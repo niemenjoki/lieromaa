@@ -42,7 +42,7 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
           <Post key={index} post={post} />
         ))}
       <Pagination numPages={numPages} currentPage={currentPage} />
-      <Advert adClient="" adSlot="" />
+      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
     </Layout>
   );
 };
