@@ -4,7 +4,9 @@ const MAX_RECOMMENDATIONS = 2;
 const MIN_COMMON_KEYWORDS = 3;
 
 const getPostRecommendations = async ({ self, keywords }) => {
-  const posts = await fs.readdir('posts');
+  const posts = (await fs.readdir('posts')).filter(
+    (filename) => !filename.startsWith('draft')
+  );
   const postsWithKeywords = await Promise.all(
     posts.map(async (postSlug) => {
       const rawPost = await fs.readFile('posts' + '/' + postSlug, 'utf-8');
