@@ -25,7 +25,7 @@ const PostPage = ({ data, content, recommendedPosts = [] }) => {
         ></div>
       </article>
       <SocialShareButtons title={title} text={excerpt} tags={tags} />
-      <Advert adClient="" adSlot="" />
+      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
       <PostRecommendation posts={recommendedPosts} />
     </Layout>
   );
