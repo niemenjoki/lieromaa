@@ -65,6 +65,7 @@ const Layout = ({ title, description, children }) => {
       <Script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        client="ca-pub-5560402633923389"
         crossOrigin="anonymous"
       />
       <Navbar />
