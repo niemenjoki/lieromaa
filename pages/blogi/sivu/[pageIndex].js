@@ -68,7 +68,9 @@ const getStaticPaths = async () => {
 
 const getStaticProps = async ({ params }) => {
   const currentPage = parseInt((params && params.pageIndex) || 1);
-  const files = fs.readdirSync('posts');
+  const files = fs
+    .readdirSync('posts')
+    .filter((filename) => filename.substring(0, 5) !== 'draft');
   const posts = files
     .map((filename) => {
       const markdownWithMeta = fs.readFileSync(
