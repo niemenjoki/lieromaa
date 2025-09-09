@@ -9,18 +9,19 @@ import Navbar from './Navbar';
 
 const Layout = ({ title, description, children }) => {
   const router = useRouter();
+
+  const handleRouteChange = (url) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', 'G-0448XXF0S0', { page_path: url });
+    }
+  };
+
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
-
-  const handleRouteChange = (url) => {
-    window.gtag?.('config', 'G-0448XXF0S0', {
-      page_path: url,
-    });
-  };
 
   return (
     <div className="container">
