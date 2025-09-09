@@ -51,8 +51,6 @@ xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <loc>${SITE_URL}/tietosuoja</loc>
 <lastmod>2024-02-22T00:00:00.000Z</lastmod>
 </url>
-<url>
-
 `;
 
   [...new Set(allTags)].forEach((tag) => {
