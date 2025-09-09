@@ -34,7 +34,7 @@ const AboutPage = () => {
           </p>
         </div>
       </div>
-      <Advert />
+      <Advert adClient="" adSlot="" />
     </Layout>
   );
 };
