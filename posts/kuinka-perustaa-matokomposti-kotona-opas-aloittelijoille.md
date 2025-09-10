@@ -1,6 +1,6 @@
 ---
 title: 'Kuinka perustaa matokomposti kotona: Opas aloittelijoille'
-date: '8 September, 2025'
+date: '6 September, 2025'
 excerpt: 'Harkitsetko matokompostin perustamista? Loistava valinta! Olipa tavoitteesi keittiöjätteen vähentäminen, ravinteikkaan luomulannoitteen tuottaminen tai uuden harrastuksen kokeileminen, matokompostointi on helppoa, hauskaa ja ympäristöystävällistä — eikä se rasita lompakkoa.'
 tags: 'matokompostointi'
 keywords: 'kompostointi, matokasvatus, kotikompostointi, puutarhanhoito, ympäristöystävällinen, biojäte, vihreä elämä, lannoite, red wiggler, eisenia fetida, matokakka, kotipuutarha, kierrätys, kasvatus'
@@ -22,7 +22,7 @@ Aloittaminen on yllättävän helppoa. Tarvitset vain muutaman asian:
 
 ### 1. Madot
 
-Matokompostin perustamiseen käytettävät madot eivät ole tavallisia kastematoja. Kastemadot syövät pääasiassa kuolleita kasvien juuria ja muuta maaperän orgaanista ainetta ja viihtyvät tyypillisesti syvällä maassa. Kompostimadot viihtyvät lähempänä maan pintaa ja syövät mielellään ruokajätettä. Yleisimmin käytetty kompostimatojen lajike on tunkioliero (*Eisenia fetida*). Ne ovat punertavia, kastematoja pienempiä ja erittäin tehokkaita biojätteen käsittelyssä. Tunkiolierot viihtyvät tiiviissä, kosteissa ja pimeissä kompostiastioissa ja pystyvät syömään noin painonsa verran ruokajätettä parissa päivässä.
+Matokompostin perustamiseen käytettävät madot eivät ole tavallisia kastematoja. Kastemadot syövät pääasiassa kuolleita kasvien juuria ja muuta maaperän orgaanista ainetta ja viihtyvät tyypillisesti syvällä maassa. Kompostimadot viihtyvät lähempänä maan pintaa ja syövät mielellään ruokajätettä. Yleisimmin käytetty kompostimatojen lajike on tunkioliero (_Eisenia fetida_). Ne ovat punertavia, kastematoja pienempiä ja erittäin tehokkaita biojätteen käsittelyssä. Tunkiolierot viihtyvät tiiviissä, kosteissa ja pimeissä kompostiastioissa ja pystyvät syömään noin painonsa verran ruokajätettä parissa päivässä.
 
 Alkuun pääsee pienelläkin matomäärällä, mutta käsittelytahti on silloin hidas. Esimerkiksi 50 madon populaatio syö vain muutaman kymmenen gramman verran jätettä viikossa. Hyvissä oloissa madot kuitenkin tuplaavat määränsä noin kolmen kuukauden välein. Pienellä populaatiolla voi siis aloittaa edullisesti ja kasvattaa määrää vähitellen, mutta suuremmalla alkuinvestoinnilla pääsee heti käsittelemään suurempia jätemääriä.
 
@@ -46,10 +46,10 @@ Uuteen ympäristöön tottuminen vie matoilta aikaa, eivätkä ne käsittele jä
 
 ## Lyhyesti
 
-- Matokompostointi on helppo, tilaa säästävä ja hajuton tapa kierrättää biojätettä.  
-- Tarvitset: madot (tunkiolierot), kompostiastian, petimateriaalia (esim. sanomalehti tai pahvi) ja ruokajätteitä.  
-- Ruoki maltillisesti, jotta biojäte ei ehdi pilaantua.  
-- Kompostin tulee olla kosteaa, mutta ei märkää. Lisää kuivaa petimateriaalia tarvittaessa.  
-- Varmista ilmanvaihto, jotta komposti ei jää ilmatiiviiksi.  
+- Matokompostointi on helppo, tilaa säästävä ja hajuton tapa kierrättää biojätettä.
+- Tarvitset: madot (tunkiolierot), kompostiastian, petimateriaalia (esim. sanomalehti tai pahvi) ja ruokajätteitä.
+- Ruoki maltillisesti, jotta biojäte ei ehdi pilaantua.
+- Kompostin tulee olla kosteaa, mutta ei märkää. Lisää kuivaa petimateriaalia tarvittaessa.
+- Varmista ilmanvaihto, jotta komposti ei jää ilmatiiviiksi.
 
 Matokompostointi on erinomainen tapa vähentää biojätettä ja tuottaa arvokasta ravinnetta kasveille. Se ei vaadi suurta tilaa tai kallista kalustoa, vaan onnistuu pienelläkin panostuksella. Kun komposti on perustettu, sen hoitaminen on helppoa ja lähes hajutonta. Pienestä matolaatikosta voi kasvaa yllättävän tehokas jätteenkäsittelylaitos — ja samalla tutustut kiehtovaan mikro- ja makroeliöiden maailmaan omassa kodissasi.
