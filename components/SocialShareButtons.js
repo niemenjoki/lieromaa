@@ -32,7 +32,7 @@ const SocialShareButtons = ({ title = '', text = '', tags = '' }) => {
   const currentPath = router.pathname.replace('[slug]', router.query.slug);
   return (
     <div className={classes.SocialShareButtons}>
-      <div>Share on social media:</div>
+      <div>Jaa tämä julkaisu somessa:</div>
       <div>
         {sharelinks.map((sharelink) => {
           const href = sharelink.href
