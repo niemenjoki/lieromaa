@@ -15,7 +15,7 @@ const Post = ({ post, compact = false }) => {
         </Link>
       </h2>
       <p className={classes.Excerpt}>{post.excerpt}</p>
-      {/*<p className={classes.Tags}>
+      <p className={classes.Tags}>
         {post.tags &&
           post.tags.map((tag) => (
             <Link
@@ -26,7 +26,7 @@ const Post = ({ post, compact = false }) => {
               {tag}
             </Link>
           ))}
-        </p>*/}
+      </p>
       {!compact && (
         <Link
           aria-label={`Avaa julkaisu ${post.title}`}
