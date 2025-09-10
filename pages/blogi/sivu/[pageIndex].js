@@ -21,10 +21,10 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
         placeholder="Etsi julkaisun nimellä tai avainsanalla.."
       />
       <div className={classes.Taglist}>
-        {/*  <Link href="/" className={classes.Tag + ' ' + classes.ActiveTag}>
+        <Link href="/" className={classes.Tag + ' ' + classes.ActiveTag}>
           Kaikki
-        </Link>
-        }  {tags
+        </Link>{' '}
+        {tags
           .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
           .map((tag) => (
             <Link
@@ -34,7 +34,7 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
             >
               {tag}
             </Link>
-          ))}*/}
+          ))}
       </div>
       {posts
         .filter((post) => post.onPage === true)
