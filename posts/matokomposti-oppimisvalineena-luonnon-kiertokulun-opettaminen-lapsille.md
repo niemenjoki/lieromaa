@@ -2,7 +2,7 @@
 title: 'Matokomposti oppimisvälineenä: luonnon kiertokulun perusteiden opettaminen lapsille'
 date: '10 September, 2025'
 excerpt: 'Matokompostointi on loistava tapa opettaa lapsille luonnon kiertokulusta ja ekologisista käytännöistä. Tutustu vinkkeihin, miten tehdä kompostoinnista hauskaa ja opettavaista koko perheelle.'
-tags: 'matokompostointi'
+tags: 'matokompostointi,puutarha,lapset'
 keywords: 'matokompostointi, ympäristökasvatus, lasten opetus, luonnon kiertokulku, biojäte, kotikompostointi, ekologinen, kierrätys, madot, kasvien lannoitus, oppiminen, perheaktiviteetti'
 ---
 
