@@ -7,9 +7,8 @@ const { SITE_URL } = require('../data/vars');
   console.log('Generating sitemap...');
 
   let latestPost = new Date(0);
-  const allTags = [];
-
-  let blogPosts = [];
+  const allTags = new Set();
+  const blogPosts = [];
 
   const files = await fs.readdir('posts');
 
@@ -19,68 +18,58 @@ const { SITE_URL } = require('../data/vars');
     const { tags, date } = extractFrontMatter(rawPost).data;
 
     const dateObj = new Date(date);
-
     blogPosts.push({
       url: `${SITE_URL}/blogi/julkaisu/${slug}`,
-      tags: tags.split(','),
       date: dateObj,
     });
 
-    if (dateObj > latestPost) {
-      latestPost = dateObj;
-    }
-
-    tags.split(',').forEach((tag) => allTags.push(tag));
+    if (dateObj > latestPost) latestPost = dateObj;
+    tags
+      .split(',')
+      .map((t) => t.trim())
+      .forEach((tag) => allTags.add(tag));
   }
 
   let sitemapXML = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-xmlns:xhtml="http://www.w3.org/1999/xhtml">
-<url>
-<loc>${SITE_URL}</loc>
-<xhtml:link rel="canonical" hreflang="fi" href="${SITE_URL}"/>
-<xhtml:link rel="alternate" hreflang="fi" href="${SITE_URL}/blogi"/>
-<xhtml:link rel="alternate" hreflang="fi" href="${SITE_URL}/blogi/sivu/1"/>
-<lastmod>${latestPost.toISOString()}</lastmod>
-</url>
-<url>
-<loc>${SITE_URL}/tietoa</loc>
-<lastmod>2024-02-29T00:00:00.000Z</lastmod>
-</url>
-<url>
-<loc>${SITE_URL}/tietosuoja</loc>
-<lastmod>2024-02-22T00:00:00.000Z</lastmod>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE_URL}</loc>
+    <lastmod>${latestPost.toISOString()}</lastmod>
+  </url>
+  <url>
+    <loc>${SITE_URL}/tietoa</loc>
+    <lastmod>2024-02-29T00:00:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>${SITE_URL}/tietosuoja</loc>
+    <lastmod>2024-02-22T00:00:00.000Z</lastmod>
+  </url>
 `;
 
-  [...new Set(allTags)].forEach((tag) => {
-    sitemapXML += '<url>\n';
-    sitemapXML += `<loc>${SITE_URL}/blogi/${tag.toLowerCase()}/sivu/1</loc>\n`;
-    sitemapXML += `<lastmod>${latestPost.toISOString()}</lastmod>\n`;
-    sitemapXML += '</url>\n';
-  });
+  // Add tag pages (if you want them indexed)
+  for (const tag of allTags) {
+    sitemapXML += `  <url>
+    <loc>${SITE_URL}/blogi/${tag.toLowerCase()}/</loc>
+    <lastmod>${latestPost.toISOString()}</lastmod>
+  </url>\n`;
+  }
 
-  blogPosts.forEach((post) => {
-    sitemapXML += '<url>\n';
-    sitemapXML += `<loc>${post.url}</loc>\n`;
-    sitemapXML += `<lastmod>${post.date.toISOString()}</lastmod>\n`;
-    sitemapXML += '</url>\n';
-  });
+  // Add post pages
+  for (const post of blogPosts) {
+    sitemapXML += `  <url>
+    <loc>${post.url}</loc>
+    <lastmod>${post.date.toISOString()}</lastmod>
+  </url>\n`;
+  }
 
   sitemapXML += '</urlset>';
 
-  try {
-    await fs.writeFile(path.join('public', 'sitemap.xml'), sitemapXML, {
-      flag: 'w',
-    });
-    const urlCount = (sitemapXML.match(/<loc>/g) || []).length;
-    console.log(
-      '\x1b[32m',
-      `Sitemap sitemap.xml written successfully ${urlCount} listed`,
-      '\x1b[0m'
-    );
-  } catch (e) {
-    console.error('\x1b[31m', 'Failed to write sitemap.xml', '\x1b[0m');
-    console.error(e);
-  }
+  await fs.writeFile(path.join('public', 'sitemap.xml'), sitemapXML, {
+    flag: 'w',
+  });
+  console.log(
+    `Sitemap sitemap.xml written successfully with ${
+      (sitemapXML.match(/<loc>/g) || []).length
+    } URLs`
+  );
 })();
