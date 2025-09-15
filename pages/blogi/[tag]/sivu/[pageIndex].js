@@ -3,7 +3,7 @@ import Layout from '@/components/Layout';
 import Pagination from '@/components/Pagination';
 import Post from '@/components/Post.js';
 import SearchPosts from '@/components/SearchPosts';
-import { POSTS_PER_PAGE } from '@/data/vars.js';
+import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.js';
 import classes from '@/styles/PostPage.module.css';
 import extractFrontMatter from '@/utils/extractFrontMatter';
 import { sortByDate } from '@/utils/index.js';
@@ -13,7 +13,10 @@ import path from 'path';
 
 const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
   return (
-    <Layout title={'Blogi | Luomuliero'} language="fi">
+    <Layout
+      title={'Blogi | Luomuliero'}
+      canonical={`${SITE_URL}/blogi/${tag}/sivu/1`}
+    >
       <h1>Julkaisut avainsanalla &quot;{tag}&quot;</h1>
       <SearchPosts
         list={posts}

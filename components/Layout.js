@@ -7,8 +7,9 @@ import { SITE_URL } from '@/data/vars';
 import Footer from './Footer';
 import Navbar from './Navbar';
 
-const Layout = ({ title, description, children }) => {
+const Layout = ({ title, description, children, canonical }) => {
   const router = useRouter();
+  const canonicalUrl = canonical || `${SITE_URL}${router.asPath}`;
 
   const handleRouteChange = (url) => {
     if (typeof window !== 'undefined' && window.gtag) {
@@ -31,7 +32,6 @@ const Layout = ({ title, description, children }) => {
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
         />
         <title>{title}</title>
-
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
         <meta
@@ -39,7 +39,8 @@ const Layout = ({ title, description, children }) => {
           property="og:description"
           content={description}
         />
-        <meta property="og:url" content={`${SITE_URL}${router?.asPath}`} />
+        <meta property="og:url" content={canonicalUrl} />
+        <link rel="canonical" href={canonicalUrl} />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <link rel="shortcut icon" href="/icons/favicon.ico" />
