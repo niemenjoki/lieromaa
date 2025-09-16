@@ -6,7 +6,11 @@ tags: 'matokompostointi,aloittelijan opas,kompostorin perustaminen'
 keywords: 'kompostointi, matokasvatus, kotikompostointi, puutarhanhoito, ympäristöystävällinen, biojäte, vihreä elämä, lannoite, red wiggler, eisenia fetida, matokakka, kotipuutarha, kierrätys, kasvatus'
 ---
 
-[[image:matokomposti.png|alt=Matokompostiastia keittiön nurkassa]]
+<picture>
+  <source srcset="/images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-800.avif 800w, /images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-1200.avif 1200w" type="image/avif">
+  <source srcset="/images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-800.webp 800w, /images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-1200.webp 1200w" type="image/webp">
+  <img src="/images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-800.jpg" srcset="/images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-800.jpg 800w, /images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-1200.jpg 1200w" alt="Matokompostiastia keittiön nurkassa" sizes="(max-width: 600px) 100vw, 800px" style="max-width:100%;height:auto;" loading="lazy">
+</picture>
 
 Kompostointi on ympäristöystävällinen tapa kierrättää biojätettä. Perinteinen lämpökomposti vaatii kuitenkin tilaa, säännöllistä hoitoa ja voi helposti aiheuttaa hajuhaittoja. Siinä orgaanisen aineksen hajottajina toimivat pääasiassa bakteerit ja muut pieneliöt.
 

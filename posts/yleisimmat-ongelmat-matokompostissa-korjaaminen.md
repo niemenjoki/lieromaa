@@ -6,7 +6,11 @@ tags: 'matokompostointi,aloittelijan opas,kompostorin hoito'
 keywords: 'matokompostointi, kompostin ongelmat, matokompostin hoito, biojäte, kompostin hajut, madot karkaavat, kosteusongelmat, pH-tasapaino, puutarhanhoito, ekologinen lannoite, kierrätys, kotikompostointi, matokakka, vihreä elämä'
 ---
 
-[[image:geneerinen_matokomposti.png|alt=Osittain prosessoitua ruokajätettä matokompostissa]]
+<picture>
+  <source srcset="/images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/geneerinen_matokomposti-800.avif 800w, /images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/geneerinen_matokomposti-1200.avif 1200w" type="image/avif">
+  <source srcset="/images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/geneerinen_matokomposti-800.webp 800w, /images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/geneerinen_matokomposti-1200.webp 1200w" type="image/webp">
+  <img src="/images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/geneerinen_matokomposti-800.jpg" srcset="/images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/geneerinen_matokomposti-800.jpg 800w, /images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/geneerinen_matokomposti-1200.jpg 1200w" alt="Osittain prosessoitua ruokajätettä matokompostissa" sizes="(max-width: 600px) 100vw, 800px" style="max-width:100%;height:auto;" loading="lazy">
+</picture>
 
 Matokompostointi on palkitseva tapa kierrättää keittiöjäte ja tuottaa ravinteikasta lannoitetta, mutta siihen liittyy myös haasteita, joiden ratkaiseminen ei aina ole itsestäänselvää. Yleensä ongelmat ovat kuitenkin hallittavissa, kun niiden syyt ymmärtää ja osaa toimia oikealla tavalla. Tässä tekstissä käyn läpi yleisimmät matokompostoinnin ongelmat, niiden taustalla olevat syyt ja käytännölliset keinot tilanteen korjaamiseksi. Kun tunnet nämä perusasiat, pystyt pitämään kompostorin elinvoimaisena ja madot tyytyväisinä pitkällä aikavälillä.
 
@@ -46,7 +50,11 @@ Varmaankin kaikkein yleisin ongelma matokompostissa on liiallinen märkyys. Eik�
 
 Liian märän kompostin tunnistaa helposti. Jos kompostiastian pohjalla on vettä tai todella märkää petimateriaalia, kosteutta on liikaa. Sopivan kostean petimateriaalin tunnistaa siitä, että se tuntuu kostealta, mutta siitä irtoaa voimakkaasti puristettaessa korkeintaan **1–2 pisaraa** vettä. Jos vettä on kertynyt pohjalle asti, se kannattaa poistaa. Pienempi liikakosteus poistuu lisäämällä reilusti kuivaa petimateriaalia märän kompostin joukkoon.
 
-[[image:puristustesti.png|alt=Kompostimateriaalin puristus kädessä. Pari pisaraa putoaa]]
+<picture>
+  <source srcset="/images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/puristustesti-800.avif 800w, /images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/puristustesti-1200.avif 1200w" type="image/avif">
+  <source srcset="/images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/puristustesti-800.webp 800w, /images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/puristustesti-1200.webp 1200w" type="image/webp">
+  <img src="/images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/puristustesti-800.jpg" srcset="/images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/puristustesti-800.jpg 800w, /images/posts/yleisimmat-ongelmat-matokompostissa-korjaaminen/puristustesti-1200.jpg 1200w" alt="Kompostimateriaalin puristus kädessä. Pari pisaraa putoaa" sizes="(max-width: 600px) 100vw, 800px" style="max-width:100%;height:auto;" loading="lazy">
+</picture>
 
 ## Kuiva komposti
 
