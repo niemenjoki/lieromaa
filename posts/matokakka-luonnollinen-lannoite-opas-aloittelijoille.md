@@ -6,7 +6,11 @@ tags: 'matokompostointi,kompostin hyödyntäminen,puutarha'
 keywords: 'matokakka, matokompostointi, kompostointi, kotikompostointi, luonnollinen lannoite, biojäte, puutarhanhoito, lierot, red wiggler, eisenia fetida, maanparannus, kierrätys, ekologinen viljely, kemikaaliton puutarha'
 ---
 
-[[image:matokakkaa_kadella.png|alt=Kasa matokakkaa henkilön kämmenellä]]
+<picture>
+  <source srcset="/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakkaa_kadella-800.avif 800w, /images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakkaa_kadella-1200.avif 1200w" type="image/avif">
+  <source srcset="/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakkaa_kadella-800.webp 800w, /images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakkaa_kadella-1200.webp 1200w" type="image/webp">
+  <img src="/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakkaa_kadella-800.jpg" srcset="/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakkaa_kadella-800.jpg 800w, /images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakkaa_kadella-1200.jpg 1200w" alt="Kasa matokakkaa henkilön kämmenellä" sizes="(max-width: 600px) 100vw, 800px" style="max-width:100%;height:auto;" loading="lazy">
+</picture>
 
 Matokompostointi on ympäristöystävällinen tapa muuttaa keittiön biojätteet ja muu orgaaninen materiaali ravinteikkaaksi matojen tuottamaksi **matokakaksi.** Tummaa, murumaista matokompostin lopputuotetta kutsutaan usein “mustaksi kullaksi”, koska se on luonnollinen lannoite, joka on täynnä hyödyllisiä mikrobeja ja ravinteita, jotka parantavat maan rakennetta ja tukevat kasvien elinvoimaa.
 
@@ -55,7 +59,11 @@ Valoerottelu on hellävarainen menetelmä, joka ei vaadi erikoistyökaluja ja hy
 
 ## Matokakan käyttö
 
-[[image:matokakan_kaytto.png|alt=Puutarhuri ripottelee matokakkaa kasvie ympärille]]
+<picture>
+  <source srcset="/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakan_kaytto-800.avif 800w, /images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakan_kaytto-1200.avif 1200w" type="image/avif">
+  <source srcset="/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakan_kaytto-800.webp 800w, /images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakan_kaytto-1200.webp 1200w" type="image/webp">
+  <img src="/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakan_kaytto-800.jpg" srcset="/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakan_kaytto-800.jpg 800w, /images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakan_kaytto-1200.jpg 1200w" alt="Puutarhuri ripottelee matokakkaa kasvie ympärille" sizes="(max-width: 600px) 100vw, 800px" style="max-width:100%;height:auto;" loading="lazy">
+</picture>
 
 Korjattu matokakka on heti valmis lannoittamaan kasveja. Säilytä komposti hengittävässä astiassa viileässä ja varjoisassa paikassa. Pidä se hieman kosteana.
 
