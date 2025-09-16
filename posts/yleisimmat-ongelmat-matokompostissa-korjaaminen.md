@@ -1,6 +1,6 @@
 ---
 title: 'Yleisimmät ongelmat matokompostissa ja niiden korjaaminen'
-date: '16 September, 2025'
+date: '15 September, 2025'
 excerpt: 'Onko matokompostisi haiseva, liian märkä tai madot karkailevat? Älä huoli! Tämä opas käy läpi yleisimmät matokompostoinnin ongelmat, niiden syyt ja helpot ratkaisut. Opi pitämään madot hyvinvoivana!
 tags: 'matokompostointi,aloittelijan opas,kompostorin hoito'
 keywords: 'matokompostointi, kompostin ongelmat, matokompostin hoito, biojäte, kompostin hajut, madot karkaavat, kosteusongelmat, pH-tasapaino, puutarhanhoito, ekologinen lannoite, kierrätys, kotikompostointi, matokakka, vihreä elämä'
