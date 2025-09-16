@@ -6,6 +6,8 @@ tags: 'matokompostointi,kompostin hyödyntäminen,puutarha'
 keywords: 'matokakka, matokompostointi, kompostointi, kotikompostointi, luonnollinen lannoite, biojäte, puutarhanhoito, lierot, red wiggler, eisenia fetida, maanparannus, kierrätys, ekologinen viljely, kemikaaliton puutarha'
 ---
 
+[[image:matokakkaa_kadella.png|alt=Kasa matokakkaa henkilön kämmenellä]]
+
 Matokompostointi on ympäristöystävällinen tapa muuttaa keittiön biojätteet ja muu orgaaninen materiaali ravinteikkaaksi matojen tuottamaksi **matokakaksi.** Tummaa, murumaista matokompostin lopputuotetta kutsutaan usein “mustaksi kullaksi”, koska se on luonnollinen lannoite, joka on täynnä hyödyllisiä mikrobeja ja ravinteita, jotka parantavat maan rakennetta ja tukevat kasvien elinvoimaa.
 
 Matokompostoreista on monenlaisia versioita, kuten monikerroksisia kompostoreita sekä läpivirtauskompostoreita, mutta keskityn tässä yksinkertaiseen yhden laatikon ratkaisuun, joka sopii erinomaisesti aloittelijoille ja kotipuutarhureille. Jos olet aivan alussa ja kiinnostuit oman matokompostin perustamisesta, tutustu aiempaan julkaisuuni [Kuinka perustaa matokomposti kotona: opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille).
@@ -52,6 +54,8 @@ Valoerottelu on hellävarainen menetelmä, joka ei vaadi erikoistyökaluja ja hy
 - Kerätty matokakka on heti valmista käyttöön, mutta kestää myös pitkäaikaisenkin säilytyksen.
 
 ## Matokakan käyttö
+
+[[image:matokakan_kaytto.png|alt=Puutarhuri ripottelee matokakkaa kasvie ympärille]]
 
 Korjattu matokakka on heti valmis lannoittamaan kasveja. Säilytä komposti hengittävässä astiassa viileässä ja varjoisassa paikassa. Pidä se hieman kosteana.
 

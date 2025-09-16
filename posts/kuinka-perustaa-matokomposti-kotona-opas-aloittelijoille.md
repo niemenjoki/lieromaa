@@ -6,6 +6,8 @@ tags: 'matokompostointi,aloittelijan opas,kompostorin perustaminen'
 keywords: 'kompostointi, matokasvatus, kotikompostointi, puutarhanhoito, ympäristöystävällinen, biojäte, vihreä elämä, lannoite, red wiggler, eisenia fetida, matokakka, kotipuutarha, kierrätys, kasvatus'
 ---
 
+[[image:matokomposti.png|alt=Matokompostiastia keittiön nurkassa]]
+
 Kompostointi on ympäristöystävällinen tapa kierrättää biojätettä. Perinteinen lämpökomposti vaatii kuitenkin tilaa, säännöllistä hoitoa ja voi helposti aiheuttaa hajuhaittoja. Siinä orgaanisen aineksen hajottajina toimivat pääasiassa bakteerit ja muut pieneliöt.
 
 Matokompostoinnissa sen sijaan käytetään matoja, jotka syövät ruoantähteitä ja muuttavat ne ravinteikkaaksi matokakaksi — mustaksi kullaksi puutarhaan, nurmikolle tai huonekasveille. Matokomposti vie vähän tilaa eikä aiheuta hajuhaittoja, joten sen voi sijoittaa vaikka keittiön nurkkaan, tiskialtaan alle, komeroon tai autotalliin. Se sopii ympärivuotiseen käyttöön ja toimii myös kerrostaloasunnossa, toisin kuin perinteinen lämpökompostori.
