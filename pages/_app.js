@@ -16,9 +16,9 @@ const rubik = Rubik({
 
 const App = ({ Component, pageProps }) => {
   return (
-    <main className={rubik.variable}>
+    <div className={rubik.variable}>
       <Component {...pageProps} />
-    </main>
+    </div>
   );
 };
 
