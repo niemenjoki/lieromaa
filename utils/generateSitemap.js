@@ -49,7 +49,9 @@ const { SITE_URL } = require('../data/vars');
   // Add tag pages (if you want them indexed)
   for (const tag of allTags) {
     sitemapXML += `  <url>
-    <loc>${SITE_URL}/blogi/${tag.toLowerCase()}/</loc>
+    <loc>${SITE_URL}/blogi/${tag
+      .toLowerCase()
+      .replaceAll(' ', '-')}/sivu/1</loc>
     <lastmod>${latestPost.toISOString()}</lastmod>
   </url>\n`;
   }

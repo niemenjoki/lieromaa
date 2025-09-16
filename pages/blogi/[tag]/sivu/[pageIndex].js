@@ -72,8 +72,9 @@ const getStaticPaths = async () => {
       const { data } = extractFrontMatter(markdownWithMeta);
       const tags = data.tags.split(',').map((tag) => tag.trim().toLowerCase());
       tags.forEach((tag) => {
-        if (!groupedPosts[tag]) groupedPosts[tag] = [];
-        groupedPosts[tag].push(filename);
+        const slugified = tag.replaceAll(' ', '-');
+        if (!groupedPosts[slugified]) groupedPosts[slugified] = [];
+        groupedPosts[slugified].push(filename);
       });
     });
 
