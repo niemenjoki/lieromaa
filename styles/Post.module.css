@@ -20,7 +20,7 @@
 .Tag {
   background: var(--highlight);
   padding: 0.25rem 0.5rem;
-  color: var(--text-color);
+  color: var(--background-1);
   border-radius: 4px;
   white-space: nowrap;
 }
