@@ -19,7 +19,7 @@ const Post = ({ post, compact = false }) => {
         {post.tags &&
           post.tags.map((tag) => (
             <Link
-              href={`/blogi/${tag.toLowerCase()}/sivu/1`}
+              href={`/blogi/${tag.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
               key={tag}
               className={classes.Tag}
             >
