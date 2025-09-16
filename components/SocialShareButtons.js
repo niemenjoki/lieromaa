@@ -38,7 +38,7 @@ const SocialShareButtons = ({ title = '', text = '', tags = '' }) => {
           const href = sharelink.href
             .replace('__URL__', SITE_URL + currentPath)
             .replace('__TITLE__', title)
-            .replace('__TAGS__', tags);
+            .replace('__TAGS__', tags.replaceAll(' ', '-'));
           return (
             <a
               key={sharelink.iconName}

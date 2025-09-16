@@ -15,7 +15,7 @@ const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
   return (
     <Layout
       title={'Blogi | Luomuliero'}
-      canonical={`${SITE_URL}/blogi/${tag}/sivu/1`}
+      canonical={`${SITE_URL}/blogi/${tag.replaceAll(' ', '-')}/sivu/1`}
     >
       <h1>Julkaisut avainsanalla &quot;{tag}&quot;</h1>
       <SearchPosts
@@ -30,10 +30,11 @@ const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
         {tags
           .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
           .map((t) => {
-            const isActive = t.toLowerCase() === tag.toLowerCase();
+            const isActive =
+              t.toLowerCase().replaceAll(' ', '-') === tag.toLowerCase();
             return (
               <Link
-                href={`/blogi/${t.toLowerCase()}/sivu/1`}
+                href={`/blogi/${t.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
                 key={t}
                 className={`${classes.Tag} ${
                   isActive ? classes.ActiveTag : ''
@@ -115,7 +116,9 @@ const getStaticProps = async ({ params }) => {
     });
 
   const postsForTag = posts.filter((post) => {
-    const tags = post.tags.split(',').map((tag) => tag.trim().toLowerCase());
+    const tags = post.tags
+      .split(',')
+      .map((tag) => tag.trim().toLowerCase().replaceAll(' ', '-'));
     return tags.includes(params.tag);
   });
   const numPages = Math.ceil(postsForTag.length / POSTS_PER_PAGE);
