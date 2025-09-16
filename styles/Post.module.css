@@ -12,13 +12,17 @@
 }
 .Tags {
   margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
+
 .Tag {
-  margin-right: 1rem;
   background: var(--highlight);
   padding: 0.25rem 0.5rem;
   color: var(--text-color);
   border-radius: 4px;
+  white-space: nowrap;
 }
 
 .Post:hover .Title {
