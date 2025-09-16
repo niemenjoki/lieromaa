@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { SITE_URL } from '@/data/vars';
 import Footer from './Footer';
 import Navbar from './Navbar';
+import { Analytics } from '@vercel/analytics/next';
 
 const Layout = ({ title, description, children, canonical }) => {
   const router = useRouter();
@@ -72,6 +73,7 @@ const Layout = ({ title, description, children, canonical }) => {
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <Analytics />
     </div>
   );
 };
