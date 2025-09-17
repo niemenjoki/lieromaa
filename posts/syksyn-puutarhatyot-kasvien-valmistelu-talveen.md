@@ -54,6 +54,6 @@ Matokakka on erinomainen maanparantaja kukkapenkkeihin tai uudelleen käytettäv
 
 Syksy on paras aika hyödyntää kompostien ravinteet maassa. Lämpökompostin kompostimulta sekä matokompostin matokakka toimivat täydellisenä pintalannoitteena, jotka lisäävät maaperän hyödyllistä mikrobitoimintaa ja antavat sille hitaan, luonnollisen ravinnelisän kevättä varten. Matokakan keräämisestä ja käyttötavoista olen kertonut tarkemmin täällä: [Matokakka – luonnollinen lannoite ja maanparannusaine: Opas keräämiseen ja käyttöön](https://www.luomuliero.fi/blogi/julkaisu/matokakka-luonnollinen-lannoite-opas-aloittelijoille).
 
-## Yhteenveto: syksy on seuraavan kesän alku
+## Syksy on seuraavan kesän alku
 
 Kun kasvit saavat kerätä voimaa juurakkoonsa ja maa saa ravinteita talteen, seuraava kasvukausi alkaa vahvemmalta pohjalta. Jokainen syksyllä tehty työ sadonkorjuusta, kompostin lisäämiseen, perennojen alasleikkaukseen tai nurmikon syyslannoitukseen näkyy keväällä nopeampana kasvuna, terveempinä kasveina ja runsaampana satona. Syksy on siis uuden puutarhakauden ensimmäinen askel, joka kannattaa hoitaa huolella.
