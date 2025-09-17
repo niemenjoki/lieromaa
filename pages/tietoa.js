@@ -22,7 +22,7 @@ const AboutPage = () => {
         <div className={classes.Bio}>
           <p>
             Moi👋 Olen Joonas, ja ylläpidän pientä matofarmia kotonani
-            Järvenpässä. Kasvatan vapaa-ajallani matoja pääasiassa omaa
+            Järvenpäässä. Kasvatan vapaa-ajallani matoja pääasiassa omaa
             kompostointia varten sekä tuottaakseni matokakkaa oman pienen
             puutarhan tarpeisiin. Myyn myös pieniä määriä matoja
             kiinnostuneille.
