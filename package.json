@@ -16,7 +16,8 @@
     "test-report": "jest --coverage && npx serve coverage/lcov-report/",
     "prebuild": "node ./utils/generateImages.js",
     "blogimages": "node ./utils/replaceImagePlaceholders.js",
-    "prepare": "husky install"
+    "prepare": "husky",
+    "pre-push": "npm run blogimages && npm run build"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.2",
+    "husky": "^9.1.7",
     "sharp": "^0.34.3"
   },
   "license": "MIT",
