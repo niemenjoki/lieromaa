@@ -10,7 +10,11 @@ keywords: 'syksyn puutarhatyöt, sadonkorjuu, marjapensaat, raparperi, nurmikko,
 
 Syksyn tulo ei tarkoita, että on aika lopettaa pihan- tai puutarhanhoito. Syksy on ratkaiseva vaihe seuraavan kasvukauden kannalta. Kun monivuotiset kasvit saavat rauhassa siirtää ravinteet ja energian juurakkoon, ne selviävät pakkasista paremmin ja lähtevät keväällä vahvaan kasvuun. Yksivuotisten osalta maaperäkin hyötyy, kun siihen lisätään ravinteita ja orgaanista ainesta jo ennen talvea. Näin keväällä ei tarvitse aloittaa nollasta, vaan maassa on jo valmiiksi elinvoimaa ja mikrobitoimintaa.
 
-[[image:syksyinen_puutarha|alt=Syksyinen puutarha, jossa näkyy kompostilaatikot ja istutuslaatikot]]
+<picture>
+  <source srcset="/images/posts/syksyn-puutarhatyot-kasvien-valmistelu-talveen/syksyinen_puutarha-800.avif 800w, /images/posts/syksyn-puutarhatyot-kasvien-valmistelu-talveen/syksyinen_puutarha-1200.avif 1200w" type="image/avif">
+  <source srcset="/images/posts/syksyn-puutarhatyot-kasvien-valmistelu-talveen/syksyinen_puutarha-800.webp 800w, /images/posts/syksyn-puutarhatyot-kasvien-valmistelu-talveen/syksyinen_puutarha-1200.webp 1200w" type="image/webp">
+  <img src="/images/posts/syksyn-puutarhatyot-kasvien-valmistelu-talveen/syksyinen_puutarha-800.jpg" srcset="/images/posts/syksyn-puutarhatyot-kasvien-valmistelu-talveen/syksyinen_puutarha-800.jpg 800w, /images/posts/syksyn-puutarhatyot-kasvien-valmistelu-talveen/syksyinen_puutarha-1200.jpg 1200w" alt="Syksyinen puutarha, jossa näkyy kompostilaatikot ja istutuslaatikot" sizes="(max-width: 600px) 100vw, 800px" style="max-width:100%;height:auto;" loading="lazy">
+</picture>
 
 ## Juurekset, vihannekset ja hedelmät
 
