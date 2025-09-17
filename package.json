@@ -15,7 +15,8 @@
     "test-coverage": "jest --coverage",
     "test-report": "jest --coverage && npx serve coverage/lcov-report/",
     "prebuild": "node ./utils/generateImages.js",
-    "blogimages": "node ./utils/replaceImagePlaceholders.js"
+    "blogimages": "node ./utils/replaceImagePlaceholders.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
