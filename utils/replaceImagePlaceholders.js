@@ -4,9 +4,14 @@ const path = require('path');
 const PUBLIC_IMAGES = path.join(__dirname, '../public/images/posts');
 const POSTS_DIR = path.join(__dirname, '../posts');
 const sizes = [800, 1200];
-const DEFAULT_CONTENT_WIDTH = 800; // adjust to your content area max-width in px
+const DEFAULT_CONTENT_WIDTH = 800;
 
-// Recursively get PNG images
+const colors = {
+  green: (s) => `\x1b[32m${s}\x1b[0m`,
+  red: (s) => `\x1b[31m${s}\x1b[0m`,
+  yellow: (s) => `\x1b[33m${s}\x1b[0m`,
+};
+
 function getImages(dir) {
   let results = [];
   const list = fs.readdirSync(dir, { withFileTypes: true });
@@ -21,7 +26,6 @@ function getImages(dir) {
   return results;
 }
 
-// Recursively get Markdown files
 function getMarkdownFiles(dir) {
   let results = [];
   const list = fs.readdirSync(dir, { withFileTypes: true });
@@ -36,13 +40,10 @@ function getMarkdownFiles(dir) {
   return results;
 }
 
-// Generate <picture> HTML with sizes attribute
 function generatePictureHTML(imgFullPath, alt) {
   const { dir, name } = path.parse(imgFullPath);
   const relativeDir = path.relative(PUBLIC_IMAGES, dir).replace(/\\/g, '/');
   const base = `/images/posts/${relativeDir}/${name}`;
-
-  // Example sizes: full width on small screens, max 800px on larger screens
   const sizesAttr = `(max-width: 600px) 100vw, ${DEFAULT_CONTENT_WIDTH}px`;
 
   return `<picture>
@@ -61,27 +62,51 @@ function generatePictureHTML(imgFullPath, alt) {
 }
 
 (async () => {
-  // Replace placeholders in Markdown
   const images = getImages(PUBLIC_IMAGES);
   const mdFiles = getMarkdownFiles(POSTS_DIR);
-  for (const file of mdFiles) {
-    let content = fs.readFileSync(file, 'utf8');
 
-    content = content.replace(
+  let okCount = 0;
+  let errorCount = 0;
+
+  for (const file of mdFiles) {
+    const filename = path.basename(file);
+    let content = fs.readFileSync(file, 'utf8');
+    let updated = false;
+    let hadError = false;
+
+    const newContent = content.replace(
       /\[\[image:(.+?)\|alt=(.+?)\]\]/g,
       (match, imgFile, altText) => {
-        // Find the image in public images (recursive)
         const foundImg = images.find((p) => p.endsWith(imgFile));
         if (!foundImg) {
-          console.error(`ERROR: Image not found: ${imgFile} in ${file}`);
-          process.exitCode = 1; // non-zero exit → Husky blocks commit
+          console.error(
+            colors.red(`ERROR: Image not found: ${imgFile} in ${filename}`)
+          );
+          process.exitCode = 1;
+          hadError = true;
           return match;
         }
+        updated = true;
         return generatePictureHTML(foundImg, altText);
       }
     );
 
-    fs.writeFileSync(file, content, 'utf8');
-    console.log(`Updated: ${file}`);
+    if (updated) {
+      fs.writeFileSync(file, newContent, 'utf8');
+    }
+
+    if (hadError) {
+      errorCount++;
+    } else {
+      console.log(colors.green(`OK: ${filename}`));
+      okCount++;
+    }
   }
+
+  console.log('');
+  console.log(
+    `Checked ${mdFiles.length} posts with ${colors.green(
+      okCount + ' OK'
+    )} and ${colors.red(errorCount + ' error' + (errorCount === 1 ? '' : 's'))}`
+  );
 })();
