@@ -6,8 +6,6 @@ tags: 'lämpökompostointi,matokompostointi,kompostivertailu'
 keywords: 'kompostointi, lämpökompostori, matokompostori, keittiöjäte, biojäte, ympäristöystävällinen, puutarhanhoito, vihreä elämä, matokomposti, lämpöpompostori, kierrätys, puutarha'
 ---
 
-# Paras kompostori keittiöbiojätteelle: lämpökompostori vai matokomposti?
-
 Keittiöjätteen kompostointi on fiksu tapa vähentää roskia ja tuottaa ravinteikasta multaa puutarhaan tai parvekkeelle. Tässä blogijutussa vertailen kahta hyvää vaihtoehtoa keittiöbiojätteelle: lämpökompostoria ja matokompostoria.
 
 <picture>
