@@ -73,8 +73,9 @@ function generatePictureHTML(imgFullPath, alt) {
         // Find the image in public images (recursive)
         const foundImg = images.find((p) => p.endsWith(imgFile));
         if (!foundImg) {
-          console.warn(`Image not found: ${imgFile} in ${file}`);
-          return match; // leave placeholder if missing
+          console.error(`ERROR: Image not found: ${imgFile} in ${file}`);
+          process.exitCode = 1; // non-zero exit → Husky blocks commit
+          return match;
         }
         return generatePictureHTML(foundImg, altText);
       }
