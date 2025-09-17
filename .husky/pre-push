@@ -1,8 +1,1 @@
-cat > .husky/pre-push <<'EOF'
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-npm run blogimages && npm run build
-EOF
-
-chmod +x .husky/pre-push
+npm run pre-push
