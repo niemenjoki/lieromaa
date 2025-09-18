@@ -42,11 +42,11 @@ Madot tarvitsevat hiilipitoista petimateriaalia, joka toimii suojana ja vararavi
 
 ### 4. Ruokajätteet
 
-Madot syövät lähes kaiken kasvipohjaisen jätteen, kuten hedelmät, vihannekset ja kahvinporot. Lihaa, maitotuotteita, sitrushedelmiä ja erittäin suolaista ruokaa kannattaa välttää, koska ne happamoittavat kompostia ja voivat aiheuttaa hajuhaittoja. Madot eivät pysty syömään kiinteää ruokaa suoraan, vaan odottavat bakteerien ja pieneliöiden pehmentävän jätteen.
+Madot syövät lähes kaiken kasvipohjaisen jätteen, kuten hedelmät, vihannekset ja kahvinporot. Lihaa, maitotuotteita, sitrushedelmiä ja erittäin suolaista ruokaa kannattaa välttää, koska ne happamoittavat kompostia ja voivat aiheuttaa hajuhaittoja. Madot eivät pysty syömään kiinteää ruokaa suoraan, vaan odottavat bakteerien ja pieneliöiden pehmentävän jätteen. Olen kertonut matojen ruokkimiesta tarkemmin aiemmassa julkaisussani [Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille)
 
 ## Kompostin perustamisen alkuvaihe
 
-Uuteen ympäristöön tottuminen vie matoilta aikaa, eivätkä ne käsittele jätettä heti. Ensimmäisten viikkojen aikana ne saattavat jopa yrittää paeta kompostiastiasta, mikä on normaalia. Hyvä tapa aloittaa on lisätä pieni pala biojätettä (esim. 2x2x2 cm pala banaania) ja tarkistaa viikon kuluttua tilanne. Jos pala on kadonnut, määrää voi lisätä vähitellen. Jos jätettä on jäljellä, kannattaa odottaa ennen uutta ruokintaa.
+Uuteen ympäristöön tottuminen vie madoilta aikaa, eivätkä ne käsittele jätettä heti. Ensimmäisten viikkojen aikana ne saattavat jopa yrittää paeta kompostiastiasta, mikä on normaalia. Hyvä tapa aloittaa on lisätä pieni pala biojätettä (esim. 2x2x2 cm pala banaania) ja tarkistaa viikon kuluttua tilanne. Jos pala on kadonnut, määrää voi lisätä vähitellen. Jos jätettä on jäljellä, kannattaa odottaa ennen uutta ruokintaa.
 
 <aside>Liikaruokinta on yleinen virhe etenkin alkuvaiheessa. Se ei yleensä tapa matoja, mutta komposti voi mädäntyä ja alkaa haista. Lisää mieluummin liian vähän ruokaa kuin liikaa. Madot pärjäävät pitkään pelkällä petimateriaalilla.</aside>
 
