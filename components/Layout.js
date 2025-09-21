@@ -7,6 +7,7 @@ import { SITE_URL } from '@/data/vars';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const Layout = ({ title, description, children, canonical }) => {
   const router = useRouter();
@@ -45,6 +46,7 @@ const Layout = ({ title, description, children, canonical }) => {
       <main>{children}</main>
       <Footer />
       <Analytics />
+      <SpeedInsights />
     </div>
   );
 };
