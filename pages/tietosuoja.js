@@ -164,7 +164,8 @@ const PrivacyPage = () => {
           <li>Oikeus saada pääsy tietoihisi (Art. 15).</li>
           <li>Oikeus tietojen oikaisemiseen (Art. 16).</li>
           <li>
-            Oikeus tietojen poistamiseen ("oikeus tulla unohdetuksi", Art. 17).
+            Oikeus tietojen poistamiseen (&quot;oikeus tulla unohdetuksi&quot;,
+            Art. 17).
           </li>
           <li>Oikeus käsittelyn rajoittamiseen (Art. 18).</li>
           <li>
