@@ -26,11 +26,11 @@ const getPostRecommendations = async ({ self, keywords }) => {
       ...post,
       commonKeywords: post.keywords
         .split(',')
-        .map((keyword) => keyword.trim())
+        .map((keyword) => keyword.trim().toLowerCase()) // normalize
         .filter((keyword) =>
           keywords
             .split(',')
-            .map((keyword) => keyword.trim())
+            .map((keyword) => keyword.trim().toLowerCase()) // normalize
             .includes(keyword)
         ).length,
     }))
