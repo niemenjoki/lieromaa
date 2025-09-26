@@ -17,7 +17,7 @@ const PostPage = ({ data, content, recommendedPosts = [] }) => {
       <article className={classes.PostPage}>
         <h1>{title}</h1>
         <div className={classes.Date}>
-          Julkaistu: {new Date(date).toLocaleDateString()}
+          Julkaistu: {new Date(date).toLocaleDateString('fi-FI')}
         </div>
         <div
           className={classes.Content}
