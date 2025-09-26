@@ -16,8 +16,12 @@ const Navbar = () => {
       text: 'Blogi',
     },
     {
+      href: '/madot',
+      text: 'Mistä kompostimatoja?',
+    },
+    {
       href: '/tietoa',
-      text: 'Tietoa sivustosta',
+      text: 'Tietoa',
     },
   ];
 

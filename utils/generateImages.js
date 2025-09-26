@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-const PUBLIC_IMAGES = path.join(__dirname, '../public/images/posts');
+const BLOGPOST_IMAGES = path.join(__dirname, '../public/images/posts');
+const WORMSPAGE_IMAGES = path.join(__dirname, '../public/images/wormspage');
 const sizes = [800, 1200];
 const formats = ['avif', 'webp', 'jpg'];
 
@@ -23,7 +24,11 @@ function getImages(dir) {
 
 (async () => {
   // Generate all image sizes/formats
-  const images = getImages(PUBLIC_IMAGES);
+  const images = [
+    ...getImages(BLOGPOST_IMAGES),
+    ...getImages(WORMSPAGE_IMAGES),
+  ];
+
   for (const imgPath of images) {
     const { dir, name } = path.parse(imgPath);
     for (const size of sizes) {

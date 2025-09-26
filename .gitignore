@@ -44,6 +44,9 @@ yarn-error.log*
 /public/images/posts/**/*-*.webp
 /public/images/posts/**/*-*.jpg
 /public/images/posts/**/*-*.avif
+/public/images/wormspage/**/*-*.webp
+/public/images/wormspage/**/*-*.jpg
+/public/images/wormspage/**/*-*.avif
 
 # Keep the source PNGs
 !/public/images/posts/**/*.png
