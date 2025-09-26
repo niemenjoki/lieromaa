@@ -30,6 +30,14 @@ const { SITE_URL } = require('../data/vars');
       .forEach((tag) => allTags.add(tag));
   }
 
+  const wormsPath = path.join('data', 'worms.json');
+const wormsRaw = await fs.readFile(wormsPath, 'utf-8');
+const worms = JSON.parse(wormsRaw);
+
+const wormsLastUpdate = new Date(
+  Math.max(...worms.map(w => new Date(w.updated).getTime()))
+);
+
   let sitemapXML = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -46,7 +54,7 @@ const { SITE_URL } = require('../data/vars');
   </url>
    <url>
     <loc>${SITE_URL}/madot</loc>
-    <lastmod>${new Date().toISOString()}</lastmod>
+    <lastmod>${wormsLastUpdate.toISOString()}</lastmod>
   </url>
 `;
 
