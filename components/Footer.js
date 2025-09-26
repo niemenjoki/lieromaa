@@ -13,6 +13,9 @@ const Footer = () => {
             <Link href={'/blogi'}>Blogi</Link>
           </li>
           <li>
+            <Link href={'/madot'}>Mistä kompostimatoja?</Link>
+          </li>
+          <li>
             <Link href={'/tietoa'}>Tietoa sivustosta</Link>
           </li>
           <li>
