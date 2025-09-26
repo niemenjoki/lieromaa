@@ -14,7 +14,7 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
   const tags = 'matokompostointi,kompostorin perustaminen';
 
   return (
-    <Layout title={title + ' | Luomuliero'} ads={true} description={excerpt}>
+    <Layout title={title} ads={true} description={excerpt}>
       <article className={classes.PostPage}>
         <h1>{title}</h1>
         <div className={classes.Date}>
