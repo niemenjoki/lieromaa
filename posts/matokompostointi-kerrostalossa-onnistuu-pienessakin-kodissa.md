@@ -3,9 +3,8 @@ title: 'Matokompostointi kerrostalossa – onnistuu pienessäkin kodissa'
 date: '26 September, 2025'
 excerpt: 'Matokompostointi onnistuu kerrostalossa helposti ilman hajuhaittoja. Opi perustamaan oma matokomposti ja hyödyntämään matokakka huonekasveissa, parvekkeella tai mökillä.'
 tags: 'matokompostointi'
-keywords: 'kompostointi, matokasvatus, kotikompostointi, kerrostalo, ympäristöystävällinen,biojäte,kierrätys,lannoite,red wiggler,eisenia fetida,matokakka,huonekasvit,parvekekasvit'
+keywords: 'matokompostointi, kompostointi, kotikompostointi, biojäte, madot, matokakka, lannoite, ekologinen, kierrätys, puutarha'
 ---
-
 
 ## Miksi matokompostointi kannattaa aloittaa myös kerrostalossa?
 
@@ -17,13 +16,13 @@ Matokomposti tekee biojätteen kierrätyksestä näkyvää ja palkitsevaa. Sen a
 
 Erikoisliikkeistä ja ulkomailta saa tilattua monenlaisia matokompostoreita, mutta yksinkertaisin ja halvin vaihtoehto on käyttää tavallista kannellista varastolaatikkoa tai ämpäriä, jonka kanteen tehdään muutamia tuuletusaukkoja.
 
-Madot viihtyvät parhaiten huoneenlämmössä. Kompostori ei vie kovin paljoa tilaa eikä myöskään haise, joten sen voi sijoittaa esimerkiksi keittiön allaskaappiin, vaatehuoneen nurkkaan tai kodinhoitohuoneeseen. 
+Madot viihtyvät parhaiten huoneenlämmössä. Kompostori ei vie kovin paljoa tilaa eikä myöskään haise, joten sen voi sijoittaa esimerkiksi keittiön allaskaappiin, vaatehuoneen nurkkaan tai kodinhoitohuoneeseen.
 
-Jos kiinnostuit kompostorin perustamisesta, kurkkaa aiemmin kirjoittamani julkaisu [Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille). 
+Jos kiinnostuit kompostorin perustamisesta, kurkkaa aiemmin kirjoittamani julkaisu [Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille).
 
 ## Matokompostorin hoito ja käyttö arjessa
 
-Matokompostoria voi käyttää lähes biojäteastian tapaan. Ihan kaikkea sinne ei kuitenkaan voi laittaa, joten sen rinnalle tarvitaan lämpökompostori tai tarvittaessa kunnallinen keräys. Madoille sopivista biojätteistäkin olen kirjoittanut aiemmin oman julkaisun: [Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat](https://www.luomuliero.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat). 
+Matokompostoria voi käyttää lähes biojäteastian tapaan. Ihan kaikkea sinne ei kuitenkaan voi laittaa, joten sen rinnalle tarvitaan lämpökompostori tai tarvittaessa kunnallinen keräys. Madoille sopivista biojätteistäkin olen kirjoittanut aiemmin oman julkaisun: [Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat](https://www.luomuliero.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat).
 
 Matojen ruokkimisen lisäksi noin kerran viikossa on syytä tarkistaa matokompostin tila. Tähän kuluu aikaa pari minuuttia. Käytännössä kompostimassaa pitää vähän möyhiä ja samalla tarkistetaan, ettei se ole päässyt liian märäksi. Liian märkään kompostiin sekoitetaan kuivaa pahvia, paperia, kookoskuitua tai muuta niin sanottua petimateriaalia, jolloin kosteustasapaino tasoittuu.
 
@@ -38,4 +37,3 @@ Usein matokakkaa suositellaan käytettäväksi eri puutarhan kasveille, mutta se
 ## Loppusanat
 
 Matokompostointi kerrostalossa on helppo ja ympäristöystävällinen tapa kierrättää biojätettä. Madot tekevät työn puolestasi ja sinä saat palkinnoksi laadukasta lannoitetta. Jos et ole vielä kokeillut matokompostointia, nyt on hyvä hetki aloittaa!
-
