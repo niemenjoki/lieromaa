@@ -3,7 +3,7 @@ title: 'NPK-lannoitus: Typpi, fosfori ja kalium kasvien ravinteina eri vuodenaik
 date: '18 September, 2025'
 excerpt: 'Lannoitus on avain kasvien terveeseen kasvuun. Tässä julkaisussa käyn läpi kolme olennaisinta ravinnetta typpi (N), fosfori (P) ja kalium (K) ja kerron, miten ne vaikuttavat kasveihin. Kerron myös, miten valitset oikeanlaisen lannoitteen kuhunkin tilanteeseen'
 tags: 'puutarha,aloittelijan opas'
-keywords: 'NPK lannoitus, typpi fosfori kalium, kevätlannoitus, syyslannoitus, lannoite puutarhaan, nurmikko lannoitus, hyötykasvit lannoitus, komposti käyttö, matokakka lannoite'
+keywords: 'lannoite, puutarha, ekologinen, npk, typpi, fosfori, kalium, kierrätys, matokakka'
 ---
 
 ## Mikä ihmeen NPK?
