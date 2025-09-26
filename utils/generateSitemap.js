@@ -44,6 +44,10 @@ const { SITE_URL } = require('../data/vars');
     <loc>${SITE_URL}/tietosuoja</loc>
     <lastmod>2024-02-22T00:00:00.000Z</lastmod>
   </url>
+   <url>
+    <loc>${SITE_URL}/madot</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+  </url>
 `;
 
   // Add tag pages (if you want them indexed)
