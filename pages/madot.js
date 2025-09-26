@@ -8,13 +8,13 @@ import path from 'path';
 
 const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
   const title =
-    'Mistä ostaa kompostimatoja (Eisenia fetida) Suomessa? | Luomuliero';
+    'Mistä ostaa kompostimatoja (Eisenia fetida) Suomessa?';
   const excerpt =
     'Etsitkö kompostimatoja (Eisenia fetida)? Tästä oppaasta löydät vinkit, mistä kompostimatoja voi ostaa, mitä eroa on kastemadoilla ja kompostimadoilla sekä ajantasaisen saatavuustilanteen Suomessa.';
   const tags = 'matokompostointi,kompostorin perustaminen';
 
   return (
-    <Layout title={title} ads={true} description={excerpt}>
+    <Layout title={title + ' | Luomuliero'} ads={true} description={excerpt}>
       <article className={classes.PostPage}>
         <h1>{title}</h1>
         <div className={classes.Date}>
@@ -68,7 +68,7 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
           <h2>Voiko kompostimatoja kerätä luonnosta?</h2>
           <p>
             Olen kuullut, että kompostimatoja voi kerätä myös itse. Ilmeisesti
-            ainakin maatiloilla niitä näkyy lantakasoista, navettojen ympäriltä
+            ainakin maatiloilla niitä löytyy lantakasoista, navettojen ympäriltä
             ja vanhoista puutarhakomposteista. Kaupungissa asuvana en pitänyt
             tätä kovinkaan käytännöllisenä ja tilasin omat matoni aikanaan
             netistä.
