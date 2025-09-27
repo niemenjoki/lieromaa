@@ -17,12 +17,7 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
     <Layout title={title + ' | Luomuliero'} ads={true} description={excerpt}>
       <article className={classes.PostPage}>
         <h1>{title}</h1>
-        <div className={classes.Date}>
-          Matojen saatavuustilanne päivitetty:{' '}
-          {lastUpdated
-            ? new Date(lastUpdated).toLocaleDateString('fi-FI')
-            : 'Ei saatavilla'}
-        </div>
+
         <picture>
           <source
             srcSet="/images/wormspage/kompostimadot-pakkaus-800.avif 800w, /images/wormspage/kompostimadot-pakkaus-1200.avif 1200w"
@@ -83,7 +78,7 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
             matojaan.
           </p>
           <p>
-            Jos matoja ei heti löydy netistä, kannattaa etsiä udestaan muutaman
+            Jos matoja ei heti löydy netistä, kannattaa etsiä uudestaan muutaman
             päivän päästä. Suosittelen myös etsimään niitä suoraan tori.fi:stä.
           </p>
           <h2>Matojen saatavuustilanne</h2>
@@ -93,12 +88,28 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
             saatavilla.
           </p>
 
+          <div className={classes.Date}>
+            <em>
+              Tiedot päivitetty:{' '}
+              {lastUpdated
+                ? (() => {
+                    const d = new Date(lastUpdated);
+                    const date = d.toLocaleDateString('fi-FI');
+                    const time = d.toLocaleTimeString('fi-FI', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    });
+                    return `${date} klo ${time}`;
+                  })()
+                : 'Ei saatavilla'}
+            </em>
+          </div>
+
           {worms.map((item, idx) => {
             const isUnavailable =
               !item.availability ||
               item.availability === 'Ei toistaiseksi saatavilla';
 
-            console.log(isUnavailable);
             return (
               <div
                 key={idx}
@@ -119,7 +130,7 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
                   </li>
                   <li>
                     Saatavuus:{' '}
-                    {item.availability || 'Ei toistaiseksi saatavilla'}
+                    {item.availability || 'Ei saatavilla'}
                   </li>
                   <li>
                     <a
