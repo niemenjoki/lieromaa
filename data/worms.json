@@ -1,27 +1,5 @@
 [
   {
-    "seller": "Kiteen Mato ja Multa Oy",
-    "url": "https://www.matojamulta.com/tuote/18856730",
-    "package": "100 kpl",
-    "price": {
-      "100": "25€"
-    },
-    "currency": "EUR",
-    "availability": "Ei toistaiseksi saatavilla",
-    "updated": "2025-09-25T09:30:00Z"
-  },
-  {
-    "seller": "Väre-Pilkki Purmonen",
-    "url": "https://www.varepilkki.fi/product/vare-kompostimato/",
-    "package": "30 kpl",
-    "price": {
-      "30": "4.60€"
-    },
-    "currency": "EUR",
-    "availability": "Ei toistaiseksi saatavilla",
-    "updated": "2025-09-25T09:30:00Z"
-  },
-  {
     "seller": "Luomuliero (Tori.fi)",
     "url": "https://www.tori.fi/recommerce/forsale/item/25965632",
     "package": "50 kpl / 100 kpl / 200 kpl",
@@ -32,6 +10,28 @@
     },
     "currency": "EUR",
     "availability": "~500 matoa",
-    "updated": "2025-09-25T09:30:00Z"
+    "updated": "2025-09-29T06:30:00Z"
+  },
+  {
+    "seller": "Kiteen Mato ja Multa Oy",
+    "url": "https://www.matojamulta.com/tuote/18856730",
+    "package": "100 kpl",
+    "price": {
+      "100": "25€"
+    },
+    "currency": "EUR",
+    "availability": "Ei toistaiseksi saatavilla",
+    "updated": "2025-09-29T06:30:00Z"
+  },
+  {
+    "seller": "Väre-Pilkki Purmonen",
+    "url": "https://www.varepilkki.fi/product/vare-kompostimato/",
+    "package": "30 kpl",
+    "price": {
+      "30": "4.60€"
+    },
+    "currency": "EUR",
+    "availability": "Ei toistaiseksi saatavilla",
+    "updated": "2025-09-29T06:30:00Z"
   }
 ]
