@@ -11,18 +11,10 @@ import Toggler from './Toggler';
 const Navbar = () => {
   const router = useRouter();
   const navLinks = [
-    {
-      href: '/blogi',
-      text: 'Blogi',
-    },
-    {
-      href: '/madot',
-      text: 'Mistä kompostimatoja?',
-    },
-    {
-      href: '/tietoa',
-      text: 'Tietoa',
-    },
+    { href: '/blogi', text: 'Blogi' },
+    { href: '/madot', text: 'Madot' },
+    { href: '/matolaskuri', text: 'Laskuri' },
+    { href: '/tietoa', text: 'Tietoa' },
   ];
 
   const [isOpen, toggleIsOpen] = useToggle(false);
