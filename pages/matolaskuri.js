@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import Link from 'next/link';
 import Advert from '@/components/Advert';
 import Layout from '@/components/Layout';
 import PostRecommendation from '@/components/PostRecommendation';
+import SocialShareButtons from '@/components/SocialShareButtons';
+import useDebounce from '@/hooks/useDebounce';
 import classes from '@/styles/PostPage.module.css';
 import getPostRecommendations from '@/utils/getPostRecommendations';
-import useDebounce from '@/hooks/useDebounce';
-import SocialShareButtons from '@/components/SocialShareButtons';
+import Link from 'next/link';
+import { useState } from 'react';
 
 const LaskuriPage = ({ recommendedPosts }) => {
   const title = 'Matolaskuri';
@@ -222,7 +222,8 @@ const LaskuriPage = ({ recommendedPosts }) => {
 export async function getStaticProps() {
   const recommendedPosts = await getPostRecommendations({
     self: 'laskuri',
-    keywords: 'matokompostointi, kotikompostointi, biojäte, madot',
+    keywords:
+      'matolaskuri, laskuri, arviointi, madot, määrä, arvio, kompostin koko, kapasiteetti, kotikompostointi, matokompostointi, Eisenia fetida, työkalut, suunnittelu, aloittelija, hyöty, käyttö, mitoitus, biojäte, laskenta, kompostorin perustaminen, vinkit',
   });
 
   return {
