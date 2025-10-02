@@ -3,7 +3,7 @@ title: 'Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat'
 date: '7 September, 2025'
 excerpt: 'Mietitkö, mitä voit antaa kompostimadoille? Tässä kattava opas turvallisista ja kielletyistä ruoista sekä vinkkejä annosteluun ja kompostorin tasapainon ylläpitämiseen.'
 tags: 'matokompostointi,kompostorin hoito'
-keywords: 'matokompostointi, kompostointi, kotikompostointi, biojäte, ruokajäte, madot, matokakka, lannoite, puutarha, ekologinen, kierrätys'
+keywords: 'sallittu ruoka,kielletty ruoka,matokompostori,ruokajätteet,biojäte,kompostointi,madot,vihannekset,hedelmät,kahvinporot,teepussit,liha,maitotuotteet,ongelmat,vinkit,opas,turvallisuus,hajuhaitat,ruoanvalinta,käyttöohjeet,kompostimadon ruokinta'
 ---
 
 ## 1. Johdanto: miksi oikea ruokavalio on madoille tärkeää

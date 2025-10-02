@@ -3,7 +3,7 @@ title: 'Kuinka perustaa matokomposti kotona: Opas aloittelijoille'
 date: '6 September, 2025'
 excerpt: 'Harkitsetko matokompostin perustamista? Loistava valinta! Olipa tavoitteesi keittiöjätteen vähentäminen, ravinteikkaan luomulannoitteen tuottaminen tai uuden harrastuksen kokeileminen, matokompostointi on helppoa, hauskaa ja ympäristöystävällistä — eikä se rasita lompakkoa.'
 tags: 'matokompostointi,aloittelijan opas,kompostorin perustaminen'
-keywords: 'matokompostointi, kompostointi, kotikompostointi, biojäte, madot, lannoite, matokakka, puutarha, ekologinen, kierrätys'
+keywords: 'matokompostointi,kompostimadot,kotikompostointi,biojäte,keittiöjäte,perustaminen,opas,aloittelija,petimateriaali,kosteus,ilmanvaihto,lämpötila,hajuhaitat,hoito-ohjeet,ruokinta,jätteiden vähentäminen,luomulannoite,ravinnekierto,kotitalousjäte,ympäristöystävällisyys,vihreä elämäntapa'
 ---
 
 <picture>

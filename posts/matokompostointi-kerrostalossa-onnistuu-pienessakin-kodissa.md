@@ -3,7 +3,7 @@ title: 'Matokompostointi kerrostalossa – onnistuu pienessäkin kodissa'
 date: '26 September, 2025'
 excerpt: 'Matokompostointi onnistuu kerrostalossa helposti ilman hajuhaittoja. Opi perustamaan oma matokomposti ja hyödyntämään matokakka huonekasveissa, parvekkeella tai mökillä.'
 tags: 'matokompostointi'
-keywords: 'matokompostointi, kompostointi, kotikompostointi, biojäte, madot, matokakka, lannoite, ekologinen, kierrätys, puutarha'
+keywords: 'kerrostalo,asunto,sisäkompostointi,pieni tila,matokomposti,hajuton,huonekasvit,parveke,mökki,biojäte,keittiöjäte,kompostointi,helppous,vähätilainen,kaupunkikompostointi,ekologisuus,ympäristö,asuminen,kierrätys,ravinnekierto,jätteiden hyödyntäminen'
 ---
 
 ## Miksi matokompostointi kannattaa aloittaa myös kerrostalossa?

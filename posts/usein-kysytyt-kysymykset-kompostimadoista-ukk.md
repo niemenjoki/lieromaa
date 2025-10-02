@@ -3,7 +3,7 @@ title: 'Usein kysytyt kysymykset kompostimadoista (UKK)'
 date: '29 September, 2025'
 excerpt: 'UKK kompostimadoista: mitä lajikkeita voi käyttää, mitä ne syövät, kuinka kauan ne elävät ja tarvitsevatko ne happea, aivoja tai silmiä. Opi lisää Eisenia fetida -madoista ja matokompostoinnista.'
 tags: 'matokompostointi'
-keywords: 'kompostimadot, Eisenia fetida, matokomposti, madot, biojäte, kastemato, kompostorin perustaminen, matojen elinkaari, matojen ravinto'
+keywords: 'kompostimadot,usein kysytyt kysymykset,UKK,Eisenia fetida,lajikkeet,ravinto,elinikä,lisääntyminen,aistit,hoito,ruokinta,hapen tarve,elinolot,madon anatomia,aloittelija,matokompostointi,kotikompostointi,tietopaketti,harrastus,ympäristöhyödyt,vinkit'
 ---
 
 # Usein kysytyt kysymykset kompostimadoista (UKK)
