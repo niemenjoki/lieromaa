@@ -65,7 +65,7 @@ Tällaisen kompostorin rakentaminen on yllättävän helppoa. Rakentaminen vei m
 
 ### Tarvittavat materiaalit:
 
-- **Kolme samanlaista kannellista muovilaatikkoa**: On tärkeää, että laatikot saa asetettua tiiviisti sisäkkäin. Laatikoiden koko kannattaa valita oman talouden tuottaman biojätteen määrän mukaan. Hyvä nyrkkisääntö on, että 10 litran laatikkoon mahtuu ~1000 matoa, jotka pystyvät prosessoimaan noin 1 kg biojätettä viikossa.
+- **Kolme samanlaista kannellista muovilaatikkoa**: On tärkeää, että laatikot saa asetettua tiiviisti sisäkkäin. Laatikoiden koko kannattaa valita oman talouden tuottaman biojätteen määrän mukaan. Hyvä nyrkkisääntö on, että 10 litran laatikkoon mahtuu ~1000 matoa, jotka pystyvät prosessoimaan noin 1 kg biojätettä viikossa. Kun tiedät astian tilavuuden, voit laskea tarvittavan matojen määrän [laskurilla](https://www.luomuliero.fi/matolaskuri).
 - **Porakone ja poranteriä**: Muovilaatikkoa saa porattua "millä vaan", joten ei tarvita kalliita laitteita
 - **Kompostimadot**: Näiden ajantasaista saatavuustilannetta Suomessa voi tarkastella täällä: [Mistä ostaa kompostimatoja Suomessa?](https://www.luomuliero.fi/madot)
 - **Petimateriaali:** Revittyä pahvia, sanomalehtipaperia, silputtua kartonkia tai kookoskuitua.
@@ -87,13 +87,13 @@ Tällaisen kompostorin rakentaminen on yllättävän helppoa. Rakentaminen vei m
 
 **Aseta laatikot päällekkäin.** **Poraa kanteen reikiä** ilmanvaihdon parantamiseksi ja aseta se ylimmän laatikon päälle.
 
-Onneksi olkoon! Jatkuvan virtauksen kompostori on nyt valmis. 
+Onneksi olkoon! Jatkuvan virtauksen kompostori on nyt valmis.
 
 ## Päivittäinen käyttö ja ylläpito
 
 Arjessa kompostori on todella vaivaton:
 
-**Ruokinta:** Lisää keittiöjätteet kerran viikossa ylimpään laatikkoon. Peitä ne petimateriaalin alle, ettei esimerkiksi banaanikärpäset kiinnostu kompostorista. Viikon aikana kertyvät jätteet kerään muovirasiaan ja siirrän pakastimeen. Pakastaminen rikkoo vihannesten ja hedelmien soluseinämiä, mikä auttaa matoja prosessoimaan ne nopeammin. Pakastaminen ei kuitenkaan ole pakollista. 
+**Ruokinta:** Lisää keittiöjätteet kerran viikossa ylimpään laatikkoon. Peitä ne petimateriaalin alle, ettei esimerkiksi banaanikärpäset kiinnostu kompostorista. Viikon aikana kertyvät jätteet kerään muovirasiaan ja siirrän pakastimeen. Pakastaminen rikkoo vihannesten ja hedelmien soluseinämiä, mikä auttaa matoja prosessoimaan ne nopeammin. Pakastaminen ei kuitenkaan ole pakollista.
 
 **Matokakan keräys:** Kurkkaa silloin tällöin alimpaan laatikkoon. Kun sen sisältö on muuttunut 99%:sti pelkäksi matokakaksi, tyhjennä alin laatikko kokonaan. Mittaa kerätyn matokakan määrä karkeasti (esim. 5 kourallista). Siirrä saman verran materiaalia keskimmäisestä laatikosta alimpaan ja sen jälkeen ylimmäisestä keskimmäiseen. Tämä pitää kierron tasapainossa. Lisää ylimpään laatikkoon lopuksi saman verran tuoretta petimateriaalia.
 
