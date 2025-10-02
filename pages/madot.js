@@ -7,8 +7,7 @@ import fs from 'fs';
 import path from 'path';
 
 const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
-  const title =
-    'Mistä ostaa kompostimatoja (Eisenia fetida) Suomessa?';
+  const title = 'Mistä ostaa kompostimatoja (Eisenia fetida) Suomessa?';
   const excerpt =
     'Etsitkö kompostimatoja (Eisenia fetida)? Tästä oppaasta löydät vinkit, mistä kompostimatoja voi ostaa, mitä eroa on kastemadoilla ja kompostimadoilla sekä ajantasaisen saatavuustilanteen Suomessa.';
   const tags = 'matokompostointi,kompostorin perustaminen';
@@ -128,10 +127,7 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
                       ? `${item.price} €`
                       : 'Ei saatavilla'}
                   </li>
-                  <li>
-                    Saatavuus:{' '}
-                    {item.availability || 'Ei saatavilla'}
-                  </li>
+                  <li>Saatavuus: {item.availability || 'Ei saatavilla'}</li>
                   <li>
                     <a
                       href={item.url}
@@ -185,7 +181,8 @@ export async function getStaticProps() {
 
   const recommendedPosts = await getPostRecommendations({
     self: 'madot',
-    keywords: 'matokompostointi,matokakka,madot',
+    keywords:
+      'kompostimadot, Eisenia fetida, matokompostointi, kastemadot vs kompostimadot, osto, saatavuus, Suomi, hankinta, matojen hoito, käyttö, lajikkeet, opas, kysymykset, harrastus, hyöty, ympäristö, biojäte, kotikompostointi, kasvatus, vinkit',
   });
 
   return {
