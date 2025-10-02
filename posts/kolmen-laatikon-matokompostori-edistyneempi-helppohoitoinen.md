@@ -3,7 +3,7 @@ title: 'Rakenna kolmen laatikon matokompostori: Edistyneempi mutta vaivaton mato
 excerpt: 'Opi rakentamaan kolmen päällekkäisen laatikon matokompostori, joka perustuu jatkuvaan virtaukseen. Tämä helppohoitoinen järjestelmä tuottaa valmista matokakkaa ja on äärimmäisen helppohoitoinen.'
 date: '1 October, 2025'
 tags: 'matokompostointi,kompostorin perustaminen'
-keywords: 'kolmen laatikon matokompostori, matokompostorin rakentaminen, jatkuvan virtauksen kompostori, lierokomposti, kompostimadot, Eisenia fetida, vermikomposti, helppohoitoinen kompostori, kotikompostointi, ekologinen jätehuolto, matokakka,kierrätys'
+keywords: 'kolmen laatikon kompostori,DIY,rakenne,suunnittelu,rakennusohje,matokomposti,kompostimadot,kerroksellinen järjestelmä,käyttö,huolto,tehokkuus,keittiöjäte,biojäte,lannoite,kestävä ratkaisu,askartelu,kotikompostointi,käytännöllisyys,ravinnekierto,omatoimisuus,projekti'
 ---
 
 Aloitin matokompostoinnin aikoinaan yksittäisellä muovilaatikolla, koska se tuntui helpoimmalta tavalta päästä alkuun. Se toimi erinomaisesti ja siksi suosittelen sitä edelleen aloittelijoille. Jos olet haluat päästä alkuun helpolla, tutustu aiempaan jukaisuuni: [Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille).
