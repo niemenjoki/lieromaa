@@ -18,6 +18,8 @@ Matokompostori toimii tehokkaimmin, kun madot saavat ravintoa, joka tukee mikrob
 
 Hyvä matokompostorin ruokavalio sisältää pehmeitä ja helposti hajoavia kasviperäisiä jätteitä. Korkea kosteus ja sopiva hiilen ja typen suhde varmistavat tehokkaan hajotuksen. Liian rasvaiset, happamat tai proteiinipitoiset ruoat voivat aiheuttaa hajuhaittoja, houkutella hyönteisiä tai vahingoittaa matojen elinympäristöä.
 
+<aside>Ruokinnan voi tehdä myös pieneksi perheprojektiksi: lue, <a href="https://www.luomuliero.fi/blogi/julkaisu/matokomposti-oppimisvalineena-luonnon-kiertokulun-opettaminen-lapsille">miten matokomposti toimii oppimisvälineenä lapsille</a></aside>
+
 ## 2. Turvalliset ruokajätteet
 
 <picture>

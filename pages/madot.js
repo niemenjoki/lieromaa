@@ -4,6 +4,7 @@ import PostRecommendation from '@/components/PostRecommendation';
 import classes from '@/styles/PostPage.module.css';
 import getPostRecommendations from '@/utils/getPostRecommendations';
 import fs from 'fs';
+import Link from 'next/link';
 import path from 'path';
 
 const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
@@ -58,6 +59,10 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
             populaatiolla voi siis aloittaa edullisesti ja kasvattaa määrää
             vähitellen, mutta suuremmalla alkuinvestoinnilla pääsee heti
             käsittelemään suurempia jätemääriä.
+          </p>
+          <p>
+            Voit arvioida sopivan aloitusmäärän helposti{' '}
+            <Link href="/matolaskuri">matolaskurilla</Link>
           </p>
           <h2>Voiko kompostimatoja kerätä luonnosta?</h2>
           <p>
