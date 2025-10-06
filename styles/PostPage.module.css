@@ -186,3 +186,41 @@
 .CalculatorForm button:hover {
   opacity: 0.7;
 }
+
+.Flex {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.Flex img {
+  max-width: 30%;
+}
+
+.WormsPageNote {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 2rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 1000px) {
+  .Flex {
+    flex-direction: column;
+  }
+  .Flex img {
+    max-width: 40%;
+  }
+}
+
+@media (max-width: 600px) {
+  .Flex img {
+    max-width: 60%;
+  }
+}
+
+@media (max-width: 450px) {
+  .Flex img {
+    max-width: 80%;
+  }
+}
