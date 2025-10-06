@@ -100,7 +100,7 @@ Valmiita matokompostoreita löytyy erikoisliikkeistä ja ulkomailta tilattuna, m
 
 Lisäksi tarvitset petimateriaalia, joka voi olla esimerkiksi silputtua pahvia tai paperia, multaa tai kookoskuitua sekä tietysti itse madot. Huomioithan, että tavalliset kastemadot eivät sovi kompostimadoiksi. Kastemadot syövät pääasiassa kuolleita kasvien juuria ja muuta maaperän orgaanista ainetta ja viihtyvät tyypillisesti syvällä maassa. Kompostimadot viihtyvät lähempänä maan pintaa ja syövät mielellään ruokajätettä. Yleisimmin käytetty kompostimatojen lajike on tunkioliero (Eisenia fetida).
 
-Valitettavasti kompostimatoja on Suomessa saatavilla niukasti. Muutama verkkokauppa myy matoja pienissä erissä, mutta saatavuus vaihtelee. Jos matoja ei ole heti saatavila, kannattaa seurata tilannetta. Jos et löydä matoja muualta, voit tiedustella matoja myös minulta missä tahansa somekanavassa nimimerkillä @luomuliero tai sähköpostilla luomuliero(a)gmail.com. Pystyn myymään vain pieniä määriä matoja silloin tällöin omasta matokompostistani, ettei omien matojeni määrä vähene liikaa.
+<aside>Jos tarvitset kompostimatoja perustaaksesi oman matokompostin, voit tilata niitä <a href="https://www.luomuliero.fi/madot">täältä</a></aside>
 
 Matokompostin voi sijoittaa minne vaan sisätiloihin. Pidän omaa matokompostiani autotallissa, mutta hajuttomuutensa vuoksi sen voi hyvin sijoittaa vaikka keittiön lavuaarin alle tai vaatehuoneen nurkkaan.
 

@@ -32,7 +32,7 @@ Matokompostin perustamiseen käytettävät madot eivät ole tavallisia kastemato
 
 Alkuun pääsee pienelläkin matomäärällä, mutta käsittelytahti on silloin hidas. Esimerkiksi 50 madon populaatio syö vain muutaman kymmenen gramman verran jätettä viikossa. Hyvissä oloissa madot kuitenkin tuplaavat määränsä noin kolmen kuukauden välein. Pienellä populaatiolla voi siis aloittaa edullisesti ja kasvattaa määrää vähitellen, mutta suuremmalla alkuinvestoinnilla pääsee heti käsittelemään suurempia jätemääriä. Voit arvioida tarvittavaa matojen määrää [matolaskurilla](https://www.luomuliero.fi/matolaskuri).
 
-Jos tarvitset matoja, voit tilate niitä [täältä](https://www.luomuliero.fi/madot).
+Jos tarvitset matoja, voit tilata niitä [täältä](https://www.luomuliero.fi/madot).
 
 ### 2. Kompostiastia
 

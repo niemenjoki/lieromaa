@@ -20,6 +20,8 @@ Madot viihtyvät parhaiten huoneenlämmössä. Kompostori ei vie kovin paljoa ti
 
 Jos kiinnostuit kompostorin perustamisesta, kurkkaa aiemmin kirjoittamani julkaisu [Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille).
 
+<aside>Jos tarvitset kompostimatoja perustaaksesi oman matokompostin, voit tilata niitä <a href="https://www.luomuliero.fi/madot">täältä</a></aside>
+
 ## Matokompostorin hoito ja käyttö arjessa
 
 Matokompostoria voi käyttää lähes biojäteastian tapaan. Ihan kaikkea sinne ei kuitenkaan voi laittaa, joten sen rinnalle tarvitaan lämpökompostori tai tarvittaessa kunnallinen keräys. Madoille sopivista biojätteistäkin olen kirjoittanut aiemmin oman julkaisun: [Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat](https://www.luomuliero.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat).
