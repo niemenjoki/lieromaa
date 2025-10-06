@@ -3,162 +3,136 @@ import Layout from '@/components/Layout';
 import PostRecommendation from '@/components/PostRecommendation';
 import classes from '@/styles/PostPage.module.css';
 import getPostRecommendations from '@/utils/getPostRecommendations';
-import fs from 'fs';
 import Link from 'next/link';
-import path from 'path';
 
-const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
-  const title = 'Mistä ostaa kompostimatoja (Eisenia fetida) Suomessa?';
+const WormsPage = ({ recommendedPosts }) => {
+  const title = 'Osta kompostimatoja';
   const excerpt =
-    'Etsitkö kompostimatoja (Eisenia fetida)? Tästä oppaasta löydät vinkit, mistä kompostimatoja voi ostaa, mitä eroa on kastemadoilla ja kompostimadoilla sekä ajantasaisen saatavuustilanteen Suomessa.';
-  const tags = 'matokompostointi,kompostorin perustaminen';
+    'Kasvatan ja myyn kotimaisia kompostimatoja (Eisenia fetida) pienimuotoisesti. Tilaa helposti sähköpostilla tai Instagramissa.';
 
   return (
     <Layout title={title + ' | Luomuliero'} ads={true} description={excerpt}>
       <article className={classes.PostPage}>
         <h1>{title}</h1>
-
-        <picture>
-          <source
-            srcSet="/images/wormspage/kompostimadot-pakkaus-800.avif 800w, /images/wormspage/kompostimadot-pakkaus-1200.avif 1200w"
-            type="image/avif"
-          />
-          <source
-            srcSet="/images/wormspage/kompostimadot-pakkaus-800.webp 800w, /images/wormspage/kompostimadot-pakkaus-1200.webp 1200w"
-            type="image/webp"
-          />
-          <img
-            src="/images/wormspage/kompostimadot-pakkaus-800.jpg"
-            srcSet="/images/wormspage/kompostimadot-pakkaus-800.jpg 800w, /images/wormspage/kompostimadot-pakkaus-1200.jpg 1200w"
-            alt="Pieni pahvinen pakkausrasia, jossa tummaa kompostimultaa ja muutama kompostimato näkyvissä"
-            sizes="(max-width: 600px) 100vw, 800px"
-            style={{ maxWidth: '100%', height: 'auto' }}
-            loading="lazy"
-          />
-        </picture>
-
         <div className={classes.Content}>
-          <h2>Minkälaiset madot sopivat kompostiin?</h2>
-          <p>
-            Matokompostin perustamiseen käytettävät madot eivät ole tavallisia
-            kastematoja. Kastemadot syövät pääasiassa kuolleita kasvien juuria
-            ja muuta maaperän orgaanista ainetta ja viihtyvät tyypillisesti
-            syvällä maassa. Kompostimadot viihtyvät lähempänä maan pintaa ja
-            syövät mielellään ruokajätettä. Yleisimmin käytetty kompostimatojen
-            lajike on tunkioliero (<em>Eisenia fetida</em>). Ne ovat punertavia,
-            kastematoja pienempiä ja erittäin tehokkaita biojätteen
-            käsittelyssä. Tunkiolierot viihtyvät tiiviissä, kosteissa ja
-            pimeissä kompostiastioissa ja pystyvät syömään noin painonsa verran
-            ruokajätettä parissa päivässä.
-          </p>
-          <p>
-            Alkuun pääsee pienelläkin matomäärällä, mutta käsittelytahti on
-            silloin hidas. Esimerkiksi 50 madon populaatio syö vain muutaman
-            kymmenen gramman verran jätettä viikossa. Hyvissä oloissa madot
-            kuitenkin tuplaavat määränsä noin kolmen kuukauden välein. Pienellä
-            populaatiolla voi siis aloittaa edullisesti ja kasvattaa määrää
-            vähitellen, mutta suuremmalla alkuinvestoinnilla pääsee heti
-            käsittelemään suurempia jätemääriä.
-          </p>
-          <p>
-            Voit arvioida sopivan aloitusmäärän helposti{' '}
-            <Link href="/matolaskuri">matolaskurilla</Link>
-          </p>
-          <h2>Voiko kompostimatoja kerätä luonnosta?</h2>
-          <p>
-            Olen kuullut, että kompostimatoja voi kerätä myös itse. Ilmeisesti
-            ainakin maatiloilla niitä löytyy lantakasoista, navettojen ympäriltä
-            ja vanhoista puutarhakomposteista. Kaupungissa asuvana en pitänyt
-            tätä kovinkaan käytännöllisenä ja tilasin omat matoni aikanaan
-            netistä.
-          </p>
-          <h2>Kompostimatojen tilaaminen netistä</h2>
-          <p>
-            Kompostimatoja voi tilata verkosta tai ostaa yksityisiltä myyjiltä,
-            mutta niiden saatavuus vaihtelee. Valitettavasti vain muutama
-            verkkokauppa Suomessa myy kompostimatoja ja niidenkin saatavuus
-            vaihtelee suuresti. Välillä matoja ilmestyy Tori.fi-sivustolle ja
-            muille vastaaville sivustoille, joissa yksityiset myyjät myyvät omia
-            matojaan.
-          </p>
-          <p>
-            Jos matoja ei heti löydy netistä, kannattaa etsiä uudestaan muutaman
-            päivän päästä. Suosittelen myös etsimään niitä suoraan tori.fi:stä.
-          </p>
-          <h2>Matojen saatavuustilanne</h2>
-          <p>
-            Matojen heikon saatavuuden vuoksi päätin alkaa ylläpitämään
-            päivittyvää tilanneseurantaa, josta näkee helposti, onko matoja
-            saatavilla.
-          </p>
-
-          <div className={classes.Date}>
-            <em>
-              Tiedot päivitetty:{' '}
-              {lastUpdated
-                ? (() => {
-                    const d = new Date(lastUpdated);
-                    const date = d.toLocaleDateString('fi-FI');
-                    const time = d.toLocaleTimeString('fi-FI', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    });
-                    return `${date} klo ${time}`;
-                  })()
-                : 'Ei saatavilla'}
-            </em>
+          <div className={classes.Flex}>
+            <picture>
+              <source
+                srcSet="/images/wormspage/kompostimatoja_kammenella-800.avif 800w, /images/wormspage/kompostimatoja_kammenella-1200.avif 1200w"
+                type="image/avif"
+              />
+              <source
+                srcSet="/images/wormspage/kompostimatoja_kammenella-800.webp 800w, /images/wormspage/kompostimatoja_kammenella-1200.webp 1200w"
+                type="image/webp"
+              />
+              <img
+                src="/images/wormspage/kompostimatoja_kammenella-800.jpg"
+                srcSet="/images/wormspage/kompostimatoja_kammenella-800.jpg 800w, /images/wormspage/kompostimatoja_kammenella-1200.jpg 1200w"
+                alt="Noin 100 kompostimatoa läjässä kämmenellä"
+                sizes="(max-width: 600px) 100vw, 800px"
+                style={{ height: 'auto' }}
+                loading="lazy"
+              />
+            </picture>
+            <div>
+              <p>
+                Kasvatan ja myyn kotimaisia kompostimatoja (
+                <em>Eisenia fetida</em>) omasta kotikompostistani. Madot ovat
+                täysin kotimaisia ja kasvaneet luonnonmukaisesti* ilman
+                kemikaaleja.
+              </p>
+              <p>
+                Kompostimadot ovat erinomainen tapa muuttaa biojäte
+                ravinteikkaaksi mullaksi kotona. Matokompostori voidaan pitää
+                sisätiloissa, se on hajuton ja helppohoitoinen. Madot hajottavat
+                jätettä tehokkaasti, jopa oman painonsa verran viikossa, ja
+                populaatio tuplaantuu noin kolmen kuukauden välein. Kastematoja
+                vilkkaammin kiemurtelevat kompostimadot sopivat myös hyvin
+                onkimadoiksi.
+              </p>
+              <p>
+                Pakkaus sisältää noin 50 kompostimatoa ja niiden kasvualustaa
+                (pahvi- ja puusilppu, kookoskuori, puutarhamulta).
+              </p>
+              <p>
+                Matoja ei saa tilattua suoraan verkkosivun kautta, koska haluan
+                varmistaa matojen saatavuuden ennen tilauksen vahvistamista.
+                Toimintani on pienimuotoista ja joudun pitämään myynnin
+                rajallisena, jotta matojen määrä omassa kompostissani ei vähene
+                liikaa. Ota sen sijaan suoraan yhteyttä minuun (ohjeet
+                alempana), niin vahvistan saatavuuden ennen maksua.
+              </p>
+              <h2>Hinnat</h2>
+              <ul>
+                <li>50 matoa 20€</li>
+                <li>100 matoa 30€</li>
+                <li>200 matoa 50€</li>
+              </ul>
+              <p>
+                Jos et ole varma kuinka paljon tarvitset matoja, kokeile
+                sivustolta löytyvää{' '}
+                <Link href="/matolaskuri">matolaskuria</Link>
+              </p>
+              <h2>Tilaaminen</h2>
+              <p>
+                Jos haluat tilata matoja tai sinulla on kysyttävää, laita
+                viestiä:
+              </p>
+              <ul>
+                <li>
+                  📧 Sähköpostitse: <strong>luomuliero@gmail.com</strong>
+                </li>
+                <li>
+                  📸 Instagramissa:{' '}
+                  <a
+                    href="https://www.instagram.com/luomuliero"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    @luomuliero
+                  </a>
+                </li>
+                <li>
+                  💬 WhatsAppissa:{' '}
+                  <a
+                    href="https://wa.me/358503365054?text=Hei!%20Olen%20kiinnostunut%20kompostimadoista."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Lähetä viesti WhatsAppissa
+                  </a>
+                </li>
+              </ul>
+              <h2>Toimitus ja nouto</h2>
+              <p>
+                Madot toimitetaan pakasterasiassa postitettuna tai ne voi noutaa
+                Järvenpäästä. Suosittelen hakemaan postitetut madot heti
+                saapumisilmoituksen saapuessa, koska madot voivat elää
+                suljetussa rasiassa vain noin 5 vuorokautta. Lähetän
+                matopakkauksia vain maanantaisin ja tiistaisin, jotta madot
+                eivät jää viikonlopuksi Postin kyytiin.
+              </p>
+              <h2>Maksaminen</h2>
+              <p>
+                Toivon, että tilaukset maksetaan MobilePayllä, mutta voimme
+                sopia myös muista maksutavoista kuten käteinen noudon yhteydessä
+                tai tilisiirto
+              </p>
+              <p className={classes.WormsPageNote}>
+                Luomuliero on kaupparekisteriin rekisteröiity toiminimi, jota
+                käytän toimiessani yksityisenä elinkeinonharjoittaja (Y-tunnus
+                arvolisäverolain 3§ mukaan arvonlisäverovelvollinen vähäisen
+                toiminnan vuoksi. Kaikki hinnat ovat verottomia.
+              </p>
+              <p className={classes.WormsPageNote}>
+                *Maininta “luonnonmukaisesti” viittaa omiin toimintatapoihini,
+                kuten kemikaalittomaan ja kotimaiseen kasvatukseen. En kuulu
+                Ruokaviraston, Ely-keskuksen tai Valviran luomuvalvontaan, enkä
+                ole maksanut luomu-nimityksen käyttöoikeudesta. Kyse ei ole
+                virallisesta luomusertifioidusta tuotannosta.
+              </p>
+            </div>{' '}
           </div>
-
-          {worms.map((item, idx) => {
-            const isUnavailable =
-              !item.availability ||
-              item.availability === 'Ei toistaiseksi saatavilla';
-
-            return (
-              <div
-                key={idx}
-                className={isUnavailable ? classes.Unavailable : undefined}
-              >
-                <h3>{item.seller}</h3>
-                <ul>
-                  <li>Pakkauskoot: {item.package}</li>
-                  <li>
-                    Hinnat:{' '}
-                    {typeof item.price === 'object'
-                      ? Object.entries(item.price)
-                          .map(([qty, price]) => `${qty} kpl: ${price}`)
-                          .join(', ')
-                      : item.price
-                      ? `${item.price} €`
-                      : 'Ei saatavilla'}
-                  </li>
-                  <li>Saatavuus: {item.availability || 'Ei saatavilla'}</li>
-                  <li>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Linkki myynti-ilmoitukseen
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            );
-          })}
-
-          <h2>Oma myyntini</h2>
-          <p>
-            <strong>Huomautus:</strong> Läpinäkyvyyden nimissä kerron vielä
-            erikseen, että saatavuuslistassa on mukana oma myynti-ilmoitukseni
-            Tori.fi:ssä. Lupaan kuitenkin pitää saatavuustiedot
-            totuudenmukaisena ja ajan tasalla.
-          </p>
-          <p>
-            Itse myymäni madot ovat peräsin omasta kompostistani, enkä pysty
-            myymään kovin suuria määriä kerralla ilman että matojen määrä omassa
-            kompostissani vähenee liikaa.
-          </p>
         </div>
       </article>
 
@@ -172,18 +146,6 @@ const WormsPage = ({ worms, lastUpdated, recommendedPosts }) => {
 };
 
 export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), 'data', 'worms.json');
-  const jsonData = fs.readFileSync(filePath, 'utf-8');
-  const worms = JSON.parse(jsonData);
-
-  const updatedTimes = worms
-    .map((w) => (w.updated ? new Date(w.updated).getTime() : null))
-    .filter(Boolean);
-  const lastUpdated =
-    updatedTimes.length > 0
-      ? new Date(Math.max(...updatedTimes)).toISOString()
-      : null;
-
   const recommendedPosts = await getPostRecommendations({
     self: 'madot',
     keywords:
@@ -191,7 +153,7 @@ export async function getStaticProps() {
   });
 
   return {
-    props: { worms, lastUpdated, recommendedPosts },
+    props: { recommendedPosts },
   };
 }
 
