@@ -26,6 +26,10 @@ Muitakin matolajeja voi käyttää kompostoinnissa, mutta se on harvinaisempaa, 
 
 Tarvittava matojen määrä riippuu taloutesi koosta. Voit arvioida määrää [matolaskurilla](https://www.luomuliero.fi/matolaskuri).
 
+## Mistä matoja saa hankittua?
+
+Kompostimatoja voi ilmeisesti kerätä itsekin luonnosta, mutta en itse ole koskaan sitä kokeillut. Sen sijaan koin aikanaan käytännöllisemmäksi tilata omat matoni netistä. Kompostimatojen saatavuus vaihtelee suuresti, mutta netistä etsimällä voi löytyä joitakin verkkokauppoja. Myyn myös itse pieniä määriä matoja, jos tilanne omassa kompostissani on hyvä. Voit tilata matoja minulta <a href="https://www.luomuliero.fi/madot">täällä</a>
+
 ## Onko madoilla suu?
 
 Kyllä on. Suu sijaitsee madon etupään ensimmäisessä jaokkeessa. Kun etupää supistuu, suun peittää pieni ja herkkä iholäppä. Kun mato etsii ruokaa, läppä venyy ulos aistimaan sopivia ruokahiukkasia ja avautuu syömistä varten.

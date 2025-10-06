@@ -6,6 +6,8 @@ tags: 'matokompostointi,kompostointi talvella,lämpökompostointi'
 keywords: 'ulkokompostointi,Suomi,ilmasto,talvi,kylmä,pakkaset,eristys,matokomposti,kompostimadot,selviytyminen,hoito,ratkaisut,keittiöjäte,biojäte,vuodenaikojen vaihtelu,kompostointi,vinkit,suojaaminen,luonnonolosuhteet,kotipuutarha,mökkikompostointi,ympäristö'
 ---
 
+<aside>Jos tarvitset kompostimatoja perustaaksesi oman matokompostin, voit tilata niitä <a href="https://www.luomuliero.fi/madot">täältä</a></aside>
+
 Moni pohtii, voiko matokompostin pitää ulkona, miten madot pärjäävät, kun tulee talvi. Tässä julkaisussa käyn läpi, mitä pitää ottaa huomioon, jos haluaa pitää matokompostoria ulkona ja esitän oman näkemykseni siitä, voiko kompostimatoja laittaa perinteiseen lämpökompostoriin.
 
 <picture>
