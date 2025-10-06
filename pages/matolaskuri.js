@@ -93,9 +93,8 @@ const LaskuriPage = ({ recommendedPosts }) => {
             tarvitaan.
           </p>
           <p>
-            Jos sinulla ei vielä ole matoja, voit tutustua{' '}
-            <Link href="/madot">kompostimatojen hankintaoppaaseen</Link> ja
-            selvittää mistä niitä voi ostaa Suomessa.
+            Jos sinulla ei vielä ole matoja, ostaa niitä{' '}
+            <Link href="/madot">täältä</Link>
           </p>
 
           <h2>Laskuri</h2>

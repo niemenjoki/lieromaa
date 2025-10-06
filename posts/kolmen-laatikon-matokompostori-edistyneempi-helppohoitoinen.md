@@ -67,7 +67,7 @@ Tällaisen kompostorin rakentaminen on yllättävän helppoa. Rakentaminen vei m
 
 - **Kolme samanlaista kannellista muovilaatikkoa**: On tärkeää, että laatikot saa asetettua tiiviisti sisäkkäin. Laatikoiden koko kannattaa valita oman talouden tuottaman biojätteen määrän mukaan. Hyvä nyrkkisääntö on, että 10 litran laatikkoon mahtuu ~1000 matoa, jotka pystyvät prosessoimaan noin 1 kg biojätettä viikossa. Kun tiedät astian tilavuuden, voit laskea tarvittavan matojen määrän [laskurilla](https://www.luomuliero.fi/matolaskuri).
 - **Porakone ja poranteriä**: Muovilaatikkoa saa porattua "millä vaan", joten ei tarvita kalliita laitteita
-- **Kompostimadot**: Näiden ajantasaista saatavuustilannetta Suomessa voi tarkastella täällä: [Mistä ostaa kompostimatoja Suomessa?](https://www.luomuliero.fi/madot)
+- **Kompostimadot**: Voit ostaa madot [täältä](https://www.luomuliero.fi/madot)
 - **Petimateriaali:** Revittyä pahvia, sanomalehtipaperia, silputtua kartonkia tai kookoskuitua.
 - **Keittiöjätteet:** Hedelmä- ja vihanneskuoria, kahvinporoja tai muuta madoille sopivaa ruokaa. Kurkkaa tarvittaessa aiempi julkaisuni: [Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat](https://www.luomuliero.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat)
 
