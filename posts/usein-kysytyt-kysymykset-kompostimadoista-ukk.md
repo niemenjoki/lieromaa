@@ -20,7 +20,7 @@ Yleisimmin käytetty kompostimatojen laji on tunkioliero (_Eisenia fetida_). Se 
   <img src="/images/posts/usein-kysytyt-kysymykset-kompostimadoista-ukk/kompostimadot_kammenella-800.jpg" srcset="/images/posts/usein-kysytyt-kysymykset-kompostimadoista-ukk/kompostimadot_kammenella-800.jpg 800w, /images/posts/usein-kysytyt-kysymykset-kompostimadoista-ukk/kompostimadot_kammenella-1200.jpg 1200w" alt="Matokompostin petimateriaalia ja kompostimatoja henkilön kämmenellä" sizes="(max-width: 600px) 100vw, 800px" style="max-width:100%;height:auto;" loading="lazy">
 </picture>
 
-Muitakin matolajeja voi käyttää kompostoinnissa, mutta se on harvinaisempaa, sillä _Eisenia fetida_ on helppo, nopea ja laajimmin saatavilla oleva vaihtoehto. Katso täältä ajantasainen ohjeistus, mistä kompostimatoja voi hankkia: [Mistä ostaa kompostimatoja (Eisenia fetida) Suomessa?](https://www.luomuliero.fi/madot)
+Muitakin matolajeja voi käyttää kompostoinnissa, mutta se on harvinaisempaa, sillä _Eisenia fetida_ on helppo, nopea ja laajimmin saatavilla oleva vaihtoehto. Voit ostaa _Eisenia fetida_ matoja [täältä](https://www.luomuliero.fi/madot)
 
 ## Kuinka monta matoa tarvitsen aloittaakseni?
 

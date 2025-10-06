@@ -12,7 +12,7 @@ const Navbar = () => {
   const router = useRouter();
   const navLinks = [
     { href: '/blogi', text: 'Blogi' },
-    { href: '/madot', text: 'Madot' },
+    { href: '/madot', text: 'Osta matoja', highlight: true },
     { href: '/matolaskuri', text: 'Laskuri' },
     { href: '/tietoa', text: 'Tietoa' },
   ];
@@ -44,7 +44,13 @@ const Navbar = () => {
             </li>
             {navLinks.map((link) => (
               <li key={link.href} onClick={() => toggleIsOpen(false)}>
-                <Link href={link.href} className={classes.NavButton}>
+                <Link
+                  href={link.href}
+                  className={classes.NavButton}
+                  style={{
+                    color: link.highlight ? 'var(--highlight-alt)' : undefined,
+                  }}
+                >
                   {link.text}
                 </Link>
               </li>
