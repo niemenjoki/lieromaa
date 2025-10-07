@@ -9,11 +9,18 @@ import fs from 'fs';
 import hljs from 'highlight.js';
 import { marked } from 'marked';
 import path from 'path';
+import { SITE_URL } from '@/data/vars';
 
-const PostPage = ({ data, content, recommendedPosts = [] }) => {
+const PostPage = ({ data, content, recommendedPosts = [], structuredData }) => {
+  console.log(data);
   const { title, date, tags, excerpt } = data;
   return (
-    <Layout title={title + ' | Luomuliero'} ads={true} description={excerpt}>
+    <Layout
+      title={title + ' | Luomuliero'}
+      ads={true}
+      description={excerpt}
+      structuredData={structuredData}
+    >
       <article className={classes.PostPage}>
         <h1>{title}</h1>
         <div className={classes.Date}>
@@ -63,8 +70,29 @@ const getStaticProps = async ({ params: { slug } }) => {
     langPrefix: 'hljs language-',
   });
   const htmlContent = marked(content);
+
+  const structuredData = data.structuredData || [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: data.title,
+      description: data.excerpt,
+      datePublished: data.date,
+      author: { '@type': 'Person', name: 'Joonas Niemenjoki' },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Luomuliero',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        },
+      },
+      mainEntityOfPage: `${SITE_URL}/blogi/julkaisu/${slug}`,
+    },
+  ];
+
   return {
-    props: { data, content: htmlContent, recommendedPosts },
+    props: { data, content: htmlContent, recommendedPosts, structuredData },
   };
 };
 
