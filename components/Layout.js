@@ -15,6 +15,7 @@ const Layout = ({
   children,
   canonical,
   structuredData,
+  showTermsLink,
 }) => {
   const router = useRouter();
   const canonicalUrl = canonical || `${SITE_URL}${router.asPath}`;
@@ -58,7 +59,7 @@ const Layout = ({
       />
       <Navbar />
       <main>{children}</main>
-      <Footer />
+      <Footer showTermsLink={showTermsLink} />
       <Analytics />
       <SpeedInsights />
     </div>
