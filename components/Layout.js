@@ -19,6 +19,12 @@ const Layout = ({
 }) => {
   const router = useRouter();
   const canonicalUrl = canonical || `${SITE_URL}${router.asPath}`;
+  const isDev =
+    process.env.NODE_ENV === 'development' ||
+    (typeof window !== 'undefined' &&
+      (window.location.hostname === 'localhost' ||
+        window.location.hostname.startsWith('192.168.') ||
+        window.location.hostname === '127.0.0.1'));
 
   return (
     <div className="container">
@@ -60,8 +66,12 @@ const Layout = ({
       <Navbar />
       <main>{children}</main>
       <Footer showTermsLink={showTermsLink} />
-      <Analytics />
-      <SpeedInsights />
+      {!isDev && (
+        <>
+          <Analytics />
+          <SpeedInsights />
+        </>
+      )}
     </div>
   );
 };
