@@ -6,8 +6,38 @@ import Image from 'next/image';
 import portrait from '../public/images/portrait2024.png';
 
 const AboutPage = () => {
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: 'Tietoa Luomulierosta',
+      description:
+        'Tietoa sivuston ylläpitäjästä Joonas Niemenjoesta ja Luomulieron toiminnasta. Luomuliero keskittyy matokompostointiin ja kestävään jätehuoltoon Suomessa.',
+      url: 'https://www.luomuliero.fi/tietoa',
+      author: {
+        '@type': 'Person',
+        name: 'Joonas Niemenjoki',
+        url: 'https://www.linkedin.com/in/joonasniemenjoki/',
+        affiliation: {
+          '@type': 'Organization',
+          name: 'Luomuliero',
+        },
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+        logo: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+      },
+      mainEntity: {
+        '@type': 'WebSite',
+        name: 'Luomuliero',
+        url: 'https://www.luomuliero.fi',
+      },
+    },
+  ];
+
   return (
-    <Layout title={'Tietoa | Luomuliero'}>
+    <Layout title={'Tietoa | Luomuliero'} structuredData={structuredData}>
       <div className={classes.AboutPage}>
         <div className={classes.Info}>
           <Image

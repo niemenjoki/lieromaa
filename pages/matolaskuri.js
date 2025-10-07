@@ -12,7 +12,45 @@ const LaskuriPage = ({ recommendedPosts }) => {
   const title = 'Matolaskuri';
   const excerpt =
     'Syötä kotitaloutesi tiedot ja laskuri arvioi biojätteen määrän sekä tarvittavan matopopulaation. Näet myös eri aloitusvaihtoehdot ja kuinka nopeasti pääset täyteen käsittelykapasiteettiin.';
-
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Matolaskuri',
+      applicationCategory: 'UtilityApplication',
+      operatingSystem: 'Web',
+      description:
+        'Verkkopohjainen laskuri, joka arvioi kotitalouden biojätteen määrän ja suosittelee tarvittavan kompostimatojen populaation. Tulokset perustuvat ruokavalioon, kotitalouden kokoon ja madon kasvuvauhtiin.',
+      url: 'https://www.luomuliero.fi/matolaskuri',
+      image:
+        'https://www.luomuliero.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
+      featureList: [
+        'Arvioi kotitalouden biojätteen määrä (g/viikko)',
+        'Laskee tarvittavan kompostimatojen määrän',
+        'Näyttää eri aloitusvaihtoehdot ja kasvuajat',
+        'Perustuu Eisenia fetida -lajin ruokintatehoon',
+      ],
+      softwareHelp: {
+        '@type': 'CreativeWork',
+        name: 'Matokompostointiopas aloittelijoille',
+        url: 'https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Joonas Niemenjoki',
+        url: 'https://www.linkedin.com/in/joonasniemenjoki/',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        },
+      },
+      datePublished: '2025-09-20T00:00:00+03:00',
+    },
+  ];
   // Household inputs
   const [adults, setAdults] = useState(2);
   const [teens, setTeens] = useState(0);
@@ -77,7 +115,12 @@ const LaskuriPage = ({ recommendedPosts }) => {
   );
 
   return (
-    <Layout title={title + ' | Luomuliero'} ads={true} description={excerpt}>
+    <Layout
+      title={title + ' | Luomuliero'}
+      ads={true}
+      description={excerpt}
+      structuredData={structuredData}
+    >
       <article className={classes.PostPage}>
         <h1>{title}</h1>
         <p>{excerpt}</p>

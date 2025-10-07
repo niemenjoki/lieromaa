@@ -1,9 +1,27 @@
 ---
 title: 'Matokomposti oppimisvälineenä: luonnon kiertokulun perusteiden opettaminen lapsille'
-date: '10 September, 2025'
 excerpt: 'Matokompostointi on loistava tapa opettaa lapsille luonnon kiertokulusta ja ekologisista käytännöistä. Tutustu vinkkeihin, miten tehdä kompostoinnista hauskaa ja opettavaista koko perheelle.'
+date: '10 September, 2025'
 tags: 'matokompostointi,puutarha,lapset'
 keywords: 'lapset,opetus,oppiminen,kasvatus,kiertokulku,luonnon ymmärtäminen,matokomposti,koulutus,ympäristökasvatus,kompostimadot,havainnollistaminen,kokeilu,harrastus,tiede,ekologia,ravinnekierto,kierrätys,käytännön oppiminen,työpaja,vanhemmat,yhteisö'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'BlogPosting'
+    headline: 'Matokomposti oppimisvälineenä: luonnon kiertokulun perusteiden opettaminen lapsille'
+    description: 'Artikkeli siitä, miten matokompostointia voidaan hyödyntää lasten ympäristökasvatuksessa ja luonnon kiertokulun opettamisessa käytännönläheisesti ja hauskasti.'
+    image: 'https://www.luomuliero.fi/images/posts/matokomposti-oppimisvalineena-luonnon-kiertokulun-opettaminen-lapsille/lapset-ja-komposti-1200.jpg'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    datePublished: '2025-09-10T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/matokomposti-oppimisvalineena-luonnon-kiertokulun-opettaminen-lapsille'
 ---
 
 Matokompostointi on loistava keino kierrättää keittiöjätettä ekologisesti ja se tarjoaa mahtavan tilaisuuden opettaa lapsille luonnon kiertokulusta. Tässä julkaisussa esitän ajatuksia siitä, miten matokompostia voi käyttää hauskana opetusvälineenä osana lasten ympäristökasvatusta.

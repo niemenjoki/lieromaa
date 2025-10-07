@@ -1,9 +1,27 @@
 ---
 title: 'NPK-lannoitus: Typpi, fosfori ja kalium kasvien ravinteina eri vuodenaikoina'
+excerpt: 'Lannoitus on avain kasvien terveeseen kasvuun. Tässä julkaisussa käyn läpi kolme olennaisinta ravinnetta typpi (N), fosfori (P) ja kalium (K) ja kerron, miten ne vaikuttavat kasveihin. Kerron myös, miten valitset oikeanlaisen lannoitteen kuhunkin tilanteeseen.'
 date: '18 September, 2025'
-excerpt: 'Lannoitus on avain kasvien terveeseen kasvuun. Tässä julkaisussa käyn läpi kolme olennaisinta ravinnetta typpi (N), fosfori (P) ja kalium (K) ja kerron, miten ne vaikuttavat kasveihin. Kerron myös, miten valitset oikeanlaisen lannoitteen kuhunkin tilanteeseen'
 tags: 'puutarha,aloittelijan opas'
 keywords: 'lannoitus,NPK,typpi,fosfori,kalium,ravinteet,kasvit,kasvu,satokausi,maaperä,kierto,luomulannoite,matokakka,komposti,puutarha,viljely,kasvien ravinteet,lannoiteopas,perusasiat,hyötykasvit,ekologia'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'BlogPosting'
+    headline: 'NPK-lannoitus: Typpi, fosfori ja kalium kasvien ravinteina eri vuodenaikoina'
+    description: 'Opas kasvien tärkeimpiin ravinteisiin – typpi, fosfori ja kalium – sekä siihen, miten niiden suhde vaikuttaa eri vuodenaikoina ja eri kasviryhmissä. Mukana käytännön esimerkkejä lannoituksen ajoituksesta ja vaihtoehdoista luonnollisille lannoitteille.'
+    image: 'https://www.luomuliero.fi/images/posts/npk-lannoitus-typpi-fosfori-kalium-kasvien-ravinteina-vuodenaikoina/hammentynyt-npk-arvoista-1200.jpg'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    datePublished: '2025-09-18T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/npk-lannoitus-typpi-fosfori-kalium-kasvien-ravinteina-vuodenaikoina'
 ---
 
 ## Mikä ihmeen NPK?

@@ -12,7 +12,6 @@ import path from 'path';
 import { SITE_URL } from '@/data/vars';
 
 const PostPage = ({ data, content, recommendedPosts = [], structuredData }) => {
-  console.log(data);
   const { title, date, tags, excerpt } = data;
   return (
     <Layout

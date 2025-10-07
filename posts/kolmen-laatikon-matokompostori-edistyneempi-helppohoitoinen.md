@@ -52,7 +52,8 @@ structuredData:
     author:
       '@type': 'Person'
       name: 'Joonas Niemenjoki'
-    datePublished: '2025-10-01'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    datePublished: '2025-10-01T00:00:00+03:00'
     mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen'
 ---
 

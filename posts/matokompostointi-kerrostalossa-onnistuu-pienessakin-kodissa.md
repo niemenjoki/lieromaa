@@ -1,9 +1,27 @@
 ---
 title: 'Matokompostointi kerrostalossa – onnistuu pienessäkin kodissa'
-date: '26 September, 2025'
 excerpt: 'Matokompostointi onnistuu kerrostalossa helposti ilman hajuhaittoja. Opi perustamaan oma matokomposti ja hyödyntämään matokakka huonekasveissa, parvekkeella tai mökillä.'
+date: '26 September, 2025'
 tags: 'matokompostointi'
 keywords: 'kerrostalo,asunto,sisäkompostointi,pieni tila,matokomposti,hajuton,huonekasvit,parveke,mökki,biojäte,keittiöjäte,kompostointi,helppous,vähätilainen,kaupunkikompostointi,ekologisuus,ympäristö,asuminen,kierrätys,ravinnekierto,jätteiden hyödyntäminen'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'BlogPosting'
+    headline: 'Matokompostointi kerrostalossa – onnistuu pienessäkin kodissa'
+    description: 'Artikkeli matokompostoinnista kerrostalo-olosuhteissa: miten aloittaa helposti, mitä hyötyjä syntyy ja miten matokakkaa voi hyödyntää kaupunkiympäristössä.'
+    image: 'https://www.luomuliero.fi/images/posts/matokompostointi-kerrostalossa-onnistuu-pienessakin-kodissa/matokomposti_kerrostalossa-1200.jpg'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    datePublished: '2025-09-26T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/matokompostointi-kerrostalossa-onnistuu-pienessakin-kodissa'
 ---
 
 ## Miksi matokompostointi kannattaa aloittaa myös kerrostalossa?

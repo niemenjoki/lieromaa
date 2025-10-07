@@ -1,9 +1,27 @@
 ---
 title: 'Lämpökompostori vai matokomposti? Paras ratkaisu keittiöjätteelle'
-date: '8 September, 2025'
 excerpt: 'Vertailu kahdesta hyvästä kompostointiratkaisusta: tilantarve, kustannukset, hoito ja käyttömukavuus. Löydä paras tapa kierrättää keittiöbiojätteesi!'
+date: '8 September, 2025'
 tags: 'lämpökompostointi,matokompostointi,kompostivertailu'
 keywords: 'lämpökompostori,matokomposti,kompostointimenetelmät,vertailu,keittiöjäte,biojäte,kompostointi,tilantarve,kustannukset,käyttömukavuus,huolto,hoito,talvikäyttö,sisäkompostointi,ulkokompostointi,ympäristövaikutukset,lannoite,multatuotanto,ekologia,jätteen kierrätys,energiatehokkuus'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'BlogPosting'
+    headline: 'Lämpökompostori vai matokomposti? Paras ratkaisu keittiöjätteelle'
+    description: 'Vertailu lämpökompostorin ja matokompostorin välillä: hyödyt, rajoitteet, tilantarve ja kustannukset. Löydä itsellesi sopivin tapa kierrättää keittiöbiojätteet.'
+    image: 'https://www.luomuliero.fi/images/posts/lampokompostori-vai-matokomposti-paras-ratkaisu-keittiojatteelle/ulkokompostori-vai-matokompostori-1200.jpg'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    datePublished: '2025-09-08T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/lampokompostori-vai-matokomposti-paras-ratkaisu-keittiojatteelle'
 ---
 
 Keittiöjätteen kompostointi on fiksu tapa vähentää roskia ja tuottaa ravinteikasta multaa puutarhaan tai parvekkeelle. Tässä blogijutussa vertailen kahta hyvää vaihtoehtoa keittiöbiojätteelle: lämpökompostoria ja matokompostoria.
