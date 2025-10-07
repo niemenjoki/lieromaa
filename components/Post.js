@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import classes from '@/styles/Post.module.css';
 
-const Post = ({ post, compact = false }) => {
+const Post = ({ post, compact = false, overrideHref = false }) => {
   if (typeof post.tags === 'string') {
     post.tags = post.tags.split(',').map((tag) => tag.trim());
   }
@@ -10,7 +10,13 @@ const Post = ({ post, compact = false }) => {
   return (
     <div className={classes.Post}>
       <h2 className={classes.Title}>
-        <Link href={`/${post.altPath || `blogi/julkaisu`}/${post.slug}`}>
+        <Link
+          href={
+            overrideHref
+              ? overrideHref
+              : `/${post.altPath || `blogi/julkaisu`}/${post.slug}`
+          }
+        >
           {post.title}
         </Link>
       </h2>
@@ -30,7 +36,11 @@ const Post = ({ post, compact = false }) => {
       {!compact && (
         <Link
           aria-label={`Avaa julkaisu ${post.title}`}
-          href={`/${post.altPath || `blogi/julkaisu`}/${post.slug}`}
+          href={
+            overrideHref
+              ? overrideHref
+              : `/${post.altPath || `blogi/julkaisu`}/${post.slug}`
+          }
         >
           <h3>
             Lue lisää{' '}
