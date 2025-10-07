@@ -9,7 +9,13 @@ import Navbar from './Navbar';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
-const Layout = ({ title, description, children, canonical }) => {
+const Layout = ({
+  title,
+  description,
+  children,
+  canonical,
+  structuredData,
+}) => {
   const router = useRouter();
   const canonicalUrl = canonical || `${SITE_URL}${router.asPath}`;
 
@@ -34,6 +40,14 @@ const Layout = ({ title, description, children, canonical }) => {
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <link rel="shortcut icon" href="/icons/favicon.ico" />
         <meta name="theme-color" content="#0e111b" />
+        {structuredData &&
+          structuredData.map((data, index) => (
+            <script
+              key={index}
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+            />
+          ))}
       </Head>
 
       <Script
