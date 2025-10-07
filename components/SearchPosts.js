@@ -6,7 +6,25 @@ import classes from '@/styles/Search.module.css';
 import Post from './Post';
 
 const Search = ({ list, keys, placeholder }) => {
-  list = list.map((post) => {
+  const staticPages = [
+    {
+      overrideHref: '/madot',
+      title: 'Osta kompostimatoja',
+      excerpt:
+        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Luomulieron madoilla!',
+      tags: 'matokompostointi',
+      keywords: 'kompostimadot,ostos,luomuliero,madot,myynti',
+    },
+    {
+      overrideHref: '/matolaskuri',
+      title: 'Matolaskuri – laske montako matoa tarvitset',
+      excerpt:
+        'Syötä kotitaloutesi tiedot ja laskuri arvioi biojätteen määrän sekä tarvittavan matopopulaation. Näet myös eri aloitusvaihtoehdot ja kuinka nopeasti pääset täyteen käsittelykapasiteettiin.',
+      tags: 'matokompostointi',
+      keywords: 'matolaskuri,kompostimadot,laskuri,luomuliero,työkalut',
+    },
+  ];
+  list = [...list, ...staticPages].map((post) => {
     if (!Array.isArray(post.tags)) post.tags = post.tags.split(',');
     if (!Array.isArray(post.keywords)) post.keywords = post.keywords.split(',');
     return post;
@@ -64,7 +82,12 @@ const Search = ({ list, keys, placeholder }) => {
           </span>
           {searchResults.length > 0 ? (
             searchResults.map((result, i) => (
-              <Post key={i} post={result} compact={true} />
+              <Post
+                key={i}
+                post={result}
+                compact={true}
+                overrideHref={result.overrideHref}
+              />
             ))
           ) : (
             <div className={classes.NoResults}>
