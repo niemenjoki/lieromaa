@@ -6,12 +6,89 @@ import getPostRecommendations from '@/utils/getPostRecommendations';
 import Link from 'next/link';
 
 const WormsPage = ({ recommendedPosts }) => {
-  const title = 'Osta kompostimatoja';
+  const title =
+    'Osta kompostimatoja (Eisenia fetida) | Kotimaiset madot matokompostointiin';
   const excerpt =
-    'Kasvatan ja myyn kotimaisia kompostimatoja (Eisenia fetida) pienimuotoisesti. Tilaa helposti sähköpostilla tai Instagramissa.';
+    'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Luomulieron madoilla!';
+
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: 'Kompostimadot (Eisenia fetida)',
+      image:
+        'https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg',
+      description:
+        'Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina.',
+      brand: 'Luomuliero',
+      sku: 'MADOT',
+      offers: {
+        '@type': 'Offer',
+        url: 'https://www.luomuliero.fi/madot',
+        priceCurrency: 'EUR',
+        itemCondition: 'https://schema.org/NewCondition',
+        areaServed: 'FI',
+        price: '20.00',
+        availability: 'https://schema.org/InStock',
+        seller: {
+          '@type': 'Person',
+          name: 'Joonas Niemenjoki',
+        },
+        shippingDetails: {
+          '@type': 'OfferShippingDetails',
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'FI',
+          },
+          deliveryTime: {
+            '@type': 'ShippingDeliveryTime',
+            handlingTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 1,
+              maxValue: 2,
+              unitCode: 'd',
+            },
+            transitTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 2,
+              maxValue: 4,
+              unitCode: 'd',
+            },
+          },
+        },
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Kuinka paljon kompostimatoja tarvitsen?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Voit arvioida määrän Luomulieron matolaskurilla. Yleensä 100–200 matoa riittää aloittamaan pienen keittiökompostorin.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Voinko tilata kompostimatoja postitse?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Kyllä, toimitan madot postitse pakasterasiassa maanantaisin ja tiistaisin tai voit noutaa Järvenpäästä.',
+          },
+        },
+      ],
+    },
+  ];
 
   return (
-    <Layout title={title + ' | Luomuliero'} ads={true} description={excerpt}>
+    <Layout
+      title={title + ' | Luomuliero'}
+      ads={true}
+      description={excerpt}
+      structuredData={structuredData}
+    >
       <article className={classes.PostPage}>
         <h1>{title}</h1>
         <div className={classes.Content}>
