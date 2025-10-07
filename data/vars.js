@@ -1,4 +1,4 @@
-export const POSTS_PER_PAGE = 5;
+export const POSTS_PER_PAGE = 10;
 export const SITE_URL = 'https://www.luomuliero.fi';
 export const REPO_URL = 'https://github.com/niemenjoki/luomuliero';
 export const LICENSE_URL =
