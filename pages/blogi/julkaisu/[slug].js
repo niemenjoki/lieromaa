@@ -2,17 +2,21 @@ import Advert from '@/components/Advert';
 import Layout from '@/components/Layout';
 import PostRecommendation from '@/components/PostRecommendation';
 import SocialShareButtons from '@/components/SocialShareButtons';
+import { SITE_URL } from '@/data/vars';
 import classes from '@/styles/PostPage.module.css';
 import extractFrontMatter from '@/utils/extractFrontMatter';
 import getPostRecommendations from '@/utils/getPostRecommendations';
 import fs from 'fs';
 import hljs from 'highlight.js';
 import { marked } from 'marked';
+import Image from 'next/image';
+import Link from 'next/link';
 import path from 'path';
-import { SITE_URL } from '@/data/vars';
+import portrait from '../../../public/images/portrait2024.png';
 
 const PostPage = ({ data, content, recommendedPosts = [], structuredData }) => {
   const { title, date, tags, excerpt } = data;
+
   return (
     <Layout
       title={title + ' | Luomuliero'}
@@ -25,11 +29,49 @@ const PostPage = ({ data, content, recommendedPosts = [], structuredData }) => {
         <div className={classes.Date}>
           Julkaistu: {new Date(date).toLocaleDateString('fi-FI')}
         </div>
+
         <div
           className={classes.Content}
           dangerouslySetInnerHTML={{ __html: content }}
         ></div>
+
+        {/* --- Author Info Box --- */}
+        <div className={classes.AuthorBox}>
+          <Image
+            src={portrait}
+            alt="Valokuva Joonas Niemenjoesta"
+            width={90}
+            height={90}
+            placeholder="blur"
+          />
+          <div className={classes.AuthorInfo}>
+            <p className={classes.AuthorHeading}>
+              <strong>Kirjoittaja:</strong> Joonas Niemenjoki
+            </p>
+            <p>
+              Olen Järvenpäässä asuva matokompostoinnin harrastaja ja
+              Luomuliero.fi-sivuston perustaja. Päivisin työskentelen
+              rakennusautomaation ohjelmoijana ja keskityn energiatehokkuuteen.
+            </p>
+            <p>
+              Kirjoitan asioista, joita olen itse kokeillut ja joista on
+              kertynyt käytännön kokemusta. Tavoitteena on tehdä kompostoinnista
+              helpommin ymmärrettävää ja käytännöllistä arjessa.
+            </p>
+            <p>
+              <a
+                href="https://www.linkedin.com/in/joonasniemenjoki/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn-profiili
+              </a>
+              • <Link href="/tietoa">Lue lisää minusta</Link>
+            </p>
+          </div>
+        </div>
       </article>
+
       <SocialShareButtons title={title} text={excerpt} tags={tags} />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
       <PostRecommendation posts={recommendedPosts} />
@@ -38,6 +80,7 @@ const PostPage = ({ data, content, recommendedPosts = [], structuredData }) => {
 };
 
 export default PostPage;
+
 const getStaticPaths = async () => {
   const files = fs.readdirSync('posts');
   const paths = files.map((filename) => ({
@@ -68,6 +111,7 @@ const getStaticProps = async ({ params: { slug } }) => {
     },
     langPrefix: 'hljs language-',
   });
+
   const htmlContent = marked(content);
 
   const structuredData = data.structuredData || [
