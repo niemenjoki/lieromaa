@@ -16,21 +16,27 @@ const WormsPage = ({ recommendedPosts }) => {
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: 'Kompostimadot (Eisenia fetida)',
+      description:
+        'Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina. Sopivat sisä- ja ulkokäyttöön, hajuttomaan biojätteen käsittelyyn ja luonnonmukaiseen lannoitukseen.',
       image:
         'https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg',
-      description:
-        'Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina.',
-      brand: 'Luomuliero',
       sku: 'MADOT',
+      brand: {
+        '@type': 'Brand',
+        name: 'Luomuliero',
+        logo: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+      },
+      category: 'GardenProduct',
+      material: 'Kompostimulta, pahvisilppu, puukuitu, kookoskuitu',
       offers: {
-        '@type': 'Offer',
+        '@type': 'AggregateOffer',
         url: 'https://www.luomuliero.fi/madot',
         priceCurrency: 'EUR',
-        priceValidUntil: '2026-06-30',
-        itemCondition: 'https://schema.org/NewCondition',
-        areaServed: 'FI',
-        price: '20.00',
+        lowPrice: '20.00',
+        highPrice: '50.00',
+        offerCount: '3',
         availability: 'https://schema.org/InStock',
+        priceValidUntil: '2026-06-30',
         seller: {
           '@type': 'Person',
           name: 'Joonas Niemenjoki',
@@ -69,7 +75,7 @@ const WormsPage = ({ recommendedPosts }) => {
           additionalProperty: [
             {
               '@type': 'PropertyValue',
-              name: 'Syy',
+              name: 'Peruuttamisoikeus',
               value:
                 'Kompostimadot eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §)',
             },
@@ -86,7 +92,7 @@ const WormsPage = ({ recommendedPosts }) => {
           name: 'Kuinka paljon kompostimatoja tarvitsen?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Voit arvioida määrän Luomulieron matolaskurilla. Yleensä 100–200 matoa riittää aloittamaan pienen keittiökompostorin.',
+            text: 'Yleensä 100–200 madon populaatio riittää aloittamaan pienen keittiökompostorin. Voit laskea tarkan määrän Luomulieron matolaskurilla.',
           },
         },
         {
@@ -94,7 +100,15 @@ const WormsPage = ({ recommendedPosts }) => {
           name: 'Voinko tilata kompostimatoja postitse?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Kyllä, toimitan madot postitse pakasterasiassa maanantaisin ja tiistaisin tai voit noutaa Järvenpäästä.',
+            text: 'Kyllä. Toimitus tapahtuu Postin kautta maanantaisin ja tiistaisin pakasterasiassa. Nouto Järvenpäästä on myös mahdollista.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Miten madot toimitetaan?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Madot pakataan kosteaan kasvualustaan (pahvi-, puu- ja kookoskuituseos) ja kuljetetaan hengittävässä pakkauksessa.',
           },
         },
       ],

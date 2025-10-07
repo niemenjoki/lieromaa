@@ -1,9 +1,65 @@
 ---
 title: 'Matokakka – luonnollinen lannoite ja maanparannusaine: Opas keräämiseen ja käyttöön'
-date: '12 September, 2025'
 excerpt: 'Haluatko ravinteikkaan, ekologisen ja kemikaalittoman lannoitteen puutarhaasi? Matokakka eli matokompostin tuottama humus parantaa maan rakennetta, lisää mikrobitoimintaa ja tukee kasvien kasvua. Lue, miten tunnistat kypsän matokompostin, keräät matokakan tehokkaasti ja hyödynnät sen puutarhassa.'
+date: '12 September, 2025'
 tags: 'matokompostointi,kompostin hyödyntäminen,puutarha'
 keywords: 'matokakka,kompostimadot,lannoite,luomulannoite,puutarha,kasvit,ravinteet,maaperä,maanparannus,hyötykasvit,kukat,ekologisuus,kiertokulku,kompostointi,satokausi,kasvatustulos,viljely,vihannesmaa,kukkapenkki,käytännön käyttö,vinkit'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'HowTo'
+    name: 'Matokakan kerääminen ja käyttö puutarhassa'
+    description: 'Vaiheittainen opas, miten keräät matokakan valoerottelulla ja käytät sitä luonnollisena lannoitteena ja maanparannusaineena puutarhassa.'
+    image: 'https://www.luomuliero.fi/images/posts/matokakka-luonnollinen-lannoite-opas-aloittelijoille/matokakkaa_kadella-1200.jpg'
+    totalTime: 'PT1H'
+    estimatedCost:
+      '@type': 'MonetaryAmount'
+      currency: 'EUR'
+      value: '0'
+    supply:
+      - '@type': 'HowToSupply'
+        name: 'Matokompostori (yksi laatikko tai monikerroksinen)'
+      - '@type': 'HowToSupply'
+        name: 'Pressu tai alusta'
+      - '@type': 'HowToSupply'
+        name: 'Astia säilytykseen'
+      - '@type': 'HowToSupply'
+        name: 'Valonlähde (aurinko tai lamppu)'
+    tool:
+      - '@type': 'HowToTool'
+        name: 'Lapiollinen tai kauha'
+      - '@type': 'HowToTool'
+        name: 'Seula (3–4 mm reikäkoko, valinnainen)'
+    step:
+      - '@type': 'HowToStep'
+        name: 'Lopeta ruokinta'
+        text: 'Pysäytä matojen ruokinta noin kaksi viikkoa ennen keruuta. Tämä vähentää keskeneräistä jätettä ja tekee kompostista tasalaatuisempaa.'
+      - '@type': 'HowToStep'
+        name: 'Valmistele komposti'
+        text: 'Kuohkeuta kompostia ja poista isot materiaalit. Luo yhteen nurkkaan ruokintapiste, jotta madot siirtyvät sinne.'
+      - '@type': 'HowToStep'
+        name: 'Odota matojen siirtymistä'
+        text: 'Anna kompostin olla rauhassa muutaman päivän ajan, kunnes suurin osa madoista on siirtynyt ruokintanurkkaan.'
+      - '@type': 'HowToStep'
+        name: 'Kerää matokakka'
+        text: 'Ota kypsä komposti talteen ja levitä se ohueksi kerrokseksi valoisalle alustalle.'
+      - '@type': 'HowToStep'
+        name: 'Erottele madot valoerottelulla'
+        text: 'Anna valon houkutella madot kekojen keskelle. Poista pintakerros ja toista, kunnes jäljellä on vain matoja.'
+      - '@type': 'HowToStep'
+        name: 'Käytä tai säilytä matokakka'
+        text: 'Käytä komposti heti tai säilytä se viileässä ja varjoisassa paikassa hengittävässä astiassa.'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    datePublished: '2025-09-12T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/matokakka-luonnollinen-lannoite-opas-aloittelijoille'
 ---
 
 <picture>

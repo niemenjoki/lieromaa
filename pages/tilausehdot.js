@@ -2,10 +2,29 @@ import Layout from '@/components/Layout';
 import classes from '@/styles/PrivacyPage.module.css';
 
 const OrderPolicyPage = () => {
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'TermsOfService',
+      name: 'Tilaus- ja toimitusehdot',
+      description:
+        'Luomulieron tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+      url: 'https://www.luomuliero.fi/tilausehdot',
+      provider: {
+        '@type': 'Organization',
+        name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+        url: 'https://www.luomuliero.fi',
+        logo: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+      },
+      inLanguage: 'fi',
+      datePublished: '2025-10-01T00:00:00+03:00',
+    },
+  ];
   return (
     <Layout
       title={'Tilaus- ja toimitusehdot | Luomuliero'}
       showTermsLink={true}
+      structuredData={structuredData}
     >
       <div className={classes.PrivacyPage}>
         <h1>Tilaus- ja toimitusehdot</h1>

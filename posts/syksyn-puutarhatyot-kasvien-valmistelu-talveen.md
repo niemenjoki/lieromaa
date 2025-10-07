@@ -1,9 +1,60 @@
 ---
 title: 'Syksyn puutarhatyöt: näin valmistelet kasvit ja maan talveen'
-date: '17 September, 2025'
 excerpt: 'Syksy on puutarhassa valmistelun aikaa. Kun kasvit ja maa hoidetaan oikein, ne selviävät talvesta paremmin ja lähtevät keväällä vahvempaan kasvuun. Tässä oppaassa kerrotaan, miten hyötykasvit, marjapensaat, nurmikko ja perennat kannattaa hoitaa ennen pakkasia sekä miten lämpö- ja matokompostia voi hyödyntää syksyllä.'
+date: '17 September, 2025'
 tags: 'puutarha,kompostin hyödyntäminen'
 keywords: 'puutarha,syksy,kasvit,valmistelu,talvi,talvisuojaus,lannoitus,matokakka,kompostointi,maanparannus,kasvin hoito,sadonkorjuu,perennat,hyötykasvit,kompostimadot,ravinteet,kiertokulku,luonnonmukaisuus,multaus,puutarhavinkit,ekologia'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'HowTo'
+    name: 'Valmistele puutarha talveen'
+    description: 'Vaiheittainen opas, miten valmistelet kasvit, maan ja kompostit syksyllä talvea varten. Sisältää vinkit hyötykasveille, perennoille, nurmikolle ja kompostin hyödyntämiseen.'
+    image: 'https://www.luomuliero.fi/images/posts/syksyn-puutarhatyot-kasvien-valmistelu-talveen/syksyinen_puutarha-1200.jpg'
+    totalTime: 'PT3H'
+    estimatedCost:
+      '@type': 'MonetaryAmount'
+      currency: 'EUR'
+      value: '0'
+    supply:
+      - '@type': 'HowToSupply'
+        name: 'Harava ja oksasakset'
+      - '@type': 'HowToSupply'
+        name: 'Syyslannoite (vähän typpeä, runsaasti fosforia ja kaliumia)'
+      - '@type': 'HowToSupply'
+        name: 'Kompostimulta tai matokakka'
+      - '@type': 'HowToSupply'
+        name: 'Katetta tai lehtiä maan suojaksi'
+    step:
+      - '@type': 'HowToStep'
+        name: 'Korjaa sato ja poista yksivuotiset kasvit'
+        text: 'Nosta juurekset ennen maan jäätymistä ja kerää viimeiset hedelmät. Poista yksivuotisten jätteet taudin leviämisen estämiseksi. Kasvijätteet kuuluvat lämpökompostiin.'
+      - '@type': 'HowToStep'
+        name: 'Hoida monivuotiset kasvit'
+        text: 'Jätä perennat ja raparperit lakastumaan rauhassa. Syksyllä ne siirtävät ravinteita juurakkoon. Lisää kevyt kerros kompostimultaa tai matokakkaa tukemaan mikrobitoimintaa.'
+      - '@type': 'HowToStep'
+        name: 'Leikkaa marjapensaat ja hoida hedelmäpuut'
+        text: 'Poista kuolleet ja sairaat oksat. Tee kevyt harvennus, mutta vältä suuria leikkauksia. Lisää kalium- ja fosforipitoista syyslannoitetta juuriston vahvistamiseksi.'
+      - '@type': 'HowToStep'
+        name: 'Valmistele nurmikko'
+        text: 'Leikkaa nurmi noin 5 cm korkeaksi ja poista lehtikasat homehtumisen estämiseksi. Käytä nurmikolle tarkoitettua syyslannoitetta vahvistamaan juuristoa ennen talvea.'
+      - '@type': 'HowToStep'
+        name: 'Huolla istutuslaatikot ja kukkapenkit'
+        text: 'Poista kuolleet kasvit ja möyhennä multaa. Lisää pintaan uutta kompostimultaa tai matokakkaa parantamaan maan rakennetta ja mikrobitoimintaa.'
+      - '@type': 'HowToStep'
+        name: 'Hyödynnä komposti ja matokakka'
+        text: 'Levitä kompostimultaa tai matokakkaa kevyenä pintakerroksena kukkapenkkeihin ja kasvimaalle. Se rikastaa maata ja valmistaa sen kevään kasvuun.'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    datePublished: '2025-09-17T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/syksyn-puutarhatyot-kasvien-valmistelu-talveen'
 ---
 
 ## Miksi syystöillä on merkitystä?

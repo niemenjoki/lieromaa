@@ -3,8 +3,29 @@ import classes from '@/styles/PrivacyPage.module.css';
 import Link from 'next/link';
 
 const PrivacyPage = () => {
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'PrivacyPolicy',
+      name: 'Tietosuojaseloste',
+      description:
+        'Tietosuojaseloste Luomulieron verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+      url: 'https://www.luomuliero.fi/tietosuoja',
+      publisher: {
+        '@type': 'Organization',
+        name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+        logo: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+      },
+      dateModified: '2025-09-21T00:00:00+03:00',
+      inLanguage: 'fi',
+    },
+  ];
+
   return (
-    <Layout title={'Tietosuojaseloste | Luomuliero'}>
+    <Layout
+      title={'Tietosuojaseloste | Luomuliero'}
+      structuredData={structuredData}
+    >
       <div className={classes.PrivacyPage}>
         <h1>Tietosuojaseloste</h1>
         <p>

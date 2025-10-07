@@ -1,9 +1,65 @@
 ---
 title: 'Yleisimmät ongelmat matokompostissa ja niiden korjaaminen'
+excerpt: 'Onko matokompostisi haiseva, liian märkä tai madot karkailevat? Tässä oppaassa käydään läpi yleisimmät ongelmat, niiden syyt ja käytännön ratkaisut. Opi pitämään madot hyvinvoivina ja kompostisi tasapainossa.'
 date: '15 September, 2025'
-excerpt: 'Onko matokompostisi haiseva, liian märkä tai madot karkailevat? Älä huoli! Tämä opas käy läpi yleisimmät matokompostoinnin ongelmat, niiden syyt ja helpot ratkaisut. Opi pitämään madot hyvinvoivana!
-tags: 'matokompostointi,aloittelijan opas,kompostorin hoito'
-keywords: 'matokomposti,ongelmat,madot,hajuhaitta,liika kosteus,kuivuminen,karkailu,lämpötilan hallinta,petimateriaali,ruokinta,virheet,ratkaisut,korjaaminen,vinkit,hoito,hajunpoisto,mätäneminen,ilmastointi,home,kärpäset,madon hyvinvointi'
+tags: 'matokompostointi,kompostorin hoito'
+keywords: 'matokomposti,ongelmat,madot,hajuhaitta,liika kosteus,kuivuminen,karkailu,lämpötila,petimateriaali,ruokinta,virheet,ratkaisut,hoito,hajunpoisto,mätäneminen,ilmastointi,home,kärpäset,madon hyvinvointi,vinkit,korjaaminen'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'FAQPage'
+    mainEntity:
+      - '@type': 'Question'
+        name: 'Miksi madot yrittävät karata kompostista?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Matojen karkaaminen kertoo epäsuotuisista olosuhteista, kuten liiasta kosteudesta, happamuudesta tai liikaruuasta. Tarkista kompostin kosteus ja vähennä ruokintaa, kunnes madot rauhoittuvat.'
+      - '@type': 'Question'
+        name: 'Mitä teen, jos olen ruokkinut matoja liikaa?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Poista ylimääräinen ruoka, lisää kuivaa petimateriaalia ja anna kompostin tasaantua. Madot syövät mieluummin liian vähän kuin liikaa, ja ne pärjäävät viikkoja ilman uutta ruokaa.'
+      - '@type': 'Question'
+        name: 'Voinko laittaa mitä tahansa jätettä matokompostiin?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Ei. Liha, maitotuotteet ja rasvaiset ruoat pilaantuvat nopeasti ja happamoittavat kompostin. Käytä kasvipohjaisia biojätteitä ja vältä happamia tai suolaisia ruokia.'
+      - '@type': 'Question'
+        name: 'Mitä teen, jos komposti on liian märkä?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Poista mahdollinen vesi pohjalta ja sekoita joukkoon reilusti kuivaa petimateriaalia, kuten pahvisilppua tai sanomalehteä. Sopiva kosteus on sellainen, että puristettaessa irtoaa vain 1–2 pisaraa vettä.'
+      - '@type': 'Question'
+        name: 'Entä jos komposti kuivuu liikaa?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Suihkuta vettä kevyesti tai lisää kosteaa biojätettä. Vältä suoraa veden kaatamista, sillä se kerääntyy helposti pohjalle ja aiheuttaa mätänemistä.'
+      - '@type': 'Question'
+        name: 'Mitä jos komposti on happamaksi muuttunut?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Happamuutta voi vähentää lisäämällä murskattuja kananmunankuoria ja vähentämällä hedelmien tai muiden happamien ruokien määrää. Änkyrimatojen runsastuminen on merkki happamuudesta.'
+      - '@type': 'Question'
+        name: 'Kuinka pääsen eroon banaanikärpäsistä?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Peitä kaikki biojätteet petimateriaalilla ja harkitse keittiöjätteen pakastamista ennen sen lisäämistä kompostiin. Tämä tappaa kärpästen toukat ja munat.'
+      - '@type': 'Question'
+        name: 'Miksi madot eivät syö ruokaa?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Madot eivät syö tuoretta ruokaa ennen kuin mikrobit ovat pehmittäneet sen. Jos ruoka jää koskemattomaksi, odota muutama päivä tai lisää pienempiä määriä kerrallaan.'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    datePublished: '2025-09-15T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/yleisimmat-ongelmat-matokompostissa-korjaaminen'
 ---
 
 <picture>

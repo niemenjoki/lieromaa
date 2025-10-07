@@ -1,9 +1,27 @@
 ---
 title: 'Matokomposti ulkona: toimiiko se Suomen oloissa kesällä ja talvella?'
-date: '16 September, 2025'
 excerpt: 'Voiko matokompostin pitää ulkona ympäri vuoden? Kesällä kyllä, mutta talvella tilanne muuttuu. Tässä oppaassa kerrotaan, miten ulkomatokomposti toimii, mitä madot kestävät ja voiko lämpökompostori auttaa pitämään matokompostin hengissä talven yli.'
+date: '16 September, 2025'
 tags: 'matokompostointi,kompostointi talvella,lämpökompostointi'
 keywords: 'ulkokompostointi,Suomi,ilmasto,talvi,kylmä,pakkaset,eristys,matokomposti,kompostimadot,selviytyminen,hoito,ratkaisut,keittiöjäte,biojäte,vuodenaikojen vaihtelu,kompostointi,vinkit,suojaaminen,luonnonolosuhteet,kotipuutarha,mökkikompostointi,ympäristö'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'BlogPosting'
+    headline: 'Matokomposti ulkona: toimiiko se Suomen oloissa kesällä ja talvella?'
+    description: 'Artikkeli matokompostoinnista Suomen ulko-olosuhteissa. Käsittelee kesä- ja talvikauden haasteet, madon selviytymisen pakkasessa sekä lämpökompostorin mahdollisuudet.'
+    image: 'https://www.luomuliero.fi/images/posts/matokomposti-ulkona-suomessa/matokomposti_ulkona_kesalla-1200.jpg'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    datePublished: '2025-09-16T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/matokomposti-ulkona-suomessa'
 ---
 
 <aside>Jos tarvitset kompostimatoja perustaaksesi oman matokompostin, voit tilata niitä <a href="https://www.luomuliero.fi/madot">täältä</a></aside>

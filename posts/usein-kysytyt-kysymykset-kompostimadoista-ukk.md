@@ -1,9 +1,75 @@
 ---
 title: 'Usein kysytyt kysymykset kompostimadoista (UKK)'
-date: '29 September, 2025'
 excerpt: 'UKK kompostimadoista: mitä lajikkeita voi käyttää, mitä ne syövät, kuinka kauan ne elävät ja tarvitsevatko ne happea, aivoja tai silmiä. Opi lisää Eisenia fetida -madoista ja matokompostoinnista.'
+date: '29 September, 2025'
 tags: 'matokompostointi'
 keywords: 'kompostimadot,usein kysytyt kysymykset,UKK,Eisenia fetida,lajikkeet,ravinto,elinikä,lisääntyminen,aistit,hoito,ruokinta,hapen tarve,elinolot,madon anatomia,aloittelija,matokompostointi,kotikompostointi,tietopaketti,harrastus,ympäristöhyödyt,vinkit'
+structuredData:
+  - '@context': 'https://schema.org'
+    '@type': 'FAQPage'
+    mainEntity:
+      - '@type': 'Question'
+        name: 'Mitkä madot sopivat matokompostointiin?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Yleisimmin käytetty kompostimatojen laji on tunkioliero (Eisenia fetida), joka on pienempi ja tehokkaampi kuin tavallinen kastemato. Se viihtyy kosteissa ja pimeissä olosuhteissa ja on siksi ihanteellinen matokompostointiin.'
+      - '@type': 'Question'
+        name: 'Kuinka monta matoa tarvitsen aloittaakseni?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Määrä riippuu taloutesi biojätteen määrästä. Keskimäärin 100–200 matoa riittää pienen kotitalouden kompostoriin. Tarkemman arvion voi laskea Luomulieron matolaskurilla.'
+      - '@type': 'Question'
+        name: 'Mistä matoja saa hankittua?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Kompostimatoja voi ostaa verkosta tai tilata Luomulierolta. Tunkiolieroja ei yleensä löydy luonnosta helposti, joten valmiin erän tilaaminen on helpoin tapa aloittaa.'
+      - '@type': 'Question'
+        name: 'Onko madoilla suu?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Kyllä. Madon suu sijaitsee etupäässä ja toimii ruokahiukkasten aistimiseen ja nielemiseen. Suuta peittää pieni iholäppä, joka avautuu syödessä.'
+      - '@type': 'Question'
+        name: 'Kuolevatko madot kompostorissa?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Kyllä, mutta hyvin hoidettu kompostori hajottaa kuolleet yksilöt nopeasti. Jos löydät paljon kuolleita matoja, tarkista lämpötila, kosteus ja happamuus.'
+      - '@type': 'Question'
+        name: 'Mitä madot syövät?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Madot syövät kasvipohjaista jätettä kuten hedelmien ja vihannesten kuoria, kahvinporoja ja teepusseja. Liha, maitotuotteet ja öljyt on syytä välttää.'
+      - '@type': 'Question'
+        name: 'Onko madoilla aivot?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'On, mutta yksinkertaiset. Madon hermosolmukkeet ohjaavat liikettä, ravinnon etsimistä ja vaarojen väistämistä.'
+      - '@type': 'Question'
+        name: 'Onko madoilla silmiä?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Ei. Ne aistivat valoa ja varjoa ihon reseptorisoluilla ja pysyttelevät pimeässä valoa vältellen.'
+      - '@type': 'Question'
+        name: 'Tarvitsevatko madot happea?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Kyllä. Madot hengittävät ihonsa kautta, joten kompostin tulee olla ilmava ja kostea, jotta happi pääsee kiertämään.'
+      - '@type': 'Question'
+        name: 'Kuinka kauan madot elävät?'
+        acceptedAnswer:
+          '@type': 'Answer'
+          text: 'Tunkioliero elää luonnossa noin vuoden, mutta hyvin hoidettuna jopa 4–5 vuotta. Populaatio uusiutuu jatkuvasti lisääntymisen ansiosta.'
+    author:
+      '@type': 'Person'
+      name: 'Joonas Niemenjoki'
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/'
+    publisher:
+      '@type': 'Organization'
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)'
+      logo:
+        '@type': 'ImageObject'
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png'
+    datePublished: '2025-09-29T00:00:00+03:00'
+    mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/usein-kysytyt-kysymykset-kompostimadoista-ukk'
 ---
 
 # Usein kysytyt kysymykset kompostimadoista (UKK)
