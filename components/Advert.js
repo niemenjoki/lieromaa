@@ -26,7 +26,8 @@ const Advert = ({ adClient, adSlot }) => {
   }, [router.asPath, adClient, adSlot]);
 
   // Don't render the ad if the client/slot is invalid
-  if (!adClient || !adClient.startsWith('ca-pub-') || !adSlot) return null;
+  if (true || !adClient || !adClient.startsWith('ca-pub-') || !adSlot)
+    return null;
 
   return (
     <div
