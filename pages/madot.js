@@ -26,6 +26,7 @@ const WormsPage = ({ recommendedPosts }) => {
         '@type': 'Offer',
         url: 'https://www.luomuliero.fi/madot',
         priceCurrency: 'EUR',
+        priceValidUntil: '2026-06-30',
         itemCondition: 'https://schema.org/NewCondition',
         areaServed: 'FI',
         price: '20.00',
@@ -39,6 +40,11 @@ const WormsPage = ({ recommendedPosts }) => {
           shippingDestination: {
             '@type': 'DefinedRegion',
             addressCountry: 'FI',
+          },
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: '8.90',
+            currency: 'EUR',
           },
           deliveryTime: {
             '@type': 'ShippingDeliveryTime',
@@ -55,6 +61,19 @@ const WormsPage = ({ recommendedPosts }) => {
               unitCode: 'd',
             },
           },
+        },
+        hasMerchantReturnPolicy: {
+          '@type': 'MerchantReturnPolicy',
+          applicableCountry: 'FI',
+          returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+          additionalProperty: [
+            {
+              '@type': 'PropertyValue',
+              name: 'Syy',
+              value:
+                'Kompostimadot eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §)',
+            },
+          ],
         },
       },
     },
@@ -197,9 +216,10 @@ const WormsPage = ({ recommendedPosts }) => {
               </p>
               <p className={classes.WormsPageNote}>
                 Luomuliero on kaupparekisteriin rekisteröiity toiminimi, jota
-                käytän toimiessani yksityisenä elinkeinonharjoittaja (Y-tunnus
-                arvolisäverolain 3§ mukaan arvonlisäverovelvollinen vähäisen
-                toiminnan vuoksi. Kaikki hinnat ovat verottomia.
+                käytän toimiessani yksityisenä elinkeinonharjoittaja (Y-tunnus:
+                3002257-7). En ole arvolisäverolain 3 § mukaan
+                arvonlisäverovelvollinen vähäisen toiminnan vuoksi ja kaikki
+                sivuston hinnat ovat näin ollen verottomia.
               </p>
               <p className={classes.WormsPageNote}>
                 *Maininta “luonnonmukaisesti” viittaa omiin toimintatapoihini,
@@ -208,7 +228,7 @@ const WormsPage = ({ recommendedPosts }) => {
                 ole maksanut luomu-nimityksen käyttöoikeudesta. Kyse ei ole
                 virallisesta luomusertifioidusta tuotannosta.
               </p>
-            </div>{' '}
+            </div>
           </div>
         </div>
       </article>
