@@ -4,7 +4,7 @@ import { LICENSE_URL, REPO_URL } from '@/data/vars';
 import classes from '@/styles/Footer.module.css';
 import Socials from './Socials';
 
-const Footer = () => {
+const Footer = ({ showTermsLink = false }) => {
   return (
     <footer className={classes.Footer}>
       <div className={classes.Left}>
@@ -25,6 +25,11 @@ const Footer = () => {
           <li>
             <Link href={'/tietosuoja'}>Tietosuoja</Link>
           </li>
+          {showTermsLink && (
+            <li>
+              <Link href={'/tilausehdot'}>Tilausehdot</Link>
+            </li>
+          )}
         </ul>
 
         <div className={classes.NoMobile}>

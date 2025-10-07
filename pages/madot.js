@@ -107,6 +107,7 @@ const WormsPage = ({ recommendedPosts }) => {
       ads={true}
       description={excerpt}
       structuredData={structuredData}
+      showTermsLink={true}
     >
       <article className={classes.PostPage}>
         <h1>{title}</h1>

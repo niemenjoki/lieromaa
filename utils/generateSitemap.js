@@ -63,14 +63,20 @@ function toISODate(d) {
       changefreq: 'yearly',
     },
     {
+      url: '/tilausehdot',
+      lastmod: '2025-10-07',
+      priority: 0.3,
+      changefreq: 'yearly',
+    },
+    {
       url: '/madot',
-      lastmod: toISODate(wormsLastUpdate),
+      lastmod: '2025-10-07',
       priority: 1.0,
       changefreq: 'weekly',
     },
     {
       url: '/matolaskuri',
-      lastmod: toISODate(new Date()),
+      lastmod: '2025-10-07',
       priority: 0.5,
       changefreq: 'monthly',
     },
