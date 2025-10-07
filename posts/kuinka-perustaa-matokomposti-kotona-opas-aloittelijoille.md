@@ -95,7 +95,7 @@ Madot tarvitsevat hiilipitoista petimateriaalia, joka toimii suojana ja vararavi
 
 ### 4. Ruokajätteet
 
-Madot syövät lähes kaiken kasvipohjaisen jätteen, kuten hedelmät, vihannekset ja kahvinporot. Lihaa, maitotuotteita, sitrushedelmiä ja erittäin suolaista ruokaa kannattaa välttää, koska ne happamoittavat kompostia ja voivat aiheuttaa hajuhaittoja. Madot eivät pysty syömään kiinteää ruokaa suoraan, vaan odottavat bakteerien ja pieneliöiden pehmentävän jätteen. Olen kertonut matojen ruokkimiesta tarkemmin aiemmassa julkaisussani [Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille)
+Madot syövät lähes kaiken kasvipohjaisen jätteen, kuten hedelmät, vihannekset ja kahvinporot. Lihaa, maitotuotteita, sitrushedelmiä ja erittäin suolaista ruokaa kannattaa välttää, koska ne happamoittavat kompostia ja voivat aiheuttaa hajuhaittoja. Madot eivät pysty syömään kiinteää ruokaa suoraan, vaan odottavat bakteerien ja pieneliöiden pehmentävän jätteen. Olen kertonut matojen ruokkimiesta tarkemmin aiemmassa julkaisussani [Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat](https://www.luomuliero.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat)
 
 ## Kompostin perustamisen alkuvaihe
 
