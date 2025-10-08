@@ -50,7 +50,7 @@ Vuodenaika vaikuttaa NPK-tarpeisiin kasvin kasvuvaiheen mukaan:
 
 - **Keväällä** on syytä painottaa typpeä (esim. 15-5-10), joka tukee vihreän kasvun käynnistymistä.
 - **Kesällä** kannattaa käyttää tasapainoista lannoitetta (esim. 10-10-10), mikä tukee kukinnan sekä hedelmien ja vihannesten tuotannon alkamista.
-- **Syksyllä** on syytä vähentää typen määrää ja korostaa fosforin ja kaliumin osuuksia (esim. 4-6-6), mikä edistää edelleen sadon kehitystä. Monivuotisilla kasveilla suurempi fosforin ja kaliumin osuus edistää juuriston hyvinvointia ja auttaa kasveja selviämään talven yli. Syksyllä puutarha kannattaa muutenkin valmistella huolella kevättä varten. Kirjoitin aiheesta aiemmin täällä: [Syksyn puutarhatyöt: näin valmistelet kasvit ja maan talveen](https://luomuliero.fi/blogi/julkaisu/syksyn-puutarhatyot-nain-valmistelet-kasvit-ja-maan-talveen).
+- **Syksyllä** on syytä vähentää typen määrää ja korostaa fosforin ja kaliumin osuuksia (esim. 4-6-6), mikä edistää edelleen sadon kehitystä. Monivuotisilla kasveilla suurempi fosforin ja kaliumin osuus edistää juuriston hyvinvointia ja auttaa kasveja selviämään talven yli. Syksyllä puutarha kannattaa muutenkin valmistella huolella kevättä varten. Kirjoitin aiheesta aiemmin täällä: [Syksyn puutarhatyöt: näin valmistelet kasvit ja maan talveen](https://www.luomuliero.fi/blogi/julkaisu/syksyn-puutarhatyot-kasvien-valmistelu-talveen).
 - **Talvella** varsinaista NPK-lannoitusta ei tarvita. Maata voi kuitenkin valmistella esimerkiksi kompostilla, mikä edistää maaperän hyödyllistä mikrobitoimintaa.
 
 ## Kasviryhmien erot NPK-lannoituksessa
