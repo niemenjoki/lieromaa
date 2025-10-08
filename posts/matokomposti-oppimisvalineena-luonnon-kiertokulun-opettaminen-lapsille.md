@@ -56,7 +56,7 @@ On myös tärkeää näyttää, miksi nämä teot ovat merkityksellisiä ja mite
 
 Lapsen kasvaessa heille voi antaa enenevissä määrin vastuuta kierrätyksestä ja matokompostin ylläpidosta. Tämä auttaa heitä tuntemaan itsensä merkitykselliseksi.
 
-Jos tarvitset ohjeita matokompostorin perustamiseen kotona, katso aiempi julkaisuni [Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille). Kirjoitin aiemmin myös ohjeen, mitä ruokaa kompostiin voi turvallisesti laittaa: [Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat](https://luomuliero.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat).
+Jos tarvitset ohjeita matokompostorin perustamiseen kotona, katso aiempi julkaisuni [Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille). Kirjoitin aiemmin myös ohjeen, mitä ruokaa kompostiin voi turvallisesti laittaa: [Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat](https://www.luomuliero.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat).
 
 ## Lopuksi
 
