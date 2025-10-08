@@ -6,21 +6,29 @@ const PrivacyPage = () => {
   const structuredData = [
     {
       '@context': 'https://schema.org',
-      '@type': 'PrivacyPolicy',
+      '@type': 'WebPage',
       name: 'Tietosuojaseloste',
       description:
         'Tietosuojaseloste Luomulieron verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
       url: 'https://www.luomuliero.fi/tietosuoja',
+      dateModified: '2025-09-21T00:00:00+03:00',
+      inLanguage: 'fi',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Luomuliero',
+        url: 'https://www.luomuliero.fi',
+      },
       publisher: {
         '@type': 'Organization',
         name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-        logo: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        },
       },
-      dateModified: '2025-09-21T00:00:00+03:00',
-      inLanguage: 'fi',
     },
   ];
-
+, 
   return (
     <Layout
       title={'Tietosuojaseloste | Luomuliero'}

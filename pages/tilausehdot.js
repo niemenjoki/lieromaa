@@ -5,19 +5,27 @@ const OrderPolicyPage = () => {
   const structuredData = [
     {
       '@context': 'https://schema.org',
-      '@type': 'TermsOfService',
+      '@type': 'WebPage',
       name: 'Tilaus- ja toimitusehdot',
       description:
         'Luomulieron tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
       url: 'https://www.luomuliero.fi/tilausehdot',
-      provider: {
+      datePublished: '2025-10-01T00:00:00+03:00',
+      inLanguage: 'fi',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Luomuliero',
+        url: 'https://www.luomuliero.fi',
+      },
+      publisher: {
         '@type': 'Organization',
         name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
         url: 'https://www.luomuliero.fi',
-        logo: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        },
       },
-      inLanguage: 'fi',
-      datePublished: '2025-10-01T00:00:00+03:00',
     },
   ];
   return (
