@@ -28,7 +28,7 @@ const PrivacyPage = () => {
       },
     },
   ];
-, 
+
   return (
     <Layout
       title={'Tietosuojaseloste | Luomuliero'}
