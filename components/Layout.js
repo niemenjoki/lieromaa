@@ -4,10 +4,10 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 import { SITE_URL } from '@/data/vars';
-import Footer from './Footer';
-import Navbar from './Navbar';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 const Layout = ({
   title,
@@ -40,6 +40,10 @@ const Layout = ({
           name="description"
           property="og:description"
           content={description}
+        />
+        <meta
+          property="og:image"
+          content="https://www.luomuliero.fi/icons/apple-touch-icon.png"
         />
         <meta property="og:url" content={canonicalUrl} />
         <link rel="canonical" href={canonicalUrl} />
