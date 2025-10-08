@@ -42,7 +42,7 @@ const getXmlItems = (blogPosts) => {
 const getRssXml = (xmlItems, latestPostDate, filename) => {
   const data = {
     title: 'Luomuliero',
-    link: 'https://luomuliero.fi',
+    link: SITE_URL,
     description:
       'Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Luomuliero auttaa tekemään jätteestä ravinnerikasta multaa!',
   };
