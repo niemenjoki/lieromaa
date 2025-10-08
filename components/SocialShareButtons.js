@@ -12,7 +12,7 @@ export const sharelinks = [
   },
   {
     iconName: 'twitter',
-    href: 'http://twitter.com/intent/tweet?url=__URL__&hashtags=__TAGS__',
+    href: 'https://twitter.com/intent/tweet?url=__URL__&hashtags=__TAGS__',
     ariaLabel: 'Share on Twitter',
   },
   {
