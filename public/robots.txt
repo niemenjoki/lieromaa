@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://luomuliero.fi/sitemap.xml
+Sitemap: https://www.luomuliero.fi/sitemap.xml
