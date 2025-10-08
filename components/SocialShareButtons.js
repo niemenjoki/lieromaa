@@ -17,7 +17,7 @@ export const sharelinks = [
   },
   {
     iconName: 'whatsapp',
-    href: 'https://wa.me/?text=__URL__',
+    href: 'https://api.whatsapp.com/send?text=__URL__',
     ariaLabel: 'Share on Whatsapp',
   },
   {
