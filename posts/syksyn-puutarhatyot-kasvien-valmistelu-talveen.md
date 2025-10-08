@@ -95,7 +95,7 @@ Perennat kannattaakin jättää törröttämään talventörröttäjiksi. Kuolle
 
 Myöskään nurmikon syyshoitoa ei kannata unohtaa. Oikea käsittely syksyllä vaikuttaa siihen, kuinka vihreänä ja terveenä nurmikko nousee keväällä. Liian pitkä nurmi lakoaa lumen alla ja saattaa homehtua, kun taas lumi ja pakkanen vaurioittavat liian lyhyeksi leikattua nurmeae helpommin. Sopiva korkeus viimeisessä leikkuussa on noin viisi senttiä.
 
-Syyslannoitus vahvistaa nurmikon juuristoa ja parantaa sen talvenkestävyyttä. Nurmikolle kerääntyvät lehtikasat kannataaa haravoida pois, ettei nurmi tukehdu ja altistu homeelle. Tämä on pieni työ, mutta sen merkitys näkyy seuraavana keväänä terveenä nurmipintana. Nurmikon syyslannoitukseen kannattaa valita nimenomaan nurmikolle suunniteltu syyslannoite. Jos haluat perehtyä lannoitteiden eroihin, kannattaa kurkata toinen julkaisuni [NPK – typpi, fosfori ja kalium: Kasvien lannoittaminen eri vuodenaikoina](https://luomuliero.fi/blogi/julkaisu/npk-typpi-fosfori-kalium-kasvien-lannoittaminen-eri-vuodenaikoina).
+Syyslannoitus vahvistaa nurmikon juuristoa ja parantaa sen talvenkestävyyttä. Nurmikolle kerääntyvät lehtikasat kannataaa haravoida pois, ettei nurmi tukehdu ja altistu homeelle. Tämä on pieni työ, mutta sen merkitys näkyy seuraavana keväänä terveenä nurmipintana. Nurmikon syyslannoitukseen kannattaa valita nimenomaan nurmikolle suunniteltu syyslannoite. Jos haluat perehtyä lannoitteiden eroihin, kannattaa kurkata toinen julkaisuni [NPK – typpi, fosfori ja kalium: Kasvien lannoittaminen eri vuodenaikoina](https://www.luomuliero.fi/blogi/julkaisu/npk-lannoitus-typpi-fosfori-kalium-kasvien-ravinteina-vuodenaikoina).
 
 ## Istutuslaatikot ja kukkapenkit
 
