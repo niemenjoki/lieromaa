@@ -25,11 +25,9 @@ const Footer = ({ showTermsLink = false }) => {
           <li>
             <Link href={'/tietosuoja'}>Tietosuoja</Link>
           </li>
-          {showTermsLink && (
-            <li>
-              <Link href={'/tilausehdot'}>Tilausehdot</Link>
-            </li>
-          )}
+          <li>
+            <Link href={'/tilausehdot'}>Tilausehdot</Link>
+          </li>
         </ul>
 
         <div className={classes.NoMobile}>

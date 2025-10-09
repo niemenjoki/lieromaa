@@ -114,7 +114,7 @@ Kompostorin sijoittelussa kannattaa muistaa, että se saattaa joskus aiheuttaa h
 
 **Matokompostori:**
 
-Valmiita matokompostoreita löytyy erikoisliikkeistä ja ulkomailta tilattuna, mutta sellaisen saa äärimmäisen helposti tehtyä myös itse. Kirjoitin aiemmin [lyhyen aloittelijoiden oppaan](https://luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille) matokompostin perustamisesta.
+Valmiita matokompostoreita löytyy erikoisliikkeistä ja ulkomailta tilattuna, mutta sellaisen saa äärimmäisen helposti tehtyä myös itse. Kirjoitin aiemmin [lyhyen aloittelijoiden oppaan](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille) matokompostin perustamisesta.
 
 Lisäksi tarvitset petimateriaalia, joka voi olla esimerkiksi silputtua pahvia tai paperia, multaa tai kookoskuitua sekä tietysti itse madot. Huomioithan, että tavalliset kastemadot eivät sovi kompostimadoiksi. Kastemadot syövät pääasiassa kuolleita kasvien juuria ja muuta maaperän orgaanista ainetta ja viihtyvät tyypillisesti syvällä maassa. Kompostimadot viihtyvät lähempänä maan pintaa ja syövät mielellään ruokajätettä. Yleisimmin käytetty kompostimatojen lajike on tunkioliero (Eisenia fetida).
 

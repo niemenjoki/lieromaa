@@ -72,8 +72,6 @@ structuredData:
     mainEntityOfPage: 'https://www.luomuliero.fi/blogi/julkaisu/usein-kysytyt-kysymykset-kompostimadoista-ukk'
 ---
 
-# Usein kysytyt kysymykset kompostimadoista (UKK)
-
 Olen koonnut tälle sivulle kysymyksiä ja vastauksia, joita ihmiset ovat kyselleet kuultuaan minun matokompostorista.
 
 ## Mitkä madot sopivat matokompostointiin?

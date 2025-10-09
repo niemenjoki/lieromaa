@@ -12,12 +12,12 @@ export const sharelinks = [
   },
   {
     iconName: 'twitter',
-    href: 'http://twitter.com/intent/tweet?url=__URL__&hashtags=__TAGS__',
+    href: 'https://twitter.com/intent/tweet?url=__URL__&hashtags=__TAGS__',
     ariaLabel: 'Share on Twitter',
   },
   {
     iconName: 'whatsapp',
-    href: 'https://wa.me/?text=__URL__',
+    href: 'https://api.whatsapp.com/send?text=__URL__',
     ariaLabel: 'Share on Whatsapp',
   },
   {

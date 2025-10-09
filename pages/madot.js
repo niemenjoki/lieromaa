@@ -206,7 +206,7 @@ const WormsPage = ({ recommendedPosts }) => {
                 <li>
                   💬 WhatsAppissa:{' '}
                   <a
-                    href="https://wa.me/358503365054?text=Hei!%20Olen%20kiinnostunut%20kompostimadoista."
+                    href="https://api.whatsapp.com/send?phone=358503365054&text=Hei!%20Olen%20kiinnostunut%20kompostimadoista."
                     target="_blank"
                     rel="noopener noreferrer"
                   >
