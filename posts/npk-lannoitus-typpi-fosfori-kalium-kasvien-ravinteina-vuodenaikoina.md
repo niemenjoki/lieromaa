@@ -1,6 +1,6 @@
 ---
 title: 'NPK-lannoitus – typpi, fosfori ja kalium kasvien ravinteina'
-excerpt: 'Lannoitus on avain kasvien terveeseen kasvuun. Tässä julkaisussa käyn läpi kolme olennaisinta ravinnetta typpi (N), fosfori (P) ja kalium (K) ja kerron, miten ne vaikuttavat kasveihin. Kerron myös, miten valitset oikeanlaisen lannoitteen kuhunkin tilanteeseen.'
+excerpt: 'NPK-lannoitus pähkinänkuoressa: typpi, fosfori ja kalium kasvien kasvun tukena. Näin valitset oikean lannoitteen vuodenaikaan.'
 date: '18 September, 2025'
 tags: 'puutarha,aloittelijan opas'
 keywords: 'lannoitus,NPK,typpi,fosfori,kalium,ravinteet,kasvit,kasvu,satokausi,maaperä,kierto,luomulannoite,matokakka,komposti,puutarha,viljely,kasvien ravinteet,lannoiteopas,perusasiat,hyötykasvit,ekologia'

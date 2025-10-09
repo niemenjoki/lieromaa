@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const WormsPage = ({ recommendedPosts }) => {
   const title =
-    'Osta kompostimatoja (Eisenia fetida) | Kotimaiset madot matokompostointiin';
+    'Osta kompostimatoja – Eisenia fetida -madot matokompostointiin';
   const excerpt =
     'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Luomulieron madoilla!';
 
@@ -117,7 +117,7 @@ const WormsPage = ({ recommendedPosts }) => {
 
   return (
     <Layout
-      title={title + ' | Luomuliero'}
+      title={title}
       ads={true}
       description={excerpt}
       structuredData={structuredData}

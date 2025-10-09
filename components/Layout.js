@@ -79,9 +79,9 @@ const Layout = ({
 Layout.defaultProps = {
   title: 'Luomuliero',
   keywords:
-    'vermicompostointi, matokomposti, kompostointi, kierrätys, luomu, puutarha',
+    'aloittelijan opas,biojäte,ekologisuus,kierrätys,kompostin hyödyntäminen,kompostivertailu,kompostointi talvella,kompostorin hoito,kompostorin perustaminen,lapset,lämpökompostointi,matokompostointi,puutarha',
   description:
-    'Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Luomuliero auttaa tekemään jätteestä ravinnerikasta multaa!',
+    'Luomuliero tarjoaa käytännön tietoa matokompostoinnista Suomessa – omiin kokemuksiin perustuvia ohjeita, mittauksia ja vinkkejä.',
 };
 
 export default Layout;
