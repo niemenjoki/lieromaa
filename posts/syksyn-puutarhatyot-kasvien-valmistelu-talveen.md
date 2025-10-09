@@ -1,5 +1,5 @@
 ---
-title: 'Syksyn puutarhatyöt: näin valmistelet kasvit ja maan talveen'
+title: 'Syksyn puutarhatyöt: näin valmistelet kasvit talveen'
 excerpt: 'Syksy on puutarhassa valmistelun aikaa. Kun kasvit ja maa hoidetaan oikein, ne selviävät talvesta paremmin ja lähtevät keväällä vahvempaan kasvuun. Tässä oppaassa kerrotaan, miten hyötykasvit, marjapensaat, nurmikko ja perennat kannattaa hoitaa ennen pakkasia sekä miten lämpö- ja matokompostia voi hyödyntää syksyllä.'
 date: '17 September, 2025'
 tags: 'puutarha,kompostin hyödyntäminen'

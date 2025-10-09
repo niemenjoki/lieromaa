@@ -1,5 +1,5 @@
 ---
-title: 'Matokakka – luonnollinen lannoite ja maanparannusaine: Opas keräämiseen ja käyttöön'
+title: 'Matokakka – luonnollinen lannoite ja maanparannusaine'
 excerpt: 'Haluatko ravinteikkaan, ekologisen ja kemikaalittoman lannoitteen puutarhaasi? Matokakka eli matokompostin tuottama humus parantaa maan rakennetta, lisää mikrobitoimintaa ja tukee kasvien kasvua. Lue, miten tunnistat kypsän matokompostin, keräät matokakan tehokkaasti ja hyödynnät sen puutarhassa.'
 date: '12 September, 2025'
 tags: 'matokompostointi,kompostin hyödyntäminen,puutarha'

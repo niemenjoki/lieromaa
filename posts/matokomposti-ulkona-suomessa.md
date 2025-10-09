@@ -1,5 +1,5 @@
 ---
-title: 'Matokomposti ulkona: toimiiko se Suomen oloissa kesällä ja talvella?'
+title: 'Matokomposti ulkona – toimiiko se Suomessa vuoden ympäri?'
 excerpt: 'Voiko matokompostin pitää ulkona ympäri vuoden? Kesällä kyllä, mutta talvella tilanne muuttuu. Tässä oppaassa kerrotaan, miten ulkomatokomposti toimii, mitä madot kestävät ja voiko lämpökompostori auttaa pitämään matokompostin hengissä talven yli.'
 date: '16 September, 2025'
 tags: 'matokompostointi,kompostointi talvella,lämpökompostointi'
