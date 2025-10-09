@@ -1,5 +1,5 @@
 ---
-title: 'Rakenna kolmen laatikon matokompostori: Edistyneempi mutta vaivaton matokompostori'
+title: 'Rakenna kolmen laatikon matokompostori – helppo ja tehokas ratkaisu'
 excerpt: 'Opi rakentamaan kolmen päällekkäisen laatikon matokompostori, joka perustuu jatkuvaan virtaukseen. Tämä helppohoitoinen järjestelmä tuottaa valmista matokakkaa ja on äärimmäisen helppohoitoinen.'
 date: '1 October, 2025'
 tags: 'matokompostointi,kompostorin perustaminen'
