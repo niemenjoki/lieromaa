@@ -9,7 +9,7 @@ export const SOCIALS = [
 
   {
     icon: 'tiktok',
-    href: `https://tiktok.com/@luomuliero`,
+    href: `https://www.tiktok.com/@luomuliero`,
     ariaLabel: 'Tiktok',
   },
   {

@@ -42,14 +42,14 @@ const Post = ({ post, compact = false, overrideHref = false }) => {
               : `/${post.altPath || `blogi/julkaisu`}/${post.slug}`
           }
         >
-          <h3>
+          <span>
             Lue lisää{' '}
             <span className={classes.Arrow}>
               <span></span>
               <span></span>
               <span></span>
             </span>
-          </h3>
+          </span>
         </Link>
       )}
     </div>
