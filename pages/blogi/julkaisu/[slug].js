@@ -15,7 +15,7 @@ const PostPage = ({ data, content, recommendedPosts = [], structuredData }) => {
   const { title, date, tags, excerpt } = data;
   return (
     <Layout
-      title={title + ' | Luomuliero'}
+      title={title}
       ads={true}
       description={excerpt}
       structuredData={structuredData}
