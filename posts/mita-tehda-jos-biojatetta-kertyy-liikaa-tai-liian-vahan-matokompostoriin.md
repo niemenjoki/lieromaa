@@ -32,7 +32,7 @@ structuredData:
 
 Joskus biojätettä kertyy paljon, esimerkiksi suurten juhlien jälkeen, kun on valmistettu kerralla suuri määrä ruokaa. Toisinaan jätettä ei synny juuri ollenkaan, kun ollaan pidempiä aikoja poissa kotoa tai käydään ulkona syömässä. Tässä blogijulkaisussa käyn läpi käytännön vinkkejä biojätteen määrän hallintaan, olipa sitä sitten liikaa tai liian vähän.
 
-Jos matokompostointi on sinulle uusia aihe, pääset alkuun kurkkaamalla aiemman julkaisuni **[Kuinka perustaa matokomposti kotona: Opas aloittelijoille](http://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille)**.
+Jos matokompostointi on sinulle uusia aihe, pääset alkuun kurkkaamalla aiemman julkaisuni **[Kuinka perustaa matokomposti kotona: Opas aloittelijoille](https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille)**.
 
 ## Kun biojätettä kertyy liikaa
 
