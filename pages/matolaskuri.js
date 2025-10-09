@@ -11,7 +11,7 @@ import { useState } from 'react';
 const LaskuriPage = ({ recommendedPosts }) => {
   const title = 'Matolaskuri';
   const excerpt =
-    'Syötä kotitaloutesi tiedot ja laskuri arvioi biojätteen määrän sekä tarvittavan matopopulaation. Näet myös eri aloitusvaihtoehdot ja kuinka nopeasti pääset täyteen käsittelykapasiteettiin.';
+    'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.';
   const structuredData = [
     {
       '@context': 'https://schema.org',
