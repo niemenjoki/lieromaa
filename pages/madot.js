@@ -142,6 +142,8 @@ const WormsPage = ({ recommendedPosts }) => {
                 alt="Noin 100 kompostimatoa läjässä kämmenellä"
                 sizes="(max-width: 600px) 100vw, 800px"
                 style={{ height: 'auto' }}
+                width="1080"
+                height="1620"
                 loading="lazy"
               />
             </picture>
