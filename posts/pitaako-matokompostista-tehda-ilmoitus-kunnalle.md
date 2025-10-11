@@ -1,6 +1,6 @@
 ---
 title: 'Pitääkö matokompostista tehdä ilmoitus kunnalle? – Käytännön opas kotikompostoijalle'
-excerpt: 'Tarvitseeko matokompostista tehdä ilmoitus kunnalle? Ei tarvitse. Lue, miksi matokompostori ei kuulu ilmoitusvelvollisuuden piiriin ja milloin komposti-ilmoitus on silti pakollinen.'
+excerpt: 'Matokompostista ei tarvitse ilmoittaa, mutta ilmoitusasioissa kannattaa olla tarkkana. Lue, milloin komposti-ilmoitus on pakollinen.'
 date: '10 October, 2025'
 tags: 'matokompostointi'
 keywords: 'matokompostointi, kotikompostointi, biojäte, lämpökompostori, kompostointi, kompostin hoito, jätteiden vähentäminen, kierrätys, ympäristöystävällisyys, kestävä ratkaisu, ravinnekierto, luomulannoite'
