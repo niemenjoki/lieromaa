@@ -64,7 +64,7 @@ const AboutPage = () => {
           <p>
             Hei, olen <strong>Joonas Niemenjoki</strong> —
             Luomuliero.fi-sivuston perustaja. Asun Järvenpäässä, olen pienen
-            lapsen isä ja intohimoinen matokompostoinnin harrastaja.
+            lapsen isä ja innokas matokompostoinnin harrastaja.
             Päivätyössäni ohjelmoin lämpöpumppujärjestelmiä ja optimoin niitä
             toimimaan mahdollisimman energiatehokkaasti. Kestävä elintapa ja
             luonnon kiertokulku ovat minulle tärkeitä — niistä kumpuaa koko
@@ -86,7 +86,7 @@ const AboutPage = () => {
           <p>
             Halusin jakaa käytännön kokemuksia, joita ei löydy virallisista
             ohjeista. Monet kompostointia käsittelevät sivustot tarjoavat
-            yleisluontoista tietoa — minä taas kirjoitan siitä, mitä
+            yleisluontoista tietoa — minä taas kirjoitan siitä, mitä{""}
             <strong>olen itse kokeillut ja todennut toimivaksi</strong>.
             Tavoitteeni on tehdä Luomulierosta Suomen paras paikka oppia
             matokompostoinnista ja innostaa yhä useampia kierrättämään
