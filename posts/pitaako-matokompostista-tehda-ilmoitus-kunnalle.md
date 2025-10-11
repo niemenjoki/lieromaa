@@ -1,5 +1,5 @@
 ---
-title: 'Pitääkö matokompostista tehdä ilmoitus kunnalle? – Käytännön opas kotikompostoijalle'
+title: 'Pitääkö matokompostista tehdä ilmoitus kunnalle?'
 excerpt: 'Matokompostista ei tarvitse ilmoittaa, mutta ilmoitusasioissa kannattaa olla tarkkana. Lue, milloin komposti-ilmoitus on pakollinen.'
 date: '10 October, 2025'
 tags: 'matokompostointi'
