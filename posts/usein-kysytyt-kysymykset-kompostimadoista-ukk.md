@@ -1,6 +1,6 @@
 ---
 title: 'Usein kysytyt kysymykset kompostimadoista (UKK)'
-excerpt: 'Opi lisää kompostimadoista: mitä ne syövät, kuinka kauan elävät ja mistä niitä saa hankittua.'
+excerpt: 'Mikä kompostimato on, mitä se syö ja kuinka kauan elää? Tästä löydät vastaukset madon elämästä, hoidosta ja hankinnasta.'
 date: '29 September, 2025'
 tags: 'matokompostointi'
 keywords: 'kompostimadot,usein kysytyt kysymykset,UKK,Eisenia fetida,lajikkeet,ravinto,elinikä,lisääntyminen,aistit,hoito,ruokinta,hapen tarve,elinolot,madon anatomia,aloittelija,matokompostointi,kotikompostointi,tietopaketti,harrastus,ympäristöhyödyt,vinkit'
