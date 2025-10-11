@@ -8,15 +8,14 @@ import portrait from '../public/images/portrait2024.png';
 const AboutPage = () => {
   const title = 'Tietoa | Luomuliero';
   const description =
-    'Luomuliero on Joonas Niemenjoen ylläpitämä sivusto, joka tarjoaa käytännön tietoa matokompostoinnista Suomessa – omiin kokemuksiin nojaavia ohjeita, mittauksia ja vinkkejä.';
+    'Luomuliero tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.';
 
   const structuredData = [
     {
       '@context': 'https://schema.org',
       '@type': 'AboutPage',
       name: 'Tietoa Luomulierosta',
-      description:
-        'Luomuliero on Joonas Niemenjoen ylläpitämä sivusto, joka tarjoaa käytännön tietoa matokompostoinnista Suomessa. Sivusto jakaa vinkkejä, myy kompostimatoja ja edistää kestävää elämäntapaa.',
+      description: description,
       url: 'https://www.luomuliero.fi/tietoa',
       author: {
         '@type': 'Person',
