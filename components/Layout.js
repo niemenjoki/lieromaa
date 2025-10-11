@@ -46,6 +46,13 @@ const Layout = ({
           content="https://www.luomuliero.fi/icons/apple-touch-icon.png"
         />
         <meta property="og:url" content={canonicalUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta
+          name="twitter:image" content="https://www.luomuliero.fi/icons/apple-touch-icon.png"
+        />
+        <meta name="twitter:site" content="@luomuliero" />
         <link rel="canonical" href={canonicalUrl} />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
