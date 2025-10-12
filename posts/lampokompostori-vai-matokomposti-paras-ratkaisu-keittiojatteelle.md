@@ -1,5 +1,5 @@
 ---
-title: 'Lämpökompostori vai matokomposti? Paras ratkaisu keittiöjätteelle'
+title: 'Lämpökompostori vai matokomposti – kumpi sopii sinulle?'
 excerpt: 'Vertailu kahdesta hyvästä kompostointiratkaisusta: tilantarve, kustannukset, hoito ja käyttömukavuus. Löydä paras tapa kierrättää keittiöbiojätteesi!'
 date: '8 September, 2025'
 tags: 'lämpökompostointi,matokompostointi,kompostivertailu'

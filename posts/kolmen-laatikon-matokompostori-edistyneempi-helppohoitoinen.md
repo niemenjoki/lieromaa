@@ -1,6 +1,6 @@
 ---
-title: 'Rakenna kolmen laatikon matokompostori – helppo ja tehokas ratkaisu'
-excerpt: 'Rakenna kolmen laatikon matokompostori – helppo ja tehokas järjestelmä, joka tuottaa jatkuvasti valmista matokakkaa.'
+title: 'Kolmen laatikon matokompostori – tehokas ja helppo ratkaisu'
+excerpt: 'Rakenna kolmen laatikon matokompostori, joka tuottaa jatkuvasti valmista matokakkaa ja tekee kompostoinnista vaivatonta.''
 date: '1 October, 2025'
 tags: 'matokompostointi,kompostorin perustaminen'
 keywords: 'kolmen laatikon kompostori,DIY,rakenne,suunnittelu,rakennusohje,matokomposti,kompostimadot,kerroksellinen järjestelmä,käyttö,huolto,tehokkuus,keittiöjäte,biojäte,lannoite,kestävä ratkaisu,askartelu,kotikompostointi,käytännöllisyys,ravinnekierto,omatoimisuus,projekti'
