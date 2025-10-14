@@ -82,8 +82,8 @@ function toISODate(d) {
     },
     {
      url: '/madot-kampanja',
-     lastmod: '2025-10-14'
-     priority: 0.3
+     lastmod: '2025-10-14',
+     priority: 0.3,
      changefreq: 'never'
     }
   ];
