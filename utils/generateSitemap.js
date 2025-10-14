@@ -80,6 +80,12 @@ function toISODate(d) {
       priority: 0.5,
       changefreq: 'monthly',
     },
+    {
+     url: '/madot-kampanja',
+     lastmod: '2025-10-14'
+     priority: 0.3
+     changefreq: 'never'
+    }
   ];
 
   // Start XML

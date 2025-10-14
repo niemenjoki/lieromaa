@@ -276,3 +276,101 @@
     width: 100%;
   }
 }
+
+/* --- Custom radio buttons (Luomuliero form style) --- */
+.CalculatorForm fieldset {
+  border: none;
+  padding: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.CalculatorForm legend {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Each label aligns radio + text neatly */
+.CalculatorForm fieldset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;            /* tighten label spacing */
+  line-height: 1.4;
+  margin-bottom: 0.35rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* Base radio style */
+.CalculatorForm input[type='radio'] {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--highlight);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-top: 0;
+}
+
+/* Selected state */
+.CalculatorForm input[type='radio']:checked::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: var(--highlight);
+}
+
+/* Hover & focus for accessibility */
+.CalculatorForm input[type='radio']:hover {
+  border-color: var(--highlight-alt);
+}
+
+.CalculatorForm input[type='radio']:focus-visible {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+/* Responsive layout – horizontal on desktop, stacked on mobile */
+@media (min-width: 700px) {
+  .CalculatorForm fieldset {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  .CalculatorForm fieldset label {
+    margin-bottom: 0;
+  }
+}
+
+/* --- Fix radio alignment: keep label text close to the button --- */
+.CalculatorForm fieldset label {
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center;
+  gap: 0.4rem;
+  width: auto;
+}
+
+/* prevent inherited width stretching */
+.CalculatorForm fieldset {
+  align-items: flex-start;
+}
+
+/* shrink radio hitbox to fit text, not full width */
+.CalculatorForm fieldset input[type='radio'] {
+  flex-shrink: 0;
+}
+
+/* optional: a bit of indentation for cleaner alignment */
+.CalculatorForm fieldset legend {
+  margin-bottom: 0.35rem;
+  margin-left: 2px;
+}
