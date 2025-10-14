@@ -15,6 +15,15 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
   return (
     <Layout title={'Blogi | Luomuliero'} canonical={`${SITE_URL}/`}>
       <h1>Viimeisimmät julkaisut</h1>
+       <aside className={classes.Content} style={{ border: '2px solid var(--highlight)', padding: '1rem', borderRadius: '8px', marginBottom: '2rem', backgroundColor: 'var(--background-4)' }}>
+    <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
+    <p style={{ marginBottom: '0.5rem' }}>
+      Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
+    </p>
+    <Link href="/madot-kampanja" style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}>
+      Katso kampanjasivu »
+    </Link>
+  </aside>
       <SearchPosts
         list={posts}
         keys={['title', 'excerpt', 'keywords', 'tags']}
