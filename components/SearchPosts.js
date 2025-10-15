@@ -36,24 +36,30 @@ const Search = ({ list, keys, placeholder }) => {
   useDebounce(() => search(searchTerm), 700, [searchTerm]);
 
   const search = async (pattern) => {
-    const options = {
+    if (!pattern || pattern.trim().length < 3) {
+      updateSearchResults([]);
+      toggleSearchResultsShown(false);
+      return;
+    }
+
+    const { default: Fuse } = await import('fuse.js');
+    const fuse = new Fuse(list, {
       includeScore: true,
-      minMatchCharLength: 3,
-      findAllMatches: true,
+      threshold: 0.4, // herkempi, vähemmän epäolennaisia tuloksia
       ignoreLocation: true,
+      minMatchCharLength: 3,
       keys,
-    };
+    });
 
-    const Fuse = (await import('fuse.js')).default;
-    const fuse = new Fuse(list, options);
     const results = fuse.search(pattern);
-    const relevantResultData = results
-      .filter((result) => result.score < 0.6)
-      .slice(0, 3)
-      .map((result) => result.item);
 
-    toggleSearchResultsShown(true);
+    const relevantResultData = results
+      .filter((r) => !r.score || r.score < 0.6)
+      .slice(0, 3)
+      .map((r) => r.item);
+
     updateSearchResults(relevantResultData);
+    toggleSearchResultsShown(true);
   };
 
   const handleInput = (e) => {
