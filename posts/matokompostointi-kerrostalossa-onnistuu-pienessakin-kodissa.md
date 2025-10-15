@@ -1,5 +1,5 @@
 ---
-title: 'Matokompostointi kerrostalossa – onnistuu pienessäkin kodissa'
+title: 'Matokompostointi kerrostalossa: onnistuu pienessäkin kodissa'
 excerpt: 'Matokompostointi onnistuu kerrostalossa helposti ilman hajuhaittoja. Opi perustamaan oma komposti ja hyödyntämään matokakka.'
 date: '26 September, 2025'
 tags: 'matokompostointi'
