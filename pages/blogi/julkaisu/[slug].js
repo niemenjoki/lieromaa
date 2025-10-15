@@ -7,7 +7,6 @@ import classes from '@/styles/PostPage.module.css';
 import extractFrontMatter from '@/utils/extractFrontMatter';
 import getPostRecommendations from '@/utils/getPostRecommendations';
 import fs from 'fs';
-import hljs from 'highlight.js';
 import { marked } from 'marked';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -102,14 +101,6 @@ const getStaticProps = async ({ params: { slug } }) => {
   const recommendedPosts = await getPostRecommendations({
     self: slug,
     keywords: data.keywords + ',' + data.tags,
-  });
-
-  marked.setOptions({
-    highlight: function (code, lang) {
-      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-      return hljs.highlight(code, { language }).value;
-    },
-    langPrefix: 'hljs language-',
   });
 
   const htmlContent = marked(content);
