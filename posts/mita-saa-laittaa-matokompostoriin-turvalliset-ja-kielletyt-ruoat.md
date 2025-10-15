@@ -1,5 +1,5 @@
 ---
-title: 'Mitä saa laittaa matokompostoriin? Turvalliset ja kielletyt ruoat'
+title: 'Mitä matokompostoriin saa laittaa ja mitä ei?'
 excerpt: 'Mietitkö, mitä voit antaa kompostimadoille? Tässä oppaassa käydään läpi turvalliset ja kielletyt ruoat sekä vinkit tasapainoon.'
 date: '7 September, 2025'
 tags: 'matokompostointi,kompostorin hoito'

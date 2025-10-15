@@ -1,5 +1,5 @@
 ---
-title: 'Biojätettä liikaa tai liian vähän? Näin pidät matokompostin tasapainossa'
+title: 'Matokompostin tasapaino: liikaa vai liian vähän biojätettä?'
 excerpt: 'Vaihteleeko taloutesi tuottaman biojätteen määrä? Lue käytännön vinkit, miten pidät matokompostorin tasapainossa, kun jätettä on liikaa tai liian vähän.'
 date: '9 October, 2025'
 tags: 'matokompostointi,kompostorin hoito'
