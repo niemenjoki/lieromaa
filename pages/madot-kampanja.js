@@ -32,8 +32,15 @@ const MadotKampanjaPage = () => {
         seller: { '@type': 'Person', name: 'Joonas Niemenjoki' },
         shippingDetails: {
           '@type': 'OfferShippingDetails',
-          shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'EUR' },
-          shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'FI' },
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: '0',
+            currency: 'EUR',
+          },
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'FI',
+          },
         },
       },
     },
@@ -45,7 +52,7 @@ const MadotKampanjaPage = () => {
       description={excerpt}
       structuredData={structuredData}
       showTermsLink={true}
-      canonical="https://www.luomuliero.fi/madot"
+      canonical="https://www.luomuliero.fi/madot-kampanja"
     >
       <article className={classes.PostPage}>
         <h1>{title}</h1>
@@ -53,8 +60,8 @@ const MadotKampanjaPage = () => {
           <p>
             Syksyn kampanjassa kaikki Luomulieron kompostimadot toimitetaan{' '}
             <strong>ilman toimituskuluja koko Suomeen</strong>. Tarjous on
-            voimassa 30.11.2025 asti ja koskee kaikkia pakkauskokoja
-            10–500 madon välillä.
+            voimassa 30.11.2025 asti ja koskee kaikkia pakkauskokoja 10–500
+            madon välillä.
           </p>
 
           <aside>
@@ -66,43 +73,44 @@ const MadotKampanjaPage = () => {
             </ul>
           </aside>
           <div className={classes.Flex}>
-          <picture>
-            <source
-              srcSet="/images/wormspage/kompostimatoja_kammenella-800.avif 800w, /images/wormspage/kompostimatoja_kammenella-1200.avif 1200w"
-              type="image/avif"
-            />
-            <source
-              srcSet="/images/wormspage/kompostimatoja_kammenella-800.webp 800w, /images/wormspage/kompostimatoja_kammenella-1200.webp 1200w"
-              type="image/webp"
-            />
-            <img
-              src="/images/wormspage/kompostimatoja_kammenella-800.jpg"
-              alt="Eisenia fetida -kompostimatoja kämmenellä"
-              width="1080"
-              height="1620"
-              loading="lazy"
-              style={{ height: 'auto' }}
-            />
-          </picture>
+            <picture>
+              <source
+                srcSet="/images/wormspage/kompostimatoja_kammenella-800.avif 800w, /images/wormspage/kompostimatoja_kammenella-1200.avif 1200w"
+                type="image/avif"
+              />
+              <source
+                srcSet="/images/wormspage/kompostimatoja_kammenella-800.webp 800w, /images/wormspage/kompostimatoja_kammenella-1200.webp 1200w"
+                type="image/webp"
+              />
+              <img
+                src="/images/wormspage/kompostimatoja_kammenella-800.jpg"
+                alt="Eisenia fetida -kompostimatoja kämmenellä"
+                width="1080"
+                height="1620"
+                loading="lazy"
+                style={{ height: 'auto' }}
+              />
+            </picture>
           </div>
           <p>
-            Kompostimadot (<em>Eisenia fetida</em>) hajottavat biojätettä tehokkaasti ja 
-            tuottavat ravinteikasta matokakkaa kasveille. Madot on kasvatettu 
-            Järvenpäässä ilman kemikaaleja ja toimitetaan hengittävässä pakkauksessa.
+            Kompostimadot (<em>Eisenia fetida</em>) hajottavat biojätettä
+            tehokkaasti ja tuottavat ravinteikasta matokakkaa kasveille. Madot
+            on kasvatettu Järvenpäässä ilman kemikaaleja ja toimitetaan
+            hengittävässä pakkauksessa.
           </p>
 
           <h2>Tilaus ja maksaminen</h2>
           <p>
-            Luomulieron toiminta on pienimuotoista ja madot ovat elävää materiaalia. 
-            Haluan varmistaa jokaisen tilauksen yhteydessä, että madot ovat 
-            hyväkuntoisia ja että toimitus lähtee oikeana päivänä – siksi tilausta 
-            ei voi tehdä suoraan nettisivujen kautta..
+            Luomulieron toiminta on pienimuotoista ja madot ovat elävää
+            materiaalia. Haluan varmistaa jokaisen tilauksen yhteydessä, että
+            madot ovat hyväkuntoisia ja että toimitus lähtee oikeana päivänä –
+            siksi tilausta ei voi tehdä suoraan nettisivujen kautta..
           </p>
 
           <p>
-            Täytä alla oleva lomake, niin tarkistan saatavuuden ja otan yhteyttä 
-            valitsemallasi tavalla. Saat vahvistuksen, maksutiedot ja toimituspäivän. 
-            Toimitus tapahtuu Postin kautta koko Suomeen – nyt{' '}
+            Täytä alla oleva lomake, niin tarkistan saatavuuden ja otan yhteyttä
+            valitsemallasi tavalla. Saat vahvistuksen, maksutiedot ja
+            toimituspäivän. Toimitus tapahtuu Postin kautta koko Suomeen – nyt{' '}
             <strong>ilman toimituskuluja</strong>.
           </p>
 
@@ -148,11 +156,7 @@ const MadotKampanjaPage = () => {
                 Tekstiviesti
               </label>
               <label>
-                <input
-                  type="radio"
-                  name="yhteydenottotapa"
-                  value="WhatsApp"
-                />{' '}
+                <input type="radio" name="yhteydenottotapa" value="WhatsApp" />{' '}
                 WhatsApp
               </label>
             </fieldset>
