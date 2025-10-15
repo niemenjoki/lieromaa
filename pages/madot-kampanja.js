@@ -18,17 +18,33 @@ const MadotKampanjaPage = () => {
         'https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg',
       sku: 'MADOT-SYYS25',
       brand: { '@type': 'Brand', name: 'Luomuliero' },
+      hasVariant: [
+        {
+          '@type': 'Product',
+          name: '50 matoa',
+          sku: 'MADOT50',
+          offers: { '@type': 'Offer', price: '20.00', priceCurrency: 'EUR' },
+        },
+        {
+          '@type': 'Product',
+          name: '100 matoa',
+          sku: 'MADOT100',
+          offers: { '@type': 'Offer', price: '30.00', priceCurrency: 'EUR' },
+        },
+        {
+          '@type': 'Product',
+          name: '200 matoa',
+          sku: 'MADOT200',
+          offers: { '@type': 'Offer', price: '50.00', priceCurrency: 'EUR' },
+        },
+      ],
       offers: {
         '@type': 'Offer',
         url: 'https://www.luomuliero.fi/madot-kampanja',
         priceCurrency: 'EUR',
         price: '20.00',
-        priceSpecification: [
-          { '@type': 'PriceSpecification', name: '50 matoa', price: '20.00' },
-          { '@type': 'PriceSpecification', name: '100 matoa', price: '30.00' },
-          { '@type': 'PriceSpecification', name: '200 matoa', price: '50.00' },
-        ],
         availability: 'https://schema.org/InStock',
+        itemCondition: 'https://schema.org/NewCondition',
         priceValidUntil: '2025-11-30',
         seller: { '@type': 'Person', name: 'Joonas Niemenjoki' },
         shippingDetails: {
@@ -42,13 +58,36 @@ const MadotKampanjaPage = () => {
             '@type': 'DefinedRegion',
             addressCountry: 'FI',
           },
+          deliveryTime: {
+            '@type': 'ShippingDeliveryTime',
+            handlingTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 0,
+              maxValue: 1,
+              unitCode: 'd',
+            },
+            transitTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 1,
+              maxValue: 3,
+              unitCode: 'd',
+            },
+            businessDays: {
+              '@type': 'OpeningHoursSpecification',
+              dayOfWeek: [
+                'https://schema.org/Monday',
+                'https://schema.org/Tuesday',
+                'https://schema.org/Wednesday',
+                'https://schema.org/Thursday',
+                'https://schema.org/Friday',
+              ],
+            },
+          },
         },
         hasMerchantReturnPolicy: {
           '@type': 'MerchantReturnPolicy',
           applicableCountry: 'FI',
-          returnPolicyCategory:
-            'https://schema.org/MerchantReturnFiniteReturnWindow',
-          merchantReturnDays: 0,
+          returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
           refundType: 'https://schema.org/NoRefund',
           returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility',
         },
