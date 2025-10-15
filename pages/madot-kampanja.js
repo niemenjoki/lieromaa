@@ -22,6 +22,7 @@ const MadotKampanjaPage = () => {
         '@type': 'Offer',
         url: 'https://www.luomuliero.fi/madot-kampanja',
         priceCurrency: 'EUR',
+        price: '20.00',
         priceSpecification: [
           { '@type': 'PriceSpecification', name: '50 matoa', price: '20.00' },
           { '@type': 'PriceSpecification', name: '100 matoa', price: '30.00' },
@@ -41,6 +42,15 @@ const MadotKampanjaPage = () => {
             '@type': 'DefinedRegion',
             addressCountry: 'FI',
           },
+        },
+        hasMerchantReturnPolicy: {
+          '@type': 'MerchantReturnPolicy',
+          applicableCountry: 'FI',
+          returnPolicyCategory:
+            'https://schema.org/MerchantReturnFiniteReturnWindow',
+          merchantReturnDays: 0,
+          refundType: 'https://schema.org/NoRefund',
+          returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility',
         },
       },
     },
