@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "next",
-    "next/core-web-vitals",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["next", "next/core-web-vitals", "plugin:prettier/recommended"],
   "rules": {
     "no-unused-vars": "warn",
     "react/no-unescaped-entities": "off",
