@@ -88,9 +88,8 @@ const MadotKampanjaPage = () => {
         <div className={classes.Content}>
           <p>
             Syksyn kampanjassa kaikki Luomulieron kompostimadot toimitetaan{' '}
-            <strong>ilman toimituskuluja koko Suomeen</strong>. Tarjous on
-            voimassa 30.11.2025 asti ja koskee kaikkia pakkauskokoja 10–500
-            madon välillä.
+            <strong>ilman toimituskuluja koko Suomeen</strong>. Tarjous on voimassa
+            30.11.2025 asti ja koskee kaikkia pakkauskokoja 10–500 madon välillä.
           </p>
 
           <aside>
@@ -122,24 +121,23 @@ const MadotKampanjaPage = () => {
             </picture>
           </div>
           <p>
-            Kompostimadot (<em>Eisenia fetida</em>) hajottavat biojätettä
-            tehokkaasti ja tuottavat ravinteikasta matokakkaa kasveille. Madot
-            on kasvatettu Järvenpäässä ilman kemikaaleja ja toimitetaan
-            hengittävässä pakkauksessa.
+            Kompostimadot (<em>Eisenia fetida</em>) hajottavat biojätettä tehokkaasti ja
+            tuottavat ravinteikasta matokakkaa kasveille. Madot on kasvatettu Järvenpäässä
+            ilman kemikaaleja ja toimitetaan hengittävässä pakkauksessa.
           </p>
 
           <h2>Tilaus ja maksaminen</h2>
           <p>
-            Luomulieron toiminta on pienimuotoista ja madot ovat elävää
-            materiaalia. Haluan varmistaa jokaisen tilauksen yhteydessä, että
-            madot ovat hyväkuntoisia ja että toimitus lähtee oikeana päivänä –
-            siksi tilausta ei voi tehdä suoraan nettisivujen kautta..
+            Luomulieron toiminta on pienimuotoista ja madot ovat elävää materiaalia.
+            Haluan varmistaa jokaisen tilauksen yhteydessä, että madot ovat hyväkuntoisia
+            ja että toimitus lähtee oikeana päivänä – siksi tilausta ei voi tehdä suoraan
+            nettisivujen kautta..
           </p>
 
           <p>
             Täytä alla oleva lomake, niin tarkistan saatavuuden ja otan yhteyttä
-            valitsemallasi tavalla. Saat vahvistuksen, maksutiedot ja
-            toimituspäivän. Toimitus tapahtuu Postin kautta koko Suomeen – nyt{' '}
+            valitsemallasi tavalla. Saat vahvistuksen, maksutiedot ja toimituspäivän.
+            Toimitus tapahtuu Postin kautta koko Suomeen – nyt{' '}
             <strong>ilman toimituskuluja</strong>.
           </p>
 
@@ -177,16 +175,11 @@ const MadotKampanjaPage = () => {
                 Sähköposti
               </label>
               <label>
-                <input
-                  type="radio"
-                  name="yhteydenottotapa"
-                  value="Tekstiviesti"
-                />{' '}
+                <input type="radio" name="yhteydenottotapa" value="Tekstiviesti" />{' '}
                 Tekstiviesti
               </label>
               <label>
-                <input type="radio" name="yhteydenottotapa" value="WhatsApp" />{' '}
-                WhatsApp
+                <input type="radio" name="yhteydenottotapa" value="WhatsApp" /> WhatsApp
               </label>
             </fieldset>
 
@@ -206,8 +199,8 @@ const MadotKampanjaPage = () => {
           </p>
 
           <p style={{ fontSize: '0.9rem', color: '#777' }}>
-            Tarjous voimassa 1.–30.11.2025. Hinnat sisältävät postituksen
-            kaikkialle Suomeen.
+            Tarjous voimassa 1.–30.11.2025. Hinnat sisältävät postituksen kaikkialle
+            Suomeen.
           </p>
 
           <Link href="/madot">← Lue lisää kompostimadoista</Link>

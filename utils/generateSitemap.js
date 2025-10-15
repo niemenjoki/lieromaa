@@ -45,7 +45,7 @@ function toISODate(d) {
   // Worms JSON update date
   const worms = JSON.parse(wormsRaw);
   const wormsLastUpdate = new Date(
-    Math.max(...worms.map((w) => new Date(w.updated).getTime())),
+    Math.max(...worms.map((w) => new Date(w.updated).getTime()))
   );
 
   // Static pages
@@ -141,6 +141,6 @@ function toISODate(d) {
     `Sitemap sitemap.xml written successfully with ${
       (sitemapXML.match(/<loc>/g) || []).length
     } URLs`,
-    '\x1b[0m',
+    '\x1b[0m'
   );
 })();

@@ -56,7 +56,7 @@ function generatePictureHTML(imgFullPath, alt) {
   <img src="${base}-800.jpg" srcset="${sizes
     .map((s) => `${base}-${s}.jpg ${s}w`)
     .join(
-      ', ',
+      ', '
     )}" alt="${alt}" sizes="${sizesAttr}" style="max-width:100%;height:auto;" loading="lazy">
 </picture>`;
 }
@@ -79,16 +79,14 @@ function generatePictureHTML(imgFullPath, alt) {
       (match, imgFile, altText) => {
         const foundImg = images.find((p) => p.endsWith(imgFile));
         if (!foundImg) {
-          console.error(
-            colors.red(`ERROR: Image not found: ${imgFile} in ${filename}`),
-          );
+          console.error(colors.red(`ERROR: Image not found: ${imgFile} in ${filename}`));
           process.exitCode = 1;
           hadError = true;
           return match;
         }
         updated = true;
         return generatePictureHTML(foundImg, altText);
-      },
+      }
     );
 
     if (updated) {
@@ -106,7 +104,7 @@ function generatePictureHTML(imgFullPath, alt) {
   console.log('');
   console.log(
     `Checked ${mdFiles.length} posts with ${colors.green(
-      okCount + ' OK',
-    )} and ${colors.red(errorCount + ' error' + (errorCount === 1 ? '' : 's'))}`,
+      okCount + ' OK'
+    )} and ${colors.red(errorCount + ' error' + (errorCount === 1 ? '' : 's'))}`
   );
 })();

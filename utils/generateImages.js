@@ -24,10 +24,7 @@ function getImages(dir) {
 }
 
 (async () => {
-  const images = [
-    ...getImages(BLOGPOST_IMAGES),
-    ...getImages(WORMSPAGE_IMAGES),
-  ];
+  const images = [...getImages(BLOGPOST_IMAGES), ...getImages(WORMSPAGE_IMAGES)];
 
   for (const imgPath of images) {
     const { dir, name, ext } = path.parse(imgPath);
@@ -47,9 +44,7 @@ function getImages(dir) {
     if (process.env.NODE_ENV === 'development') {
       const tmpFile = path.join(dir, `${name}-tmp${ext}`);
       console.log(
-        `Replacing original with max ${maxSize}px version: ${path.basename(
-          imgPath,
-        )}`,
+        `Replacing original with max ${maxSize}px version: ${path.basename(imgPath)}`
       );
       await sharp(imgPath)
         .resize({
@@ -63,7 +58,7 @@ function getImages(dir) {
       fs.renameSync(tmpFile, imgPath);
     } else {
       console.log(
-        `Skipping original replacement in production: ${path.basename(imgPath)}`,
+        `Skipping original replacement in production: ${path.basename(imgPath)}`
       );
     }
   }

@@ -33,14 +33,9 @@ const Footer = ({ showTermsLink = false }) => {
         <div className={classes.NoMobile}>
           <div>
             &copy; 2025
-            {new Date().getFullYear() > 2025 &&
-              `-${new Date().getFullYear()}`}{' '}
-            Luomuliero | Joonas Niemenjoki. Koodi ja sisältö on
-            <a
-              href={LICENSE_URL}
-              target="_blank"
-              rel="license noopener noreferrer"
-            >
+            {new Date().getFullYear() > 2025 && `-${new Date().getFullYear()}`} Luomuliero
+            | Joonas Niemenjoki. Koodi ja sisältö on
+            <a href={LICENSE_URL} target="_blank" rel="license noopener noreferrer">
               {' '}
               lisensoitu
             </a>
@@ -63,17 +58,12 @@ const Footer = ({ showTermsLink = false }) => {
       <div className={classes.Mobile}>
         <div>
           &copy; 2025
-          {new Date().getFullYear() > 2025 &&
-            `-${new Date().getFullYear()}`}{' '}
-          Luomuliero | Joonas Niemenjoki
+          {new Date().getFullYear() > 2025 && `-${new Date().getFullYear()}`} Luomuliero |
+          Joonas Niemenjoki
         </div>
         <div>
           Koodi ja sisältö on
-          <a
-            href={LICENSE_URL}
-            target="_blank"
-            rel="license noopener noreferrer"
-          >
+          <a href={LICENSE_URL} target="_blank" rel="license noopener noreferrer">
             {' '}
             lisensoitu
           </a>

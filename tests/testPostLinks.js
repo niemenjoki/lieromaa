@@ -49,14 +49,14 @@ async function testPostLinks() {
       // 1. Enforce www
       if (subdomain !== 'www.') {
         issues.push(
-          `${colors.red}[${file}] non-www URL used: ${match[0]}${colors.reset}\n`,
+          `${colors.red}[${file}] non-www URL used: ${match[0]}${colors.reset}\n`
         );
       }
 
       // 2. Ensure https
       if (!match[0].startsWith('https://')) {
         issues.push(
-          `${colors.red}[${file}] non-https URL used: ${match[0]}${colors.reset}\n`,
+          `${colors.red}[${file}] non-https URL used: ${match[0]}${colors.reset}\n`
         );
       }
 
@@ -70,7 +70,7 @@ async function testPostLinks() {
         const slug = blogMatch[1];
         if (!slugs.includes(slug)) {
           issues.push(
-            `${colors.red}[${file}] link to non-existent post slug: ${slug}${colors.reset}\n`,
+            `${colors.red}[${file}] link to non-existent post slug: ${slug}${colors.reset}\n`
           );
         }
         continue;
@@ -79,15 +79,13 @@ async function testPostLinks() {
       // Check static path validity
       if (!allowedStaticPaths.includes(urlPath)) {
         issues.push(
-          `${colors.red}[${file}] invalid internal URL path: ${urlPath}${colors.reset}\n`,
+          `${colors.red}[${file}] invalid internal URL path: ${urlPath}${colors.reset}\n`
         );
       }
     }
 
     // 4. Detect relative Luomuliero links (like href="/madot" or href="madot")
-    const relativeMatches = [
-      ...content.matchAll(/href\s*=\s*["'](\/?[^"']+)["']/g),
-    ];
+    const relativeMatches = [...content.matchAll(/href\s*=\s*["'](\/?[^"']+)["']/g)];
     for (const match of relativeMatches) {
       const href = match[1];
       if (href.startsWith('http')) continue; // already absolute
@@ -95,24 +93,20 @@ async function testPostLinks() {
 
       if (allowedStaticPaths.includes(href)) {
         issues.push(
-          `${colors.yellow}[${file}] relative internal link used instead of full URL: ${href}${colors.reset}\n`,
+          `${colors.yellow}[${file}] relative internal link used instead of full URL: ${href}${colors.reset}\n`
         );
       }
     }
   }
 
   if (issues.length) {
-    console.log(
-      `${colors.yellow}${colors.bold}⚠️  Link issues found:${colors.reset}\n`,
-    );
+    console.log(`${colors.yellow}${colors.bold}⚠️  Link issues found:${colors.reset}\n`);
     for (const issue of issues) console.log(' - ' + issue);
     console.log(
-      `\n${colors.red}❌ Found ${issues.length} post link issues${colors.reset}`,
+      `\n${colors.red}❌ Found ${issues.length} post link issues${colors.reset}`
     );
   } else {
-    console.log(
-      `${colors.green}✅  All Luomuliero link checks passed.${colors.reset}`,
-    );
+    console.log(`${colors.green}✅  All Luomuliero link checks passed.${colors.reset}`);
   }
 }
 
