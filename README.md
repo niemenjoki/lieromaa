@@ -8,7 +8,7 @@
 
 ## Overview
 
-**Luomuliero** is a Finnish educational website and blog about worm composting. It teaches how to compost household biowaste efficiently, provides DIY guides for compost bins, and promotes sustainable soil enrichment methods.  
+**Luomuliero** is a Finnish educational website and blog about worm composting. It teaches how to compost household biowaste efficiently, provides DIY guides for compost bins, and promotes sustainable soil enrichment methods.
 
 This repository contains the **source code for the Luomuliero website**, built with **Next.js**. The live site is hosted on [Vercel](https://vercel.com).
 
@@ -30,7 +30,7 @@ This repository contains the **source code for the Luomuliero website**, built w
 
 ## Contribution
 
-Luomuliero is intended to be a solo project. 
+Luomuliero is intended to be a solo project.
 
 That being said, if you have found a bug or an improvement opportunity, feel free to create an issue and I'll check it out.
 
@@ -50,6 +50,7 @@ See [`LICENSE`](LICENSE) for details.
 
 ## Author
 
-**Joonas Niemenjoki**  
-- [luomuliero.fi](https://www.luomuliero.fi)  
+**Joonas Niemenjoki**
+
+- [luomuliero.fi](https://www.luomuliero.fi)
 - Contact me at: luomuliero@gmail.com

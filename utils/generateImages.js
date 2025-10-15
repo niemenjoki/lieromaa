@@ -48,8 +48,8 @@ function getImages(dir) {
       const tmpFile = path.join(dir, `${name}-tmp${ext}`);
       console.log(
         `Replacing original with max ${maxSize}px version: ${path.basename(
-          imgPath
-        )}`
+          imgPath,
+        )}`,
       );
       await sharp(imgPath)
         .resize({
@@ -63,7 +63,7 @@ function getImages(dir) {
       fs.renameSync(tmpFile, imgPath);
     } else {
       console.log(
-        `Skipping original replacement in production: ${path.basename(imgPath)}`
+        `Skipping original replacement in production: ${path.basename(imgPath)}`,
       );
     }
   }

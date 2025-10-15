@@ -296,7 +296,7 @@
 .CalculatorForm fieldset label {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;            /* tighten label spacing */
+  gap: 0.25rem; /* tighten label spacing */
   line-height: 1.4;
   margin-bottom: 0.35rem;
   cursor: pointer;

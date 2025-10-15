@@ -93,7 +93,7 @@ const getStaticPaths = async () => {
 const getStaticProps = async ({ params: { slug } }) => {
   const markdownWithMeta = fs.readFileSync(
     path.join('posts', slug + '.md'),
-    'utf-8'
+    'utf-8',
   );
 
   const { data, content } = extractFrontMatter(markdownWithMeta);

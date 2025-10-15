@@ -15,15 +15,30 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
   return (
     <Layout title={'Blogi | Luomuliero'} canonical={`${SITE_URL}/`}>
       <h1>Viimeisimmät julkaisut</h1>
-       <aside className={classes.Content} style={{ border: '2px solid var(--highlight)', padding: '1rem', borderRadius: '8px', marginBottom: '2rem', backgroundColor: 'var(--background-4)' }}>
-    <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
-    <p style={{ marginBottom: '0.5rem' }}>
-      Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
-    </p>
-    <Link href="/madot-kampanja" style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}>
-      Katso kampanjasivu »
-    </Link>
-  </aside>
+      <aside
+        className={classes.Content}
+        style={{
+          border: '2px solid var(--highlight)',
+          padding: '1rem',
+          borderRadius: '8px',
+          marginBottom: '2rem',
+          backgroundColor: 'var(--background-4)',
+        }}
+      >
+        <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>
+          Syystarjous 🍂
+        </h3>
+        <p style={{ marginBottom: '0.5rem' }}>
+          Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025
+          asti.
+        </p>
+        <Link
+          href="/madot-kampanja"
+          style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
+        >
+          Katso kampanjasivu »
+        </Link>
+      </aside>
       <SearchPosts
         list={posts}
         keys={['title', 'excerpt', 'keywords', 'tags']}
@@ -61,7 +76,7 @@ export default BlogPage;
 const getStaticPaths = async () => {
   const files = fs.readdirSync('posts');
   const filesWithoutDrafts = files.filter(
-    (filename) => filename.substring(0, 5) !== 'draft'
+    (filename) => filename.substring(0, 5) !== 'draft',
   );
   const numPages = Math.ceil(filesWithoutDrafts.length / POSTS_PER_PAGE);
 
@@ -84,7 +99,7 @@ const getStaticProps = async ({ params }) => {
     .map((filename) => {
       const markdownWithMeta = fs.readFileSync(
         path.join('posts', filename),
-        'utf-8'
+        'utf-8',
       );
       const { data, content } = extractFrontMatter(markdownWithMeta);
       const slug = filename.replace('.md', '');
@@ -106,7 +121,7 @@ const getStaticProps = async ({ params }) => {
   const pageIndex = currentPage - 1;
   const pagePosts = posts.slice(
     pageIndex * POSTS_PER_PAGE,
-    (pageIndex + 1) * POSTS_PER_PAGE
+    (pageIndex + 1) * POSTS_PER_PAGE,
   );
 
   posts.forEach((post) => {
@@ -128,7 +143,7 @@ const getStaticProps = async ({ params }) => {
       posts
         .map((post) => post.tags)
         .join(',')
-        .split(',')
+        .split(','),
     ),
   ];
 

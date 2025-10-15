@@ -66,7 +66,7 @@ const getStaticPaths = async () => {
     .forEach((filename) => {
       const markdownWithMeta = fs.readFileSync(
         path.join('posts', filename),
-        'utf-8'
+        'utf-8',
       );
 
       const { data } = extractFrontMatter(markdownWithMeta);
@@ -97,7 +97,7 @@ const getStaticProps = async ({ params }) => {
     .map((filename) => {
       const markdownWithMeta = fs.readFileSync(
         path.join('posts', filename),
-        'utf-8'
+        'utf-8',
       );
       const { data, content } = extractFrontMatter(markdownWithMeta);
       const slug = filename.replace('.md', '');
@@ -126,7 +126,7 @@ const getStaticProps = async ({ params }) => {
   const pageIndex = currentPage - 1;
   const pagePosts = postsForTag.slice(
     pageIndex * POSTS_PER_PAGE,
-    (pageIndex + 1) * POSTS_PER_PAGE
+    (pageIndex + 1) * POSTS_PER_PAGE,
   );
 
   posts.forEach((post) => {
@@ -148,7 +148,7 @@ const getStaticProps = async ({ params }) => {
       posts
         .map((post) => post.tags)
         .join(',')
-        .split(',')
+        .split(','),
     ),
   ];
 

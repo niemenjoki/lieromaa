@@ -82,7 +82,7 @@ export const getStaticProps = async () => {
     .map((filename) => {
       const markdownWithMeta = fs.readFileSync(
         path.join('posts', filename),
-        'utf-8'
+        'utf-8',
       );
       const { data } = extractFrontMatter(markdownWithMeta);
       const slug = filename.replace('.md', '');

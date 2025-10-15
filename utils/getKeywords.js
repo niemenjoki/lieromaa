@@ -8,7 +8,7 @@ const extractFrontMatter = require('./extractFrontMatter.js');
       const rawPost = await fs.readFile('posts' + '/' + postSlug, 'utf-8');
       const { data } = extractFrontMatter(rawPost);
       return data.keywords.split(',').map((kw) => kw.trim().toLowerCase());
-    })
+    }),
   );
 
   const uniqueKeywords = [...new Set(keywords.flat())].sort();
