@@ -25,12 +25,9 @@ const BlogPage = ({ posts, numPages, currentPage, tags }) => {
           backgroundColor: 'var(--background-4)',
         }}
       >
-        <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>
-          Syystarjous 🍂
-        </h3>
+        <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
         <p style={{ marginBottom: '0.5rem' }}>
-          Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025
-          asti.
+          Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
         </p>
         <Link
           href="/madot-kampanja"
@@ -76,7 +73,7 @@ export default BlogPage;
 const getStaticPaths = async () => {
   const files = fs.readdirSync('posts');
   const filesWithoutDrafts = files.filter(
-    (filename) => filename.substring(0, 5) !== 'draft',
+    (filename) => filename.substring(0, 5) !== 'draft'
   );
   const numPages = Math.ceil(filesWithoutDrafts.length / POSTS_PER_PAGE);
 
@@ -97,10 +94,7 @@ const getStaticProps = async ({ params }) => {
     .filter((filename) => filename.substring(0, 5) !== 'draft');
   const posts = files
     .map((filename) => {
-      const markdownWithMeta = fs.readFileSync(
-        path.join('posts', filename),
-        'utf-8',
-      );
+      const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8');
       const { data, content } = extractFrontMatter(markdownWithMeta);
       const slug = filename.replace('.md', '');
 
@@ -121,7 +115,7 @@ const getStaticProps = async ({ params }) => {
   const pageIndex = currentPage - 1;
   const pagePosts = posts.slice(
     pageIndex * POSTS_PER_PAGE,
-    (pageIndex + 1) * POSTS_PER_PAGE,
+    (pageIndex + 1) * POSTS_PER_PAGE
   );
 
   posts.forEach((post) => {
@@ -143,7 +137,7 @@ const getStaticProps = async ({ params }) => {
       posts
         .map((post) => post.tags)
         .join(',')
-        .split(','),
+        .split(',')
     ),
   ];
 

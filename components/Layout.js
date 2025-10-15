@@ -36,11 +36,7 @@ const Layout = ({
         <title>{title}</title>
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
-        <meta
-          name="description"
-          property="og:description"
-          content={description}
-        />
+        <meta name="description" property="og:description" content={description} />
         <meta
           property="og:image"
           content="https://www.luomuliero.fi/icons/apple-touch-icon.png"

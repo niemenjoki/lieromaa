@@ -96,9 +96,7 @@ const Search = ({ list, keys, placeholder }) => {
               />
             ))
           ) : (
-            <div className={classes.NoResults}>
-              Ei tuloksia haulle: {searchTerm}
-            </div>
+            <div className={classes.NoResults}>Ei tuloksia haulle: {searchTerm}</div>
           )}
         </div>
       )}

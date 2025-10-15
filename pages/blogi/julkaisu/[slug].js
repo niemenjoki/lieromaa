@@ -49,13 +49,13 @@ const PostPage = ({ data, content, recommendedPosts = [], structuredData }) => {
             </p>
             <p>
               Olen Järvenpäässä asuva matokompostoinnin harrastaja ja
-              Luomuliero.fi-sivuston perustaja. Päivisin työskentelen
-              rakennusautomaation ohjelmoijana ja keskityn energiatehokkuuteen.
+              Luomuliero.fi-sivuston perustaja. Päivisin työskentelen rakennusautomaation
+              ohjelmoijana ja keskityn energiatehokkuuteen.
             </p>
             <p>
-              Kirjoitan asioista, joita olen itse kokeillut ja joista on
-              kertynyt käytännön kokemusta. Tavoitteena on tehdä kompostoinnista
-              helpommin ymmärrettävää ja käytännöllistä arjessa.
+              Kirjoitan asioista, joita olen itse kokeillut ja joista on kertynyt
+              käytännön kokemusta. Tavoitteena on tehdä kompostoinnista helpommin
+              ymmärrettävää ja käytännöllistä arjessa.
             </p>
             <p>
               <a
@@ -91,10 +91,7 @@ const getStaticPaths = async () => {
 };
 
 const getStaticProps = async ({ params: { slug } }) => {
-  const markdownWithMeta = fs.readFileSync(
-    path.join('posts', slug + '.md'),
-    'utf-8',
-  );
+  const markdownWithMeta = fs.readFileSync(path.join('posts', slug + '.md'), 'utf-8');
 
   const { data, content } = extractFrontMatter(markdownWithMeta);
 

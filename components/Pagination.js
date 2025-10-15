@@ -31,10 +31,7 @@ const Pagination = ({ numPages, currentPage }) => {
           )}
           {Array.from({ length: numPages }, (_, i) => (
             <li key={i}>
-              <Link
-                href={`/blogi/sivu/${i + 1}`}
-                className={classes.NumberButton}
-              >
+              <Link href={`/blogi/sivu/${i + 1}`} className={classes.NumberButton}>
                 {i + 1}
               </Link>
             </li>

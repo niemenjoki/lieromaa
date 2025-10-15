@@ -41,45 +41,42 @@ const OrderPolicyPage = () => {
         </p>
         <h2>Yleistä</h2>
         <p>
-          Luomuliero on kaupparekisteriin rekisteröiity toiminimi, jota käytän
-          toimiessani yksityisenä elinkeinonharjoittaja (Y-tunnus: 3002257-7).
-          Vähäisen toiminnan vuoksi en toistaiseksi ole arvonlisäverovelvollinen
-          (arvolisäverolain 3 §) ja kaikki sivuston hinnat ovat näin ollen
-          verottomia. Pidätän oikeuden hintojen ja postikulujen muutoksiin.
+          Luomuliero on kaupparekisteriin rekisteröiity toiminimi, jota käytän toimiessani
+          yksityisenä elinkeinonharjoittaja (Y-tunnus: 3002257-7). Vähäisen toiminnan
+          vuoksi en toistaiseksi ole arvonlisäverovelvollinen (arvolisäverolain 3 §) ja
+          kaikki sivuston hinnat ovat näin ollen verottomia. Pidätän oikeuden hintojen ja
+          postikulujen muutoksiin.
         </p>
         <h2>Tilaaminen</h2>
         <p>
-          Tuotteet tilataan sähköpostitse tai pikaviestinten avulla. Kaikki
-          tilaukset vahvistetaan erikseen, kun tuotteen saatavuus on
-          tarkistettu. Vahvistuksessa ilmoitetaan tilauksen hinta, toimituskulut
-          sekä tilatut tuotteet.
+          Tuotteet tilataan sähköpostitse tai pikaviestinten avulla. Kaikki tilaukset
+          vahvistetaan erikseen, kun tuotteen saatavuus on tarkistettu. Vahvistuksessa
+          ilmoitetaan tilauksen hinta, toimituskulut sekä tilatut tuotteet.
         </p>
         <h2>Maksutavat</h2>
         <p>
-          Maksutapana käytetään oletusarvoisesti MobilePay-maksua ja
-          toissijaisesti käteistä rahaa tai suoraa tilisiirtoa
+          Maksutapana käytetään oletusarvoisesti MobilePay-maksua ja toissijaisesti
+          käteistä rahaa tai suoraa tilisiirtoa
         </p>
         <h2>Toimitusaika</h2>
         <p>
-          Matotilaukset postitetaan tilausta seuraavana maanantaina tai
-          tiistaina. Matoja ei postiteta keskiviikon ja sunnuntain välisenä
-          aikana, jotta varmistetaan, ettei madot jää postin varastoon
-          viikonlopuksi. Mahdolliset muut tuotteet toimitetaan Postin
-          kuljettavaksi viimeistään kolmen päivän kuluessa maksun suorituksesta.
+          Matotilaukset postitetaan tilausta seuraavana maanantaina tai tiistaina. Matoja
+          ei postiteta keskiviikon ja sunnuntain välisenä aikana, jotta varmistetaan,
+          ettei madot jää postin varastoon viikonlopuksi. Mahdolliset muut tuotteet
+          toimitetaan Postin kuljettavaksi viimeistään kolmen päivän kuluessa maksun
+          suorituksesta.
         </p>
         <h2>Palautusoikeus</h2>
         <p>
-          Asiakkaalla on kuluttajansuojalain mukainen 14 päivän vaihto- ja
-          palautusoikeus. Palautusoikeus kuitenkin koskee vain käyttämättömiä
-          tuotteita.
+          Asiakkaalla on kuluttajansuojalain mukainen 14 päivän vaihto- ja palautusoikeus.
+          Palautusoikeus kuitenkin koskee vain käyttämättömiä tuotteita.
         </p>
         <p>
-          Madoilla ei ole palautusoikeutta kuluttajansuojalain 6 luvun 16 §
-          perusteella
+          Madoilla ei ole palautusoikeutta kuluttajansuojalain 6 luvun 16 § perusteella
         </p>
         <p>
-          Jos haluat palauttaa tuotteesi, ota yhteyttä minuun samassa kanavassa
-          kuin tilaus tehtiin.
+          Jos haluat palauttaa tuotteesi, ota yhteyttä minuun samassa kanavassa kuin
+          tilaus tehtiin.
         </p>
       </div>
     </Layout>

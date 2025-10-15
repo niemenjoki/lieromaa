@@ -48,17 +48,10 @@ const NotFoundPage = ({ posts, keys }) => {
       </h1>
       {results.length > 0 && (
         <>
-          <div className={classNames.Suggestion}>
-            Ehkä tarkoitit yhtä näistä:
-          </div>
+          <div className={classNames.Suggestion}>Ehkä tarkoitit yhtä näistä:</div>
           <div className={classNames.Results}>
             {results.map((post, i) => (
-              <Post
-                key={i}
-                post={post}
-                compact={true}
-                overrideHref={post.overrideHref}
-              />
+              <Post key={i} post={post} compact={true} overrideHref={post.overrideHref} />
             ))}
           </div>
         </>
@@ -80,10 +73,7 @@ export const getStaticProps = async () => {
   const posts = files
     .filter((filename) => filename.substring(0, 5) !== 'draft')
     .map((filename) => {
-      const markdownWithMeta = fs.readFileSync(
-        path.join('posts', filename),
-        'utf-8',
-      );
+      const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8');
       const { data } = extractFrontMatter(markdownWithMeta);
       const slug = filename.replace('.md', '');
 

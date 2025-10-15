@@ -30,15 +30,12 @@ const BlogTagPage = ({ posts, numPages, currentPage, tag, tags }) => {
         {tags
           .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
           .map((t) => {
-            const isActive =
-              t.toLowerCase().replaceAll(' ', '-') === tag.toLowerCase();
+            const isActive = t.toLowerCase().replaceAll(' ', '-') === tag.toLowerCase();
             return (
               <Link
                 href={`/blogi/${t.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
                 key={t}
-                className={`${classes.Tag} ${
-                  isActive ? classes.ActiveTag : ''
-                }`}
+                className={`${classes.Tag} ${isActive ? classes.ActiveTag : ''}`}
               >
                 {t}
               </Link>
@@ -64,10 +61,7 @@ const getStaticPaths = async () => {
   files
     .filter((filename) => filename.substring(0, 5) !== 'draft')
     .forEach((filename) => {
-      const markdownWithMeta = fs.readFileSync(
-        path.join('posts', filename),
-        'utf-8',
-      );
+      const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8');
 
       const { data } = extractFrontMatter(markdownWithMeta);
       const tags = data.tags.split(',').map((tag) => tag.trim().toLowerCase());
@@ -95,10 +89,7 @@ const getStaticProps = async ({ params }) => {
   const files = fs.readdirSync('posts');
   const posts = files
     .map((filename) => {
-      const markdownWithMeta = fs.readFileSync(
-        path.join('posts', filename),
-        'utf-8',
-      );
+      const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8');
       const { data, content } = extractFrontMatter(markdownWithMeta);
       const slug = filename.replace('.md', '');
 
@@ -126,7 +117,7 @@ const getStaticProps = async ({ params }) => {
   const pageIndex = currentPage - 1;
   const pagePosts = postsForTag.slice(
     pageIndex * POSTS_PER_PAGE,
-    (pageIndex + 1) * POSTS_PER_PAGE,
+    (pageIndex + 1) * POSTS_PER_PAGE
   );
 
   posts.forEach((post) => {
@@ -148,7 +139,7 @@ const getStaticProps = async ({ params }) => {
       posts
         .map((post) => post.tags)
         .join(',')
-        .split(','),
+        .split(',')
     ),
   ];
 

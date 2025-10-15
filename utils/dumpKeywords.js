@@ -21,8 +21,8 @@ const extractFrontMatter = require('./extractFrontMatter.js');
             keywords: data.keywords || '',
           },
           null,
-          2,
-        ),
+          2
+        )
       );
     }
   } catch (err) {

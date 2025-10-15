@@ -6,8 +6,7 @@ import getPostRecommendations from '@/utils/getPostRecommendations';
 import Link from 'next/link';
 
 const WormsPage = ({ recommendedPosts }) => {
-  const title =
-    'Osta kompostimatoja – Eisenia fetida -madot matokompostointiin';
+  const title = 'Osta kompostimatoja – Eisenia fetida -madot matokompostointiin';
   const excerpt =
     'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Luomulieron madoilla!';
 
@@ -149,31 +148,28 @@ const WormsPage = ({ recommendedPosts }) => {
             </picture>
             <div>
               <p>
-                Kasvatan ja myyn kotimaisia kompostimatoja (
-                <em>Eisenia fetida</em>) omasta kotikompostistani. Madot ovat
-                täysin kotimaisia ja kasvaneet luonnonmukaisesti* ilman
-                kemikaaleja.
+                Kasvatan ja myyn kotimaisia kompostimatoja (<em>Eisenia fetida</em>)
+                omasta kotikompostistani. Madot ovat täysin kotimaisia ja kasvaneet
+                luonnonmukaisesti* ilman kemikaaleja.
               </p>
               <p>
-                Kompostimadot ovat erinomainen tapa muuttaa biojäte
-                ravinteikkaaksi mullaksi kotona. Matokompostori voidaan pitää
-                sisätiloissa, se on hajuton ja helppohoitoinen. Madot hajottavat
-                jätettä tehokkaasti, jopa oman painonsa verran viikossa, ja
-                populaatio tuplaantuu noin kolmen kuukauden välein. Kastematoja
-                vilkkaammin kiemurtelevat kompostimadot sopivat myös hyvin
-                onkimadoiksi.
+                Kompostimadot ovat erinomainen tapa muuttaa biojäte ravinteikkaaksi
+                mullaksi kotona. Matokompostori voidaan pitää sisätiloissa, se on hajuton
+                ja helppohoitoinen. Madot hajottavat jätettä tehokkaasti, jopa oman
+                painonsa verran viikossa, ja populaatio tuplaantuu noin kolmen kuukauden
+                välein. Kastematoja vilkkaammin kiemurtelevat kompostimadot sopivat myös
+                hyvin onkimadoiksi.
               </p>
               <p>
-                Pakkaus sisältää noin 50 kompostimatoa ja niiden kasvualustaa
-                (pahvi- ja puusilppu, kookoskuori, puutarhamulta).
+                Pakkaus sisältää noin 50 kompostimatoa ja niiden kasvualustaa (pahvi- ja
+                puusilppu, kookoskuori, puutarhamulta).
               </p>
               <p>
-                Matoja ei saa tilattua suoraan verkkosivun kautta, koska haluan
-                varmistaa matojen saatavuuden ennen tilauksen vahvistamista.
-                Toimintani on pienimuotoista ja joudun pitämään myynnin
-                rajallisena, jotta matojen määrä omassa kompostissani ei vähene
-                liikaa. Ota sen sijaan suoraan yhteyttä minuun (ohjeet
-                alempana), niin vahvistan saatavuuden ennen maksua.
+                Matoja ei saa tilattua suoraan verkkosivun kautta, koska haluan varmistaa
+                matojen saatavuuden ennen tilauksen vahvistamista. Toimintani on
+                pienimuotoista ja joudun pitämään myynnin rajallisena, jotta matojen määrä
+                omassa kompostissani ei vähene liikaa. Ota sen sijaan suoraan yhteyttä
+                minuun (ohjeet alempana), niin vahvistan saatavuuden ennen maksua.
               </p>
               <h2>Hinnat</h2>
               <ul>
@@ -182,15 +178,11 @@ const WormsPage = ({ recommendedPosts }) => {
                 <li>200 matoa 50€</li>
               </ul>
               <p>
-                Jos et ole varma kuinka paljon tarvitset matoja, kokeile
-                sivustolta löytyvää{' '}
-                <Link href="/matolaskuri">matolaskuria</Link>
+                Jos et ole varma kuinka paljon tarvitset matoja, kokeile sivustolta
+                löytyvää <Link href="/matolaskuri">matolaskuria</Link>
               </p>
               <h2>Tilaaminen</h2>
-              <p>
-                Jos haluat tilata matoja tai sinulla on kysyttävää, laita
-                viestiä:
-              </p>
+              <p>Jos haluat tilata matoja tai sinulla on kysyttävää, laita viestiä:</p>
               <ul>
                 <li>
                   📧 Sähköpostitse: <strong>luomuliero@gmail.com</strong>
@@ -220,30 +212,27 @@ const WormsPage = ({ recommendedPosts }) => {
               <p>
                 Madot toimitetaan pakasterasiassa postitettuna tai ne voi noutaa
                 Järvenpäästä. Suosittelen hakemaan postitetut madot heti
-                saapumisilmoituksen saapuessa, koska madot voivat elää
-                suljetussa rasiassa vain noin 5 vuorokautta. Lähetän
-                matopakkauksia vain maanantaisin ja tiistaisin, jotta madot
-                eivät jää viikonlopuksi Postin kyytiin.
+                saapumisilmoituksen saapuessa, koska madot voivat elää suljetussa rasiassa
+                vain noin 5 vuorokautta. Lähetän matopakkauksia vain maanantaisin ja
+                tiistaisin, jotta madot eivät jää viikonlopuksi Postin kyytiin.
               </p>
               <h2>Maksaminen</h2>
               <p>
-                Toivon, että tilaukset maksetaan MobilePayllä, mutta voimme
-                sopia myös muista maksutavoista kuten käteinen noudon yhteydessä
-                tai tilisiirto
+                Toivon, että tilaukset maksetaan MobilePayllä, mutta voimme sopia myös
+                muista maksutavoista kuten käteinen noudon yhteydessä tai tilisiirto
               </p>
               <p className={classes.WormsPageNote}>
-                Luomuliero on kaupparekisteriin rekisteröiity toiminimi, jota
-                käytän toimiessani yksityisenä elinkeinonharjoittaja (Y-tunnus:
-                3002257-7). En ole arvolisäverolain 3 § mukaan
-                arvonlisäverovelvollinen vähäisen toiminnan vuoksi ja kaikki
-                sivuston hinnat ovat näin ollen verottomia.
+                Luomuliero on kaupparekisteriin rekisteröiity toiminimi, jota käytän
+                toimiessani yksityisenä elinkeinonharjoittaja (Y-tunnus: 3002257-7). En
+                ole arvolisäverolain 3 § mukaan arvonlisäverovelvollinen vähäisen
+                toiminnan vuoksi ja kaikki sivuston hinnat ovat näin ollen verottomia.
               </p>
               <p className={classes.WormsPageNote}>
-                *Maininta “luonnonmukaisesti” viittaa omiin toimintatapoihini,
-                kuten kemikaalittomaan ja kotimaiseen kasvatukseen. En kuulu
-                Ruokaviraston, Ely-keskuksen tai Valviran luomuvalvontaan, enkä
-                ole maksanut luomu-nimityksen käyttöoikeudesta. Kyse ei ole
-                virallisesta luomusertifioidusta tuotannosta.
+                *Maininta “luonnonmukaisesti” viittaa omiin toimintatapoihini, kuten
+                kemikaalittomaan ja kotimaiseen kasvatukseen. En kuulu Ruokaviraston,
+                Ely-keskuksen tai Valviran luomuvalvontaan, enkä ole maksanut
+                luomu-nimityksen käyttöoikeudesta. Kyse ei ole virallisesta
+                luomusertifioidusta tuotannosta.
               </p>
             </div>
           </div>

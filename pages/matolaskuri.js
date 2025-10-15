@@ -100,7 +100,7 @@ const LaskuriPage = ({ recommendedPosts }) => {
       calculate();
     },
     2000,
-    [adults, teens, children, toddlers, diet],
+    [adults, teens, children, toddlers, diet]
   );
 
   return (
@@ -117,25 +117,22 @@ const LaskuriPage = ({ recommendedPosts }) => {
         <div className={classes.Content}>
           <h2>Miksi laskuri on hyödyllinen?</h2>
           <p>
-            Kompostimatojen määrän mitoittaminen oikein auttaa pitämään
-            kompostorin tasapainossa. Liian pieni populaatio ei ehdi
-            käsittelemään kaikkea jätettä, ja liian suuri populaatio taas kärsii
-            ruoan puutteesta. Laskurin avulla saat karkean arvion siitä, kuinka
-            monta matoa kotitaloutesi tuottaman biojätteen käsittelyyn
-            tarvitaan.
+            Kompostimatojen määrän mitoittaminen oikein auttaa pitämään kompostorin
+            tasapainossa. Liian pieni populaatio ei ehdi käsittelemään kaikkea jätettä, ja
+            liian suuri populaatio taas kärsii ruoan puutteesta. Laskurin avulla saat
+            karkean arvion siitä, kuinka monta matoa kotitaloutesi tuottaman biojätteen
+            käsittelyyn tarvitaan.
           </p>
           <p>
-            Jos sinulla ei vielä ole matoja, ostaa niitä{' '}
-            <Link href="/madot">täältä</Link>
+            Jos sinulla ei vielä ole matoja, ostaa niitä <Link href="/madot">täältä</Link>
           </p>
 
           <h2>Laskuri</h2>
           <p>
             Arvio perustuu kotitalouden kokoon, ruokavalioon ja oletukseen, että
-            matopopulaatio kaksinkertaistuu noin 3 kuukaudessa hyvissä oloissa.
-            Tulokset ovat suuntaa-antavia – käytännössä biojätteen määrä ja
-            matojen syönti riippuvat mm. lämpötilasta, kosteudesta ja ruoan
-            laadusta.
+            matopopulaatio kaksinkertaistuu noin 3 kuukaudessa hyvissä oloissa. Tulokset
+            ovat suuntaa-antavia – käytännössä biojätteen määrä ja matojen syönti
+            riippuvat mm. lämpötilasta, kosteudesta ja ruoan laadusta.
           </p>
 
           {/* Form */}
@@ -188,37 +185,37 @@ const LaskuriPage = ({ recommendedPosts }) => {
             <div style={{ marginTop: '2rem' }}>
               <h3>Tulokset</h3>
               <p>
-                Kotitaloutesi tuottaa arviolta {result.scraps[0]} –{' '}
-                {result.scraps[1]} g biojätettä viikossa. Sen käsittelemiseen
-                tarvitaan noin <strong>{result.wormsNeeded} matoa</strong>.
+                Kotitaloutesi tuottaa arviolta {result.scraps[0]} – {result.scraps[1]} g
+                biojätettä viikossa. Sen käsittelemiseen tarvitaan noin{' '}
+                <strong>{result.wormsNeeded} matoa</strong>.
               </p>
 
               <p>
-                Koko suositellun määrän hankkimalla kompostori toimii heti
-                täydellä teholla. Käytännössä isoja matomääriä voi kuitenkin
-                olla vaikea saada ostettua kerralla. Toinen vaihtoehto on
-                hankkia pieni määrä matoja ja odottaa, että ne lisääntyy.
+                Koko suositellun määrän hankkimalla kompostori toimii heti täydellä
+                teholla. Käytännössä isoja matomääriä voi kuitenkin olla vaikea saada
+                ostettua kerralla. Toinen vaihtoehto on hankkia pieni määrä matoja ja
+                odottaa, että ne lisääntyy.
               </p>
 
               <ul>
                 <li>
-                  Jos aloitat noin {result.options.halfStart} madolla, kestää
-                  noin 3 kuukautta, että sinulla on tarvittava määrä matoja.
+                  Jos aloitat noin {result.options.halfStart} madolla, kestää noin 3
+                  kuukautta, että sinulla on tarvittava määrä matoja.
                 </li>
                 <li>
-                  Jos aloitat noin {result.options.quarterStart} madolla, aikaa
-                  kuluu noin 6 kuukautta.
+                  Jos aloitat noin {result.options.quarterStart} madolla, aikaa kuluu noin
+                  6 kuukautta.
                 </li>
                 <li>
-                  Vähimmäisvaihtoehtona {result.options.eighthStart} madolla
-                  kompostori toimii täysillä noin vuoden kuluttua.
+                  Vähimmäisvaihtoehtona {result.options.eighthStart} madolla kompostori
+                  toimii täysillä noin vuoden kuluttua.
                 </li>
               </ul>
 
               <small>
-                Laskelma perustuu oletukseen, että yksi mato painaa noin 0.5 g
-                ja syö noin 1 g biojätettä viikossa. Populaatio tuplaantuu
-                keskimäärin 3 kuukauden välein.
+                Laskelma perustuu oletukseen, että yksi mato painaa noin 0.5 g ja syö noin
+                1 g biojätettä viikossa. Populaatio tuplaantuu keskimäärin 3 kuukauden
+                välein.
               </small>
             </div>
           )}
@@ -226,16 +223,16 @@ const LaskuriPage = ({ recommendedPosts }) => {
           <h2>Vinkkejä tulosten tulkintaan</h2>
           <ul>
             <li>
-              Jos aloitat pienellä matomäärällä, anna populaation kasvaa
-              rauhassa – vältä liiallista ruokintaa.
+              Jos aloitat pienellä matomäärällä, anna populaation kasvaa rauhassa – vältä
+              liiallista ruokintaa.
             </li>
             <li>
-              Jos aloitat suurella määrällä, varmista että biojätettä riittää
-              heti alusta asti.
+              Jos aloitat suurella määrällä, varmista että biojätettä riittää heti alusta
+              asti.
             </li>
             <li>
-              Muista, että matojen kasvu ja syönti vaihtelevat kompostorin
-              olosuhteiden mukaan.
+              Muista, että matojen kasvu ja syönti vaihtelevat kompostorin olosuhteiden
+              mukaan.
             </li>
           </ul>
         </div>

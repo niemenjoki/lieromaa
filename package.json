@@ -2,24 +2,20 @@
   "name": "luomuliero",
   "version": "1.0.0",
   "private": true,
-"scripts": {
-  "dev": "next dev -H 0.0.0.0 -p 3080",
-
-  "build": "next build",
-  "prebuild": "node ./utils/generateImages.js",
-  "postbuild": "npm run rss && npm run sitemap",
-
-  "rss": "node ./utils/generateRss.js",
-  "sitemap": "node ./utils/generateSitemap.js",
-
-  "start": "next start",
-
-  "lint": "next lint",
-  "format": "prettier --write .",
-"format:check": "prettier --check .",
-  "test": "node ./tests/test.js",
-  "images:update": "node ./utils/replaceImagePlaceholders.js"
-},
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0 -p 3080",
+    "build": "next build",
+    "prebuild": "node ./utils/generateImages.js",
+    "postbuild": "npm run rss && npm run sitemap",
+    "rss": "node ./utils/generateRss.js",
+    "sitemap": "node ./utils/generateSitemap.js",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node ./tests/test.js",
+    "images:update": "node ./utils/replaceImagePlaceholders.js"
+  },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
