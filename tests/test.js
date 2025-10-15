@@ -9,12 +9,16 @@ const colors = {
   red: '\x1b[31m',
   cyan: '\x1b[36m',
   magenta: '\x1b[35m',
-  gray: '\x1b[90m'
+  gray: '\x1b[90m',
 };
 
 (async () => {
-  console.log(`${colors.cyan}${colors.bold}🔍 Running Luomuliero test suite...${colors.reset}\n`);
+  console.log(
+    `${colors.cyan}${colors.bold}🔍 Running Luomuliero test suite...${colors.reset}\n`,
+  );
   const tests = [testPostMetadata, testPostLinks];
   for (const test of tests) await test();
-  console.log(`${colors.green}${colors.bold}✅  All tests completed.${colors.reset}\n`);
+  console.log(
+    `${colors.green}${colors.bold}✅  All tests completed.${colors.reset}\n`,
+  );
 })();

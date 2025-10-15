@@ -5,7 +5,7 @@ const useToggle = (defaultValue) => {
 
   function toggleValue(value) {
     setValue((currentValue) =>
-      typeof value === 'boolean' ? value : !currentValue
+      typeof value === 'boolean' ? value : !currentValue,
     );
   }
 

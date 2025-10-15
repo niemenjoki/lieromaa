@@ -12,33 +12,33 @@ const LaskuriPage = ({ recommendedPosts }) => {
   const title = 'Matolaskuri';
   const excerpt =
     'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.';
-  
+
   const structuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'Matolaskuri',
-    url: 'https://www.luomuliero.fi/matolaskuri',
-    description:
-      'Verkkopohjainen laskuri, joka arvioi kotitalouden biojätteen määrän ja suosittelee tarvittavan kompostimatojen populaation. Tulokset perustuvat ruokavalioon, kotitalouden kokoon ja madon kasvuvauhtiin.',
-    image:
-      'https://www.luomuliero.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
-    datePublished: '2025-09-20T00:00:00+03:00',
-    author: {
-      '@type': 'Person',
-      name: 'Joonas Niemenjoki',
-      url: 'https://www.linkedin.com/in/joonasniemenjoki/',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Matolaskuri',
+      url: 'https://www.luomuliero.fi/matolaskuri',
+      description:
+        'Verkkopohjainen laskuri, joka arvioi kotitalouden biojätteen määrän ja suosittelee tarvittavan kompostimatojen populaation. Tulokset perustuvat ruokavalioon, kotitalouden kokoon ja madon kasvuvauhtiin.',
+      image:
+        'https://www.luomuliero.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
+      datePublished: '2025-09-20T00:00:00+03:00',
+      author: {
+        '@type': 'Person',
+        name: 'Joonas Niemenjoki',
+        url: 'https://www.linkedin.com/in/joonasniemenjoki/',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        },
       },
     },
-  },
-]; 
+  ];
 
   // Household inputs
   const [adults, setAdults] = useState(2);
@@ -100,7 +100,7 @@ const LaskuriPage = ({ recommendedPosts }) => {
       calculate();
     },
     2000,
-    [adults, teens, children, toddlers, diet]
+    [adults, teens, children, toddlers, diet],
   );
 
   return (

@@ -5,7 +5,7 @@ const MIN_COMMON_KEYWORDS = 3;
 
 const getPostRecommendations = async ({ self, keywords }) => {
   const posts = (await fs.readdir('posts')).filter(
-    (filename) => !filename.startsWith('draft')
+    (filename) => !filename.startsWith('draft'),
   );
   const postsWithKeywords = await Promise.all(
     posts.map(async (postSlug) => {
@@ -17,7 +17,7 @@ const getPostRecommendations = async ({ self, keywords }) => {
         slug: postSlug.replace('.md', ''),
       };
       return post;
-    })
+    }),
   );
 
   const recommendations = postsWithKeywords
@@ -31,7 +31,7 @@ const getPostRecommendations = async ({ self, keywords }) => {
           keywords
             .split(',')
             .map((keyword) => keyword.trim().toLowerCase()) // normalize
-            .includes(keyword)
+            .includes(keyword),
         ).length,
     }))
     .filter((post) => post.commonKeywords >= MIN_COMMON_KEYWORDS)

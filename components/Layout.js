@@ -50,7 +50,8 @@ const Layout = ({
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta
-          name="twitter:image" content="https://www.luomuliero.fi/icons/apple-touch-icon.png"
+          name="twitter:image"
+          content="https://www.luomuliero.fi/icons/apple-touch-icon.png"
         />
         <meta name="twitter:site" content="@luomuliero" />
         <link rel="canonical" href={canonicalUrl} />
