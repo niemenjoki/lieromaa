@@ -18,26 +18,6 @@ const MadotKampanjaPage = () => {
         'https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg',
       sku: 'MADOT-SYYS25',
       brand: { '@type': 'Brand', name: 'Luomuliero' },
-      hasVariant: [
-        {
-          '@type': 'Product',
-          name: '50 matoa',
-          sku: 'MADOT50',
-          offers: { '@type': 'Offer', price: '20.00', priceCurrency: 'EUR' },
-        },
-        {
-          '@type': 'Product',
-          name: '100 matoa',
-          sku: 'MADOT100',
-          offers: { '@type': 'Offer', price: '30.00', priceCurrency: 'EUR' },
-        },
-        {
-          '@type': 'Product',
-          name: '200 matoa',
-          sku: 'MADOT200',
-          offers: { '@type': 'Offer', price: '50.00', priceCurrency: 'EUR' },
-        },
-      ],
       offers: {
         '@type': 'Offer',
         url: 'https://www.luomuliero.fi/madot-kampanja',
