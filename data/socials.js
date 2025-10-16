@@ -6,7 +6,11 @@ export const SOCIALS = [
     href: 'https://www.instagram.com/luomuliero',
     ariaLabel: 'Instagram',
   },
-
+  {
+    icon: 'facebook',
+    href: 'https://www.facebook.com/people/Luomuliero/61582353659508/?locale=fi_FI',
+    ariaLabel: 'Facebook',
+  },
   {
     icon: 'tiktok',
     href: `https://www.tiktok.com/@luomuliero`,
