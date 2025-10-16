@@ -30,7 +30,7 @@ export const sharelinks = [
   },
 ];
 
-export default function SocialShareButtons({ title = '', text = '', tags = '' }) {
+export default function SocialShareButtons({ title = '', tags = '' }) {
   const pathname = usePathname();
   const currentUrl = SITE_URL + pathname;
 

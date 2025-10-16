@@ -12,9 +12,6 @@ const description =
   'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Luomulieron madoilla!';
 
 export async function generateMetadata() {
-  const title = 'Osta kompostimatoja – Eisenia fetida -madot matokompostointiin';
-  const description =
-    'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Luomulieron madoilla!';
   const canonicalUrl = 'https://www.luomuliero.fi/madot';
   const image =
     'https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg';
