@@ -5,7 +5,7 @@ import { LICENSE_URL, REPO_URL } from '@/data/vars';
 import Socials from '../Socials/Socials.jsx';
 import classes from './Footer.module.css';
 
-const Footer = ({ showTermsLink = false }) => {
+const Footer = () => {
   return (
     <footer className={classes.Footer}>
       <div className={classes.Left}>

@@ -7,7 +7,7 @@ import Advert from '@/components/Advert/Advert';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview.jsx';
 import SearchPosts from '@/components/SearchPosts/SearchPosts.jsx';
-import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.js';
+import { POSTS_PER_PAGE } from '@/data/vars.js';
 import extractFrontMatter from '@/utils/extractFrontMatter';
 import { sortByDate } from '@/utils/index.js';
 
