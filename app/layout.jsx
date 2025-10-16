@@ -3,6 +3,7 @@ import { Rubik } from 'next/font/google';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
+import AnalyticsWrapper from '@/components/AnalyticsWrapper';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar.jsx';
 
@@ -64,6 +65,7 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );
