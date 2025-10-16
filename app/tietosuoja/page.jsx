@@ -2,7 +2,6 @@ import { SITE_URL } from '@/data/vars';
 
 import classes from './Tietosuoja.module.css';
 
-// 🧠 Metadata for SEO and sharing
 export const metadata = {
   title: 'Tietosuojaseloste | Luomuliero',
   description:
@@ -22,7 +21,6 @@ export const metadata = {
   },
 };
 
-// ✅ Structured data
 const structuredData = [
   {
     '@context': 'https://schema.org',
