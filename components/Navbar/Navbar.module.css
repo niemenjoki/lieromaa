@@ -1,0 +1,173 @@
+.NavbarWrapper {
+  background: linear-gradient(var(--background-1), var(--background-2));
+  color: var(--text-color);
+  position: relative;
+  z-index: 100;
+}
+
+.Navbar {
+  height: 150px;
+  padding: 2em;
+  display: flex;
+  flex-flow: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.Brand {
+  display: flex;
+  align-items: center;
+}
+
+.BrandLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.Logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.BrandName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+/* --- Mobile drawer nav --- */
+.Nav {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--overlay-color-initial);
+  transition: background-color 200ms ease-in-out;
+  transform: translateX(-100vw);
+  align-items: center;
+}
+
+.Open {
+  background: var(--overlay-color-final);
+  transform: translateX(0);
+}
+
+.Toggler {
+  display: inline-block;
+  margin: 0.5rem;
+}
+
+.Drawer {
+  list-style: none;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  height: 100%;
+  padding-left: 15vw;
+  gap: 2rem;
+}
+
+.Drawer li {
+  width: fit-content;
+}
+
+.NavButton {
+  cursor: pointer;
+  font-size: 2rem;
+  margin: auto 0;
+}
+
+.Socials {
+  display: inline-block;
+  font-size: 24px;
+}
+
+.Socials > span {
+  display: flex;
+  flex-flow: row;
+  gap: 1rem;
+}
+
+/* --- Decorative divider under navbar --- */
+.Divider {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.Divider svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 50px;
+}
+
+.Divider svg path {
+  fill: var(--background-1);
+}
+
+/* --- Responsive layout --- */
+@media (min-width: 550px) {
+  .Divider svg {
+    height: 100px;
+  }
+  .NavButton {
+    font-size: 3rem;
+  }
+  .Socials {
+    font-size: 28px;
+  }
+  .Socials > span {
+    gap: 1.75rem;
+  }
+}
+
+@media (min-width: 845px) {
+  .Divider svg {
+    height: 150px;
+  }
+
+  .Toggler {
+    display: none;
+  }
+
+  .Nav {
+    position: static;
+    width: auto;
+    height: auto;
+    transform: none;
+    margin-top: 1rem;
+  }
+
+  .Drawer {
+    flex-flow: row;
+    align-items: flex-end;
+    justify-content: center;
+    padding-left: 15vw;
+    gap: 3rem;
+  }
+
+  .NavButton {
+    font-size: 1.25rem;
+  }
+
+  .Socials {
+    display: none;
+  }
+
+  .BrandName {
+    font-size: 1.25rem;
+  }
+
+  .Logo {
+    width: 50px;
+    height: 50px;
+  }
+}

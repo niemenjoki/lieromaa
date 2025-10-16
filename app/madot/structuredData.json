@@ -1,0 +1,100 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Kompostimadot (Eisenia fetida)",
+    "description": "Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina. Sopivat sisä- ja ulkokäyttöön, hajuttomaan biojätteen käsittelyyn ja luonnonmukaiseen lannoitukseen.",
+    "image": "https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg",
+    "sku": "MADOT",
+    "brand": {
+      "@type": "Brand",
+      "name": "Luomuliero",
+      "logo": "https://www.luomuliero.fi/icons/apple-touch-icon.png"
+    },
+    "category": "GardenProduct",
+    "material": "Kompostimulta, pahvisilppu, puukuitu, kookoskuitu",
+    "offers": {
+      "@type": "AggregateOffer",
+      "url": "https://www.luomuliero.fi/madot",
+      "priceCurrency": "EUR",
+      "lowPrice": "20.00",
+      "highPrice": "50.00",
+      "offerCount": "3",
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": "2026-06-30",
+      "seller": {
+        "@type": "Person",
+        "name": "Joonas Niemenjoki"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "FI"
+        },
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "8.90",
+          "currency": "EUR"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 2,
+            "unitCode": "d"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 2,
+            "maxValue": 4,
+            "unitCode": "d"
+          }
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "FI",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "name": "Peruuttamisoikeus",
+            "value": "Kompostimadot eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Kuinka paljon kompostimatoja tarvitsen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yleensä 100–200 madon populaatio riittää aloittamaan pienen keittiökompostorin. Voit laskea tarkan määrän Luomulieron matolaskurilla."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Voinko tilata kompostimatoja postitse?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kyllä. Toimitus tapahtuu Postin kautta maanantaisin ja tiistaisin pakasterasiassa. Nouto Järvenpäästä on myös mahdollista."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Miten madot toimitetaan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Madot pakataan kosteaan kasvualustaan (pahvi-, puu- ja kookoskuituseos) ja kuljetetaan hengittävässä pakkauksessa."
+        }
+      }
+    ]
+  }
+]
