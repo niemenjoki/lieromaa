@@ -1,0 +1,78 @@
+import WormCalculatorClient from '@/components/WormCalculatorClient/WormCalculatorClient';
+import { SITE_URL } from '@/data/vars';
+import getPostRecommendations from '@/utils/getPostRecommendations';
+
+export const metadata = {
+  title: 'Matolaskuri | Luomuliero',
+  description:
+    'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
+  alternates: {
+    canonical: `${SITE_URL}/matolaskuri`,
+  },
+  openGraph: {
+    title: 'Matolaskuri | Luomuliero',
+    description:
+      'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
+    url: `${SITE_URL}/matolaskuri`,
+    images: [
+      {
+        url: 'https://www.luomuliero.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
+        width: 1200,
+        height: 800,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Matolaskuri | Luomuliero',
+    description:
+      'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
+  },
+};
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Matolaskuri',
+    url: 'https://www.luomuliero.fi/matolaskuri',
+    description:
+      'Verkkopohjainen laskuri, joka arvioi kotitalouden biojätteen määrän ja suosittelee tarvittavan kompostimatojen populaation.',
+    image:
+      'https://www.luomuliero.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
+    datePublished: '2025-09-20T00:00:00+03:00',
+    author: {
+      '@type': 'Person',
+      name: 'Joonas Niemenjoki',
+      url: 'https://www.linkedin.com/in/joonasniemenjoki/',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+      },
+    },
+  },
+];
+
+export default async function Page() {
+  const recommendedPosts = await getPostRecommendations({
+    self: 'laskuri',
+    keywords:
+      'matolaskuri, laskuri, arviointi, madot, määrä, arvio, kompostin koko, kapasiteetti, kotikompostointi, matokompostointi, Eisenia fetida, työkalut, suunnittelu, aloittelija, hyöty, käyttö, mitoitus, biojäte, laskenta, kompostorin perustaminen, vinkit',
+  });
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+        }}
+      />
+      <WormCalculatorClient recommendedPosts={recommendedPosts} />
+    </>
+  );
+}

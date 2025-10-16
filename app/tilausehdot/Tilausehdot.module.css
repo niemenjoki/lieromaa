@@ -1,0 +1,15 @@
+.OrderPolicyPage > div {
+  margin: 1rem 0;
+}
+
+.OrderPolicyPage a {
+  color: var(--highlight);
+  transition: opacity 0.1s ease-in-out;
+}
+.OrderPolicyPage a:hover {
+  opacity: 0.7;
+}
+
+.OrderPolicyPage p {
+  margin: 1rem 0;
+}
