@@ -8,6 +8,8 @@ function toISODate(d) {
   return d.toISOString().split('T')[0];
 }
 
+export const revalidate = 3600;
+
 export default async function sitemap() {
   const urls = [];
   let latestPost = new Date(0);

@@ -4,6 +4,8 @@ import path from 'path';
 import { SITE_URL } from '../../data/vars';
 import extractFrontMatter from '../../utils/extractFrontMatter';
 
+export const revalidate = 3600;
+
 export async function GET() {
   const filenames = await fs.readdir('posts');
   const posts = [];
