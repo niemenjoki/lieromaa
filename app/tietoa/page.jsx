@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Advert from '@/components/Advert/Advert';
 import { SITE_URL } from '@/data/vars';
 import portrait from '@/public/images/portrait2024.png';
-import classes from '@/styles/AboutPage.module.css';
 
-// 🧠 Build-time metadata (replaces <Layout> props)
+import classes from './Tietoa.module.css';
+
 export const metadata = {
   title: 'Tietoa | Luomuliero',
   description:
@@ -34,7 +34,6 @@ export const metadata = {
   },
 };
 
-// ✅ Structured data injection
 const structuredData = [
   {
     '@context': 'https://schema.org',
