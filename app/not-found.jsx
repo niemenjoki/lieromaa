@@ -1,5 +1,5 @@
 import ClientNotFoundPage from '@/components/NotFoundClient/NotFoundClient';
-import { getAllPosts } from '@/utils/mdx';
+import { getAllPosts } from '@/lib/posts';
 
 export default async function NotFound() {
   const posts = getAllPosts();
