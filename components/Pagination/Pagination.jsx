@@ -12,6 +12,8 @@ const Pagination = ({ numPages, currentPage }) => {
   const previousPage = `/blogi/sivu/${currentPage - 1}`;
   const nextPage = `/blogi/sivu/${currentPage + 1}`;
 
+  console.log({ numPages, currentPage, isFirst, isLast, previousPage, nextPage });
+
   if (numPages === 1) {
     return <></>;
   }
