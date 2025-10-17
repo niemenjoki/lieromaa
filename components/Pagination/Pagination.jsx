@@ -6,41 +6,54 @@ import { SITE_URL } from '@/data/vars';
 import classes from './Pagination.module.css';
 
 const Pagination = ({ numPages, currentPage }) => {
-  const isFirst = currentPage === 1;
-  const isLast = currentPage === numPages;
+  const total = Number(numPages) || 1;
+  const page = Number(currentPage) || 1;
 
-  const previousPage = `/blogi/sivu/${currentPage - 1}`;
-  const nextPage = `/blogi/sivu/${currentPage + 1}`;
+  const isFirst = page === 1;
+  const isLast = page === total;
 
-  console.log({ numPages, currentPage, isFirst, isLast, previousPage, nextPage });
+  const previousPage = `/blogi/sivu/${page - 1}`;
+  const nextPage = `/blogi/sivu/${page + 1}`;
 
-  if (numPages === 1) {
-    return <></>;
-  }
+  if (total === 1) return null;
+
   return (
     <>
       <Head>
         {!isFirst && <link rel="prev" href={SITE_URL + previousPage} />}
         {!isLast && <link rel="next" href={SITE_URL + nextPage} />}
       </Head>
+
       <div className={classes.Pagination}>
         <ul>
           {!isFirst && (
-            <li key={'previous'}>
+            <li key="previous">
               <Link href={previousPage} className={classes.TextButton}>
                 Edellinen
               </Link>
             </li>
           )}
-          {Array.from({ length: numPages }, (_, i) => (
-            <li key={i}>
-              <Link href={`/blogi/sivu/${i + 1}`} className={classes.NumberButton}>
-                {i + 1}
-              </Link>
-            </li>
-          ))}
+
+          {Array.from({ length: total }, (_, i) => {
+            const pageNumber = i + 1;
+            const isActive = pageNumber === page;
+
+            return (
+              <li key={pageNumber}>
+                <Link
+                  href={`/blogi/sivu/${pageNumber}`}
+                  className={`${classes.NumberButton} ${
+                    isActive ? classes.ActiveButton : ''
+                  }`}
+                >
+                  {pageNumber}
+                </Link>
+              </li>
+            );
+          })}
+
           {!isLast && (
-            <li key={'next'}>
+            <li key="next">
               <Link href={nextPage} className={classes.TextButton}>
                 Seuraava
               </Link>
