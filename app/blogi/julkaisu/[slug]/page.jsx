@@ -9,9 +9,9 @@ import Advert from '@/components/Advert/Advert';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import { SITE_URL } from '@/data/vars';
+import { getAllPostSlugs, getPostMetadata } from '@/lib/posts';
+import { getPostRecommendations } from '@/lib/posts';
 import portrait from '@/public/images/portrait2024.png';
-import getPostRecommendations from '@/utils/getPostRecommendations';
-import { getAllPostSlugs, getPostMetadata } from '@/utils/mdx';
 
 import classes from './PostPage.module.css';
 

@@ -1,6 +1,6 @@
 import WormCalculatorClient from '@/components/WormCalculatorClient/WormCalculatorClient';
 import { SITE_URL } from '@/data/vars';
-import getPostRecommendations from '@/utils/getPostRecommendations';
+import { getPostRecommendations } from '@/lib/posts';
 
 export const metadata = {
   title: 'Matolaskuri | Luomuliero',

@@ -5,7 +5,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
 import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars';
-import { getAllPosts, getAllTags, getPostsByTag } from '@/utils/mdx';
+import { getAllPosts, getAllTags, getPostsByTag } from '@/lib/posts';
 
 import classes from './TagPage.module.css';
 

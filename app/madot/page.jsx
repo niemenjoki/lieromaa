@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import Advert from '@/components/Advert/Advert';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
-import getPostRecommendations from '@/utils/getPostRecommendations';
+import { getPostRecommendations } from '@/lib/posts';
 
 import classes from './Madot.module.css';
 import structuredData from './structuredData.json';

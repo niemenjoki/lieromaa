@@ -1,4 +1,4 @@
-import { getAllPosts, getAllTags } from '@/utils/mdx';
+import { getAllPosts, getAllTags } from '@/lib/posts';
 
 import { SITE_URL } from '../data/vars';
 
