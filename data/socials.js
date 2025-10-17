@@ -23,7 +23,7 @@ export const SOCIALS = [
   },
   {
     icon: 'rss',
-    href: `${SITE_URL}/rss.xml`,
+    href: `${SITE_URL}/rss`,
     ariaLabel: 'RSS-Syöte',
   },
 ];

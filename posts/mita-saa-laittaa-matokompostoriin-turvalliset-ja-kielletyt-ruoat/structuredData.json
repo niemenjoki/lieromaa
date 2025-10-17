@@ -1,0 +1,63 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Mitä ruokia saa laittaa matokompostoriin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Madot viihtyvät pehmeissä, kasvipohjaisissa jätteissä kuten hedelmien ja vihannesten kuorissa, kahvinporoissa, teepusseissa, kaurahiutaleissa, leivässä ja pienissä määrissä riisiä tai pastaa. Myös murskatut kananmunankuoret ovat hyödyllisiä kalsiumlähteenä."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Mitkä ruoat sopivat vain pieninä määrinä?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sitrushedelmät, sipulit, valkosipuli ja mausteiset ruoat voivat ärsyttää matoja, joten niitä tulisi lisätä vain satunnaisesti ja pienissä määrissä. Rasvaiset ja hapan ruoat kannattaa myös välttää suurina annoksina."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Mitä ei saa laittaa matokompostoriin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Liha, kala, maitotuotteet, öljyt ja suolaiset ruoat ovat kiellettyjä, sillä ne pilaantuvat helposti, happamoittavat kompostia ja houkuttelevat kärpäsiä tai muita haittaeläimiä."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Miten ruokinta vaikuttaa kompostin olosuhteisiin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Liika kosteus ja happamuus ovat yleisimmät ongelmat. Lisää kuivaa petimateriaalia kuten pahvisilppua tai kookoskuitua, jos komposti tuntuu märältä. Happamuutta voi tasata murskatuilla kananmunankuorilla tai kahvinporoilla."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kuinka usein matoja tulisi ruokkia ja kuinka paljon?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ruoki matoja 1–2 kertaa viikossa pienissä erissä. Hautaa ruoka aina pintakerroksen alle ja lisää uusi erä vasta, kun edellinen on lähes hajonnut. Näin vältät hajuhaitat ja ylläpidät kompostin tasapainoa."
+        }
+      }
+    ],
+    "author": {
+      "@type": "Person",
+      "name": "Joonas Niemenjoki",
+      "url": "https://www.linkedin.com/in/joonasniemenjoki/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.luomuliero.fi/icons/apple-touch-icon.png"
+      }
+    },
+    "datePublished": "2025-09-07T00:00:00+03:00",
+    "mainEntityOfPage": "https://www.luomuliero.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat"
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Kuinka perustaa matokomposti kotona",
+    "description": "Vaiheittainen opas matokompostin perustamiseen kotona. Opi, mitä tarvitset ja miten aloitat helposti sisätiloissa ilman hajuhaittoja.",
+    "image": "https://www.luomuliero.fi/images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-1200.jpg",
+    "totalTime": "PT30M",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "EUR",
+      "value": "30"
+    },
+    "supply": [
+      { "@type": "HowToSupply", "name": "Kompostimadot (Eisenia fetida)" },
+      { "@type": "HowToSupply", "name": "Kannellinen ämpäri tai muovilaatikko" },
+      {
+        "@type": "HowToSupply",
+        "name": "Petimateriaali (sanomalehti, pahvi, kookoskuitu tai multa)"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Keittiöjätteet (hedelmät, vihannekset, kahvinporot)"
+      }
+    ],
+    "tool": [{ "@type": "HowToTool", "name": "Porakone tai puukko reikien tekoon" }],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Valitse kompostiastia",
+        "text": "Käytä kannellista, läpinäkymätöntä muovilaatikkoa. Tee kanteen ja reunoihin pieniä reikiä ilmanvaihdon varmistamiseksi."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Valmistele petimateriaali",
+        "text": "Lisää silputtua ja kevyesti kostutettua sanomalehteä, pahvia tai kookoskuitua noin puoliväliin astiaa."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Lisää madot",
+        "text": "Aseta madot petimateriaalin päälle ja anna niiden rauhassa sopeutua uuteen ympäristöön."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Aloita ruokinta",
+        "text": "Lisää pieni määrä biojätettä (esimerkiksi banaaninkuori) ja odota viikon ajan. Lisää jätettä vasta, kun edellinen erä on kadonnut."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Seuraa kosteutta ja ilmanvaihtoa",
+        "text": "Pidä petimateriaali kosteana mutta ei märkänä, ja lisää kuivaa paperia jos komposti tuntuu liian märältä."
+      }
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.luomuliero.fi/icons/apple-touch-icon.png"
+      }
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Joonas Niemenjoki",
+      "url": "https://www.linkedin.com/in/joonasniemenjoki/"
+    },
+    "datePublished": "2025-09-06T00:00:00+03:00",
+    "mainEntityOfPage": "https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille"
+  }
+]

@@ -5,6 +5,7 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "endOfLine": "lf",
+  "proseWrap": "preserve",
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
     "^react(.*)$",
@@ -14,5 +15,14 @@
     "^[./]"
   ],
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "overrides": [
+    {
+      "files": "*.mdx",
+      "options": {
+        "printWidth": 120,
+        "proseWrap": "always"
+      }
+    }
+  ]
 }

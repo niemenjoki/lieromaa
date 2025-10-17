@@ -1,39 +1,23 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { getAllPosts } from '@/utils/mdx';
 
 import { SITE_URL } from '../../data/vars';
-import extractFrontMatter from '../../utils/extractFrontMatter';
 
 export const revalidate = 3600;
 
 export async function GET() {
-  const filenames = await fs.readdir('posts');
-  const posts = [];
-
-  for (const filename of filenames) {
-    const filepath = path.join('posts', filename);
-    const markdownWithMeta = await fs.readFile(filepath, 'utf-8');
-    const postData = extractFrontMatter(markdownWithMeta);
-    const slug = filename.replace('.md', '');
-
-    posts.push({
-      title: postData.data.title,
-      date: new Date(postData.data.date),
-      excerpt: postData.data.excerpt,
-      link: `${SITE_URL}/blogi/julkaisu/${slug}`,
-    });
-  }
+  const posts = getAllPosts();
 
   posts.sort((a, b) => b.date - a.date);
-  const latestPostDate = posts[0]?.date || new Date();
+
+  const latestPostDate = posts[0]?.date || 0;
 
   const xmlItems = posts
     .map(
       (post) => `<item>
         <title><![CDATA[ ${post.title} ]]></title>
-        <link>${post.link}</link>
-        <guid>${post.link}</guid>
-        <pubDate>${post.date.toUTCString()}</pubDate>
+        <link>${SITE_URL}/blogi/julkaisu/${post.slug}</link>
+        <guid>${SITE_URL}/blogi/julkaisu/${post.slug}</guid>
+        <pubDate>${new Date(post.date).toUTCString()}</pubDate>
         <description><![CDATA[ ${post.excerpt} ]]></description>
         <dc:creator>Joonas Niemenjoki</dc:creator>
       </item>`
@@ -50,10 +34,10 @@ export async function GET() {
     <channel>
       <title><![CDATA[ Luomuliero ]]></title>
       <link>${SITE_URL}</link>
-      <atom:link href="${SITE_URL}/rss.xml" rel="self" type="application/rss+xml" />
+      <atom:link href="${SITE_URL}/rss" rel="self" type="application/rss+xml" />
       <description><![CDATA[ Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Luomuliero auttaa tekemään jätteestä ravinnerikasta multaa! ]]></description>
       <language>fi</language>
-      <lastBuildDate>${latestPostDate.toUTCString()}</lastBuildDate>
+      <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>
       ${xmlItems}
     </channel>
   </rss>`;

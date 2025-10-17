@@ -1,8 +1,8 @@
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import fs from 'fs';
-import { marked } from 'marked';
 import path from 'path';
 
 import Advert from '@/components/Advert/Advert';
@@ -10,26 +10,29 @@ import PostRecommendation from '@/components/PostRecommendation/PostRecommendati
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import { SITE_URL } from '@/data/vars';
 import portrait from '@/public/images/portrait2024.png';
-import extractFrontMatter from '@/utils/extractFrontMatter';
 import getPostRecommendations from '@/utils/getPostRecommendations';
+import { getAllPostSlugs, getPostMetadata } from '@/utils/mdx';
 
 import classes from './PostPage.module.css';
 
+export const mdxComponents = {
+  Image,
+};
+
 export async function generateStaticParams() {
-  const files = fs.readdirSync('posts');
-  return files.map((filename) => ({
-    slug: filename.replace('.md', ''),
+  const slugs = getAllPostSlugs();
+  return slugs.map((slug) => ({
+    slug,
   }));
 }
 
 export async function generateMetadata({ params }) {
-  const filePath = path.join('posts', params.slug + '.md');
-  const markdownWithMeta = fs.readFileSync(filePath, 'utf-8');
-  const { data } = extractFrontMatter(markdownWithMeta);
+  const { slug } = await params;
+  const data = getPostMetadata(slug);
 
   const title = data.title || 'Luomuliero';
   const description = data.excerpt || '';
-  const url = `${SITE_URL}/blogi/julkaisu/${params.slug}`;
+  const url = `${SITE_URL}/blogi/julkaisu/${slug}`;
   const image = data.image || `${SITE_URL}/icons/apple-touch-icon.png`;
 
   return {
@@ -53,14 +56,15 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function PostPage({ params }) {
-  const filePath = path.join('posts', params.slug + '.md');
-  const markdownWithMeta = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = extractFrontMatter(markdownWithMeta);
+  const { slug } = await params;
+  const data = getPostMetadata(slug);
 
-  const htmlContent = marked(content);
+  const mdxPath = path.join(process.cwd(), 'posts', slug, 'post.mdx');
+  const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
+
   const recommendedPosts = await getPostRecommendations({
-    self: params.slug,
-    keywords: data.keywords + ',' + data.tags,
+    self: slug,
+    keywords: [...data.tags, ...data.keywords],
   });
 
   const structuredData = data.structuredData || [
@@ -96,12 +100,14 @@ export default async function PostPage({ params }) {
         <h1>{data.title}</h1>
         <div className={classes.Date}>
           Julkaistu: {new Date(data.date).toLocaleDateString('fi-FI')}
+          {data.updated
+            ? ` (Päivitetty: ${new Date(data.updated).toLocaleDateString('fi-FI')})`
+            : undefined}
         </div>
 
-        <div
-          className={classes.Content}
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
-        />
+        <div className={classes.Content + ' .md'}>
+          <MDXRemote source={mdxContent} components={mdxComponents} />
+        </div>
 
         <div className={classes.AuthorBox}>
           <Image

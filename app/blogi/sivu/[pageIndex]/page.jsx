@@ -1,68 +1,29 @@
 import Link from 'next/link';
 
-import fs from 'fs';
-import path from 'path';
-
 import Advert from '@/components/Advert/Advert';
 import Pagination from '@/components/Pagination/Pagination';
-import Post from '@/components/PostPreview/PostPreview.jsx';
-import SearchPosts from '@/components/SearchPosts/SearchPosts.jsx';
-import { POSTS_PER_PAGE } from '@/data/vars.js';
-import extractFrontMatter from '@/utils/extractFrontMatter';
-import { sortByDate } from '@/utils/index.js';
+import Post from '@/components/PostPreview/PostPreview';
+import SearchPosts from '@/components/SearchPosts/SearchPosts';
+import { POSTS_PER_PAGE } from '@/data/vars';
+import { getAllPostSlugs, getAllTags, getPaginatedPosts } from '@/utils/mdx';
 
 import classes from './PostPage.module.css';
 
 export async function generateStaticParams() {
-  const files = fs.readdirSync('posts');
-  const filesWithoutDrafts = files.filter((f) => !f.startsWith('draft'));
-  const numPages = Math.ceil(filesWithoutDrafts.length / POSTS_PER_PAGE);
+  const slugs = getAllPostSlugs();
+
+  const numPages = Math.ceil(slugs.length / POSTS_PER_PAGE);
   return Array.from({ length: numPages }, (_, i) => ({
     pageIndex: (i + 1).toString(),
   }));
 }
 
-async function getPageData(pageIndex) {
-  const currentPage = parseInt(pageIndex) || 1;
-  const files = fs.readdirSync('posts').filter((f) => !f.startsWith('draft'));
-  const posts = files
-    .map((filename) => {
-      const markdownWithMeta = fs.readFileSync(path.join('posts', filename), 'utf-8');
-      const { data, content } = extractFrontMatter(markdownWithMeta);
-      const slug = filename.replace('.md', '');
-      return { slug, ...data, content };
-    })
-    .sort(sortByDate)
-    .map((post) => {
-      delete post.date;
-      delete post.content;
-      return post;
-    });
+export default async function BlogPage({ params }) {
+  const { pageIndex } = await params;
 
-  const numPages = Math.ceil(posts.length / POSTS_PER_PAGE);
-  const pageIdx = currentPage - 1;
-  const pagePosts = posts.slice(pageIdx * POSTS_PER_PAGE, (pageIdx + 1) * POSTS_PER_PAGE);
-
-  posts.forEach((post) => {
-    const onPage = pagePosts.some((p) => p.slug === post.slug);
-    pagePosts.push({ ...post, onPage });
-  });
-
-  const uniqueTags = [
-    ...new Set(
-      posts
-        .map((p) => p.tags)
-        .join(',')
-        .split(',')
-    ),
-  ];
-
-  return { posts: pagePosts, numPages, currentPage, tags: uniqueTags };
-}
-
-export default async function BlogPage({ params, currentPage: override }) {
-  const pageIndex = override ?? params?.pageIndex ?? '1';
-  const { posts, numPages, currentPage, tags } = await getPageData(pageIndex);
+  const pageIndexInt = parseInt(pageIndex) || 1;
+  const { posts, numPages } = getPaginatedPosts(pageIndexInt, POSTS_PER_PAGE);
+  const allTags = getAllTags();
 
   return (
     <>
@@ -97,29 +58,25 @@ export default async function BlogPage({ params, currentPage: override }) {
       />
 
       <div className={classes.Taglist}>
-        <Link href="/" className={`${classes.Tag} ${classes.ActiveTag}`}>
+        <Link href="/blogi" className={`${classes.Tag} ${classes.ActiveTag}`}>
           Kaikki
-        </Link>{' '}
-        {tags
-          .sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1))
-          .map((tag) => (
-            <Link
-              href={`/blogi/${tag.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
-              key={tag}
-              className={classes.Tag}
-            >
-              {tag}
-            </Link>
-          ))}
+        </Link>
+        {allTags.map((tag) => (
+          <Link
+            href={`/blogi/${tag.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
+            key={tag}
+            className={classes.Tag}
+          >
+            {tag}
+          </Link>
+        ))}
       </div>
 
-      {posts
-        .filter((post) => post.onPage === true)
-        .map((post, index) => (
-          <Post key={index} post={post} />
-        ))}
+      {posts.map((post, index) => (
+        <Post key={index} post={post} />
+      ))}
 
-      <Pagination numPages={numPages} currentPage={currentPage} />
+      <Pagination numPages={numPages} currentPage={pageIndexInt} />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
     </>
   );

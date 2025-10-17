@@ -1,7 +1,5 @@
 import BlogPage from './blogi/sivu/[pageIndex]/page';
 
-export default async function Home() {
-  return <BlogPage currentPage={1} />;
+export default async function HomePage() {
+  return await BlogPage({ params: { pageIndex: '1' } });
 }
-
-export const dynamicParams = false;

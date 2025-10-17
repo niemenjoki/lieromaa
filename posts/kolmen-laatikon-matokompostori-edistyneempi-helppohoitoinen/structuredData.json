@@ -1,0 +1,69 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Rakenna kolmen laatikon matokompostori",
+    "description": "Opi rakentamaan kolmen päällekkäisen laatikon matokompostori, joka perustuu jatkuvaan virtaukseen ja tuottaa valmista matokakkaa helposti.",
+    "image": "https://www.luomuliero.fi/images/posts/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen/kolmen_laatikon_kompostori-1200.jpg",
+    "totalTime": "PT1H",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "EUR",
+      "value": "70"
+    },
+    "supply": [
+      { "@type": "HowToSupply", "name": "Kolme kannellista muovilaatikkoa" },
+      { "@type": "HowToSupply", "name": "Kompostimadot" },
+      {
+        "@type": "HowToSupply",
+        "name": "Petimateriaali (pahvi, paperi tai kookoskuitu)"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Keittiöjätteet (hedelmä- ja vihanneskuoret, kahvinporot)"
+      }
+    ],
+    "tool": [
+      { "@type": "HowToTool", "name": "Porakone" },
+      { "@type": "HowToTool", "name": "Poranterät" }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "Poraa laatikoihin reiät",
+        "text": "Poraa reikiä kahden muovilaatikon pohjaan, jotta madot pääsevät liikkumaan kerrosten välillä. Yksi laatikko jätetään poraamatta.",
+        "image": "https://www.luomuliero.fi/images/posts/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen/kolmen_laatikon_kompostori_poraus-800.jpg"
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Täytä laatikot petimateriaalilla",
+        "text": "Lisää kostutettua petimateriaalia laatikoihin, esimerkiksi silputtua pahvia tai kookoskuitua. Materiaalin tulee olla kosteaa, mutta ei märkää."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Aseta laatikot päällekkäin ja poraa kanteen reiät",
+        "text": "Kasaa kompostori päällekkäin ja tee kanteen ilmanvaihtoreiät. Näin varmistat riittävän hapensaannin."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "Käynnistä kompostointi",
+        "text": "Lisää madot ja ensimmäinen erä keittiöjätettä ylimpään laatikkoon. Pidä kansi päällä ja seuraa kosteutta säännöllisesti."
+      }
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Luomuliero",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.luomuliero.fi/icons/apple-touch-icon.png"
+      }
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Joonas Niemenjoki",
+      "url": "https://www.linkedin.com/in/joonasniemenjoki/"
+    },
+    "datePublished": "2025-10-01T00:00:00+03:00",
+    "mainEntityOfPage": "https://www.luomuliero.fi/blogi/julkaisu/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen"
+  }
+]
