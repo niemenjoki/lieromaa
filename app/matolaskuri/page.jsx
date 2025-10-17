@@ -60,8 +60,29 @@ const structuredData = [
 export default async function Page() {
   const recommendedPosts = await getPostRecommendations({
     self: 'laskuri',
-    keywords:
-      'matolaskuri, laskuri, arviointi, madot, määrä, arvio, kompostin koko, kapasiteetti, kotikompostointi, matokompostointi, Eisenia fetida, työkalut, suunnittelu, aloittelija, hyöty, käyttö, mitoitus, biojäte, laskenta, kompostorin perustaminen, vinkit',
+    keywords: [
+      'matolaskuri',
+      'laskuri',
+      'arviointi',
+      'madot',
+      'määrä',
+      'arvio',
+      'kompostin koko',
+      'kapasiteetti',
+      'kotikompostointi',
+      'matokompostointi',
+      'Eisenia fetida',
+      'työkalut',
+      'suunnittelu',
+      'aloittelija',
+      'hyöty',
+      'käyttö',
+      'mitoitus',
+      'biojäte',
+      'laskenta',
+      'kompostorin perustaminen',
+      'vinkit',
+    ],
   });
 
   return (

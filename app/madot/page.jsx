@@ -49,8 +49,28 @@ export const dynamic = 'force-static';
 export default async function Page() {
   const recommendedPosts = await getPostRecommendations({
     self: 'madot',
-    keywords:
-      'kompostimadot, Eisenia fetida, matokompostointi, kastemadot vs kompostimadot, osto, saatavuus, Suomi, hankinta, matojen hoito, käyttö, lajikkeet, opas, kysymykset, harrastus, hyöty, ympäristö, biojäte, kotikompostointi, kasvatus, vinkit',
+    keywords: [
+      'kompostimadot',
+      'Eisenia fetida',
+      'matokompostointi',
+      'kastemadot vs kompostimadot',
+      'osto',
+      'saatavuus',
+      'Suomi',
+      'hankinta',
+      'matojen hoito',
+      'käyttö',
+      'lajikkeet',
+      'opas',
+      'kysymykset',
+      'harrastus',
+      'hyöty',
+      'ympäristö',
+      'biojäte',
+      'kotikompostointi',
+      'kasvatus',
+      'vinkit',
+    ],
   });
 
   return (

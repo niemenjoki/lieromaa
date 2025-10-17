@@ -1,43 +1,23 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { getAllPosts, getAllTags } from '@/utils/mdx';
 
 import { SITE_URL } from '../data/vars';
-import extractFrontMatter from '../utils/extractFrontMatter';
 
 function toISODate(d) {
-  return d.toISOString().split('T')[0];
+  return new Date(d).toISOString().split('T')[0];
 }
 
 export const revalidate = 3600;
 
 export default async function sitemap() {
   const urls = [];
-  let latestPost = new Date(0);
-  const allTags = new Set();
-  const blogPosts = [];
 
-  const files = await fs.readdir('posts');
+  const posts = getAllPosts();
+  const tags = getAllTags();
 
-  for (const file of files) {
-    const slug = path.parse(file).name;
-    const rawPost = await fs.readFile(path.join('posts', file), 'utf-8');
-    const { tags, date } = extractFrontMatter(rawPost).data;
-
-    const dateObj = new Date(date);
-    if (isNaN(dateObj)) continue;
-
-    blogPosts.push({
-      url: `${SITE_URL}/blogi/julkaisu/${slug}`,
-      date: dateObj,
-    });
-
-    if (dateObj > latestPost) latestPost = dateObj;
-
-    tags
-      .split(',')
-      .map((t) => t.trim().toLowerCase().replaceAll(' ', '-'))
-      .forEach((tag) => allTags.add(tag));
-  }
+  const latestPost = posts.reduce((latest, post) => {
+    const current = new Date(post.date);
+    return current > latest ? current : latest;
+  }, new Date(0));
 
   const staticPages = [
     { url: '/', lastmod: latestPost },
@@ -52,20 +32,20 @@ export default async function sitemap() {
   for (const { url, lastmod } of staticPages) {
     urls.push({
       url: `${SITE_URL}${url}`,
-      lastModified: toISODate(new Date(lastmod)),
+      lastModified: toISODate(lastmod),
     });
   }
 
-  for (const tag of allTags) {
+  for (const tag of tags) {
     urls.push({
       url: `${SITE_URL}/blogi/${tag}/sivu/1`,
       lastModified: toISODate(latestPost),
     });
   }
 
-  for (const post of blogPosts) {
+  for (const post of posts) {
     urls.push({
-      url: post.url,
+      url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
       lastModified: toISODate(post.date),
     });
   }

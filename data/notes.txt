@@ -5,8 +5,4 @@ Aiheita
 - Mitä opin 1 vuodessa matokompostoinnista
 - Matojen maailma lapsille selitettynä
 
-Improvements
-Add link to Facebook page
-Improve sitemap and rss gen
-Use next/image in blogposts somehow?
-Improve font awesome importing
+Fix pagination active number styling

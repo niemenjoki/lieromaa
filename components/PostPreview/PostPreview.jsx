@@ -3,10 +3,6 @@ import Link from 'next/link';
 import classes from './PostPreview.module.css';
 
 const PostPreview = ({ post, compact = false, overrideHref = false }) => {
-  if (typeof post.tags === 'string') {
-    post.tags = post.tags.split(',').map((tag) => tag.trim());
-  }
-
   return (
     <div className={classes.PostPreview}>
       <h2 className={classes.Title}>

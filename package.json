@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3080",
     "build": "next build",
-    "prebuild": "node ./utils/generateImages.js",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
@@ -20,8 +19,8 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "fuse.js": "^7.1.0",
-    "marked": "^16.4.0",
     "next": "^15.5.5",
+    "next-mdx-remote": "^5.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

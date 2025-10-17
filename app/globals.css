@@ -238,3 +238,7 @@ a:hover:hover {
   padding: 2px 4px;
   background: var(--background-);
 }
+
+img {
+  border-radius: 6px;
+}

@@ -1,39 +1,23 @@
-const fs = require('fs').promises;
-const extractFrontMatter = require('../utils/extractFrontMatter.js');
+import { getAllPosts } from '@/utils/mdx';
+
 const MAX_RECOMMENDATIONS = 2;
 const MIN_COMMON_KEYWORDS = 3;
 
 const getPostRecommendations = async ({ self, keywords }) => {
-  const posts = (await fs.readdir('posts')).filter(
-    (filename) => !filename.startsWith('draft')
-  );
-  const postsWithKeywords = await Promise.all(
-    posts.map(async (postSlug) => {
-      const rawPost = await fs.readFile('posts' + '/' + postSlug, 'utf-8');
-      const { data } = extractFrontMatter(rawPost);
+  const targetKeywords = keywords.map((k) => k.trim().toLowerCase());
 
-      const post = {
-        ...data,
-        slug: postSlug.replace('.md', ''),
-      };
-      return post;
-    })
-  );
+  const posts = getAllPosts();
 
-  const recommendations = postsWithKeywords
+  const recommendations = posts
     .filter((post) => post.slug !== self)
-    .map((post) => ({
-      ...post,
-      commonKeywords: post.keywords
-        .split(',')
-        .map((keyword) => keyword.trim().toLowerCase()) // normalize
-        .filter((keyword) =>
-          keywords
-            .split(',')
-            .map((keyword) => keyword.trim().toLowerCase()) // normalize
-            .includes(keyword)
-        ).length,
-    }))
+    .map((post) => {
+      const postKeywords = (post.keywords || []).map((k) => k.trim().toLowerCase());
+      const commonKeywords = postKeywords.filter((k) =>
+        targetKeywords.includes(k)
+      ).length;
+
+      return { ...post, commonKeywords };
+    })
     .filter((post) => post.commonKeywords >= MIN_COMMON_KEYWORDS)
     .sort((a, b) => b.commonKeywords - a.commonKeywords)
     .slice(0, MAX_RECOMMENDATIONS);
@@ -41,4 +25,4 @@ const getPostRecommendations = async ({ self, keywords }) => {
   return recommendations;
 };
 
-module.exports = getPostRecommendations;
+export default getPostRecommendations;

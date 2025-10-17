@@ -30,9 +30,11 @@ export const sharelinks = [
   },
 ];
 
-export default function SocialShareButtons({ title = '', tags = '' }) {
+export default function SocialShareButtons({ title = '', tags = [] }) {
   const pathname = usePathname();
   const currentUrl = SITE_URL + pathname;
+
+  const tagString = tags.map((tag) => tag.replaceAll(' ', '-')).join(',');
 
   return (
     <div className={classes.SocialShareButtons}>
@@ -42,7 +44,7 @@ export default function SocialShareButtons({ title = '', tags = '' }) {
           const href = sharelink.href
             .replace('__URL__', encodeURIComponent(currentUrl))
             .replace('__TITLE__', encodeURIComponent(title))
-            .replace('__TAGS__', encodeURIComponent(tags.replaceAll(' ', '-')));
+            .replace('__TAGS__', encodeURIComponent(tagString));
 
           return (
             <a
