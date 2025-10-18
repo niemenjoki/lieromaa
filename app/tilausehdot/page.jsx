@@ -3,21 +3,21 @@ import { SITE_URL } from '@/data/vars';
 import classes from './Tilausehdot.module.css';
 
 export const metadata = {
-  title: 'Tilaus- ja toimitusehdot | Luomuliero',
+  title: 'Tilaus- ja toimitusehdot | Lieromaa',
   description:
-    'Luomulieron tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+    'Lieromaan tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
   alternates: { canonical: `${SITE_URL}/tilausehdot` },
   openGraph: {
-    title: 'Tilaus- ja toimitusehdot | Luomuliero',
+    title: 'Tilaus- ja toimitusehdot | Lieromaa',
     description:
-      'Luomulieron tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+      'Lieromaan tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
     url: `${SITE_URL}/tilausehdot`,
   },
   twitter: {
     card: 'summary',
-    title: 'Tilaus- ja toimitusehdot | Luomuliero',
+    title: 'Tilaus- ja toimitusehdot | Lieromaa',
     description:
-      'Luomulieron tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+      'Lieromaan tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
   },
 };
 
@@ -27,22 +27,22 @@ const structuredData = [
     '@type': 'WebPage',
     name: 'Tilaus- ja toimitusehdot',
     description:
-      'Luomulieron tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
-    url: 'https://www.luomuliero.fi/tilausehdot',
+      'Lieromaan tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+    url: 'https://www.lieromaa.fi/tilausehdot',
     datePublished: '2025-10-01T00:00:00+03:00',
     inLanguage: 'fi',
     isPartOf: {
       '@type': 'WebSite',
-      name: 'Luomuliero',
-      url: 'https://www.luomuliero.fi',
+      name: 'Lieromaa',
+      url: 'https://www.lieromaa.fi',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-      url: 'https://www.luomuliero.fi',
+      name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+      url: 'https://www.lieromaa.fi',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
       },
     },
   },
@@ -66,7 +66,7 @@ export default function OrderPolicyPage() {
 
         <h2>Yleistä</h2>
         <p>
-          Luomuliero on kaupparekisteriin rekisteröity toiminimi, jota käytän toimiessani
+          Lieromaa on kaupparekisteriin rekisteröity toiminimi, jota käytän toimiessani
           yksityisenä elinkeinonharjoittajana (Y-tunnus: 3002257-7). Vähäisen toiminnan
           vuoksi en toistaiseksi ole arvonlisäverovelvollinen (arvonlisäverolain 3 §) ja
           kaikki sivuston hinnat ovat näin ollen verottomia. Pidätän oikeuden hintojen ja

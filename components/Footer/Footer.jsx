@@ -34,8 +34,8 @@ const Footer = () => {
         <div className={classes.NoMobile}>
           <div>
             &copy; 2025
-            {new Date().getFullYear() > 2025 && `-${new Date().getFullYear()}`} Luomuliero
-            | Joonas Niemenjoki. Koodi ja sisältö on
+            {new Date().getFullYear() > 2025 && `-${new Date().getFullYear()}`} Lieromaa |
+            Joonas Niemenjoki. Koodi ja sisältö on
             <a href={LICENSE_URL} target="_blank" rel="license noopener noreferrer">
               {' '}
               lisensoitu
@@ -59,7 +59,7 @@ const Footer = () => {
       <div className={classes.Mobile}>
         <div>
           &copy; 2025
-          {new Date().getFullYear() > 2025 && `-${new Date().getFullYear()}`} Luomuliero |
+          {new Date().getFullYear() > 2025 && `-${new Date().getFullYear()}`} Lieromaa |
           Joonas Niemenjoki
         </div>
         <div>

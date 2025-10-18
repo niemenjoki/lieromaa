@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Luomuliero",
-  "short_name": "luomuliero",
-  "description": "Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Luomuliero auttaa tekemään jätteestä ravinnerikasta multaa!",
+  "name": "Lieromaa",
+  "short_name": "lieromaa",
+  "description": "Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta multaa!",
   "icons": [
     {
       "src": "icons/android-chrome-192x192.png",

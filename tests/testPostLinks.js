@@ -30,16 +30,16 @@ async function testPostLinks() {
     '/tilausehdot',
   ];
 
-  const linkRegex = /https?:\/\/(?:www\.)?luomuliero\.fi[^\s"'<>)]*/g;
+  const linkRegex = /https?:\/\/(?:www\.)?lieromaa\.fi[^\s"'<>)]*/g;
 
   for (const file of files) {
     const filePath = path.join(POSTS_DIR, file);
     const raw = await fs.readFile(filePath, 'utf8');
     const { content } = extractFrontMatter(raw);
 
-    // Find all Luomuliero links (with or without www)
+    // Find all Lieromaa links (with or without www)
     const matches = [
-      ...content.matchAll(/https?:\/\/([a-z.]*?)luomuliero\.fi([^\s"'<>)]*)/g),
+      ...content.matchAll(/https?:\/\/([a-z.]*?)lieromaa\.fi([^\s"'<>)]*)/g),
     ];
 
     for (const match of matches) {
@@ -84,12 +84,12 @@ async function testPostLinks() {
       }
     }
 
-    // 4. Detect relative Luomuliero links (like href="/madot" or href="madot")
+    // 4. Detect relative Lieromaa links (like href="/madot" or href="madot")
     const relativeMatches = [...content.matchAll(/href\s*=\s*["'](\/?[^"']+)["']/g)];
     for (const match of relativeMatches) {
       const href = match[1];
       if (href.startsWith('http')) continue; // already absolute
-      if (href.includes('luomuliero')) continue; // handled above
+      if (href.includes('lieromaa')) continue; // handled above
 
       if (allowedStaticPaths.includes(href)) {
         issues.push(
@@ -106,7 +106,7 @@ async function testPostLinks() {
       `\n${colors.red}❌ Found ${issues.length} post link issues${colors.reset}`
     );
   } else {
-    console.log(`${colors.green}✅  All Luomuliero link checks passed.${colors.reset}`);
+    console.log(`${colors.green}✅  All Lieromaa link checks passed.${colors.reset}`);
   }
 }
 

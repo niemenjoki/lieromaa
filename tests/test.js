@@ -14,7 +14,7 @@ const colors = {
 
 (async () => {
   console.log(
-    `${colors.cyan}${colors.bold}🔍 Running Luomuliero test suite...${colors.reset}\n`
+    `${colors.cyan}${colors.bold}🔍 Running Lieromaa test suite...${colors.reset}\n`
   );
   const tests = [testPostMetadata, testPostLinks];
   for (const test of tests) await test();

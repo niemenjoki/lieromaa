@@ -27,28 +27,28 @@ export const viewport = {
 
 export const metadata = {
   title: {
-    default: 'Luomuliero',
-    template: '%s | Luomuliero',
+    default: 'Lieromaa',
+    template: '%s | Lieromaa',
   },
   description: 'Kotimainen matokompostointi ja kompostimatojen myynti.',
   openGraph: {
     type: 'website',
-    url: 'https://www.luomuliero.fi',
-    siteName: 'Luomuliero',
+    url: 'https://www.lieromaa.fi',
+    siteName: 'Lieromaa',
     images: [
       {
-        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
         width: 180,
         height: 180,
-        alt: 'Luomuliero logo',
+        alt: 'Lieromaa logo',
       },
     ],
     locale: 'fi_FI',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@luomuliero',
-    images: ['https://www.luomuliero.fi/icons/apple-touch-icon.png'],
+    site: '@lieromaa',
+    images: ['https://www.lieromaa.fi/icons/apple-touch-icon.png'],
   },
   icons: {
     icon: '/icons/favicon.ico',

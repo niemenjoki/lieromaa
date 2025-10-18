@@ -4,18 +4,18 @@
     "@type": "Product",
     "name": "Kompostimadot (Eisenia fetida)",
     "description": "Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina. Sopivat sisä- ja ulkokäyttöön, hajuttomaan biojätteen käsittelyyn ja luonnonmukaiseen lannoitukseen.",
-    "image": "https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg",
+    "image": "https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg",
     "sku": "MADOT",
     "brand": {
       "@type": "Brand",
-      "name": "Luomuliero",
-      "logo": "https://www.luomuliero.fi/icons/apple-touch-icon.png"
+      "name": "Lieromaa",
+      "logo": "https://www.lieromaa.fi/icons/apple-touch-icon.png"
     },
     "category": "GardenProduct",
     "material": "Kompostimulta, pahvisilppu, puukuitu, kookoskuitu",
     "offers": {
       "@type": "AggregateOffer",
-      "url": "https://www.luomuliero.fi/madot",
+      "url": "https://www.lieromaa.fi/madot",
       "priceCurrency": "EUR",
       "lowPrice": "20.00",
       "highPrice": "50.00",
@@ -76,7 +76,7 @@
         "name": "Kuinka paljon kompostimatoja tarvitsen?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yleensä 100–200 madon populaatio riittää aloittamaan pienen keittiökompostorin. Voit laskea tarkan määrän Luomulieron matolaskurilla."
+          "text": "Yleensä 100–200 madon populaatio riittää aloittamaan pienen keittiökompostorin. Voit laskea tarkan määrän Lieromaan matolaskurilla."
         }
       },
       {
