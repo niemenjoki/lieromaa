@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import Advert from '@/components/Advert/Advert';
@@ -79,27 +80,16 @@ export default async function Page() {
 
         <div className={classes.Content}>
           <div className={classes.Flex}>
-            <picture>
-              <source
-                srcSet="/images/wormspage/kompostimatoja_kammenella-800.avif 800w, /images/wormspage/kompostimatoja_kammenella-1200.avif 1200w"
-                type="image/avif"
-              />
-              <source
-                srcSet="/images/wormspage/kompostimatoja_kammenella-800.webp 800w, /images/wormspage/kompostimatoja_kammenella-1200.webp 1200w"
-                type="image/webp"
-              />
-              <img
-                src="/images/wormspage/kompostimatoja_kammenella-800.jpg"
-                srcSet="/images/wormspage/kompostimatoja_kammenella-800.jpg 800w, /images/wormspage/kompostimatoja_kammenella-1200.jpg 1200w"
-                alt="Noin 100 kompostimatoa läjässä kämmenellä"
-                sizes="(max-width: 600px) 100vw, 800px"
-                style={{ height: 'auto' }}
-                width="1080"
-                height="1620"
-                loading="lazy"
-              />
-            </picture>
-
+            <Image
+              src="/images/wormspage/kompostimatoja_kammenella.png"
+              alt="Noin 100 kompostimatoa läjässä kämmenellä"
+              width={1080}
+              height={1620}
+              sizes="(max-width: 600px) 100vw, 800px"
+              priority={false}
+              loading="lazy"
+              style={{ height: 'auto' }}
+            />
             <div>
               <p>
                 Kasvatan ja myyn kotimaisia kompostimatoja (<em>Eisenia fetida</em>)

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import classes from './MadotKampanja.module.css';
@@ -64,24 +65,16 @@ export default function Page() {
           </aside>
 
           <div className={classes.Flex}>
-            <picture>
-              <source
-                srcSet="/images/wormspage/kompostimatoja_kammenella-800.avif 800w, /images/wormspage/kompostimatoja_kammenella-1200.avif 1200w"
-                type="image/avif"
-              />
-              <source
-                srcSet="/images/wormspage/kompostimatoja_kammenella-800.webp 800w, /images/wormspage/kompostimatoja_kammenella-1200.webp 1200w"
-                type="image/webp"
-              />
-              <img
-                src="/images/wormspage/kompostimatoja_kammenella-800.jpg"
-                alt="Eisenia fetida -kompostimatoja kämmenellä"
-                width="1080"
-                height="1620"
-                loading="lazy"
-                style={{ height: 'auto' }}
-              />
-            </picture>
+            <Image
+              src="/images/wormspage/kompostimatoja_kammenella.png"
+              alt="Noin 100 kompostimatoa läjässä kämmenellä"
+              width={1080}
+              height={1620}
+              sizes="(max-width: 600px) 100vw, 800px"
+              priority={false}
+              loading="lazy"
+              style={{ height: 'auto' }}
+            />
           </div>
 
           <p>
