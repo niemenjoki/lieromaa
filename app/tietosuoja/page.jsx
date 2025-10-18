@@ -3,21 +3,21 @@ import { SITE_URL } from '@/data/vars';
 import classes from './Tietosuoja.module.css';
 
 export const metadata = {
-  title: 'Tietosuojaseloste | Luomuliero',
+  title: 'Tietosuojaseloste | Lieromaa',
   description:
-    'Tietosuojaseloste Luomulieron verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+    'Tietosuojaseloste Lieromaan verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
   alternates: { canonical: `${SITE_URL}/tietosuoja` },
   openGraph: {
-    title: 'Tietosuojaseloste | Luomuliero',
+    title: 'Tietosuojaseloste | Lieromaa',
     description:
-      'Tietosuojaseloste Luomulieron verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+      'Tietosuojaseloste Lieromaan verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
     url: `${SITE_URL}/tietosuoja`,
   },
   twitter: {
     card: 'summary',
-    title: 'Tietosuojaseloste | Luomuliero',
+    title: 'Tietosuojaseloste | Lieromaa',
     description:
-      'Tietosuojaseloste Luomulieron verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+      'Tietosuojaseloste Lieromaan verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
   },
 };
 
@@ -27,21 +27,21 @@ const structuredData = [
     '@type': 'WebPage',
     name: 'Tietosuojaseloste',
     description:
-      'Tietosuojaseloste Luomulieron verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
-    url: 'https://www.luomuliero.fi/tietosuoja',
+      'Tietosuojaseloste Lieromaan verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+    url: 'https://www.lieromaa.fi/tietosuoja',
     dateModified: '2025-09-21T00:00:00+03:00',
     inLanguage: 'fi',
     isPartOf: {
       '@type': 'WebSite',
-      name: 'Luomuliero',
-      url: 'https://www.luomuliero.fi',
+      name: 'Lieromaa',
+      url: 'https://www.lieromaa.fi',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+      name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
       },
     },
   },
@@ -64,7 +64,7 @@ export default function PrivacyPage() {
         </p>
 
         <p>
-          Luomuliero-verkkosivustoa ylläpitää Joonas Niemenjoki (rekisterinpitäjä). Tässä
+          Lieromaa-verkkosivustoa ylläpitää Joonas Niemenjoki (rekisterinpitäjä). Tässä
           tietosuojaselosteessa kerrotaan käytännöistä, jotka liittyvät henkilötietojen
           keräämiseen, käyttöön, säilyttämiseen ja luovuttamiseen kolmansille osapuolille
           tämän sivuston yhteydessä GDPR:n (EU 2016/679) mukaisesti. Sivusto ei edellytä

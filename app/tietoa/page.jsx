@@ -7,20 +7,20 @@ import portrait from '@/public/images/portrait2024.png';
 import classes from './Tietoa.module.css';
 
 export const metadata = {
-  title: 'Tietoa | Luomuliero',
+  title: 'Tietoa | Lieromaa',
   description:
-    'Luomuliero tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
+    'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
   alternates: {
     canonical: `${SITE_URL}/tietoa`,
   },
   openGraph: {
-    title: 'Tietoa | Luomuliero',
+    title: 'Tietoa | Lieromaa',
     description:
-      'Luomuliero tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
+      'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
     url: `${SITE_URL}/tietoa`,
     images: [
       {
-        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
         width: 180,
         height: 180,
       },
@@ -28,9 +28,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'Tietoa | Luomuliero',
+    title: 'Tietoa | Lieromaa',
     description:
-      'Luomuliero tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
+      'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
   },
 };
 
@@ -38,28 +38,28 @@ const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',
-    name: 'Tietoa Luomulierosta',
+    name: 'Tietoa Lieromaasta',
     description:
-      'Luomuliero tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
-    url: 'https://www.luomuliero.fi/tietoa',
+      'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
+    url: 'https://www.lieromaa.fi/tietoa',
     author: {
       '@type': 'Person',
       name: 'Joonas Niemenjoki',
       url: 'https://www.linkedin.com/in/joonasniemenjoki/',
       affiliation: {
         '@type': 'Organization',
-        name: 'Luomuliero',
+        name: 'Lieromaa',
       },
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-      logo: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+      name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+      logo: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
     },
     mainEntity: {
       '@type': 'WebSite',
-      name: 'Luomuliero',
-      url: 'https://www.luomuliero.fi',
+      name: 'Lieromaa',
+      url: 'https://www.lieromaa.fi',
     },
   },
 ];
@@ -90,12 +90,11 @@ export default function AboutPage() {
         <div className={classes.Bio}>
           <h2>Minusta</h2>
           <p>
-            Hei, olen <strong>Joonas Niemenjoki</strong> — Luomuliero.fi-sivuston
-            perustaja. Asun Järvenpäässä, olen pienen lapsen isä ja innokas
-            matokompostoinnin harrastaja. Päivätyössäni ohjelmoin lämpöpumppujärjestelmiä
-            ja optimoin niitä toimimaan mahdollisimman energiatehokkaasti. Kestävä
-            elintapa ja luonnon kiertokulku ovat minulle tärkeitä — niistä kumpuaa koko
-            Luomulieron idea.
+            Hei, olen <strong>Joonas Niemenjoki</strong> — Lieromaa.fi-sivuston perustaja.
+            Asun Järvenpäässä, olen pienen lapsen isä ja innokas matokompostoinnin
+            harrastaja. Päivätyössäni ohjelmoin lämpöpumppujärjestelmiä ja optimoin niitä
+            toimimaan mahdollisimman energiatehokkaasti. Kestävä elintapa ja luonnon
+            kiertokulku ovat minulle tärkeitä — niistä kumpuaa koko Lieromaan idea.
           </p>
 
           <h2>Miten kaikki alkoi</h2>
@@ -108,13 +107,13 @@ export default function AboutPage() {
             takaisin maaperään.
           </p>
 
-          <h2>Miksi perustin Luomulieron</h2>
+          <h2>Miksi perustin Lieromaan</h2>
           <p>
             Halusin jakaa käytännön kokemuksia, joita ei löydy virallisista ohjeista.
             Monet kompostointia käsittelevät sivustot tarjoavat yleisluontoista tietoa —
             minä taas kirjoitan siitä, mitä{' '}
             <strong>olen itse kokeillut ja todennut toimivaksi</strong>. Tavoitteeni on
-            tehdä Luomulierosta Suomen paras paikka oppia matokompostoinnista ja innostaa
+            tehdä Lieromaasta Suomen paras paikka oppia matokompostoinnista ja innostaa
             yhä useampia kierrättämään biojätteensä helposti ja ympäristöystävällisesti.
           </p>
 
@@ -129,7 +128,7 @@ export default function AboutPage() {
 
           <p>
             <small>
-              Luomuliero.fi on yksityinen harrastajavetoinen sivusto. En edusta mitään
+              Lieromaa.fi on yksityinen harrastajavetoinen sivusto. En edusta mitään
               virallista tahoa, vaan jaan tietoa ja vinkkejä omien kokemusteni pohjalta.
             </small>
           </p>

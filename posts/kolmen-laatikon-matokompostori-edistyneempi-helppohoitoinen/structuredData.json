@@ -4,7 +4,7 @@
     "@type": "HowTo",
     "name": "Rakenna kolmen laatikon matokompostori",
     "description": "Opi rakentamaan kolmen päällekkäisen laatikon matokompostori, joka perustuu jatkuvaan virtaukseen ja tuottaa valmista matokakkaa helposti.",
-    "image": "https://www.luomuliero.fi/images/posts/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen/kolmen_laatikon_kompostori-1200.jpg",
+    "image": "https://www.lieromaa.fi/images/posts/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen/kolmen_laatikon_kompostori-1200.jpg",
     "totalTime": "PT1H",
     "estimatedCost": {
       "@type": "MonetaryAmount",
@@ -32,7 +32,7 @@
         "@type": "HowToStep",
         "name": "Poraa laatikoihin reiät",
         "text": "Poraa reikiä kahden muovilaatikon pohjaan, jotta madot pääsevät liikkumaan kerrosten välillä. Yksi laatikko jätetään poraamatta.",
-        "image": "https://www.luomuliero.fi/images/posts/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen/kolmen_laatikon_kompostori_poraus-800.jpg"
+        "image": "https://www.lieromaa.fi/images/posts/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen/kolmen_laatikon_kompostori_poraus-800.jpg"
       },
       {
         "@type": "HowToStep",
@@ -52,10 +52,10 @@
     ],
     "publisher": {
       "@type": "Organization",
-      "name": "Luomuliero",
+      "name": "Lieromaa",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.luomuliero.fi/icons/apple-touch-icon.png"
+        "url": "https://www.lieromaa.fi/icons/apple-touch-icon.png"
       }
     },
     "author": {
@@ -64,6 +64,6 @@
       "url": "https://www.linkedin.com/in/joonasniemenjoki/"
     },
     "datePublished": "2025-10-01T00:00:00+03:00",
-    "mainEntityOfPage": "https://www.luomuliero.fi/blogi/julkaisu/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen"
+    "mainEntityOfPage": "https://www.lieromaa.fi/blogi/julkaisu/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen"
   }
 ]

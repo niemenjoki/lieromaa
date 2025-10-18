@@ -9,8 +9,7 @@ import Advert from '@/components/Advert/Advert';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import { SITE_URL } from '@/data/vars';
-import { getAllPostSlugs, getPostMetadata } from '@/lib/posts';
-import { getPostRecommendations } from '@/lib/posts';
+import { getAllPostSlugs, getPostMetadata, getPostRecommendations } from '@/lib/posts';
 import portrait from '@/public/images/portrait2024.png';
 
 import classes from './PostPage.module.css';
@@ -30,13 +29,13 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = getPostMetadata(slug);
 
-  const title = data.title || 'Luomuliero';
+  const title = data.title || 'Lieromaa';
   const description = data.excerpt || '';
   const url = `${SITE_URL}/blogi/julkaisu/${slug}`;
   const image = data.image || `${SITE_URL}/icons/apple-touch-icon.png`;
 
   return {
-    title: `${title} | Luomuliero`,
+    title: `${title} | Lieromaa`,
     description,
     alternates: { canonical: url },
     openGraph: {
@@ -77,10 +76,10 @@ export default async function PostPage({ params }) {
       author: { '@type': 'Person', name: 'Joonas Niemenjoki' },
       publisher: {
         '@type': 'Organization',
-        name: 'Luomuliero',
+        name: 'Lieromaa',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+          url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
         },
       },
       mainEntityOfPage: `${SITE_URL}/blogi/julkaisu/${params.slug}`,
@@ -122,9 +121,9 @@ export default async function PostPage({ params }) {
               <strong>Kirjoittaja:</strong> Joonas Niemenjoki
             </p>
             <p>
-              Olen Järvenpäässä asuva matokompostoinnin harrastaja ja
-              Luomuliero.fi-sivuston perustaja. Päivisin työskentelen rakennusautomaation
-              ohjelmoijana ja keskityn energiatehokkuuteen.
+              Olen Järvenpäässä asuva matokompostoinnin harrastaja ja Lieromaa.fi-sivuston
+              perustaja. Päivisin työskentelen rakennusautomaation ohjelmoijana ja
+              keskityn energiatehokkuuteen.
             </p>
             <p>
               Kirjoitan asioista, joita olen itse kokeillut ja joista on kertynyt

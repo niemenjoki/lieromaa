@@ -4,7 +4,7 @@
     "@type": "HowTo",
     "name": "Kuinka perustaa matokomposti kotona",
     "description": "Vaiheittainen opas matokompostin perustamiseen kotona. Opi, mitä tarvitset ja miten aloitat helposti sisätiloissa ilman hajuhaittoja.",
-    "image": "https://www.luomuliero.fi/images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-1200.jpg",
+    "image": "https://www.lieromaa.fi/images/posts/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/matokomposti-1200.jpg",
     "totalTime": "PT30M",
     "estimatedCost": {
       "@type": "MonetaryAmount",
@@ -53,10 +53,10 @@
     ],
     "publisher": {
       "@type": "Organization",
-      "name": "Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)",
+      "name": "Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.luomuliero.fi/icons/apple-touch-icon.png"
+        "url": "https://www.lieromaa.fi/icons/apple-touch-icon.png"
       }
     },
     "author": {
@@ -65,6 +65,6 @@
       "url": "https://www.linkedin.com/in/joonasniemenjoki/"
     },
     "datePublished": "2025-09-06T00:00:00+03:00",
-    "mainEntityOfPage": "https://www.luomuliero.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille"
+    "mainEntityOfPage": "https://www.lieromaa.fi/blogi/julkaisu/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille"
   }
 ]

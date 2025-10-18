@@ -11,10 +11,10 @@
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Luomuliero",
-      "logo": "https://www.luomuliero.fi/icons/apple-touch-icon.png"
+      "name": "Lieromaa",
+      "logo": "https://www.lieromaa.fi/icons/apple-touch-icon.png"
     },
-    "mainEntityOfPage": "https://www.luomuliero.fi/blogi/pitaako-matokompostista-tehda-ilmoitus-kunnalle"
+    "mainEntityOfPage": "https://www.lieromaa.fi/blogi/pitaako-matokompostista-tehda-ilmoitus-kunnalle"
   },
   {
     "@context": "https://schema.org",

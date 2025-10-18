@@ -3,22 +3,22 @@ import { SITE_URL } from './vars';
 export const SOCIALS = [
   {
     icon: 'instagram',
-    href: 'https://www.instagram.com/luomuliero',
+    href: 'https://www.instagram.com/lieromaa',
     ariaLabel: 'Instagram',
   },
   {
     icon: 'facebook',
-    href: 'https://www.facebook.com/people/Luomuliero/61582353659508/?locale=fi_FI',
+    href: 'https://www.facebook.com/people/Lieromaa/61582353659508/?locale=fi_FI',
     ariaLabel: 'Facebook',
   },
   {
     icon: 'tiktok',
-    href: `https://www.tiktok.com/@luomuliero`,
+    href: `https://www.tiktok.com/@lieromaa`,
     ariaLabel: 'Tiktok',
   },
   {
     icon: 'youtube',
-    href: `https://www.youtube.com/@luomuliero`,
+    href: `https://www.youtube.com/@lieromaa`,
     ariaLabel: 'YouTube',
   },
   {

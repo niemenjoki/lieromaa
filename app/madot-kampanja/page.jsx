@@ -7,9 +7,9 @@ export async function generateMetadata() {
   const title = 'Syystarjous – ilmainen toimitus kompostimadoille!';
   const description =
     'Tilaa kotimaisia kompostimatoja (Eisenia fetida) ilman toimituskuluja koko Suomeen. Tarjous voimassa 30.11.2025 asti.';
-  const canonicalUrl = 'https://www.luomuliero.fi/madot-kampanja';
+  const canonicalUrl = 'https://www.lieromaa.fi/madot-kampanja';
   const image =
-    'https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg';
+    'https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg';
 
   return {
     title,
@@ -24,7 +24,7 @@ export async function generateMetadata() {
     },
     twitter: {
       card: 'summary_large_image',
-      site: '@luomuliero',
+      site: '@lieromaa',
       title,
       description,
       images: [image],
@@ -49,7 +49,7 @@ export default function Page() {
 
         <div className={classes.Content}>
           <p>
-            Syksyn kampanjassa kaikki Luomulieron kompostimadot toimitetaan{' '}
+            Syksyn kampanjassa kaikki Lieromaan kompostimadot toimitetaan{' '}
             <strong>ilman toimituskuluja koko Suomeen</strong>. Tarjous on voimassa
             30.11.2025 asti ja koskee kaikkia pakkauskokoja 10–500 madon välillä.
           </p>
@@ -92,9 +92,9 @@ export default function Page() {
 
           <h2>Tilaus ja maksaminen</h2>
           <p>
-            Luomulieron toiminta on pienimuotoista ja madot ovat elävää materiaalia.
-            Haluan varmistaa jokaisen tilauksen yhteydessä, että madot ovat hyväkuntoisia
-            ja että toimitus lähtee oikeana päivänä – siksi tilausta ei voi tehdä suoraan
+            Lieromaan toiminta on pienimuotoista ja madot ovat elävää materiaalia. Haluan
+            varmistaa jokaisen tilauksen yhteydessä, että madot ovat hyväkuntoisia ja että
+            toimitus lähtee oikeana päivänä – siksi tilausta ei voi tehdä suoraan
             nettisivujen kautta.
           </p>
 
@@ -152,7 +152,7 @@ export default function Page() {
 
           <p>
             Voit myös ottaa yhteyttä suoraan sähköpostitse:{' '}
-            <strong>luomuliero@gmail.com</strong> tai WhatsAppissa{' '}
+            <strong>lieromaa@gmail.com</strong> tai WhatsAppissa{' '}
             <a
               href="https://api.whatsapp.com/send?phone=358503365054&text=Hei!%20Olen%20kiinnostunut%20kompostimadoista."
               target="_blank"

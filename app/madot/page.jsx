@@ -9,12 +9,12 @@ import structuredData from './structuredData.json';
 
 const title = 'Osta kompostimatoja – Eisenia fetida -madot matokompostointiin';
 const description =
-  'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Luomulieron madoilla!';
+  'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!';
 
 export async function generateMetadata() {
-  const canonicalUrl = 'https://www.luomuliero.fi/madot';
+  const canonicalUrl = 'https://www.lieromaa.fi/madot';
   const image =
-    'https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg';
+    'https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg';
 
   return {
     title,
@@ -38,7 +38,7 @@ export async function generateMetadata() {
       card: 'summary_large_image',
       title,
       description,
-      site: '@luomuliero',
+      site: '@lieromaa',
       images: [image],
     },
   };
@@ -145,16 +145,16 @@ export default async function Page() {
               <p>Jos haluat tilata matoja tai sinulla on kysyttävää, laita viestiä:</p>
               <ul>
                 <li>
-                  📧 Sähköpostitse: <strong>luomuliero@gmail.com</strong>
+                  📧 Sähköpostitse: <strong>lieromaa@gmail.com</strong>
                 </li>
                 <li>
                   📸 Instagramissa:{' '}
                   <a
-                    href="https://www.instagram.com/luomuliero"
+                    href="https://www.instagram.com/lieromaa"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    @luomuliero
+                    @lieromaa
                   </a>
                 </li>
                 <li>
@@ -185,7 +185,7 @@ export default async function Page() {
               </p>
 
               <p className={classes.WormsPageNote}>
-                Luomuliero on kaupparekisteriin rekisteröiity toiminimi, jota käytän
+                Lieromaa on kaupparekisteriin rekisteröiity toiminimi, jota käytän
                 toimiessani yksityisenä elinkeinonharjoittaja (Y-tunnus: 3002257-7). En
                 ole arvolisäverolain 3 § mukaan arvonlisäverovelvollinen vähäisen
                 toiminnan vuoksi ja kaikki sivuston hinnat ovat näin ollen verottomia.

@@ -36,14 +36,14 @@ export async function generateMetadata({ params }) {
   const { tag, pageIndex } = await params;
   const tagName = tag.replaceAll('-', ' ');
   return {
-    title: `Blogi: ${tagName} | Luomuliero`,
-    description: `Luomulieron blogijulkaisut avainsanalla "${tagName}".`,
+    title: `Blogi: ${tagName} | Lieromaa`,
+    description: `Lieromaan blogijulkaisut avainsanalla "${tagName}".`,
     alternates: {
       canonical: `${SITE_URL}/blogi/${tag}/sivu/1`,
     },
     openGraph: {
-      title: `Blogi: ${tagName} | Luomuliero`,
-      description: `Luomulieron blogijulkaisut avainsanalla "${tagName}".`,
+      title: `Blogi: ${tagName} | Lieromaa`,
+      description: `Lieromaan blogijulkaisut avainsanalla "${tagName}".`,
       url: `${SITE_URL}/blogi/${tag}/sivu/${pageIndex}`,
     },
   };

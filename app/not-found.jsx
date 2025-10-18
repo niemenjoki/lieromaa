@@ -11,7 +11,7 @@ export default async function NotFound() {
       excerpt:
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen.',
       tags: ['matokompostointi'],
-      keywords: ['kompostimadot', 'ostos', 'luomuliero', 'madot', 'myynti'],
+      keywords: ['kompostimadot', 'ostos', 'lieromaa', 'madot', 'myynti'],
     },
     {
       overrideHref: '/matolaskuri',
@@ -19,7 +19,7 @@ export default async function NotFound() {
       excerpt:
         'Syötä kotitaloutesi tiedot ja laskuri arvioi biojätteen määrän sekä tarvittavan matopopulaation.',
       tags: ['matokompostointi'],
-      keywords: ['matolaskuri', 'kompostimadot', 'laskuri', 'luomuliero', 'työkalut'],
+      keywords: ['matolaskuri', 'kompostimadot', 'laskuri', 'lieromaa', 'työkalut'],
     },
   ];
 

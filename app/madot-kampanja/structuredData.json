@@ -4,15 +4,15 @@
     "@type": "Product",
     "name": "Kompostimadot (Eisenia fetida)",
     "description": "Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Syystarjouksena ilmainen toimitus koko Suomeen 30.11.2025 asti.",
-    "image": "https://www.luomuliero.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg",
+    "image": "https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg",
     "sku": "MADOT-SYYS25",
     "brand": {
       "@type": "Brand",
-      "name": "Luomuliero"
+      "name": "Lieromaa"
     },
     "offers": {
       "@type": "Offer",
-      "url": "https://www.luomuliero.fi/madot-kampanja",
+      "url": "https://www.lieromaa.fi/madot-kampanja",
       "priceCurrency": "EUR",
       "price": "20.00",
       "availability": "https://schema.org/InStock",

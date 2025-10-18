@@ -10,7 +10,7 @@ import Toggler from '../NavToggler/NavToggler.jsx';
 import Socials from '../Socials/Socials';
 import ThemeToggler from '../ThemeToggler/ThemeToggler.jsx';
 import classes from './Navbar.module.css';
-import logo from '/public/images/luomuliero_logo.png';
+import logo from '/public/images/lieromaa_logo.png';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -30,13 +30,13 @@ const Navbar = () => {
           <Link href="/" className={classes.BrandLink}>
             <Image
               src={logo}
-              alt="Luomuliero logo"
+              alt="Lieromaa logo"
               width={40}
               height={40}
               className={classes.Logo}
               priority
             />
-            <span className={classes.BrandName}>Luomuliero</span>
+            <span className={classes.BrandName}>Lieromaa</span>
           </Link>
         </div>
 

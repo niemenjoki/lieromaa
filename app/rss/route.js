@@ -32,10 +32,10 @@ export async function GET() {
     version="2.0"
   >
     <channel>
-      <title><![CDATA[ Luomuliero ]]></title>
+      <title><![CDATA[ Lieromaa ]]></title>
       <link>${SITE_URL}</link>
       <atom:link href="${SITE_URL}/rss" rel="self" type="application/rss+xml" />
-      <description><![CDATA[ Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Luomuliero auttaa tekemään jätteestä ravinnerikasta multaa! ]]></description>
+      <description><![CDATA[ Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta multaa! ]]></description>
       <language>fi</language>
       <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>
       ${xmlItems}

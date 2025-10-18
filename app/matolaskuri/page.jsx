@@ -3,20 +3,20 @@ import { SITE_URL } from '@/data/vars';
 import { getPostRecommendations } from '@/lib/posts';
 
 export const metadata = {
-  title: 'Matolaskuri | Luomuliero',
+  title: 'Matolaskuri | Lieromaa',
   description:
     'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
   alternates: {
     canonical: `${SITE_URL}/matolaskuri`,
   },
   openGraph: {
-    title: 'Matolaskuri | Luomuliero',
+    title: 'Matolaskuri | Lieromaa',
     description:
       'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
     url: `${SITE_URL}/matolaskuri`,
     images: [
       {
-        url: 'https://www.luomuliero.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
+        url: 'https://www.lieromaa.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
         width: 1200,
         height: 800,
       },
@@ -24,7 +24,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Matolaskuri | Luomuliero',
+    title: 'Matolaskuri | Lieromaa',
     description:
       'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
   },
@@ -35,11 +35,10 @@ const structuredData = [
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'Matolaskuri',
-    url: 'https://www.luomuliero.fi/matolaskuri',
+    url: 'https://www.lieromaa.fi/matolaskuri',
     description:
       'Verkkopohjainen laskuri, joka arvioi kotitalouden biojätteen määrän ja suosittelee tarvittavan kompostimatojen populaation.',
-    image:
-      'https://www.luomuliero.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
+    image: 'https://www.lieromaa.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
     datePublished: '2025-09-20T00:00:00+03:00',
     author: {
       '@type': 'Person',
@@ -48,10 +47,10 @@ const structuredData = [
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Luomuliero (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+      name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.luomuliero.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
       },
     },
   },
