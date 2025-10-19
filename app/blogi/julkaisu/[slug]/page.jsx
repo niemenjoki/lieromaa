@@ -73,6 +73,10 @@ export default async function PostPage({ params }) {
       headline: data.title,
       description: data.excerpt,
       datePublished: data.date,
+      dateModified: data.updated || data.date,
+      articleSection: data.category || 'Blogi',
+      keywords: data.tags?.join(', '),
+      image: [data.image || `${SITE_URL}/icons/apple-touch-icon.png`],
       author: { '@type': 'Person', name: 'Joonas Niemenjoki' },
       publisher: {
         '@type': 'Organization',
@@ -82,7 +86,7 @@ export default async function PostPage({ params }) {
           url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
         },
       },
-      mainEntityOfPage: `${SITE_URL}/blogi/julkaisu/${params.slug}`,
+      mainEntityOfPage: `${SITE_URL}/blogi/julkaisu/${slug}`,
     },
   ];
 
