@@ -63,6 +63,10 @@
 .Toggler {
   display: inline-block;
   margin: 0.5rem;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
 }
 
 .Drawer {
