@@ -39,12 +39,10 @@ const Navbar = () => {
             <span className={classes.BrandName}>Lieromaa</span>
           </Link>
         </div>
-
+        <span className={classes.Toggler}>
+          <Toggler drawerOpen={isOpen} clicked={toggleIsOpen} />
+        </span>
         <nav className={[classes.Nav, isOpen ? classes.Open : ''].join(' ')}>
-          <span className={classes.Toggler}>
-            <Toggler drawerOpen={isOpen} clicked={toggleIsOpen} />
-          </span>
-
           <ul className={classes.Drawer}>
             <li>
               <ThemeToggler style={{ fontSize: '28px' }} />
