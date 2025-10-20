@@ -19,12 +19,18 @@
       "priceCurrency": "EUR",
       "lowPrice": "20.00",
       "highPrice": "50.00",
-      "offerCount": "3",
+      "offerCount": 3,
       "availability": "https://schema.org/InStock",
       "priceValidUntil": "2026-06-30",
       "seller": {
-        "@type": "Person",
-        "name": "Joonas Niemenjoki"
+        "@type": "Organization",
+        "name": "Lieromaa / Joonas Niemenjoki",
+        "identifier": "Y-tunnus 3002257-7",
+        "makesOfferThrough": {
+          "@type": "Organization",
+          "name": "OP Kevytyrittäjä",
+          "url": "https://www.op-kevytyrittaja.fi"
+        }
       },
       "shippingDetails": {
         "@type": "OfferShippingDetails",
@@ -61,7 +67,7 @@
           {
             "@type": "PropertyValue",
             "name": "Peruuttamisoikeus",
-            "value": "Kompostimadot eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §)"
+            "value": "Kompostimadot eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §)."
           }
         ]
       }
