@@ -93,8 +93,7 @@ export default async function Page() {
             <div>
               <p>
                 Kasvatan ja myyn kotimaisia kompostimatoja (<em>Eisenia fetida</em>)
-                omasta kotikompostistani. Madot ovat täysin kotimaisia ja kasvaneet
-                luonnonmukaisesti* ilman kemikaaleja.
+                omasta kotikompostistani.
               </p>
 
               <p>
@@ -170,23 +169,20 @@ export default async function Page() {
 
               <h2>Maksaminen</h2>
               <p>
-                Toivon, että tilaukset maksetaan MobilePayllä, mutta voimme sopia myös
-                muista maksutavoista kuten käteinen noudon yhteydessä tai tilisiirto.
+                Laskutus tapahtuu <strong>OP Kevytyrittäjä</strong> -palvelun kautta
+                sähköpostilaskulla. Saat laskun, kun olemme sopineet tilauksesta.
+                Maksuaika on 14 vuorokautta.
               </p>
 
-              <p className={classes.WormsPageNote}>
-                Lieromaa on kaupparekisteriin rekisteröiity toiminimi, jota käytän
-                toimiessani yksityisenä elinkeinonharjoittaja (Y-tunnus: 3002257-7). En
-                ole arvolisäverolain 3 § mukaan arvonlisäverovelvollinen vähäisen
-                toiminnan vuoksi ja kaikki sivuston hinnat ovat näin ollen verottomia.
+              <p>
+                Lieromaan matomyynti hoidetaan <strong>OP Kevytyrittäjä</strong> -palvelun
+                kautta. Toiminta on omaa yritystoimintaani (Y-tunnus: 3002257-7), mutta
+                laskutus ja verotuksen hallinnointi tapahtuu OP Kevytyrittäjän kautta.
               </p>
-
-              <p className={classes.WormsPageNote}>
-                *Maininta “luonnonmukaisesti” viittaa omiin toimintatapoihini, kuten
-                kemikaalittomaan ja kotimaiseen kasvatukseen. En kuulu Ruokaviraston,
-                Ely-keskuksen tai Valviran luomuvalvontaan, enkä ole maksanut
-                luomu-nimityksen käyttöoikeudesta. Kyse ei ole virallisesta
-                luomusertifioidusta tuotannosta.
+              <p>
+                OP Kevytyrittäjä on OP Ryhmän tarjoama palvelu, jonka kautta yrittäjä voi
+                hoitaa yrityksen laskutuksen ja kirjanpidon. Lieromaan madot laskutetaan
+                tämän palvelun kautta.
               </p>
             </div>
           </div>

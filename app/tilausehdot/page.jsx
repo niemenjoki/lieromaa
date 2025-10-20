@@ -38,8 +38,14 @@ const structuredData = [
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
+      name: 'Lieromaa / Joonas Niemenjoki',
+      identifier: 'Y-tunnus 3002257-7',
       url: 'https://www.lieromaa.fi',
+      makesOfferThrough: {
+        '@type': 'Organization',
+        name: 'OP Kevytyrittäjä',
+        url: 'https://www.op-kevytyrittaja.fi',
+      },
       logo: {
         '@type': 'ImageObject',
         url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
@@ -66,11 +72,11 @@ export default function OrderPolicyPage() {
 
         <h2>Yleistä</h2>
         <p>
-          Lieromaa on kaupparekisteriin rekisteröity toiminimi, jota käytän toimiessani
-          yksityisenä elinkeinonharjoittajana (Y-tunnus: 3002257-7). Vähäisen toiminnan
-          vuoksi en toistaiseksi ole arvonlisäverovelvollinen (arvonlisäverolain 3 §) ja
-          kaikki sivuston hinnat ovat näin ollen verottomia. Pidätän oikeuden hintojen ja
-          postikulujen muutoksiin.
+          Lieromaan toiminta on omaa yritystoimintaani (Y-tunnus: 3002257-7), mutta
+          laskutus ja verotuksen hallinnointi hoidetaan
+          <strong> OP Kevytyrittäjä </strong>-palvelun kautta. Kaikki sivuston hinnat
+          sisältävät arvonlisäveron. Pidätän oikeuden hintojen ja toimitusehtojen
+          muutoksiin.
         </p>
 
         <h2>Tilaaminen</h2>
@@ -82,8 +88,9 @@ export default function OrderPolicyPage() {
 
         <h2>Maksutavat</h2>
         <p>
-          Maksutapana käytetään oletusarvoisesti MobilePay-maksua ja toissijaisesti
-          käteistä rahaa tai suoraa tilisiirtoa.
+          Maksaminen tapahtuu <strong>OP Kevytyrittäjä</strong> -palvelun kautta
+          sähköpostitse lähetettävällä laskulla. Maksuaika on 14 vuorokautta. Laskun voi
+          maksaa normaalisti verkkopankissa tai mobiilissa.
         </p>
 
         <h2>Toimitusaika</h2>

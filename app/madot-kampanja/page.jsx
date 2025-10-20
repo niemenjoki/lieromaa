@@ -85,19 +85,23 @@ export default function Page() {
 
           <h2>Tilaus ja maksaminen</h2>
           <p>
-            Lieromaan toiminta on pienimuotoista ja madot ovat elävää materiaalia. Haluan
-            varmistaa jokaisen tilauksen yhteydessä, että madot ovat hyväkuntoisia ja että
-            toimitus lähtee oikeana päivänä – siksi tilausta ei voi tehdä suoraan
-            nettisivujen kautta.
+            Lieromaan toiminta on pienimuotoista ja madot ovat elävää materiaalia. Siksi
+            jokainen tilaus vahvistetaan erikseen, jotta voin varmistaa matojen
+            saatavuuden ja lähetyksen ajankohdan.
           </p>
 
           <p>
             Täytä alla oleva lomake, niin tarkistan saatavuuden ja otan yhteyttä
-            valitsemallasi tavalla. Saat vahvistuksen, maksutiedot ja toimituspäivän.
-            Toimitus tapahtuu Postin kautta koko Suomeen – nyt{' '}
+            valitsemallasi tavalla. Kun olemme sopineet tilauksesta, saat
+            <strong> sähköpostilaskun OP Kevytyrittäjä-palvelun kautta</strong>. Maksuaika
+            on 14 vuorokautta. Toimitus tapahtuu Postin kautta koko Suomeen – nyt{' '}
             <strong>ilman toimituskuluja</strong>.
           </p>
-
+          <p style={{ fontSize: '0.9rem', color: '#555' }}>
+            Lieromaan matomyynti on omaa yritystoimintaani (Y-tunnus 3002257-7), mutta
+            laskutus ja verotuksen hallinnointi hoidetaan
+            <strong> OP Kevytyrittäjä </strong>-palvelun kautta.
+          </p>
           <form
             className={classes.CalculatorForm}
             action="https://formspree.io/f/xyznlyow"
