@@ -6,7 +6,7 @@ export const SOCIALS = [
     href: 'https://www.instagram.com/lieromaa',
     ariaLabel: 'Instagram',
   },
- /* {
+  /* {
     icon: 'facebook',
     href: 'https://www.facebook.com/people/Lieromaa/61582353659508/?locale=fi_FI',
     ariaLabel: 'Facebook',
