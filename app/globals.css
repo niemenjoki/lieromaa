@@ -242,3 +242,11 @@ a:hover:hover {
 img {
   border-radius: 6px;
 }
+
+.swiper {
+  --swiper-pagination-color: var(--highlight);
+  --swiper-pagination-bullet-inactive-color: var(--text-color);
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+  --swiper-pagination-bullet-size: 10px;
+  --swiper-pagination-bullet-horizontal-gap: 6px;
+}
