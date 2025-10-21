@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
+
+import ImageSlider from '@/components/ImageSlider/ImageSlider';
 
 import classes from './MadotKampanja.module.css';
 import structuredData from './structuredData.json';
@@ -64,18 +65,18 @@ export default function Page() {
             </ul>
           </aside>
 
-          <div className={classes.Flex}>
-            <Image
-              src="/images/wormspage/kompostimatoja_kammenella.png"
-              alt="Noin 100 kompostimatoa läjässä kämmenellä"
-              width={1080}
-              height={1620}
-              sizes="(max-width: 600px) 100vw, 800px"
-              priority={false}
-              loading="lazy"
-              style={{ height: 'auto' }}
-            />
-          </div>
+          <ImageSlider
+            images={[
+              {
+                src: '/images/wormspage/kompostimadot_kammenella.png',
+                alt: 'Kourallinen matokompostin sisältöä ja matoja käsissä',
+              },
+              {
+                src: '/images/wormspage/madot_toimituspakkauksessa.jpg',
+                alt: 'Kompostimadot toimituspakkauksessa',
+              },
+            ]}
+          />
 
           <p>
             Kompostimadot (<em>Eisenia fetida</em>) hajottavat biojätettä tehokkaasti ja
