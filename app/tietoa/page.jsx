@@ -14,6 +14,8 @@ export const metadata = {
     canonical: `${SITE_URL}/tietoa`,
   },
   openGraph: {
+    type: 'website',
+    site_name: 'Lieromaa',
     title: 'Tietoa | Lieromaa',
     description:
       'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
@@ -21,8 +23,9 @@ export const metadata = {
     images: [
       {
         url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
-        width: 180,
-        height: 180,
+        width: 1024,
+        height: 1024,
+        alt: 'Lieromaa logo',
       },
     ],
   },

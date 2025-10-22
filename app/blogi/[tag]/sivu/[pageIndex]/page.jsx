@@ -35,16 +35,28 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { tag, pageIndex } = await params;
   const tagName = tag.replaceAll('-', ' ');
+  const decodedTag = decodeURIComponent(tagName);
   return {
-    title: `Blogi: ${tagName} | Lieromaa`,
-    description: `Julkaisut avainsanalla "${decodeURIComponent(tagName)}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
+    title: `Blogi: ${decodedTag} | Lieromaa`,
+    description: `Julkaisut avainsanalla "${decodedTag}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
     alternates: {
       canonical: `${SITE_URL}/blogi/${tag}/sivu/1`,
     },
     openGraph: {
-      title: `Blogi: ${tagName} | Lieromaa`,
-      description: `Julkaisut avainsanalla "${decodeURIComponent(tagName)}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
+      type: 'website',
+      site_name: 'Lieromaa',
+      title: `Blogi: ${decodedTag} | Lieromaa`,
+      description: `Julkaisut avainsanalla "${decodedTag}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
       url: `${SITE_URL}/blogi/${tag}/sivu/${pageIndex}`,
+      locale: 'fi_FI',
+      images: [
+        {
+          url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+          width: 1024,
+          height: 1024,
+          alt: 'Lieromaa logo',
+        },
+      ],
     },
   };
 }

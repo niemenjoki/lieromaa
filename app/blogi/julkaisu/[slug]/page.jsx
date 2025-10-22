@@ -32,18 +32,24 @@ export async function generateMetadata({ params }) {
   const title = data.title || '';
   const description = data.excerpt || '';
   const url = `${SITE_URL}/blogi/julkaisu/${slug}`;
-  const image = data.image || `${SITE_URL}/icons/apple-touch-icon.png`;
+  const image = data.image || {
+    url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+    width: 1024,
+    height: 1024,
+    alt: 'Lieromaa logo',
+  };
 
   return {
     title: `${title}`,
     description,
     alternates: { canonical: url },
     openGraph: {
+      site_name: 'Lieromaa',
       title,
       description,
       type: 'article',
       url,
-      images: [{ url: image }],
+      images: [image],
     },
     twitter: {
       card: 'summary_large_image',
