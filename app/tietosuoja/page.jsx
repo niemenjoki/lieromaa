@@ -5,19 +5,19 @@ import classes from './Tietosuoja.module.css';
 export const metadata = {
   title: 'Tietosuojaseloste | Lieromaa',
   description:
-    'Tietosuojaseloste Lieromaan verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+    'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
   alternates: { canonical: `${SITE_URL}/tietosuoja` },
   openGraph: {
     title: 'Tietosuojaseloste | Lieromaa',
     description:
-      'Tietosuojaseloste Lieromaan verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
     url: `${SITE_URL}/tietosuoja`,
   },
   twitter: {
     card: 'summary',
     title: 'Tietosuojaseloste | Lieromaa',
     description:
-      'Tietosuojaseloste Lieromaan verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
   },
 };
 
@@ -27,7 +27,7 @@ const structuredData = [
     '@type': 'WebPage',
     name: 'Tietosuojaseloste',
     description:
-      'Tietosuojaseloste Lieromaan verkkosivustolle. Sisältää tiedot henkilötietojen käsittelystä, evästeistä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics).',
+      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
     url: 'https://www.lieromaa.fi/tietosuoja',
     dateModified: '2025-09-21T00:00:00+03:00',
     inLanguage: 'fi',
