@@ -5,19 +5,19 @@ import classes from './Tilausehdot.module.css';
 export const metadata = {
   title: 'Tilaus- ja toimitusehdot | Lieromaa',
   description:
-    'Lieromaan tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+    'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',
   alternates: { canonical: `${SITE_URL}/tilausehdot` },
   openGraph: {
     title: 'Tilaus- ja toimitusehdot | Lieromaa',
     description:
-      'Lieromaan tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+      'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',
     url: `${SITE_URL}/tilausehdot`,
   },
   twitter: {
     card: 'summary',
     title: 'Tilaus- ja toimitusehdot | Lieromaa',
     description:
-      'Lieromaan tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+      'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',
   },
 };
 
@@ -27,7 +27,7 @@ const structuredData = [
     '@type': 'WebPage',
     name: 'Tilaus- ja toimitusehdot',
     description:
-      'Lieromaan tilausta, maksua, toimitusta ja palautuksia koskevat ehdot. Voimassa 1.10.2025 alkaen.',
+      'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',
     url: 'https://www.lieromaa.fi/tilausehdot',
     datePublished: '2025-10-01T00:00:00+03:00',
     inLanguage: 'fi',
