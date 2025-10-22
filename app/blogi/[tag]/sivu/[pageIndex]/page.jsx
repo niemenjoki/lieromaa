@@ -37,13 +37,13 @@ export async function generateMetadata({ params }) {
   const tagName = tag.replaceAll('-', ' ');
   return {
     title: `Blogi: ${tagName} | Lieromaa`,
-    description: `Lieromaan blogijulkaisut avainsanalla "${tagName}".`,
+    description: `Julkaisut avainsanalla "${decodeURIComponent(tagName)}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
     alternates: {
       canonical: `${SITE_URL}/blogi/${tag}/sivu/1`,
     },
     openGraph: {
       title: `Blogi: ${tagName} | Lieromaa`,
-      description: `Lieromaan blogijulkaisut avainsanalla "${tagName}".`,
+      description: `Julkaisut avainsanalla "${decodeURIComponent(tagName)}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
       url: `${SITE_URL}/blogi/${tag}/sivu/${pageIndex}`,
     },
   };
