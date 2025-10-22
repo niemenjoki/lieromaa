@@ -11,7 +11,7 @@ export const metadata = {
   },
   openGraph: {
     type: 'website',
-    site_name: 'Lieromaa',
+    siteName: 'Lieromaa',
     title: 'Matolaskuri | Lieromaa',
     description:
       'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',

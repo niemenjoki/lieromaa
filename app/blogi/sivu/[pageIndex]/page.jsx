@@ -9,6 +9,42 @@ import { getAllPostSlugs, getAllTags, getPaginatedPosts } from '@/lib/posts';
 
 import classes from './PostPage.module.css';
 
+export const metadata = {
+  title: 'Lieromaa – Kompostimadot ja matokompostointi kotona',
+  alternates: {
+    canonical: `${SITE_URL}`,
+  },
+  description:
+    'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.',
+  openGraph: {
+    type: 'website',
+    url: 'https://www.lieromaa.fi',
+    title: 'Lieromaa – Kompostimadot ja matokompostointi kotona',
+    description:
+      'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.',
+    siteName: 'Lieromaa',
+    images: [
+      {
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Lieromaa logo',
+      },
+    ],
+    locale: 'fi_FI',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@lieromaa',
+    images: ['https://www.lieromaa.fi/images/luomuliero_logo_1024.png'],
+  },
+  icons: {
+    icon: '/icons/favicon.ico',
+    apple: '/icons/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
+};
+
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
 

@@ -21,7 +21,7 @@ export async function generateMetadata() {
     description,
     alternates: { canonical: canonicalUrl },
     openGraph: {
-      site_name: 'Lieromaa',
+      siteName: 'Lieromaa',
       title,
       description,
       locale: 'fi_FI',
