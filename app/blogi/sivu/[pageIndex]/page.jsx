@@ -5,6 +5,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
 import { POSTS_PER_PAGE } from '@/data/vars';
+import { SITE_URL } from '@/data/vars';
 import { getAllPostSlugs, getAllTags, getPaginatedPosts } from '@/lib/posts';
 
 import classes from './PostPage.module.css';
