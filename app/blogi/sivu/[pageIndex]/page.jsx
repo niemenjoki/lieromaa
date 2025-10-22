@@ -64,7 +64,31 @@ export default async function BlogPage({ params }) {
 
   return (
     <>
-      <h1>Viimeisimmät julkaisut</h1>
+      {pageIndexInt === 1 ? (
+        <section className={classes.LandingInfo}>
+          <h1>Lieromaa - Kompostimadot ja matokompostointi kotona</h1>
+          <p>
+            Lieromaa on suomalainen blogi ja kompostimatojen verkkokauppa, joka keskittyy
+            matokompostointiin sekä ajoittain muihin kompostointimenetelmiin ja kestävän
+            kehityksen aiheisiin. Kasvatan Järvenpäässä <strong>Eisenia fetida</strong>{' '}
+            -kompostimatoja ja toimitan niitä postitse kaikkialle Suomeen.
+          </p>
+          <p>
+            Matokompostointi on helppo ja hajuton tapa muuttaa biojäte ravinteikkaaksi
+            mullaksi ympäri vuoden. Sivustolta löydät selkeät ohjeet oman matokompostorin
+            rakentamiseen, hoitoon ja valmiin matokakan keräämiseen sekä hyödyntämiseen.
+          </p>
+          <p>
+            Tutustu blogiin valitsemalla alta sinua kiinnostava kategoria – tai{' '}
+            <Link href="/madot" style={{ fontWeight: 'bold' }}>
+              tilaa kompostimatoja
+            </Link>{' '}
+            ja aloita oma matokompostointi jo tänään.
+          </p>
+        </section>
+      ) : (
+        <h1>Lieromaa – Kompostimadot ja matokompostointi kotona</h1>
+      )}
 
       <aside
         className={classes.Content}
@@ -108,7 +132,9 @@ export default async function BlogPage({ params }) {
           </Link>
         ))}
       </div>
-
+      <h2 style={{ color: 'var(--highlight-alt)', marginTop: '1rem' }}>
+        Viimeisimmät julkaisut
+      </h2>
       {posts.map((post, index) => (
         <Post key={index} post={post} />
       ))}
