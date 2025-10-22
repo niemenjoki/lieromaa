@@ -26,10 +26,7 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: {
-    default: 'Lieromaa',
-    template: '%s | Lieromaa',
-  },
+  title: 'Lieromaa – Kompostimadot ja matokompostointi kotona',
   description:
     'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.',
   openGraph: {
