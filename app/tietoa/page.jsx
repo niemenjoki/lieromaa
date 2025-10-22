@@ -20,7 +20,7 @@ export const metadata = {
     url: `${SITE_URL}/tietoa`,
     images: [
       {
-        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
         width: 180,
         height: 180,
       },
@@ -54,7 +54,7 @@ const structuredData = [
     publisher: {
       '@type': 'Organization',
       name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-      logo: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
+      logo: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
     },
     mainEntity: {
       '@type': 'WebSite',
