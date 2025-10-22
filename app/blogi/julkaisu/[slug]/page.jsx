@@ -29,13 +29,13 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const data = getPostMetadata(slug);
 
-  const title = data.title || 'Lieromaa';
+  const title = data.title || '';
   const description = data.excerpt || '';
   const url = `${SITE_URL}/blogi/julkaisu/${slug}`;
   const image = data.image || `${SITE_URL}/icons/apple-touch-icon.png`;
 
   return {
-    title: `${title} | Lieromaa`,
+    title: `${title}`,
     description,
     alternates: { canonical: url },
     openGraph: {
