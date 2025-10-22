@@ -9,7 +9,7 @@ export const metadata = {
   alternates: { canonical: `${SITE_URL}/tilausehdot` },
   openGraph: {
     type: 'website',
-    site_name: 'Lieromaa',
+    siteName: 'Lieromaa',
     title: 'Tilaus- ja toimitusehdot | Lieromaa',
     description:
       'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',

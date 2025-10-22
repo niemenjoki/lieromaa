@@ -22,7 +22,7 @@ export async function generateMetadata() {
       type: 'website',
       url: canonicalUrl,
       locale: 'fi_FI',
-      site_name: 'Lieromaa',
+      siteName: 'Lieromaa',
       images: [
         {
           url: image,

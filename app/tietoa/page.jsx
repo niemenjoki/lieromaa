@@ -15,7 +15,7 @@ export const metadata = {
   },
   openGraph: {
     type: 'website',
-    site_name: 'Lieromaa',
+    siteName: 'Lieromaa',
     title: 'Tietoa | Lieromaa',
     description:
       'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',

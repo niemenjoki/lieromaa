@@ -9,7 +9,7 @@ export const metadata = {
   alternates: { canonical: `${SITE_URL}/tietosuoja` },
   openGraph: {
     type: 'website',
-    site_name: 'Lieromaa',
+    siteName: 'Lieromaa',
     title: 'Tietosuojaseloste | Lieromaa',
     description:
       'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä.',

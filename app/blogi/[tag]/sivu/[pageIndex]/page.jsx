@@ -44,7 +44,7 @@ export async function generateMetadata({ params }) {
     },
     openGraph: {
       type: 'website',
-      site_name: 'Lieromaa',
+      siteName: 'Lieromaa',
       title: `Blogi: ${decodedTag} | Lieromaa`,
       description: `Julkaisut avainsanalla "${decodedTag}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
       url: `${SITE_URL}/blogi/${tag}/sivu/${pageIndex}`,
