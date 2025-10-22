@@ -38,7 +38,7 @@ export default async function sitemap() {
 
   for (const tag of tags) {
     urls.push({
-      url: `${SITE_URL}/blogi/${tag}/sivu/1`,
+      url: `${SITE_URL}/blogi/${tag.replaceAll(' ', '-').trim()}/sivu/1`,
       lastModified: toISODate(latestPost),
     });
   }
