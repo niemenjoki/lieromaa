@@ -8,10 +8,21 @@ export const metadata = {
     'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
   alternates: { canonical: `${SITE_URL}/tietosuoja` },
   openGraph: {
+    type: 'website',
+    site_name: 'Lieromaa',
     title: 'Tietosuojaseloste | Lieromaa',
     description:
-      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
+      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä.',
     url: `${SITE_URL}/tietosuoja`,
+    locale: 'fi_FI',
+    images: [
+      {
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Lieromaa logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary',

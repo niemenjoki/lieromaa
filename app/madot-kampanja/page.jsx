@@ -10,8 +10,7 @@ export async function generateMetadata() {
   const description =
     'Tilaa kotimaisia kompostimatoja (Eisenia fetida) ilman toimituskuluja koko Suomeen. Tarjous voimassa 30.11.2025 asti.';
   const canonicalUrl = 'https://www.lieromaa.fi/madot-kampanja';
-  const image =
-    'https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.jpg';
+  const image = 'https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella.png';
 
   return {
     title,
@@ -22,7 +21,16 @@ export async function generateMetadata() {
       description,
       type: 'website',
       url: canonicalUrl,
-      images: [{ url: image, width: 1080, height: 1620 }],
+      locale: 'fi_FI',
+      site_name: 'Lieromaa',
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 800,
+          alt: 'Kompostimatoja ja matokompostin sisältöä kämmenellä',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',

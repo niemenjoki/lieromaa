@@ -10,15 +10,19 @@ export const metadata = {
     canonical: `${SITE_URL}/matolaskuri`,
   },
   openGraph: {
+    type: 'website',
+    site_name: 'Lieromaa',
     title: 'Matolaskuri | Lieromaa',
     description:
       'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
     url: `${SITE_URL}/matolaskuri`,
+    locale: 'fi_FI',
     images: [
       {
-        url: 'https://www.lieromaa.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
-        width: 1200,
-        height: 800,
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Lieromaa logo',
       },
     ],
   },
