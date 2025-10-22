@@ -8,7 +8,7 @@ import { getPostRecommendations } from '@/lib/posts';
 import classes from './Madot.module.css';
 import structuredData from './structuredData.json';
 
-const title = 'Osta kompostimatoja – Eisenia fetida -madot matokompostointiin';
+const title = 'Osta kompostimatoja | Lieromaa';
 const description =
   'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!';
 
