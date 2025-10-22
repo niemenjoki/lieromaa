@@ -48,7 +48,7 @@ const structuredData = [
       },
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
       },
     },
   },

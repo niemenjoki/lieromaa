@@ -35,7 +35,7 @@ export const metadata = {
     siteName: 'Lieromaa',
     images: [
       {
-        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
         width: 180,
         height: 180,
         alt: 'Lieromaa logo',
@@ -46,7 +46,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@lieromaa',
-    images: ['https://www.lieromaa.fi/icons/apple-touch-icon.png'],
+    images: ['https://www.lieromaa.fi/images/luomuliero_logo_1024.png'],
   },
   icons: {
     icon: '/icons/favicon.ico',

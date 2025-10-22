@@ -41,7 +41,7 @@ const structuredData = [
       name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.lieromaa.fi/icons/apple-touch-icon.png',
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
       },
     },
   },
