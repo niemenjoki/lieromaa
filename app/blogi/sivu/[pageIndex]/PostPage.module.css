@@ -27,3 +27,17 @@
   color: white;
   font-weight: bold;
 }
+
+.LandingInfo {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  padding-top: 1.5rem;
+}
+
+.LandingInfo p {
+  margin: 1rem 0;
+}
+
+.LandingInfo a {
+  color: var(--highlight);
+}
