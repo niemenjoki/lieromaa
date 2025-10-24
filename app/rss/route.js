@@ -5,9 +5,11 @@ import { SITE_URL } from '../../data/vars';
 export const revalidate = 3600;
 
 export async function GET() {
-  const posts = getAllPosts();
+  const rawPosts = getAllPosts();
 
-  posts.sort((a, b) => b.date - a.date);
+  const posts = rawPosts.sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
 
   const latestPostDate = posts[0]?.date || 0;
 
@@ -15,7 +17,7 @@ export async function GET() {
     .map(
       (post) => `<item>
         <title><![CDATA[ ${post.title} ]]></title>
-        <SafeLink>${SITE_URL}/blogi/julkaisu/${post.slug}</SafeLink>
+        <link>${SITE_URL}/blogi/julkaisu/${post.slug}</link>
         <guid>${SITE_URL}/blogi/julkaisu/${post.slug}</guid>
         <pubDate>${new Date(post.date).toUTCString()}</pubDate>
         <description><![CDATA[ ${post.excerpt} ]]></description>
@@ -33,7 +35,7 @@ export async function GET() {
   >
     <channel>
       <title><![CDATA[ Lieromaa ]]></title>
-      <SafeLink>${SITE_URL}</SafeLink>
+      <link>${SITE_URL}</link>
       <atom:link href="${SITE_URL}/rss" rel="self" type="application/rss+xml" />
       <description><![CDATA[ Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta multaa! ]]></description>
       <language>fi</language>
