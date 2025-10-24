@@ -7,9 +7,7 @@ export const revalidate = 3600;
 export async function GET() {
   const rawPosts = getAllPosts();
 
-  const posts = rawPosts.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
+  const posts = rawPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const latestPostDate = posts[0]?.date || 0;
 
