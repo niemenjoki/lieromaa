@@ -1,11 +1,10 @@
-// /helpers/generateSafeLinks.js
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path'; 
 
 const appDir = path.join(process.cwd(), 'app');
 const postsDir = path.join(process.cwd(), 'posts');
-const outFile = path.join(process.cwd(), 'data', 'safeRoutes.json');
-const { POSTS_PER_PAGE } = require('../data/vars');
+const outFile = path.join(process.cwd(), 'data', 'generated', 'safeRoutes.json');
+import { SITE_URL, POSTS_PER_PAGE } from "../../data/vars.js";
 
 function walk(dir, list = []) {
   if (!fs.existsSync(dir)) return list;
@@ -79,7 +78,7 @@ function generate() {
   fs.writeFileSync(outFile, JSON.stringify(safeRoutes, null, 2));
 
   console.log(
-    `✅ Safe links written to ${outFile}\n` +
+    `✅ Safe internal routes written to ${outFile}\n` +
       `   Static:  ${staticRoutes.length}\n` +
       `   Dynamic: ${dynamicRoutes.length}\n` +
       `   Total:   ${safeRoutes.length}`
