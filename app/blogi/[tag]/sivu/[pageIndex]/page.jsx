@@ -1,8 +1,7 @@
-import Link from 'next/link';
-
 import Advert from '@/components/Advert/Advert';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
+import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
 import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars';
 import { getAllPosts, getAllTags, getPostsByTag } from '@/lib/posts';
@@ -83,21 +82,21 @@ export default async function BlogTagPage({ params }) {
       />
 
       <div className={classes.Taglist}>
-        <Link href="/blogi" className={classes.Tag}>
+        <SafeLink href="/blogi" className={classes.Tag}>
           Kaikki
-        </Link>
+        </SafeLink>
         {allTags.map((t) => {
           const isActive =
             t.toLowerCase().replaceAll(' ', '-') ===
             decodedTag.toLowerCase().replaceAll(' ', '-');
           return (
-            <Link
+            <SafeLink
               key={t}
               href={`/blogi/${t.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
               className={`${classes.Tag} ${isActive ? classes.ActiveTag : ''}`}
             >
               {t}
-            </Link>
+            </SafeLink>
           );
         })}
       </div>

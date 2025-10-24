@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './PostPreview.module.css';
 
@@ -6,7 +6,7 @@ const PostPreview = ({ post, compact = false, overrideHref = false }) => {
   return (
     <div className={classes.PostPreview}>
       <h2 className={classes.Title}>
-        <Link
+        <SafeLink
           href={
             overrideHref
               ? overrideHref
@@ -14,23 +14,23 @@ const PostPreview = ({ post, compact = false, overrideHref = false }) => {
           }
         >
           {post.title}
-        </Link>
+        </SafeLink>
       </h2>
       <p className={classes.Excerpt}>{post.excerpt}</p>
       <p className={classes.Tags}>
         {post.tags &&
           post.tags.map((tag) => (
-            <Link
+            <SafeLink
               href={`/blogi/${tag.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
               key={tag}
               className={classes.Tag}
             >
               {tag}
-            </Link>
+            </SafeLink>
           ))}
       </p>
       {!compact && (
-        <Link
+        <SafeLink
           aria-label={`Avaa julkaisu ${post.title}`}
           href={
             overrideHref
@@ -46,7 +46,7 @@ const PostPreview = ({ post, compact = false, overrideHref = false }) => {
               <span></span>
             </span>
           </span>
-        </Link>
+        </SafeLink>
       )}
     </div>
   );

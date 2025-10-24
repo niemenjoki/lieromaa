@@ -1,12 +1,12 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import fs from 'fs';
 import path from 'path';
 
 import Advert from '@/components/Advert/Advert';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
+import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import { SITE_URL } from '@/data/vars';
 import { getAllPostSlugs, getPostMetadata, getPostRecommendations } from '@/lib/posts';
@@ -16,6 +16,7 @@ import classes from './PostPage.module.css';
 
 export const mdxComponents = {
   Image,
+  SafeLink,
 };
 
 export async function generateStaticParams() {
@@ -148,7 +149,7 @@ export default async function PostPage({ params }) {
               >
                 LinkedIn-profiili
               </a>{' '}
-              • <Link href="/tietoa">Lue lisää minusta</Link>
+              • <SafeLink href="/tietoa">Lue lisää minusta</SafeLink>
             </p>
           </div>
         </div>

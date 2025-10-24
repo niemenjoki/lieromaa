@@ -1,8 +1,7 @@
-import Link from 'next/link';
-
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
+import SafeLink from '@/components/SafeLink/SafeLink';
 import { getPostRecommendations } from '@/lib/posts';
 
 import classes from './Madot.module.css';
@@ -129,7 +128,7 @@ export default async function Page() {
 
           <p>
             Jos et ole varma kuinka paljon tarvitset matoja, kokeile sivustolta löytyvää{' '}
-            <Link href="/matolaskuri">matolaskuria</Link>
+            <SafeLink href="/matolaskuri">matolaskuria</SafeLink>
           </p>
 
           <h2>Tilaaminen</h2>

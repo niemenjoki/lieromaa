@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Link from 'next/link';
 
+import SafeLink from '@/components/SafeLink/SafeLink';
 import { SITE_URL } from '@/data/vars';
 
 import classes from './Pagination.module.css';
@@ -20,17 +20,17 @@ const Pagination = ({ numPages, currentPage }) => {
   return (
     <>
       <Head>
-        {!isFirst && <link rel="prev" href={SITE_URL + previousPage} />}
-        {!isLast && <link rel="next" href={SITE_URL + nextPage} />}
+        {!isFirst && <SafeLink rel="prev" href={SITE_URL + previousPage} />}
+        {!isLast && <SafeLink rel="next" href={SITE_URL + nextPage} />}
       </Head>
 
       <div className={classes.Pagination}>
         <ul>
           {!isFirst && (
             <li key="previous">
-              <Link href={previousPage} className={classes.TextButton}>
+              <SafeLink href={previousPage} className={classes.TextButton}>
                 Edellinen
-              </Link>
+              </SafeLink>
             </li>
           )}
 
@@ -40,23 +40,23 @@ const Pagination = ({ numPages, currentPage }) => {
 
             return (
               <li key={pageNumber}>
-                <Link
+                <SafeLink
                   href={`/blogi/sivu/${pageNumber}`}
                   className={`${classes.NumberButton} ${
                     isActive ? classes.ActiveButton : ''
                   }`}
                 >
                   {pageNumber}
-                </Link>
+                </SafeLink>
               </li>
             );
           })}
 
           {!isLast && (
             <li key="next">
-              <Link href={nextPage} className={classes.TextButton}>
+              <SafeLink href={nextPage} className={classes.TextButton}>
                 Seuraava
-              </Link>
+              </SafeLink>
             </li>
           )}
         </ul>

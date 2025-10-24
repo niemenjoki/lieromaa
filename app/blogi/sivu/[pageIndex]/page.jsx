@@ -1,8 +1,7 @@
-import Link from 'next/link';
-
 import Advert from '@/components/Advert/Advert';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
+import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
 import { POSTS_PER_PAGE } from '@/data/vars';
 import { SITE_URL } from '@/data/vars';
@@ -80,9 +79,9 @@ export default async function BlogPage({ params }) {
           </p>
           <p>
             Tutustu blogiin valitsemalla alta sinua kiinnostava kategoria – tai{' '}
-            <Link href="/madot" style={{ fontWeight: 'bold' }}>
+            <SafeLink href="/madot" style={{ fontWeight: 'bold' }}>
               tilaa kompostimatoja
-            </Link>{' '}
+            </SafeLink>{' '}
             ja aloita oma matokompostointi jo tänään.
           </p>
         </section>
@@ -104,12 +103,12 @@ export default async function BlogPage({ params }) {
         <p style={{ marginBottom: '0.5rem' }}>
           Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
         </p>
-        <Link
+        <SafeLink
           href="/madot-kampanja"
           style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
         >
           Katso kampanjasivu »
-        </Link>
+        </SafeLink>
       </aside>
 
       <SearchPosts
@@ -119,17 +118,17 @@ export default async function BlogPage({ params }) {
       />
 
       <div className={classes.Taglist}>
-        <Link href="/blogi" className={`${classes.Tag} ${classes.ActiveTag}`}>
+        <SafeLink href="/blogi" className={`${classes.Tag} ${classes.ActiveTag}`}>
           Kaikki
-        </Link>
+        </SafeLink>
         {allTags.map((tag) => (
-          <Link
+          <SafeLink
             href={`/blogi/${tag.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
             key={tag}
             className={classes.Tag}
           >
             {tag}
-          </Link>
+          </SafeLink>
         ))}
       </div>
       <h2 style={{ color: 'var(--highlight-alt)', marginTop: '1rem' }}>
