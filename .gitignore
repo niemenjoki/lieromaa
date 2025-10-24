@@ -40,15 +40,10 @@ yarn-error.log*
 
 /data/notes/*
 
-# Ignore all generated images
-/public/images/posts/**/*-*.webp
-/public/images/posts/**/*-*.jpg
-/public/images/posts/**/*-*.avif
-/public/images/wormspage/**/*-*.webp
-/public/images/wormspage/**/*-*.jpg
-/public/images/wormspage/**/*-*.avif
-
-# Keep the source PNGs
-!/public/images/posts/**/*.png
-
-/data/safeRoutes.json
+public/images/**/*.jpg
+public/images/**/*.jpeg
+public/images/**/*.png
+public/images/**/*.webp
+public/images/**/*.gif
+data/generated/**
+!data/generated/.gitkeep
