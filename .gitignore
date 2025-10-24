@@ -50,3 +50,5 @@ yarn-error.log*
 
 # Keep the source PNGs
 !/public/images/posts/**/*.png
+
+/data/safeRoutes.json

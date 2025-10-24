@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 
-import Link from 'next/link';
-
 import Advert from '@/components/Advert/Advert';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
+import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import useDebounce from '@/hooks/useDebounce';
 
@@ -76,7 +75,7 @@ export default function WormCalculatorClient({ recommendedPosts }) {
         </p>
         <p>
           Jos sinulla ei vielä ole matoja, voit ostaa niitä{' '}
-          <Link href="/madot">täältä</Link>.
+          <SafeLink href="/madot">täältä</SafeLink>.
         </p>
 
         <h2>Laskuri</h2>

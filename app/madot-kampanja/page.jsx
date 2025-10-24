@@ -1,6 +1,5 @@
-import Link from 'next/link';
-
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
+import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './MadotKampanja.module.css';
 import structuredData from './structuredData.json';
@@ -173,7 +172,7 @@ export default function Page() {
             Suomeen.
           </p>
 
-          <Link href="/madot">← Lue lisää kompostimadoista</Link>
+          <SafeLink href="/madot">← Lue lisää kompostimadoista</SafeLink>
         </div>
       </article>
     </>

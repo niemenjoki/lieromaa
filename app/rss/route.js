@@ -15,7 +15,7 @@ export async function GET() {
     .map(
       (post) => `<item>
         <title><![CDATA[ ${post.title} ]]></title>
-        <link>${SITE_URL}/blogi/julkaisu/${post.slug}</link>
+        <SafeLink>${SITE_URL}/blogi/julkaisu/${post.slug}</SafeLink>
         <guid>${SITE_URL}/blogi/julkaisu/${post.slug}</guid>
         <pubDate>${new Date(post.date).toUTCString()}</pubDate>
         <description><![CDATA[ ${post.excerpt} ]]></description>
@@ -33,7 +33,7 @@ export async function GET() {
   >
     <channel>
       <title><![CDATA[ Lieromaa ]]></title>
-      <link>${SITE_URL}</link>
+      <SafeLink>${SITE_URL}</SafeLink>
       <atom:link href="${SITE_URL}/rss" rel="self" type="application/rss+xml" />
       <description><![CDATA[ Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta multaa! ]]></description>
       <language>fi</language>

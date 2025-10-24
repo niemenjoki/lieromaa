@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import Fuse from 'fuse.js';
 
 import Post from '@/components/PostPreview/PostPreview';
+import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './NotFoundClient.module.css';
 
@@ -61,7 +61,7 @@ export default function ClientNotFoundPage({ posts }) {
       )}
 
       <div className={classes.LinkWrapper}>
-        <Link href="/blogi">Muut viimeisimmät blogijulkaisut</Link>
+        <SafeLink href="/blogi">Muut viimeisimmät blogijulkaisut</SafeLink>
       </div>
     </main>
   );
