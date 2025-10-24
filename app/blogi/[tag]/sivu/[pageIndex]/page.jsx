@@ -3,10 +3,11 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { POSTS_PER_PAGE } from '@/data/vars';
+import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars';
 import { getAllPosts, getAllTags, getPostsByTag } from '@/lib/posts';
 
 import classes from './TagPage.module.css';
+import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -41,8 +42,27 @@ export default async function BlogTagPage({ params }) {
   const allTags = getAllTags();
   const tagDisplay = decodedTag.replaceAll('-', ' ');
 
+  const data = {
+    ...structuredData,
+    '@graph': structuredData['@graph'].map((obj) => ({ ...obj })),
+  };
+
+  posts.forEach((post, i) => {
+    data['@graph'][1]['itemListElement'].push({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE_URL}/blogi/${post.slug}`,
+    });
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+        }}
+      />
       <h1>Julkaisut avainsanalla "{tagDisplay}"</h1>
 
       <SearchPosts

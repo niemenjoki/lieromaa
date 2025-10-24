@@ -18,50 +18,75 @@ const rubik = Rubik({
   display: 'swap',
 });
 
-export const viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  minimumScale: 1,
-  viewportFit: 'cover',
-};
-
-export const metadata = {
-  title: 'Lieromaa – Kompostimadot ja matokompostointi kotona',
-  description:
-    'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.',
-  openGraph: {
-    type: 'website',
-    url: 'https://www.lieromaa.fi',
-    title: 'Lieromaa – Kompostimadot ja matokompostointi kotona',
-    description:
-      'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.',
-    siteName: 'Lieromaa',
-    images: [
-      {
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://www.lieromaa.fi/#website',
+      url: 'https://www.lieromaa.fi',
+      name: 'Lieromaa',
+      description:
+        'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.',
+      publisher: {
+        '@type': 'Organization',
+        '@id': 'https://www.lieromaa.fi/#organization',
+        name: 'Lieromaa',
+      },
+      inLanguage: 'fi',
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.lieromaa.fi/#organization',
+      name: 'Lieromaa',
+      url: 'https://www.lieromaa.fi',
+      logo: {
+        '@type': 'ImageObject',
+        '@id': 'https://www.lieromaa.fi/#logo',
         url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+        contentUrl: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+
         width: 1024,
         height: 1024,
-        alt: 'Lieromaa logo',
       },
-    ],
-    locale: 'fi_FI',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@lieromaa',
-    images: ['https://www.lieromaa.fi/images/luomuliero_logo_1024.png'],
-  },
-  icons: {
-    icon: '/icons/favicon.ico',
-    apple: '/icons/apple-touch-icon.png',
-  },
-  manifest: '/site.webmanifest',
+      sameAs: ['https://www.instagram.com/lieromaa'],
+      founder: { '@id': 'https://www.lieromaa.fi/#joonas' },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Customer Support',
+        email: 'lieromaa@gmail.com',
+        availableLanguage: 'fi',
+      },
+      foundingDate: '2024-10-01',
+      foundingLocation: { '@type': 'Place', name: 'Finland' },
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'FI',
+      },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://www.lieromaa.fi/#joonas',
+      name: 'Joonas Niemenjoki',
+      url: 'https://www.linkedin.com/in/joonasniemenjoki',
+      jobTitle: 'Founder',
+      worksFor: { '@id': 'https://www.lieromaa.fi/#organization' },
+      sameAs: ['https://www.linkedin.com/in/joonasniemenjoki'],
+      image: 'https://www.lieromaa.fi/images/portrait2024.png',
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="fi" className={rubik.variable}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+          }}
+        />
         <div className="container">
           <Navbar />
           <main>{children}</main>
