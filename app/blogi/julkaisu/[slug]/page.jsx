@@ -1,6 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
-
+import SafeImage from '@/components/SafeImage/SafeImage';
 import fs from 'fs';
 import path from 'path';
 
@@ -17,6 +17,7 @@ import classes from './PostPage.module.css';
 export const mdxComponents = {
   Image,
   SafeLink,
+  SafeImage
 };
 
 export async function generateStaticParams() {

@@ -4,7 +4,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import safeLinks from '@/data/safeRoutes.json';
+import safeLinks from '@/data/generated/safeRoutes.json';
 
 function isSafeHref(href) {
   return safeLinks.includes(href);
