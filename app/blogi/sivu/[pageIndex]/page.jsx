@@ -41,7 +41,7 @@ export const metadata = {
   },
   icons: {
     icon: '/icons/favicon.ico',
-    apple: '/icons/apple-touch-icon.png',
+    apple: '/images/luomuliero_logo_1024.png',
   },
   manifest: '/site.webmanifest',
 };
