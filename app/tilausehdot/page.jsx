@@ -1,36 +1,6 @@
-import { SITE_URL } from '@/data/vars';
-
 import classes from './Tilausehdot.module.css';
 
-export const metadata = {
-  title: 'Tilaus- ja toimitusehdot | Lieromaa',
-  description:
-    'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',
-  alternates: { canonical: `${SITE_URL}/tilausehdot` },
-  openGraph: {
-    type: 'website',
-    siteName: 'Lieromaa',
-    title: 'Tilaus- ja toimitusehdot | Lieromaa',
-    description:
-      'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',
-    url: `${SITE_URL}/tilausehdot`,
-    locale: 'fi_FI',
-    images: [
-      {
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
-        width: 1024,
-        height: 1024,
-        alt: 'Lieromaa logo',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Tilaus- ja toimitusehdot | Lieromaa',
-    description:
-      'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',
-  },
-};
+export { default as generateMetadata } from './generateMetadata';
 
 const structuredData = [
   {

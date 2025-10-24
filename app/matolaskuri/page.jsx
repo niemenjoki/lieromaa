@@ -1,38 +1,7 @@
 import WormCalculatorClient from '@/components/WormCalculatorClient/WormCalculatorClient';
-import { SITE_URL } from '@/data/vars';
 import { getPostRecommendations } from '@/lib/posts';
 
-export const metadata = {
-  title: 'Matolaskuri | Lieromaa',
-  description:
-    'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
-  alternates: {
-    canonical: `${SITE_URL}/matolaskuri`,
-  },
-  openGraph: {
-    type: 'website',
-    siteName: 'Lieromaa',
-    title: 'Matolaskuri | Lieromaa',
-    description:
-      'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
-    url: `${SITE_URL}/matolaskuri`,
-    locale: 'fi_FI',
-    images: [
-      {
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
-        width: 1024,
-        height: 1024,
-        alt: 'Lieromaa logo',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Matolaskuri | Lieromaa',
-    description:
-      'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
-  },
-};
+export { default as generateMetadata } from './generateMetadata';
 
 const structuredData = [
   {

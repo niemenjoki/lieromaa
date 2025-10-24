@@ -1,6 +1,12 @@
 import ClientNotFoundPage from '@/components/NotFoundClient/NotFoundClient';
 import { getAllPosts } from '@/lib/posts';
 
+export const metadata = {
+  title: 'Sivua ei löytynyt | Lieromaa',
+  description: 'Hakemaasi sivua ei löytynyt. Palaa etusivulle tai selaa blogia.',
+  robots: { index: false, follow: false },
+};
+
 export default async function NotFound() {
   const posts = getAllPosts();
 

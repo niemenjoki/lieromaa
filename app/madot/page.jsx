@@ -7,43 +7,7 @@ import { getPostRecommendations } from '@/lib/posts';
 import classes from './Madot.module.css';
 import structuredData from './structuredData.json';
 
-const title = 'Osta kompostimatoja | Lieromaa';
-const description =
-  'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!';
-
-export async function generateMetadata() {
-  const canonicalUrl = 'https://www.lieromaa.fi/madot';
-  const image = 'https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella.png';
-
-  return {
-    title,
-    description,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      siteName: 'Lieromaa',
-      title,
-      description,
-      locale: 'fi_FI',
-      type: 'website',
-      url: canonicalUrl,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 800,
-          alt: 'Kompostimatoja ja matokompostin sisältöä kämmenellä',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      site: '@lieromaa',
-      images: [image],
-    },
-  };
-}
+export { default as generateMetadata } from './generateMetadata';
 
 export const dynamic = 'force-static';
 
@@ -76,7 +40,7 @@ export default async function Page() {
       />
 
       <article className={classes.WormsPage}>
-        <h1>{title}</h1>
+        <h1>Osta Luomulieron Eisenia fetida -kompostimatoja</h1>
 
         <div className={classes.Content}>
           <ImageSlider

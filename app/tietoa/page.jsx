@@ -1,41 +1,11 @@
 import Image from 'next/image';
 
 import Advert from '@/components/Advert/Advert';
-import { SITE_URL } from '@/data/vars';
 import portrait from '@/public/images/portrait2024.png';
 
 import classes from './Tietoa.module.css';
 
-export const metadata = {
-  title: 'Tietoa | Lieromaa',
-  description:
-    'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
-  alternates: {
-    canonical: `${SITE_URL}/tietoa`,
-  },
-  openGraph: {
-    type: 'website',
-    siteName: 'Lieromaa',
-    title: 'Tietoa | Lieromaa',
-    description:
-      'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
-    url: `${SITE_URL}/tietoa`,
-    images: [
-      {
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
-        width: 1024,
-        height: 1024,
-        alt: 'Lieromaa logo',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Tietoa | Lieromaa',
-    description:
-      'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
-  },
-};
+export { default as generateMetadata } from './generateMetadata';
 
 const structuredData = [
   {

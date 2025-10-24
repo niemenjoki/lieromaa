@@ -1,36 +1,6 @@
-import { SITE_URL } from '@/data/vars';
-
 import classes from './Tietosuoja.module.css';
 
-export const metadata = {
-  title: 'Tietosuojaseloste | Lieromaa',
-  description:
-    'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
-  alternates: { canonical: `${SITE_URL}/tietosuoja` },
-  openGraph: {
-    type: 'website',
-    siteName: 'Lieromaa',
-    title: 'Tietosuojaseloste | Lieromaa',
-    description:
-      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä.',
-    url: `${SITE_URL}/tietosuoja`,
-    locale: 'fi_FI',
-    images: [
-      {
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
-        width: 1024,
-        height: 1024,
-        alt: 'Lieromaa logo',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Tietosuojaseloste | Lieromaa',
-    description:
-      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
-  },
-};
+export { default as generateMetadata } from './generateMetadata';
 
 const structuredData = [
   {
