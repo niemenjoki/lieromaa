@@ -4,42 +4,7 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 import classes from './MadotKampanja.module.css';
 import structuredData from './structuredData.json';
 
-export async function generateMetadata() {
-  const title = 'Syystarjous – ilmainen toimitus kompostimadoille!';
-  const description =
-    'Tilaa kotimaisia kompostimatoja (Eisenia fetida) ilman toimituskuluja koko Suomeen. Tarjous voimassa 30.11.2025 asti.';
-  const canonicalUrl = 'https://www.lieromaa.fi/madot-kampanja';
-  const image = 'https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella.png';
-
-  return {
-    title,
-    description,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-      url: canonicalUrl,
-      locale: 'fi_FI',
-      siteName: 'Lieromaa',
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 800,
-          alt: 'Kompostimatoja ja matokompostin sisältöä kämmenellä',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      site: '@lieromaa',
-      title,
-      description,
-      images: [image],
-    },
-  };
-}
+export { default as generateMetadata } from './generateMetadata';
 
 export default function Page() {
   const title = 'Syystarjous – ilmainen toimitus kompostimadoille!';

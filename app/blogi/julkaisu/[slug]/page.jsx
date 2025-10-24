@@ -26,40 +26,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const data = getPostMetadata(slug);
-
-  const title = data.title || '';
-  const description = data.excerpt || '';
-  const url = `${SITE_URL}/blogi/julkaisu/${slug}`;
-  const image = data.image || {
-    url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
-    width: 1024,
-    height: 1024,
-    alt: 'Lieromaa logo',
-  };
-
-  return {
-    title: `${title}`,
-    description,
-    alternates: { canonical: url },
-    openGraph: {
-      siteName: 'Lieromaa',
-      title,
-      description,
-      type: 'article',
-      url,
-      images: [image],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [image],
-    },
-  };
-}
+export { default as generateMetadata } from './generateMetadata';
 
 export default async function PostPage({ params }) {
   const { slug } = await params;

@@ -3,10 +3,12 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars';
+import { POSTS_PER_PAGE } from '@/data/vars';
 import { getAllPosts, getAllTags, getPostsByTag } from '@/lib/posts';
 
 import classes from './TagPage.module.css';
+
+export { default as generateMetadata } from './generateMetadata';
 
 export async function generateStaticParams() {
   const allPosts = getAllPosts();
@@ -31,44 +33,12 @@ export async function generateStaticParams() {
   return params;
 }
 
-export async function generateMetadata({ params }) {
-  const { tag, pageIndex } = await params;
-  const tagName = tag.replaceAll('-', ' ');
-  const decodedTag = decodeURIComponent(tagName);
-  return {
-    title: `Blogi: ${decodedTag} | Lieromaa`,
-    description: `Julkaisut avainsanalla "${decodedTag}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
-    alternates: {
-      canonical: `${SITE_URL}/blogi/${tag}/sivu/1`,
-    },
-    openGraph: {
-      type: 'website',
-      siteName: 'Lieromaa',
-      title: `Blogi: ${decodedTag} | Lieromaa`,
-      description: `Julkaisut avainsanalla "${decodedTag}": Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`,
-      url: `${SITE_URL}/blogi/${tag}/sivu/${pageIndex}`,
-      locale: 'fi_FI',
-      images: [
-        {
-          url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
-          width: 1024,
-          height: 1024,
-          alt: 'Lieromaa logo',
-        },
-      ],
-    },
-  };
-}
-
 export default async function BlogTagPage({ params }) {
   const { pageIndex, tag } = await params;
   const decodedTag = decodeURIComponent(tag);
-
   const pageIndexInt = parseInt(pageIndex) || 1;
   const { posts, numPages } = getPostsByTag(decodedTag, pageIndexInt, POSTS_PER_PAGE);
-
   const allTags = getAllTags();
-
   const tagDisplay = decodedTag.replaceAll('-', ' ');
 
   return (
