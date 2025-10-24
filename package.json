@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
