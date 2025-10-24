@@ -11,7 +11,6 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "images:update": "node ./utils/replaceImagePlaceholders.js"
   },
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
