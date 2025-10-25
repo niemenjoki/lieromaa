@@ -1,24 +1,44 @@
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Matokomposti ulkona: toimiiko se Suomen oloissa kesällä ja talvella?",
-    "description": "Artikkeli matokompostoinnista Suomen ulko-olosuhteissa. Käsittelee kesä- ja talvikauden haasteet, madon selviytymisen pakkasessa sekä lämpökompostorin mahdollisuudet.",
-    "image": "https://www.lieromaa.fi/images/posts/matokomposti-ulkona-suomessa/matokomposti_ulkona_kesalla-1200.jpg",
-    "author": {
-      "@type": "Person",
-      "name": "Joonas Niemenjoki",
-      "url": "https://www.linkedin.com/in/joonasniemenjoki/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
-      }
-    },
-    "datePublished": "2025-09-16T00:00:00+03:00",
-    "mainEntityOfPage": "https://www.lieromaa.fi/blogi/julkaisu/matokomposti-ulkona-suomessa"
-  }
-]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.lieromaa.fi/blogi/matokomposti-ulkona-suomessa#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/matokomposti-ulkona-suomessa",
+      "headline": "Matokomposti ulkona – toimiiko se Suomessa vuoden ympäri?",
+      "description": "Voiko matokompostin pitää ulkona talvella? Lue, miten madot selviävät eri vuodenaikoina ja miten lämpökompostori voi auttaa.",
+      "datePublished": "2025-09-16T00:00:00+03:00",
+      "dateModified": "2025-09-16T00:00:00+03:00",
+      "inLanguage": "fi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.lieromaa.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.lieromaa.fi/#organization",
+        "name": "Lieromaa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
+        }
+      },
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "articleSection": "Matokompostointi",
+      "about": [
+        { "@type": "Thing", "name": "matokompostointi" },
+        { "@type": "Thing", "name": "kompostointi talvella" },
+        { "@type": "Thing", "name": "lämpökompostointi" }
+      ],
+      "keywords": [
+        "kompostointi talvella",
+        "lämpökompostointi",
+        "matokompostointi",
+        "suomi",
+        "talvi",
+        "ulkokompostointi"
+      ]
+    }
+  ]
+}

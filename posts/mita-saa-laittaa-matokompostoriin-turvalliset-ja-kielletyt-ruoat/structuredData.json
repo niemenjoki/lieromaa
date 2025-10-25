@@ -1,63 +1,44 @@
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Mitä ruokia saa laittaa matokompostoriin?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Madot viihtyvät pehmeissä, kasvipohjaisissa jätteissä kuten hedelmien ja vihannesten kuorissa, kahvinporoissa, teepusseissa, kaurahiutaleissa, leivässä ja pienissä määrissä riisiä tai pastaa. Myös murskatut kananmunankuoret ovat hyödyllisiä kalsiumlähteenä."
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.lieromaa.fi/blogi/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat",
+      "headline": "Mitä matokompostoriin saa laittaa ja mitä ei?",
+      "description": "Mietitkö, mitä voit antaa kompostimadoille? Tässä oppaassa käydään läpi turvalliset ja kielletyt ruoat sekä vinkit tasapainoon.",
+      "datePublished": "2025-09-07T00:00:00+03:00",
+      "dateModified": "2025-09-07T00:00:00+03:00",
+      "inLanguage": "fi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.lieromaa.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.lieromaa.fi/#organization",
+        "name": "Lieromaa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
         }
       },
-      {
-        "@type": "Question",
-        "name": "Mitkä ruoat sopivat vain pieninä määrinä?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sitrushedelmät, sipulit, valkosipuli ja mausteiset ruoat voivat ärsyttää matoja, joten niitä tulisi lisätä vain satunnaisesti ja pienissä määrissä. Rasvaiset ja hapan ruoat kannattaa myös välttää suurina annoksina."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Mitä ei saa laittaa matokompostoriin?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Liha, kala, maitotuotteet, öljyt ja suolaiset ruoat ovat kiellettyjä, sillä ne pilaantuvat helposti, happamoittavat kompostia ja houkuttelevat kärpäsiä tai muita haittaeläimiä."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Miten ruokinta vaikuttaa kompostin olosuhteisiin?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Liika kosteus ja happamuus ovat yleisimmät ongelmat. Lisää kuivaa petimateriaalia kuten pahvisilppua tai kookoskuitua, jos komposti tuntuu märältä. Happamuutta voi tasata murskatuilla kananmunankuorilla tai kahvinporoilla."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Kuinka usein matoja tulisi ruokkia ja kuinka paljon?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ruoki matoja 1–2 kertaa viikossa pienissä erissä. Hautaa ruoka aina pintakerroksen alle ja lisää uusi erä vasta, kun edellinen on lähes hajonnut. Näin vältät hajuhaitat ja ylläpidät kompostin tasapainoa."
-        }
-      }
-    ],
-    "author": {
-      "@type": "Person",
-      "name": "Joonas Niemenjoki",
-      "url": "https://www.linkedin.com/in/joonasniemenjoki/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
-      }
-    },
-    "datePublished": "2025-09-07T00:00:00+03:00",
-    "mainEntityOfPage": "https://www.lieromaa.fi/blogi/julkaisu/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat"
-  }
-]
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "articleSection": "Matokompostointi",
+      "about": [
+        { "@type": "Thing", "name": "matokompostointi" },
+        { "@type": "Thing", "name": "kompostorin hoito" },
+        { "@type": "Thing", "name": "ruokinta" }
+      ],
+      "keywords": [
+        "happamuus",
+        "kompostorin hoito",
+        "kosteus",
+        "matokompostointi",
+        "ongelmat",
+        "ruokinta"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.lieromaa.fi/blogi/sivu/[pageIndex]#webpage",
+      "url": "https://www.lieromaa.fi/blogi/sivu/[pageIndex]",
+      "name": "Blogi – Kaikki julkaisut (sivu [pageIndex])",
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "about": { "@id": "https://www.lieromaa.fi/#organization" },
+      "inLanguage": "fi"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.lieromaa.fi/blogi/sivu/[pageIndex]#itemlist",
+      "itemListElement": [],
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/blogi/sivu/[pageIndex]#webpage"
+      },
+      "inLanguage": "fi"
+    }
+  ]
+}
