@@ -1,87 +1,50 @@
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Miksi madot yrittävät karata kompostista?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Matojen karkaaminen kertoo epäsuotuisista olosuhteista, kuten liiasta kosteudesta, happamuudesta tai liikaruuasta. Tarkista kompostin kosteus ja vähennä ruokintaa, kunnes madot rauhoittuvat."
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://www.lieromaa.fi/blogi/yleisimmat-ongelmat-matokompostissa-korjaaminen#article",
+      "url": "https://www.lieromaa.fi/blogi/yleisimmat-ongelmat-matokompostissa-korjaaminen",
+      "headline": "Yleisimmät ongelmat matokompostissa ja niiden korjaaminen",
+      "description": "Haiseeko matokomposti tai karkailevatko madot? Lue yleisimmät syyt ja ratkaisut, joilla pidät kompostin tasapainossa.",
+      "datePublished": "2025-09-15T00:00:00+03:00",
+      "dateModified": "2025-09-15T00:00:00+03:00",
+      "inLanguage": "fi",
+      "keywords": [
+        "banaanikärpäset",
+        "happamuus",
+        "kompostorin hoito",
+        "kosteus",
+        "matokakka",
+        "matokompostointi",
+        "ongelmat",
+        "opas",
+        "ruokinta"
+      ],
+      "articleSection": "Matokompostointi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.lieromaa.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.lieromaa.fi/#organization",
+        "name": "Lieromaa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
         }
       },
-      {
-        "@type": "Question",
-        "name": "Mitä teen, jos olen ruokkinut matoja liikaa?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Poista ylimääräinen ruoka, lisää kuivaa petimateriaalia ja anna kompostin tasaantua. Madot syövät mieluummin liian vähän kuin liikaa, ja ne pärjäävät viikkoja ilman uutta ruokaa."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Voinko laittaa mitä tahansa jätettä matokompostiin?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ei. Liha, maitotuotteet ja rasvaiset ruoat pilaantuvat nopeasti ja happamoittavat kompostin. Käytä kasvipohjaisia biojätteitä ja vältä happamia tai suolaisia ruokia."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Mitä teen, jos komposti on liian märkä?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Poista mahdollinen vesi pohjalta ja sekoita joukkoon reilusti kuivaa petimateriaalia, kuten pahvisilppua tai sanomalehteä. Sopiva kosteus on sellainen, että puristettaessa irtoaa vain 1–2 pisaraa vettä."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Entä jos komposti kuivuu liikaa?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Suihkuta vettä kevyesti tai lisää kosteaa biojätettä. Vältä suoraa veden kaatamista, sillä se kerääntyy helposti pohjalle ja aiheuttaa mätänemistä."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Mitä jos komposti on happamaksi muuttunut?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Happamuutta voi vähentää lisäämällä murskattuja kananmunankuoria ja vähentämällä hedelmien tai muiden happamien ruokien määrää. Änkyrimatojen runsastuminen on merkki happamuudesta."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Kuinka pääsen eroon banaanikärpäsistä?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Peitä kaikki biojätteet petimateriaalilla ja harkitse keittiöjätteen pakastamista ennen sen lisäämistä kompostiin. Tämä tappaa kärpästen toukat ja munat."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Miksi madot eivät syö ruokaa?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Madot eivät syö tuoretta ruokaa ennen kuin mikrobit ovat pehmittäneet sen. Jos ruoka jää koskemattomaksi, odota muutama päivä tai lisää pienempiä määriä kerrallaan."
-        }
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "about": [
+        { "@type": "Thing", "name": "matokomposti" },
+        { "@type": "Thing", "name": "kompostorin hoito" }
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.lieromaa.fi/blogi/yleisimmat-ongelmat-matokompostissa-korjaaminen#webpage"
       }
-    ],
-    "author": {
-      "@type": "Person",
-      "name": "Joonas Niemenjoki",
-      "url": "https://www.linkedin.com/in/joonasniemenjoki/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
-      }
-    },
-    "datePublished": "2025-09-15T00:00:00+03:00",
-    "mainEntityOfPage": "https://www.lieromaa.fi/blogi/julkaisu/yleisimmat-ongelmat-matokompostissa-korjaaminen"
-  }
-]
+    }
+  ]
+}

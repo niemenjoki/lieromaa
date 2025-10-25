@@ -1,32 +1,7 @@
 import classes from './Tietosuoja.module.css';
+import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
-
-const structuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'Tietosuojaseloste',
-    description:
-      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä',
-    url: 'https://www.lieromaa.fi/tietosuoja',
-    dateModified: '2025-09-21T00:00:00+03:00',
-    inLanguage: 'fi',
-    isPartOf: {
-      '@type': 'WebSite',
-      name: 'Lieromaa',
-      url: 'https://www.lieromaa.fi',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
-      },
-    },
-  },
-];
 
 export default function PrivacyPage() {
   return (

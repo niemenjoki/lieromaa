@@ -4,14 +4,14 @@ const title = 'Lieromaa – Kompostimadot ja matokompostointi kotona';
 const description =
   'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.';
 const siteName = 'Lieromaa';
-const logoURL = 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif';
+const logoURL = '/images/luomuliero_logo_1024.avif';
 
 export const defaultMetadata = {
   title,
   description,
   metadataBase: new URL(SITE_URL),
 
-  authors: [{ name: 'Joonas Niemenjoki', url: 'https://www.lieromaa.fi/tietoa' }],
+  authors: [{ name: 'Joonas Niemenjoki', url: '/tietoa' }],
   creator: siteName,
   publisher: siteName,
 
@@ -20,7 +20,7 @@ export const defaultMetadata = {
     description,
     siteName,
     type: 'website',
-    url: 'https://www.lieromaa.fi',
+    url: '/',
     images: [
       {
         url: logoURL,

@@ -42,26 +42,24 @@ export default async function BlogTagPage({ params }) {
   const allTags = getAllTags();
   const tagDisplay = decodedTag.replaceAll('-', ' ');
 
-  const data = {
-    ...structuredData,
-    '@graph': structuredData['@graph'].map((obj) => ({ ...obj })),
-  };
-
+  const data = JSON.parse(JSON.stringify(structuredData));
+  data['@graph'][1]['itemListElement'] = [];
   posts.forEach((post, i) => {
     data['@graph'][1]['itemListElement'].push({
       '@type': 'ListItem',
-      position: i + 1,
+      position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
       url: `${SITE_URL}/blogi/${post.slug}`,
     });
   });
-  data['@graph'][0].name = data['@graph'][0].name.replace('pageIndex', pageIndex);
+
+  const ldJSON = JSON.parse(JSON.stringify(data).replaceAll('[pageIndex]', pageIndex));
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+          __html: JSON.stringify(ldJSON).replace(/</g, '\\u003c'),
         }}
       />
       <h1>Julkaisut avainsanalla "{tagDisplay}"</h1>

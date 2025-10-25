@@ -1,39 +1,7 @@
 import classes from './Tilausehdot.module.css';
+import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
-
-const structuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'Tilaus- ja toimitusehdot',
-    description:
-      'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin. Ehdot voimassa 1.10.2025 alkaen.',
-    url: 'https://www.lieromaa.fi/tilausehdot',
-    datePublished: '2025-10-01T00:00:00+03:00',
-    inLanguage: 'fi',
-    isPartOf: {
-      '@type': 'WebSite',
-      name: 'Lieromaa',
-      url: 'https://www.lieromaa.fi',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Lieromaa / Joonas Niemenjoki',
-      identifier: 'Y-tunnus 3002257-7',
-      url: 'https://www.lieromaa.fi',
-      makesOfferThrough: {
-        '@type': 'Organization',
-        name: 'OP Kevytyrittäjä',
-        url: 'https://www.op-kevytyrittaja.fi',
-      },
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
-      },
-    },
-  },
-];
 
 export default function OrderPolicyPage() {
   return (

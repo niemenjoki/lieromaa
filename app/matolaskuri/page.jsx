@@ -1,33 +1,9 @@
 import WormCalculatorClient from '@/components/WormCalculatorClient/WormCalculatorClient';
 import { getPostRecommendations } from '@/lib/posts';
 
-export { default as generateMetadata } from './generateMetadata';
+import structuredData from './structuredData.json';
 
-const structuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'Matolaskuri',
-    url: 'https://www.lieromaa.fi/matolaskuri',
-    description:
-      'Verkkopohjainen laskuri, joka arvioi kotitalouden biojätteen määrän ja suosittelee tarvittavan kompostimatojen populaation.',
-    image: 'https://www.lieromaa.fi/images/pages/matolaskuri/matolaskuri-naytto-1200.jpg',
-    datePublished: '2025-09-20T00:00:00+03:00',
-    author: {
-      '@type': 'Person',
-      name: 'Joonas Niemenjoki',
-      url: 'https://www.linkedin.com/in/joonasniemenjoki/',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
-      },
-    },
-  },
-];
+export { default as generateMetadata } from './generateMetadata';
 
 export default async function Page() {
   const recommendedPosts = await getPostRecommendations({

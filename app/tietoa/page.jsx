@@ -4,38 +4,9 @@ import Advert from '@/components/Advert/Advert';
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './Tietoa.module.css';
+import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
-
-const structuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: 'Tietoa Lieromaasta',
-    description:
-      'Lieromaa tarjoaa käytännön tietoa matokompostoinnista Suomessa – kokemukseen perustuvia ohjeita ja vinkkejä kompostoijalle.',
-    url: 'https://www.lieromaa.fi/tietoa',
-    author: {
-      '@type': 'Person',
-      name: 'Joonas Niemenjoki',
-      url: 'https://www.linkedin.com/in/joonasniemenjoki/',
-      affiliation: {
-        '@type': 'Organization',
-        name: 'Lieromaa',
-      },
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-      logo: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
-    },
-    mainEntity: {
-      '@type': 'WebSite',
-      name: 'Lieromaa',
-      url: 'https://www.lieromaa.fi',
-    },
-  },
-];
 
 export default function AboutPage() {
   return (

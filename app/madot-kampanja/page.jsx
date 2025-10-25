@@ -44,7 +44,7 @@ export default function Page() {
                 alt: 'Kourallinen matokompostin sisältöä ja matoja käsissä',
               },
               {
-                src: '/images/wormspage/madot_toimituspakkauksessa.jpg',
+                src: '/images/wormspage/madot_toimituspakkauksessa.avif',
                 alt: 'Kompostimadot toimituspakkauksessa',
               },
             ]}

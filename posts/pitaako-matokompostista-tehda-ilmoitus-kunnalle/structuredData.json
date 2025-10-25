@@ -1,41 +1,44 @@
-[
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Pitääkö matokompostista tehdä ilmoitus kunnalle? – Käytännön opas kotikompostoijalle",
-    "description": "Matokompostori ei kuulu virallisen komposti-ilmoituksen piiriin. Artikkelissa selitetään, miksi matokompostista ei tarvitse ilmoittaa kunnalle ja missä tilanteissa ilmoitus on pakollinen.",
-    "datePublished": "2025-10-10",
-    "author": {
-      "@type": "Person",
-      "name": "Joonas Niemenjoki"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Lieromaa",
-      "logo": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
-    },
-    "mainEntityOfPage": "https://www.lieromaa.fi/blogi/pitaako-matokompostista-tehda-ilmoitus-kunnalle"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Pitääkö matokompostista tehdä ilmoitus, jos se on iso ja hoidan sillä lähes kaiken biojätteen?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Ei. Vaikka matokompostisi olisi suuri ja tehokas, se ei käsittele kaikkea jätettä (esim. lihaa tai maitotuotteita), joten se katsotaan pienimuotoiseksi toiminnaksi. Ilmoitusta ei tarvita."
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.lieromaa.fi/blogi/pitaako-matokompostista-tehda-ilmoitus-kunnalle#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/pitaako-matokompostista-tehda-ilmoitus-kunnalle",
+      "headline": "Pitääkö matokompostista tehdä ilmoitus kunnalle?",
+      "description": "Matokompostista ei tarvitse ilmoittaa, mutta ilmoitusasioissa kannattaa olla tarkkana. Lue, milloin komposti-ilmoitus on pakollinen.",
+      "datePublished": "2025-10-10T00:00:00+03:00",
+      "dateModified": "2025-10-18T00:00:00+03:00",
+      "inLanguage": "fi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.lieromaa.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.lieromaa.fi/#organization",
+        "name": "Lieromaa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
         }
       },
-      {
-        "@type": "Question",
-        "name": "Voinko lopettaa biojätteen keräyksen, jos minulla on iso matokompostori?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Et virallisesti. Vapautus onnistuu vain, jos sinulla on lämpökompostori ja teet siitä ilmoituksen."
-        }
-      }
-    ]
-  }
-]
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "articleSection": "Matokompostointi",
+      "about": [
+        { "@type": "Thing", "name": "matokompostointi" },
+        { "@type": "Thing", "name": "lämpökompostointi" },
+        { "@type": "Thing", "name": "kompostointi-ilmoitus" }
+      ],
+      "keywords": [
+        "lämpökompostointi",
+        "matokompostointi",
+        "opas",
+        "perustaminen",
+        "ravinteet",
+        "yhteiskunta"
+      ]
+    }
+  ]
+}

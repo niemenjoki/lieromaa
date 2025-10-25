@@ -9,7 +9,6 @@ import PostRecommendation from '@/components/PostRecommendation/PostRecommendati
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
-import { SITE_URL } from '@/data/vars.mjs';
 import { getAllPostSlugs, getPostMetadata, getPostRecommendations } from '@/lib/posts';
 import portrait from '@/public/images/portrait2024.avif';
 
@@ -42,29 +41,7 @@ export default async function PostPage({ params }) {
     keywords: [...data.tags, ...data.keywords],
   });
 
-  const structuredData = data.structuredData || [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BlogPosting',
-      headline: data.title,
-      description: data.excerpt,
-      datePublished: data.date,
-      dateModified: data.updated || data.date,
-      articleSection: data.category || 'Blogi',
-      keywords: data.tags?.join(', '),
-      image: [data.image || `${SITE_URL}/images/luomuliero_logo_1024.avif`],
-      author: { '@type': 'Person', name: 'Joonas Niemenjoki' },
-      publisher: {
-        '@type': 'Organization',
-        name: 'Lieromaa',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
-        },
-      },
-      mainEntityOfPage: `${SITE_URL}/blogi/julkaisu/${slug}`,
-    },
-  ];
+  const { structuredData } = data;
 
   return (
     <>

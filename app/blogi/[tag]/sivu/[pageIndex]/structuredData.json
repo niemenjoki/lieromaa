@@ -2,22 +2,20 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@context": "https://schema.org",
       "@type": "WebPage",
-      "@id": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/1#webpage",
-      "url": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/1",
-      "name": "Blogi – Matokompostointi (sivu <pageIndex>)",
+      "@id": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/[pageIndex]#webpage",
+      "url": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/[pageIndex]",
+      "name": "Blogi – Matokompostointi (sivu [pageIndex])",
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
       "about": { "@id": "https://www.lieromaa.fi/#organization" },
       "inLanguage": "fi"
     },
     {
-      "@context": "https://schema.org",
       "@type": "ItemList",
-      "@id": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/1#itemlist",
+      "@id": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/[pageIndex]#itemlist",
       "itemListElement": [],
       "isPartOf": {
-        "@id": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/1#webpage"
+        "@id": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/[pageIndex]#webpage"
       },
       "inLanguage": "fi"
     }

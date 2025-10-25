@@ -1,0 +1,51 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.lieromaa.fi/matolaskuri#webpage",
+      "url": "https://www.lieromaa.fi/matolaskuri",
+      "name": "Matolaskuri – arvioi tarvittava kompostimatojen määrä",
+      "description": "Lieromaan matolaskuri auttaa arvioimaan, kuinka paljon kompostimatoja (Eisenia fetida) tarvitaan kotitalouden biojätteen käsittelyyn. Syötä perheesi koko ja ruokavalio, ja laskuri kertoo suuntaa-antavan määrän.",
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "about": { "@id": "https://www.lieromaa.fi/#organization" },
+      "mainEntity": {
+        "@type": "Thing",
+        "name": "Kompostimatojen määrän laskuri",
+        "description": "Interaktiivinen työkalu, joka arvioi biojätteen määrän ja siihen tarvittavan kompostimatojen populaation."
+      },
+      "inLanguage": "fi"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.lieromaa.fi/matolaskuri#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Mihin matolaskuri perustuu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Laskuri arvioi biojätteen määrän kotitalouden koon ja ruokavalion perusteella. Oletuksena yksi mato painaa noin 0.5 g ja syö noin 1 g jätettä viikossa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kuinka tarkka laskuri on?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tulokset ovat suuntaa-antavia. Todellinen matotarve riippuu mm. lämpötilasta, kosteudesta ja jätteen koostumuksesta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Mistä voin ostaa kompostimatoja?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Voit ostaa kotimaisia kompostimatoja (Eisenia fetida) osoitteesta https://www.lieromaa.fi/madot."
+          }
+        }
+      ],
+      "inLanguage": "fi"
+    }
+  ]
+}

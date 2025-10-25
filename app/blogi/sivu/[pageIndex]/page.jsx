@@ -3,10 +3,11 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { POSTS_PER_PAGE } from '@/data/vars.mjs';
+import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
 import { getAllPostSlugs, getAllTags, getPaginatedPosts } from '@/lib/posts';
 
 import classes from './PostPage.module.css';
+import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -26,8 +27,27 @@ export default async function BlogPage({ params }) {
   const { posts, numPages } = getPaginatedPosts(pageIndexInt, POSTS_PER_PAGE);
   const allTags = getAllTags();
 
+  const data = JSON.parse(JSON.stringify(structuredData));
+  data['@graph'][1]['itemListElement'] = [];
+  posts.forEach((post, i) => {
+    data['@graph'][1]['itemListElement'].push({
+      '@type': 'ListItem',
+      position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
+      url: `${SITE_URL}/blogi/${post.slug}`,
+    });
+  });
+
+  const ldJSON = JSON.parse(JSON.stringify(data).replaceAll('[pageIndex]', pageIndex));
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(ldJSON).replace(/</g, '\\u003c'),
+        }}
+      />
+
       {pageIndexInt === 1 ? (
         <section className={classes.LandingInfo}>
           <h1>Lieromaa - Kompostimadot ja matokompostointi kotona</h1>
