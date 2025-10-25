@@ -3,7 +3,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars';
+import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
 import { getAllPosts, getAllTags, getPostsByTag } from '@/lib/posts';
 
 import classes from './TagPage.module.css';
@@ -54,6 +54,7 @@ export default async function BlogTagPage({ params }) {
       url: `${SITE_URL}/blogi/${post.slug}`,
     });
   });
+  data['@graph'][0].name = data['@graph'][0].name.replace('pageIndex', pageIndex);
 
   return (
     <>

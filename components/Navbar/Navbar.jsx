@@ -10,7 +10,7 @@ import Toggler from '../NavToggler/NavToggler.jsx';
 import Socials from '../Socials/Socials';
 import ThemeToggler from '../ThemeToggler/ThemeToggler.jsx';
 import classes from './Navbar.module.css';
-import logo from '/public/images/lieromaa_logo.png';
+import logo from '/public/images/lieromaa_logo.avif';
 
 const Navbar = () => {
   const pathname = usePathname();

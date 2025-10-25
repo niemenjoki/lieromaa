@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/lib/posts';
 
-import { SITE_URL } from '../../data/vars';
+import { SITE_URL } from '../../data/vars.mjs';
 
 export const revalidate = 3600;
 

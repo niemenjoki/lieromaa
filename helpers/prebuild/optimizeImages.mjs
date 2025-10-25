@@ -1,12 +1,12 @@
-import fs from "fs";
-import path from "path";
-import sharp from "sharp";
+import fs from 'fs';
+import path from 'path';
+import sharp from 'sharp';
 
-const ROOT = path.resolve("public/images");
+const ROOT = path.resolve('public/images');
 const MAX_DIMENSION = 1200;
 const QUALITY = 65;
 
-const isRaster = (ext) => [".jpg", ".jpeg", ".png", ".avif"].includes(ext);
+const isRaster = (ext) => ['.jpg', '.jpeg', '.png', '.avif'].includes(ext);
 
 let alreadyOptimized = true;
 
@@ -14,7 +14,7 @@ async function processImage(filePath) {
   const ext = path.extname(filePath).toLowerCase();
   if (!isRaster(ext)) return;
 
-  const outPath = filePath.replace(ext, ".avif");
+  const outPath = filePath.replace(ext, '.avif');
   const image = sharp(filePath);
   const metadata = await image.metadata();
 
@@ -32,7 +32,7 @@ async function processImage(filePath) {
     else resizeOptions.width = MAX_DIMENSION;
   }
 
-  if (ext === ".avif" && longerSide <= MAX_DIMENSION) {
+  if (ext === '.avif' && longerSide <= MAX_DIMENSION) {
     return;
   }
 
@@ -43,23 +43,18 @@ async function processImage(filePath) {
       return;
     }
   }
-  if(alreadyOptimized) {
-    console.log("Starting image optimization..");
+  if (alreadyOptimized) {
+    console.log('Starting image optimization..');
     alreadyOptimized = false;
   }
 
-  await image
-    .resize(resizeOptions)
-    .avif({ quality: QUALITY, effort: 9 })
-    .toFile(outPath);
+  await image.resize(resizeOptions).avif({ quality: QUALITY, effort: 9 }).toFile(outPath);
 
   const origKB = (fs.statSync(filePath).size / 1024).toFixed(0);
   const newKB = (fs.statSync(outPath).size / 1024).toFixed(0);
 
   console.log(
-    `- ${path.basename(filePath)} → ${path.basename(
-      outPath
-    )} (${origKB}KB → ${newKB}KB)`
+    `- ${path.basename(filePath)} → ${path.basename(outPath)} (${origKB}KB → ${newKB}KB)`
   );
 }
 
@@ -74,8 +69,8 @@ async function walk(dir) {
 
 await walk(ROOT);
 
-if(alreadyOptimized) {
-  console.log("✅ Images checked. All already optimized");
+if (alreadyOptimized) {
+  console.log('✅ Images checked. All already optimized');
 } else {
-  console.log("✅ Image optimization done.");
+  console.log('✅ Image optimization done.');
 }

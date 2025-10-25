@@ -10,7 +10,7 @@ function isSafeHref(src) {
   return safePaths.includes(src);
 }
 
-export default function SafeImage({ src, ...props }) {
+export default function SafeImage({ src, alt, ...props }) {
   if (typeof src !== 'string') {
     throw new Error(`SafeImage: src must be a string, got ${typeof src}`);
   }
@@ -19,6 +19,5 @@ export default function SafeImage({ src, ...props }) {
     throw new Error(`Unsafe image path blocked: "${src}"`);
   }
 
-  return <Image src={src} {...props} />
- 
+  return <Image src={src} alt={alt} {...props} />;
 }

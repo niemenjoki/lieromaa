@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { SITE_URL } from '@/data/vars';
+import { SITE_URL } from '@/data/vars.mjs';
 
 import classes from './Pagination.module.css';
 

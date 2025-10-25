@@ -40,7 +40,7 @@ export default function Page() {
           <ImageSlider
             images={[
               {
-                src: '/images/wormspage/kompostimadot_kammenella.png',
+                src: '/images/wormspage/kompostimadot_kammenella.avif',
                 alt: 'Kourallinen matokompostin sisältöä ja matoja käsissä',
               },
               {

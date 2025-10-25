@@ -29,7 +29,7 @@ const structuredData = [
       },
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
       },
     },
   },

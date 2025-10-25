@@ -43,8 +43,8 @@ const structuredData = {
       logo: {
         '@type': 'ImageObject',
         '@id': 'https://www.lieromaa.fi/#logo',
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
-        contentUrl: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
+        contentUrl: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
 
         width: 1024,
         height: 1024,
@@ -72,7 +72,7 @@ const structuredData = {
       jobTitle: 'Founder',
       worksFor: { '@id': 'https://www.lieromaa.fi/#organization' },
       sameAs: ['https://www.linkedin.com/in/joonasniemenjoki'],
-      image: 'https://www.lieromaa.fi/images/portrait2024.png',
+      image: 'https://www.lieromaa.fi/images/portrait2024.avif',
     },
   ],
 };

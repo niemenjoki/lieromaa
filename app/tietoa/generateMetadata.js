@@ -5,12 +5,6 @@ export default function generateMetadata() {
   const description =
     'Tilaa kotimaisia kompostimatoja (Eisenia fetida) ilman toimituskuluja koko Suomeen. Tarjous voimassa 30.11.2025 asti.';
   const canonicalUrl = '/tietoa';
-  const image = {
-    url: '/images/wormspage/kompostimadot-kammenella.png',
-    width: 1536,
-    height: 1024,
-    alt: 'Kompostimatoja ja matokompostin sisältöä kämmenellä',
-  };
 
   const customMetadata = {
     title,

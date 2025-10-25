@@ -1,6 +1,6 @@
 import { getAllPosts, getAllTags } from '@/lib/posts';
 
-import { SITE_URL } from '../data/vars';
+import { SITE_URL } from '../data/vars.mjs';
 
 function toISODate(d) {
   return new Date(d).toISOString().split('T')[0];
