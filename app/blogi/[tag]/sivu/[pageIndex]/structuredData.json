@@ -6,7 +6,7 @@
       "@type": "WebPage",
       "@id": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/1#webpage",
       "url": "https://www.lieromaa.fi/blogi/matokompostointi/sivu/1",
-      "name": "Blogi – Matokompostointi (sivu 1)",
+      "name": "Blogi – Matokompostointi (sivu <pageIndex>)",
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
       "about": { "@id": "https://www.lieromaa.fi/#organization" },
       "inLanguage": "fi"

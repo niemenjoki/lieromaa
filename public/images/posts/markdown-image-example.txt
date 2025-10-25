@@ -1,1 +1,1 @@
-[[image:filename.png|alt=Alttext]]
+[[image:filename.avif|alt=Alttext]]

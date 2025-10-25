@@ -1,23 +1,24 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
-import SafeImage from '@/components/SafeImage/SafeImage';
+
 import fs from 'fs';
 import path from 'path';
 
 import Advert from '@/components/Advert/Advert';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
+import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
-import { SITE_URL } from '@/data/vars';
+import { SITE_URL } from '@/data/vars.mjs';
 import { getAllPostSlugs, getPostMetadata, getPostRecommendations } from '@/lib/posts';
-import portrait from '@/public/images/portrait2024.png';
+import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './PostPage.module.css';
 
 export const mdxComponents = {
   Image,
   SafeLink,
-  SafeImage
+  SafeImage,
 };
 
 export async function generateStaticParams() {
@@ -51,14 +52,14 @@ export default async function PostPage({ params }) {
       dateModified: data.updated || data.date,
       articleSection: data.category || 'Blogi',
       keywords: data.tags?.join(', '),
-      image: [data.image || `${SITE_URL}/images/luomuliero_logo_1024.png`],
+      image: [data.image || `${SITE_URL}/images/luomuliero_logo_1024.avif`],
       author: { '@type': 'Person', name: 'Joonas Niemenjoki' },
       publisher: {
         '@type': 'Organization',
         name: 'Lieromaa',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+          url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
         },
       },
       mainEntityOfPage: `${SITE_URL}/blogi/julkaisu/${slug}`,

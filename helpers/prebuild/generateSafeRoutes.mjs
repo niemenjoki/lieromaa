@@ -1,10 +1,11 @@
 import fs from 'fs';
-import path from 'path'; 
+import path from 'path';
+
+import { POSTS_PER_PAGE, SITE_URL } from '../../data/vars.mjs';
 
 const appDir = path.join(process.cwd(), 'app');
 const postsDir = path.join(process.cwd(), 'posts');
 const outFile = path.join(process.cwd(), 'data', 'generated', 'safeRoutes.json');
-import { SITE_URL, POSTS_PER_PAGE } from "../../data/vars.js";
 
 function walk(dir, list = []) {
   if (!fs.existsSync(dir)) return list;

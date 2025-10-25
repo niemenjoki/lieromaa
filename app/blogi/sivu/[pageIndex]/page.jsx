@@ -3,7 +3,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { POSTS_PER_PAGE } from '@/data/vars';
+import { POSTS_PER_PAGE } from '@/data/vars.mjs';
 import { getAllPostSlugs, getAllTags, getPaginatedPosts } from '@/lib/posts';
 
 import classes from './PostPage.module.css';

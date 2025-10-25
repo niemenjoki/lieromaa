@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "predev": "node helpers/prebuild/index.mjs",
-    "prebuild": "node helpers/prebuild/index.js",
+    "prebuild": "node helpers/prebuild/index.mjs",
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",

@@ -1,10 +1,10 @@
-import fs from "fs";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
 
-const ROOT = path.resolve("public/images");
-const OUTPUT = path.resolve("data/generated/safeImagePaths.json");
+const ROOT = path.resolve('public/images');
+const OUTPUT = path.resolve('data/generated/safeImagePaths.json');
 
-const IMAGE_EXTS = [".avif", ".webp", ".jpg", ".jpeg", ".png", ".svg"];
+const IMAGE_EXTS = ['.avif', '.webp', '.jpg', '.jpeg', '.png', '.svg'];
 
 async function walk(dir) {
   const entries = await fs.promises.readdir(dir, { withFileTypes: true });
@@ -18,8 +18,8 @@ async function walk(dir) {
     } else {
       const ext = path.extname(e.name).toLowerCase();
       if (IMAGE_EXTS.includes(ext)) {
-        const relative = path.relative("public", fullPath).replace(/\\/g, "/");
-        files.push("/" + relative);
+        const relative = path.relative('public', fullPath).replace(/\\/g, '/');
+        files.push('/' + relative);
       }
     }
   }
@@ -33,16 +33,12 @@ async function main() {
   images.sort();
 
   await fs.promises.mkdir(path.dirname(OUTPUT), { recursive: true });
-  await fs.promises.writeFile(
-    OUTPUT,
-    JSON.stringify(images, null, 2),
-    "utf8"
-  );
+  await fs.promises.writeFile(OUTPUT, JSON.stringify(images, null, 2), 'utf8');
 
   console.log(`✅ Wrote ${images.length} image paths to ${OUTPUT}`);
 }
 
 main().catch((err) => {
-  console.error("❌ Error generating safe image paths:", err);
+  console.error('❌ Error generating safe image paths:', err);
   process.exit(1);
 });

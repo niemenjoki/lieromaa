@@ -6,7 +6,7 @@ export default function generateMetadata() {
     'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!';
   const canonicalUrl = '/madot';
   const image = {
-    url: '/images/wormspage/kompostimadot-kammenella.png',
+    url: '/images/wormspage/kompostimadot-kammenella.avif',
     width: 1536,
     height: 1024,
     alt: 'Kompostimatoja ja matokompostin sisältöä kämmenellä',

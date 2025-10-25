@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { LICENSE_URL, REPO_URL } from '@/data/vars';
+import { LICENSE_URL, REPO_URL } from '@/data/vars.mjs';
 
 import Socials from '../Socials/Socials.jsx';
 import classes from './Footer.module.css';

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import Advert from '@/components/Advert/Advert';
-import portrait from '@/public/images/portrait2024.png';
+import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './Tietoa.module.css';
 
@@ -27,7 +27,7 @@ const structuredData = [
     publisher: {
       '@type': 'Organization',
       name: 'Lieromaa (Joonas Niemenjoki, Y-tunnus 3002257-7)',
-      logo: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.png',
+      logo: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
     },
     mainEntity: {
       '@type': 'WebSite',
