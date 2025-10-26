@@ -1,5 +1,4 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import Image from 'next/image';
 
 import fs from 'fs';
 import path from 'path';
@@ -15,7 +14,6 @@ import portrait from '@/public/images/portrait2024.avif';
 import classes from './PostPage.module.css';
 
 export const mdxComponents = {
-  Image,
   SafeLink,
   SafeImage,
 };
@@ -66,7 +64,7 @@ export default async function PostPage({ params }) {
         </div>
 
         <div className={classes.AuthorBox}>
-          <Image
+          <SafeImage
             src={portrait}
             alt="Valokuva Joonas Niemenjoesta"
             width={90}
