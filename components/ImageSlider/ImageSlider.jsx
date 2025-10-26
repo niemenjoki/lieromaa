@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import SafeImage from '../SafeImage/SafeImage';
 
 export default function ImageSlider({ images = [], maxWidth = '600px' }) {
   if (!images.length) return null;
@@ -24,7 +24,7 @@ export default function ImageSlider({ images = [], maxWidth = '600px' }) {
     >
       {images.map((img, i) => (
         <SwiperSlide key={i}>
-          <Image
+          <SafeImage
             src={img.src}
             alt={img.alt || ''}
             width={img.width || 1200}

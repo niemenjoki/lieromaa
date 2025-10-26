@@ -1,12 +1,12 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import useToggle from '@/hooks/useToggle';
 
 import Toggler from '../NavToggler/NavToggler.jsx';
+import SafeImage from '../SafeImage/SafeImage.jsx';
 import Socials from '../Socials/Socials';
 import ThemeToggler from '../ThemeToggler/ThemeToggler.jsx';
 import classes from './Navbar.module.css';
@@ -28,7 +28,7 @@ const Navbar = () => {
       <div className={classes.Navbar}>
         <div className={classes.Brand}>
           <Link href="/" className={classes.BrandLink}>
-            <Image
+            <SafeImage
               src={logo}
               alt="Lieromaa logo"
               width={40}

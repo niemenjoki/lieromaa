@@ -1,6 +1,5 @@
-import Image from 'next/image';
-
 import Advert from '@/components/Advert/Advert';
+import SafeImage from '@/components/SafeImage/SafeImage';
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './Tietoa.module.css';
@@ -20,7 +19,7 @@ export default function AboutPage() {
 
       <div className={classes.AboutPage}>
         <div className={classes.Info}>
-          <Image
+          <SafeImage
             src={portrait}
             alt="Valokuva Joonas Niemenjoesta"
             placeholder="blur"
