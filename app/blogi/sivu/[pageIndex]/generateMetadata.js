@@ -1,9 +1,11 @@
+import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
+import { getAllPostSlugs } from '@/lib/posts';
 
 export default async function generateMetadata({ params }) {
   const { pageIndex } = await params;
-
-  const pageIndexInt = parseInt(pageIndex, 10);
+  const currentPage = pageIndex || 1;
+  const pageIndexInt = parseInt(currentPage, 10);
 
   let canonical, ogUrl;
 
@@ -17,6 +19,9 @@ export default async function generateMetadata({ params }) {
     canonical = `/blogi/sivu/${pageIndexInt}`;
     ogUrl = canonical;
   }
+  const numPages = Math.ceil(getAllPostSlugs().length / POSTS_PER_PAGE);
+  const isFirst = pageIndexInt === 1;
+  const isLast = pageIndexInt === numPages;
 
   const customMetadata = {
     alternates: {
@@ -24,6 +29,10 @@ export default async function generateMetadata({ params }) {
     },
     openGraph: {
       url: ogUrl,
+    },
+    pagination: {
+      ...(isFirst ? {} : { previous: `/blogi/sivu/${pageIndexInt - 1}` }),
+      ...(isLast ? {} : { next: `/blogi/sivu/${pageIndexInt + 1}` }),
     },
   };
 
