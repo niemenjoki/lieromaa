@@ -13,11 +13,7 @@
     {
       "@type": "ItemList",
       "@id": "https://www.lieromaa.fi/blogi/sivu/[pageIndex]#itemlist",
-      "itemListElement": [],
-      "isPartOf": {
-        "@id": "https://www.lieromaa.fi/blogi/sivu/[pageIndex]#webpage"
-      },
-      "inLanguage": "fi"
+      "itemListElement": []
     }
   ]
 }
