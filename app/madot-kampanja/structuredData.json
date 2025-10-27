@@ -37,12 +37,7 @@
         "seller": {
           "@type": "Organization",
           "name": "Lieromaa / Joonas Niemenjoki",
-          "identifier": "Y-tunnus 3002257-7",
-          "makesOfferThrough": {
-            "@type": "Organization",
-            "name": "OP Kevytyrittäjä",
-            "url": "https://www.op-kevytyrittaja.fi"
-          }
+          "identifier": "Y-tunnus 3002257-7"
         },
         "shippingDetails": {
           "@type": "OfferShippingDetails",
