@@ -80,3 +80,123 @@
     max-width: 80%;
   }
 }
+
+.CalculatorForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 400px;
+  margin: 1rem 0;
+}
+
+.CalculatorForm label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CalculatorForm input,
+.CalculatorForm select {
+  margin-left: 0.5rem;
+  padding: 0.25rem;
+  width: 10rem;
+}
+
+.CalculatorForm button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--highlight);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.CalculatorForm button:hover {
+  opacity: 0.7;
+}
+
+/* --- Custom radio buttons --- */
+.CalculatorForm fieldset {
+  border: none;
+  padding: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.CalculatorForm legend {
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  margin-left: 2px;
+}
+
+.CalculatorForm fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.CalculatorForm input[type='radio'] {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--highlight);
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.CalculatorForm input[type='radio']:checked::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: var(--highlight);
+}
+
+.CalculatorForm input[type='radio']:hover {
+  border-color: var(--highlight-alt);
+}
+
+.CalculatorForm input[type='radio']:focus-visible {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+@media (min-width: 700px) {
+  .CalculatorForm fieldset {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  .CalculatorForm fieldset label {
+    margin-bottom: 0;
+  }
+}
+.Content aside {
+  border: 2px solid black;
+  padding: 15px;
+  margin: 16px 0;
+  border-radius: 8px;
+  background-color: var(--background-4);
+}
+
+.Content aside > h3 {
+  margin: 0;
+  color: var(--highlight);
+}
+
+.Content aside ul {
+  margin: 10px 0 0 0;
+  padding-left: 1rem;
+}
