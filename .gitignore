@@ -45,5 +45,6 @@ public/images/**/*.jpeg
 public/images/**/*.png
 public/images/**/*.webp
 public/images/**/*.gif
-data/generated/**
-!data/generated/.gitkeep
+
+data/generated/
+
