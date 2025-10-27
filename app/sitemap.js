@@ -1,6 +1,7 @@
-import { getAllPosts, getAllTags } from '@/lib/posts';
+import safeLinks from '@/data/generated/safeRoutes.json';
+import { getAllPosts, getAllTags, getPostsByTag } from '@/lib/posts';
 
-import { SITE_URL } from '../data/vars.mjs';
+import { POSTS_PER_PAGE, SITE_URL } from '../data/vars.mjs';
 
 function toISODate(d) {
   return new Date(d).toISOString().split('T')[0];
@@ -37,10 +38,14 @@ export default async function sitemap() {
   }
 
   for (const tag of tags) {
-    urls.push({
-      url: `${SITE_URL}/blogi/julkaisu/${tag.replaceAll(' ', '-').trim()}/sivu/1`,
-      lastModified: toISODate(latestPost),
-    });
+    const { numPages } = getPostsByTag(tag, 1, POSTS_PER_PAGE);
+
+    for (let i = 1; i <= numPages; i++) {
+      urls.push({
+        url: `${SITE_URL}/blogi/${tag.replaceAll(' ', '-').trim()}/sivu/${i}`,
+        lastModified: toISODate(latestPost),
+      });
+    }
   }
 
   for (const post of posts) {
@@ -48,6 +53,13 @@ export default async function sitemap() {
       url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
       lastModified: toISODate(post.date),
     });
+  }
+
+  for (const url of urls) {
+    const path = url.url.replace(SITE_URL, '');
+    if (!safeLinks.includes(path)) {
+      throw new Error(`Invalid url defined in sitemap: "${path}"`);
+    }
   }
 
   return urls;
