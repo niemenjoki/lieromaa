@@ -1,30 +1,25 @@
-import Head from 'next/head';
-
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { SITE_URL } from '@/data/vars.mjs';
 
 import classes from './Pagination.module.css';
 
-const Pagination = ({ numPages, currentPage }) => {
+const Pagination = ({ numPages, currentPage, basePath }) => {
   const total = Number(numPages) || 1;
   const page = Number(currentPage) || 1;
+
+  if (total === 1) return null;
 
   const isFirst = page === 1;
   const isLast = page === total;
 
-  const previousPage = `/blogi/sivu/${page - 1}`;
-  const nextPage = `/blogi/sivu/${page + 1}`;
+  const pagePath = (pageNumber) =>
+    pageNumber === 1 ? `${basePath}/sivu/1` : `${basePath}/sivu/${pageNumber}`;
 
-  if (total === 1) return null;
+  const previousPage = pagePath(page - 1);
+  const nextPage = pagePath(page + 1);
 
   return (
     <>
-      <Head>
-        {!isFirst && <SafeLink rel="prev" href={SITE_URL + previousPage} />}
-        {!isLast && <SafeLink rel="next" href={SITE_URL + nextPage} />}
-      </Head>
-
-      <div className={classes.Pagination}>
+      <div className={classes.Pagination} aria-label="pagination">
         <ul>
           {!isFirst && (
             <li key="previous">
@@ -41,7 +36,7 @@ const Pagination = ({ numPages, currentPage }) => {
             return (
               <li key={pageNumber}>
                 <SafeLink
-                  href={`/blogi/sivu/${pageNumber}`}
+                  href={pagePath(pageNumber)}
                   className={`${classes.NumberButton} ${
                     isActive ? classes.ActiveButton : ''
                   }`}

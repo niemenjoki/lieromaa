@@ -123,7 +123,7 @@ export default async function BlogPage({ params }) {
         <Post key={index} post={post} />
       ))}
 
-      <Pagination numPages={numPages} currentPage={pageIndexInt} />
+      <Pagination numPages={numPages} currentPage={pageIndexInt} basePath="/blogi" />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
     </>
   );

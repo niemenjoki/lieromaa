@@ -94,7 +94,11 @@ export default async function BlogTagPage({ params }) {
         <Post key={i} post={post} />
       ))}
 
-      <Pagination numPages={numPages} currentPage={pageIndexInt} />
+      <Pagination
+        numPages={numPages}
+        currentPage={pageIndexInt}
+        basePath={`/blogi/${tag}`}
+      />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
     </>
   );
