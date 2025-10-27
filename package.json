@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "predev": "node helpers/prebuild/index.mjs",
-    "prebuild": "node helpers/prebuild/index.mjs",
+    "predev": "node lib/prebuild/index.mjs",
+    "prebuild": "node lib/prebuild/index.mjs",
+    "log:tags": "node lib/devHelpers/logAllTags.js",
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
