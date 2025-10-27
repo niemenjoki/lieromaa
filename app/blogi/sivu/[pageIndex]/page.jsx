@@ -1,6 +1,7 @@
 import Advert from '@/components/Advert/Advert';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
+import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
 import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
@@ -47,7 +48,18 @@ export default async function BlogPage({ params }) {
           __html: JSON.stringify(ldJSON).replace(/</g, '\\u003c'),
         }}
       />
-
+      <PromoBox>
+        <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
+        <p style={{ marginBottom: '0.5rem' }}>
+          Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
+        </p>
+        <SafeLink
+          href="/madot-kampanja"
+          style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
+        >
+          Katso kampanjasivu »
+        </SafeLink>
+      </PromoBox>
       {pageIndexInt === 1 ? (
         <section className={classes.LandingInfo}>
           <h1>Lieromaa - Kompostimadot ja matokompostointi kotona</h1>
@@ -73,28 +85,6 @@ export default async function BlogPage({ params }) {
       ) : (
         <h1>Lieromaa – Kompostimadot ja matokompostointi kotona</h1>
       )}
-
-      <aside
-        className={classes.Content}
-        style={{
-          border: '2px solid var(--highlight)',
-          padding: '1rem',
-          borderRadius: '8px',
-          marginBottom: '2rem',
-          backgroundColor: 'var(--background-4)',
-        }}
-      >
-        <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
-        <p style={{ marginBottom: '0.5rem' }}>
-          Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
-        </p>
-        <SafeLink
-          href="/madot-kampanja"
-          style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
-        >
-          Katso kampanjasivu »
-        </SafeLink>
-      </aside>
 
       <SearchPosts
         list={posts}
