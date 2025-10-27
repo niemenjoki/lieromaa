@@ -2,15 +2,13 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "PrivacyPolicy",
+      "@type": "WebPage",
       "@id": "https://www.lieromaa.fi/tietosuoja#privacypolicy",
       "url": "https://www.lieromaa.fi/tietosuoja",
       "name": "Tietosuojaseloste – Lieromaa",
       "description": "Lieromaan tietosuojaseloste henkilötietojen käsittelystä, evästeiden käytöstä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics, Speed Insights).",
-      "dateModified": "2025-09-21T00:00:00+03:00",
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
       "about": { "@id": "https://www.lieromaa.fi/#organization" },
-      "publisher": { "@id": "https://www.lieromaa.fi/#organization" },
       "inLanguage": "fi"
     }
   ]

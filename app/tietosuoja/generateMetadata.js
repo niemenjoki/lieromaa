@@ -3,7 +3,7 @@ import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 export default function generateMetadata() {
   const title = 'Tietosuojaseloste | Lieromaa';
   const description =
-    'Lieromaan tietosuojaseloste henkilötietojen käsittelystä ja evästeiden käytöstä';
+    'Lue, miten Lieromaa käsittelee henkilötietoja ja käyttää evästeitä. Sivulla kerrotaan tietosuojaperiaatteet ja käyttäjän oikeudet.';
   const canonicalUrl = '/tietosuoja';
 
   const customMetadata = {

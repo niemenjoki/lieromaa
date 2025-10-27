@@ -25,7 +25,6 @@
         }
       },
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
-      "articleSection": "Matokompostointi",
       "about": [{ "@type": "Thing", "name": "kompostimadot" }],
       "keywords": [
         "matokompostointi",
