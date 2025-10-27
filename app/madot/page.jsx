@@ -1,6 +1,7 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
+import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { getPostRecommendations } from '@/lib/posts';
 
@@ -40,6 +41,18 @@ export default async function Page() {
       />
 
       <article className={classes.WormsPage}>
+        <PromoBox>
+          <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
+          <p style={{ marginBottom: '0.5rem' }}>
+            Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
+          </p>
+          <SafeLink
+            href="/madot-kampanja"
+            style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
+          >
+            Katso kampanjasivu »
+          </SafeLink>
+        </PromoBox>
         <h1>Osta Luomulieron Eisenia fetida -kompostimatoja</h1>
 
         <div className={classes.Content}>
