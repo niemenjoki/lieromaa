@@ -1,9 +1,10 @@
+import { CONTENT_TYPES } from '@/data/vars.mjs';
+import { getContentMetadata } from '@/lib/content';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
-import { getPostMetadata } from '@/lib/posts';
 
 export default async function generateMetadata({ params }) {
   const { slug } = await params;
-  const data = getPostMetadata(slug);
+  const data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
 
   const title = data.title || '';
   const description = data.excerpt || '';

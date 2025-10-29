@@ -1,7 +1,7 @@
 import safeLinks from '@/data/generated/safeRoutes.json';
-import { getAllPosts, getAllTags, getPaginatedPosts, getPostsByTag } from '@/lib/posts';
+import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content';
 
-import { POSTS_PER_PAGE, SITE_URL } from '../data/vars.mjs';
+import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '../data/vars.mjs';
 
 function toISODate(d) {
   return new Date(d).toISOString().split('T')[0];
@@ -12,8 +12,8 @@ export const revalidate = 3600;
 export default async function sitemap() {
   const urls = [];
 
-  const posts = getAllPosts();
-  const tags = getAllTags();
+  const posts = getAllContent({ type: CONTENT_TYPES.POST });
+  const tags = getAllPostTags();
 
   const latestPost = posts.reduce((latest, post) => {
     const current = new Date(post.date);

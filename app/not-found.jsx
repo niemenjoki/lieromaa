@@ -1,5 +1,6 @@
 import ClientNotFoundPage from '@/components/NotFoundClient/NotFoundClient';
-import { getAllPosts } from '@/lib/posts';
+import { CONTENT_TYPES } from '@/data/vars.mjs';
+import { getAllContent } from '@/lib/content';
 
 export const metadata = {
   title: 'Sivua ei löytynyt | Lieromaa',
@@ -8,7 +9,7 @@ export const metadata = {
 };
 
 export default async function NotFound() {
-  const posts = getAllPosts();
+  const posts = getAllContent({ type: CONTENT_TYPES.POST });
 
   const staticPages = [
     {

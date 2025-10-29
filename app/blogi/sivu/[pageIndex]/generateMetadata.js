@@ -1,6 +1,6 @@
-import { POSTS_PER_PAGE } from '@/data/vars.mjs';
+import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/data/vars.mjs';
+import { getAllContentSlugs } from '@/lib/content';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
-import { getAllPostSlugs } from '@/lib/posts';
 
 export default async function generateMetadata({ params }) {
   const { pageIndex } = await params;
@@ -19,7 +19,9 @@ export default async function generateMetadata({ params }) {
     canonical = `/blogi/sivu/${pageIndexInt}`;
     ogUrl = canonical;
   }
-  const numPages = Math.ceil(getAllPostSlugs().length / POSTS_PER_PAGE);
+  const numPages = Math.ceil(
+    getAllContentSlugs({ type: CONTENT_TYPES.POST }).length / POSTS_PER_PAGE
+  );
   const isFirst = pageIndexInt === 1;
   const isLast = pageIndexInt === numPages;
 

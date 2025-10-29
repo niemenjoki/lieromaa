@@ -1,6 +1,6 @@
 import { POSTS_PER_PAGE } from '@/data/vars.mjs';
+import { getPostsByTag } from '@/lib/content';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
-import { getPostsByTag } from '@/lib/posts';
 
 export default async function generateMetadata({ params }) {
   const { tag, pageIndex } = await params;
