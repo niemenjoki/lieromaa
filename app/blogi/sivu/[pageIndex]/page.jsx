@@ -51,7 +51,7 @@ export default async function BlogPage({ params }) {
       <PromoBox>
         <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
         <p style={{ marginBottom: '0.5rem' }}>
-          Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
+          Ilmainen toimitus kompostimadoille koko Suomeen 30.11.2025 asti.
         </p>
         <SafeLink
           href="/tuotteet/madot-kampanja"
