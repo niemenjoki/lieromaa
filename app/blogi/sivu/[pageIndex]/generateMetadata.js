@@ -1,4 +1,4 @@
-import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
+import { POSTS_PER_PAGE } from '@/data/vars.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 import { getAllPostSlugs } from '@/lib/posts';
 
