@@ -1,5 +1,5 @@
 import { CONTENT_TYPES } from '@/data/vars.mjs';
-import { getContentMetadata } from '@/lib/content';
+import { getContentMetadata } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default async function generateMetadata({ params }) {

@@ -13,7 +13,7 @@ import {
   getAllContentSlugs,
   getContentMetadata,
   getPostRecommendations,
-} from '@/lib/content';
+} from '@/lib/content/index.mjs';
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './PostPage.module.css';

@@ -15,8 +15,8 @@ export const sharelinks = [
   },
   {
     iconName: 'twitter',
-    href: 'https://twitter.com/intent/tweet?url=__URL__&hashtags=__TAGS__',
-    ariaLabel: 'Jaa Twitterissä',
+    href: 'https://x.com/intent/tweet?url=__URL__&hashtags=__TAGS__',
+    ariaLabel: 'Jaa X:ssä',
   },
   {
     iconName: 'whatsapp',
@@ -38,7 +38,7 @@ export default function SocialShareButtons({ title = '', tags = [] }) {
 
   return (
     <div className={classes.SocialShareButtons}>
-      <div>Jaa tämä julkaisu somessa:</div>
+      <div>Jaa tämä somessa:</div>
       <div>
         {sharelinks.map((sharelink) => {
           const href = sharelink.href

@@ -50,7 +50,7 @@ export default function Navbar() {
               </ul>
             </li>
 
-            {/*<li className={classes.Dropdown}>
+            <li className={classes.Dropdown}>
               <span>Opas</span>
               <ul className={classes.DropdownMenu}>
                 <li>
@@ -62,10 +62,12 @@ export default function Navbar() {
                   <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>
                 </li>
                 <li>
-                  <SafeLink href="/opas/matokakan-kerays">Matokakan keräys</SafeLink>
+                  <SafeLink href="/opas/kompostin-hyödyntäminen">
+                    Kompostin hyödyntäminen
+                  </SafeLink>
                 </li>
               </ul>
-            </li>*/}
+            </li>
 
             <li>
               <SafeLink href="/blogi">Blogi</SafeLink>
@@ -104,7 +106,7 @@ export default function Navbar() {
             </ul>
           </div>
 
-          {/*<div className={classes.MobileSection}>
+          <div className={classes.MobileSection}>
             <h3>Opas</h3>
             <ul>
               <li>
@@ -116,10 +118,12 @@ export default function Navbar() {
                 <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>
               </li>
               <li>
-                <SafeLink href="/opas/matokakan-kerays">Matokakan keräys</SafeLink>
+                <SafeLink href="/opas/kompostin-hyödyntäminen">
+                  Kompostin hyödyntäminen
+                </SafeLink>
               </li>
             </ul>
-          </div>*/}
+          </div>
 
           <div className={classes.MobileSection}>
             <ul>

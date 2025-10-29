@@ -1,6 +1,6 @@
 import ClientNotFoundPage from '@/components/NotFoundClient/NotFoundClient';
 import { CONTENT_TYPES } from '@/data/vars.mjs';
-import { getAllContent } from '@/lib/content';
+import { getAllContent } from '@/lib/content/index.mjs';
 
 export const metadata = {
   title: 'Sivua ei löytynyt | Lieromaa',

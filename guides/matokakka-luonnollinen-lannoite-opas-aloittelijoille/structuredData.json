@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://www.lieromaa.fi/opas/matokakan-keräys/matokakka-luonnollinen-lannoite-opas-aloittelijoille#blogpost",
+      "url": "https://www.lieromaa.fi/opas/matokakan-keräys/matokakka-luonnollinen-lannoite-opas-aloittelijoille",
+      "headline": "Matokakka – luonnollinen lannoite ja maanparannusaine",
+      "description": "Matokakka on luonnollinen, kemikaaliton lannoite, joka parantaa maan rakennetta ja tukee kasvien kasvua. Opi hyödyntämään se oikein.",
+      "datePublished": "2025-09-12T00:00:00+03:00",
+      "dateModified": "2025-09-12T00:00:00+03:00",
+      "inLanguage": "fi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.lieromaa.fi/#joonas",
+        "name": "Joonas Niemenjoki",
+        "url": "https://www.lieromaa.fi/#joonas"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.lieromaa.fi/#organization",
+        "name": "Lieromaa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
+        }
+      },
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "articleSection": "Kompostin hyödyntäminen",
+      "about": [{ "@type": "Thing", "name": "kompostin hyödyntäminen" }],
+      "keywords": [
+        "kasvit",
+        "kompostin hyödyntäminen",
+        "kosteus",
+        "matokakan hyödyt",
+        "matokakan käyttö",
+        "matokakka",
+        "matokompostointi",
+        "npk",
+        "opas",
+        "puutarha",
+        "ruokkiminen",
+        "valoerottelu"
+      ]
+    }
+  ]
+}

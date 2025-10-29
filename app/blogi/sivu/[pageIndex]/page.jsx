@@ -5,7 +5,11 @@ import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
-import { getAllContentSlugs, getAllPostTags, getPaginatedPosts } from '@/lib/content';
+import {
+  getAllContentSlugs,
+  getAllPostTags,
+  getPaginatedPosts,
+} from '@/lib/content/index.mjs';
 
 import classes from './PostPage.module.css';
 import structuredData from './structuredData.json';
