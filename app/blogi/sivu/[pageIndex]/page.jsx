@@ -54,7 +54,7 @@ export default async function BlogPage({ params }) {
           Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
         </p>
         <SafeLink
-          href="/madot-kampanja"
+          href="/tuotteet/madot-kampanja"
           style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
         >
           Katso kampanjasivu »
@@ -76,7 +76,7 @@ export default async function BlogPage({ params }) {
           </p>
           <p>
             Tutustu blogiin valitsemalla alta sinua kiinnostava kategoria – tai{' '}
-            <SafeLink href="/madot" style={{ fontWeight: 'bold' }}>
+            <SafeLink href="/tuotteet/madot" style={{ fontWeight: 'bold' }}>
               tilaa kompostimatoja
             </SafeLink>{' '}
             ja aloita oma matokompostointi jo tänään.

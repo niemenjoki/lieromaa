@@ -12,7 +12,7 @@ export default async function NotFound() {
 
   const staticPages = [
     {
-      overrideHref: '/madot',
+      overrideHref: '/tuotteet/madot',
       title: 'Osta kompostimatoja',
       excerpt:
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen.',

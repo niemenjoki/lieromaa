@@ -3,19 +3,19 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.lieromaa.fi/madot#webpage",
-      "url": "https://www.lieromaa.fi/madot",
-      "name": "Osta kompostimatoja – Eisenia fetida matokompostointiin",
-      "description": "Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.",
+      "@id": "https://www.lieromaa.fi/tuotteet/madot-kampanja#webpage",
+      "url": "https://www.lieromaa.fi/tuotteet/madot-kampanja",
+      "name": "Syystarjous – ilmainen toimitus kompostimadoille!",
+      "description": "Syksyn kampanjassa kaikki Lieromaan kompostimadot toimitetaan ilman toimituskuluja koko Suomeen. Tarjous on voimassa 30.11.2025 asti ja koskee kaikkia pakkauskokoja.",
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
       "about": { "@id": "https://www.lieromaa.fi/#organization" },
       "inLanguage": "fi"
     },
     {
       "@type": "Product",
-      "@id": "https://www.lieromaa.fi/madot#product",
+      "@id": "https://www.lieromaa.fi/tuotteet/madot#product",
       "name": "Kompostimadot (Eisenia fetida)",
-      "description": "Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina. Sopivat sisä- ja ulkokäyttöön, hajuttomaan biojätteen käsittelyyn ja luonnonmukaiseen lannoitukseen.",
+      "description": "Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Nyt syyskampanjassa ilmainen toimitus 30.11.2025 asti.",
       "image": "https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.avif",
       "sku": "MADOT",
       "brand": {
@@ -27,13 +27,13 @@
       "material": "Kompostimulta, pahvisilppu, puukuitu, kookoskuitu",
       "offers": {
         "@type": "AggregateOffer",
-        "url": "https://www.lieromaa.fi/madot",
+        "url": "https://www.lieromaa.fi/tuotteet/madot-kampanja",
         "priceCurrency": "EUR",
         "lowPrice": "20.00",
         "highPrice": "50.00",
         "offerCount": 3,
         "availability": "https://schema.org/InStock",
-        "priceValidUntil": "2026-06-30",
+        "priceValidUntil": "2025-11-30",
         "seller": {
           "@type": "Organization",
           "name": "Lieromaa / Joonas Niemenjoki",
@@ -47,7 +47,7 @@
           },
           "shippingRate": {
             "@type": "MonetaryAmount",
-            "value": "8.90",
+            "value": "0.00",
             "currency": "EUR"
           },
           "deliveryTime": {
@@ -81,34 +81,13 @@
       }
     },
     {
-      "@type": "FAQPage",
-      "@id": "https://www.lieromaa.fi/madot#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Kuinka paljon kompostimatoja tarvitsen?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yleensä 100–200 madon populaatio riittää aloittamaan pienen keittiökompostorin. Voit laskea tarkan määrän Lieromaan matolaskurilla."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Voinko tilata kompostimatoja postitse?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Kyllä. Toimitus tapahtuu Postin kautta maanantaisin ja tiistaisin pakasterasiassa. Nouto Järvenpäästä on myös mahdollista."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Miten madot toimitetaan?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Madot pakataan kosteaan kasvualustaan (pahvi-, puu- ja kookoskuituseos) ja kuljetetaan hengittävässä pakkauksessa."
-          }
-        }
-      ],
+      "@type": "SpecialAnnouncement",
+      "@id": "https://www.lieromaa.fi/tuotteet/madot-kampanja#announcement",
+      "name": "Syystarjous – ilmainen toimitus kompostimadoille",
+      "text": "Syksyn kampanjassa kaikki Lieromaan kompostimadot toimitetaan ilman toimituskuluja koko Suomeen. Tarjous on voimassa 1.–30.11.2025.",
+      "datePosted": "2025-10-01",
+      "expires": "2025-11-30",
+      "about": { "@id": "https://www.lieromaa.fi/tuotteet/madot#product" },
       "inLanguage": "fi"
     }
   ]

@@ -14,7 +14,7 @@ const Footer = () => {
             <Link href={'/blogi'}>Blogi</Link>
           </li>
           <li>
-            <Link href={'/madot'}>Osta kompostimatoja</Link>
+            <Link href={'/tuotteet/madot'}>Osta kompostimatoja</Link>
           </li>
           <li>
             <Link href={'/matolaskuri'}>Kompostimatojen laskuri</Link>

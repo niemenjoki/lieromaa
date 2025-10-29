@@ -75,7 +75,7 @@ export default async function Page() {
             Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
           </p>
           <SafeLink
-            href="/madot-kampanja"
+            href="/tuotteet/madot-kampanja"
             style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
           >
             Katso kampanjasivu »

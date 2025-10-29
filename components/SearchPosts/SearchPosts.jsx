@@ -12,7 +12,7 @@ import classes from './SearchPosts.module.css';
 const Search = ({ list, keys, placeholder }) => {
   const staticPages = [
     {
-      overrideHref: '/madot',
+      overrideHref: '/tuotteet/madot',
       title: 'Osta kompostimatoja',
       excerpt:
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!',

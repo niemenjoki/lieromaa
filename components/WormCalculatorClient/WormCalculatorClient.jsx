@@ -75,7 +75,7 @@ export default function WormCalculatorClient({ recommendedPosts }) {
         </p>
         <p>
           Jos sinulla ei vielä ole matoja, voit ostaa niitä{' '}
-          <SafeLink href="/madot">täältä</SafeLink>.
+          <SafeLink href="/tuotteet/madot">täältä</SafeLink>.
         </p>
 
         <h2>Laskuri</h2>
