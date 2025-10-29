@@ -43,6 +43,11 @@
   gap: 1.2rem;
 }
 
+.Socials span a {
+  margin: 0 0.5rem 0 0;
+  font-size: 1.5rem;
+}
+
 /* --- Links --- */
 .Links {
   list-style: none;
@@ -137,7 +142,7 @@
 }
 
 .MobileSection h3 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-bottom: 0.5rem;
 }
 
@@ -153,14 +158,18 @@
 .MobileSection a {
   color: var(--text-color);
   text-decoration: none;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   opacity: 0.9;
   transition: opacity 0.2s ease;
 }
 
+.MobileSection li {
+  margin: 0.25rem 0;
+}
+
 .MobileSection a:hover {
   opacity: 1;
-  text-decoration: underline;
+  color: var(--highlight);
 }
 
 /* --- Toggler visibility --- */

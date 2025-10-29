@@ -50,6 +50,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  font-size: 1.5em;
+}
+
+.Socials a:not(:first-child) {
+  margin: 0 0.25rem;
 }
 
 .Bottom {

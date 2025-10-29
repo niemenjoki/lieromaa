@@ -55,7 +55,7 @@ export default function Footer() {
                 <SafeLink href="/matolaskuri">Matolaskuri</SafeLink>
               </li>
               <li>
-                <SafeLink href="/tietoa">Tietoa</SafeLink>
+                <SafeLink href="/tietoa">Tietoa sivustosta</SafeLink>
               </li>
               <li>
                 <SafeLink href="/tietosuoja">Tietosuoja</SafeLink>

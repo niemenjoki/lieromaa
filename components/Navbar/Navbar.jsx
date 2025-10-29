@@ -7,6 +7,7 @@ import ThemeToggler from '@/components/ThemeToggler/ThemeToggler';
 
 import Toggler from '../NavToggler/NavToggler.jsx';
 import SafeLink from '../SafeLink/SafeLink';
+import Socials from '../Socials/Socials.jsx';
 import classes from './Navbar.module.css';
 import logo from '/public/images/lieromaa_logo.avif';
 
@@ -89,6 +90,9 @@ export default function Navbar() {
       <div className={`${classes.MobileMenu} ${isOpen ? classes.MobileOpen : ''}`}>
         <div className={classes.MobileContent}>
           <div className={classes.MobileSection}>
+            <ThemeToggler style={{ fontSize: '26px' }} />
+          </div>
+          <div className={classes.MobileSection}>
             <h3>Tuotteet</h3>
             <ul>
               <li>
@@ -118,16 +122,31 @@ export default function Navbar() {
           </div>*/}
 
           <div className={classes.MobileSection}>
-            <h3>Blogi</h3>
             <ul>
               <li>
                 <SafeLink href="/blogi">Blogi</SafeLink>
               </li>
+              <li>
+                <SafeLink href="/matolaskuri">Matolaskuri</SafeLink>
+              </li>
+              <li>
+                <SafeLink href="/tietoa">Tietoa sivustosta</SafeLink>
+              </li>
+              <li>
+                <SafeLink href="/tietosuoja">Tietosuoja</SafeLink>
+              </li>
+              <li>
+                <SafeLink href="/tilausehdot">Tilausehdot</SafeLink>
+              </li>
             </ul>
           </div>
-
           <div className={classes.MobileSection}>
-            <ThemeToggler style={{ fontSize: '26px' }} />
+            <h3>Seuraa</h3>
+            <ul>
+              <li className={classes.Socials}>
+                <Socials />
+              </li>
+            </ul>
           </div>
         </div>
       </div>
