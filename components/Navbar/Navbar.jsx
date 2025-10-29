@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 
-import Link from 'next/link.js';
-
 import SafeImage from '@/components/SafeImage/SafeImage';
 import ThemeToggler from '@/components/ThemeToggler/ThemeToggler';
 
@@ -12,7 +10,7 @@ import SafeLink from '../SafeLink/SafeLink';
 import classes from './Navbar.module.css';
 import logo from '/public/images/lieromaa_logo.avif';
 
-export default function Navbar({ posts }) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen((prev) => !prev);
 
@@ -21,7 +19,7 @@ export default function Navbar({ posts }) {
       <div className={classes.Inner}>
         {/* LEFT */}
         <div className={classes.Left}>
-          <Link href="/" className={classes.LogoLink}>
+          <SafeLink href="/" className={classes.LogoLink}>
             <SafeImage
               src={logo}
               alt="Lieromaa logo"
@@ -31,7 +29,7 @@ export default function Navbar({ posts }) {
               priority
             />
             <span className={classes.Brand}>Lieromaa</span>
-          </Link>
+          </SafeLink>
         </div>
 
         {/* RIGHT */}
@@ -41,12 +39,12 @@ export default function Navbar({ posts }) {
               <span>Tuotteet</span>
               <ul className={classes.DropdownMenu}>
                 <li>
-                  <Link href="/tuotteet/madot">Kompostimadot</Link>
+                  <SafeLink href="/tuotteet/madot">Kompostimadot</SafeLink>
                 </li>
                 {/* <li>
-                  <Link href="/tuotteet/matokompostin-aloituspakkaus">
+                  <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">
                     Aloituspakkaus
-                  </Link>
+                  </SafeLink>
                 </li> */}
               </ul>
             </li>
@@ -55,21 +53,21 @@ export default function Navbar({ posts }) {
               <span>Opas</span>
               <ul className={classes.DropdownMenu}>
                 <li>
-                  <Link href="/opas/kompostorin-perustaminen">
+                  <SafeLink href="/opas/kompostorin-perustaminen">
                     Kompostorin perustaminen
-                  </Link>
+                  </SafeLink>
                 </li>
                 <li>
-                  <Link href="/opas/kompostorin-hoito">Kompostorin hoito</Link>
+                  <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>
                 </li>
                 <li>
-                  <Link href="/opas/matokakan-kerays">Matokakan keräys</Link>
+                  <SafeLink href="/opas/matokakan-kerays">Matokakan keräys</SafeLink>
                 </li>
               </ul>
             </li>*/}
 
             <li>
-              <Link href="/blogi">Blogi</Link>
+              <SafeLink href="/blogi">Blogi</SafeLink>
             </li>
             <li>
               <ThemeToggler style={{ fontSize: '24px' }} />
@@ -94,10 +92,10 @@ export default function Navbar({ posts }) {
             <h3>Tuotteet</h3>
             <ul>
               <li>
-                <Link href="/tuotteet/madot">Kompostimadot</Link>
+                <SafeLink href="/tuotteet/madot">Kompostimadot</SafeLink>
               </li>
               {/*<li>
-                <Link href="/tuotteet/matokompostin-aloituspakkaus">Aloituspakkaus</Link>
+                <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">Aloituspakkaus</SafeLink>
               </li>*/}
             </ul>
           </div>
@@ -106,15 +104,15 @@ export default function Navbar({ posts }) {
             <h3>Opas</h3>
             <ul>
               <li>
-                <Link href="/opas/kompostorin-perustaminen">
+                <SafeLink href="/opas/kompostorin-perustaminen">
                   Kompostorin perustaminen
-                </Link>
+                </SafeLink>
               </li>
               <li>
-                <Link href="/opas/kompostorin-hoito">Kompostorin hoito</Link>
+                <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>
               </li>
               <li>
-                <Link href="/opas/matokakan-kerays">Matokakan keräys</Link>
+                <SafeLink href="/opas/matokakan-kerays">Matokakan keräys</SafeLink>
               </li>
             </ul>
           </div>*/}
@@ -123,7 +121,7 @@ export default function Navbar({ posts }) {
             <h3>Blogi</h3>
             <ul>
               <li>
-                <Link href="/blogi">Blogi</Link>
+                <SafeLink href="/blogi">Blogi</SafeLink>
               </li>
             </ul>
           </div>

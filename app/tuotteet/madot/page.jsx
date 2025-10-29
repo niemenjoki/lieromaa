@@ -3,7 +3,6 @@ import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { getPostRecommendations } from '@/lib/posts';
 
 import classes from './Madot.module.css';
 import structuredData from './structuredData.json';
