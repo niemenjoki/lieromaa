@@ -1,5 +1,5 @@
 import safeLinks from '@/data/generated/safeRoutes.json';
-import { getAllPosts, getAllTags, getPostsByTag } from '@/lib/posts';
+import { getAllPosts, getAllTags, getPaginatedPosts, getPostsByTag } from '@/lib/posts';
 
 import { POSTS_PER_PAGE, SITE_URL } from '../data/vars.mjs';
 
@@ -54,6 +54,14 @@ export default async function sitemap() {
     });
   }
 
+  const pageCount = Math.ceil(posts.length / POSTS_PER_PAGE);
+  for (let i = 2; i <= pageCount; i++) {
+    urls.push({
+      url: `${SITE_URL}/blogi/sivu/${i}`,
+      lastModified: toISODate(latestPost),
+    });
+  }
+
   for (const url of urls) {
     const path = url.url.replace(SITE_URL, '');
     if (!safeLinks.includes(path)) {
@@ -61,5 +69,5 @@ export default async function sitemap() {
     }
   }
 
-  return urls;
+  return urls.sort((a, b) => a.url.localeCompare(b.url));
 }
