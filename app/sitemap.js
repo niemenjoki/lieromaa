@@ -38,8 +38,7 @@ export default async function sitemap() {
   }
 
   for (const tag of tags) {
-    const { numPages } = getPostsByTag(tag, 1, POSTS_PER_PAGE);
-
+    const { numPages } = getPostsByTag(tag.replaceAll(' ', '-'), 1, POSTS_PER_PAGE);
     for (let i = 1; i <= numPages; i++) {
       urls.push({
         url: `${SITE_URL}/blogi/${tag.replaceAll(' ', '-').trim()}/sivu/${i}`,
