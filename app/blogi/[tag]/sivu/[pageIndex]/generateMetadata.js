@@ -18,8 +18,6 @@ export default async function generateMetadata({ params }) {
   const isFirst = pageIndexInt === 1;
   const isLast = pageIndexInt === numPages;
 
-  console.log({ isFirst, isLast });
-
   const customMetadata = {
     title,
     description,
