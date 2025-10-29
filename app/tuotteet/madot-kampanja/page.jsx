@@ -137,7 +137,7 @@ export default function Page() {
             Suomeen.
           </p>
 
-          <SafeLink href="/madot">← Lue lisää kompostimadoista</SafeLink>
+          <SafeLink href="/tuotteet/madot">← Lue lisää kompostimadoista</SafeLink>
         </div>
       </article>
     </>

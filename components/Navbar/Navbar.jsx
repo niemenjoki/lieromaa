@@ -18,7 +18,7 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '/blogi', text: 'Blogi' },
-    { href: '/madot', text: 'Osta matoja', highlight: true },
+    { href: '/tuotteet/madot', text: 'Osta matoja' },
     { href: '/matolaskuri', text: 'Laskuri' },
     { href: '/tietoa', text: 'Tietoa' },
   ];

@@ -25,9 +25,9 @@ export default async function sitemap() {
     { url: '/tietoa', lastmod: '2025-09-08' },
     { url: '/tietosuoja', lastmod: '2025-09-08' },
     { url: '/tilausehdot', lastmod: '2025-10-07' },
-    { url: '/madot', lastmod: '2025-10-07' },
+    { url: '/tuotteet/madot', lastmod: '2025-10-07' },
     { url: '/matolaskuri', lastmod: '2025-10-07' },
-    { url: '/madot-kampanja', lastmod: '2025-10-14' },
+    { url: '/tuotteet/madot-kampanja', lastmod: '2025-10-14' },
   ];
 
   for (const { url, lastmod } of staticPages) {
