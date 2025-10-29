@@ -3,3 +3,7 @@ export const SITE_URL = 'https://www.lieromaa.fi';
 export const REPO_URL = 'https://github.com/niemenjoki/lieromaa';
 export const LICENSE_URL =
   'https://github.com/niemenjoki/lieromaa/blob/master/LICENSE.md';
+export const CONTENT_TYPES = {
+  POST: 'POST',
+  GUIDE: 'GUIDE',
+};

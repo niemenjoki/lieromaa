@@ -4,8 +4,8 @@ import Post from '@/components/PostPreview/PostPreview';
 import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
-import { getAllPostSlugs, getAllTags, getPaginatedPosts } from '@/lib/posts';
+import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
+import { getAllContentSlugs, getAllPostTags, getPaginatedPosts } from '@/lib/content';
 
 import classes from './PostPage.module.css';
 import structuredData from './structuredData.json';
@@ -13,7 +13,7 @@ import structuredData from './structuredData.json';
 export { default as generateMetadata } from './generateMetadata';
 
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs();
+  const slugs = getAllContentSlugs({ type: CONTENT_TYPES.POST });
 
   const numPages = Math.ceil(slugs.length / POSTS_PER_PAGE);
   return Array.from({ length: numPages }, (_, i) => ({
@@ -26,7 +26,7 @@ export default async function BlogPage({ params }) {
 
   const pageIndexInt = parseInt(pageIndex) || 1;
   const { posts, numPages } = getPaginatedPosts(pageIndexInt, POSTS_PER_PAGE);
-  const allTags = getAllTags();
+  const allTags = getAllPostTags();
 
   const data = JSON.parse(JSON.stringify(structuredData));
   data['@graph'][1]['itemListElement'] = [];

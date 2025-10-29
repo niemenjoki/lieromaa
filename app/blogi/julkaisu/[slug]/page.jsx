@@ -8,7 +8,12 @@ import PostRecommendation from '@/components/PostRecommendation/PostRecommendati
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
-import { getAllPostSlugs, getPostMetadata, getPostRecommendations } from '@/lib/posts';
+import { CONTENT_TYPES } from '@/data/vars.mjs';
+import {
+  getAllContentSlugs,
+  getContentMetadata,
+  getPostRecommendations,
+} from '@/lib/content';
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './PostPage.module.css';
@@ -19,7 +24,7 @@ export const mdxComponents = {
 };
 
 export async function generateStaticParams() {
-  const slugs = getAllPostSlugs();
+  const slugs = getAllContentSlugs({ type: CONTENT_TYPES.POST });
   return slugs.map((slug) => ({
     slug,
   }));
@@ -29,7 +34,7 @@ export { default as generateMetadata } from './generateMetadata';
 
 export default async function PostPage({ params }) {
   const { slug } = await params;
-  const data = getPostMetadata(slug);
+  const data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
 
   const mdxPath = path.join(process.cwd(), 'posts', slug, 'post.mdx');
   const mdxContent = fs.readFileSync(mdxPath, 'utf-8');

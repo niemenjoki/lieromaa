@@ -1,11 +1,11 @@
-import { getAllPosts } from '@/lib/posts';
+import { getAllContent } from '@/lib/content';
 
-import { SITE_URL } from '../../data/vars.mjs';
+import { CONTENT_TYPES, SITE_URL } from '../../data/vars.mjs';
 
 export const revalidate = 3600;
 
 export async function GET() {
-  const rawPosts = getAllPosts();
+  const rawPosts = getAllContent({ type: CONTENT_TYPES.POST });
 
   const posts = rawPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 

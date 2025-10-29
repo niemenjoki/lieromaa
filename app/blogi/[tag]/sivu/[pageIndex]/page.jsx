@@ -3,8 +3,8 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
-import { getAllPosts, getAllTags, getPostsByTag } from '@/lib/posts';
+import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
+import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content';
 
 import classes from './TagPage.module.css';
 import structuredData from './structuredData.json';
@@ -12,7 +12,7 @@ import structuredData from './structuredData.json';
 export { default as generateMetadata } from './generateMetadata';
 
 export async function generateStaticParams() {
-  const allPosts = getAllPosts();
+  const allPosts = getAllContent({ type: CONTENT_TYPES.POST });
   const groupedPosts = {};
 
   allPosts.forEach((post) => {
@@ -39,7 +39,7 @@ export default async function BlogTagPage({ params }) {
   const decodedTag = decodeURIComponent(tag);
   const pageIndexInt = parseInt(pageIndex) || 1;
   const { posts, numPages } = getPostsByTag(decodedTag, pageIndexInt, POSTS_PER_PAGE);
-  const allTags = getAllTags();
+  const allTags = getAllPostTags();
   const tagDisplay = decodedTag.replaceAll('-', ' ');
 
   const data = JSON.parse(JSON.stringify(structuredData));
