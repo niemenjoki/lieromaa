@@ -1,5 +1,5 @@
 import WormCalculatorClient from '@/components/WormCalculatorClient/WormCalculatorClient';
-import { getPostRecommendations } from '@/lib/content';
+import { getPostRecommendations } from '@/lib/content/index.mjs';
 
 import structuredData from './structuredData.json';
 

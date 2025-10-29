@@ -4,7 +4,7 @@ import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
-import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content';
+import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content/index.mjs';
 
 import classes from './TagPage.module.css';
 import structuredData from './structuredData.json';

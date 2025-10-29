@@ -3,12 +3,12 @@ import { getContentMetadata } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
+  const { categorySlug, guideSlug } = await params;
+  const data = getContentMetadata({ type: CONTENT_TYPES.GUIDE, slug: guideSlug });
 
   const title = data.title || '';
   const description = data.excerpt || '';
-  const url = `/blogi/julkaisu/${slug}`;
+  const url = `/opas/${categorySlug}/${guideSlug}`;
   const image = data.image || {
     url: '/images/luomuliero_logo_1024.avif',
     width: 1024,

@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen#blogpost",
+      "url": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen",
+      "headline": "Kolmen laatikon matokompostori - edistyneempi, helppohoitoinen ratkaisu",
+      "description": "Tämä kompostori vaatii hieman enemmän rakentamista kuin yksilaatikkoinen malli, mutta palkitsee helppohoitoisuudella ja paremmalla ilmanvaihdolla.",
+      "datePublished": "2025-10-01T00:00:00+03:00",
+      "dateModified": "2025-10-01T00:00:00+03:00",
+      "inLanguage": "fi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.lieromaa.fi/#joonas",
+        "name": "Joonas Niemenjoki",
+        "url": "https://www.lieromaa.fi/#joonas"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.lieromaa.fi/#organization",
+        "name": "Lieromaa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
+        }
+      },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
+      "image": "https://www.lieromaa.fi/images/guides/kolmen_laatikon_kompostori.avif",
+      "articleSection": "Matokompostointi",
+      "about": [{ "@type": "Thing", "name": "kompostorin perustaminen" }],
+      "keywords": [
+        "banaanikärpäset",
+        "continuous flow",
+        "diy",
+        "jatkuva virtaus",
+        "kompostorin perustaminen",
+        "kosteus",
+        "matokakan keräys",
+        "matokakka",
+        "matokompostointi",
+        "opas",
+        "rakentaminen",
+        "ruokinta"
+      ]
+    }
+  ]
+}

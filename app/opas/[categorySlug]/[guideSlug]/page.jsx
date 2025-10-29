@@ -1,48 +1,39 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
+import classes from 'app/blogi/julkaisu/[slug]/PostPage.module.css';
 import fs from 'fs';
 import path from 'path';
 
 import Advert from '@/components/Advert/Advert';
-import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import { CONTENT_TYPES } from '@/data/vars.mjs';
-import {
-  getAllContentSlugs,
-  getContentMetadata,
-  getPostRecommendations,
-} from '@/lib/content/index.mjs';
+import { getAllContent, getContentMetadata } from '@/lib/content/index.mjs';
 import portrait from '@/public/images/portrait2024.avif';
-
-import classes from './PostPage.module.css';
 
 export const mdxComponents = {
   SafeLink,
   SafeImage,
 };
 
-export async function generateStaticParams() {
-  const slugs = getAllContentSlugs({ type: CONTENT_TYPES.POST });
-  return slugs.map((slug) => ({
-    slug,
+export function generateStaticParams() {
+  const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
+
+  return guides.map((guide) => ({
+    categorySlug: guide.category.name.replaceAll(' ', '-'),
+    guideSlug: guide.slug,
   }));
 }
 
 export { default as generateMetadata } from './generateMetadata';
 
-export default async function PostPage({ params }) {
-  const { slug } = await params;
-  const data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
+export default async function GuidePage({ params }) {
+  const { guideSlug } = await params;
+  const data = getContentMetadata({ type: CONTENT_TYPES.GUIDE, slug: guideSlug });
 
-  const mdxPath = path.join(process.cwd(), 'posts', slug, 'post.mdx');
+  const mdxPath = path.join(process.cwd(), 'guides', guideSlug, 'content.mdx');
   const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
-
-  const recommendedPosts = await getPostRecommendations({
-    self: slug,
-    keywords: [...data.tags, ...data.keywords],
-  });
 
   const { structuredData } = data;
 
@@ -54,14 +45,10 @@ export default async function PostPage({ params }) {
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
-
       <article className={classes.PostPage}>
         <h1>{data.title}</h1>
         <div className={classes.Date}>
-          Julkaistu: {new Date(data.date).toLocaleDateString('fi-FI')}
-          {data.updated
-            ? ` (Päivitetty: ${new Date(data.updated).toLocaleDateString('fi-FI')})`
-            : undefined}
+          Päivitetty: {new Date(data.updated).toLocaleDateString('fi-FI')}
         </div>
 
         <div className={classes.Content + ' .md'}>
@@ -106,7 +93,6 @@ export default async function PostPage({ params }) {
 
       <SocialShareButtons title={data.title} text={data.excerpt} tags={data.tags} />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
-      <PostRecommendation posts={recommendedPosts} />
     </>
   );
 }

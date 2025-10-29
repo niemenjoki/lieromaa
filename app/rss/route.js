@@ -1,4 +1,4 @@
-import { getAllContent } from '@/lib/content';
+import { getAllContent } from '@/lib/content/index.mjs';
 
 import { CONTENT_TYPES, SITE_URL } from '../../data/vars.mjs';
 

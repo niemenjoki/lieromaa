@@ -1,73 +1,76 @@
 import safeLinks from '@/data/generated/safeRoutes.json';
-import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content';
+import {
+  getAllContent,
+  getAllGuideCategories,
+  getAllPostTags,
+  getPostsByTag,
+} from '@/lib/content/index.mjs';
 
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '../data/vars.mjs';
 
-function toISODate(d) {
-  return new Date(d).toISOString().split('T')[0];
-}
+const toISODate = (d) => new Date(d).toISOString().split('T')[0];
+const slugify = (s) => s.replaceAll(' ', '-').trim().toLowerCase();
 
 export const revalidate = 3600;
 
 export default async function sitemap() {
   const urls = [];
-
   const posts = getAllContent({ type: CONTENT_TYPES.POST });
-  const tags = getAllPostTags();
+  const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
+  const postTags = getAllPostTags();
+  const guideCategories = getAllGuideCategories();
 
-  const latestPost = posts.reduce((latest, post) => {
-    const current = new Date(post.date);
-    return current > latest ? current : latest;
-  }, new Date(0));
+  const latest = (arr, field) =>
+    arr.reduce((latest, item) => {
+      const d = new Date(item[field]);
+      return d > latest ? d : latest;
+    }, new Date(0));
 
-  const staticPages = [
-    { url: '/', lastmod: latestPost },
-    { url: '/tietoa', lastmod: '2025-09-08' },
-    { url: '/tietosuoja', lastmod: '2025-09-08' },
-    { url: '/tilausehdot', lastmod: '2025-10-07' },
-    { url: '/tuotteet/madot', lastmod: '2025-10-07' },
-    { url: '/matolaskuri', lastmod: '2025-10-07' },
-    { url: '/tuotteet/madot-kampanja', lastmod: '2025-10-14' },
-  ];
+  const latestPost = latest(posts, 'date');
+  const latestGuide = latest(guides, 'updated');
 
-  for (const { url, lastmod } of staticPages) {
-    urls.push({
-      url: `${SITE_URL}${url}`,
-      lastModified: toISODate(lastmod),
-    });
+  const add = (url, lastmod) => {
+    console.log({ url, lastmod });
+    urls.push({ url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
+  };
+  // --- Static pages
+  [
+    ['/', latestPost],
+    ['/tietoa', '2025-09-08'],
+    ['/tietosuoja', '2025-09-08'],
+    ['/tilausehdot', '2025-10-07'],
+    ['/tuotteet/madot', '2025-10-07'],
+    ['/matolaskuri', '2025-10-07'],
+    ['/tuotteet/madot-kampanja', '2025-10-14'],
+  ].forEach(([url, lastmod]) => add(url, lastmod));
+
+  // --- Tag pages
+  for (const tag of postTags) {
+    const slug = slugify(tag);
+    const { numPages } = getPostsByTag(slug, 1, POSTS_PER_PAGE);
+    for (let i = 1; i <= numPages; i++) add(`/blogi/${slug}/sivu/${i}`, latestPost);
   }
 
-  for (const tag of tags) {
-    const { numPages } = getPostsByTag(tag.replaceAll(' ', '-'), 1, POSTS_PER_PAGE);
-    for (let i = 1; i <= numPages; i++) {
-      urls.push({
-        url: `${SITE_URL}/blogi/${tag.replaceAll(' ', '-').trim()}/sivu/${i}`,
-        lastModified: toISODate(latestPost),
-      });
-    }
-  }
+  // --- Guide categories
+  guideCategories.forEach((cat) => add(`/opas/${slugify(cat)}`, latestGuide));
 
-  for (const post of posts) {
-    urls.push({
-      url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
-      lastModified: toISODate(post.date),
-    });
-  }
+  // --- Blog posts
+  posts.forEach((p) => add(`/blogi/julkaisu/${p.slug}`, p.date));
 
-  const pageCount = Math.ceil(posts.length / POSTS_PER_PAGE);
-  for (let i = 2; i <= pageCount; i++) {
-    urls.push({
-      url: `${SITE_URL}/blogi/sivu/${i}`,
-      lastModified: toISODate(latestPost),
-    });
-  }
+  // --- Guides
+  guides.forEach((g) => add(`/opas/${slugify(g.category.name)}/${g.slug}`, g.updated));
 
-  for (const url of urls) {
-    const path = url.url.replace(SITE_URL, '');
+  // --- Paginated blog index
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  for (let i = 2; i <= totalPages; i++) add(`/blogi/sivu/${i}`, latestPost);
+
+  // --- Validate paths
+  urls.forEach(({ url }) => {
+    const path = url.replace(SITE_URL, '');
     if (!safeLinks.includes(path)) {
       throw new Error(`Invalid url defined in sitemap: "${path}"`);
     }
-  }
+  });
 
-  return urls.sort((a, b) => a.url.localeCompare(b.url));
+  return urls.sort((a, b) => a.url.localeCompare(b.url, 'fi'));
 }
