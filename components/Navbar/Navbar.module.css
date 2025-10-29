@@ -1,177 +1,186 @@
-.NavbarWrapper {
+.Navbar {
   background: linear-gradient(var(--background-1), var(--background-2));
   color: var(--text-color);
-  position: relative;
-  z-index: 100;
-}
-
-.Navbar {
-  height: 150px;
-  padding: 2em;
-  display: flex;
-  flex-flow: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  position: relative;
-  width: 100%;
-}
-
-.Brand {
-  display: flex;
-  align-items: center;
-}
-
-.BrandLink {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-}
-
-.Logo {
-  display: block;
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
-
-.BrandName {
-  font-size: 1rem;
-  font-weight: 600;
-  color: inherit;
-}
-
-/* --- Mobile drawer nav --- */
-.Nav {
-  position: fixed;
-  z-index: 10;
-  left: 0;
+  position: sticky;
   top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: var(--overlay-color-initial);
-  transition: background-color 200ms ease-in-out;
-  transform: translateX(-100vw);
-  align-items: center;
-}
-
-.Open {
-  background: var(--overlay-color-final);
-  transform: translateX(0);
-}
-
-.Toggler {
-  display: inline-block;
-  margin: 0.5rem;
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
   z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.Drawer {
-  list-style: none;
+/* --- Layout --- */
+.Inner {
+  max-width: 1300px;
+  margin: 0 auto;
   display: flex;
-  flex-flow: column;
-  justify-content: center;
-  height: 100%;
-  padding-left: 15vw;
-  gap: 2rem;
-}
-
-.Drawer li {
-  width: fit-content;
-}
-
-.NavButton {
-  cursor: pointer;
-  font-size: 2rem;
-  margin: auto 0;
-}
-
-.Socials {
-  display: inline-block;
-  font-size: 24px;
-}
-
-.Socials > span {
-  display: flex;
-  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
   gap: 1rem;
 }
 
-/* --- Decorative divider under navbar --- */
-.Divider {
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
+.Left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
-.Divider svg {
+.LogoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  gap: 0.5rem;
+}
+
+.Brand {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.Right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* --- Links --- */
+.Links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.Links a,
+.Dropdown > span {
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.Links a:hover,
+.Dropdown > span:hover {
+  opacity: 1;
+  color: var(--highlight);
+}
+
+/* --- Dropdowns --- */
+.Dropdown {
+  position: relative;
+}
+
+.DropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: -10%;
+  background: var(--background-2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.4rem;
+  min-width: 180px;
+  padding: 0.4rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.Dropdown:hover .DropdownMenu {
   display: block;
-  width: calc(100% + 1.3px);
-  height: 50px;
 }
 
-.Divider svg path {
-  fill: var(--background-1);
+.DropdownMenu li {
+  list-style: none;
 }
 
-/* --- Responsive layout --- */
-@media (min-width: 550px) {
-  .Divider svg {
-    height: 100px;
-  }
-  .NavButton {
-    font-size: 3rem;
-  }
-  .Socials {
-    font-size: 28px;
-  }
-  .Socials > span {
-    gap: 1.75rem;
-  }
+.DropdownMenu li a {
+  display: block;
+  padding: 0.4rem 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
 }
 
-@media (min-width: 845px) {
-  .Divider svg {
-    height: 150px;
+.DropdownMenu li a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* --- Mobile menu overlay --- */
+.MobileMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(var(--background-2), var(--background-1));
+  transform: translateY(-100%);
+  transition: transform 0.35s ease-in-out;
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.MobileOpen {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.MobileContent {
+  padding: 5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.MobileSection h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.MobileSection ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.MobileSection a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.05rem;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.MobileSection a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* --- Toggler visibility --- */
+.Toggler {
+  display: none;
+  z-index: 100;
+}
+
+@media (max-width: 900px) {
+  .Links {
+    display: none;
   }
 
   .Toggler {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) {
+  .MobileMenu {
     display: none;
-  }
-
-  .Nav {
-    position: static;
-    width: auto;
-    height: auto;
-    transform: none;
-    margin-top: 1rem;
-  }
-
-  .Drawer {
-    flex-flow: row;
-    align-items: flex-end;
-    justify-content: center;
-    padding-left: 15vw;
-    gap: 3rem;
-  }
-
-  .NavButton {
-    font-size: 1.25rem;
-  }
-
-  .Socials {
-    display: none;
-  }
-
-  .BrandName {
-    font-size: 1.25rem;
-  }
-
-  .Logo {
-    width: 50px;
-    height: 50px;
   }
 }

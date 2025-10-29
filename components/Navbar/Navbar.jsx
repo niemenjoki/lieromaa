@@ -1,33 +1,27 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
-import useToggle from '@/hooks/useToggle';
+import Link from 'next/link.js';
+
+import SafeImage from '@/components/SafeImage/SafeImage';
+import ThemeToggler from '@/components/ThemeToggler/ThemeToggler';
 
 import Toggler from '../NavToggler/NavToggler.jsx';
-import SafeImage from '../SafeImage/SafeImage.jsx';
-import Socials from '../Socials/Socials';
-import ThemeToggler from '../ThemeToggler/ThemeToggler.jsx';
+import SafeLink from '../SafeLink/SafeLink';
 import classes from './Navbar.module.css';
 import logo from '/public/images/lieromaa_logo.avif';
 
-const Navbar = () => {
-  const pathname = usePathname();
-  const [isOpen, toggleIsOpen] = useToggle(false);
-
-  const navLinks = [
-    { href: '/blogi', text: 'Blogi' },
-    { href: '/tuotteet/madot', text: 'Osta matoja' },
-    { href: '/matolaskuri', text: 'Laskuri' },
-    { href: '/tietoa', text: 'Tietoa' },
-  ];
+export default function Navbar({ posts }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleIsOpen = () => setIsOpen((prev) => !prev);
 
   return (
-    <header className={classes.NavbarWrapper}>
-      <div className={classes.Navbar}>
-        <div className={classes.Brand}>
-          <Link href="/" className={classes.BrandLink}>
+    <nav className={classes.Navbar}>
+      <div className={classes.Inner}>
+        {/* LEFT */}
+        <div className={classes.Left}>
+          <Link href="/" className={classes.LogoLink}>
             <SafeImage
               src={logo}
               alt="Lieromaa logo"
@@ -36,49 +30,109 @@ const Navbar = () => {
               className={classes.Logo}
               priority
             />
-            <span className={classes.BrandName}>Lieromaa</span>
+            <span className={classes.Brand}>Lieromaa</span>
           </Link>
         </div>
-        <span className={classes.Toggler}>
-          <Toggler drawerOpen={isOpen} clicked={toggleIsOpen} />
-        </span>
-        <nav className={[classes.Nav, isOpen ? classes.Open : ''].join(' ')}>
-          <ul className={classes.Drawer}>
-            <li>
-              <ThemeToggler style={{ fontSize: '28px' }} />
+
+        {/* RIGHT */}
+        <div className={classes.Right}>
+          <ul className={classes.Links}>
+            <li className={classes.Dropdown}>
+              <span>Tuotteet</span>
+              <ul className={classes.DropdownMenu}>
+                <li>
+                  <Link href="/tuotteet/madot">Kompostimadot</Link>
+                </li>
+                {/* <li>
+                  <Link href="/tuotteet/matokompostin-aloituspakkaus">
+                    Aloituspakkaus
+                  </Link>
+                </li> */}
+              </ul>
             </li>
 
-            {navLinks.map((link) => (
-              <li key={link.href} onClick={() => toggleIsOpen(false)}>
-                <Link
-                  href={link.href}
-                  className={[
-                    classes.NavButton,
-                    pathname === link.href ? classes.Active : '',
-                  ].join(' ')}
-                  style={{
-                    color: link.highlight ? 'var(--highlight-alt)' : undefined,
-                  }}
-                >
-                  {link.text}
-                </Link>
-              </li>
-            ))}
+            {/*<li className={classes.Dropdown}>
+              <span>Opas</span>
+              <ul className={classes.DropdownMenu}>
+                <li>
+                  <Link href="/opas/kompostorin-perustaminen">
+                    Kompostorin perustaminen
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/opas/kompostorin-hoito">Kompostorin hoito</Link>
+                </li>
+                <li>
+                  <Link href="/opas/matokakan-kerays">Matokakan keräys</Link>
+                </li>
+              </ul>
+            </li>*/}
 
-            <li className={classes.Socials}>
-              <Socials />
+            <li>
+              <Link href="/blogi">Blogi</Link>
+            </li>
+            <li>
+              <ThemeToggler style={{ fontSize: '24px' }} />
             </li>
           </ul>
-        </nav>
+
+          {/* Mobile toggler */}
+          <span className={classes.Toggler}>
+            <Toggler
+              className={classes.Toggler}
+              drawerOpen={isOpen}
+              clicked={toggleIsOpen}
+            />
+          </span>
+        </div>
       </div>
 
-      <div className={classes.Divider}>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" />
-        </svg>
+      {/* MOBILE OVERLAY */}
+      <div className={`${classes.MobileMenu} ${isOpen ? classes.MobileOpen : ''}`}>
+        <div className={classes.MobileContent}>
+          <div className={classes.MobileSection}>
+            <h3>Tuotteet</h3>
+            <ul>
+              <li>
+                <Link href="/tuotteet/madot">Kompostimadot</Link>
+              </li>
+              {/*<li>
+                <Link href="/tuotteet/matokompostin-aloituspakkaus">Aloituspakkaus</Link>
+              </li>*/}
+            </ul>
+          </div>
+
+          {/*<div className={classes.MobileSection}>
+            <h3>Opas</h3>
+            <ul>
+              <li>
+                <Link href="/opas/kompostorin-perustaminen">
+                  Kompostorin perustaminen
+                </Link>
+              </li>
+              <li>
+                <Link href="/opas/kompostorin-hoito">Kompostorin hoito</Link>
+              </li>
+              <li>
+                <Link href="/opas/matokakan-kerays">Matokakan keräys</Link>
+              </li>
+            </ul>
+          </div>*/}
+
+          <div className={classes.MobileSection}>
+            <h3>Blogi</h3>
+            <ul>
+              <li>
+                <Link href="/blogi">Blogi</Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className={classes.MobileSection}>
+            <ThemeToggler style={{ fontSize: '26px' }} />
+          </div>
+        </div>
       </div>
-    </header>
+    </nav>
   );
-};
-
-export default Navbar;
+}
