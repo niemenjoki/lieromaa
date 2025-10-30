@@ -6,6 +6,7 @@ export const LICENSE_URL =
 export const CONTENT_TYPES = {
   POST: 'POST',
   GUIDE: 'GUIDE',
+  ALL: 'ALL',
 };
 export const GUIDE_CATEGORIES = [
   'kompostorin perustaminen',
