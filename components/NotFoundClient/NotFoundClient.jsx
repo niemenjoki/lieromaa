@@ -25,7 +25,7 @@ export default function ClientNotFoundPage({ posts }) {
       ignoreLocation: true,
       keys: [
         { name: 'title', weight: 0.6 },
-        { name: 'excerpt', weight: 0.3 },
+        { name: 'description', weight: 0.3 },
         { name: 'keywords', weight: 0.1 },
         { name: 'tags', weight: 0.2 },
         { name: 'overrideHref', weight: 0.1 },

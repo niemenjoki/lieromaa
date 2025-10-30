@@ -66,7 +66,7 @@ export default async function BlogTagPage({ params }) {
 
       <SearchPosts
         list={posts}
-        keys={['title', 'excerpt', 'keywords', 'tags']}
+        keys={['title', 'description', 'keywords', 'tags']}
         placeholder="Etsi julkaisun nimellä tai avainsanalla.."
       />
 

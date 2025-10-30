@@ -7,7 +7,7 @@ export default async function generateMetadata({ params }) {
   const data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
 
   const title = data.title || '';
-  const description = data.excerpt || '';
+  const description = data.description || '';
   const url = `/blogi/julkaisu/${slug}`;
   const image = data.image || {
     url: '/images/lieromaa_logo_1024.avif',
