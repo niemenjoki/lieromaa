@@ -98,10 +98,12 @@ export default function Navbar() {
             <h3>Tuotteet</h3>
             <ul>
               <li>
-                <SafeLink href="/tuotteet/madot">Kompostimadot</SafeLink>
+                <SafeLink href="/tuotteet/madot" onClick={toggleIsOpen}>
+                  Kompostimadot
+                </SafeLink>
               </li>
               {/*<li>
-                <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">Aloituspakkaus</SafeLink>
+                <SafeLink href="/tuotteet/matokompostin-aloituspakkaus"onClick={toggleIsOpen}>Aloituspakkaus</SafeLink>
               </li>*/}
             </ul>
           </div>
@@ -110,15 +112,17 @@ export default function Navbar() {
             <h3>Opas</h3>
             <ul>
               <li>
-                <SafeLink href="/opas/kompostorin-perustaminen">
+                <SafeLink href="/opas/kompostorin-perustaminen" onClick={toggleIsOpen}>
                   Kompostorin perustaminen
                 </SafeLink>
               </li>
               <li>
-                <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>
+                <SafeLink href="/opas/kompostorin-hoito" onClick={toggleIsOpen}>
+                  Kompostorin hoito
+                </SafeLink>
               </li>
               <li>
-                <SafeLink href="/opas/kompostin-hyödyntäminen">
+                <SafeLink href="/opas/kompostin-hyödyntäminen" onClick={toggleIsOpen}>
                   Kompostin hyödyntäminen
                 </SafeLink>
               </li>
@@ -128,19 +132,29 @@ export default function Navbar() {
           <div className={classes.MobileSection}>
             <ul>
               <li>
-                <SafeLink href="/blogi">Blogi</SafeLink>
+                <SafeLink href="/blogi" onClick={toggleIsOpen}>
+                  Blogi
+                </SafeLink>
               </li>
               <li>
-                <SafeLink href="/matolaskuri">Matolaskuri</SafeLink>
+                <SafeLink href="/matolaskuri" onClick={toggleIsOpen}>
+                  Matolaskuri
+                </SafeLink>
               </li>
               <li>
-                <SafeLink href="/tietoa">Tietoa sivustosta</SafeLink>
+                <SafeLink href="/tietoa" onClick={toggleIsOpen}>
+                  Tietoa sivustosta
+                </SafeLink>
               </li>
               <li>
-                <SafeLink href="/tietosuoja">Tietosuoja</SafeLink>
+                <SafeLink href="/tietosuoja" onClick={toggleIsOpen}>
+                  Tietosuoja
+                </SafeLink>
               </li>
               <li>
-                <SafeLink href="/tilausehdot">Tilausehdot</SafeLink>
+                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
+                  Tilausehdot
+                </SafeLink>
               </li>
             </ul>
           </div>
