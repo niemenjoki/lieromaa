@@ -3,13 +3,5 @@
   "excerpt": "Matokompostista ei tarvitse ilmoittaa, mutta ilmoitusasioissa kannattaa olla tarkkana. Lue, milloin komposti-ilmoitus on pakollinen.",
   "date": "10 October, 2025",
   "updated": "18 October, 2025",
-  "tags": ["matokompostointi"],
-  "keywords": [
-    "lämpökompostointi",
-    "matokompostointi",
-    "opas",
-    "perustaminen",
-    "ravinteet",
-    "yhteiskunta"
-  ]
+  "category": { "name": "kompostorin perustaminen", "pagePosition": 3 }
 }

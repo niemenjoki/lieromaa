@@ -1,6 +1,5 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
-import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 
@@ -12,52 +11,6 @@ export { default as generateMetadata } from './generateMetadata';
 export const dynamic = 'force-static';
 
 export default async function Page() {
-  const recommendedPosts = [
-    {
-      title: 'Kuinka perustaa matokomposti kotona: Opas aloittelijoille',
-      excerpt:
-        'Harkitsetko matokompostin perustamista? Se on helppo, edullinen ja ympäristöystävällinen tapa hyödyntää keittiöjätteet ravinteiksi.',
-      date: '6 September, 2025',
-      tags: ['matokompostointi', 'aloittelijan opas', 'kompostorin perustaminen'],
-      keywords: [
-        'aloittelijan opas',
-        'continuous flow',
-        'diy',
-        'jatkuva virtaus',
-        'kompostorin perustaminen',
-        'lämpökompostointi',
-        'matokakan keräys',
-        'matokompostointi',
-        'opas',
-        'perustaminen',
-        'rakentaminen',
-      ],
-      slug: 'kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille',
-    },
-    {
-      title: 'Kolmen laatikon matokompostori - tehokas ja helppo ratkaisu',
-      excerpt:
-        'Rakenna kolmen laatikon matokompostori, joka tuottaa jatkuvasti valmista matokakkaa ja tekee kompostoinnista vaivatonta.',
-      date: '1 October, 2025',
-      tags: ['matokompostointi', 'kompostorin perustaminen'],
-      keywords: [
-        'banaanikärpäset',
-        'continuous flow',
-        'diy',
-        'jatkuva virtaus',
-        'kompostorin perustaminen',
-        'kosteus',
-        'matokakan keräys',
-        'matokakka',
-        'matokompostointi',
-        'opas',
-        'rakentaminen',
-        'ruokinta',
-      ],
-      slug: 'kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen',
-    },
-  ];
-
   return (
     <>
       <script
@@ -226,10 +179,6 @@ export default async function Page() {
       </article>
 
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
-      <PostRecommendation
-        posts={recommendedPosts}
-        customTitle="Aiheeseen liittyviä blogijulkaisuja"
-      />
     </>
   );
 }

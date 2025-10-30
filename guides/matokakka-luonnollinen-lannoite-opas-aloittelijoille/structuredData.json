@@ -42,6 +42,34 @@
         "ruokkiminen",
         "valoerottelu"
       ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.lieromaa.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Opas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Kompostin hyödyntäminen",
+          "item": "https://www.lieromaa.fi/opas/kompostin-hyödyntäminen/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Matokakka – luonnollinen lannoite ja maanparannusaine",
+          "item": "https://www.lieromaa.fi/opas/kompostin-hyödyntäminen/matokakka-luonnollinen-lannoite-opas-aloittelijoille/"
+        }
+      ]
     }
   ]
 }

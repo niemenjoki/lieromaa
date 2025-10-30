@@ -45,6 +45,34 @@
         "rakentaminen",
         "ruokinta"
       ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.lieromaa.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Opas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Kompostorin perustaminen",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Kolmen laatikon matokompostori – edistyneempi, helppohoitoinen ratkaisu",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/kolmen-laatikon-matokompostori-edistyneempi-helppohoitoinen/"
+        }
+      ]
     }
   ]
 }
