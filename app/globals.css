@@ -115,6 +115,12 @@ body::-webkit-scrollbar-thumb {
   background: var(--highlight);
 }
 
+body.nav-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
 .container {
   display: flex;
   min-height: 100vh;

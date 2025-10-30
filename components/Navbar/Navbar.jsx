@@ -13,7 +13,15 @@ import logo from '/public/images/lieromaa_logo.avif';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const toggleIsOpen = () => setIsOpen((prev) => !prev);
+  const toggleIsOpen = () => {
+    setIsOpen((prev) => {
+      const newState = !prev;
+      if (typeof document !== 'undefined') {
+        document.body.classList.toggle('nav-open', newState);
+      }
+      return newState;
+    });
+  };
 
   return (
     <nav className={classes.Navbar}>
@@ -152,6 +160,27 @@ export default function Navbar() {
                 </SafeLink>
               </li>
               <li>
+                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
+                  Tilausehdot
+                </SafeLink>
+              </li>
+              <li>
+                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
+                  Tilausehdot
+                </SafeLink>
+              </li>              <li>
+                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
+                  Tilausehdot
+                </SafeLink>
+              </li>              <li>
+                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
+                  Tilausehdot
+                </SafeLink>
+              </li>              <li>
+                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
+                  Tilausehdot
+                </SafeLink>
+              </li>              <li>
                 <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
                   Tilausehdot
                 </SafeLink>
