@@ -22,13 +22,21 @@ export default function Footer() {
               <li>
                 <SafeLink href="/tuotteet/madot">Kompostimadot</SafeLink>
               </li>
+              {/*<li>
+                <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">
+                  Aloituspakkaus
+                </SafeLink>
+              </li>*/}
+            </ul>
+            <h3 style={{ marginTop: '2rem' }}>Blogi</h3>
+            <ul>
               <li>
-                {/*<SafeLink href="/tuotteet/matokompostin-aloituspakkaus">Aloituspakkaus</SafeLink>*/}
+                <SafeLink href="/blogi">Viimeisimmät julkaisut</SafeLink>
               </li>
             </ul>
           </div>
 
-          {/*<div>
+          <div>
             <h3>Oppaat</h3>
             <ul>
               <li>
@@ -40,13 +48,15 @@ export default function Footer() {
                 <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>
               </li>
               <li>
-                <SafeLink href="/opas/matokakan-kerays">Matokakan keräys</SafeLink>
+                <SafeLink href="/opas/kompostin-hyödyntäminen">
+                  Kompostin hyödyntäminen
+                </SafeLink>
               </li>
             </ul>
-          </div>*/}
+          </div>
 
           <div>
-            <h3>Sivut</h3>
+            <h3>Muut sivut</h3>
             <ul>
               <li>
                 <SafeLink href="/blogi">Blogi</SafeLink>

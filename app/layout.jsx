@@ -43,8 +43,8 @@ const structuredData = {
       logo: {
         '@type': 'ImageObject',
         '@id': 'https://www.lieromaa.fi/#logo',
-        url: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
-        contentUrl: 'https://www.lieromaa.fi/images/luomuliero_logo_1024.avif',
+        url: 'https://www.lieromaa.fi/images/lieromaa_logo_1024.avif',
+        contentUrl: 'https://www.lieromaa.fi/images/lieromaa_logo_1024.avif',
 
         width: 1024,
         height: 1024,

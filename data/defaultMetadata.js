@@ -4,7 +4,7 @@ const title = 'Lieromaa – Kompostimadot ja matokompostointi kotona';
 const description =
   'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.';
 const siteName = 'Lieromaa';
-const logoURL = '/images/luomuliero_logo_1024.avif';
+const logoURL = '/images/lieromaa_logo_1024.avif';
 
 export const defaultMetadata = {
   title,
@@ -41,7 +41,7 @@ export const defaultMetadata = {
 
   icons: {
     icon: '/icons/favicon.ico',
-    apple: '/images/luomuliero_logo_1024.avif',
+    apple: '/images/lieromaa_logo_1024.avif',
   },
   manifest: '/site.webmanifest',
 };

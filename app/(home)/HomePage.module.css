@@ -1,0 +1,51 @@
+/* --- HERO --- */
+.Hero {
+  padding-bottom: 5rem;
+  min-height: initial;
+}
+
+.Hero p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0.5rem auto 0;
+  color: var(--text-2);
+}
+
+/* --- ButtonLink buttons --- */
+.ButtonLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ButtonLink,
+.ButtonLinkAlt {
+  font-weight: 600;
+  padding: 0.75rem 1.4rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  display: inline-block;
+}
+
+.ButtonLink {
+  background: var(--highlight);
+  color: var(--background-3);
+}
+
+.ButtonLink:hover {
+  background: var(--highlight-alt);
+  color: var(--background);
+}
+
+.ButtonLinkAlt {
+  background: var(--background-6);
+  color: var(--highlight);
+  border: 1px solid var(--highlight);
+}
+
+.ButtonLinkAlt:hover {
+  background: var(--highlight);
+  color: var(--background);
+}

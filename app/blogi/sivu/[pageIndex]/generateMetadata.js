@@ -9,16 +9,14 @@ export default async function generateMetadata({ params }) {
 
   let canonical, ogUrl;
 
-  if (!pageIndex) {
-    canonical = '/';
-    ogUrl = '/';
-  } else if (pageIndexInt === 1) {
-    canonical = '/';
-    ogUrl = `/blogi/sivu/${pageIndexInt}`;
+  if (pageIndexInt === 1) {
+    canonical = '/blogi';
+    ogUrl = '/blogi';
   } else {
     canonical = `/blogi/sivu/${pageIndexInt}`;
     ogUrl = canonical;
   }
+
   const numPages = Math.ceil(
     getAllContentSlugs({ type: CONTENT_TYPES.POST }).length / POSTS_PER_PAGE
   );

@@ -21,7 +21,7 @@
         "name": "Lieromaa",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
+          "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },

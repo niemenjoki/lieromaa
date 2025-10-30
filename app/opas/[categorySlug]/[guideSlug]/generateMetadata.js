@@ -10,7 +10,7 @@ export default async function generateMetadata({ params }) {
   const description = data.excerpt || '';
   const url = `/opas/${categorySlug}/${guideSlug}`;
   const image = data.image || {
-    url: '/images/luomuliero_logo_1024.avif',
+    url: '/images/lieromaa_logo_1024.avif',
     width: 1024,
     height: 1024,
     alt: 'Lieromaa logo',

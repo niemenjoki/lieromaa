@@ -7,7 +7,7 @@ import Link from 'next/link';
 import safeLinks from '@/data/generated/safeRoutes.json';
 
 function isSafeHref(href) {
-  return safeLinks.includes(href);
+  return safeLinks.includes(decodeURIComponent(href));
 }
 
 export default function SafeLink({ href, children, ...props }) {
@@ -16,8 +16,8 @@ export default function SafeLink({ href, children, ...props }) {
   }
 
   if (!isSafeHref(href)) {
-    console.warn('SafeLink component temporarily disabled! ENABLE BEFORE PUSH');
-    //throw new Error(`Unsafe link blocked: "${href}"`);
+    //console.warn('SafeLink component temporarily disabled! ENABLE BEFORE PUSH');
+    throw new Error(`🚫 Unsafe link blocked: "${decodeURIComponent(href)}"`);
   }
 
   return (
