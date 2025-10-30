@@ -1,4 +1,5 @@
 import Advert from '@/components/Advert/Advert';
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import PostPreview from '@/components/PostPreview/PostPreview';
 import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/data/vars.mjs';
 import { SITE_URL } from '@/data/vars.mjs';
@@ -51,6 +52,13 @@ export default async function GuideCategoryPage({ params }) {
         }}
       />
       <div>
+        <Breadcrumbs
+          items={[
+            { name: 'Etusivu', href: '/' },
+            { name: 'Opas' },
+            { name: categorySlug.replaceAll('-', ' '), href: `/opas/${categorySlug}` },
+          ]}
+        />
         <h1>Oppaat: {category}</h1>
         {guides.map((guide, index) => (
           <PostPreview

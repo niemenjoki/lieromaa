@@ -5,6 +5,7 @@ import fs from 'fs';
 import path from 'path';
 
 import Advert from '@/components/Advert/Advert';
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
@@ -29,7 +30,7 @@ export function generateStaticParams() {
 export { default as generateMetadata } from './generateMetadata';
 
 export default async function GuidePage({ params }) {
-  const { guideSlug } = await params;
+  const { guideSlug, categorySlug } = await params;
   const data = getContentMetadata({ type: CONTENT_TYPES.GUIDE, slug: guideSlug });
 
   const mdxPath = path.join(process.cwd(), 'guides', guideSlug, 'content.mdx');
@@ -46,6 +47,15 @@ export default async function GuidePage({ params }) {
         }}
       />
       <article className={classes.PostPage}>
+        <Breadcrumbs
+          items={[
+            { name: 'Etusivu', href: '/' },
+            { name: 'Opas' },
+            { name: categorySlug.replaceAll('-', ' '), href: `/opas/${categorySlug}` },
+            { name: data.title },
+          ]}
+        />
+
         <h1>{data.title}</h1>
         <div className={classes.Date}>
           Päivitetty: {new Date(data.updated).toLocaleDateString('fi-FI')}
