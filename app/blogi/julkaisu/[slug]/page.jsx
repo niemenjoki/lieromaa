@@ -36,7 +36,7 @@ export default async function PostPage({ params }) {
   const { slug } = await params;
   const data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
 
-  const mdxPath = path.join(process.cwd(), 'content', 'posts', slug, 'post.mdx');
+  const mdxPath = path.join(process.cwd(), 'content', 'posts', slug, 'content.mdx');
   const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
 
   const recommendedPosts = await getPostRecommendations({
