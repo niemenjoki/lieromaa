@@ -18,7 +18,7 @@ export async function GET() {
         <link>${SITE_URL}/blogi/julkaisu/${post.slug}</link>
         <guid>${SITE_URL}/blogi/julkaisu/${post.slug}</guid>
         <pubDate>${new Date(post.date).toUTCString()}</pubDate>
-        <description><![CDATA[ ${post.excerpt} ]]></description>
+        <description><![CDATA[ ${post.description} ]]></description>
         <dc:creator>Joonas Niemenjoki</dc:creator>
       </item>`
     )

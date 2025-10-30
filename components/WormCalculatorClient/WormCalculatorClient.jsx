@@ -12,7 +12,7 @@ import classes from './WormCalculatorClient.module.css';
 
 export default function WormCalculatorClient({ recommendedPosts }) {
   const title = 'Matolaskuri';
-  const excerpt =
+  const description =
     'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.';
 
   const [adults, setAdults] = useState(2);
@@ -62,7 +62,7 @@ export default function WormCalculatorClient({ recommendedPosts }) {
   return (
     <article className={classes.WormCalculatorClient}>
       <h1>{title}</h1>
-      <p>{excerpt}</p>
+      <p>{description}</p>
 
       <div className={classes.Content}>
         <h2>Miksi laskuri on hyödyllinen?</h2>
@@ -184,7 +184,7 @@ export default function WormCalculatorClient({ recommendedPosts }) {
         </ul>
       </div>
 
-      <SocialShareButtons title={title} text={excerpt} tags={['matokomposti']} />
+      <SocialShareButtons title={title} text={description} tags={['matokomposti']} />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
       <PostRecommendation
         posts={recommendedPosts}

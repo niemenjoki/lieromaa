@@ -101,7 +101,7 @@ export default async function GuidePage({ params }) {
         </div>
       </article>
 
-      <SocialShareButtons title={data.title} text={data.excerpt} tags={data.tags} />
+      <SocialShareButtons title={data.title} text={data.description} tags={data.tags} />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
     </>
   );

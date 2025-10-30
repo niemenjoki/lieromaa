@@ -16,7 +16,7 @@ const PostPreview = ({ post, compact = false, overrideHref = false }) => {
           {post.title}
         </SafeLink>
       </h2>
-      <p className={classes.Excerpt}>{post.excerpt}</p>
+      <p className={classes.description}>{post.description}</p>
       <p className={classes.Tags}>
         {post.tags &&
           post.tags.map((tag) => (
