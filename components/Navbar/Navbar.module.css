@@ -91,6 +91,10 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.Dropdown span:first-child {
+  cursor: default;
+}
+
 .Dropdown:hover .DropdownMenu {
   display: block;
 }
