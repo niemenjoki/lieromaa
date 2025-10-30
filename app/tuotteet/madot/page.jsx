@@ -34,7 +34,7 @@ export default async function Page() {
           </SafeLink>
         </PromoBox>
 
-        <h1>Osta Luomulieron Eisenia fetida -kompostimatoja</h1>
+        <h1>Osta Lieromaan Eisenia fetida -kompostimatoja</h1>
 
         <div className={classes.Content}>
           <ImageSlider

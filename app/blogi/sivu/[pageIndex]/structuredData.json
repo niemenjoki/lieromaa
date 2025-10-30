@@ -14,6 +14,24 @@
       "@type": "ItemList",
       "@id": "https://www.lieromaa.fi/blogi/sivu/[pageIndex]#itemlist",
       "itemListElement": []
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.lieromaa.fi/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.lieromaa.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blogi",
+          "item": "https://www.lieromaa.fi/blogi"
+        }
+      ]
     }
   ]
 }
