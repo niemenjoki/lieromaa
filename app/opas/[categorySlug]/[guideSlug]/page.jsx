@@ -33,7 +33,7 @@ export default async function GuidePage({ params }) {
   const { guideSlug, categorySlug } = await params;
   const data = getContentMetadata({ type: CONTENT_TYPES.GUIDE, slug: guideSlug });
 
-  const mdxPath = path.join(process.cwd(), 'guides', guideSlug, 'content.mdx');
+  const mdxPath = path.join(process.cwd(), 'content', 'guides', guideSlug, 'content.mdx');
   const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
 
   const { structuredData } = data;
