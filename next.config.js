@@ -7,6 +7,20 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/madot',
+        destination: '/tuotteet/madot',
+        permanent: true,
+      },
+      {
+        source: '/madot-kampanja',
+        destination: '/tuotteet/madot-kampanja',
+        permanent: true,
+      },
+    ];
+  },
   reactStrictMode: true,
 };
 

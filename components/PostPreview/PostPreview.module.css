@@ -1,5 +1,8 @@
 .PostPreview {
-  margin: 3rem 0;
+  margin: 1rem 0;
+  background: var(--background-3);
+  padding: 1rem 1rem;
+  border-radius: 9px;
 }
 
 .Title {

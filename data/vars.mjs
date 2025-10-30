@@ -7,3 +7,8 @@ export const CONTENT_TYPES = {
   POST: 'POST',
   GUIDE: 'GUIDE',
 };
+export const GUIDE_CATEGORIES = [
+  'kompostorin perustaminen',
+  'kompostorin hoito',
+  'kompostin hyödyntäminen',
+];

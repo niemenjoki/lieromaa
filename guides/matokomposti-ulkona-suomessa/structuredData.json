@@ -2,9 +2,9 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/matokomposti-ulkona-suomessa#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/matokomposti-ulkona-suomessa",
+      "@type": "Article",
+      "@id": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokomposti-ulkona-suomessa#blogpost",
+      "url": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokomposti-ulkona-suomessa",
       "headline": "Matokomposti ulkona – toimiiko se Suomessa vuoden ympäri?",
       "description": "Voiko matokompostin pitää ulkona talvella? Lue, miten madot selviävät eri vuodenaikoina ja miten lämpökompostori voi auttaa.",
       "datePublished": "2025-09-16T00:00:00+03:00",
@@ -26,11 +26,7 @@
       },
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
       "articleSection": "Matokompostointi",
-      "about": [
-        { "@type": "Thing", "name": "matokompostointi" },
-        { "@type": "Thing", "name": "kompostointi talvella" },
-        { "@type": "Thing", "name": "lämpökompostointi" }
-      ],
+      "about": [{ "@type": "Thing", "name": "kompostorin hoito" }],
       "keywords": [
         "kompostointi talvella",
         "lämpökompostointi",
@@ -38,6 +34,34 @@
         "suomi",
         "talvi",
         "ulkokompostointi"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.lieromaa.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Opas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Kompostorin hoito",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Matokomposti ulkona – toimiiko se Suomessa vuoden ympäri?",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokomposti-ulkona-suomessa/"
+        }
       ]
     }
   ]

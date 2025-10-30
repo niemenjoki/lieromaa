@@ -3,18 +3,17 @@
   "@graph": [
     {
       "@type": "Article",
-      "@id": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille#blogpost",
-      "url": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille",
-      "headline": "Kuinka perustaa matokomposti kotona: Opas aloittelijoille",
-      "description": "Harkitsetko matokompostin perustamista? Se on helppo, edullinen ja ympäristöystävällinen tapa hyödyntää keittiöjätteet ravinteiksi.",
-      "datePublished": "2025-09-06T00:00:00+03:00",
-      "dateModified": "2025-09-06T00:00:00+03:00",
+      "@id": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/pitaako-matokompostista-tehda-ilmoitus-kunnalle#blogpost",
+      "url": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/pitaako-matokompostista-tehda-ilmoitus-kunnalle",
+      "headline": "Pitääkö matokompostista tehdä ilmoitus kunnalle?",
+      "description": "Matokompostista ei tarvitse ilmoittaa, mutta ilmoitusasioissa kannattaa olla tarkkana. Lue, milloin komposti-ilmoitus on pakollinen.",
+      "datePublished": "2025-10-10T00:00:00+03:00",
+      "dateModified": "2025-10-18T00:00:00+03:00",
       "inLanguage": "fi",
       "author": {
         "@type": "Person",
         "@id": "https://www.lieromaa.fi/#joonas",
-        "name": "Joonas Niemenjoki",
-        "url": "https://www.lieromaa.fi/#joonas"
+        "name": "Joonas Niemenjoki"
       },
       "publisher": {
         "@type": "Organization",
@@ -25,24 +24,16 @@
           "url": "https://www.lieromaa.fi/images/luomuliero_logo_1024.avif"
         }
       },
-      "isPartOf": {
-        "@id": "https://www.lieromaa.fi/#website"
-      },
-      "image": "https://www.lieromaa.fi/images/guides/matokomposti.avif",
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
       "articleSection": "Matokompostointi",
       "about": [{ "@type": "Thing", "name": "kompostorin perustaminen" }],
       "keywords": [
-        "aloittelijan opas",
-        "continuous flow",
-        "diy",
-        "jatkuva virtaus",
-        "kompostorin perustaminen",
         "lämpökompostointi",
-        "matokakan keräys",
         "matokompostointi",
         "opas",
         "perustaminen",
-        "rakentaminen"
+        "ravinteet",
+        "yhteiskunta"
       ]
     },
     {
@@ -68,8 +59,8 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Kuinka perustaa matokomposti kotona: Opas aloittelijoille",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/kuinka-perustaa-matokomposti-kotona-opas-aloittelijoille/"
+          "name": "Pitääkö matokompostista tehdä ilmoitus kunnalle?",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/pitaako-matokompostista-tehda-ilmoitus-kunnalle/"
         }
       ]
     }

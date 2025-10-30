@@ -1,0 +1,42 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.lieromaa.fi/opas/[categorySlug]#webpage",
+      "url": "https://www.lieromaa.fi/opas/[categorySlug]",
+      "name": "Lieromaan oppaat aiheesta: [categoryName]",
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "about": { "@id": "https://www.lieromaa.fi/#organization" },
+      "inLanguage": "fi"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.lieromaa.fi/opas/[categorySlug]#itemlist",
+      "itemListElement": []
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.lieromaa.fi/opas/[categorySlug]#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.lieromaa.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Opas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "[categoryName]",
+          "item": "https://www.lieromaa.fi/opas/[categorySlug]/"
+        }
+      ]
+    }
+  ]
+}

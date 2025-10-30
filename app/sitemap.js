@@ -30,7 +30,6 @@ export default async function sitemap() {
   const latestGuide = latest(guides, 'updated');
 
   const add = (url, lastmod) => {
-    console.log({ url, lastmod });
     urls.push({ url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
   };
   // --- Static pages

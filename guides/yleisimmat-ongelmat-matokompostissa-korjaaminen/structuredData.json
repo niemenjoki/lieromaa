@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "Article",
-      "@id": "https://www.lieromaa.fi/blogi/yleisimmat-ongelmat-matokompostissa-korjaaminen#article",
-      "url": "https://www.lieromaa.fi/blogi/yleisimmat-ongelmat-matokompostissa-korjaaminen",
+      "@id": "https://www.lieromaa.fi/opas/kompostorin-hoito/yleisimmat-ongelmat-matokompostissa-korjaaminen#article",
+      "url": "https://www.lieromaa.fi/opas/kompostorin-hoito/yleisimmat-ongelmat-matokompostissa-korjaaminen",
       "headline": "Yleisimmät ongelmat matokompostissa ja niiden korjaaminen",
       "description": "Haiseeko matokomposti tai karkailevatko madot? Lue yleisimmät syyt ja ratkaisut, joilla pidät kompostin tasapainossa.",
       "datePublished": "2025-09-15T00:00:00+03:00",
@@ -37,14 +37,35 @@
         }
       },
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
-      "about": [
-        { "@type": "Thing", "name": "matokomposti" },
-        { "@type": "Thing", "name": "kompostorin hoito" }
-      ],
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://www.lieromaa.fi/blogi/yleisimmat-ongelmat-matokompostissa-korjaaminen#webpage"
-      }
+      "about": [{ "@type": "Thing", "name": "kompostorin hoito" }]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.lieromaa.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Opas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Kompostorin hoito",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Yleisimmät ongelmat matokompostissa ja niiden korjaaminen",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/yleisimmat-ongelmat-matokompostissa-korjaaminen/"
+        }
+      ]
     }
   ]
 }
