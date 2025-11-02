@@ -11,24 +11,24 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './NotFoundClient.module.css';
 
-export default function ClientNotFoundPage({ posts }) {
+export default function ClientNotFoundPage({ content }) {
   const pathname = usePathname();
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    if (!pathname || !posts?.length) return;
+    if (!pathname || !content?.length) return;
 
-    const fuse = new Fuse(posts, {
+    const fuse = new Fuse(content, {
       includeScore: true,
       minMatchCharLength: 3,
       findAllMatches: true,
       ignoreLocation: true,
       keys: [
-        { name: 'title', weight: 0.6 },
-        { name: 'description', weight: 0.3 },
+        { name: 'title', weight: 0.4 },
+        { name: 'description', weight: 0.2 },
         { name: 'keywords', weight: 0.1 },
-        { name: 'tags', weight: 0.2 },
-        { name: 'overrideHref', weight: 0.1 },
+        { name: 'tags', weight: 0.1 },
+        { name: 'slug', weight: 0.9 },
       ],
     });
 
@@ -38,9 +38,9 @@ export default function ClientNotFoundPage({ posts }) {
       .filter((r) => r.score < 0.6)
       .slice(0, 3)
       .map((r) => r.item);
-
+    console.log({ matches });
     setResults(matches);
-  }, [pathname, posts]);
+  }, [pathname, content]);
 
   return (
     <main className={classes.NotFoundWrapper}>
@@ -61,7 +61,7 @@ export default function ClientNotFoundPage({ posts }) {
       )}
 
       <div className={classes.LinkWrapper}>
-        <SafeLink href="/blogi">Muut viimeisimmät blogijulkaisut</SafeLink>
+        <SafeLink href="/blogi">Viimeisimmät blogijulkaisut</SafeLink>
       </div>
     </main>
   );

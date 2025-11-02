@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function NotFound() {
-  const posts = getAllContent({ type: CONTENT_TYPES.POST });
+  const { posts, guides } = getAllContent({ type: CONTENT_TYPES.ALL });
 
   const staticPages = [
     {
@@ -30,5 +30,10 @@ export default async function NotFound() {
     },
   ];
 
-  return <ClientNotFoundPage posts={[...posts, ...staticPages]} />;
+  const resultGuides = guides.map((guide) => {
+    const categorySlug = guide.category.name.replaceAll(' ', '-');
+    return { altPath: `opas/${categorySlug}`, ...guide };
+  });
+
+  return <ClientNotFoundPage content={[...posts, ...resultGuides, ...staticPages]} />;
 }
