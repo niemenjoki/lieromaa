@@ -168,19 +168,23 @@ export default function Navbar() {
                 <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
                   Tilausehdot
                 </SafeLink>
-              </li>              <li>
+              </li>{' '}
+              <li>
                 <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
                   Tilausehdot
                 </SafeLink>
-              </li>              <li>
+              </li>{' '}
+              <li>
                 <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
                   Tilausehdot
                 </SafeLink>
-              </li>              <li>
+              </li>{' '}
+              <li>
                 <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
                   Tilausehdot
                 </SafeLink>
-              </li>              <li>
+              </li>{' '}
+              <li>
                 <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
                   Tilausehdot
                 </SafeLink>
