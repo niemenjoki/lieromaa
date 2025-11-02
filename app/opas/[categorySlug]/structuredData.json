@@ -28,7 +28,8 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Opas"
+          "name": "Opas",
+          "item": "https://www.lieromaa.fi/opas/"
         },
         {
           "@type": "ListItem",
