@@ -1,4 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { notFound } from 'next/navigation';
 
 import classes from 'app/blogi/julkaisu/[slug]/PostPage.module.css';
 import fs from 'fs';
@@ -31,8 +32,12 @@ export { default as generateMetadata } from './generateMetadata';
 
 export default async function GuidePage({ params }) {
   const { guideSlug, categorySlug } = await params;
-  const data = getContentMetadata({ type: CONTENT_TYPES.GUIDE, slug: guideSlug });
-
+  let data;
+  try {
+    data = getContentMetadata({ type: CONTENT_TYPES.GUIDE, slug: guideSlug });
+  } catch {
+    notFound();
+  }
   const mdxPath = path.join(process.cwd(), 'content', 'guides', guideSlug, 'content.mdx');
   const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
 

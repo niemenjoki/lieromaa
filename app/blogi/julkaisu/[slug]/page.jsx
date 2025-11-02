@@ -1,4 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { notFound } from 'next/navigation';
 
 import fs from 'fs';
 import path from 'path';
@@ -33,9 +34,13 @@ export async function generateStaticParams() {
 export { default as generateMetadata } from './generateMetadata';
 
 export default async function PostPage({ params }) {
-  const { slug } = await params;
-  const data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
-
+  const { slug } = params;
+  let data;
+  try {
+    data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
+  } catch {
+    notFound();
+  }
   const mdxPath = path.join(process.cwd(), 'content', 'posts', slug, 'content.mdx');
   const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
 
