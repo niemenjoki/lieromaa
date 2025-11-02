@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import Advert from '@/components/Advert/Advert';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
@@ -36,10 +38,15 @@ export async function generateStaticParams() {
 
 export default async function BlogTagPage({ params }) {
   const { pageIndex, tag } = await params;
+
   const decodedTag = decodeURIComponent(tag);
   const pageIndexInt = parseInt(pageIndex) || 1;
   const { posts, numPages } = getPostsByTag(decodedTag, pageIndexInt, POSTS_PER_PAGE);
+  if (posts.length === 0) {
+    notFound();
+  }
   const allTags = getAllPostTags();
+  console.log({ tag, allTags, decodedTag });
   const tagDisplay = decodedTag.replaceAll('-', ' ');
 
   const data = JSON.parse(JSON.stringify(structuredData));

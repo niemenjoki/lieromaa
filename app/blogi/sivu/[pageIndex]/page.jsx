@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import Advert from '@/components/Advert/Advert';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
@@ -29,6 +31,9 @@ export default async function BlogPage({ params }) {
 
   const pageIndexInt = parseInt(pageIndex) || 1;
   const { posts, numPages } = getPaginatedPosts(pageIndexInt, POSTS_PER_PAGE);
+  if (posts.length === 0) {
+    notFound();
+  }
   const allTags = getAllPostTags();
 
   const data = JSON.parse(JSON.stringify(structuredData));
