@@ -35,6 +35,7 @@ export default async function sitemap() {
   // --- Static pages
   [
     ['/', latestPost],
+    ['/blogi', latestPost],
     ['/tietoa', '2025-09-08'],
     ['/tietosuoja', '2025-09-08'],
     ['/tilausehdot', '2025-10-07'],
