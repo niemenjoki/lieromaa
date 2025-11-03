@@ -164,31 +164,6 @@ export default function Navbar() {
                   Tilausehdot
                 </SafeLink>
               </li>
-              <li>
-                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
-                  Tilausehdot
-                </SafeLink>
-              </li>{' '}
-              <li>
-                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
-                  Tilausehdot
-                </SafeLink>
-              </li>{' '}
-              <li>
-                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
-                  Tilausehdot
-                </SafeLink>
-              </li>{' '}
-              <li>
-                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
-                  Tilausehdot
-                </SafeLink>
-              </li>{' '}
-              <li>
-                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
-                  Tilausehdot
-                </SafeLink>
-              </li>
             </ul>
           </div>
           <div className={classes.MobileSection}>
