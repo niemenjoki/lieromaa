@@ -46,7 +46,7 @@ export default async function BlogTagPage({ params }) {
     notFound();
   }
   const allTags = getAllPostTags();
-  console.log({ tag, allTags, decodedTag });
+
   const tagDisplay = decodedTag.replaceAll('-', ' ');
 
   const data = JSON.parse(JSON.stringify(structuredData));

@@ -38,7 +38,7 @@ export default function ClientNotFoundPage({ content }) {
       .filter((r) => r.score < 0.6)
       .slice(0, 3)
       .map((r) => r.item);
-    console.log({ matches });
+
     setResults(matches);
   }, [pathname, content]);
 
