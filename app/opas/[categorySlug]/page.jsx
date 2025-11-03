@@ -61,7 +61,7 @@ export default async function GuideCategoryPage({ params }) {
           items={[
             { name: 'Etusivu', href: '/' },
             { name: 'Opas' },
-            { name: categorySlug.replaceAll('-', ' '), href: `/opas/${categorySlug}` },
+            { name: category, href: `/opas/${categorySlug}` },
           ]}
         />
         <h1>Oppaat: {category}</h1>
