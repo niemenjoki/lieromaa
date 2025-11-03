@@ -41,7 +41,6 @@ export default async function sitemap() {
     ['/tilausehdot', '2025-10-07'],
     ['/tuotteet/madot', '2025-10-07'],
     ['/matolaskuri', '2025-10-07'],
-    ['/tuotteet/madot-kampanja', '2025-10-14'],
   ].forEach(([url, lastmod]) => add(url, lastmod));
 
   // --- Tag pages
