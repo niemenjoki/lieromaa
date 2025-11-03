@@ -1,5 +1,4 @@
 import Post from '@/components/PostPreview/PostPreview';
-import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { CONTENT_TYPES } from '@/data/vars.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
@@ -40,18 +39,7 @@ export default async function HomePage() {
           </SafeLink>
         </div>
       </section>
-      <PromoBox>
-        <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
-        <p style={{ marginBottom: '0.5rem' }}>
-          Ilmainen toimitus kompostimadoille koko Suomeen 30.11.2025 asti.
-        </p>
-        <SafeLink
-          href="/tuotteet/madot-kampanja"
-          style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
-        >
-          Katso kampanjasivu »
-        </SafeLink>
-      </PromoBox>
+
       <section className={classes.Section}>
         <h2>Viimeisimmät blogijulkaisut</h2>
         {posts.map((post) => (

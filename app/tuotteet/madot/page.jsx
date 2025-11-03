@@ -1,6 +1,5 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
-import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './Madot.module.css';
@@ -21,19 +20,6 @@ export default async function Page() {
       />
 
       <article className={classes.WormsPage}>
-        <PromoBox>
-          <h3 style={{ marginTop: 0, color: 'var(--highlight-alt)' }}>Syystarjous 🍂</h3>
-          <p style={{ marginBottom: '0.5rem' }}>
-            Ilmainen toimitus kaikille kompostimadoille koko Suomeen 30.11.2025 asti.
-          </p>
-          <SafeLink
-            href="/tuotteet/madot-kampanja"
-            style={{ fontWeight: 'bold', color: 'var(--highlight-content-link)' }}
-          >
-            Katso kampanjasivu »
-          </SafeLink>
-        </PromoBox>
-
         <h1>Osta Lieromaan Eisenia fetida -kompostimatoja</h1>
 
         <div className={classes.Content}>
@@ -82,27 +68,15 @@ export default async function Page() {
           <section>
             <h2>Tilaus ja maksaminen</h2>
             <p>
-              Matoja ei saa tilattua suoraan verkkosivun kautta, koska haluan varmistaa
-              matojen saatavuuden ennen tilauksen vahvistamista. Toimintani on
-              pienimuotoista ja joudun pitämään myynnin rajallisena, jotta matojen määrä
-              omassa kompostissani ei vähene liikaa. Ota yhteyttä (ohjeet alempana), niin
-              vahvistan saatavuuden ennen maksua.
+              Voit tilata kompostimadot suoraan tämän lomakkeen kautta. Kun olet
+              lähettänyt tilauksen, saat tilausvahvistuksen sähköpostiisi 1–2 arkipäivän
+              kuluessa. Vahvistan tilauksen manuaalisesti varmistaakseni matojen
+              saatavuuden ja hyvän lähetyskunnon ennen laskutusta.
             </p>
             <p>
-              Lieromaan toiminta on pienimuotoista ja madot ovat elävää materiaalia. Siksi
-              jokainen tilaus vahvistetaan erikseen, jotta voin varmistaa matojen
-              saatavuuden ja lähetyksen ajankohdan.
-            </p>
-            <p>
-              Täytä alla oleva lomake, niin tarkistan saatavuuden ja otan yhteyttä
-              valitsemallasi tavalla. Kun olemme sopineet tilauksesta, saat
-              <strong> sähköpostilaskun OP Kevytyrittäjä -palvelun kautta</strong>.
-              Maksuaika on 14 vuorokautta. Toimitus tapahtuu Postin kautta koko Suomeen.
-            </p>
-            <p style={{ fontSize: '0.9rem', color: '#555' }}>
-              Lieromaan matomyynti on omaa yritystoimintaani (Y-tunnus 3002257-7), mutta
-              laskutus ja verotuksen hallinnointi hoidetaan
-              <strong> OP Kevytyrittäjä </strong> -palvelun kautta.
+              Saat laskun <strong>OP Kevytyrittäjä</strong> -palvelun kautta
+              sähköpostitse. Maksuaika on 14 päivää, ja toimitus tapahtuu Postin kautta
+              koko Suomeen.
             </p>
           </section>
 
@@ -115,46 +89,72 @@ export default async function Page() {
               Nimi
               <input type="text" name="nimi" required />
             </label>
+
             <label>
               Sähköposti
-              <input type="email" name="email" />
+              <input type="email" name="email" required />
             </label>
+
             <label>
               Puhelinnumero
-              <input type="phone" name="phone" />
-            </label>
-            <label>
-              Haluttu määrä (10–500)
-              <input type="number" name="maara" min="10" max="500" required />
+              <input type="tel" name="phone" />
             </label>
 
             <fieldset>
-              <legend>Toivottu yhteydenottotapa</legend>
+              <legend>Toimitustapa</legend>
               <label>
-                <input
-                  type="radio"
-                  name="yhteydenottotapa"
-                  value="Sähköposti"
-                  defaultChecked
-                />{' '}
-                Sähköposti
+                <input type="radio" name="toimitus" value="postitus" defaultChecked />{' '}
+                Posti (8,90 €)
               </label>
               <label>
-                <input type="radio" name="yhteydenottotapa" value="Tekstiviesti" />{' '}
-                Tekstiviesti
-              </label>
-              <label>
-                <input type="radio" name="yhteydenottotapa" value="WhatsApp" /> WhatsApp
+                <input type="radio" name="toimitus" value="nouto" /> Nouto Järvenpäästä
               </label>
             </fieldset>
 
-            <button type="submit">Lähetä tilauspyyntö</button>
+            <div className="address-group">
+              <label>
+                Postiosoite
+                <input className="address-field" type="text" name="osoite" />
+              </label>
+              <label>
+                Postinumero
+                <input className="address-field" type="text" name="postinumero" />
+              </label>
+              <label>
+                Postitoimipaikka
+                <input className="address-field" type="text" name="toimipaikka" />
+              </label>
+            </div>
+
+            <fieldset>
+              <legend>Valitse määrä</legend>
+              <label>
+                <input type="radio" name="maara" value="50" required /> 50 matoa – 20 €
+              </label>
+              <label>
+                <input type="radio" name="maara" value="100" /> 100 matoa – 30 €
+              </label>
+              <label>
+                <input type="radio" name="maara" value="200" /> 200 matoa – 50 €
+              </label>
+            </fieldset>
+
+            <label>
+              Viesti (valinnainen)
+              <textarea name="lisatiedot" rows="3" />
+            </label>
+
+            <button type="submit">Lähetä tilaus</button>
+            <p className={classes.Note}>
+              Saat manuaalisen vahvistuksen ja laskun sähköpostiisi 1–2 arkipäivän
+              sisällä.
+            </p>
           </form>
 
           <section>
             <p>
-              Voit myös ottaa yhteyttä suoraan sähköpostitse:{' '}
-              <strong>lieromaa@gmail.com</strong> tai WhatsAppissa{' '}
+              Voit myös ottaa yhteyttä sähköpostitse: <strong>lieromaa@gmail.com</strong>{' '}
+              tai WhatsAppissa{' '}
               <a
                 href="https://api.whatsapp.com/send?phone=358503365054&text=Hei!%20Olen%20kiinnostunut%20kompostimadoista."
                 target="_blank"
@@ -168,11 +168,23 @@ export default async function Page() {
           <section>
             <h2>Toimitus ja nouto</h2>
             <p>
-              Madot toimitetaan pakasterasiassa postitettuna tai ne voi noutaa
-              Järvenpäästä. Suosittelen hakemaan postitetut madot heti saapumisilmoituksen
-              saapuessa, koska madot voivat elää suljetussa rasiassa vain noin 5 vrk.
-              Lähetän matopakkauksia vain maanantaisin ja tiistaisin, jotta madot eivät
-              jää viikonlopuksi Postin kyytiin.
+              Madot ovat elävää materiaalia, joten lähetän ne vain maanantaisin ja
+              tiistaisin.
+              <strong>Maanantaina klo 12:een mennessä</strong> tehdyt tilaukset postitan
+              tiistaina, ja myöhemmin saapuneet tilaukset seuraavan viikon maanantaina.
+            </p>
+            <p>
+              Näin varmistetaan, etteivät madot jää viikonlopuksi Postin kuljetukseen.
+              Saat sähköpostiisi ilmoituksen, kun lähetys on postitettu.
+            </p>
+            <p>
+              Toimitusaika on yleensä 2–3 arkipäivää postituksesta. Aikataulu riippuu
+              Postin toiminnasta, johon en valitettavasti voi vaikuttaa.
+            </p>
+            <p>
+              Halutessasi voit myös <strong>noutaa tilauksen Järvenpäästä</strong>{' '}
+              sovittuna ajankohtana. Valitse nouto toimitustavaksi tilauslomakkeessa, niin
+              otan yhteyttä sopiakseni tarkan ajan.
             </p>
           </section>
         </div>
