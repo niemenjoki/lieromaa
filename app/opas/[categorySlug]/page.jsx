@@ -16,7 +16,6 @@ export function generateStaticParams() {
   return guides.map((guide) => {
     const category = guide.category.name;
     if (!GUIDE_CATEGORIES.includes(category)) {
-      console.log({ title: guide.title, category });
       throw new Error(`Guide ${guide.title} uses an unknown category ${category}`);
     }
     return { categorySlug: category.replaceAll(' ', '-') };
