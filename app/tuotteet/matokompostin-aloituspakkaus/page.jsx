@@ -26,11 +26,11 @@ export default async function Page() {
           <ImageSlider
             images={[
               {
-                src: '/images/posts/matokompostorin-aloituspakkaus-osa-2-ensimmainen-tarkastus/kompostori_avattuna.avif',
+                src: '/images/content/kompostori_avattuna.avif',
                 alt: 'Käynnistynyt matokompostori sisältä',
               },
               {
-                src: '/images/guides/matokakkaa_kadella.avif',
+                src: '/images/content/matokakkaa_kadella.avif',
                 alt: 'Kasa tummaa matokakkaa kämmenellä',
               },
             ]}
