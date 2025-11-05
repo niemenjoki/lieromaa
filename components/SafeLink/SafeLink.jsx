@@ -16,8 +16,8 @@ export default function SafeLink({ href, children, ...props }) {
   }
 
   if (!isSafeHref(href)) {
-    console.warn('SafeLink component temporarily disabled! ENABLE BEFORE PUSH');
-    //throw new Error(`🚫 Unsafe link blocked: "${decodeURIComponent(href)}"`);
+    //console.warn('SafeLink component temporarily disabled! ENABLE BEFORE PUSH');
+    throw new Error(`🚫 Unsafe link blocked: "${decodeURIComponent(href)}"`);
   }
 
   return (
