@@ -1,0 +1,104 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/lapivirtauskompostori-tehokas-ratkaisu-kokeneelle#blogpost",
+      "url": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/lapivirtauskompostori-tehokas-ratkaisu-kokeneelle",
+      "headline": "Läpivirtauskompostori - helppo ja tehokas matokompostori",
+      "description": "Rakenna läpivirtauskompostori, joka on helppo hoitaa ja tuottaa valmista multaa jatkuvasti. Selkeät ohjeet aloittelijalle ja harrastajalle.",
+      "datePublished": "2025-09-16T00:00:00+03:00",
+      "dateModified": "2025-11-03T00:00:00+03:00",
+      "inLanguage": "fi",
+      "author": {
+        "@type": "Person",
+        "@id": "https://www.lieromaa.fi/#joonas",
+        "name": "Joonas Niemenjoki"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://www.lieromaa.fi/#organization",
+        "name": "Lieromaa",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
+        }
+      },
+      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "articleSection": "Matokompostointi",
+      "about": [{ "@type": "Thing", "name": "kompostorin perustaminen" }],
+      "keywords": [
+        "banaanikärpäset",
+        "continuous flow",
+        "diy",
+        "jatkuva virtaus",
+        "kompostorin perustaminen",
+        "kosteus",
+        "matokakan keräys",
+        "matokakka",
+        "matokompostointi",
+        "opas",
+        "rakentaminen",
+        "ruokinta"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Etusivu",
+          "item": "https://www.lieromaa.fi/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Opas",
+          "item": "https://www.lieromaa.fi/opas"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Kompostorin hoito",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Jatkuvaan virtaukseen perustuva kompostori: edistyneempi ratkaisu",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/lapivirtauskompostori-tehokas-ratkaisu-kokeneelle"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Matokakan sekaan jää paljon matoja, miten saan ne pois?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Matokakan sekaan jäävistä madoista ei kannata murehtia. Itse kerään isoimmat yksilöt ja suuremmat läjät toisiinsa kietoutuneista madoista käsin pois matokakasta ja siirrän ne ylimpään laatikkoon. Tämä ei kuitenkaan ole pakollista. Ylimmän laatikon ruoka houkuttelee suurimman osan madoista ylempiin laatikoihin, joten matokakan seassa on vain pieni osa madoista. Madot jatkavat matokakan seassa elämistä jonkin aikaa ja lopulta kuolevat. Matokakan sisältämät mikrobit hajottavat kuolleet madot todella nopeasti takaisin luonnon kiertoon"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Matokakan seassa on vielä vähän petimateriaalia, miten saan ne pois?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pienet määrät petimateriaalia eivät ole haitallisia. Matokakkaa voi hyvin käyttää puutarhassa niistä huolimatta. Jos kuitenkin haluat olla tarkka, voit antaa matokakan sekaan jäävien matojen hoitaa homman. Pidä huoli, että kerätyn matokakan kosteus on sopiva ja pidä se madoille sopivassa lämpötilassa. Madot jatkavat materiaalin käsittelemistä niin pitkään, kunnes kaikki petimateriaali on prosessoitu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Minulla ei vielä ole tarvetta matokakalle. Miten säilytän sitä?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Matokakka säilyy parhaiten, kun se pidetään aavistuksen kosteana ja ilma pääsee vaihtumaan sen ympärillä. Itse pidän matokakkaa muovilaatikossa, jonka kannessa on reikiä. Muutaman kuukauden välein möyhin sitä varmistaakseni, ettei kosteus pääse luomaan hapetonta tilaa, joka voisi mädäntyä. Tarvittaessa lisään vettä, jos matokakka vaikuttaa turhan kuivalta."
+          }
+        }
+      ]
+    }
+  ]
+}

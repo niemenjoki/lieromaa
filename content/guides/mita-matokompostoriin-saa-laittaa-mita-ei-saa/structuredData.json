@@ -3,12 +3,12 @@
   "@graph": [
     {
       "@type": "Article",
-      "@id": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-tehda-jos-biojatetta-kertyy-liikaa-tai-liian-vahan-matokompostoriin#blogpost",
-      "url": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-tehda-jos-biojatetta-kertyy-liikaa-tai-liian-vahan-matokompostoriin",
-      "headline": "Matokompostin tasapaino: liikaa vai liian vähän biojätettä?",
-      "description": "Vaihteleeko taloutesi tuottaman biojätteen määrä? Lue käytännön vinkit, miten pidät matokompostorin tasapainossa, kun jätettä on liikaa tai liian vähän.",
-      "datePublished": "2025-10-09T00:00:00+03:00",
-      "dateModified": "2025-10-09T00:00:00+03:00",
+      "@id": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa#blogpost",
+      "url": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa",
+      "headline": "Mitä matokompostoriin saa laittaa ja mitä ei saa",
+      "description": "Lue lista sallituista ja kielletyistä biojätteistä matokompostissa. Näin ruokit matosi oikein ja vältät hajuhaitat.",
+      "datePublished": "2025-09-07T00:00:00+03:00",
+      "dateModified": "2025-09-07T00:00:00+03:00",
       "inLanguage": "fi",
       "author": {
         "@type": "Person",
@@ -29,11 +29,11 @@
       "articleSection": "Matokompostointi",
       "about": [{ "@type": "Thing", "name": "kompostorin hoito" }],
       "keywords": [
-        "biojäte",
+        "happamuus",
         "kompostorin hoito",
+        "kosteus",
         "matokompostointi",
         "ongelmat",
-        "opas",
         "ruokinta"
       ]
     },
@@ -61,8 +61,8 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Matokompostin tasapaino: liikaa vai liian vähän biojätettä?",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-tehda-jos-biojatetta-kertyy-liikaa-tai-liian-vahan-matokompostoriin/"
+          "name": "Mitä matokompostoriin saa laittaa ja mitä ei saa",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa/"
         }
       ]
     }
