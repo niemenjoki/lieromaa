@@ -40,6 +40,7 @@ export default async function sitemap() {
     ['/tietosuoja', '2025-09-08'],
     ['/tilausehdot', '2025-10-07'],
     ['/tuotteet/madot', '2025-10-07'],
+    ['/tuotteet/matokompostin-aloituspakkaus', '2025-11-05'],
     ['/matolaskuri', '2025-10-07'],
   ].forEach(([url, lastmod]) => add(url, lastmod));
 
