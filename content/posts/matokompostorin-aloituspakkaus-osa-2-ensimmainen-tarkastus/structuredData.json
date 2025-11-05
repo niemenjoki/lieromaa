@@ -3,12 +3,12 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/matokompostorin-aloituspakkaus-osa-1-idea-rakentaminen#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/matokompostorin-aloituspakkaus-osa-1-idea-rakentaminen",
-      "headline": "Matokompostorin aloituspakkaus osa 1: Idea ja rakentaminen",
-      "description": "Sarjan ensimmäinen osa, jossa kehitetään Lieromaan matokompostorin aloituspakkaus ideasta käyttövalmiiksi prototyypiksi.",
-      "datePublished": "2025-10-24T00:00:00+03:00",
-      "dateModified": "2025-10-24T00:00:00+03:00",
+      "@id": "https://www.lieromaa.fi/blogi/matokompostorin-aloituspakkaus-osa-2-ensimmainen-tarkastus#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/matokompostorin-aloituspakkaus-osa-2-ensimmainen-tarkastus",
+      "headline": "Matokompostorin aloituspakkaus osa 2: Ensimmäinen tarkastus",
+      "description": "Sarjan toinen osa, jossa seurataan aloituspakkauksen prototyypin käynnistymistä ja tehdään ensimmäinen tarkistus ja ruokinta.",
+      "datePublished": "2025-11-05T00:00:00+03:00",
+      "dateModified": "2025-11-05T00:00:00+03:00",
       "inLanguage": "fi",
       "author": {
         "@type": "Person",
