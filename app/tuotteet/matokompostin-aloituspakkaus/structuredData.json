@@ -16,7 +16,7 @@
       "@id": "https://www.lieromaa.fi/tuotteet/aloituspakkaus#product",
       "name": "Matokompostorin aloituspakkaus",
       "description": "Lieromaan matokompostorin aloituspakkaus sisältää kaiken tarvittavan jatkuvatoimisen matokompostorin perustamiseen: laatikot, petimateriaalin, matokakkaa, kananmunankuorijauhetta ja madot.",
-      "image": "https://www.lieromaa.fi/images/guides/matokakkaa_kadella.avif",
+      "image": "https://www.lieromaa.fi/images/content/matokakkaa_kadella.avif",
       "brand": {
         "@type": "Brand",
         "name": "Lieromaa",

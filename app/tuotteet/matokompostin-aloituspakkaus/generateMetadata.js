@@ -6,7 +6,7 @@ export default function generateMetadata() {
     'Lieromaan matokompostorin aloituspakkaus sisältää kaiken tarvittavan kompostoinnin aloittamiseen. Tulossa myyntiin keväällä 2026.';
   const canonicalUrl = '/tuotteet/aloituspakkaus';
   const image = {
-    url: '/images/guides/matokakkaa_kadella.avif',
+    url: '/images/content/matokakkaa_kadella.avif',
     width: 1200,
     height: 800,
     alt: 'Kourallinen tummaa matokakkaa',
