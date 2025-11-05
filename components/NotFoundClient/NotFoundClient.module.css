@@ -1,7 +1,8 @@
 .Oops {
-  font-size: 10em;
+  font-size: 8em;
   opacity: 0.1;
   margin: 0;
+  max-width: 100%;
 }
 
 .NotFound {

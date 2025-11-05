@@ -43,7 +43,7 @@ export default function ClientNotFoundPage({ content }) {
   }, [pathname, content]);
 
   return (
-    <main className={classes.NotFoundWrapper}>
+   <>
       <div className={classes.Oops}>Hups!</div>
       <h1 className={classes.NotFoundPage}>
         Näyttää siltä, että etsimääsi sivua ei ole olemassa
@@ -63,6 +63,6 @@ export default function ClientNotFoundPage({ content }) {
       <div className={classes.LinkWrapper}>
         <SafeLink href="/blogi">Viimeisimmät blogijulkaisut</SafeLink>
       </div>
-    </main>
+   </>
   );
 }
