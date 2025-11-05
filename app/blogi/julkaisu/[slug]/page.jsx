@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 export { default as generateMetadata } from './generateMetadata';
 
 export default async function PostPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   let data;
   try {
     data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
