@@ -3,12 +3,12 @@
   "@graph": [
     {
       "@type": "Article",
-      "@id": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat#blogpost",
-      "url": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat",
-      "headline": "Mitä matokompostoriin saa laittaa ja mitä ei?",
-      "description": "Mietitkö, mitä voit antaa kompostimadoille? Tässä oppaassa käydään läpi turvalliset ja kielletyt ruoat sekä vinkit tasapainoon.",
-      "datePublished": "2025-09-07T00:00:00+03:00",
-      "dateModified": "2025-09-07T00:00:00+03:00",
+      "@id": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokompostin-tasapaino-liikaa-vai-liian-vahan-jatetta#blogpost",
+      "url": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokompostin-tasapaino-liikaa-vai-liian-vahan-jatetta",
+      "headline": "Matokompostin tasapaino - liikaa vai liian vähän jätettä",
+      "description": "Vaihteleeko taloutesi tuottaman biojätteen määrä? Lue käytännön vinkit, miten pidät matokompostorin tasapainossa, kun jätettä on liikaa tai liian vähän.",
+      "datePublished": "2025-10-09T00:00:00+03:00",
+      "dateModified": "2025-10-09T00:00:00+03:00",
       "inLanguage": "fi",
       "author": {
         "@type": "Person",
@@ -29,11 +29,11 @@
       "articleSection": "Matokompostointi",
       "about": [{ "@type": "Thing", "name": "kompostorin hoito" }],
       "keywords": [
-        "happamuus",
+        "biojäte",
         "kompostorin hoito",
-        "kosteus",
         "matokompostointi",
         "ongelmat",
+        "opas",
         "ruokinta"
       ]
     },
@@ -61,8 +61,8 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Mitä matokompostoriin saa laittaa ja mitä ei?",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-saa-laittaa-matokompostoriin-turvalliset-ja-kielletyt-ruoat/"
+          "name": "Matokompostin tasapaino - liikaa vai liian vähän jätettä",
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokompostin-tasapaino-liikaa-vai-liian-vahan-jatetta/"
         }
       ]
     }
