@@ -50,11 +50,11 @@ export default function Navbar() {
                 <li>
                   <SafeLink href="/tuotteet/madot">Kompostimadot</SafeLink>
                 </li>
-                {/* <li>
+                <li>
                   <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">
                     Aloituspakkaus
                   </SafeLink>
-                </li> */}
+                </li>
               </ul>
             </li>
 
@@ -110,9 +110,14 @@ export default function Navbar() {
                   Kompostimadot
                 </SafeLink>
               </li>
-              {/*<li>
-                <SafeLink href="/tuotteet/matokompostin-aloituspakkaus"onClick={toggleIsOpen}>Aloituspakkaus</SafeLink>
-              </li>*/}
+              <li>
+                <SafeLink
+                  href="/tuotteet/matokompostin-aloituspakkaus"
+                  onClick={toggleIsOpen}
+                >
+                  Aloituspakkaus
+                </SafeLink>
+              </li>
             </ul>
           </div>
 
