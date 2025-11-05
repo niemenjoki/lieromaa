@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://www.lieromaa.fi/tuotteet/aloituspakkaus#webpage",
-      "url": "https://www.lieromaa.fi/tuotteet/aloituspakkaus",
+      "@id": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#webpage",
+      "url": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus",
       "name": "Matokompostorin aloituspakkaus – tulossa myyntiin",
       "description": "Lieromaan matokompostorin aloituspakkaus on tulossa myyntiin keväällä 2026. Se sisältää kaiken tarvittavan matokompostoinnin aloittamiseen helposti.",
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
@@ -13,7 +13,7 @@
     },
     {
       "@type": "Product",
-      "@id": "https://www.lieromaa.fi/tuotteet/aloituspakkaus#product",
+      "@id": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#product",
       "name": "Matokompostorin aloituspakkaus",
       "description": "Lieromaan matokompostorin aloituspakkaus sisältää kaiken tarvittavan jatkuvatoimisen matokompostorin perustamiseen: laatikot, petimateriaalin, matokakkaa, kananmunankuorijauhetta ja madot.",
       "image": "https://www.lieromaa.fi/images/content/matokakkaa_kadella.avif",
@@ -28,7 +28,7 @@
         "price": "0.00",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/PreOrder",
-        "url": "https://www.lieromaa.fi/tuotteet/aloituspakkaus",
+        "url": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus",
         "priceValidUntil": "2026-06-30",
         "seller": {
           "@type": "Organization",
