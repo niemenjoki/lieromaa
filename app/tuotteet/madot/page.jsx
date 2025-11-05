@@ -2,7 +2,7 @@ import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
 
-import classes from './Madot.module.css';
+import classes from '../ProductPage.module.css';
 import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
@@ -19,7 +19,7 @@ export default async function Page() {
         }}
       />
 
-      <article className={classes.WormsPage}>
+      <article className={classes.ProductPage}>
         <h1>Osta Lieromaan Eisenia fetida -kompostimatoja</h1>
 
         <div className={classes.Content}>
@@ -168,10 +168,9 @@ export default async function Page() {
           <section>
             <h2>Toimitus ja nouto</h2>
             <p>
-              Madot ovat elävää materiaalia, joten lähetän ne vain maanantaisin ja
-              tiistaisin.
-              <strong>Maanantaina klo 12:een mennessä</strong> tehdyt tilaukset postitan
-              tiistaina, ja myöhemmin saapuneet tilaukset seuraavan viikon maanantaina.
+              Madot ovat elävää materiaalia, joten lähetän niitä vain maanantaisin ja
+              tiistaisin. Maanantaina klo 12 mennessä tehdyt tilaukset postitan tiistaina,
+              ja myöhemmin saapuneet tilaukset seuraavan viikon maanantaina.
             </p>
             <p>
               Näin varmistetaan, etteivät madot jää viikonlopuksi Postin kuljetukseen.
@@ -182,9 +181,9 @@ export default async function Page() {
               Postin toiminnasta, johon en valitettavasti voi vaikuttaa.
             </p>
             <p>
-              Halutessasi voit myös <strong>noutaa tilauksen Järvenpäästä</strong>{' '}
-              sovittuna ajankohtana. Valitse nouto toimitustavaksi tilauslomakkeessa, niin
-              otan yhteyttä sopiakseni tarkan ajan.
+              Halutessasi voit myös noutaa tilauksen Järvenpäästä sovittuna ajankohtana.
+              Valitse nouto toimitustavaksi tilauslomakkeessa, niin otan yhteyttä
+              sopiakseni tarkan ajan.
             </p>
           </section>
         </div>

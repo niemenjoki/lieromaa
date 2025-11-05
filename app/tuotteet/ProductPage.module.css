@@ -1,4 +1,4 @@
-.WormsPage h1 {
+.ProductPage h1 {
   margin: 0.25rem 0;
   font-size: 1.75rem;
   overflow-wrap: break-word;
@@ -58,7 +58,7 @@
   max-width: 30%;
 }
 
-.WormsPageNote {
+.Note {
   font-size: 0.85rem;
   color: #777;
   margin-top: 2rem;
@@ -85,7 +85,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-width: 400px;
+  max-width: 600px;
   margin: 1rem 0;
 }
 
@@ -99,6 +99,7 @@
 .CalculatorForm select {
   margin-left: 0.5rem;
   padding: 0.25rem;
+  margin: 0.25rem 0;
   width: 10rem;
 }
 
@@ -181,6 +182,10 @@
   }
   .CalculatorForm fieldset label {
     margin-bottom: 0;
+  }
+  .CalculatorForm input,
+  .CalculatorForm select {
+    width: 16rem;
   }
 }
 .Content aside {
