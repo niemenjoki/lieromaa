@@ -4,7 +4,7 @@ export default function generateMetadata() {
   const title = 'Matokompostorin aloituspakkaus - tulossa myyntiin | Lieromaa';
   const description =
     'Lieromaan matokompostorin aloituspakkaus sisältää kaiken tarvittavan kompostoinnin aloittamiseen. Tulossa myyntiin keväällä 2026.';
-  const canonicalUrl = '/tuotteet/aloituspakkaus';
+  const canonicalUrl = '/tuotteet/matokompostin-aloituspakkaus';
   const image = {
     url: '/images/content/matokakkaa_kadella.avif',
     width: 1200,
