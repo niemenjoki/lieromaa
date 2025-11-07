@@ -22,11 +22,11 @@ export default function Footer() {
               <li>
                 <SafeLink href="/tuotteet/madot">Kompostimadot</SafeLink>
               </li>
-              {/*<li>
+              <li>
                 <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">
                   Aloituspakkaus
                 </SafeLink>
-              </li>*/}
+              </li>
             </ul>
             <h3 style={{ marginTop: '2rem' }}>Blogi</h3>
             <ul>
