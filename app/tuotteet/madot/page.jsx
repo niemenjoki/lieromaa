@@ -1,5 +1,6 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
+import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from '../ProductPage.module.css';
@@ -20,6 +21,19 @@ export default async function Page() {
       />
 
       <article className={classes.ProductPage}>
+        <PromoBox>
+          <strong>Uutta tulossa:</strong> Kehitän parhaillaan matokompostorin
+          aloituspakkausta, jonka on tarkoitus tulla myyntiin kevääseen 2026 mennessä.
+          Pakkaus tulee sisältämään kaiken, mitä matokompostorin aloittamiseen tarvitsee;
+          laatikot, petimateriaalin ja kompostimadot. Voit tutustua pakkauksen kehitykseen
+          ja ilmoittaa kiinnostuksesi{' '}
+          <SafeLink
+            href="/tuotteet/matokompostin-aloituspakkaus"
+            style={{ color: 'var(--highlight-alt)', fontWeight: 600 }}
+          >
+            täällä
+          </SafeLink>
+        </PromoBox>
         <h1>Osta Lieromaan Eisenia fetida -kompostimatoja</h1>
 
         <div className={classes.Content}>
