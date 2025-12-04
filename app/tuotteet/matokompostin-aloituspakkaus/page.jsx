@@ -84,7 +84,7 @@ export default async function Page() {
             <p>
               Jos haluat saada ilmoituksen heti, kun aloituspakkaus on myynnissä, jätä
               yhteystietosi alla olevalla lomakkeella. Ilmoitan sinulle, kun tuote tulee
-              myyntiin.
+              myyntiin. Yhteystietojen jättäminen ei sido tilaamaan pakkausta.
             </p>
 
             <form
@@ -109,6 +109,36 @@ export default async function Page() {
             </form>
           </section>
 
+          <section>
+            <h2>Hinnoittelu ja kustannusrakenne</h2>
+            <p>
+              Tulen hinnoittelemaan aloituspakkauksen läpinäkyvästi. Alla on alustava
+              erittely siitä, mihin hinta tulee perustumaan. Hinta saattaa vielä tarkentua
+              ennen lopullisen tuotteen julkaisua.
+            </p>
+
+            <ul>
+              <li>3 x SmartStore Pro 14L laatikko - 8,99 €/kpl (yhteensä 26,97 €)</li>
+              <li>Kookoskuitua petimateriaaliksi (arviolta 2,70 € / pakkaus)</li>
+              <li>
+                Eisenia fetida -kompostimadot (nykyiset myyntihintani: 30 € / 100 kpl ja
+                50 € / 200 kpl)
+              </li>
+              <li>Noin 1 dl matokakkaa mikrobitoiminnan tehostamiseksi (0 €)</li>
+              <li>Kirjalliset ohjeet pakkauksen käynnistämiseen (0 €)</li>
+              <li>Kate / työn hinta 20 €</li>
+            </ul>
+
+            <p>
+              Alustavan kustannusarvion perusteella pakettien hinnat tulevat olemaan
+              seuraavat:
+            </p>
+
+            <ul>
+              <li>100 madon aloituspakkaus: 80 €</li>
+              <li>200 madon aloituspakkaus: 100 €</li>
+            </ul>
+          </section>
           <section>
             <h2>Arvioitu saatavuus</h2>
             <p>
