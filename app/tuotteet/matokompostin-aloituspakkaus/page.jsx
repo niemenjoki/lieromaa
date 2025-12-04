@@ -71,6 +71,11 @@ export default async function Page() {
                   Osa 2: Ensimmäinen tarkistus ja ruokinta
                 </SafeLink>
               </li>
+              <li>
+                <SafeLink href="/blogi/julkaisu/matokompostorin-aloituspakkaus-osa-3-munakotelot-kerrosten-kehitys">
+                  Osa 3: Munakotelot ja kerrosten kehitys
+                </SafeLink>
+              </li>
             </ul>
           </section>
 
