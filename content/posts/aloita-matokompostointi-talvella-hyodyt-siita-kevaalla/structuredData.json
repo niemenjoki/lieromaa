@@ -28,9 +28,7 @@
         "@id": "https://www.lieromaa.fi/#website"
       },
       "articleSection": "Matokompostointi",
-      "about": [
-        { "@type": "Thing", "name": "matokompostointi" }
-      ],
+      "about": [{ "@type": "Thing", "name": "matokompostointi" }],
       "keywords": [
         "matokompostointi talvella",
         "matokomposti sisällä",
