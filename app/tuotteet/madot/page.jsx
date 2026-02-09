@@ -4,6 +4,7 @@ import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from '../ProductPage.module.css';
+import OrderForm from './OrderForm';
 import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
@@ -88,82 +89,13 @@ export default async function Page() {
               saatavuuden ja hyvän lähetyskunnon ennen laskutusta.
             </p>
             <p>
-              Saat laskun <strong>OP Kevytyrittäjä</strong> -palvelun kautta
-              sähköpostitse. Maksuaika on 14 päivää, ja toimitus tapahtuu Postin kautta
-              koko Suomeen.
+              Saat laskun <strong>OP Kevytyrittäjä</strong> -palvelun kautta sähköpostitse
+              aikaisintaan silloin, kun pakkaus on toimitettu postille. Maksuaika on 14
+              päivää, ja toimitus tapahtuu Postin kautta koko Suomeen.
             </p>
           </section>
 
-          <form
-            className={classes.CalculatorForm}
-            action="https://formspree.io/f/xyznlyow"
-            method="POST"
-          >
-            <label>
-              Nimi
-              <input type="text" name="nimi" required />
-            </label>
-
-            <label>
-              Sähköposti
-              <input type="email" name="email" required />
-            </label>
-
-            <label>
-              Puhelinnumero
-              <input type="tel" name="phone" />
-            </label>
-
-            <fieldset>
-              <legend>Toimitustapa</legend>
-              <label>
-                <input type="radio" name="toimitus" value="postitus" defaultChecked />{' '}
-                Posti (8,90 €)
-              </label>
-              <label>
-                <input type="radio" name="toimitus" value="nouto" /> Nouto Järvenpäästä
-              </label>
-            </fieldset>
-
-            <div className="address-group">
-              <label>
-                Postiosoite
-                <input className="address-field" type="text" name="osoite" />
-              </label>
-              <label>
-                Postinumero
-                <input className="address-field" type="text" name="postinumero" />
-              </label>
-              <label>
-                Postitoimipaikka
-                <input className="address-field" type="text" name="toimipaikka" />
-              </label>
-            </div>
-
-            <fieldset>
-              <legend>Valitse määrä</legend>
-              <label>
-                <input type="radio" name="maara" value="50" required /> 50 matoa – 20 €
-              </label>
-              <label>
-                <input type="radio" name="maara" value="100" /> 100 matoa – 30 €
-              </label>
-              <label>
-                <input type="radio" name="maara" value="200" /> 200 matoa – 50 €
-              </label>
-            </fieldset>
-
-            <label>
-              Viesti (valinnainen)
-              <textarea name="lisatiedot" rows="3" />
-            </label>
-
-            <button type="submit">Lähetä tilaus</button>
-            <p className={classes.Note}>
-              Saat manuaalisen vahvistuksen ja laskun sähköpostiisi 1–2 arkipäivän
-              sisällä.
-            </p>
-          </form>
+          <OrderForm />
 
           <section>
             <p>
