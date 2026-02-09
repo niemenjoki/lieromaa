@@ -103,6 +103,13 @@
   width: 10rem;
 }
 
+.CalculatorForm input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
 .CalculatorForm button {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
@@ -175,6 +182,33 @@
   outline-offset: 2px;
 }
 
+.CalculatorForm:has(input[name='toimitus'][value='nouto']:checked) .AddressGroup {
+  display: none;
+}
+
+.AddressGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.FrostCharge {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Content .HelperText {
+  margin: 0.25rem 0 0.75rem 0;
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.OrderTotal {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+}
+
 @media (min-width: 700px) {
   .CalculatorForm fieldset {
     flex-direction: row;
@@ -186,6 +220,10 @@
   .CalculatorForm input,
   .CalculatorForm select {
     width: 16rem;
+  }
+  .CalculatorForm fieldset.FrostCharge {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
 .Content aside {
