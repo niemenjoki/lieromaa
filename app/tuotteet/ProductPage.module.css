@@ -60,7 +60,6 @@
 
 .Note {
   font-size: 0.85rem;
-  color: #777;
   margin-top: 2rem;
   line-height: 1.4;
 }
@@ -200,7 +199,6 @@
 .Content .HelperText {
   margin: 0.25rem 0 0.75rem 0;
   font-size: 0.9rem;
-  color: #555;
   line-height: 1.4;
 }
 
