@@ -85,6 +85,10 @@ export default function Navbar() {
             </li>
           </ul>
 
+          <span className={classes.MobileThemeToggler}>
+            <ThemeToggler style={{ fontSize: '26px' }} />
+          </span>
+
           {/* Mobile toggler */}
           <span className={classes.Toggler}>
             <Toggler
@@ -99,9 +103,6 @@ export default function Navbar() {
       {/* MOBILE OVERLAY */}
       <div className={`${classes.MobileMenu} ${isOpen ? classes.MobileOpen : ''}`}>
         <div className={classes.MobileContent}>
-          <div className={classes.MobileSection}>
-            <ThemeToggler style={{ fontSize: '26px' }} />
-          </div>
           <div className={classes.MobileSection}>
             <h3>Tuotteet</h3>
             <ul>

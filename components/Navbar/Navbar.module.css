@@ -43,6 +43,11 @@
   gap: 1.2rem;
 }
 
+.MobileThemeToggler {
+  display: none;
+  line-height: 1;
+}
+
 .Socials span a {
   margin: 0 0.5rem 0 0;
   font-size: 1.5rem;
@@ -187,6 +192,16 @@
 @media (max-width: 900px) {
   .Links {
     display: none;
+  }
+
+  .Right {
+    gap: 0.35rem;
+  }
+
+  .MobileThemeToggler {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .Toggler {
