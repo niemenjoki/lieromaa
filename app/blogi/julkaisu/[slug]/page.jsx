@@ -70,7 +70,14 @@ export default async function PostPage({ params }) {
         </div>
 
         <div className={classes.Content + ' .md'}>
-          <MDXRemote source={mdxContent} components={mdxComponents} />
+          <MDXRemote
+            source={mdxContent}
+            components={mdxComponents}
+            options={{
+              blockJS: false,
+              blockDangerousJS: true,
+            }}
+          />
         </div>
 
         <div className={classes.AuthorBox}>
