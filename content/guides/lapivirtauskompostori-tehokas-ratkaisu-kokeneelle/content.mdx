@@ -12,10 +12,10 @@ jos olet valmis näkemään hieman enemmän vaivaa matokompostoria perustaessasi
   alt="Kolmesta muovilaatikosta tehty valmis matokompostori"
   width={1200}
   height={900}
-  sizes="(max-width: 600px) 100vw, 800px"
+  sizes="(max-width: 800px) 100vw, 800px"
   priority={false}
   loading="lazy"
-  style={{ maxWidth: '60%', height: 'auto' }}
+  style={{ width: '100%', maxWidth: '800px', height: 'auto' }}
 />
 
 ## Läpivirtauskompostorin idea
@@ -27,22 +27,12 @@ Matojen ruoka annetaan aina ylimpään muovilaatikkoon. Alimmasta laatikosta ker
 Tällä tavalla kompostorissa on käynnissä jatkuva prosessi, jossa kaikkein prosessoiduin materiaali "virtaa" kohti alinta laatikkoa. Alla olevassa kuvissa
 näet selkeän eron eri kerrosten sisältämässä materiaalissa.
 
-{(<div
-style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '0.5rem',
-    maxWidth: '100%',
-  }}
-
->
-
 <div
   style={{
-    flex: '1 1 calc(33.333% - 0.5rem)',
-    maxWidth: 'calc(33.333% - 0.5rem)',
-    display: 'block',
-    minWidth: '200px',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+    gap: '0.75rem',
+    maxWidth: '100%',
   }}
 >
   <SafeImage
@@ -50,50 +40,31 @@ style={{
     alt="Matokompostorin yläkerros"
     width={1200}
     height={900}
-    sizes="(max-width: 600px) 100vw, 800px"
+    sizes="(max-width: 800px) 100vw, (max-width: 1200px) 50vw, 33vw"
     loading="lazy"
-    style={{ maxWidth: '100%', height: 'auto' }}
+    style={{ width: '100%', maxWidth: '100%', height: 'auto' }}
   />
-</div>
 
-<div
-  style={{
-    flex: '1 1 calc(33.333% - 0.5rem)',
-    maxWidth: 'calc(33.333% - 0.5rem)',
-    display: 'block',
-    minWidth: '200px',
-  }}
->
   <SafeImage
     src="/images/content/matokompostori_keskikerros.avif"
     alt="Matokompostorin keskikerros"
     width={1200}
     height={900}
-    sizes="(max-width: 600px) 100vw, 800px"
+    sizes="(max-width: 800px) 100vw, (max-width: 1200px) 50vw, 33vw"
     loading="lazy"
-    style={{ maxWidth: '100%', height: 'auto' }}
+    style={{ width: '100%', maxWidth: '100%', height: 'auto' }}
+  />
+
+  <SafeImage
+    src="/images/content/matokompostori_pohjakerros.avif"
+    alt="Matokompostorin pohjakerros"
+    width={1200}
+    height={900}
+    sizes="(max-width: 800px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    loading="lazy"
+    style={{ width: '100%', maxWidth: '100%', height: 'auto' }}
   />
 </div>
-
-  <div
-    style={{
-      flex: '1 1 calc(33.333% - 0.5rem)',
-      maxWidth: 'calc(33.333% - 0.5rem)',
-      display: 'block',
-      minWidth: '200px',
-    }}
-  >
-    <SafeImage
-      src="/images/content/matokompostori_pohjakerros.avif"
-      alt="Matokompostorin pohjakerros"
-      width={1200}
-      height={900}
-      sizes="(max-width: 600px) 100vw, 800px"
-      loading="lazy"
-      style={{ maxWidth: '100%', height: 'auto' }}
-    />
-  </div>
-</div>)}
 
 ## Tarvittavat materiaalit ja rakentaminen
 
@@ -125,7 +96,7 @@ Poraa reikiä kahden muovilaatikon pohjaan sinne tänne. Madot käyttävät reik
   alt="Reiät matokompostorin laatikon pohjassa"
   width={1200}
   height={900}
-  sizes="(max-width: 600px) 100vw, 800px"
+  sizes="(max-width: 800px) 100vw, 800px"
   loading="lazy"
   style={{ maxWidth: '300px', height: 'auto' }}
 />
