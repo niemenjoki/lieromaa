@@ -8,7 +8,7 @@
       "headline": "Matokompostin tasapaino - liikaa vai liian vähän jätettä",
       "description": "Vaihteleeko taloutesi tuottaman biojätteen määrä? Lue käytännön vinkit, miten pidät matokompostorin tasapainossa, kun jätettä on liikaa tai liian vähän.",
       "datePublished": "2025-10-09T00:00:00+03:00",
-      "dateModified": "2025-10-09T00:00:00+03:00",
+      "dateModified": "2025-11-03T00:00:00+03:00",
       "inLanguage": "fi",
       "author": {
         "@type": "Person",
@@ -25,9 +25,16 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Matokompostointi",
-      "about": [{ "@type": "Thing", "name": "kompostorin hoito" }],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "kompostorin hoito"
+        }
+      ],
       "keywords": [
         "biojäte",
         "kompostorin hoito",
