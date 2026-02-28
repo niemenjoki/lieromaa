@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/syksyn-puutarhatyot-kasvien-valmistelu-talveen#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/syksyn-puutarhatyot-kasvien-valmistelu-talveen",
+      "@id": "https://www.lieromaa.fi/blogi/julkaisu/syksyn-puutarhatyot-kasvien-valmistelu-talveen#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/julkaisu/syksyn-puutarhatyot-kasvien-valmistelu-talveen",
       "headline": "Syksyn puutarhatyöt: näin valmistelet kasvit talveen",
       "description": "Valmistele puutarha talveen oikein: näin hoidat kasvit, maan ja kompostin ennen pakkasia ja varmistat vahvan kevätkasvun.",
       "datePublished": "2025-09-17T00:00:00+03:00",
@@ -24,13 +24,27 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Puutarha",
       "about": [
-        { "@type": "Thing", "name": "puutarha" },
-        { "@type": "Thing", "name": "kompostin hyödyntäminen" },
-        { "@type": "Thing", "name": "kasvien hoito" },
-        { "@type": "Thing", "name": "talvi" }
+        {
+          "@type": "Thing",
+          "name": "puutarha"
+        },
+        {
+          "@type": "Thing",
+          "name": "kompostin hyödyntäminen"
+        },
+        {
+          "@type": "Thing",
+          "name": "kasvien hoito"
+        },
+        {
+          "@type": "Thing",
+          "name": "talvi"
+        }
       ],
       "keywords": [
         "fosfori",

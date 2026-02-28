@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/matokomposti-oppimisvalineena-luonnon-kiertokulun-opettaminen-lapsille#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/matokomposti-oppimisvalineena-luonnon-kiertokulun-opettaminen-lapsille",
+      "@id": "https://www.lieromaa.fi/blogi/julkaisu/matokomposti-oppimisvalineena-luonnon-kiertokulun-opettaminen-lapsille#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/julkaisu/matokomposti-oppimisvalineena-luonnon-kiertokulun-opettaminen-lapsille",
       "headline": "Matokomposti oppimisvälineenä – luonnon kiertokulku lapsille",
       "description": "Matokompostointi opettaa lapsille luonnon kiertokulusta hauskalla tavalla. Tutustu vinkkeihin ja käytännön ideoihin.",
       "datePublished": "2025-09-10T00:00:00+03:00",
@@ -24,12 +24,23 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Matokompostointi",
       "about": [
-        { "@type": "Thing", "name": "matokompostointi" },
-        { "@type": "Thing", "name": "puutarha" },
-        { "@type": "Thing", "name": "lapset" }
+        {
+          "@type": "Thing",
+          "name": "matokompostointi"
+        },
+        {
+          "@type": "Thing",
+          "name": "puutarha"
+        },
+        {
+          "@type": "Thing",
+          "name": "lapset"
+        }
       ],
       "keywords": [
         "ajatuksia",

@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/matokompostorin-aloituspakkaus-osa-2-ensimmainen-tarkastus#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/matokompostorin-aloituspakkaus-osa-2-ensimmainen-tarkastus",
+      "@id": "https://www.lieromaa.fi/blogi/julkaisu/matokompostorin-aloituspakkaus-osa-2-ensimmainen-tarkastus#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/julkaisu/matokompostorin-aloituspakkaus-osa-2-ensimmainen-tarkastus",
       "headline": "Matokompostorin aloituspakkaus osa 2: Ensimmäinen tarkastus",
       "description": "Sarjan toinen osa, jossa seurataan aloituspakkauksen prototyypin käynnistymistä ja tehdään ensimmäinen tarkistus ja ruokinta.",
       "datePublished": "2025-11-05T00:00:00+03:00",
@@ -24,12 +24,23 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Kompostorin perustaminen",
       "about": [
-        { "@type": "Thing", "name": "matokompostointi" },
-        { "@type": "Thing", "name": "kompostorin perustaminen" },
-        { "@type": "Thing", "name": "rakentaminen" }
+        {
+          "@type": "Thing",
+          "name": "matokompostointi"
+        },
+        {
+          "@type": "Thing",
+          "name": "kompostorin perustaminen"
+        },
+        {
+          "@type": "Thing",
+          "name": "rakentaminen"
+        }
       ],
       "keywords": [
         "matokompostointi",

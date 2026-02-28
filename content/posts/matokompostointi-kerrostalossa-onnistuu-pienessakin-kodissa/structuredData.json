@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/matokompostointi-kerrostalossa-onnistuu-pienessakin-kodissa#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/matokompostointi-kerrostalossa-onnistuu-pienessakin-kodissa",
+      "@id": "https://www.lieromaa.fi/blogi/julkaisu/matokompostointi-kerrostalossa-onnistuu-pienessakin-kodissa#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/julkaisu/matokompostointi-kerrostalossa-onnistuu-pienessakin-kodissa",
       "headline": "Matokompostointi kerrostalossa: onnistuu pienessäkin kodissa",
       "description": "Matokompostointi onnistuu kerrostalossa helposti ilman hajuhaittoja. Opi perustamaan oma komposti ja hyödyntämään matokakka.",
       "datePublished": "2025-09-26T00:00:00+03:00",
@@ -24,12 +24,23 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Matokompostointi",
       "about": [
-        { "@type": "Thing", "name": "matokompostointi" },
-        { "@type": "Thing", "name": "kerrostalo" },
-        { "@type": "Thing", "name": "kompostointi sisätiloissa" }
+        {
+          "@type": "Thing",
+          "name": "matokompostointi"
+        },
+        {
+          "@type": "Thing",
+          "name": "kerrostalo"
+        },
+        {
+          "@type": "Thing",
+          "name": "kompostointi sisätiloissa"
+        }
       ],
       "keywords": [
         "kasvit",
