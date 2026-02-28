@@ -14,11 +14,6 @@ const nextConfig = {
         destination: '/tuotteet/madot',
         permanent: true,
       },
-      {
-        source: '/madot-kampanja',
-        destination: '/tuotteet/madot-kampanja',
-        permanent: true,
-      },
     ];
   },
   reactStrictMode: true,
