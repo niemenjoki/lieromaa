@@ -41,7 +41,11 @@ export default async function BlogTagPage({ params }) {
 
   const decodedTag = decodeURIComponent(tag);
   const pageIndexInt = parseInt(pageIndex) || 1;
-  const { posts, numPages } = getPostsByTag(decodedTag, pageIndexInt, POSTS_PER_PAGE);
+  const { posts, numPages, allPostsForTag } = getPostsByTag(
+    decodedTag,
+    pageIndexInt,
+    POSTS_PER_PAGE
+  );
   if (posts.length === 0) {
     notFound();
   }
@@ -73,7 +77,7 @@ export default async function BlogTagPage({ params }) {
       <h1>Julkaisut avainsanalla "{tagDisplay}"</h1>
 
       <SearchPosts
-        list={posts}
+        list={allPostsForTag}
         keys={['title', 'description', 'keywords', 'tags']}
         placeholder="Etsi julkaisun nimellä tai avainsanalla.."
       />

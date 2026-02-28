@@ -30,7 +30,7 @@ export default async function BlogPage({ params }) {
   const { pageIndex } = await params;
 
   const pageIndexInt = parseInt(pageIndex) || 1;
-  const { posts, numPages } = getPaginatedPosts(pageIndexInt, POSTS_PER_PAGE);
+  const { posts, numPages, allPosts } = getPaginatedPosts(pageIndexInt, POSTS_PER_PAGE);
   if (posts.length === 0) {
     notFound();
   }
@@ -60,7 +60,7 @@ export default async function BlogPage({ params }) {
       <h1>Lieromaan blogi – Asiaa kompostoinnista ja kestävästä kehityksestä</h1>
 
       <SearchPosts
-        list={posts}
+        list={allPosts}
         keys={['title', 'description', 'keywords', 'tags']}
         placeholder="Etsi julkaisun nimellä tai avainsanalla.."
       />
