@@ -3,18 +3,17 @@
   "@graph": [
     {
       "@type": "Article",
-      "@id": "https://www.lieromaa.fi/opas/matokakan-keräys/matokakka-luonnollinen-lannoite-opas-aloittelijoille#blogpost",
-      "url": "https://www.lieromaa.fi/opas/matokakan-keräys/matokakka-luonnollinen-lannoite-opas-aloittelijoille",
-      "headline": "Matokakka – luonnollinen lannoite ja maanparannusaine",
-      "description": "Matokakka on luonnollinen, kemikaaliton lannoite, joka parantaa maan rakennetta ja tukee kasvien kasvua. Opi hyödyntämään se oikein.",
+      "@id": "https://www.lieromaa.fi/opas/kompostin-hyödyntäminen/valoerottelu-matoystavallinen-tapa-kerata-matokakka#article",
+      "url": "https://www.lieromaa.fi/opas/kompostin-hyödyntäminen/valoerottelu-matoystavallinen-tapa-kerata-matokakka",
+      "headline": "Valoerottelu: matoystävällinen tapa kerätä matokakka",
+      "description": "Valoerottelu on matoystävällinen tapa erottaa matokakka ja madot toisistaan. Opi valmistelut, työvaiheet ja yleisimmät virheet juuri valoerottelussa.",
       "datePublished": "2025-09-12T00:00:00+03:00",
-      "dateModified": "2025-09-12T00:00:00+03:00",
+      "dateModified": "2026-02-27T00:00:00+02:00",
       "inLanguage": "fi",
       "author": {
         "@type": "Person",
         "@id": "https://www.lieromaa.fi/#joonas",
-        "name": "Joonas Niemenjoki",
-        "url": "https://www.lieromaa.fi/#joonas"
+        "name": "Joonas Niemenjoki"
       },
       "publisher": {
         "@type": "Organization",
@@ -29,18 +28,11 @@
       "articleSection": "Kompostin hyödyntäminen",
       "about": [{ "@type": "Thing", "name": "kompostin hyödyntäminen" }],
       "keywords": [
-        "kasvit",
-        "kompostin hyödyntäminen",
-        "kosteus",
-        "matokakan hyödyt",
-        "matokakan käyttö",
         "matokakka",
+        "matokakan keräys",
+        "valoerottelu",
         "matokompostointi",
-        "npk",
-        "opas",
-        "puutarha",
-        "ruokkiminen",
-        "valoerottelu"
+        "kompostin hyödyntäminen"
       ]
     },
     {
@@ -67,8 +59,8 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Matokakka – luonnollinen lannoite ja maanparannusaine",
-          "item": "https://www.lieromaa.fi/opas/kompostin-hyödyntäminen/matokakka-luonnollinen-lannoite-opas-aloittelijoille/"
+          "name": "Valoerottelu: matoystävällinen tapa kerätä matokakka",
+          "item": "https://www.lieromaa.fi/opas/kompostin-hyödyntäminen/valoerottelu-matoystavallinen-tapa-kerata-matokakka"
         }
       ]
     }
