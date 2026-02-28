@@ -13,13 +13,19 @@ export { default as generateMetadata } from './generateMetadata';
 
 export function generateStaticParams() {
   const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
-  return guides.map((guide) => {
+  const categorySet = new Set();
+
+  guides.forEach((guide) => {
     const category = guide.category.name;
     if (!GUIDE_CATEGORIES.includes(category)) {
       throw new Error(`Guide ${guide.title} uses an unknown category ${category}`);
     }
-    return { categorySlug: category.replaceAll(' ', '-') };
+    categorySet.add(category);
   });
+
+  return Array.from(categorySet)
+    .sort()
+    .map((category) => ({ categorySlug: category.replaceAll(' ', '-') }));
 }
 
 export default async function GuideCategoryPage({ params }) {
