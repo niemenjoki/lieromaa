@@ -16,7 +16,7 @@
       "@id": "https://www.lieromaa.fi/tuotteet/madot#product",
       "name": "Kompostimadot (Eisenia fetida)",
       "description": "Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina. Sopivat sisä- ja ulkokäyttöön, hajuttomaan biojätteen käsittelyyn ja luonnonmukaiseen lannoitukseen.",
-      "image": "https://www.lieromaa.fi/images/wormspage/kompostimadot-kammenella-eisenia-fetida.avif",
+      "image": "https://www.lieromaa.fi/images/wormspage/kompostimadot_kammenella.avif",
       "sku": "MADOT",
       "brand": {
         "@type": "Brand",
