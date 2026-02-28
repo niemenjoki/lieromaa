@@ -24,9 +24,16 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Matokompostointi",
-      "about": [{ "@type": "Thing", "name": "kompostorin perustaminen" }],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "kompostorin perustaminen"
+        }
+      ],
       "keywords": [
         "banaanikärpäset",
         "continuous flow",
@@ -66,7 +73,7 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Jatkuvaan virtaukseen perustuva kompostori: edistyneempi ratkaisu",
+          "name": "Läpivirtauskompostori - helppo ja tehokas matokompostori",
           "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/lapivirtauskompostori-tehokas-ratkaisu-kokeneelle"
         }
       ]

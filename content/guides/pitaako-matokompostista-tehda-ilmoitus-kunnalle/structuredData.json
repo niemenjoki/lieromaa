@@ -5,7 +5,7 @@
       "@type": "Article",
       "@id": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/pitaako-matokompostista-tehda-ilmoitus-kunnalle#blogpost",
       "url": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/pitaako-matokompostista-tehda-ilmoitus-kunnalle",
-      "headline": "Pitääkö matokompostista tehdä ilmoitus kunnalle?",
+      "headline": "Pitääkö matokompostista tehdä kompostointi-ilmoitus kunnalle?",
       "description": "Matokompostista ei tarvitse ilmoittaa, mutta ilmoitusasioissa kannattaa olla tarkkana. Lue, milloin komposti-ilmoitus on pakollinen.",
       "datePublished": "2025-10-10T00:00:00+03:00",
       "dateModified": "2025-10-18T00:00:00+03:00",
@@ -24,9 +24,16 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Matokompostointi",
-      "about": [{ "@type": "Thing", "name": "kompostorin perustaminen" }],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "kompostorin perustaminen"
+        }
+      ],
       "keywords": [
         "lämpökompostointi",
         "matokompostointi",
@@ -60,7 +67,7 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Pitääkö matokompostista tehdä ilmoitus kunnalle?",
+          "name": "Pitääkö matokompostista tehdä kompostointi-ilmoitus kunnalle?",
           "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/pitaako-matokompostista-tehda-ilmoitus-kunnalle/"
         }
       ]

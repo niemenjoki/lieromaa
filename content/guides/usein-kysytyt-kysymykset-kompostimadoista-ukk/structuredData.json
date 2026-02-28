@@ -5,8 +5,8 @@
       "@type": "FAQPage",
       "@id": "https://www.lieromaa.fi/opas/kompostorin-hoito/usein-kysytyt-kysymykset-kompostimadoista-ukk#faqpage",
       "url": "https://www.lieromaa.fi/opas/kompostorin-hoito/usein-kysytyt-kysymykset-kompostimadoista-ukk",
-      "name": "Usein kysytyt kysymykset kompostimadoista (UKK)",
-      "description": "Yleisimmät kysymykset ja vastaukset kompostimadoista ja matokompostoinnista Suomessa. Käytännön kokemuksiin perustuva opas madon hoidosta, lajista ja elintavoista.",
+      "name": "Usein kysyttyjä kysymyksiä ja vastauksia kompostimadoista (UKK)",
+      "description": "Mikä kompostimato on, mitä se syö ja kuinka kauan elää? Tästä löydät vastaukset madon elämästä, hoidosta ja hankinnasta",
       "datePublished": "2025-09-29T00:00:00+03:00",
       "dateModified": "2025-09-29T00:00:00+03:00",
       "inLanguage": "fi",
@@ -24,8 +24,15 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
-      "about": [{ "@type": "Thing", "name": "kompostorin hoito" }],
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "kompostorin hoito"
+        }
+      ],
       "keywords": [
         "matokompostointi",
         "kompostimadot",
@@ -142,7 +149,7 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Usein kysytyt kysymykset kompostimadoista (UKK)",
+          "name": "Usein kysyttyjä kysymyksiä ja vastauksia kompostimadoista (UKK)",
           "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/usein-kysytyt-kysymykset-kompostimadoista-ukk/"
         }
       ]
