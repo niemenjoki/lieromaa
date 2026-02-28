@@ -3,7 +3,7 @@ import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 export default function generateMetadata() {
   const title = 'Tietoa | Lieromaa';
   const description =
-    'Tilaa kotimaisia kompostimatoja (Eisenia fetida) ilman toimituskuluja koko Suomeen. Tarjous voimassa 30.11.2025 asti.';
+    'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!';
   const canonicalUrl = '/tietoa';
 
   const customMetadata = {
