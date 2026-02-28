@@ -48,18 +48,19 @@ export default async function BlogTagPage({ params }) {
   const allTags = getAllPostTags();
 
   const tagDisplay = decodedTag.replaceAll('-', ' ');
+  const pagePath = `/blogi/${tag}/sivu/${pageIndexInt}`;
+  const pageUrl = `${SITE_URL}${pagePath}`;
 
-  const data = JSON.parse(JSON.stringify(structuredData));
-  data['@graph'][1]['itemListElement'] = [];
-  posts.forEach((post, i) => {
-    data['@graph'][1]['itemListElement'].push({
-      '@type': 'ListItem',
-      position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
-      url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
-    });
-  });
-
-  const ldJSON = JSON.parse(JSON.stringify(data).replaceAll('[pageIndex]', pageIndex));
+  const ldJSON = JSON.parse(JSON.stringify(structuredData));
+  ldJSON['@graph'][0]['@id'] = `${pageUrl}#webpage`;
+  ldJSON['@graph'][0].url = pageUrl;
+  ldJSON['@graph'][0].name = `Blogi – ${tagDisplay} (sivu ${pageIndexInt})`;
+  ldJSON['@graph'][1]['@id'] = `${pageUrl}#itemlist`;
+  ldJSON['@graph'][1]['itemListElement'] = posts.map((post, i) => ({
+    '@type': 'ListItem',
+    position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
+    url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
+  }));
 
   return (
     <>
