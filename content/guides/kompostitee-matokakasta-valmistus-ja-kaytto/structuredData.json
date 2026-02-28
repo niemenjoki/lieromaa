@@ -8,7 +8,7 @@
       "headline": "Matokakasta tehty kompostitee: valmistus, laimennus ja käyttö",
       "description": "Matokakasta tehty kompostitee toimii turvallisena lisäravinteena, kun uuttoaika pysyy maltillisena, laimennus tehdään oikein ja liuos käytetään tuoreena.",
       "datePublished": "2026-02-27T00:00:00+02:00",
-      "dateModified": "2026-02-27T00:00:00+02:00",
+      "dateModified": "2026-03-01T00:00:00+02:00",
       "inLanguage": "fi",
       "author": {
         "@type": "Person",
@@ -24,9 +24,16 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Kompostin hyödyntäminen",
-      "about": [{ "@type": "Thing", "name": "kompostin hyödyntäminen" }],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "kompostin hyödyntäminen"
+        }
+      ],
       "keywords": [
         "kompostitee",
         "matokakka",

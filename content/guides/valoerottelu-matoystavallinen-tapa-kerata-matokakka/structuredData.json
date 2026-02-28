@@ -8,7 +8,7 @@
       "headline": "Valoerottelu: matoystävällinen tapa kerätä matokakka",
       "description": "Valoerottelu on matoystävällinen tapa erottaa matokakka ja madot toisistaan. Opi valmistelut, työvaiheet ja yleisimmät virheet juuri valoerottelussa.",
       "datePublished": "2025-09-12T00:00:00+03:00",
-      "dateModified": "2026-02-27T00:00:00+02:00",
+      "dateModified": "2026-03-01T00:00:00+02:00",
       "inLanguage": "fi",
       "author": {
         "@type": "Person",
@@ -24,9 +24,16 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Kompostin hyödyntäminen",
-      "about": [{ "@type": "Thing", "name": "kompostin hyödyntäminen" }],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "kompostin hyödyntäminen"
+        }
+      ],
       "keywords": [
         "matokakka",
         "matokakan keräys",
