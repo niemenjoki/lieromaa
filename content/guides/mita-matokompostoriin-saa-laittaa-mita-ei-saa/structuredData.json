@@ -5,7 +5,7 @@
       "@type": "Article",
       "@id": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa#blogpost",
       "url": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa",
-      "headline": "Mitä matokompostoriin saa laittaa ja mitä ei saa",
+      "headline": "Mitä matokompostoriin saa laittaa matojen ruoaksi ja mitä ei",
       "description": "Lue lista sallituista ja kielletyistä biojätteistä matokompostissa. Näin ruokit matosi oikein ja vältät hajuhaitat.",
       "datePublished": "2025-09-07T00:00:00+03:00",
       "dateModified": "2025-09-07T00:00:00+03:00",
@@ -25,9 +25,16 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Matokompostointi",
-      "about": [{ "@type": "Thing", "name": "kompostorin hoito" }],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "kompostorin hoito"
+        }
+      ],
       "keywords": [
         "happamuus",
         "kompostorin hoito",
@@ -61,7 +68,7 @@
         {
           "@type": "ListItem",
           "position": 4,
-          "name": "Mitä matokompostoriin saa laittaa ja mitä ei saa",
+          "name": "Mitä matokompostoriin saa laittaa matojen ruoaksi ja mitä ei",
           "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa/"
         }
       ]
