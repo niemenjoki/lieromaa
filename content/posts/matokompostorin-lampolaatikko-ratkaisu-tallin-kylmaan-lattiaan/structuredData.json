@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/matokompostorin-lampolaatikko-ratkaisu-tallin-kylmaan-lattiaan#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/matokompostorin-lampolaatikko-ratkaisu-tallin-kylmaan-lattiaan",
+      "@id": "https://www.lieromaa.fi/blogi/julkaisu/matokompostorin-lampolaatikko-ratkaisu-tallin-kylmaan-lattiaan#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/julkaisu/matokompostorin-lampolaatikko-ratkaisu-tallin-kylmaan-lattiaan",
       "headline": "Tallin kylmä lattia hidasti matoja - rakensin lämpölaatikon",
       "description": "Tallin kylmä lattia pudotti kompostin aktiivisuuden talvella. Rakensin lämpölaatikon sulanapitokaapelilla ja termostaatilla, jolloin lämpö tasaantui.",
       "datePublished": "2026-02-27T00:00:00+02:00",
@@ -29,9 +29,18 @@
       },
       "articleSection": "Matokompostointi",
       "about": [
-        { "@type": "Thing", "name": "matokompostointi" },
-        { "@type": "Thing", "name": "kompostorin hoito" },
-        { "@type": "Thing", "name": "talvikäyttö" }
+        {
+          "@type": "Thing",
+          "name": "matokompostointi"
+        },
+        {
+          "@type": "Thing",
+          "name": "kompostorin hoito"
+        },
+        {
+          "@type": "Thing",
+          "name": "talvikäyttö"
+        }
       ],
       "keywords": [
         "matokompostori tallissa",

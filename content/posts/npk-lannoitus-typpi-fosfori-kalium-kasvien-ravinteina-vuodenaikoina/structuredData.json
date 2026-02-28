@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/npk-lannoitus-typpi-fosfori-kalium-kasvien-ravinteina-vuodenaikoina#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/npk-lannoitus-typpi-fosfori-kalium-kasvien-ravinteina-vuodenaikoina",
+      "@id": "https://www.lieromaa.fi/blogi/julkaisu/npk-lannoitus-typpi-fosfori-kalium-kasvien-ravinteina-vuodenaikoina#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/julkaisu/npk-lannoitus-typpi-fosfori-kalium-kasvien-ravinteina-vuodenaikoina",
       "headline": "NPK-lannoitus – typpi, fosfori ja kalium kasvien ravinteina",
       "description": "NPK-lannoitus pähkinänkuoressa: typpi, fosfori ja kalium kasvien kasvun tukena. Näin valitset oikean lannoitteen vuodenaikaan.",
       "datePublished": "2025-09-18T00:00:00+03:00",
@@ -24,14 +24,31 @@
           "url": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
         }
       },
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
+      "isPartOf": {
+        "@id": "https://www.lieromaa.fi/#website"
+      },
       "articleSection": "Puutarha",
       "about": [
-        { "@type": "Thing", "name": "lannoitus" },
-        { "@type": "Thing", "name": "typpi" },
-        { "@type": "Thing", "name": "fosfori" },
-        { "@type": "Thing", "name": "kalium" },
-        { "@type": "Thing", "name": "ravinteet" }
+        {
+          "@type": "Thing",
+          "name": "lannoitus"
+        },
+        {
+          "@type": "Thing",
+          "name": "typpi"
+        },
+        {
+          "@type": "Thing",
+          "name": "fosfori"
+        },
+        {
+          "@type": "Thing",
+          "name": "kalium"
+        },
+        {
+          "@type": "Thing",
+          "name": "ravinteet"
+        }
       ],
       "keywords": [
         "aloittelijan opas",

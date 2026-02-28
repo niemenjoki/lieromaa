@@ -3,8 +3,8 @@
   "@graph": [
     {
       "@type": "BlogPosting",
-      "@id": "https://www.lieromaa.fi/blogi/aloita-matokompostointi-talvella-hyodyt-siita-kevaalla#blogpost",
-      "url": "https://www.lieromaa.fi/blogi/aloita-matokompostointi-talvella-hyodyt-siita-kevaalla",
+      "@id": "https://www.lieromaa.fi/blogi/julkaisu/aloita-matokompostointi-talvella-hyodyt-siita-kevaalla#blogpost",
+      "url": "https://www.lieromaa.fi/blogi/julkaisu/aloita-matokompostointi-talvella-hyodyt-siita-kevaalla",
       "headline": "Aloita matokompostointi talvella ja hyödyt siitä keväällä",
       "description": "Matokomposti vaatii aikaa käynnistyäkseen. Kun madot laitetaan töihin nyt, saat ravinnerikasta matokakkaa kevään istutuksiin.",
       "datePublished": "2026-01-09T00:00:00+02:00",
@@ -28,7 +28,12 @@
         "@id": "https://www.lieromaa.fi/#website"
       },
       "articleSection": "Matokompostointi",
-      "about": [{ "@type": "Thing", "name": "matokompostointi" }],
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "matokompostointi"
+        }
+      ],
       "keywords": [
         "matokompostointi talvella",
         "matokomposti sisällä",
