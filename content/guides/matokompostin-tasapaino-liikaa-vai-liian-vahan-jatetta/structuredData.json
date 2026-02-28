@@ -63,13 +63,13 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Kompostorin hoito",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Matokompostin tasapaino - liikaa vai liian vähän jätettä",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokompostin-tasapaino-liikaa-vai-liian-vahan-jatetta/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokompostin-tasapaino-liikaa-vai-liian-vahan-jatetta"
         }
       ]
     }

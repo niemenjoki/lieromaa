@@ -62,13 +62,13 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Kompostorin perustaminen",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Pitääkö matokompostista tehdä kompostointi-ilmoitus kunnalle?",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/pitaako-matokompostista-tehda-ilmoitus-kunnalle/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-perustaminen/pitaako-matokompostista-tehda-ilmoitus-kunnalle"
         }
       ]
     }

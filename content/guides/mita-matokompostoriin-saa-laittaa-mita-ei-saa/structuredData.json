@@ -63,13 +63,13 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Kompostorin hoito",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Mitä matokompostoriin saa laittaa matojen ruoaksi ja mitä ei",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa"
         }
       ]
     }

@@ -144,13 +144,13 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Kompostorin hoito",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Usein kysyttyjä kysymyksiä ja vastauksia kompostimadoista (UKK)",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/usein-kysytyt-kysymykset-kompostimadoista-ukk/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/usein-kysytyt-kysymykset-kompostimadoista-ukk"
         }
       ]
     }

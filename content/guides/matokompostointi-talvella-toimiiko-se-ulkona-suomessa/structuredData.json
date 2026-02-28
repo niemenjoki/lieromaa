@@ -55,13 +55,13 @@
           "@type": "ListItem",
           "position": 3,
           "name": "Kompostorin hoito",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito"
         },
         {
           "@type": "ListItem",
           "position": 4,
           "name": "Matokompostointi talvella - toimiiko se ulkona Suomessa",
-          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokompostointi-talvella-toimiiko-se-ulkona-suomessa/"
+          "item": "https://www.lieromaa.fi/opas/kompostorin-hoito/matokompostointi-talvella-toimiiko-se-ulkona-suomessa"
         }
       ]
     }
