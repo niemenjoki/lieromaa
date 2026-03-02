@@ -123,6 +123,16 @@
   opacity: 0.7;
 }
 
+.SecondaryButton {
+  margin-top: 0.25rem !important;
+  align-self: flex-start;
+}
+
+.SecondaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* --- Custom radio buttons --- */
 .CalculatorForm fieldset {
   border: none;
