@@ -155,6 +155,7 @@ export default async function Page() {
               <li>3 kestävää 14 L muovilaatikkoa, valmiiksi porattuina</li>
               <li>Valmiiksi mitattu määrä petimateriaalia</li>
               <li>Valitsemasi määrä kompostimatoja (50 / 100 / 200)</li>
+              <li>Sähköiset ohjeet kompostorin käyttöönotolle</li>
             </ul>
           </section>
 
