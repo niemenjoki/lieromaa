@@ -1,0 +1,16 @@
+{
+  "obfuscation": {
+    "algorithm": "XOR-BASE64-REVERSE",
+    "pepperVersion": 1
+  },
+  "discounts": [
+    {
+      "appliesToSkus": ["starterkit-50", "starterkit-100", "starterkit-200"],
+      "type": "free_shipping",
+      "value": 0,
+      "endsOn": "2026-03-08",
+      "code": "",
+      "obfuscatedCode": "=gyMsQSOrACI"
+    }
+  ]
+}
