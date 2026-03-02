@@ -26,7 +26,7 @@ const formatPrice = (value) => {
 
 export default function OrderForm() {
   const [delivery, setDelivery] = useState('postitus');
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState('100');
   const [frostFee, setFrostFee] = useState(false);
 
   const showFrostCharge = useMemo(() => {
@@ -45,6 +45,9 @@ export default function OrderForm() {
       action="https://formspree.io/f/xyznlyow"
       method="POST"
     >
+      <input type="text" name="_gotcha" style={{ display: 'none' }} />
+      <input type="hidden" name="tuote" value="Kompostimadot" />
+
       <label>
         Nimi
         <input type="text" name="nimi" required />
@@ -114,15 +117,30 @@ export default function OrderForm() {
         <div className={classes.AddressGroup}>
           <label>
             Postiosoite
-            <input className="address-field" type="text" name="osoite" />
+            <input
+              className="address-field"
+              type="text"
+              name="osoite"
+              required={delivery === 'postitus'}
+            />
           </label>
           <label>
             Postinumero
-            <input className="address-field" type="text" name="postinumero" />
+            <input
+              className="address-field"
+              type="text"
+              name="postinumero"
+              required={delivery === 'postitus'}
+            />
           </label>
           <label>
             Postitoimipaikka
-            <input className="address-field" type="text" name="toimipaikka" />
+            <input
+              className="address-field"
+              type="text"
+              name="toimipaikka"
+              required={delivery === 'postitus'}
+            />
           </label>
         </div>
       ) : null}
@@ -134,7 +152,6 @@ export default function OrderForm() {
             type="radio"
             name="maara"
             value="50"
-            required
             checked={amount === '50'}
             onChange={() => setAmount('50')}
           />{' '}
