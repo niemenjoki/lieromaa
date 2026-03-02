@@ -75,6 +75,9 @@ export default async function Page() {
               <li>Aloituspakkaus + 200 matoa - 114 €</li>
               <li>Postitus 10,90 € tai nouto Järvenpäästä 0 €</li>
             </ul>
+            <p className={classes.HelperText}>
+              Laske sopiva määrä <SafeLink href="/matolaskuri">matolaskurilla</SafeLink>
+            </p>
             <a className={classes.PrimaryCTA} href="#tilaa">
               Tilaa aloituspakkaus
             </a>
