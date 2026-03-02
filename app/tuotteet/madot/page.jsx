@@ -23,11 +23,9 @@ export default async function Page() {
 
       <article className={classes.ProductPage}>
         <PromoBox>
-          <strong>Uutta tulossa:</strong> Kehitän parhaillaan matokompostorin
-          aloituspakkausta, jonka on tarkoitus tulla myyntiin kevääseen 2026 mennessä.
-          Pakkaus tulee sisältämään kaiken, mitä matokompostorin aloittamiseen tarvitsee;
-          laatikot, petimateriaalin ja kompostimadot. Voit tutustua pakkauksen kehitykseen
-          ja ilmoittaa kiinnostuksesi{' '}
+          <strong>Uutta:</strong> Matokompostorin aloituspakkaus on nyt saatavilla. Saat
+          valmiiksi kootun kolmen laatikon läpivirtauskompostorin, petimateriaalin ja
+          kompostimadot samassa paketissa. Tutustu pakettiin ja tilaa{' '}
           <SafeLink
             href="/tuotteet/matokompostin-aloituspakkaus"
             style={{ color: 'var(--highlight-alt)', fontWeight: 600 }}

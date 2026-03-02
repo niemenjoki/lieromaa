@@ -1,15 +1,19 @@
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default function generateMetadata() {
-  const title = 'Matokompostorin aloituspakkaus - tulossa myyntiin | Lieromaa';
+  const title =
+    'Matokompostorin aloituspakkaus kotiin – valmis läpivirtauskompostori | Lieromaa';
+
   const description =
-    'Lieromaan matokompostorin aloituspakkaus sisältää kaiken tarvittavan kompostoinnin aloittamiseen. Tulossa myyntiin keväällä 2026.';
+    'Valmis matokompostorin aloituspakkaus kotiin: valmiiksi porattu läpivirtauskompostori, petimateriaali ja 50–200 Eisenia fetida -kompostimatoa. Ei rakentelua – suoraan käyttöön.';
+
   const canonicalUrl = '/tuotteet/matokompostin-aloituspakkaus';
+
   const image = {
-    url: '/images/content/matokakkaa_kadella.avif',
+    url: '/images/starterkit/aloituspakkaus_suljettu_matokompostori.avif',
     width: 1200,
     height: 800,
-    alt: 'Kourallinen tummaa matokakkaa',
+    alt: 'Valmis kolmen laatikon matokompostori',
   };
 
   const customMetadata = {

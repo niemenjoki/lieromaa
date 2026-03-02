@@ -5,36 +5,107 @@
       "@type": "WebPage",
       "@id": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#webpage",
       "url": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus",
-      "name": "Matokompostorin aloituspakkaus – tulossa myyntiin",
-      "description": "Lieromaan matokompostorin aloituspakkaus on tulossa myyntiin keväällä 2026. Se sisältää kaiken tarvittavan matokompostoinnin aloittamiseen helposti.",
-      "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
-      "about": { "@id": "https://www.lieromaa.fi/#organization" },
+      "name": "Matokompostorin aloituspakkaus kotiin – valmis läpivirtauskompostori",
+      "description": "Valmis matokompostorin aloituspakkaus kotiin. Sisältää valmiiksi poratun läpivirtauskompostorin, petimateriaalin ja 50–200 Eisenia fetida -kompostimatoa.",
       "inLanguage": "fi"
     },
     {
       "@type": "Product",
       "@id": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#product",
       "name": "Matokompostorin aloituspakkaus",
-      "description": "Lieromaan matokompostorin aloituspakkaus sisältää kaiken tarvittavan jatkuvatoimisen matokompostorin perustamiseen: laatikot, petimateriaalin, matokakkaa, kananmunankuorijauhetta ja madot.",
-      "image": "https://www.lieromaa.fi/images/content/matokakkaa_kadella.avif",
+      "sku": "LM-STARTER-001",
+      "image": [
+        "https://www.lieromaa.fi/images/starterkit/aloituspakkaus_suljettu_matokompostori.avif",
+        "https://www.lieromaa.fi/images/starterkit/aloituspakkaus_sisalto_ylhaalta_kuvattuna.avif"
+      ],
+      "description": "Valmis kolmen laatikon läpivirtauskompostorin aloituspakkaus kotikäyttöön. Sisältää petimateriaalin, käynnistyslisät ja valitsemasi määrän Eisenia fetida -kompostimatoja.",
       "brand": {
         "@type": "Brand",
-        "name": "Lieromaa",
-        "logo": "https://www.lieromaa.fi/images/lieromaa_logo_1024.avif"
+        "name": "Lieromaa"
       },
-      "category": "GardenProduct",
+      "itemCondition": "https://schema.org/NewCondition",
+      "hasVariant": [
+        {
+          "@type": "Product",
+          "name": "Aloituspakkaus + 50 matoa",
+          "offers": {
+            "@type": "Offer",
+            "price": "84.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "Aloituspakkaus + 100 matoa",
+          "offers": {
+            "@type": "Offer",
+            "price": "94.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "Product",
+          "name": "Aloituspakkaus + 200 matoa",
+          "offers": {
+            "@type": "Offer",
+            "price": "114.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      ],
       "offers": {
-        "@type": "Offer",
-        "price": "0.00",
+        "@type": "AggregateOffer",
         "priceCurrency": "EUR",
-        "availability": "https://schema.org/PreOrder",
-        "url": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus",
-        "priceValidUntil": "2026-06-30",
-        "seller": {
-          "@type": "Organization",
-          "name": "Lieromaa / Joonas Niemenjoki"
+        "lowPrice": "84.00",
+        "highPrice": "114.00",
+        "offerCount": "3",
+        "availability": "https://schema.org/InStock",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "FI"
+          },
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "10.90",
+            "currency": "EUR"
+          }
         }
       }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Haiseeko matokompostori?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oikein hoidettuna matokompostori on hajuton. Hajuhaitat liittyvät yleensä liialliseen ruokintaan tai liian kosteaan massaan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kuinka nopeasti kompostointi käynnistyy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Madot alkavat käsitellä biojätettä heti, mutta ensimmäisten viikkojen aikana ruokintaa suositellaan maltillisena."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Voiko kompostoria pitää sisätiloissa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kyllä. Läpivirtauskompostori soveltuu hyvin sisäkäyttöön, kun kosteustasapaino ja ruokinta pidetään hallinnassa."
+          }
+        }
+      ]
     }
   ]
 }
