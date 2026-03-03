@@ -4,7 +4,7 @@ export default function generateMetadata() {
   const title =
     'Aloituspakkauksen käyttöönotto – matokompostorin käynnistysohje | Lieromaa';
   const description =
-    'Vaiheittainen ohje Lieromaan matokompostorin aloituspakkauksen käyttöönottoon: kookoskuidun kostutus, kerrosten rakentaminen, matojen totuttelu ja ensimmäinen ruokinta.';
+    'Näin käynnistät aloituspakkauksen oikein: oikea kosteus, laatikoiden kerrokset, matojen totuttelu ja ensimmäiset ruokinnat.';
   const canonicalUrl = '/tuotteet/matokompostin-aloituspakkaus/kayttoonotto';
   const image = {
     url: '/images/content/aloituspakkauksen_aloitus.avif',

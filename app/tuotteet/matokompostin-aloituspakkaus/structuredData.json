@@ -6,7 +6,7 @@
       "@id": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#webpage",
       "url": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus",
       "name": "Matokompostorin aloituspakkaus kotiin - valmis läpivirtauskompostori",
-      "description": "Valmis matokompostorin aloituspakkaus kotiin. Sisältää valmiiksi poratun läpivirtauskompostorin, petimateriaalin ja 50–200 Eisenia fetida -kompostimatoa.",
+      "description": "Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.",
       "inLanguage": "fi"
     },
     {
@@ -18,7 +18,7 @@
         "https://www.lieromaa.fi/images/starterkit/aloituspakkaus_suljettu_matokompostori.avif",
         "https://www.lieromaa.fi/images/starterkit/aloituspakkaus_sisalto_ylhaalta_kuvattuna.avif"
       ],
-      "description": "Valmis kolmen laatikon läpivirtauskompostorin aloituspakkaus kotikäyttöön. Sisältää petimateriaalin, käynnistyslisät ja valitsemasi määrän Eisenia fetida -kompostimatoja.",
+      "description": "Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.",
       "brand": {
         "@type": "Brand",
         "name": "Lieromaa"
