@@ -30,6 +30,8 @@ export default async function BlogPage({ params }) {
   const { pageIndex } = await params;
 
   const pageIndexInt = parseInt(pageIndex) || 1;
+  const pagePath = pageIndexInt === 1 ? '/blogi' : `/blogi/sivu/${pageIndexInt}`;
+  const pageUrl = `${SITE_URL}${pagePath}`;
   const { posts, numPages, allPosts } = getPaginatedPosts(pageIndexInt, POSTS_PER_PAGE);
   if (posts.length === 0) {
     notFound();
@@ -37,6 +39,13 @@ export default async function BlogPage({ params }) {
   const allTags = getAllPostTags();
 
   const data = JSON.parse(JSON.stringify(structuredData));
+  data['@graph'][0]['@id'] = `${pageUrl}#webpage`;
+  data['@graph'][0].url = pageUrl;
+  data['@graph'][0].name =
+    pageIndexInt === 1
+      ? 'Blogi – Kaikki julkaisut'
+      : `Blogi – Kaikki julkaisut (sivu ${pageIndexInt})`;
+  data['@graph'][1]['@id'] = `${pageUrl}#itemlist`;
   data['@graph'][1]['itemListElement'] = [];
   posts.forEach((post, i) => {
     data['@graph'][1]['itemListElement'].push({
@@ -45,8 +54,9 @@ export default async function BlogPage({ params }) {
       url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
     });
   });
+  data['@graph'][2]['@id'] = `${pageUrl}#breadcrumb`;
 
-  const ldJSON = JSON.parse(JSON.stringify(data).replaceAll('[pageIndex]', pageIndex));
+  const ldJSON = data;
 
   return (
     <>
