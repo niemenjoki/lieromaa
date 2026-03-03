@@ -5,7 +5,7 @@ export default function generateMetadata() {
     'Matokompostorin aloituspakkaus kotiin – valmis läpivirtauskompostori | Lieromaa';
 
   const description =
-    'Valmis matokompostorin aloituspakkaus kotiin: valmiiksi porattu läpivirtauskompostori, petimateriaali ja 50–200 Eisenia fetida -kompostimatoa. Ei rakentelua – suoraan käyttöön.';
+    'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.';
 
   const canonicalUrl = '/tuotteet/matokompostin-aloituspakkaus';
 

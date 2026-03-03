@@ -6,7 +6,7 @@
       "@id": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus/kayttoonotto#webpage",
       "url": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus/kayttoonotto",
       "name": "Aloituspakkauksen käyttöönotto",
-      "description": "Vaiheittainen ohje Lieromaan matokompostorin aloituspakkauksen käyttöönottoon: kookoskuidun kostutus, kerrosten rakentaminen, matojen totuttelu ja ensimmäinen ruokinta.",
+      "description": "Näin käynnistät aloituspakkauksen oikein: oikea kosteus, laatikoiden kerrokset, matojen totuttelu ja ensimmäiset ruokinnat.",
       "isPartOf": { "@id": "https://www.lieromaa.fi/#website" },
       "about": { "@id": "https://www.lieromaa.fi/#organization" },
       "mainEntity": {
@@ -19,7 +19,7 @@
       "@id": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus/kayttoonotto#howto",
       "url": "https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus/kayttoonotto",
       "name": "Matokompostorin aloituspakkauksen käyttöönotto",
-      "description": "Käynnistä aloituspakkaus neljässä vaiheessa: kostuta petimateriaali, rakenna kerrokset, lisää madot ja aloita ruokinta rauhallisesti.",
+      "description": "Näin käynnistät aloituspakkauksen oikein: oikea kosteus, laatikoiden kerrokset, matojen totuttelu ja ensimmäiset ruokinnat.",
       "image": "https://www.lieromaa.fi/images/content/aloituspakkauksen_aloitus.avif",
       "inLanguage": "fi",
       "supply": [
