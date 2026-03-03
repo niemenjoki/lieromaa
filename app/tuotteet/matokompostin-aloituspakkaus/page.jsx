@@ -53,7 +53,7 @@ export default async function Page() {
               Tämä aloituspakkaus on suunniteltu sinulle, joka haluat aloittaa
               matokompostoinnin suoraan toimivalla kokonaisuudella. Kaikki tarvittava on
               mukana - kompostorilaatikot, valmiiksi mitattu kookoskuitu petimateriaaliksi
-              sekä tietenkin valitsemasi määrä kompostimatoja. Sinun tarvitsee lisätä 4,5
+              sekä tietenkin valitsemasi määrä kompostimatoja. Sinun tarvitsee lisätä 4
               litraa vettä sekaan ja siirtää madot uuteen kotiinsa.
             </p>
 
@@ -156,6 +156,15 @@ export default async function Page() {
               <li>Valmiiksi mitattu määrä petimateriaalia</li>
               <li>Valitsemasi määrä kompostimatoja (50 / 100 / 200)</li>
               <li>Sähköiset ohjeet kompostorin käyttöönotolle</li>
+            </ul>
+          </section>
+
+          <section id="mitat">
+            <h2>Mitat</h2>
+            <ul>
+              <li>
+                Kosmpotorin ulkomitat koottuna: leveys 30 cm, syvyys 40 cm, korkeus 27 cm
+              </li>
             </ul>
           </section>
 
