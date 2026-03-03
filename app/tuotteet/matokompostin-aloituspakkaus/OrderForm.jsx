@@ -204,6 +204,28 @@ export default function OrderForm() {
         </p>
       ) : null}
 
+      <label>
+        Viesti (valinnainen)
+        <textarea name="lisatiedot" rows="3" />
+      </label>
+      <p className={classes.HelperText}>
+        Voit toivoa tiettyä Postin noutopaikkaa (pakettiautomaatti tai postitoimipaikka).
+        Toiveen tulee löytyä Postin{' '}
+        <a
+          href="https://www.posti.fi/palvelupisteet-kartalla"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          palvelupistekartalta
+        </a>
+        . Jos et toivo noutopaikkaa, lähetys toimitetaan ilmoittamasi postinumeron mukaan
+        ensimmäiseen Postin tarjoamaan noutopisteeseen.
+      </p>
+      <p className={classes.HelperText}>
+        Huomioithan, että Posti saattaa toiveesta huolimatta toimittaa paketin eri
+        toimipisteeseen, jos esimerkiksi noutopiste on täynnä.
+      </p>
+
       <p className={classes.OrderTotal}>
         Yhteensä: <strong>{formatPrice(total)} €</strong>
       </p>
