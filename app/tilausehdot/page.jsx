@@ -23,16 +23,20 @@ export default function OrderPolicyPage() {
         <p>
           Lieromaan toiminta on omaa yritystoimintaani (Y-tunnus: 3002257-7), mutta
           laskutus ja verotuksen hallinnointi hoidetaan
-          <strong> OP Kevytyrittäjä </strong>-palvelun kautta. Kaikki sivuston hinnat
-          sisältävät arvonlisäveron. Pidätän oikeuden hintojen ja toimitusehtojen
-          muutoksiin.
+          <strong> OP Kevytyrittäjä </strong>-palvelun kautta. Myynti on
+          arvonlisäverotonta arvonlisäverolain 2 luvun 3 § nojalla (vähäinen toiminta).
+          Pidätän oikeuden hintojen ja toimitusehtojen muutoksiin.
         </p>
 
         <h2>Tilaaminen</h2>
         <p>
-          Tuotteet tilataan sähköpostitse tai pikaviestinten avulla. Kaikki tilaukset
-          vahvistetaan erikseen, kun tuotteen saatavuus on tarkistettu. Vahvistuksessa
-          ilmoitetaan tilauksen hinta, toimituskulut sekä tilatut tuotteet.
+          Tuotteet tilataan ensisijaisesti sivuston tilauslomakkeilla. Tilauksen voi tehdä
+          myös sähköpostitse tai pikaviestinten avulla.{' '}
+        </p>
+        <p>
+          Kaikki tilaukset vahvistetaan manuaalisesti erikseen 1-2 arkipäivän kuluessa,
+          kun tuotteen saatavuus on tarkistettu. Vahvistuksessa ilmoitetaan tilauksen
+          hinta, toimituskulut sekä tilatut tuotteet.
         </p>
 
         <h2>Maksutavat</h2>
@@ -44,24 +48,24 @@ export default function OrderPolicyPage() {
 
         <h2>Toimitusaika</h2>
         <p>
-          Matotilaukset postitetaan tilausta seuraavana maanantaina tai tiistaina. Matoja
-          ei postiteta keskiviikon ja sunnuntain välisenä aikana, jotta varmistetaan,
-          ettei madot jää Postin varastoon viikonlopuksi. Mahdolliset muut tuotteet
-          toimitetaan Postin kuljetettavaksi viimeistään kolmen päivän kuluessa maksun
-          suorituksesta.
+          Matojen postitus tapahtuu maanantaisin ja tiistaisin. Maanantaina klo 12
+          mennessä tehdyt tilaukset postitetaan tiistaina, ja myöhemmin tehdyt tilaukset
+          seuraavan viikon maanantaina. Matoja ei postiteta keskiviikon ja sunnuntain
+          välisenä aikana, jotta madot eivät jää Postin varastoon viikonlopuksi.
+          Mahdolliset muut tuotteet toimitetaan erikseen vahvistettavan aikataulun mukaan.
         </p>
 
         <h2>Palautusoikeus</h2>
         <p>
-          Asiakkaalla on kuluttajansuojalain mukainen 14 päivän vaihto- ja palautusoikeus.
-          Palautusoikeus kuitenkin koskee vain käyttämättömiä tuotteita.
+          Asiakkaalla on kuluttajansuojalain mukainen 14 päivän peruuttamisoikeus
+          etämyynnissä. Palautusoikeus kuitenkin koskee vain käyttämättömiä tuotteita.
         </p>
         <p>
           Madoilla ei ole palautusoikeutta kuluttajansuojalain 6 luvun 16 § perusteella.
         </p>
         <p>
-          Jos haluat palauttaa tuotteesi, ota yhteyttä minuun samassa kanavassa kuin
-          tilaus tehtiin.
+          Jos haluat palauttaa tuotteesi, ota yhteyttä sähköpostitse{' '}
+          <strong>lieromaa@gmail.com</strong>
         </p>
       </div>
     </>
