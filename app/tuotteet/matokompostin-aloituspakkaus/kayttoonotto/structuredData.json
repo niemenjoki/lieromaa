@@ -33,7 +33,7 @@
         }
       ],
       "tool": [
-        { "@type": "HowToTool", "name": "Mitta-astia (4 litraa vettä)" },
+        { "@type": "HowToTool", "name": "Mitta-astia (4.5 litraa vettä)" },
         { "@type": "HowToTool", "name": "Kädet, kauha tai lusikka sekoitukseen" }
       ],
       "step": [
@@ -41,7 +41,7 @@
           "@type": "HowToStep",
           "position": 1,
           "name": "Kookoskuidun kostutus pohjalaatikossa",
-          "text": "Poista matorasia ja lisää kuiva kookoskuitu umpipohjaiseen laatikkoon. Kaada joukkoon 4 litraa vettä, anna imeytyä noin 15 minuuttia ja sekoita, kunnes kuivia kohtia ei ole. Puristustestissä materiaalista irtoaa vain 1-2 pisaraa vettä."
+          "text": "Poista matorasia ja lisää kuiva kookoskuitu umpipohjaiseen laatikkoon. Kaada joukkoon 4.5 litraa vettä tasaisesti koko pinnalle. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä, jotta kosteus jakautuu tasaisemmin."
         },
         {
           "@type": "HowToStep",
@@ -59,7 +59,7 @@
           "@type": "HowToStep",
           "position": 4,
           "name": "Ensimmäinen ruokinta",
-          "text": "Aloita kahden vuorokauden jälkeen pienellä annoksella, esimerkiksi teelusikallisella banaania. Lisää uutta ruokaa vasta, kun edellinen annos on kadonnut kokonaan."
+          "text": "Aloita kahden vuorokauden jälkeen pienellä annoksella, esimerkiksi ruokalusikallisella banaania. Lisää uutta ruokaa vasta, kun edellinen annos on kadonnut kokonaan."
         }
       ]
     },

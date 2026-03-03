@@ -61,7 +61,7 @@
         "priceCurrency": "EUR",
         "lowPrice": "84.00",
         "highPrice": "114.00",
-        "offerCount": "3",
+        "offerCount": 3,
         "availability": "https://schema.org/InStock",
         "shippingDetails": {
           "@type": "OfferShippingDetails",
