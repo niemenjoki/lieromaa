@@ -53,8 +53,8 @@ export default async function Page() {
               Tämä aloituspakkaus on suunniteltu sinulle, joka haluat aloittaa
               matokompostoinnin suoraan toimivalla kokonaisuudella. Kaikki tarvittava on
               mukana - kompostorilaatikot, valmiiksi mitattu kookoskuitu petimateriaaliksi
-              sekä tietenkin valitsemasi määrä kompostimatoja. Sinun tarvitsee lisätä 4
-              litraa vettä sekaan ja siirtää madot uuteen kotiinsa.
+              sekä tietenkin valitsemasi määrä kompostimatoja. Sinun tarvitsee lisätä
+              vettä sekaan ja siirtää madot uuteen kotiinsa.
             </p>
 
             <p>
@@ -77,6 +77,12 @@ export default async function Page() {
             </ul>
             <p className={classes.HelperText}>
               Laske sopiva määrä <SafeLink href="/matolaskuri">matolaskurilla</SafeLink>
+            </p>
+            <p className={classes.HelperText}>
+              Katso vaiheittainen{' '}
+              <SafeLink href="/tuotteet/matokompostin-aloituspakkaus/kayttoonotto">
+                käyttöönotto-ohje
+              </SafeLink>
             </p>
             <a className={classes.PrimaryCTA} href="#tilaa">
               Tilaa aloituspakkaus
@@ -155,7 +161,12 @@ export default async function Page() {
               <li>3 kestävää 14 L muovilaatikkoa, valmiiksi porattuina</li>
               <li>Valmiiksi mitattu määrä petimateriaalia</li>
               <li>Valitsemasi määrä kompostimatoja (50 / 100 / 200)</li>
-              <li>Sähköiset ohjeet kompostorin käyttöönotolle</li>
+              <li>
+                Sähköiset{' '}
+                <SafeLink href="/tuotteet/matokompostin-aloituspakkaus/kayttoonotto">
+                  ohjeet kompostorin käyttöönotolle
+                </SafeLink>
+              </li>
             </ul>
           </section>
 
@@ -163,7 +174,7 @@ export default async function Page() {
             <h2>Mitat</h2>
             <ul>
               <li>
-                Kosmpotorin ulkomitat koottuna: leveys 30 cm, syvyys 40 cm, korkeus 27 cm
+                Kompostorin ulkomitat koottuna: leveys 30 cm, syvyys 40 cm, korkeus 27 cm
               </li>
             </ul>
           </section>
