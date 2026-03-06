@@ -1,8 +1,7 @@
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default function generateMetadata() {
-  const title =
-    'Matokompostorin aloituspakkaus kotiin – valmis läpivirtauskompostori | Lieromaa';
+  const title = 'Matokompostorin aloituspakkaus ja madot | Lieromaa';
 
   const description =
     'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.';
