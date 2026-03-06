@@ -1,8 +1,7 @@
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default function generateMetadata() {
-  const title =
-    'Aloituspakkauksen käyttöönotto – matokompostorin käynnistysohje | Lieromaa';
+  const title = 'Aloituspakkauksen käyttöönotto | Lieromaa';
   const description =
     'Näin käynnistät aloituspakkauksen oikein: oikea kosteus, laatikoiden kerrokset, matojen totuttelu ja ensimmäiset ruokinnat.';
   const canonicalUrl = '/tuotteet/matokompostin-aloituspakkaus/kayttoonotto';
