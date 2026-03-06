@@ -38,6 +38,10 @@ export default function PrivacyPage() {
             mahdolliset alennuskoodiin liittyvät tiedot.
           </li>
           <li>
+            Palautetiedot: palautewidgetin kautta lähetetty viesti, mahdollinen
+            sähköpostiosoite, nykyisen sivun URL-osoite ja viittaava sivu (referrer).
+          </li>
+          <li>
             Tekninen käyttödata: esimerkiksi IP-osoite, selain- ja laitetiedot,
             verkkokäyttäytymiseen liittyvät tiedot ja suorituskykymittarit kolmansien
             osapuolten palveluissa.
@@ -51,10 +55,11 @@ export default function PrivacyPage() {
         <h2>Tietojen kerääminen ja lähteet</h2>
         <p>
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
-          tilauslomakkeella. Lisäksi kolmannen osapuolen palvelut (esimerkiksi Google
-          AdSense, Vercel Analytics ja Speed Insights) voivat kerätä teknisiä tietoja
-          sivuston käytöstä. Sivustoa voi käyttää myös mainostenesto-ohjelmien tai muiden
-          seurantaa estävien työkalujen kanssa.
+          tilauslomakkeella tai viestin palautewidgetin kautta. Lisäksi kolmannen
+          osapuolen palvelut (esimerkiksi Google AdSense, Vercel Analytics, Speed Insights
+          ja Formspree) voivat kerätä teknisiä tietoja sivuston käytöstä. Sivustoa voi
+          käyttää myös mainostenesto-ohjelmien tai muiden seurantaa estävien työkalujen
+          kanssa.
         </p>
 
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
@@ -64,6 +69,11 @@ export default function PrivacyPage() {
             Tilausten vastaanotto, käsittely, toimituksen järjestäminen ja
             asiakasviestintä: oikeusperusteena sopimuksen täytäntöönpano tai sopimusta
             edeltävät toimet (GDPR Art. 6(1)(b)).
+          </li>
+          <li>
+            Palautekysymysten vastaanotto, niihin vastaaminen sekä sisältöideoiden
+            kehittäminen palautteen perusteella: oikeusperusteena oikeutettu etu (GDPR
+            Art. 6(1)(f)).
           </li>
           <li>
             Kirjanpito ja lakisääteiset velvoitteet: oikeusperusteena lakisääteinen
@@ -83,16 +93,19 @@ export default function PrivacyPage() {
             kehittämiseksi.
           </li>
           <li>
-            Käyttäjäasetusten tallentaminen (localStorage): Oikeusperusteena oikeutettu
-            etu (GDPR Art. 6(1)(f)) sivuston käytettävyyden parantamiseksi.
+            Käyttäjäasetusten ja palautewidgetin näyttölogiikan tallentaminen
+            (localStorage): Oikeusperusteena oikeutettu etu (GDPR Art. 6(1)(f)) sivuston
+            käytettävyyden parantamiseksi.
           </li>
         </ul>
 
-        <h2>Tilauslomakkeet (Formspree)</h2>
+        <h2>Lomakkeet (Formspree)</h2>
         <p>
-          Tilauslomakkeet välitetään Formspree-palvelun kautta. Formspree käsittelee
-          lomaketietoja, jotta tilaukset voidaan vastaanottaa ja käsitellä. Formspree voi
-          käsitellä henkilötietoja EU-/ETA-alueen ulkopuolella (esimerkiksi
+          Tilauslomakkeet ja palautewidgetin viestit välitetään Formspree-palvelun kautta.
+          Formspree käsittelee lomaketietoja, jotta tilaukset ja palautteet voidaan
+          vastaanottaa ja käsitellä. Palautewidgetin lähetyksessä välitetään myös sivun
+          URL-osoite ja viittaava sivu (referrer), jos sellainen on saatavilla. Formspree
+          voi käsitellä henkilötietoja EU-/ETA-alueen ulkopuolella (esimerkiksi
           Yhdysvalloissa). Tietosiirrot suojataan GDPR:n mukaisilla suojatoimilla, kuten
           vakiosopimuslausekkeilla.
         </p>
@@ -184,10 +197,13 @@ export default function PrivacyPage() {
         <h2>LocalStorage</h2>
         <p>
           Kun vaihdat vaaleaan tai tummaan tilaan, sivusto tallentaa valitsemasi teeman
-          selaimesi paikalliseen tallennustilaan (localStorage). Näin valittu teema säilyy
-          myös seuraavalla käyntikerralla. Tieto tallennetaan ainoastaan laitteellesi eikä
-          sitä siirretä eteenpäin. Tietoa säilytetään toistaiseksi, kunnes poistat sen
-          selaimestasi.
+          selaimesi paikalliseen tallennustilaan (localStorage). Lisäksi palautewidgetin
+          näyttämistä hallitaan localStorage-arvoilla <code>lieromaa_session_start</code>,{' '}
+          <code>lieromaa_pages_visited</code> ja <code>lieromaa_feedback_last_shown</code>
+          . Näillä varmistetaan, että widget näkyy vain aktiivisille kävijöille eikä liian
+          usein (vähintään 30 päivän välein). Tiedot tallennetaan ainoastaan laitteellesi,
+          eikä niitä siirretä eteenpäin. Tietoa säilytetään toistaiseksi, kunnes poistat
+          sen selaimestasi.
         </p>
 
         <h2>Evästeet</h2>
@@ -221,6 +237,12 @@ export default function PrivacyPage() {
             Tilausviestejä ja tilauslomakkeiden tietoja säilytetään, kunnes maksu on
             vastaanotettu ja tilaus on toimitettu, ellei säilytys ole tarpeen esimerkiksi
             reklamaatioiden tai lakisääteisten velvoitteiden vuoksi.
+          </li>
+          <li>
+            Palautewidgetin kautta lähetettyjä viestejä säilytetään niin kauan kuin se on
+            tarpeen viestiin vastaamiseksi, palautteen käsittelemiseksi tai sivuston
+            sisällön kehittämiseksi, kuitenkin enintään 24 kuukautta ilman erillistä
+            perustetta.
           </li>
           <li>
             Kirjanpitoon liittyviä tietoja säilytetään Suomen kirjanpitolainsäädännön
