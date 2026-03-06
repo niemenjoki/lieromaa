@@ -24,38 +24,6 @@
         "name": "Lieromaa"
       },
       "itemCondition": "https://schema.org/NewCondition",
-      "hasVariant": [
-        {
-          "@type": "Product",
-          "name": "Aloituspakkaus + 50 matoa",
-          "offers": {
-            "@type": "Offer",
-            "price": "84.00",
-            "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        {
-          "@type": "Product",
-          "name": "Aloituspakkaus + 100 matoa",
-          "offers": {
-            "@type": "Offer",
-            "price": "94.00",
-            "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock"
-          }
-        },
-        {
-          "@type": "Product",
-          "name": "Aloituspakkaus + 200 matoa",
-          "offers": {
-            "@type": "Offer",
-            "price": "114.00",
-            "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock"
-          }
-        }
-      ],
       "offers": {
         "@type": "AggregateOffer",
         "priceCurrency": "EUR",
