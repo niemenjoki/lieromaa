@@ -7,6 +7,7 @@ import AdSenseConsentGate from '@/components/AdSense/AdSenseConsentGate';
 import Analytics from '@/components/Analytics/Analytics';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
+import VisitorFeedbackWidget from '@/components/VisitorFeedbackWidget/VisitorFeedbackWidget';
 
 import './globals.css';
 
@@ -93,6 +94,7 @@ export default function RootLayout({ children }) {
           <main>{children}</main>
           <Footer />
         </div>
+        <VisitorFeedbackWidget />
         <Analytics />
         <AdSenseConsentGate />
       </body>
