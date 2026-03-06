@@ -41,7 +41,34 @@
             "@type": "MonetaryAmount",
             "value": "10.90",
             "currency": "EUR"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 1,
+              "maxValue": 2,
+              "unitCode": "d"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 2,
+              "maxValue": 4,
+              "unitCode": "d"
+            }
           }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "FI",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
+          "additionalProperty": [
+            {
+              "@type": "PropertyValue",
+              "name": "Peruuttamisoikeus",
+              "value": "Aloituspakkaus sisältää kompostimatoja, jotka eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §)."
+            }
+          ]
         }
       }
     },
