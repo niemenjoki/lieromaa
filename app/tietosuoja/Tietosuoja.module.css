@@ -1,15 +1,32 @@
-.PrivacyPage > div {
+.PrivacyPage h2 {
+  margin: 2rem 0 0.75rem;
+}
+
+.PrivacyPage p {
   margin: 1rem 0;
+}
+
+.PrivacyPage ul {
+  margin: 0.5rem 0 1.25rem;
+  padding-left: 1.25rem;
+  list-style-position: outside;
+}
+
+.PrivacyPage li {
+  margin: 0.5rem 0;
 }
 
 .PrivacyPage a {
   color: var(--highlight);
   transition: opacity 0.1s ease-in-out;
 }
+
 .PrivacyPage a:hover {
   opacity: 0.7;
 }
 
-.PrivacyPage p {
-  margin: 1rem 0;
+@media (max-width: 640px) {
+  .PrivacyPage h2 {
+    margin-top: 1.75rem;
+  }
 }
