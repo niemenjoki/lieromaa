@@ -3,37 +3,32 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
+import {
+  formatPrice,
+  getProductPricing,
+  getProductShippingOptions,
+  getProductVariant,
+  getProductVariants,
+} from '@/lib/pricing/catalog';
 
 import classes from '../ProductPage.module.css';
 
-const AMOUNT_PRICES = {
-  50: 20,
-  100: 30,
-  200: 50,
+const wormProduct = getProductPricing('worms');
+const wormVariants = getProductVariants('worms');
+const wormShippingOptions = getProductShippingOptions('worms');
+const defaultWormVariant = getProductVariant('worms', 100) ?? wormVariants[0] ?? null;
+const defaultDelivery = wormShippingOptions[0]?.id ?? 'postitus';
+const frostProtectionFee = {
+  label: 'Pakkastoimituslisä',
+  price: 3,
 };
-const SKU_BY_AMOUNT = {
-  50: 'worms-50',
-  100: 'worms-100',
-  200: 'worms-200',
-};
-
-const POSTAGE_PRICE = 8.9;
-const FROST_FEE = 3;
-
-const formatPrice = (value) => {
-  if (value % 1 === 0) {
-    return value.toLocaleString('fi-FI');
-  }
-
-  return value.toLocaleString('fi-FI', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-};
+const frostProtectionLabel = `Maksan ${frostProtectionFee.label.toLowerCase()}n`;
 
 export default function OrderForm() {
-  const [delivery, setDelivery] = useState('postitus');
-  const [amount, setAmount] = useState('100');
+  const [delivery, setDelivery] = useState(defaultDelivery);
+  const [amount, setAmount] = useState(
+    defaultWormVariant ? String(defaultWormVariant.amount) : ''
+  );
   const [frostFee, setFrostFee] = useState(false);
   const [discountCode, setDiscountCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(null);
@@ -45,10 +40,16 @@ export default function OrderForm() {
     return currentMonth >= 9 || currentMonth <= 5;
   }, []);
 
-  const wormPrice = amount ? (AMOUNT_PRICES[amount] ?? 0) : 0;
-  const currentSku = SKU_BY_AMOUNT[amount] ?? '';
-  const postage = delivery === 'postitus' ? POSTAGE_PRICE : 0;
-  const frost = showFrostCharge && frostFee ? FROST_FEE : 0;
+  const currentVariant =
+    wormVariants.find((variant) => String(variant.amount) === amount) ??
+    defaultWormVariant;
+  const wormPrice = currentVariant?.price ?? 0;
+  const currentSku = currentVariant?.sku ?? '';
+  const currentShippingOption =
+    wormShippingOptions.find((option) => option.id === delivery) ??
+    wormShippingOptions[0];
+  const postage = currentShippingOption?.price ?? 0;
+  const frost = showFrostCharge && frostFee ? Number(frostProtectionFee.price) || 0 : 0;
 
   useEffect(() => {
     if (!appliedDiscount) {
@@ -114,7 +115,7 @@ export default function OrderForm() {
       method="POST"
     >
       <input type="text" name="_gotcha" style={{ display: 'none' }} />
-      <input type="hidden" name="tuote" value="Kompostimadot" />
+      <input type="hidden" name="tuote" value={wormProduct.name} />
       <input type="hidden" name="sku" value={currentSku} />
       <input
         type="hidden"
@@ -142,26 +143,19 @@ export default function OrderForm() {
 
       <fieldset>
         <legend>Toimitustapa</legend>
-        <label>
-          <input
-            type="radio"
-            name="toimitus"
-            value="postitus"
-            checked={delivery === 'postitus'}
-            onChange={() => setDelivery('postitus')}
-          />{' '}
-          Posti (8,90 €)
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="toimitus"
-            value="nouto"
-            checked={delivery === 'nouto'}
-            onChange={() => setDelivery('nouto')}
-          />{' '}
-          Nouto Järvenpäästä
-        </label>
+        {wormShippingOptions.map((option) => (
+          <label key={option.id}>
+            <input
+              type="radio"
+              name="toimitus"
+              value={option.id}
+              checked={delivery === option.id}
+              onChange={() => setDelivery(option.id)}
+            />{' '}
+            {option.label}
+            {option.price > 0 ? ` (${formatPrice(option.price)} €)` : ''}
+          </label>
+        ))}
       </fieldset>
 
       {showFrostCharge ? (
@@ -181,7 +175,7 @@ export default function OrderForm() {
               checked={frostFee}
               onChange={(event) => setFrostFee(event.target.checked)}
             />{' '}
-            Maksan pakkastoimituslisän (3 €)
+            {frostProtectionLabel} ({formatPrice(frostProtectionFee.price)} €)
           </label>
           <p className={classes.HelperText}>
             Voit tehdä tilauksen myös ilman pakkaslisää, vaikka ulkona olisi pakkasta,
@@ -224,36 +218,18 @@ export default function OrderForm() {
 
       <fieldset>
         <legend>Valitse määrä</legend>
-        <label>
-          <input
-            type="radio"
-            name="maara"
-            value="50"
-            checked={amount === '50'}
-            onChange={() => setAmount('50')}
-          />{' '}
-          50 matoa – 20 €
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="maara"
-            value="100"
-            checked={amount === '100'}
-            onChange={() => setAmount('100')}
-          />{' '}
-          100 matoa – 30 €
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="maara"
-            value="200"
-            checked={amount === '200'}
-            onChange={() => setAmount('200')}
-          />{' '}
-          200 matoa – 50 €
-        </label>
+        {wormVariants.map((variant) => (
+          <label key={variant.sku}>
+            <input
+              type="radio"
+              name="maara"
+              value={variant.amount}
+              checked={amount === String(variant.amount)}
+              onChange={() => setAmount(String(variant.amount))}
+            />{' '}
+            {variant.amount} matoa – {formatPrice(variant.price)} €
+          </label>
+        ))}
       </fieldset>
 
       <label>

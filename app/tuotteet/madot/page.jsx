@@ -2,14 +2,17 @@ import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 
 import classes from '../ProductPage.module.css';
 import OrderForm from './OrderForm';
-import structuredData from './structuredData.json';
+import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export const dynamic = 'force-static';
+
+const wormVariants = getProductVariants('worms');
 
 export default async function Page() {
   return (
@@ -72,9 +75,11 @@ export default async function Page() {
           <aside>
             <h3>Hinnat</h3>
             <ul>
-              <li>50 matoa – 20 €</li>
-              <li>100 matoa – 30 €</li>
-              <li>200 matoa – 50 €</li>
+              {wormVariants.map((variant) => (
+                <li key={variant.sku}>
+                  {variant.amount} matoa – {formatPrice(variant.price)} €
+                </li>
+              ))}
             </ul>
           </aside>
 

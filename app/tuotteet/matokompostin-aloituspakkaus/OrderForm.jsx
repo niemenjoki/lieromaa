@@ -3,34 +3,42 @@
 import { useEffect, useState } from 'react';
 
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
+import {
+  formatPrice,
+  getProductPricing,
+  getProductShippingOptions,
+  getProductVariant,
+  getProductVariants,
+} from '@/lib/pricing/catalog';
 
 import classes from '../ProductPage.module.css';
 
-const PACKAGE_PRICES = { 50: 84, 100: 94, 200: 114 };
-const SKU_BY_AMOUNT = {
-  50: 'starterkit-50',
-  100: 'starterkit-100',
-  200: 'starterkit-200',
-};
-const POSTAGE_PRICE = 10.9;
-
-const formatPrice = (value) =>
-  value.toLocaleString('fi-FI', {
-    minimumFractionDigits: value % 1 ? 2 : 0,
-    maximumFractionDigits: 2,
-  });
+const starterKitProduct = getProductPricing('starterKit');
+const starterKitVariants = getProductVariants('starterKit');
+const starterKitShippingOptions = getProductShippingOptions('starterKit');
+const defaultStarterKitVariant =
+  getProductVariant('starterKit', 100) ?? starterKitVariants[0] ?? null;
+const defaultDelivery = starterKitShippingOptions[0]?.id ?? 'postitus';
 
 export default function OrderForm() {
-  const [delivery, setDelivery] = useState('postitus');
-  const [amount, setAmount] = useState('100');
+  const [delivery, setDelivery] = useState(defaultDelivery);
+  const [amount, setAmount] = useState(
+    defaultStarterKitVariant ? String(defaultStarterKitVariant.amount) : ''
+  );
   const [discountCode, setDiscountCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(null);
   const [discountFeedback, setDiscountFeedback] = useState('');
   const [isCheckingDiscount, setIsCheckingDiscount] = useState(false);
 
-  const packagePrice = PACKAGE_PRICES[amount] ?? 0;
-  const currentSku = SKU_BY_AMOUNT[amount] ?? '';
-  const postage = delivery === 'postitus' ? POSTAGE_PRICE : 0;
+  const currentVariant =
+    starterKitVariants.find((variant) => String(variant.amount) === amount) ??
+    defaultStarterKitVariant;
+  const packagePrice = currentVariant?.price ?? 0;
+  const currentSku = currentVariant?.sku ?? '';
+  const currentShippingOption =
+    starterKitShippingOptions.find((option) => option.id === delivery) ??
+    starterKitShippingOptions[0];
+  const postage = currentShippingOption?.price ?? 0;
 
   useEffect(() => {
     if (!appliedDiscount) {
@@ -96,7 +104,7 @@ export default function OrderForm() {
       method="POST"
     >
       <input type="text" name="_gotcha" style={{ display: 'none' }} />
-      <input type="hidden" name="tuote" value="Matokompostorin aloituspakkaus" />
+      <input type="hidden" name="tuote" value={starterKitProduct.name} />
       <input type="hidden" name="sku" value={currentSku} />
       <input
         type="hidden"
@@ -119,42 +127,35 @@ export default function OrderForm() {
 
       <fieldset>
         <legend>Valitse paketti</legend>
-        {Object.entries(PACKAGE_PRICES).map(([qty, price]) => (
-          <label key={qty}>
+        {starterKitVariants.map((variant) => (
+          <label key={variant.sku}>
             <input
               type="radio"
               name="maara"
-              value={qty}
-              checked={amount === qty}
-              onChange={() => setAmount(qty)}
+              value={variant.amount}
+              checked={amount === String(variant.amount)}
+              onChange={() => setAmount(String(variant.amount))}
             />
-            Aloituspakkaus + {qty} matoa – {price} €
+            Aloituspakkaus + {variant.amount} matoa – {formatPrice(variant.price)} €
           </label>
         ))}
       </fieldset>
 
       <fieldset>
         <legend>Toimitustapa</legend>
-        <label>
-          <input
-            type="radio"
-            name="toimitus"
-            value="postitus"
-            checked={delivery === 'postitus'}
-            onChange={() => setDelivery('postitus')}
-          />
-          Posti (10,90 €)
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="toimitus"
-            value="nouto"
-            checked={delivery === 'nouto'}
-            onChange={() => setDelivery('nouto')}
-          />
-          Nouto Järvenpäästä
-        </label>
+        {starterKitShippingOptions.map((option) => (
+          <label key={option.id}>
+            <input
+              type="radio"
+              name="toimitus"
+              value={option.id}
+              checked={delivery === option.id}
+              onChange={() => setDelivery(option.id)}
+            />
+            {option.label}
+            {option.price > 0 ? ` (${formatPrice(option.price)} €)` : ''}
+          </label>
+        ))}
       </fieldset>
 
       {delivery === 'postitus' && (

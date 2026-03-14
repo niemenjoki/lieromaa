@@ -1,14 +1,36 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import {
+  formatPrice,
+  getProductShippingOptions,
+  getProductVariants,
+} from '@/lib/pricing/catalog';
 
 import classes from '../ProductPage.module.css';
 import OrderForm from './OrderForm';
-import structuredData from './structuredData.json';
+import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export const dynamic = 'force-static';
+
+const starterKitVariants = getProductVariants('starterKit');
+const wormVariants = getProductVariants('worms');
+const starterKitShippingOptions = getProductShippingOptions('starterKit');
+const starterKitComponentCosts = [
+  { label: 'Kompostilaatikot', price: 26.97 },
+  { label: 'Kookoskuitu petimateriaaliksi', price: 3.8 },
+  { label: 'Rakentaminen, viimeistely ja pakkaus', price: 30 },
+];
+const starterKitBasePrice = starterKitVariants[0]
+  ? starterKitVariants[0].price -
+    (wormVariants.find((variant) => variant.amount === starterKitVariants[0].amount)
+      ?.price ?? 0)
+  : 0;
+const starterKitComponentCostTotal = Number(
+  starterKitComponentCosts.reduce((sum, item) => sum + item.price, 0).toFixed(2)
+);
 
 export default async function Page() {
   return (
@@ -70,10 +92,16 @@ export default async function Page() {
           <aside>
             <h3>Paketit ja hinnat</h3>
             <ul>
-              <li>Aloituspakkaus + 50 matoa - 84 €</li>
-              <li>Aloituspakkaus + 100 matoa - 94 €</li>
-              <li>Aloituspakkaus + 200 matoa - 114 €</li>
-              <li>Postitus 10,90 € tai nouto Järvenpäästä 0 €</li>
+              {starterKitVariants.map((variant) => (
+                <li key={variant.sku}>
+                  Aloituspakkaus + {variant.amount} matoa - {formatPrice(variant.price)} €
+                </li>
+              ))}
+              <li>
+                {starterKitShippingOptions
+                  .map((option) => `${option.label} ${formatPrice(option.price)} €`)
+                  .join(' tai ')}
+              </li>
             </ul>
             <p className={classes.HelperText}>
               Laske sopiva määrä <SafeLink href="/matolaskuri">matolaskurilla</SafeLink>
@@ -160,7 +188,10 @@ export default async function Page() {
             <ul>
               <li>3 kestävää 14 L muovilaatikkoa, valmiiksi porattuina</li>
               <li>Valmiiksi mitattu määrä petimateriaalia</li>
-              <li>Valitsemasi määrä kompostimatoja (50 / 100 / 200)</li>
+              <li>
+                Valitsemasi määrä kompostimatoja (
+                {starterKitVariants.map((variant) => variant.amount).join(' / ')})
+              </li>
               <li>
                 Sähköiset{' '}
                 <SafeLink href="/tuotteet/matokompostin-aloituspakkaus/kayttoonotto">
@@ -188,28 +219,39 @@ export default async function Page() {
             </p>
 
             <ul>
-              <li>Kompostilaatikot: 26,97 €</li>
-              <li>Kookoskuitu petimateriaaliksi: 3,80 €</li>
-              <li>Rakentaminen, viimeistely ja pakkaus: 30 €</li>
+              {starterKitComponentCosts.map((item) => (
+                <li key={item.label}>
+                  {item.label}: {formatPrice(item.price)} €
+                </li>
+              ))}
               <li>
-                <strong>Yhteensä: 60,77 €</strong>
+                <strong>Yhteensä: {formatPrice(starterKitComponentCostTotal)} €</strong>
               </li>
             </ul>
 
             <p>
-              Perusosa on hinnoiteltu 60 euroon. Tähän lisätään madot samalla hinnalla
-              kuin erikseen myytävissä matopaketeissa:
+              Perusosa on hinnoiteltu {formatPrice(starterKitBasePrice)} euroon. Tähän
+              lisätään madot samalla hinnalla kuin erikseen myytävissä matopaketeissa:
             </p>
 
             <ul>
-              <li>+ 50 matoa: 20 €</li>
-              <li>+ 100 matoa: 30 €</li>
-              <li>+ 200 matoa: 50 €</li>
+              {wormVariants.map((variant) => (
+                <li key={variant.sku}>
+                  + {variant.amount} matoa: {formatPrice(variant.price)} €
+                </li>
+              ))}
             </ul>
 
+            <p>Valmiit paketit muodostuvat seuraavasti:</p>
+            <ul>
+              {starterKitVariants.map((variant) => (
+                <li key={`${variant.sku}-final`}>
+                  Aloituspakkaus + {variant.amount} matoa: {formatPrice(variant.price)} €
+                </li>
+              ))}
+            </ul>
             <p>
-              Lopulliset paketit ovat 80 €, 90 € ja 110 €. Työosuus on 30 €, muut kulut
-              ovat materiaaleja.
+              Työosuus sisältyy perusosan hintaan, loput kulut muodostuvat materiaaleista.
             </p>
           </section>
 
