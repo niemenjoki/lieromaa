@@ -8,6 +8,7 @@ import Analytics from '@/components/Analytics/Analytics';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
 import VisitorFeedbackWidget from '@/components/VisitorFeedbackWidget/VisitorFeedbackWidget';
+import { CONTACT_EMAIL } from '@/data/contact';
 
 import './globals.css';
 
@@ -56,7 +57,7 @@ const structuredData = {
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'Customer Support',
-        email: 'lieromaa@gmail.com',
+        email: CONTACT_EMAIL,
         availableLanguage: 'fi',
       },
       foundingDate: '2024-10-01',

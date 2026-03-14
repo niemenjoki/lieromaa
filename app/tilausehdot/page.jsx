@@ -1,3 +1,5 @@
+import { ORDER_CONTACT_EMAIL } from '@/data/contact';
+
 import classes from './Tilausehdot.module.css';
 import structuredData from './structuredData.json';
 
@@ -65,7 +67,7 @@ export default function OrderPolicyPage() {
         </p>
         <p>
           Jos haluat palauttaa tuotteesi, ota yhteyttä sähköpostitse{' '}
-          <strong>lieromaa@gmail.com</strong>
+          <strong>{ORDER_CONTACT_EMAIL}</strong>
         </p>
       </div>
     </>

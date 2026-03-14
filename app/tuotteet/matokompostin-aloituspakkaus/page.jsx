@@ -1,6 +1,7 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { ORDER_CONTACT_EMAIL } from '@/data/contact';
 import {
   formatPrice,
   getProductShippingOptions,
@@ -298,7 +299,7 @@ export default async function Page() {
           <section id="yhteys">
             <p>
               Voit kysyä aloituspakkauksesta myös suoraan:{' '}
-              <strong>lieromaa@gmail.com</strong>
+              <strong>{ORDER_CONTACT_EMAIL}</strong>
             </p>
           </section>
         </div>

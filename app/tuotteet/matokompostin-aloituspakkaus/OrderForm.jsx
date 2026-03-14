@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
+import { usePathname } from 'next/navigation';
+
+import { ORDER_SUBMIT_ENDPOINT, ORDER_SUCCESS_MESSAGE } from '@/data/orderConfig';
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
+import { submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   formatPrice,
   getProductPricing,
@@ -21,6 +25,7 @@ const defaultStarterKitVariant =
 const defaultDelivery = starterKitShippingOptions[0]?.id ?? 'postitus';
 
 export default function OrderForm() {
+  const pathname = usePathname();
   const [delivery, setDelivery] = useState(defaultDelivery);
   const [amount, setAmount] = useState(
     defaultStarterKitVariant ? String(defaultStarterKitVariant.amount) : ''
@@ -29,6 +34,11 @@ export default function OrderForm() {
   const [appliedDiscount, setAppliedDiscount] = useState(null);
   const [discountFeedback, setDiscountFeedback] = useState('');
   const [isCheckingDiscount, setIsCheckingDiscount] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [formStartedAt, setFormStartedAt] = useState('');
+  const [submissionId, setSubmissionId] = useState('');
 
   const currentVariant =
     starterKitVariants.find((variant) => String(variant.amount) === amount) ??
@@ -50,6 +60,11 @@ export default function OrderForm() {
       setDiscountFeedback('Alennus poistettiin, koska valittu tuote muuttui.');
     }
   }, [appliedDiscount, currentSku]);
+
+  useEffect(() => {
+    setFormStartedAt(String(Date.now()));
+    setSubmissionId(globalThis.crypto?.randomUUID?.() || `starterkit-${Date.now()}`);
+  }, []);
 
   const discountFromProductPrice =
     appliedDiscount?.type === 'percentage'
@@ -97,15 +112,41 @@ export default function OrderForm() {
     }
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (isSubmitting || isSubmitted) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      await submitOrderForm(event.currentTarget);
+      setIsSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : 'Tilauksen lähetys epäonnistui.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <form
       className={classes.CalculatorForm}
-      action="https://formspree.io/f/xkgpdwpa"
+      action={ORDER_SUBMIT_ENDPOINT}
       method="POST"
+      onSubmit={handleSubmit}
     >
       <input type="text" name="_gotcha" style={{ display: 'none' }} />
       <input type="hidden" name="tuote" value={starterKitProduct.name} />
+      <input type="hidden" name="tuote_avain" value="starterKit" />
       <input type="hidden" name="sku" value={currentSku} />
+      <input type="hidden" name="lomake_aloitettu_ms" value={formStartedAt} />
+      <input type="hidden" name="submission_id" value={submissionId} />
+      <input type="hidden" name="sivu_polku" value={pathname ?? ''} />
       <input
         type="hidden"
         name="alennus_obfuscated_code"
@@ -231,7 +272,25 @@ export default function OrderForm() {
         Yhteensä: <strong>{formatPrice(total)} €</strong>
       </p>
 
-      <button type="submit">Tilaa aloituspakkaus ({formatPrice(total)} €)</button>
+      {submitError ? (
+        <p className={classes.HelperText} role="alert">
+          {submitError}
+        </p>
+      ) : null}
+
+      {isSubmitted ? (
+        <p className={classes.Note} role="status">
+          {ORDER_SUCCESS_MESSAGE}
+        </p>
+      ) : null}
+
+      <button type="submit" disabled={isSubmitting || isSubmitted}>
+        {isSubmitting
+          ? 'Lähetetään tilausta...'
+          : isSubmitted
+            ? 'Tilaus vastaanotettu'
+            : `Tilaa aloituspakkaus (${formatPrice(total)} €)`}
+      </button>
 
       <p className={classes.Note}>
         Saat manuaalisen tilausvahvistuksen 1–2 arkipäivässä.
