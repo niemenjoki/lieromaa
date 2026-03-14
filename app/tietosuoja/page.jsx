@@ -16,7 +16,7 @@ export default function PrivacyPage() {
       <div className={classes.PrivacyPage}>
         <h1>Tietosuojaseloste</h1>
         <p>
-          <em>Päivitetty: 6. maaliskuuta 2026</em>
+          <em>Päivitetty: 15. maaliskuuta 2026</em>
         </p>
 
         <p>
@@ -57,9 +57,10 @@ export default function PrivacyPage() {
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
           tilauslomakkeella tai viestin palautewidgetin kautta. Lisäksi kolmannen
           osapuolen palvelut (esimerkiksi Google AdSense, Vercel Analytics, Speed Insights
-          ja Formspree) voivat kerätä teknisiä tietoja sivuston käytöstä. Sivustoa voi
-          käyttää myös mainostenesto-ohjelmien tai muiden seurantaa estävien työkalujen
-          kanssa.
+          ja Formspree) voivat kerätä teknisiä tietoja sivuston käytöstä.
+          Tilauslomakkeiden välityksessä käytetään lisäksi Verceliä ja Cloudflare Tunnel
+          -yhteyttä. Sivustoa voi käyttää myös mainostenesto-ohjelmien tai muiden
+          seurantaa estävien työkalujen kanssa.
         </p>
 
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
@@ -99,15 +100,24 @@ export default function PrivacyPage() {
           </li>
         </ul>
 
-        <h2>Lomakkeet (Formspree)</h2>
+        <h2>Tilauslomakkeet</h2>
         <p>
-          Tilauslomakkeet ja palautewidgetin viestit välitetään Formspree-palvelun kautta.
-          Formspree käsittelee lomaketietoja, jotta tilaukset ja palautteet voidaan
-          vastaanottaa ja käsitellä. Palautewidgetin lähetyksessä välitetään myös sivun
-          URL-osoite ja viittaava sivu (referrer), jos sellainen on saatavilla. Formspree
-          voi käsitellä henkilötietoja EU-/ETA-alueen ulkopuolella (esimerkiksi
-          Yhdysvalloissa). Tietosiirrot suojataan GDPR:n mukaisilla suojatoimilla, kuten
-          vakiosopimuslausekkeilla.
+          Tilauslomakkeiden lähetykset vastaanotetaan ensin Lieromaan julkisella
+          verkkosivustolla Vercelissä ja välitetään sieltä Lieromaan omaan
+          tilaustenhallinta- palveluun. Yhteys julkisen sivuston ja kotipalvelimella
+          toimivan tilaustenhallinnan välillä kulkee Cloudflare Tunnel -palvelun kautta.
+          Tilaustiedot tallennetaan Lieromaan hallinnoimaan paikalliseen
+          SQLite-tietokantaan kotipalvelimella. Tilauksiin liittyviä sähköposteja
+          lähetetään Zoho Mailin SMTP-palvelun kautta.
+        </p>
+
+        <h2>Palautewidget (Formspree)</h2>
+        <p>
+          Palautewidgetin viestit välitetään edelleen Formspree-palvelun kautta.
+          Lähetyksessä välitetään viestin lisäksi myös sivun URL-osoite ja viittaava sivu
+          (referrer), jos sellainen on saatavilla. Formspree voi käsitellä henkilötietoja
+          EU-/ETA-alueen ulkopuolella (esimerkiksi Yhdysvalloissa). Tietosiirrot suojataan
+          GDPR:n mukaisilla suojatoimilla, kuten vakiosopimuslausekkeilla.
         </p>
 
         <h2>Toimitukset (Posti)</h2>
@@ -218,7 +228,8 @@ export default function PrivacyPage() {
 
         <h2>Tietojen siirto EU-/ETA-alueen ulkopuolelle</h2>
         <p>
-          Osa käytetyistä palveluista (kuten Google ja Formspree) voi käsitellä tietoja
+          Osa käytetyistä palveluista (kuten Google, Formspree, Cloudflare ja
+          mahdollisesti Zoho Mail käytetyn palvelinalueen mukaan) voi käsitellä tietoja
           EU-/ETA-alueen ulkopuolella. Tällöin siirrot toteutetaan GDPR:n edellyttämillä
           suojatoimilla, kuten vakiosopimuslausekkeilla.
         </p>
@@ -226,9 +237,9 @@ export default function PrivacyPage() {
         <h2>Tietojen vastaanottajat</h2>
         <p>
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
-          palveluissa kuvatulla tavalla (Formspree, Posti, OP Kevytyrittäjä, Google,
-          Vercel). Henkilötietoja ei myydä eikä luovuteta muihin tarkoituksiin ilman
-          lainmukaista perustetta.
+          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Formspree palautewidgetin
+          osalta, Posti, OP Kevytyrittäjä, Google ja Vercel). Henkilötietoja ei myydä eikä
+          luovuteta muihin tarkoituksiin ilman lainmukaista perustetta.
         </p>
 
         <h2>Tietojen säilytysaika</h2>

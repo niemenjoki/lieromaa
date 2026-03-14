@@ -2,6 +2,7 @@ import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { ORDER_CONTACT_EMAIL, ORDER_WHATSAPP_URL } from '@/data/contact';
 import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 
 import classes from '../ProductPage.module.css';
@@ -102,13 +103,9 @@ export default async function Page() {
 
           <section>
             <p>
-              Voit myös ottaa yhteyttä sähköpostitse: <strong>lieromaa@gmail.com</strong>{' '}
-              tai WhatsAppissa{' '}
-              <a
-                href="https://api.whatsapp.com/send?phone=358503365054&text=Hei!%20Olen%20kiinnostunut%20kompostimadoista."
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              Voit myös ottaa yhteyttä sähköpostitse:{' '}
+              <strong>{ORDER_CONTACT_EMAIL}</strong> tai WhatsAppissa{' '}
+              <a href={ORDER_WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 Lähetä viesti
               </a>
             </p>

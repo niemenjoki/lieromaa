@@ -1,5 +1,6 @@
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { ORDER_CONTACT_EMAIL } from '@/data/contact';
 
 import classes from './StarterKitSetup.module.css';
 import structuredData from './structuredData.json';
@@ -163,7 +164,7 @@ export default function StarterKitSetupPage() {
         <p>
           Tarkemmat ohjeet jatkuvaan hoitoon löydät tältä sivustolta kohdasta{' '}
           <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>. Voit myös
-          laittaa sähköpostia <strong>lieromaa@gmail.com</strong>, niin autan parhaani
+          laittaa sähköpostia <strong>{ORDER_CONTACT_EMAIL}</strong>, niin autan parhaani
           mukaan.
         </p>
       </div>
