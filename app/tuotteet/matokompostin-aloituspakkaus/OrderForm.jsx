@@ -166,6 +166,11 @@ export default function OrderForm() {
         <input type="email" name="email" required />
       </label>
 
+      <label>
+        Puhelinnumero
+        <input type="tel" name="phone" />
+      </label>
+
       <fieldset>
         <legend>Valitse paketti</legend>
         {starterKitVariants.map((variant) => (
