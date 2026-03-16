@@ -64,6 +64,16 @@
   line-height: 1.4;
 }
 
+.FinePrint {
+  margin: -0.25rem 0 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--text-color);
+  opacity: 0.8;
+  align-self: flex-start;
+  max-width: 42rem;
+}
+
 @media (max-width: 1000px) {
   .Flex img {
     max-width: 40%;
