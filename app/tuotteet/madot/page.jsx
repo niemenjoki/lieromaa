@@ -94,7 +94,7 @@ export default async function Page() {
             </p>
             <p>
               Saat laskun <strong>OP Kevytyrittäjä</strong> -palvelun kautta sähköpostitse
-              aikaisintaan silloin, kun pakkaus on toimitettu postille. Maksuaika on 14
+              aikaisintaan silloin, kun pakkaus on toimitettu postille. Maksuaika on 7
               päivää, ja toimitus tapahtuu Postin kautta koko Suomeen.
             </p>
           </section>

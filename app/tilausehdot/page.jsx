@@ -44,7 +44,7 @@ export default function OrderPolicyPage() {
         <h2>Maksutavat</h2>
         <p>
           Maksaminen tapahtuu <strong>OP Kevytyrittäjä</strong> -palvelun kautta
-          sähköpostitse lähetettävällä laskulla. Maksuaika on 14 vuorokautta. Laskun voi
+          sähköpostitse lähetettävällä laskulla. Maksuaika on 7 vuorokautta. Laskun voi
           maksaa normaalisti verkkopankissa tai mobiilissa.
         </p>
 
