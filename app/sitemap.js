@@ -1,5 +1,10 @@
 import safeLinks from '@/data/generated/safeRoutes.json';
 import {
+  getLegalPageLastModified,
+  orderTermsPage,
+  privacyPolicyPage,
+} from '@/data/legalPages';
+import {
   getAllContent,
   getAllGuideCategories,
   getAllPostTags,
@@ -37,8 +42,8 @@ export default async function sitemap() {
     ['/', latestPost],
     ['/blogi', latestPost],
     ['/tietoa', '2025-09-08'],
-    ['/tietosuoja', '2025-09-08'],
-    ['/tilausehdot', '2025-10-07'],
+    [privacyPolicyPage.canonicalUrl, getLegalPageLastModified(privacyPolicyPage)],
+    [orderTermsPage.canonicalUrl, getLegalPageLastModified(orderTermsPage)],
     ['/tuotteet/madot', '2025-10-07'],
     ['/tuotteet/matokompostin-aloituspakkaus', '2026-03-01'],
     ['/tuotteet/matokompostin-aloituspakkaus/kayttoonotto', '2026-03-03'],

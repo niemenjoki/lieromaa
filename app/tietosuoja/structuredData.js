@@ -1,4 +1,11 @@
-import { pageDescription, pageId, pageName, pageUrl } from './pageMetadata';
+import {
+  pageDescription,
+  pageId,
+  pageName,
+  pageUrl,
+  publishedAt,
+  updatedAt,
+} from './pageMetadata';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -11,6 +18,8 @@ const structuredData = {
       description: pageDescription,
       isPartOf: { '@id': 'https://www.lieromaa.fi/#website' },
       about: { '@id': 'https://www.lieromaa.fi/#organization' },
+      datePublished: publishedAt,
+      dateModified: updatedAt,
       inLanguage: 'fi',
     },
   ],

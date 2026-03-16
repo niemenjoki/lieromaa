@@ -1,4 +1,7 @@
+import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
+
 import classes from './Tietosuoja.module.css';
+import { updatedAt } from './pageMetadata';
 import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
@@ -16,7 +19,7 @@ export default function PrivacyPage() {
       <div className={classes.PrivacyPage}>
         <h1>Tietosuojaseloste</h1>
         <p>
-          <em>Päivitetty: 15. maaliskuuta 2026</em>
+          <em>Päivitetty: {formatFinnishDate(updatedAt)}</em>
         </p>
 
         <p>
@@ -211,9 +214,9 @@ export default function PrivacyPage() {
           näyttämistä hallitaan localStorage-arvoilla <code>lieromaa_session_start</code>,{' '}
           <code>lieromaa_pages_visited</code> ja <code>lieromaa_feedback_last_shown</code>
           . Näillä varmistetaan, että widget näkyy vain aktiivisille kävijöille eikä liian
-          usein (vähintään 30 päivän välein). Tiedot tallennetaan ainoastaan laitteellesi,
-          eikä niitä siirretä eteenpäin. Tietoa säilytetään toistaiseksi, kunnes poistat
-          sen selaimestasi.
+          usein (korkeintaan 30 päivän välein). Tiedot tallennetaan ainoastaan
+          laitteellesi, eikä niitä siirretä eteenpäin. Tietoa säilytetään toistaiseksi,
+          kunnes poistat sen selaimestasi.
         </p>
 
         <h2>Evästeet</h2>

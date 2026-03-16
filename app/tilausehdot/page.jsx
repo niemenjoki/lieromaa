@@ -1,6 +1,8 @@
 import { ORDER_CONTACT_EMAIL } from '@/data/contact';
+import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 
 import classes from './Tilausehdot.module.css';
+import { effectiveFrom, updatedAt } from './pageMetadata';
 import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
@@ -18,7 +20,13 @@ export default function OrderPolicyPage() {
       <div className={classes.OrderPolicyPage}>
         <h1>Tilaus- ja toimitusehdot</h1>
         <p>
-          <em>Voimassa 1.10.2025 alkaen.</em>
+          <em>Voimassa {formatFinnishDate(effectiveFrom, 'numeric')} alkaen.</em>
+          {updatedAt && updatedAt !== effectiveFrom ? (
+            <>
+              <br />
+              <em>Päivitetty: {formatFinnishDate(updatedAt)}</em>
+            </>
+          ) : null}
         </p>
 
         <h2>Yleistä</h2>
