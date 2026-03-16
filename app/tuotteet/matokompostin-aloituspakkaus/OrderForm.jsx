@@ -16,6 +16,7 @@ import {
 } from '@/lib/pricing/catalog';
 
 import classes from '../ProductPage.module.css';
+import WormAmountFinePrint from '../WormAmountFinePrint';
 
 const starterKitProduct = getProductPricing('starterKit');
 const starterKitVariants = getProductVariants('starterKit');
@@ -186,6 +187,7 @@ export default function OrderForm() {
           </label>
         ))}
       </fieldset>
+      <WormAmountFinePrint />
 
       <fieldset>
         <legend>Toimitustapa</legend>
