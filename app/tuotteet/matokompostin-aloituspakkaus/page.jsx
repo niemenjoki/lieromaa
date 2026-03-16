@@ -266,7 +266,7 @@ export default async function Page() {
             <p>
               Laskutus tulee <strong>OP Kevytyrittäjä</strong> -palvelun kautta
               sähköpostiin aikaisintaan silloin, kun lähetys on postitettu. Maksuaika on
-              14 päivää.
+              7 päivää.
             </p>
           </section>
 
