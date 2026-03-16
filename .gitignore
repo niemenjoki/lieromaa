@@ -19,6 +19,7 @@
 /out/
 public/sitemap.xml
 public/rss*.xml
+public/google-merchant-feed.xml
 
 # misc
 .DS_Store
