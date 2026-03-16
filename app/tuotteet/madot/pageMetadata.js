@@ -1,31 +1,21 @@
-import { SITE_URL } from '@/data/vars.mjs';
+import { getProductCatalogEntry } from '@/data/productCatalog.mjs';
 
-export const pageName = 'Osta kompostimatoja – Eisenia fetida matokompostointiin';
-export const title = 'Osta kompostimatoja | Lieromaa';
-export const description =
-  'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!';
-export const canonicalUrl = '/tuotteet/madot';
-export const pageUrl = new URL(canonicalUrl, SITE_URL).toString();
-export const pageId = `${pageUrl}#webpage`;
-export const pageDescription =
-  'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.';
-export const image = {
-  url: '/images/wormspage/kompostimadot_kammenella.avif',
-  width: 1536,
-  height: 1024,
-  alt: 'Kompostimatoja ja matokompostin sisältöä kämmenellä',
-};
-export const imageUrl = new URL(image.url, SITE_URL).toString();
-export const productId = `${pageUrl}#product`;
-export const productName = 'Kompostimadot (Eisenia fetida)';
-export const productDescription =
-  'Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina. Sopivat sisä- ja ulkokäyttöön, hajuttomaan biojätteen käsittelyyn ja luonnonmukaiseen lannoitukseen.';
+const product = getProductCatalogEntry('worms');
 
-const pageMetadata = {
-  title,
-  description,
-  canonicalUrl,
-  image,
-};
+export const pageName = product.pageName;
+export const title = product.title;
+export const description = product.description;
+export const canonicalUrl = product.canonicalUrl;
+export const pageUrl = product.pageUrl;
+export const pageId = product.pageId;
+export const pageDescription = product.pageDescription;
+export const image = product.image;
+export const imageUrl = product.imageUrl;
+export const galleryImages = product.images;
+export const productImageUrls = product.productImageUrls;
+export const productId = product.productId;
+export const productName = product.productName;
+export const productDescription = product.productDescription;
+export const h1 = product.h1;
 
-export default pageMetadata;
+export default product.metadata;
