@@ -34,7 +34,7 @@ Lieromaa is intended to be a solo project.
 
 That being said, if you have found a bug or an improvement opportunity, feel free to create an issue and I'll check it out.
 
-If you want to contribute to writing content on the blog, contact me at lieromaa@gmail.com and we can discuss how we could make that possible.
+If you want to contribute to writing content on the blog, contact me at info@lieromaa.fi and we can discuss how we could make that possible.
 
 ---
 
@@ -53,4 +53,4 @@ See [`LICENSE`](LICENSE) for details.
 **Joonas Niemenjoki**
 
 - [lieromaa.fi](https://www.lieromaa.fi)
-- Contact me at: lieromaa@gmail.com
+- Contact me at: info@lieromaa.fi
