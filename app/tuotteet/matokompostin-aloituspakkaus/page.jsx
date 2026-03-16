@@ -10,6 +10,7 @@ import {
 
 import classes from '../ProductPage.module.css';
 import OrderForm from './OrderForm';
+import { faqItems, galleryImages, h1 } from './pageMetadata';
 import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
@@ -44,32 +45,10 @@ export default async function Page() {
       />
 
       <article className={classes.ProductPage}>
-        <h1>Lieromaan matokompostorin aloituspakkaus on nyt tilattavissa</h1>
+        <h1>{h1}</h1>
 
         <div className={classes.Content}>
-          <ImageSlider
-            maxWidth="800px"
-            images={[
-              {
-                src: '/images/starterkit/aloituspakkaus_suljettu_matokompostori.avif',
-                alt: 'Suljettu musta matokompostori oransseilla kahvoilla vaaleaa taustaa vasten.',
-                priority: true,
-                loading: 'eager',
-              },
-              {
-                src: '/images/starterkit/aloituspakkaus_sisalto_ylhaalta_kuvattuna.avif',
-                alt: 'Matokompostin aloituspakkauksen sisältö ylhäältä kuvattuna: kolme mustaa laatikkoa, kookoskuituharkot ja erillinen astia kuivikkeelle.',
-              },
-              {
-                src: '/images/starterkit/aloituspakkaus_kompostimadot_toimitusastiassa.avif',
-                alt: 'Kompostimadot toimitusastiassa omassa kasvualustassaan valmiina siirrettäväksi kompostoriin.',
-              },
-              {
-                src: '/images/starterkit/aloituspakkaus_kompostimadot_lahella.avif',
-                alt: 'Lähikuva elävistä kompostimadoista kosteassa ja ilmavassa kasvualustassa.',
-              },
-            ]}
-          />
+          <ImageSlider maxWidth="800px" images={galleryImages} />
 
           <section>
             <p>
@@ -277,23 +256,12 @@ export default async function Page() {
           <section id="faq">
             <h2>Usein kysytyt kysymykset</h2>
 
-            <h3>Haiseeko matokompostori?</h3>
-            <p>
-              Oikein hoidettuna matokompostori on hajuton. Hajuhaitat liittyvät yleensä
-              liialliseen ruokintaan tai liikaan kosteuteen.
-            </p>
-
-            <h3>Kuinka nopeasti kompostointi käynnistyy?</h3>
-            <p>
-              Madot alkavat käsitellä biojätettä heti, mutta ensimmäisten viikkojen aikana
-              ruokintaa suositellaan maltillisena.
-            </p>
-
-            <h3>Voiko kompostoria pitää sisätiloissa?</h3>
-            <p>
-              Kyllä. Läpivirtauskompostori soveltuu hyvin sisäkäyttöön, kun
-              kosteustasapaino ja ruokinta pidetään hallinnassa.
-            </p>
+            {faqItems.map((item) => (
+              <div key={item.question}>
+                <h3>{item.question}</h3>
+                <p>{item.answer}</p>
+              </div>
+            ))}
           </section>
 
           <section id="yhteys">

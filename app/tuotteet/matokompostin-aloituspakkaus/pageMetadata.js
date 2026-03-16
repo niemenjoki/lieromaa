@@ -1,34 +1,22 @@
-import { SITE_URL } from '@/data/vars.mjs';
+import { getProductCatalogEntry } from '@/data/productCatalog.mjs';
 
-export const pageName = 'Matokompostorin aloituspakkaus ja madot';
-export const title = `${pageName} | Lieromaa`;
-export const description =
-  'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.';
-export const canonicalUrl = '/tuotteet/matokompostin-aloituspakkaus';
-export const pageUrl = new URL(canonicalUrl, SITE_URL).toString();
-export const pageId = `${pageUrl}#webpage`;
-export const image = {
-  url: '/images/starterkit/aloituspakkaus_suljettu_matokompostori.avif',
-  width: 1200,
-  height: 800,
-  alt: 'Valmis kolmen laatikon matokompostori',
-};
-export const productImageUrls = [
-  new URL(image.url, SITE_URL).toString(),
-  new URL(
-    '/images/starterkit/aloituspakkaus_sisalto_ylhaalta_kuvattuna.avif',
-    SITE_URL
-  ).toString(),
-];
-export const productId = `${pageUrl}#product`;
-export const productName = 'Matokompostorin aloituspakkaus';
-export const faqId = `${pageUrl}#faq`;
+const product = getProductCatalogEntry('starterKit');
 
-const pageMetadata = {
-  title,
-  description,
-  canonicalUrl,
-  image,
-};
+export const pageName = product.pageName;
+export const title = product.title;
+export const description = product.description;
+export const canonicalUrl = product.canonicalUrl;
+export const pageUrl = product.pageUrl;
+export const pageId = product.pageId;
+export const image = product.image;
+export const imageUrl = product.imageUrl;
+export const galleryImages = product.images;
+export const productImageUrls = product.productImageUrls;
+export const productId = product.productId;
+export const productName = product.productName;
+export const productDescription = product.productDescription;
+export const faqId = product.faqId;
+export const faqItems = product.faqItems;
+export const h1 = product.h1;
 
-export default pageMetadata;
+export default product.metadata;

@@ -7,6 +7,7 @@ import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 
 import classes from '../ProductPage.module.css';
 import OrderForm from './OrderForm';
+import { galleryImages, h1 } from './pageMetadata';
 import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
@@ -37,21 +38,10 @@ export default async function Page() {
             täällä
           </SafeLink>
         </PromoBox>
-        <h1>Osta Lieromaan Eisenia fetida -kompostimatoja</h1>
+        <h1>{h1}</h1>
 
         <div className={classes.Content}>
-          <ImageSlider
-            images={[
-              {
-                src: '/images/wormspage/kompostimadot_kammenella.avif',
-                alt: 'Kourallinen matokompostin sisältöä ja matoja käsissä',
-              },
-              {
-                src: '/images/wormspage/madot_toimituspakkauksessa.avif',
-                alt: 'Kompostimadot toimituspakkauksessa',
-              },
-            ]}
-          />
+          <ImageSlider images={galleryImages} />
 
           <section>
             <p>
