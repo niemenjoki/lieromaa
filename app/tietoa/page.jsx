@@ -3,7 +3,7 @@ import SafeImage from '@/components/SafeImage/SafeImage';
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './Tietoa.module.css';
-import structuredData from './structuredData.json';
+import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 

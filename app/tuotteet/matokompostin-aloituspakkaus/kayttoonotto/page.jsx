@@ -3,7 +3,7 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 import { ORDER_CONTACT_EMAIL } from '@/data/contact';
 
 import classes from './StarterKitSetup.module.css';
-import structuredData from './structuredData.json';
+import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 

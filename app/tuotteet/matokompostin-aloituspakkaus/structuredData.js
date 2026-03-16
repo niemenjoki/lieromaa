@@ -4,6 +4,17 @@ import {
   getShippingOption,
 } from '@/lib/pricing/catalog';
 
+import {
+  description,
+  faqId,
+  pageId,
+  pageName,
+  pageUrl,
+  productId,
+  productImageUrls,
+  productName,
+} from './pageMetadata';
+
 const { highPrice, lowPrice, offerCount } = getProductOfferStats('starterKit');
 const shippingRate = getShippingOption('starterKit', 'postitus')?.price ?? 0;
 
@@ -12,24 +23,19 @@ const structuredData = {
   '@graph': [
     {
       '@type': 'WebPage',
-      '@id': 'https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#webpage',
-      url: 'https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus',
-      name: 'Matokompostorin aloituspakkaus ja madot',
-      description:
-        'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.',
+      '@id': pageId,
+      url: pageUrl,
+      name: pageName,
+      description,
       inLanguage: 'fi',
     },
     {
       '@type': 'Product',
-      '@id': 'https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#product',
-      name: 'Matokompostorin aloituspakkaus',
+      '@id': productId,
+      name: productName,
       sku: 'LM-STARTER-001',
-      image: [
-        'https://www.lieromaa.fi/images/starterkit/aloituspakkaus_suljettu_matokompostori.avif',
-        'https://www.lieromaa.fi/images/starterkit/aloituspakkaus_sisalto_ylhaalta_kuvattuna.avif',
-      ],
-      description:
-        'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.',
+      image: productImageUrls,
+      description,
       brand: {
         '@type': 'Brand',
         name: 'Lieromaa',
@@ -86,7 +92,7 @@ const structuredData = {
     },
     {
       '@type': 'FAQPage',
-      '@id': 'https://www.lieromaa.fi/tuotteet/matokompostin-aloituspakkaus#faq',
+      '@id': faqId,
       mainEntity: [
         {
           '@type': 'Question',

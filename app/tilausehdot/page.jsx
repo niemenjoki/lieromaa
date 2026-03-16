@@ -1,7 +1,7 @@
 import { ORDER_CONTACT_EMAIL } from '@/data/contact';
 
 import classes from './Tilausehdot.module.css';
-import structuredData from './structuredData.json';
+import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 
