@@ -1,7 +1,7 @@
 import WormCalculatorClient from '@/components/WormCalculatorClient/WormCalculatorClient';
 import { getPostRecommendations } from '@/lib/content/index.mjs';
 
-import structuredData from './structuredData.json';
+import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 

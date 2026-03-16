@@ -1,33 +1,7 @@
-import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
+import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
+
+import pageMetadata from './pageMetadata';
 
 export default function generateMetadata() {
-  const title = 'Aloituspakkauksen käyttöönotto | Lieromaa';
-  const description =
-    'Näin käynnistät aloituspakkauksen oikein: oikea kosteus, laatikoiden kerrokset, matojen totuttelu ja ensimmäiset ruokinnat.';
-  const canonicalUrl = '/tuotteet/matokompostin-aloituspakkaus/kayttoonotto';
-  const image = {
-    url: '/images/content/aloituspakkauksen_aloitus.avif',
-    width: 1200,
-    height: 900,
-    alt: 'Matokompostorin aloituspakkauksen käyttöönotto',
-  };
-
-  const customMetadata = {
-    title,
-    description,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      images: [image],
-    },
-    twitter: {
-      title,
-      description,
-      images: [image.url],
-    },
-  };
-
-  return withDefaultMetadata(customMetadata);
+  return createPageMetadata(pageMetadata);
 }

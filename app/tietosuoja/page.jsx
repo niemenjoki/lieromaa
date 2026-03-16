@@ -1,5 +1,5 @@
 import classes from './Tietosuoja.module.css';
-import structuredData from './structuredData.json';
+import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 

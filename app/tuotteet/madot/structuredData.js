@@ -4,6 +4,17 @@ import {
   getShippingOption,
 } from '@/lib/pricing/catalog';
 
+import {
+  imageUrl,
+  pageDescription,
+  pageId,
+  pageName,
+  pageUrl,
+  productDescription,
+  productId,
+  productName,
+} from './pageMetadata';
+
 const { highPrice, lowPrice, offerCount } = getProductOfferStats('worms');
 const shippingRate = getShippingOption('worms', 'postitus')?.price ?? 0;
 
@@ -12,22 +23,20 @@ const structuredData = {
   '@graph': [
     {
       '@type': 'WebPage',
-      '@id': 'https://www.lieromaa.fi/tuotteet/madot#webpage',
-      url: 'https://www.lieromaa.fi/tuotteet/madot',
-      name: 'Osta kompostimatoja – Eisenia fetida matokompostointiin',
-      description:
-        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
+      '@id': pageId,
+      url: pageUrl,
+      name: pageName,
+      description: pageDescription,
       isPartOf: { '@id': 'https://www.lieromaa.fi/#website' },
       about: { '@id': 'https://www.lieromaa.fi/#organization' },
       inLanguage: 'fi',
     },
     {
       '@type': 'Product',
-      '@id': 'https://www.lieromaa.fi/tuotteet/madot#product',
-      name: 'Kompostimadot (Eisenia fetida)',
-      description:
-        'Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina. Sopivat sisä- ja ulkokäyttöön, hajuttomaan biojätteen käsittelyyn ja luonnonmukaiseen lannoitukseen.',
-      image: 'https://www.lieromaa.fi/images/wormspage/kompostimadot_kammenella.avif',
+      '@id': productId,
+      name: productName,
+      description: productDescription,
+      image: imageUrl,
       sku: 'MADOT',
       brand: {
         '@type': 'Brand',
@@ -38,7 +47,7 @@ const structuredData = {
       material: 'Kompostimulta, pahvisilppu, puukuitu, kookoskuitu',
       offers: {
         '@type': 'AggregateOffer',
-        url: 'https://www.lieromaa.fi/tuotteet/madot',
+        url: pageUrl,
         priceCurrency: 'EUR',
         lowPrice: formatSchemaPrice(lowPrice),
         highPrice: formatSchemaPrice(highPrice),

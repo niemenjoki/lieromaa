@@ -1,0 +1,103 @@
+import {
+  breadcrumbId,
+  description,
+  howToId,
+  howToName,
+  imageUrl,
+  pageId,
+  pageName,
+  pageUrl,
+  parentPageUrl,
+} from './pageMetadata';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      '@id': pageId,
+      url: pageUrl,
+      name: pageName,
+      description,
+      isPartOf: { '@id': 'https://www.lieromaa.fi/#website' },
+      about: { '@id': 'https://www.lieromaa.fi/#organization' },
+      mainEntity: { '@id': howToId },
+      inLanguage: 'fi',
+    },
+    {
+      '@type': 'HowTo',
+      '@id': howToId,
+      url: pageUrl,
+      name: howToName,
+      description,
+      image: imageUrl,
+      inLanguage: 'fi',
+      supply: [
+        { '@type': 'HowToSupply', name: 'Umpipohjainen laatikko (1 kpl)' },
+        { '@type': 'HowToSupply', name: "Rei'itetty laatikko (2 kpl)" },
+        { '@type': 'HowToSupply', name: 'Kansi (1 kpl)' },
+        { '@type': 'HowToSupply', name: 'Kuiva kookoskuitu' },
+        {
+          '@type': 'HowToSupply',
+          name: 'Kompostimadot ja vanhaa petimateriaalia sisältävä rasia',
+        },
+      ],
+      tool: [
+        { '@type': 'HowToTool', name: 'Mitta-astia (4.5 litraa vettä)' },
+        { '@type': 'HowToTool', name: 'Kädet, kauha tai lusikka sekoitukseen' },
+      ],
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Kookoskuidun kostutus pohjalaatikossa',
+          text: 'Poista matorasia ja lisää kuiva kookoskuitu umpipohjaiseen laatikkoon. Kaada joukkoon 4.5 litraa vettä tasaisesti koko pinnalle. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä, jotta kosteus jakautuu tasaisemmin.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Kerrosten rakentaminen',
+          text: "Siirrä kostutettua materiaalia rei'itettyihin laatikoihin niin, että pohjalaatikkoon jää vain kevyt kerros. Kun laatikot pinotaan, petimateriaalin tulee painautua kevyesti mutta pysyä ilmavana.",
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Matojen lisääminen ja totuttelu',
+          text: 'Kaada madot ylimpään laatikkoon petimateriaalin päälle ja anna niiden kaivautua rauhassa. Sulje kansi ja anna matojen sopeutua ilman ruokintaa kaksi vuorokautta.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 4,
+          name: 'Ensimmäinen ruokinta',
+          text: 'Aloita kahden vuorokauden jälkeen pienellä annoksella, esimerkiksi ruokalusikallisella banaania. Lisää uutta ruokaa vasta, kun edellinen annos on kadonnut kokonaan.',
+        },
+      ],
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': breadcrumbId,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Etusivu',
+          item: 'https://www.lieromaa.fi/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Matokompostorin aloituspakkaus',
+          item: parentPageUrl,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: pageName,
+          item: pageUrl,
+        },
+      ],
+    },
+  ],
+};
+
+export default structuredData;

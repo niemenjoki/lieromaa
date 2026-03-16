@@ -5,7 +5,7 @@ import { CONTENT_TYPES } from '@/data/vars.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
 
 import classes from './HomePage.module.css';
-import structuredData from './structuredData.json';
+import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 
