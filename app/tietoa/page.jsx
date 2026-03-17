@@ -1,6 +1,6 @@
 import Advert from '@/components/Advert/Advert';
 import SafeImage from '@/components/SafeImage/SafeImage';
-import portrait from '@/public/images/portrait2024.avif';
+import { SITE_AUTHOR } from '@/data/siteAuthor';
 
 import classes from './Tietoa.module.css';
 import structuredData from './structuredData.js';
@@ -20,14 +20,14 @@ export default function AboutPage() {
       <div className={classes.AboutPage}>
         <div className={classes.Info}>
           <SafeImage
-            src={portrait}
-            alt="Valokuva Joonas Niemenjoesta"
+            src={SITE_AUTHOR.portrait}
+            alt={SITE_AUTHOR.portraitAlt}
             placeholder="blur"
             width={200}
             height={200}
             priority
           />
-          <h1>Joonas Niemenjoki</h1>
+          <h1>{SITE_AUTHOR.name}</h1>
         </div>
 
         <div className={classes.Bio}>
@@ -78,7 +78,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

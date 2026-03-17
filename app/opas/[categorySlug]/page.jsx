@@ -77,7 +77,7 @@ export default async function GuideCategoryPage({ params }) {
             overrideHref={`/opas/${categorySlug}/${guide.slug}`}
           />
         ))}
-        <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+        <Advert />
       </div>
     </>
   );

@@ -137,6 +137,12 @@ const baseProductCatalog = {
     name: 'Matokompostorin aloituspakkaus',
     variantSkus: ['starterkit-50', 'starterkit-100', 'starterkit-200'],
     shippingSku: 'postage-starterkit',
+    promo: {
+      badge: 'Uutta:',
+      description:
+        'Matokompostorin aloituspakkaus on nyt saatavilla. Saat valmiiksi kootun kolmen laatikon läpivirtauskompostorin, petimateriaalin ja kompostimadot samassa paketissa. Tutustu pakettiin ja tilaa',
+      linkLabel: 'täältä',
+    },
     page: {
       canonicalUrl: '/tuotteet/matokompostin-aloituspakkaus',
       pageName: 'Matokompostorin aloituspakkaus ja madot',
@@ -271,6 +277,7 @@ function createCatalogEntry(productKey, product) {
     images,
     productImageUrls: images.map((image) => image.absoluteUrl),
     faqItems: product.faqItems ?? [],
+    promo: product.promo ?? null,
     search: product.search ?? null,
     metadata: {
       title,

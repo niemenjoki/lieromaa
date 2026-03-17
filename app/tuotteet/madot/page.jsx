@@ -1,7 +1,7 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
-import PromoBox from '@/components/PromoBox/Promobox';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import StarterKitPromo from '@/components/StarterKitPromo/StarterKitPromo';
 import { ORDER_CONTACT_EMAIL, ORDER_WHATSAPP_URL } from '@/data/contact';
 import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 
@@ -27,17 +27,7 @@ export default async function Page() {
       />
 
       <article className={classes.ProductPage}>
-        <PromoBox>
-          <strong>Uutta:</strong> Matokompostorin aloituspakkaus on nyt saatavilla. Saat
-          valmiiksi kootun kolmen laatikon läpivirtauskompostorin, petimateriaalin ja
-          kompostimadot samassa paketissa. Tutustu pakettiin ja tilaa{' '}
-          <SafeLink
-            href="/tuotteet/matokompostin-aloituspakkaus"
-            style={{ color: 'var(--highlight-alt)', fontWeight: 600 }}
-          >
-            täällä
-          </SafeLink>
-        </PromoBox>
+        <StarterKitPromo />
         <h1>{h1}</h1>
 
         <div className={classes.Content}>
@@ -125,7 +115,7 @@ export default async function Page() {
         </div>
       </article>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }
