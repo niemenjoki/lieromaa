@@ -1,6 +1,62 @@
 {
   "title": "Usein kysyttyjä kysymyksiä ja vastauksia kompostimadoista (UKK)",
   "description": "Mikä kompostimato on, mitä se syö ja kuinka kauan elää? Tästä löydät vastaukset madon elämästä, hoidosta ja hankinnasta",
-  "updated": "2025-11-03",
-  "category": { "name": "kompostorin hoito", "pagePosition": 99 }
+  "publishedAt": "2025-09-29",
+  "updatedAt": "2025-11-03",
+  "keywords": [
+    "matokompostointi",
+    "kompostimadot",
+    "Eisenia fetida",
+    "biojäte",
+    "madot",
+    "UKK",
+    "kompostointi"
+  ],
+  "category": {
+    "name": "kompostorin hoito",
+    "pagePosition": 99
+  },
+  "schemaType": "FAQPage",
+  "faqItems": [
+    {
+      "question": "Mitkä madot sopivat matokompostointiin?",
+      "answer": "Yleisimmin käytetty kompostimatojen laji on tunkioliero (Eisenia fetida). Se on kastematoa pienempi, punertava ja erityisen tehokas biojätteen käsittelijä. Tunkiolierot viihtyvät kosteissa, tiiviissä ja pimeissä olosuhteissa, minkä vuoksi ne sopivat täydellisesti matokompostoriin. Muitakin lajeja voi käyttää, mutta Eisenia fetida on helppo, nopea ja laajimmin saatavilla oleva vaihtoehto."
+    },
+    {
+      "question": "Kuinka monta matoa tarvitsen aloittaakseni?",
+      "answer": "Tarvittava matojen määrä riippuu taloutesi koosta. Arvioinnissa voi käyttää Lieromaan matolaskuria, joka laskee sopivan määrän kotitalouden jätteiden perusteella."
+    },
+    {
+      "question": "Mistä matoja saa hankittua?",
+      "answer": "Kompostimatoja voi joskus kerätä luonnosta, mutta käytännössä helpointa on tilata ne netistä. Kompostimatojen saatavuus vaihtelee, mutta Lieromaa myy pieniä määriä Eisenia fetida -matoja, kun oma kompostori tuottaa ylimääräisiä yksilöitä."
+    },
+    {
+      "question": "Onko madoilla suu?",
+      "answer": "Kyllä. Suu sijaitsee madon etupään ensimmäisessä jaokkeessa. Etupään iholäppä toimii aistimiseen ja avautuu syömistä varten, kun mato etsii ravintoa."
+    },
+    {
+      "question": "Kuolevatko madot kompostorissa?",
+      "answer": "Kyllä, madot kuolevat ajan myötä, mutta hyvin hoidetussa kompostissa kuolleita yksilöitä näkyy harvoin, koska muut eliöt hajottavat ne nopeasti. Jos kompostissa on paljon kuolleita matoja, olosuhteet eivät ole kunnossa — tarkista lämpötila, happamuus ja kosteus."
+    },
+    {
+      "question": "Mitä madot syövät?",
+      "answer": "Madot syövät luonnonmukaista biojätettä kuten vihannesten ja hedelmien kuoria. Ne eivät syö lihaa, maitotuotteita tai rasvaa, sillä ne hajoavat hitaasti ja voivat houkutella haittaeläimiä. Hapan ruoka kuten sitrushedelmät tulisi välttää."
+    },
+    {
+      "question": "Onko madoilla aivot?",
+      "answer": "On, mutta hyvin yksinkertaiset. Madon aivot koostuvat hermosolmukkeista, jotka ohjaavat sen perustoimintoja kuten liikkumista, ravinnon etsimistä ja vaarojen välttämistä."
+    },
+    {
+      "question": "Onko madoilla silmiä?",
+      "answer": "Ei ole. Sen sijaan madoilla on valoa ja pimeyttä aistivia reseptorisoluja, joiden avulla ne osaavat väistää valoa ja pysytellä kompostorin suojassa."
+    },
+    {
+      "question": "Tarvitsevatko madot happea?",
+      "answer": "Kyllä. Madot hengittävät ihonsa läpi, ja hapen siirtyminen tapahtuu diffuusion avulla kosteasta ihosta verenkiertoon. Kompostorin petimateriaalin pitää olla ilmavaa ja kosteaa, jotta madot saavat riittävästi happea."
+    },
+    {
+      "question": "Kuinka kauan madot elävät?",
+      "answer": "Luonnossa kastemadon elinikä on noin vuoden, mutta hallituissa olosuhteissa tunkioliero voi elää jopa 4–5 vuotta. Hyvin hoidettu kompostori ylläpitää populaation, koska madot lisääntyvät jatkuvasti."
+    }
+  ]
 }

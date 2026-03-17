@@ -9,6 +9,16 @@ import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
 import VisitorFeedbackWidget from '@/components/VisitorFeedbackWidget/VisitorFeedbackWidget';
 import { CONTACT_EMAIL } from '@/data/contact';
+import {
+  AUTHOR_ID,
+  AUTHOR_NAME,
+  ORGANIZATION_ID,
+  ORGANIZATION_NAME,
+  SCHEMA_LANGUAGE,
+  SITE_LOGO_URL,
+  WEBSITE_ID,
+} from '@/data/siteSchema.mjs';
+import { SITE_URL } from '@/data/vars.mjs';
 
 import './globals.css';
 
@@ -26,39 +36,39 @@ const structuredData = {
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': 'https://www.lieromaa.fi/#website',
-      url: 'https://www.lieromaa.fi',
-      name: 'Lieromaa',
+      '@id': WEBSITE_ID,
+      url: SITE_URL,
+      name: ORGANIZATION_NAME,
       description:
         'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.',
       publisher: {
         '@type': 'Organization',
-        '@id': 'https://www.lieromaa.fi/#organization',
-        name: 'Lieromaa',
+        '@id': ORGANIZATION_ID,
+        name: ORGANIZATION_NAME,
       },
-      inLanguage: 'fi',
+      inLanguage: SCHEMA_LANGUAGE,
     },
     {
       '@type': 'Organization',
-      '@id': 'https://www.lieromaa.fi/#organization',
-      name: 'Lieromaa',
-      url: 'https://www.lieromaa.fi',
+      '@id': ORGANIZATION_ID,
+      name: ORGANIZATION_NAME,
+      url: SITE_URL,
       logo: {
         '@type': 'ImageObject',
-        '@id': 'https://www.lieromaa.fi/#logo',
-        url: 'https://www.lieromaa.fi/images/lieromaa_logo_1024.avif',
-        contentUrl: 'https://www.lieromaa.fi/images/lieromaa_logo_1024.avif',
+        '@id': `${SITE_URL}/#logo`,
+        url: SITE_LOGO_URL,
+        contentUrl: SITE_LOGO_URL,
 
         width: 1024,
         height: 1024,
       },
       sameAs: ['https://www.instagram.com/lieromaa'],
-      founder: { '@id': 'https://www.lieromaa.fi/#joonas' },
+      founder: { '@id': AUTHOR_ID },
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'Customer Support',
         email: CONTACT_EMAIL,
-        availableLanguage: 'fi',
+        availableLanguage: SCHEMA_LANGUAGE,
       },
       foundingDate: '2024-10-01',
       foundingLocation: { '@type': 'Place', name: 'Finland' },
@@ -69,13 +79,13 @@ const structuredData = {
     },
     {
       '@type': 'Person',
-      '@id': 'https://www.lieromaa.fi/#joonas',
-      name: 'Joonas Niemenjoki',
+      '@id': AUTHOR_ID,
+      name: AUTHOR_NAME,
       url: 'https://www.linkedin.com/in/joonasniemenjoki',
       jobTitle: 'Founder',
-      worksFor: { '@id': 'https://www.lieromaa.fi/#organization' },
+      worksFor: { '@id': ORGANIZATION_ID },
       sameAs: ['https://www.linkedin.com/in/joonasniemenjoki'],
-      image: 'https://www.lieromaa.fi/images/portrait2024.avif',
+      image: `${SITE_URL}/images/portrait2024.avif`,
     },
   ],
 };

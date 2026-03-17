@@ -7,9 +7,11 @@ export const revalidate = 3600;
 export async function GET() {
   const rawPosts = getAllContent({ type: CONTENT_TYPES.POST });
 
-  const posts = rawPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+  const posts = rawPosts.sort(
+    (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+  );
 
-  const latestPostDate = posts[0]?.date || 0;
+  const latestPostDate = posts[0]?.publishedAt || 0;
 
   const xmlItems = posts
     .map(
@@ -17,7 +19,7 @@ export async function GET() {
         <title><![CDATA[ ${post.title} ]]></title>
         <link>${SITE_URL}/blogi/julkaisu/${post.slug}</link>
         <guid>${SITE_URL}/blogi/julkaisu/${post.slug}</guid>
-        <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+        <pubDate>${new Date(`${post.publishedAt}T00:00:00Z`).toUTCString()}</pubDate>
         <description><![CDATA[ ${post.description} ]]></description>
         <dc:creator>Joonas Niemenjoki</dc:creator>
       </item>`
@@ -37,7 +39,7 @@ export async function GET() {
       <atom:link href="${SITE_URL}/rss" rel="self" type="application/rss+xml" />
       <description><![CDATA[ Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta multaa! ]]></description>
       <language>fi</language>
-      <lastBuildDate>${new Date(latestPostDate).toUTCString()}</lastBuildDate>
+      <lastBuildDate>${new Date(`${latestPostDate}T00:00:00Z`).toUTCString()}</lastBuildDate>
       ${xmlItems}
     </channel>
   </rss>`;

@@ -12,6 +12,7 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import { CONTENT_TYPES } from '@/data/vars.mjs';
 import { getAllContent, getContentMetadata } from '@/lib/content/index.mjs';
+import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import portrait from '@/public/images/portrait2024.avif';
 
 export const mdxComponents = {
@@ -63,7 +64,7 @@ export default async function GuidePage({ params }) {
 
         <h1>{data.title}</h1>
         <div className={classes.Date}>
-          Päivitetty: {new Date(data.updated).toLocaleDateString('fi-FI')}
+          Päivitetty: {formatFinnishDate(data.updatedAt)}
         </div>
 
         <div className={classes.Content + ' .md'}>
@@ -113,7 +114,11 @@ export default async function GuidePage({ params }) {
         </div>
       </article>
 
-      <SocialShareButtons title={data.title} text={data.description} tags={data.tags} />
+      <SocialShareButtons
+        title={data.title}
+        text={data.description}
+        tags={data.keywords}
+      />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
     </>
   );

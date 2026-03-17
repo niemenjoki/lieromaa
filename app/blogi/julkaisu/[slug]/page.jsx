@@ -15,6 +15,7 @@ import {
   getContentMetadata,
   getPostRecommendations,
 } from '@/lib/content/index.mjs';
+import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import portrait from '@/public/images/portrait2024.avif';
 
 import classes from './PostPage.module.css';
@@ -63,9 +64,9 @@ export default async function PostPage({ params }) {
       <article className={classes.PostPage}>
         <h1>{data.title}</h1>
         <div className={classes.Date}>
-          Julkaistu: {new Date(data.date).toLocaleDateString('fi-FI')}
-          {data.updated
-            ? ` (Päivitetty: ${new Date(data.updated).toLocaleDateString('fi-FI')})`
+          Julkaistu: {formatFinnishDate(data.publishedAt)}
+          {data.updatedAt
+            ? ` (Päivitetty: ${formatFinnishDate(data.updatedAt)})`
             : undefined}
         </div>
 

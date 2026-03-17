@@ -1,6 +1,22 @@
 {
   "title": "Yleisimmät ongelmat matokompostissa ja niiden korjaaminen",
   "description": "Haiseeko matokomposti tai karkailevatko madot? Lue yleisimmät syyt ja ratkaisut, joilla pidät kompostin tasapainossa.",
-  "updated": "2025-09-15",
-  "category": { "name": "kompostorin hoito", "pagePosition": 4 }
+  "publishedAt": "2025-09-15",
+  "updatedAt": "2025-09-15",
+  "keywords": [
+    "banaanikärpäset",
+    "happamuus",
+    "kompostorin hoito",
+    "kosteus",
+    "matokakka",
+    "matokompostointi",
+    "ongelmat",
+    "opas",
+    "ruokinta"
+  ],
+  "category": {
+    "name": "kompostorin hoito",
+    "pagePosition": 4
+  },
+  "articleSection": "Matokompostointi"
 }

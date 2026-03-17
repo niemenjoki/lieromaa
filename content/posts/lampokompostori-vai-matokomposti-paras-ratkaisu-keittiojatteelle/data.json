@@ -1,12 +1,13 @@
 {
   "title": "Lämpökompostori vai matokomposti - kumpi sopii sinulle?",
   "description": "Vertailu kahdesta hyvästä kompostointiratkaisusta: tilantarve, kustannukset, hoito ja käyttömukavuus. Löydä paras tapa kierrättää keittiöbiojätteesi!",
-  "date": "8 September, 2025",
+  "publishedAt": "2025-09-08",
   "tags": ["lämpökompostointi", "matokompostointi", "kompostivertailu"],
   "keywords": [
     "kompostivertailu",
     "kompostointimenetelmät",
     "lämpökompostointi",
     "matokompostointi"
-  ]
+  ],
+  "articleSection": "Kompostivertailu"
 }

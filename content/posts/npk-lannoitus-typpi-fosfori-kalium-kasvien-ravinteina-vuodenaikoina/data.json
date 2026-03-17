@@ -1,7 +1,7 @@
 {
   "title": "NPK-lannoitus – typpi, fosfori ja kalium kasvien ravinteina",
   "description": "NPK-lannoitus pähkinänkuoressa: typpi, fosfori ja kalium kasvien kasvun tukena. Näin valitset oikean lannoitteen vuodenaikaan.",
-  "date": "18 September, 2025",
+  "publishedAt": "2025-09-18",
   "tags": ["puutarha", "lannoitus"],
   "keywords": [
     "aloittelijan opas",
@@ -16,5 +16,6 @@
     "puutarha",
     "ravinteet",
     "typpi"
-  ]
+  ],
+  "about": ["lannoitus", "typpi", "fosfori", "kalium", "ravinteet"]
 }

@@ -1,7 +1,7 @@
 {
   "title": "Aloita matokompostointi talvella ja hyödyt siitä keväällä",
   "description": "Matokomposti vaatii aikaa käynnistyäkseen. Kun madot laitetaan töihin nyt, saat ravinnerikasta matokakkaa kevään istutuksiin.",
-  "date": "9 January, 2026",
+  "publishedAt": "2026-01-09",
   "tags": ["matokompostointi", "puutarha"],
   "keywords": [
     "matokompostointi talvella",
@@ -9,5 +9,6 @@
     "matokakka lannoite",
     "kompostimadot",
     "biojätteen vähentäminen"
-  ]
+  ],
+  "about": ["matokompostointi"]
 }
