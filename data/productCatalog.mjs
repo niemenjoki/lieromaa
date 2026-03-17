@@ -43,6 +43,12 @@ const baseProductCatalog = {
       pageDescription:
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
+      navigationLabel: 'Kompostimadot',
+    },
+    search: {
+      contexts: ['blog', 'notFound'],
+      title: 'Osta kompostimatoja',
+      keywords: ['kompostimadot', 'ostos', 'lieromaa', 'madot', 'myynti'],
     },
     product: {
       name: 'Kompostimadot (Eisenia fetida)',
@@ -137,6 +143,12 @@ const baseProductCatalog = {
       description:
         'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.',
       h1: 'Lieromaan matokompostorin aloituspakkaus on nyt tilattavissa',
+      navigationLabel: 'Aloituspakkaus',
+    },
+    search: {
+      contexts: ['blog', 'notFound'],
+      title: 'Matokompostorin aloituspakkaus',
+      keywords: ['aloituspakkaus', 'matokompostori', 'kompostori', 'kompostimadot'],
     },
     product: {
       name: 'Matokompostorin aloituspakkaus',
@@ -244,6 +256,7 @@ function createCatalogEntry(productKey, product) {
     description,
     pageDescription: product.page.pageDescription ?? description,
     h1: product.page.h1,
+    navigationLabel: product.page.navigationLabel ?? product.name,
     productName: product.product.name,
     productDescription: product.product.description ?? description,
     image: primaryImage
@@ -258,6 +271,7 @@ function createCatalogEntry(productKey, product) {
     images,
     productImageUrls: images.map((image) => image.absoluteUrl),
     faqItems: product.faqItems ?? [],
+    search: product.search ?? null,
     metadata: {
       title,
       description,

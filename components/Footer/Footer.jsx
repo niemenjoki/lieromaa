@@ -6,7 +6,7 @@ import { LICENSE_URL, REPO_URL } from '@/data/vars.mjs';
 
 import classes from './Footer.module.css';
 
-export default function Footer() {
+export default function Footer({ navigation }) {
   const startYear = 2025;
   const currentYear = new Date().getFullYear();
   const yearRange =
@@ -16,65 +16,18 @@ export default function Footer() {
     <footer className={classes.Footer}>
       <div className={classes.Inner}>
         <div className={classes.Columns}>
-          <div>
-            <h3>Tuotteet</h3>
-            <ul>
-              <li>
-                <SafeLink href="/tuotteet/madot">Kompostimadot</SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">
-                  Aloituspakkaus
-                </SafeLink>
-              </li>
-            </ul>
-            <h3 style={{ marginTop: '2rem' }}>Blogi</h3>
-            <ul>
-              <li>
-                <SafeLink href="/blogi">Viimeisimmät julkaisut</SafeLink>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>Oppaat</h3>
-            <ul>
-              <li>
-                <SafeLink href="/opas/kompostorin-perustaminen">
-                  Kompostorin perustaminen
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/opas/kompostin-hyödyntäminen">
-                  Kompostin hyödyntäminen
-                </SafeLink>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3>Muut sivut</h3>
-            <ul>
-              <li>
-                <SafeLink href="/blogi">Blogi</SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/matolaskuri">Matolaskuri</SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tietoa">Tietoa sivustosta</SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tietosuoja">Tietosuoja</SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tilausehdot">Tilausehdot</SafeLink>
-              </li>
-            </ul>
-          </div>
+          {navigation.footerColumns.map((column) => (
+            <div key={column.heading}>
+              <h3>{column.heading}</h3>
+              <ul>
+                {column.items.map((link) => (
+                  <li key={link.href}>
+                    <SafeLink href={link.href}>{link.label}</SafeLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
           <div className={classes.Socials}>
             <h3>Seuraa</h3>

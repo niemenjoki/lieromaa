@@ -11,7 +11,30 @@ import Socials from '../Socials/Socials.jsx';
 import classes from './Navbar.module.css';
 import logo from '/public/images/lieromaa_logo.avif';
 
-export default function Navbar() {
+function renderDesktopItem(item) {
+  if (item.kind === 'menu') {
+    return (
+      <li key={item.label} className={classes.Dropdown}>
+        <span>{item.label}</span>
+        <ul className={classes.DropdownMenu}>
+          {item.items.map((link) => (
+            <li key={link.href}>
+              <SafeLink href={link.href}>{link.label}</SafeLink>
+            </li>
+          ))}
+        </ul>
+      </li>
+    );
+  }
+
+  return (
+    <li key={item.href}>
+      <SafeLink href={item.href}>{item.label}</SafeLink>
+    </li>
+  );
+}
+
+export default function Navbar({ navigation }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => {
     setIsOpen((prev) => {
@@ -44,42 +67,7 @@ export default function Navbar() {
         {/* RIGHT */}
         <div className={classes.Right}>
           <ul className={classes.Links}>
-            <li className={classes.Dropdown}>
-              <span>Tuotteet</span>
-              <ul className={classes.DropdownMenu}>
-                <li>
-                  <SafeLink href="/tuotteet/madot">Kompostimadot</SafeLink>
-                </li>
-                <li>
-                  <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">
-                    Aloituspakkaus
-                  </SafeLink>
-                </li>
-              </ul>
-            </li>
-
-            <li className={classes.Dropdown}>
-              <span>Opas</span>
-              <ul className={classes.DropdownMenu}>
-                <li>
-                  <SafeLink href="/opas/kompostorin-perustaminen">
-                    Kompostorin perustaminen
-                  </SafeLink>
-                </li>
-                <li>
-                  <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>
-                </li>
-                <li>
-                  <SafeLink href="/opas/kompostin-hyödyntäminen">
-                    Kompostin hyödyntäminen
-                  </SafeLink>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <SafeLink href="/blogi">Blogi</SafeLink>
-            </li>
+            {navigation.desktopItems.map((item) => renderDesktopItem(item))}
             <li>
               <ThemeToggler style={{ fontSize: '24px' }} />
             </li>
@@ -103,75 +91,23 @@ export default function Navbar() {
       {/* MOBILE OVERLAY */}
       <div className={`${classes.MobileMenu} ${isOpen ? classes.MobileOpen : ''}`}>
         <div className={classes.MobileContent}>
-          <div className={classes.MobileSection}>
-            <h3>Tuotteet</h3>
-            <ul>
-              <li>
-                <SafeLink href="/tuotteet/madot" onClick={toggleIsOpen}>
-                  Kompostimadot
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink
-                  href="/tuotteet/matokompostin-aloituspakkaus"
-                  onClick={toggleIsOpen}
-                >
-                  Aloituspakkaus
-                </SafeLink>
-              </li>
-            </ul>
-          </div>
-
-          <div className={classes.MobileSection}>
-            <h3>Opas</h3>
-            <ul>
-              <li>
-                <SafeLink href="/opas/kompostorin-perustaminen" onClick={toggleIsOpen}>
-                  Kompostorin perustaminen
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/opas/kompostorin-hoito" onClick={toggleIsOpen}>
-                  Kompostorin hoito
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/opas/kompostin-hyödyntäminen" onClick={toggleIsOpen}>
-                  Kompostin hyödyntäminen
-                </SafeLink>
-              </li>
-            </ul>
-          </div>
-
-          <div className={classes.MobileSection}>
-            <ul>
-              <li>
-                <SafeLink href="/blogi" onClick={toggleIsOpen}>
-                  Blogi
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/matolaskuri" onClick={toggleIsOpen}>
-                  Matolaskuri
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tietoa" onClick={toggleIsOpen}>
-                  Tietoa sivustosta
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tietosuoja" onClick={toggleIsOpen}>
-                  Tietosuoja
-                </SafeLink>
-              </li>
-              <li>
-                <SafeLink href="/tilausehdot" onClick={toggleIsOpen}>
-                  Tilausehdot
-                </SafeLink>
-              </li>
-            </ul>
-          </div>
+          {navigation.mobileSections.map((section, sectionIndex) => (
+            <div
+              key={section.heading ?? `mobile-section-${sectionIndex}`}
+              className={classes.MobileSection}
+            >
+              {section.heading && <h3>{section.heading}</h3>}
+              <ul>
+                {section.items.map((link) => (
+                  <li key={link.href}>
+                    <SafeLink href={link.href} onClick={toggleIsOpen}>
+                      {link.label}
+                    </SafeLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
           <div className={classes.MobileSection}>
             <h3>Seuraa</h3>
             <ul>

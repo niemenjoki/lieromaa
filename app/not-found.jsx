@@ -1,6 +1,7 @@
 import ClientNotFoundPage from '@/components/NotFoundClient/NotFoundClient';
 import { CONTENT_TYPES } from '@/data/vars.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
+import { getSearchableSitePages } from '@/lib/siteStructure.mjs';
 
 export const metadata = {
   title: 'Sivua ei löytynyt | Lieromaa',
@@ -10,30 +11,12 @@ export const metadata = {
 
 export default async function NotFound() {
   const { posts, guides } = getAllContent({ type: CONTENT_TYPES.ALL });
-
-  const staticPages = [
-    {
-      overrideHref: '/tuotteet/madot',
-      title: 'Osta kompostimatoja',
-      description:
-        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen.',
-      tags: ['matokompostointi'],
-      keywords: ['kompostimadot', 'ostos', 'lieromaa', 'madot', 'myynti'],
-    },
-    {
-      overrideHref: '/matolaskuri',
-      title: 'Matolaskuri - laske montako matoa tarvitset',
-      description:
-        'Syötä kotitaloutesi tiedot ja laskuri arvioi biojätteen määrän sekä tarvittavan matopopulaation.',
-      tags: ['matokompostointi'],
-      keywords: ['matolaskuri', 'kompostimadot', 'laskuri', 'lieromaa', 'työkalut'],
-    },
-  ];
+  const searchablePages = getSearchableSitePages({ context: 'notFound' });
 
   const resultGuides = guides.map((guide) => {
     const categorySlug = guide.category.name.replaceAll(' ', '-');
     return { altPath: `opas/${categorySlug}`, ...guide };
   });
 
-  return <ClientNotFoundPage content={[...posts, ...resultGuides, ...staticPages]} />;
+  return <ClientNotFoundPage content={[...posts, ...resultGuides, ...searchablePages]} />;
 }

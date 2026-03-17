@@ -9,31 +9,22 @@ import useToggle from '@/hooks/useToggle';
 import Post from '../PostPreview/PostPreview.jsx';
 import classes from './SearchPosts.module.css';
 
-const Search = ({ list, keys, placeholder }) => {
-  const staticPages = [
-    {
-      overrideHref: '/tuotteet/madot',
-      title: 'Osta kompostimatoja',
-      description:
-        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!',
-      tags: 'matokompostointi',
-      keywords: 'kompostimadot,ostos,lieromaa,madot,myynti',
-    },
-    {
-      overrideHref: '/matolaskuri',
-      title: 'Matolaskuri – laske montako matoa tarvitset',
-      description:
-        'Syötä kotitaloutesi tiedot ja laskuri arvioi biojätteen määrän sekä tarvittavan matopopulaation. Näet myös eri aloitusvaihtoehdot ja kuinka nopeasti pääset täyteen käsittelykapasiteettiin.',
-      tags: 'matokompostointi',
-      keywords: 'matolaskuri,kompostimadot,laskuri,lieromaa,työkalut',
-    },
-  ];
+function normalizeSearchItem(item) {
+  return {
+    ...item,
+    keywords: Array.isArray(item.keywords)
+      ? item.keywords
+      : item.keywords
+        ? item.keywords.split(',')
+        : [],
+    tags: Array.isArray(item.tags) ? item.tags : item.tags ? item.tags.split(',') : [],
+  };
+}
 
-  list = [...list, ...staticPages].map((post) => {
-    if (!Array.isArray(post.tags)) post.tags = post.tags.split(',');
-    if (!Array.isArray(post.keywords)) post.keywords = post.keywords.split(',');
-    return post;
-  });
+const Search = ({ list, keys, placeholder, extraItems = [] }) => {
+  const searchableItems = [...list, ...extraItems].map((item) =>
+    normalizeSearchItem(item)
+  );
 
   const [searchTerm, updateSearchTerm] = useState('');
   const [searchResults, updateSearchResults] = useState([]);
@@ -49,7 +40,7 @@ const Search = ({ list, keys, placeholder }) => {
     }
 
     const { default: Fuse } = await import('fuse.js');
-    const fuse = new Fuse(list, {
+    const fuse = new Fuse(searchableItems, {
       includeScore: true,
       threshold: 0.4,
       ignoreLocation: true,
