@@ -5,11 +5,7 @@
   },
   "discounts": [
     {
-      "appliesToSkus": [
-        "worms-50",
-        "worms-100",
-        "worms-200"
-      ],
+      "appliesToSkus": ["worms-50", "worms-100", "worms-200"],
       "type": "fixed",
       "value": 3.9,
       "endsOn": "2026-04-25",
