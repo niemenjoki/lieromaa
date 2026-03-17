@@ -1,4 +1,4 @@
-import { getProductCatalogEntry } from '@/data/productCatalog.mjs';
+import { getProductCatalogEntry } from '@/lib/products/catalog.mjs';
 
 import PromoBox from '../PromoBox/Promobox';
 import SafeLink from '../SafeLink/SafeLink';

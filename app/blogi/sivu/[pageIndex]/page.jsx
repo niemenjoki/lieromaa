@@ -5,7 +5,7 @@ import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
-import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
+import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/data/site/constants.mjs';
 import {
   getAllContentSlugs,
   getAllPostTags,

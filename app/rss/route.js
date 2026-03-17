@@ -1,6 +1,6 @@
 import { getAllContent } from '@/lib/content/index.mjs';
 
-import { CONTENT_TYPES, SITE_URL } from '../../data/vars.mjs';
+import { CONTENT_TYPES, SITE_URL } from '../../data/site/constants.mjs';
 
 export const revalidate = 3600;
 

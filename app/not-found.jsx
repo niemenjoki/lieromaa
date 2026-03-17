@@ -1,5 +1,5 @@
 import ClientNotFoundPage from '@/components/NotFoundClient/NotFoundClient';
-import { CONTENT_TYPES } from '@/data/vars.mjs';
+import { CONTENT_TYPES } from '@/data/site/constants.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
 import { getSearchableSitePages } from '@/lib/siteStructure.mjs';
 

@@ -1,4 +1,4 @@
-import { ORDER_ERROR_MESSAGE } from '@/data/orderConfig';
+import { ORDER_ERROR_MESSAGE } from '@/data/commerce/orderMessages';
 import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,

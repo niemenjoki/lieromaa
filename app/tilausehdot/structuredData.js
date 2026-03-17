@@ -1,3 +1,5 @@
+import { ORGANIZATION_ID, WEBSITE_ID } from '@/data/site/schema.mjs';
+
 import {
   description,
   pageId,
@@ -16,8 +18,8 @@ const structuredData = {
       url: pageUrl,
       name: pageName,
       description,
-      isPartOf: { '@id': 'https://www.lieromaa.fi/#website' },
-      about: { '@id': 'https://www.lieromaa.fi/#organization' },
+      isPartOf: { '@id': WEBSITE_ID },
+      about: { '@id': ORGANIZATION_ID },
       datePublished: publishedAt,
       dateModified: updatedAt,
       inLanguage: 'fi',

@@ -1,6 +1,6 @@
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { ORDER_CONTACT_EMAIL } from '@/data/contact';
+import { ORDER_CONTACT_EMAIL } from '@/data/site/contact';
 
 import classes from './StarterKitSetup.module.css';
 import structuredData from './structuredData.js';

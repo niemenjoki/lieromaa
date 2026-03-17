@@ -1,7 +1,8 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { ORDER_CONTACT_EMAIL } from '@/data/contact';
+import { starterKitPageContent } from '@/data/pages/products/starterKit.js';
+import { ORDER_CONTACT_EMAIL } from '@/data/site/contact';
 import {
   formatPrice,
   getProductShippingOptions,
@@ -20,11 +21,7 @@ export const dynamic = 'force-static';
 const starterKitVariants = getProductVariants('starterKit');
 const wormVariants = getProductVariants('worms');
 const starterKitShippingOptions = getProductShippingOptions('starterKit');
-const starterKitComponentCosts = [
-  { label: 'Kompostilaatikot', price: 26.97 },
-  { label: 'Kookoskuitu petimateriaaliksi', price: 3.8 },
-  { label: 'Rakentaminen, viimeistely ja pakkaus', price: 30 },
-];
+const starterKitComponentCosts = starterKitPageContent.componentCosts;
 const starterKitBasePrice = starterKitVariants[0]
   ? starterKitVariants[0].price -
     (wormVariants.find((variant) => variant.amount === starterKitVariants[0].amount)

@@ -1,4 +1,4 @@
-import { privacyPolicyPage } from '@/data/legalPages';
+import { privacyPolicyPage } from '@/lib/site/pageRecords.mjs';
 
 export const {
   pageName,

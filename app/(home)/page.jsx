@@ -1,7 +1,7 @@
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import StarterKitPromo from '@/components/StarterKitPromo/StarterKitPromo';
-import { CONTENT_TYPES } from '@/data/vars.mjs';
+import { CONTENT_TYPES } from '@/data/site/constants.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
 
 import classes from './HomePage.module.css';

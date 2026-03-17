@@ -4,7 +4,7 @@ import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
-import { CONTENT_TYPES } from '@/data/vars.mjs';
+import { CONTENT_TYPES } from '@/data/site/constants.mjs';
 import {
   getAllContent,
   getContentMdxSource,

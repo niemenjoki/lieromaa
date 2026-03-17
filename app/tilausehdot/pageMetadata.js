@@ -1,4 +1,4 @@
-import { orderTermsPage } from '@/data/legalPages';
+import { orderTermsPage } from '@/lib/site/pageRecords.mjs';
 
 export const {
   pageName,

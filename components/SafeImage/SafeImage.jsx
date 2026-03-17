@@ -4,7 +4,7 @@ import React from 'react';
 
 import Image from 'next/image';
 
-import safePaths from '@/data/generated/safeImagePaths.json';
+import safePaths from '@/generated/site/safeImagePaths.json';
 
 function isSafeSrc(src) {
   let srcToCheck = src;

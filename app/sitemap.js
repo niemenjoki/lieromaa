@@ -1,17 +1,22 @@
-import safeLinks from '@/data/generated/safeRoutes.json';
-import {
-  getLegalPageLastModified,
-  orderTermsPage,
-  privacyPolicyPage,
-} from '@/data/legalPages';
+import safeLinks from '@/generated/site/safeRoutes.json';
 import {
   getAllContent,
   getAllGuideCategories,
   getAllPostTags,
   getPostsByTag,
 } from '@/lib/content/index.mjs';
+import { productCatalog } from '@/lib/products/catalog.mjs';
+import {
+  aboutPage,
+  blogIndexPage,
+  getLegalPageLastModified,
+  orderTermsPage,
+  privacyPolicyPage,
+  starterKitSetupPage,
+  wormCalculatorPage,
+} from '@/lib/site/pageRecords.mjs';
 
-import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '../data/vars.mjs';
+import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '../data/site/constants.mjs';
 
 const toISODate = (d) => new Date(d).toISOString().split('T')[0];
 const slugify = (s) => s.replaceAll(' ', '-').trim().toLowerCase();
@@ -37,17 +42,17 @@ export default async function sitemap() {
   const add = (url, lastmod) => {
     urls.push({ url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
   };
-  // --- Static pages
+
   [
     ['/', latestPost],
-    ['/blogi', latestPost],
-    ['/tietoa', '2025-09-08'],
+    [blogIndexPage.canonicalUrl, latestPost],
+    [aboutPage.canonicalUrl, aboutPage.updatedAt],
     [privacyPolicyPage.canonicalUrl, getLegalPageLastModified(privacyPolicyPage)],
     [orderTermsPage.canonicalUrl, getLegalPageLastModified(orderTermsPage)],
-    ['/tuotteet/madot', '2025-10-07'],
-    ['/tuotteet/matokompostin-aloituspakkaus', '2026-03-01'],
-    ['/tuotteet/matokompostin-aloituspakkaus/kayttoonotto', '2026-03-03'],
-    ['/matolaskuri', '2025-10-07'],
+    [productCatalog.worms.canonicalUrl, productCatalog.worms.updatedAt],
+    [productCatalog.starterKit.canonicalUrl, productCatalog.starterKit.updatedAt],
+    [starterKitSetupPage.canonicalUrl, starterKitSetupPage.updatedAt],
+    [wormCalculatorPage.canonicalUrl, wormCalculatorPage.updatedAt],
   ].forEach(([url, lastmod]) => add(url, lastmod));
 
   // --- Tag pages

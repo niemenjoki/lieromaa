@@ -1,4 +1,4 @@
-import { wormCalculatorPage } from '@/data/sitePages';
+import { wormCalculatorPage } from '@/lib/site/pageRecords.mjs';
 
 export const {
   pageName,

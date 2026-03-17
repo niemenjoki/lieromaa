@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { ADSENSE_CLIENT, ADSENSE_DEFAULT_SLOT } from '@/data/adsense';
+import { ADSENSE_CLIENT, ADSENSE_DEFAULT_SLOT } from '@/data/site/adsense';
 
 const ADS_TEMPORARILY_DISABLED = true;
 

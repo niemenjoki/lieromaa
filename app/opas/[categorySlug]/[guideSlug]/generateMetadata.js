@@ -1,4 +1,4 @@
-import { CONTENT_TYPES } from '@/data/vars.mjs';
+import { CONTENT_TYPES } from '@/data/site/constants.mjs';
 import { getContentMetadata } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 

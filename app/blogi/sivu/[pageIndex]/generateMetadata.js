@@ -1,4 +1,4 @@
-import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/data/vars.mjs';
+import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/data/site/constants.mjs';
 import { getAllContentSlugs, getBlogPageData } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
