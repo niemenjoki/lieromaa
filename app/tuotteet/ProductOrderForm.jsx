@@ -6,31 +6,61 @@ import { usePathname } from 'next/navigation';
 
 import { ORDER_SUBMIT_ENDPOINT, ORDER_SUCCESS_MESSAGE } from '@/data/orderConfig';
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
+import { getOrderQuote } from '@/lib/orders/getOrderQuote';
 import { submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   formatPrice,
+  getProductOrderConfig,
   getProductPricing,
   getProductShippingOptions,
   getProductVariant,
   getProductVariants,
 } from '@/lib/pricing/catalog';
 
-import classes from '../ProductPage.module.css';
-import WormAmountFinePrint from '../WormAmountFinePrint';
+import classes from './ProductPage.module.css';
+import WormAmountFinePrint from './WormAmountFinePrint';
 
-const starterKitProduct = getProductPricing('starterKit');
-const starterKitVariants = getProductVariants('starterKit');
-const starterKitShippingOptions = getProductShippingOptions('starterKit');
-const defaultStarterKitVariant =
-  getProductVariant('starterKit', 100) ?? starterKitVariants[0] ?? null;
-const defaultDelivery = starterKitShippingOptions[0]?.id ?? 'postitus';
+function PostiPickupHelp() {
+  return (
+    <>
+      <p className={classes.HelperText}>
+        Voit toivoa tiettyä Postin noutopaikkaa (pakettiautomaatti tai postitoimipaikka).
+        Toiveen tulee löytyä Postin{' '}
+        <a
+          href="https://www.posti.fi/palvelupisteet-kartalla"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          palvelupistekartalta
+        </a>
+        . Jos et toivo noutopaikkaa, lähetys toimitetaan ilmoittamasi postinumeron mukaan
+        ensimmäiseen Postin tarjoamaan noutopisteeseen.
+      </p>
+      <p className={classes.HelperText}>
+        Huomioithan, että Posti saattaa toiveesta huolimatta toimittaa paketin eri
+        toimipisteeseen, jos esimerkiksi noutopiste on täynnä.
+      </p>
+    </>
+  );
+}
 
-export default function OrderForm() {
+export default function ProductOrderForm({ productKey }) {
   const pathname = usePathname();
+  const product = getProductPricing(productKey);
+  const orderConfig = getProductOrderConfig(productKey);
+  const variants = getProductVariants(productKey);
+  const shippingOptions = getProductShippingOptions(productKey);
+  const defaultVariant =
+    getProductVariant(productKey, orderConfig.defaultVariantAmount) ??
+    variants[0] ??
+    null;
+  const defaultDelivery = shippingOptions[0]?.id ?? 'postitus';
+
   const [delivery, setDelivery] = useState(defaultDelivery);
   const [amount, setAmount] = useState(
-    defaultStarterKitVariant ? String(defaultStarterKitVariant.amount) : ''
+    defaultVariant ? String(defaultVariant.amount) : ''
   );
+  const [selectedExtraCharges, setSelectedExtraCharges] = useState({});
   const [discountCode, setDiscountCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(null);
   const [discountFeedback, setDiscountFeedback] = useState('');
@@ -42,14 +72,19 @@ export default function OrderForm() {
   const [submissionId, setSubmissionId] = useState('');
 
   const currentVariant =
-    starterKitVariants.find((variant) => String(variant.amount) === amount) ??
-    defaultStarterKitVariant;
-  const packagePrice = currentVariant?.price ?? 0;
+    variants.find((variant) => String(variant.amount) === amount) ?? defaultVariant;
   const currentSku = currentVariant?.sku ?? '';
-  const currentShippingOption =
-    starterKitShippingOptions.find((option) => option.id === delivery) ??
-    starterKitShippingOptions[0];
-  const postage = currentShippingOption?.price ?? 0;
+  const quote =
+    currentSku && delivery
+      ? getOrderQuote({
+          productKey,
+          sku: currentSku,
+          shippingMethod: delivery,
+          discount: appliedDiscount,
+          selectedExtraCharges,
+        })
+      : null;
+  const activeExtraCharges = quote?.extraCharges.filter((charge) => charge.active) ?? [];
 
   useEffect(() => {
     if (!appliedDiscount) {
@@ -64,18 +99,8 @@ export default function OrderForm() {
 
   useEffect(() => {
     setFormStartedAt(String(Date.now()));
-    setSubmissionId(globalThis.crypto?.randomUUID?.() || `starterkit-${Date.now()}`);
-  }, []);
-
-  const discountFromProductPrice =
-    appliedDiscount?.type === 'percentage'
-      ? Number(((packagePrice * appliedDiscount.value) / 100).toFixed(2))
-      : appliedDiscount?.type === 'fixed'
-        ? Math.min(packagePrice, appliedDiscount.value)
-        : 0;
-
-  const shippingDiscount = appliedDiscount?.type === 'free_shipping' ? postage : 0;
-  const total = packagePrice - discountFromProductPrice + postage - shippingDiscount;
+    setSubmissionId(globalThis.crypto?.randomUUID?.() || `${productKey}-${Date.now()}`);
+  }, [productKey]);
 
   const handleDiscountChange = (event) => {
     setDiscountCode(event.target.value);
@@ -96,7 +121,7 @@ export default function OrderForm() {
       const match = await findDiscountForSku({ code: plainCode, sku: currentSku });
       if (!match) {
         setAppliedDiscount(null);
-        setDiscountFeedback('Alennuskoodia ei tunnistettu');
+        setDiscountFeedback('Alennuskoodia ei tunnistettu.');
         return;
       }
 
@@ -111,6 +136,13 @@ export default function OrderForm() {
     } finally {
       setIsCheckingDiscount(false);
     }
+  };
+
+  const handleExtraChargeChange = (fieldName, checked) => {
+    setSelectedExtraCharges((current) => ({
+      ...current,
+      [fieldName]: checked,
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -134,6 +166,38 @@ export default function OrderForm() {
     }
   };
 
+  const renderVariantSection = () => (
+    <>
+      <fieldset>
+        <legend>{orderConfig.variantLegend}</legend>
+        {variants.map((variant) => (
+          <label key={variant.sku}>
+            <input
+              type="radio"
+              name="maara"
+              value={variant.amount}
+              checked={amount === String(variant.amount)}
+              onChange={() => setAmount(String(variant.amount))}
+            />{' '}
+            {orderConfig.getVariantLabel({
+              amount: variant.amount,
+              price: variant.price,
+              priceFormatted: formatPrice(variant.price),
+              variant,
+              productKey,
+            })}
+          </label>
+        ))}
+      </fieldset>
+      {orderConfig.showWormAmountFinePrint ? <WormAmountFinePrint /> : null}
+    </>
+  );
+
+  const total = quote?.total ?? 0;
+  const totalFormatted = formatPrice(total);
+  const discountProductAmount = quote?.discountAmounts.productAmount ?? 0;
+  const shippingDiscount = quote?.discountAmounts.shippingAmount ?? 0;
+
   return (
     <form
       className={classes.CalculatorForm}
@@ -142,20 +206,12 @@ export default function OrderForm() {
       onSubmit={handleSubmit}
     >
       <input type="text" name="_gotcha" style={{ display: 'none' }} />
-      <input type="hidden" name="tuote" value={starterKitProduct.name} />
-      <input type="hidden" name="tuote_avain" value="starterKit" />
+      <input type="hidden" name="tuote" value={product.name} />
+      <input type="hidden" name="tuote_avain" value={productKey} />
       <input type="hidden" name="sku" value={currentSku} />
       <input type="hidden" name="lomake_aloitettu_ms" value={formStartedAt} />
       <input type="hidden" name="submission_id" value={submissionId} />
       <input type="hidden" name="sivu_polku" value={pathname ?? ''} />
-      <input
-        type="hidden"
-        name="alennus_obfuscated_code"
-        value={appliedDiscount?.obfuscatedCode ?? ''}
-      />
-      <input type="hidden" name="alennus_tyyppi" value={appliedDiscount?.type ?? ''} />
-      <input type="hidden" name="alennus_arvo" value={appliedDiscount?.value ?? ''} />
-      <input type="hidden" name="alennus_paattyy" value={appliedDiscount?.endsOn ?? ''} />
 
       <label>
         Nimi
@@ -172,26 +228,13 @@ export default function OrderForm() {
         <input type="tel" name="phone" />
       </label>
 
-      <fieldset>
-        <legend>Valitse paketti</legend>
-        {starterKitVariants.map((variant) => (
-          <label key={variant.sku}>
-            <input
-              type="radio"
-              name="maara"
-              value={variant.amount}
-              checked={amount === String(variant.amount)}
-              onChange={() => setAmount(String(variant.amount))}
-            />
-            Aloituspakkaus + {variant.amount} matoa – {formatPrice(variant.price)} €
-          </label>
-        ))}
-      </fieldset>
-      <WormAmountFinePrint />
+      {orderConfig.variantSelectorPosition === 'beforeFulfillment'
+        ? renderVariantSection()
+        : null}
 
       <fieldset>
         <legend>Toimitustapa</legend>
-        {starterKitShippingOptions.map((option) => (
+        {shippingOptions.map((option) => (
           <label key={option.id}>
             <input
               type="radio"
@@ -199,29 +242,61 @@ export default function OrderForm() {
               value={option.id}
               checked={delivery === option.id}
               onChange={() => setDelivery(option.id)}
-            />
+            />{' '}
             {option.label}
             {option.price > 0 ? ` (${formatPrice(option.price)} €)` : ''}
           </label>
         ))}
       </fieldset>
 
-      {delivery === 'postitus' && (
+      {activeExtraCharges.map((charge) => (
+        <fieldset key={charge.key} className={classes.FrostCharge}>
+          <legend>{charge.label}</legend>
+          {charge.descriptionLines?.map((line) => (
+            <p key={line} className={classes.HelperText}>
+              {line}
+            </p>
+          ))}
+          <label>
+            <input
+              type="checkbox"
+              name={charge.fieldName}
+              value={charge.checkedValue ?? 'on'}
+              checked={Boolean(selectedExtraCharges[charge.fieldName])}
+              onChange={(event) =>
+                handleExtraChargeChange(charge.fieldName, event.target.checked)
+              }
+            />{' '}
+            {charge.checkboxLabel} ({formatPrice(charge.price)} €)
+          </label>
+          {charge.helperTextLines?.map((line) => (
+            <p key={line} className={classes.HelperText}>
+              {line}
+            </p>
+          ))}
+        </fieldset>
+      ))}
+
+      {delivery === 'postitus' ? (
         <div className={classes.AddressGroup}>
           <label>
             Postiosoite
-            <input type="text" name="osoite" required />
+            <input type="text" name="osoite" required={delivery === 'postitus'} />
           </label>
           <label>
             Postinumero
-            <input type="text" name="postinumero" required />
+            <input type="text" name="postinumero" required={delivery === 'postitus'} />
           </label>
           <label>
             Postitoimipaikka
-            <input type="text" name="toimipaikka" required />
+            <input type="text" name="toimipaikka" required={delivery === 'postitus'} />
           </label>
         </div>
-      )}
+      ) : null}
+
+      {orderConfig.variantSelectorPosition === 'afterFulfillment'
+        ? renderVariantSection()
+        : null}
 
       <label>
         Alennuskoodi (valinnainen)
@@ -246,9 +321,9 @@ export default function OrderForm() {
       {appliedDiscount ? (
         <p className={classes.HelperText}>
           {appliedDiscount.type === 'percentage'
-            ? `Alennus tuotteesta ${appliedDiscount.value} % (-${formatPrice(discountFromProductPrice)} €)`
+            ? `Alennus tuotteesta ${appliedDiscount.value} % (-${formatPrice(discountProductAmount)} €)`
             : appliedDiscount.type === 'fixed'
-              ? `Alennus tuotteesta -${formatPrice(discountFromProductPrice)} €`
+              ? `Alennus tuotteesta -${formatPrice(discountProductAmount)} €`
               : `Toimitus alennuksella: -${formatPrice(shippingDiscount)} €`}
         </p>
       ) : null}
@@ -257,26 +332,11 @@ export default function OrderForm() {
         Viesti (valinnainen)
         <textarea name="lisatiedot" rows="3" />
       </label>
-      <p className={classes.HelperText}>
-        Voit toivoa tiettyä Postin noutopaikkaa (pakettiautomaatti tai postitoimipaikka).
-        Toiveen tulee löytyä Postin{' '}
-        <a
-          href="https://www.posti.fi/palvelupisteet-kartalla"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          palvelupistekartalta
-        </a>
-        . Jos et toivo noutopaikkaa, lähetys toimitetaan ilmoittamasi postinumeron mukaan
-        ensimmäiseen Postin tarjoamaan noutopisteeseen.
-      </p>
-      <p className={classes.HelperText}>
-        Huomioithan, että Posti saattaa toiveesta huolimatta toimittaa paketin eri
-        toimipisteeseen, jos esimerkiksi noutopiste on täynnä.
-      </p>
+
+      {orderConfig.shippingHelperTexts.length > 0 ? <PostiPickupHelp /> : null}
 
       <p className={classes.OrderTotal}>
-        Yhteensä: <strong>{formatPrice(total)} €</strong>
+        Yhteensä: <strong>{totalFormatted} €</strong>
       </p>
 
       {submitError ? (
@@ -296,12 +356,17 @@ export default function OrderForm() {
           ? 'Lähetetään tilausta...'
           : isSubmitted
             ? 'Tilaus vastaanotettu'
-            : `Tilaa aloituspakkaus (${formatPrice(total)} €)`}
+            : orderConfig.submitButtonLabel({
+                total,
+                totalFormatted,
+                productKey,
+                productName: product.name,
+              })}
       </button>
 
-      <p className={classes.Note}>
-        Saat manuaalisen tilausvahvistuksen 1–2 arkipäivässä.
-      </p>
+      {orderConfig.confirmationNote ? (
+        <p className={classes.Note}>{orderConfig.confirmationNote}</p>
+      ) : null}
     </form>
   );
 }

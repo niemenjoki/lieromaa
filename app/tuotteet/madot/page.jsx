@@ -5,8 +5,8 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 import { ORDER_CONTACT_EMAIL, ORDER_WHATSAPP_URL } from '@/data/contact';
 import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 
+import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';
-import OrderForm from './OrderForm';
 import { galleryImages, h1 } from './pageMetadata';
 import structuredData from './structuredData.js';
 
@@ -89,7 +89,7 @@ export default async function Page() {
             </p>
           </section>
 
-          <OrderForm />
+          <ProductOrderForm productKey="worms" />
 
           <section>
             <p>
