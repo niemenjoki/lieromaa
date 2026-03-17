@@ -9,7 +9,6 @@ import Toggler from '../NavToggler/NavToggler.jsx';
 import SafeLink from '../SafeLink/SafeLink';
 import Socials from '../Socials/Socials.jsx';
 import classes from './Navbar.module.css';
-import logo from '/public/images/lieromaa_logo.avif';
 
 function renderDesktopItem(item) {
   if (item.kind === 'menu') {
@@ -53,12 +52,13 @@ export default function Navbar({ navigation }) {
         <div className={classes.Left}>
           <SafeLink href="/" className={classes.LogoLink}>
             <SafeImage
-              src={logo}
+              src="/images/lieromaa_logo.svg"
               alt="Lieromaa logo"
               width={40}
               height={40}
               className={classes.Logo}
               priority
+              unoptimized
             />
             <span className={classes.Brand}>Lieromaa</span>
           </SafeLink>
