@@ -19,6 +19,7 @@ import {
   WEBSITE_ID,
 } from '@/data/siteSchema.mjs';
 import { SITE_URL } from '@/data/vars.mjs';
+import { getSiteNavigation } from '@/lib/siteStructure.mjs';
 
 import './globals.css';
 
@@ -91,6 +92,8 @@ const structuredData = {
 };
 
 export default function RootLayout({ children }) {
+  const navigation = getSiteNavigation();
+
   return (
     <html lang="fi" className={rubik.variable}>
       <body>
@@ -101,9 +104,9 @@ export default function RootLayout({ children }) {
           }}
         />
         <div className="container">
-          <Navbar />
+          <Navbar navigation={navigation} />
           <main>{children}</main>
-          <Footer />
+          <Footer navigation={navigation} />
         </div>
         <VisitorFeedbackWidget />
         <Analytics />

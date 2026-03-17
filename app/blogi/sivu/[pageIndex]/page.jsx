@@ -12,6 +12,7 @@ import {
   getBlogPageData,
   getPaginatedPosts,
 } from '@/lib/content/index.mjs';
+import { getSearchableSitePages } from '@/lib/siteStructure.mjs';
 import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
 import classes from './PostPage.module.css';
@@ -34,6 +35,7 @@ export default async function BlogPage({ params }) {
     pageData.pageIndexInt,
     POSTS_PER_PAGE
   );
+  const searchablePages = getSearchableSitePages({ context: 'blog' });
   if (posts.length === 0) {
     notFound();
   }
@@ -66,6 +68,7 @@ export default async function BlogPage({ params }) {
         list={allPosts}
         keys={['title', 'description', 'keywords', 'tags']}
         placeholder="Etsi julkaisun nimellä tai avainsanalla.."
+        extraItems={searchablePages}
       />
 
       <div className={classes.Taglist}>
