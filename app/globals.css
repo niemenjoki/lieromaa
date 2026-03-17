@@ -57,6 +57,7 @@ body {
   --text-color: var(--text);
   --highlight: var(--blue);
   --highlight-alt: var(--orange);
+  --text-on-accent: hsl(0, 0%, 100%);
   --overlay-color-initial: var(--overlay-initial-light);
   --overlay-color-final: var(--overlay-final-light);
   --code-background: var(--code-background-light);
@@ -82,6 +83,7 @@ body.dark {
   --text-color: var(--text-dark-mode);
   --highlight: var(--blue-dark-mode);
   --highlight-alt: var(--orange-dark-mode);
+  --text-on-accent: var(--dark-1);
   --overlay-color-initial: var(--overlay-dark);
   --overlay-color-final: var(--overlay-final-dark);
   --code-background: var(--code-background-dark);
