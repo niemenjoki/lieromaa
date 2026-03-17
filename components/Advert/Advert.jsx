@@ -4,14 +4,16 @@ import { useEffect } from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { ADSENSE_CLIENT, ADSENSE_DEFAULT_SLOT } from '@/data/site/adsense';
-
-const ADS_TEMPORARILY_DISABLED = true;
+import {
+  ADSENSE_CLIENT,
+  ADSENSE_DEFAULT_SLOT,
+  ADSENSE_ENABLED,
+} from '@/data/site/adsense';
 
 const Advert = ({ adClient = ADSENSE_CLIENT, adSlot = ADSENSE_DEFAULT_SLOT }) => {
   const pathname = usePathname();
   const hasValidAdConfig = adClient && adClient.startsWith('ca-pub-') && adSlot;
-  const canRenderAd = !ADS_TEMPORARILY_DISABLED && hasValidAdConfig;
+  const canRenderAd = ADSENSE_ENABLED && hasValidAdConfig;
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development' || !canRenderAd) {
