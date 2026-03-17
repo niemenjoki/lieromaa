@@ -273,7 +273,7 @@ export default async function Page() {
         </div>
       </article>
 
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

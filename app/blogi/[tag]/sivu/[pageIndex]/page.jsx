@@ -112,7 +112,7 @@ export default async function BlogTagPage({ params }) {
         currentPage={pageData.pageIndexInt}
         basePath={`/blogi/${tag}`}
       />
-      <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
+      <Advert />
     </>
   );
 }

@@ -4,9 +4,11 @@ import { useEffect } from 'react';
 
 import { usePathname } from 'next/navigation';
 
+import { ADSENSE_CLIENT, ADSENSE_DEFAULT_SLOT } from '@/data/adsense';
+
 const ADS_TEMPORARILY_DISABLED = true;
 
-const Advert = ({ adClient, adSlot }) => {
+const Advert = ({ adClient = ADSENSE_CLIENT, adSlot = ADSENSE_DEFAULT_SLOT }) => {
   const pathname = usePathname();
   const hasValidAdConfig = adClient && adClient.startsWith('ca-pub-') && adSlot;
   const canRenderAd = !ADS_TEMPORARILY_DISABLED && hasValidAdConfig;

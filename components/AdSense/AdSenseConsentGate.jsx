@@ -1,6 +1,7 @@
 import Script from 'next/script';
 
-const ADSENSE_CLIENT = 'ca-pub-5560402633923389';
+import { ADSENSE_CLIENT } from '@/data/adsense';
+
 const FUNDING_CHOICES_PUBLISHER = ADSENSE_CLIENT.replace(/^ca-/, '');
 
 const consentBootstrap = `
