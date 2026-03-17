@@ -4,7 +4,10 @@ import { useEffect, useState } from 'react';
 
 import { usePathname } from 'next/navigation';
 
-import { ORDER_SUBMIT_ENDPOINT, ORDER_SUCCESS_MESSAGE } from '@/data/orderConfig';
+import {
+  ORDER_SUBMIT_ENDPOINT,
+  ORDER_SUCCESS_MESSAGE,
+} from '@/data/commerce/orderMessages';
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
 import { getOrderQuote } from '@/lib/orders/getOrderQuote';
 import { submitOrderForm } from '@/lib/orders/submitOrderForm';

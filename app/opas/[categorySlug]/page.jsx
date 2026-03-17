@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import PostPreview from '@/components/PostPreview/PostPreview';
-import { CONTENT_TYPES, GUIDE_CATEGORIES, SITE_URL } from '@/data/vars.mjs';
+import { CONTENT_TYPES, GUIDE_CATEGORIES, SITE_URL } from '@/data/site/constants.mjs';
 import {
   getAllContent,
   getGuideCategoryPageData,

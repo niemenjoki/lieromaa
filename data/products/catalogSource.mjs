@@ -1,35 +1,9 @@
-import { SITE_URL } from './vars.mjs';
-
-const merchantDefaults = {
-  brand: 'Lieromaa',
-  availability: 'in_stock',
-  condition: 'new',
-  identifierExists: 'no',
-  shippingService: 'Posti',
-};
-
-const schemaDefaults = {
-  brandName: 'Lieromaa',
-  shippingDestinationCountry: 'FI',
-  handlingTime: {
-    minValue: 1,
-    maxValue: 2,
-    unitCode: 'd',
-  },
-  transitTime: {
-    minValue: 2,
-    maxValue: 4,
-    unitCode: 'd',
-  },
-  returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
-};
-
-const postiPickupHelpTexts = [
+export const sharedPickupHelperTexts = [
   'Voit toivoa tiettyä Postin noutopaikkaa (pakettiautomaatti tai postitoimipaikka). Toiveen tulee löytyä Postin palvelupistekartalta. Jos et toivo noutopaikkaa, lähetys toimitetaan ilmoittamasi postinumeron mukaan ensimmäiseen Postin tarjoamaan noutopisteeseen.',
   'Huomioithan, että Posti saattaa toiveesta huolimatta toimittaa paketin eri toimipisteeseen, jos esimerkiksi noutopiste on täynnä.',
 ];
 
-const baseProductCatalog = {
+export const productCatalogSource = {
   worms: {
     name: 'Kompostimadot',
     variantSkus: ['worms-50', 'worms-100', 'worms-200'],
@@ -44,6 +18,7 @@ const baseProductCatalog = {
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
+      updatedAt: '2025-10-07',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -80,15 +55,10 @@ const baseProductCatalog = {
       productType: 'Matokompostointi > Kompostimadot',
     },
     schema: {
-      webPage: {
-        isPartOf: { '@id': `${SITE_URL}/#website` },
-        about: { '@id': `${SITE_URL}/#organization` },
-      },
       productAttributes: {
         category: 'GardenProduct',
         material: 'Kompostimulta, pahvisilppu, puukuitu, kookoskuitu',
       },
-      brandLogo: `${SITE_URL}/images/lieromaa_logo_1024.avif`,
       offerAttributes: {
         priceValidUntil: '2026-06-30',
         seller: {
@@ -108,7 +78,7 @@ const baseProductCatalog = {
       getVariantLabel({ amount, priceFormatted }) {
         return `${amount} matoa - ${priceFormatted} €`;
       },
-      shippingHelperTexts: postiPickupHelpTexts,
+      shippingHelperTexts: sharedPickupHelperTexts,
       submitButtonLabel() {
         return 'Lähetä tilaus';
       },
@@ -150,6 +120,7 @@ const baseProductCatalog = {
         'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.',
       h1: 'Lieromaan matokompostorin aloituspakkaus on nyt tilattavissa',
       navigationLabel: 'Aloituspakkaus',
+      updatedAt: '2026-03-01',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -224,7 +195,7 @@ const baseProductCatalog = {
       getVariantLabel({ amount, priceFormatted }) {
         return `Aloituspakkaus + ${amount} matoa - ${priceFormatted} €`;
       },
-      shippingHelperTexts: postiPickupHelpTexts,
+      shippingHelperTexts: sharedPickupHelperTexts,
       submitButtonLabel({ totalFormatted }) {
         return `Tilaa aloituspakkaus (${totalFormatted} €)`;
       },
@@ -232,101 +203,3 @@ const baseProductCatalog = {
     },
   },
 };
-
-function createImageEntries(images) {
-  return images.map((image) => ({
-    ...image,
-    src: image.url,
-    absoluteUrl: new URL(image.url, SITE_URL).toString(),
-  }));
-}
-
-function createCatalogEntry(productKey, product) {
-  const canonicalUrl = product.page.canonicalUrl;
-  const pageUrl = new URL(canonicalUrl, SITE_URL).toString();
-  const images = createImageEntries(product.media.images);
-  const primaryImage = images[0];
-  const title = product.page.title ?? `${product.page.pageName} | Lieromaa`;
-  const description = product.page.description;
-
-  return {
-    ...product,
-    key: productKey,
-    canonicalUrl,
-    pageUrl,
-    pageId: `${pageUrl}#webpage`,
-    faqId: `${pageUrl}#faq`,
-    productId: `${pageUrl}#product`,
-    pageName: product.page.pageName,
-    title,
-    description,
-    pageDescription: product.page.pageDescription ?? description,
-    h1: product.page.h1,
-    navigationLabel: product.page.navigationLabel ?? product.name,
-    productName: product.product.name,
-    productDescription: product.product.description ?? description,
-    image: primaryImage
-      ? {
-          url: primaryImage.url,
-          width: primaryImage.width,
-          height: primaryImage.height,
-          alt: primaryImage.alt,
-        }
-      : null,
-    imageUrl: primaryImage?.absoluteUrl ?? '',
-    images,
-    productImageUrls: images.map((image) => image.absoluteUrl),
-    faqItems: product.faqItems ?? [],
-    promo: product.promo ?? null,
-    search: product.search ?? null,
-    metadata: {
-      title,
-      description,
-      canonicalUrl,
-      image: primaryImage
-        ? {
-            url: primaryImage.url,
-            width: primaryImage.width,
-            height: primaryImage.height,
-            alt: primaryImage.alt,
-          }
-        : undefined,
-    },
-    merchant: {
-      ...merchantDefaults,
-      ...product.merchant,
-    },
-    schema: {
-      ...schemaDefaults,
-      ...product.schema,
-    },
-  };
-}
-
-export const productCatalog = Object.fromEntries(
-  Object.entries(baseProductCatalog).map(([productKey, product]) => [
-    productKey,
-    createCatalogEntry(productKey, product),
-  ])
-);
-
-export function getProductCatalogEntry(productKey) {
-  const product = productCatalog[productKey];
-
-  if (!product || typeof product !== 'object') {
-    throw new Error(`Unknown product catalog key "${productKey}"`);
-  }
-
-  return product;
-}
-
-export const productDefinitions = Object.fromEntries(
-  Object.entries(productCatalog).map(([productKey, product]) => [
-    productKey,
-    {
-      name: product.name,
-      variantSkus: product.variantSkus,
-      shippingSku: product.shippingSku,
-    },
-  ])
-);

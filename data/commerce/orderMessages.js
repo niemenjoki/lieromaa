@@ -1,4 +1,4 @@
-import { ORDER_CONTACT_EMAIL } from '@/data/contact';
+import { ORDER_CONTACT_EMAIL } from '@/data/site/contact';
 
 export const ORDER_SUBMIT_ENDPOINT = '/api/orders/submit';
 export const ORDER_FORM_MIN_FILL_MS = 1500;

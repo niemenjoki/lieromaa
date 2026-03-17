@@ -1,4 +1,4 @@
-import { SITE_AUTHOR } from '@/data/siteAuthor';
+import { SITE_AUTHOR } from '@/data/site/author';
 
 import SafeImage from '../SafeImage/SafeImage';
 import SafeLink from '../SafeLink/SafeLink';

@@ -1,4 +1,4 @@
-import { ORDER_CONTACT_EMAIL } from '@/data/contact';
+import { ORDER_CONTACT_EMAIL } from '@/data/site/contact';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 
 import classes from './Tilausehdot.module.css';

@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-import { ADSENSE_CLIENT } from '@/data/adsense';
+import { ADSENSE_CLIENT } from '@/data/site/adsense';
 
 const FUNDING_CHOICES_PUBLISHER = ADSENSE_CLIENT.replace(/^ca-/, '');
 

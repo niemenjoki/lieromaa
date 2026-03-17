@@ -1,3 +1,12 @@
+import { SITE_AUTHOR } from '@/data/site/author';
+import {
+  AUTHOR_ID,
+  AUTHOR_IMAGE_PATH,
+  AUTHOR_LINKEDIN_URL,
+  ORGANIZATION_ID,
+  WEBSITE_ID,
+} from '@/data/site/schema.mjs';
+
 import { description, pageName, pageUrl } from './pageMetadata';
 
 const structuredData = {
@@ -9,29 +18,26 @@ const structuredData = {
       url: pageUrl,
       name: pageName,
       description,
-      isPartOf: { '@id': 'https://www.lieromaa.fi/#website' },
-      about: { '@id': 'https://www.lieromaa.fi/#organization' },
+      isPartOf: { '@id': WEBSITE_ID },
+      about: { '@id': ORGANIZATION_ID },
       author: {
         '@type': 'Person',
-        '@id': 'https://www.lieromaa.fi/#joonas',
-        name: 'Joonas Niemenjoki',
-        url: 'https://www.linkedin.com/in/joonasniemenjoki',
-        affiliation: { '@id': 'https://www.lieromaa.fi/#organization' },
+        '@id': AUTHOR_ID,
+        name: SITE_AUTHOR.name,
+        url: AUTHOR_LINKEDIN_URL,
+        affiliation: { '@id': ORGANIZATION_ID },
       },
-      publisher: { '@id': 'https://www.lieromaa.fi/#organization' },
+      publisher: { '@id': ORGANIZATION_ID },
       mainEntity: {
         '@type': 'Person',
-        '@id': 'https://www.lieromaa.fi/#joonas',
-        name: 'Joonas Niemenjoki',
+        '@id': AUTHOR_ID,
+        name: SITE_AUTHOR.name,
         description:
           'Lieromaa.fi-sivuston perustaja, ohjelmoija ja matokompostoinnin harrastaja Järvenpäästä.',
-        image: 'https://www.lieromaa.fi/images/portrait2024.avif',
+        image: `https://www.lieromaa.fi${AUTHOR_IMAGE_PATH}`,
         jobTitle: 'Founder',
-        worksFor: { '@id': 'https://www.lieromaa.fi/#organization' },
-        sameAs: [
-          'https://www.linkedin.com/in/joonasniemenjoki',
-          'https://www.instagram.com/lieromaa',
-        ],
+        worksFor: { '@id': ORGANIZATION_ID },
+        sameAs: [AUTHOR_LINKEDIN_URL, 'https://www.instagram.com/lieromaa'],
       },
       inLanguage: 'fi',
     },

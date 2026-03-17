@@ -1,4 +1,4 @@
-import { aboutPage } from '@/data/sitePages';
+import { aboutPage } from '@/lib/site/pageRecords.mjs';
 
 export const { pageName, title, description, canonicalUrl, pageUrl } = aboutPage;
 

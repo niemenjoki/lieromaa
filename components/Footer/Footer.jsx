@@ -2,7 +2,7 @@
 
 import SafeLink from '@/components/SafeLink/SafeLink';
 import Socials from '@/components/Socials/Socials';
-import { LICENSE_URL, REPO_URL } from '@/data/vars.mjs';
+import { LICENSE_URL, REPO_URL } from '@/data/site/constants.mjs';
 
 import classes from './Footer.module.css';
 

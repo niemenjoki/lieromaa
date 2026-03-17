@@ -1,6 +1,6 @@
 import Advert from '@/components/Advert/Advert';
 import SafeImage from '@/components/SafeImage/SafeImage';
-import { SITE_AUTHOR } from '@/data/siteAuthor';
+import { SITE_AUTHOR } from '@/data/site/author';
 
 import classes from './Tietoa.module.css';
 import structuredData from './structuredData.js';

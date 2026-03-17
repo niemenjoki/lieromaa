@@ -1,3 +1,5 @@
+import { ORGANIZATION_ID, WEBSITE_ID } from '@/data/site/schema.mjs';
+
 import { imageUrl, pageDescription, pageName, pageUrl } from './pageMetadata';
 
 const structuredData = {
@@ -9,8 +11,8 @@ const structuredData = {
       url: pageUrl,
       name: pageName,
       description: pageDescription,
-      isPartOf: { '@id': 'https://www.lieromaa.fi/#website' },
-      about: { '@id': 'https://www.lieromaa.fi/#organization' },
+      isPartOf: { '@id': WEBSITE_ID },
+      about: { '@id': ORGANIZATION_ID },
       primaryImageOfPage: {
         '@type': 'ImageObject',
         url: imageUrl,
