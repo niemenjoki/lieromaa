@@ -16,6 +16,7 @@ export default function StarterKitPromo() {
       <SafeLink
         href={starterKit.canonicalUrl}
         style={{ color: 'var(--highlight-alt)', fontWeight: 600 }}
+        prefetch={false}
       >
         {starterKit.promo.linkLabel}
       </SafeLink>

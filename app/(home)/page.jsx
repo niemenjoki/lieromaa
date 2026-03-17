@@ -30,7 +30,11 @@ export default async function HomePage() {
           liittyen.
         </p>
         <div className={classes.ButtonLinks}>
-          <SafeLink href="/tuotteet/madot" className={classes.ButtonLink}>
+          <SafeLink
+            href="/tuotteet/madot"
+            className={classes.ButtonLink}
+            prefetch={false}
+          >
             Tilaa kompostimatoja
           </SafeLink>
           <SafeLink
