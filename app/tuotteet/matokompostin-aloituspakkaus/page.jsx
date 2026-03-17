@@ -8,8 +8,8 @@ import {
   getProductVariants,
 } from '@/lib/pricing/catalog';
 
+import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';
-import OrderForm from './OrderForm';
 import { faqItems, galleryImages, h1 } from './pageMetadata';
 import structuredData from './structuredData.js';
 
@@ -250,7 +250,7 @@ export default async function Page() {
           </section>
 
           <section id="tilaa">
-            <OrderForm />
+            <ProductOrderForm productKey="starterKit" />
           </section>
 
           <section id="faq">

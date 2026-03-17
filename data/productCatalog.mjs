@@ -24,6 +24,11 @@ const schemaDefaults = {
   returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
 };
 
+const postiPickupHelpTexts = [
+  'Voit toivoa tiettyä Postin noutopaikkaa (pakettiautomaatti tai postitoimipaikka). Toiveen tulee löytyä Postin palvelupistekartalta. Jos et toivo noutopaikkaa, lähetys toimitetaan ilmoittamasi postinumeron mukaan ensimmäiseen Postin tarjoamaan noutopisteeseen.',
+  'Huomioithan, että Posti saattaa toiveesta huolimatta toimittaa paketin eri toimipisteeseen, jos esimerkiksi noutopiste on täynnä.',
+];
+
 const baseProductCatalog = {
   worms: {
     name: 'Kompostimadot',
@@ -88,6 +93,38 @@ const baseProductCatalog = {
       },
       returnPolicyText:
         'Kompostimadot eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §).',
+    },
+    order: {
+      defaultVariantAmount: 100,
+      variantLegend: 'Valitse määrä',
+      variantSelectorPosition: 'afterFulfillment',
+      showWormAmountFinePrint: true,
+      getVariantLabel({ amount, priceFormatted }) {
+        return `${amount} matoa - ${priceFormatted} €`;
+      },
+      shippingHelperTexts: postiPickupHelpTexts,
+      submitButtonLabel() {
+        return 'Lähetä tilaus';
+      },
+      confirmationNote:
+        'Saat manuaalisen vahvistuksen ja laskun sähköpostiisi 1-2 arkipäivän sisällä.',
+      extraCharges: [
+        {
+          key: 'frostProtection',
+          fieldName: 'pakkastoimituslisa',
+          checkedValue: 'maksan',
+          label: 'Pakkastoimituslisä',
+          checkboxLabel: 'Maksan pakkastoimituslisän',
+          price: 3,
+          activeMonths: [9, 10, 11, 12, 1, 2, 3, 4, 5],
+          descriptionLines: [
+            'Kun ulkolämpötila on alle -5 C, matojen toimittaminen vaatii ylimääräistä pakkausmateriaalia matojen pitämiseksi elossa. Pakkastilanne määritetään alimmasta lämpötilaennusteesta matojen lähtöpaikan (Järvenpää) ja toimitusosoitteen perusteella.',
+          ],
+          helperTextLines: [
+            'Voit tehdä tilauksen myös ilman pakkaslisää, vaikka ulkona olisi pakkasta, jolloin paketti toimitetaan pikimmiten sään lämmettyä.',
+          ],
+        },
+      ],
     },
   },
   starterKit: {
@@ -160,6 +197,20 @@ const baseProductCatalog = {
     schema: {
       returnPolicyText:
         'Aloituspakkaus sisältää kompostimatoja, jotka eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §).',
+    },
+    order: {
+      defaultVariantAmount: 100,
+      variantLegend: 'Valitse paketti',
+      variantSelectorPosition: 'beforeFulfillment',
+      showWormAmountFinePrint: true,
+      getVariantLabel({ amount, priceFormatted }) {
+        return `Aloituspakkaus + ${amount} matoa - ${priceFormatted} €`;
+      },
+      shippingHelperTexts: postiPickupHelpTexts,
+      submitButtonLabel({ totalFormatted }) {
+        return `Tilaa aloituspakkaus (${totalFormatted} €)`;
+      },
+      confirmationNote: 'Saat manuaalisen tilausvahvistuksen 1-2 arkipäivässä.',
     },
   },
 };
