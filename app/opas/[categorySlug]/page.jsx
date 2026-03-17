@@ -3,11 +3,13 @@ import { notFound } from 'next/navigation';
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import PostPreview from '@/components/PostPreview/PostPreview';
-import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/data/vars.mjs';
-import { SITE_URL } from '@/data/vars.mjs';
-import { getAllContent, getGuidesByCategory } from '@/lib/content/index.mjs';
-
-import structuredData from './structuredData.json';
+import { CONTENT_TYPES, GUIDE_CATEGORIES, SITE_URL } from '@/data/vars.mjs';
+import {
+  getAllContent,
+  getGuideCategoryPageData,
+  getGuidesByCategory,
+} from '@/lib/content/index.mjs';
+import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -30,28 +32,26 @@ export function generateStaticParams() {
 
 export default async function GuideCategoryPage({ params }) {
   const { categorySlug } = await params;
-  const category = decodeURIComponent(categorySlug.replaceAll('-', ' '));
-  const guides = getGuidesByCategory(category).sort(
+  const pageData = getGuideCategoryPageData(categorySlug);
+  const guides = getGuidesByCategory(pageData.categoryName).sort(
     (a, b) => a.category.pagePosition - b.category.pagePosition
   );
   if (guides.length === 0) {
     notFound();
   }
 
-  const data = JSON.parse(JSON.stringify(structuredData));
-  data['@graph'][1]['itemListElement'] = guides.map((guide, i) => ({
-    '@type': 'ListItem',
-    name: guide.title,
-    position: i + 1,
-    url: `${SITE_URL}/opas/${categorySlug}/${guide.slug}`,
-  }));
-
-  // Replace placeholders
-  const ldJSON = JSON.parse(
-    JSON.stringify(data)
-      .replaceAll('[categorySlug]', categorySlug)
-      .replaceAll('[categoryName]', category)
-  );
+  const ldJSON = createCollectionStructuredData({
+    pageUrl: pageData.pageUrl,
+    pageName: pageData.pageName,
+    description: pageData.description,
+    breadcrumbItems: pageData.breadcrumbItems,
+    itemListElement: guides.map((guide, i) => ({
+      '@type': 'ListItem',
+      name: guide.title,
+      position: i + 1,
+      url: `${SITE_URL}/opas/${categorySlug}/${guide.slug}`,
+    })),
+  });
 
   return (
     <>
@@ -66,10 +66,10 @@ export default async function GuideCategoryPage({ params }) {
           items={[
             { name: 'Etusivu', href: '/' },
             { name: 'Opas' },
-            { name: category, href: `/opas/${categorySlug}` },
+            { name: pageData.categoryName, href: pageData.pagePath },
           ]}
         />
-        <h1>Oppaat: {category}</h1>
+        <h1>Oppaat: {pageData.categoryName}</h1>
         {guides.map((guide, index) => (
           <PostPreview
             key={index}
@@ -82,5 +82,3 @@ export default async function GuideCategoryPage({ params }) {
     </>
   );
 }
-
-//

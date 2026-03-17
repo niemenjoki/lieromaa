@@ -1,22 +1,20 @@
+import { getGuideCategoryPageData } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default async function generateMetadata({ params }) {
   const { categorySlug } = await params;
-  const category = categorySlug.replaceAll('-', ' ');
-  const title = `Lieromaan oppaat aiheesta: ${category}`;
-  const description = `Lue käytännön vinkit ja ohjeet aiheesta ${category} – miten perustaa, hoitaa ja hyödyntää matokompostia.`;
-  const pageURL = `/opas/${categorySlug}`;
+  const pageData = getGuideCategoryPageData(categorySlug);
 
   const customMetadata = {
-    title,
-    description,
+    title: pageData.title,
+    description: pageData.description,
     alternates: {
-      canonical: pageURL,
+      canonical: pageData.pagePath,
     },
     openGraph: {
-      title,
-      description,
-      url: pageURL,
+      title: pageData.title,
+      description: pageData.description,
+      url: pageData.pagePath,
     },
   };
 

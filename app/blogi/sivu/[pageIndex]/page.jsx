@@ -9,11 +9,12 @@ import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
 import {
   getAllContentSlugs,
   getAllPostTags,
+  getBlogPageData,
   getPaginatedPosts,
 } from '@/lib/content/index.mjs';
+import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
 import classes from './PostPage.module.css';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -28,35 +29,27 @@ export async function generateStaticParams() {
 
 export default async function BlogPage({ params }) {
   const { pageIndex } = await params;
-
-  const pageIndexInt = parseInt(pageIndex) || 1;
-  const pagePath = pageIndexInt === 1 ? '/blogi' : `/blogi/sivu/${pageIndexInt}`;
-  const pageUrl = `${SITE_URL}${pagePath}`;
-  const { posts, numPages, allPosts } = getPaginatedPosts(pageIndexInt, POSTS_PER_PAGE);
+  const pageData = getBlogPageData(pageIndex);
+  const { posts, numPages, allPosts } = getPaginatedPosts(
+    pageData.pageIndexInt,
+    POSTS_PER_PAGE
+  );
   if (posts.length === 0) {
     notFound();
   }
   const allTags = getAllPostTags();
 
-  const data = JSON.parse(JSON.stringify(structuredData));
-  data['@graph'][0]['@id'] = `${pageUrl}#webpage`;
-  data['@graph'][0].url = pageUrl;
-  data['@graph'][0].name =
-    pageIndexInt === 1
-      ? 'Blogi – Kaikki julkaisut'
-      : `Blogi – Kaikki julkaisut (sivu ${pageIndexInt})`;
-  data['@graph'][1]['@id'] = `${pageUrl}#itemlist`;
-  data['@graph'][1]['itemListElement'] = [];
-  posts.forEach((post, i) => {
-    data['@graph'][1]['itemListElement'].push({
+  const ldJSON = createCollectionStructuredData({
+    pageUrl: pageData.pageUrl,
+    pageName: pageData.pageName,
+    description: pageData.description,
+    breadcrumbItems: pageData.breadcrumbItems,
+    itemListElement: posts.map((post, i) => ({
       '@type': 'ListItem',
-      position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
+      position: (pageData.pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
       url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
-    });
+    })),
   });
-  data['@graph'][2]['@id'] = `${pageUrl}#breadcrumb`;
-
-  const ldJSON = data;
 
   return (
     <>
@@ -96,7 +89,11 @@ export default async function BlogPage({ params }) {
         <Post key={index} post={post} />
       ))}
 
-      <Pagination numPages={numPages} currentPage={pageIndexInt} basePath="/blogi" />
+      <Pagination
+        numPages={numPages}
+        currentPage={pageData.pageIndexInt}
+        basePath="/blogi"
+      />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
     </>
   );
