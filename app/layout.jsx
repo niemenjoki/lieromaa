@@ -8,6 +8,7 @@ import Analytics from '@/components/Analytics/Analytics';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
 import VisitorFeedbackWidget from '@/components/VisitorFeedbackWidget/VisitorFeedbackWidget';
+import { ADSENSE_ENABLED } from '@/data/site/adsense';
 import { getSiteNavigation } from '@/lib/siteStructure.mjs';
 import { createSiteStructuredData } from '@/lib/structuredData/createSiteStructuredData';
 
@@ -42,7 +43,7 @@ export default function RootLayout({ children }) {
         </div>
         <VisitorFeedbackWidget />
         <Analytics />
-        <AdSenseConsentGate />
+        {ADSENSE_ENABLED ? <AdSenseConsentGate /> : null}
       </body>
     </html>
   );
