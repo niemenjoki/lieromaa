@@ -1,7 +1,7 @@
 {
   "title": "Syksyn puutarhatyöt: näin valmistelet kasvit talveen",
   "description": "Valmistele puutarha talveen oikein: näin hoidat kasvit, maan ja kompostin ennen pakkasia ja varmistat vahvan kevätkasvun.",
-  "date": "17 September, 2025",
+  "publishedAt": "2025-09-17",
   "tags": ["puutarha", "lannoitus"],
   "keywords": [
     "fosfori",
@@ -16,5 +16,6 @@
     "suomi",
     "talvi",
     "typpi"
-  ]
+  ],
+  "about": ["puutarha", "kompostin hyödyntäminen", "kasvien hoito", "talvi"]
 }

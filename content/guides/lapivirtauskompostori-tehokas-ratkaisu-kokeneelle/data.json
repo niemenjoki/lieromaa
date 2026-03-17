@@ -1,9 +1,39 @@
 {
   "title": "Läpivirtauskompostori - helppo ja tehokas matokompostori",
   "description": "Rakenna läpivirtauskompostori, joka on helppo hoitaa ja tuottaa valmista multaa jatkuvasti. Selkeät ohjeet aloittelijalle ja harrastajalle.",
-  "updated": "2025-11-03",
+  "publishedAt": "2025-09-16",
+  "updatedAt": "2025-11-03",
+  "keywords": [
+    "banaanikärpäset",
+    "continuous flow",
+    "diy",
+    "jatkuva virtaus",
+    "kompostorin perustaminen",
+    "kosteus",
+    "matokakan keräys",
+    "matokakka",
+    "matokompostointi",
+    "opas",
+    "rakentaminen",
+    "ruokinta"
+  ],
   "category": {
     "name": "kompostorin perustaminen",
     "pagePosition": 2
-  }
+  },
+  "articleSection": "Matokompostointi",
+  "faqItems": [
+    {
+      "question": "Matokakan sekaan jää paljon matoja, miten saan ne pois?",
+      "answer": "Matokakan sekaan jäävistä madoista ei kannata murehtia. Itse kerään isoimmat yksilöt ja suuremmat läjät toisiinsa kietoutuneista madoista käsin pois matokakasta ja siirrän ne ylimpään laatikkoon. Tämä ei kuitenkaan ole pakollista. Ylimmän laatikon ruoka houkuttelee suurimman osan madoista ylempiin laatikoihin, joten matokakan seassa on vain pieni osa madoista. Madot jatkavat matokakan seassa elämistä jonkin aikaa ja lopulta kuolevat. Matokakan sisältämät mikrobit hajottavat kuolleet madot todella nopeasti takaisin luonnon kiertoon"
+    },
+    {
+      "question": "Matokakan seassa on vielä vähän petimateriaalia, miten saan ne pois?",
+      "answer": "Pienet määrät petimateriaalia eivät ole haitallisia. Matokakkaa voi hyvin käyttää puutarhassa niistä huolimatta. Jos kuitenkin haluat olla tarkka, voit antaa matokakan sekaan jäävien matojen hoitaa homman. Pidä huoli, että kerätyn matokakan kosteus on sopiva ja pidä se madoille sopivassa lämpötilassa. Madot jatkavat materiaalin käsittelemistä niin pitkään, kunnes kaikki petimateriaali on prosessoitu."
+    },
+    {
+      "question": "Minulla ei vielä ole tarvetta matokakalle. Miten säilytän sitä?",
+      "answer": "Matokakka säilyy parhaiten, kun se pidetään aavistuksen kosteana ja ilma pääsee vaihtumaan sen ympärillä. Itse pidän matokakkaa muovilaatikossa, jonka kannessa on reikiä. Muutaman kuukauden välein möyhin sitä varmistaakseni, ettei kosteus pääse luomaan hapetonta tilaa, joka voisi mädäntyä. Tarvittaessa lisään vettä, jos matokakka vaikuttaa turhan kuivalta."
+    }
+  ]
 }

@@ -31,8 +31,8 @@ export default async function sitemap() {
       return d > latest ? d : latest;
     }, new Date(0));
 
-  const latestPost = latest(posts, 'date');
-  const latestGuide = latest(guides, 'updated');
+  const latestPost = latest(posts, 'publishedAt');
+  const latestGuide = latest(guides, 'updatedAt');
 
   const add = (url, lastmod) => {
     urls.push({ url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
@@ -61,10 +61,10 @@ export default async function sitemap() {
   guideCategories.forEach((cat) => add(`/opas/${slugify(cat)}`, latestGuide));
 
   // --- Blog posts
-  posts.forEach((p) => add(`/blogi/julkaisu/${p.slug}`, p.date));
+  posts.forEach((p) => add(`/blogi/julkaisu/${p.slug}`, p.updatedAt ?? p.publishedAt));
 
   // --- Guides
-  guides.forEach((g) => add(`/opas/${slugify(g.category.name)}/${g.slug}`, g.updated));
+  guides.forEach((g) => add(`/opas/${slugify(g.category.name)}/${g.slug}`, g.updatedAt));
 
   // --- Paginated blog index
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);

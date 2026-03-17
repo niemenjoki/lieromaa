@@ -1,7 +1,7 @@
 {
   "title": "Tallin kylmä lattia hidasti matoja - rakensin lämpölaatikon",
   "description": "Tallin kylmä lattia pudotti kompostin aktiivisuuden talvella. Rakensin lämpölaatikon sulanapitokaapelilla ja termostaatilla, jolloin lämpö tasaantui.",
-  "date": "27 February, 2026",
+  "publishedAt": "2026-02-27",
   "tags": ["matokompostointi"],
   "keywords": [
     "matokompostori tallissa",
@@ -10,5 +10,6 @@
     "matokompostin lämpötila",
     "talvi matokompostointi",
     "diy lämpölaatikko"
-  ]
+  ],
+  "about": ["matokompostointi", "kompostorin hoito", "talvikäyttö"]
 }
