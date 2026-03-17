@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "node lib/prebuild/index.mjs",
     "predev": "npm run format && node lib/prebuild/index.mjs",
     "prebuild": "node lib/prebuild/index.mjs",
+    "prelint": "node lib/prebuild/index.mjs",
     "log:tags": "node lib/devHelpers/logAllTags.js",
     "dev": "next dev -H 0.0.0.0",
     "build": "next build",
