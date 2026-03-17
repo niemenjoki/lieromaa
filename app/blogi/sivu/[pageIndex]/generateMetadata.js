@@ -1,38 +1,29 @@
 import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/data/vars.mjs';
-import { getAllContentSlugs } from '@/lib/content/index.mjs';
+import { getAllContentSlugs, getBlogPageData } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default async function generateMetadata({ params }) {
   const { pageIndex } = await params;
-  const currentPage = pageIndex || 1;
-  const pageIndexInt = parseInt(currentPage, 10);
-
-  let canonical, ogUrl;
-
-  if (pageIndexInt === 1) {
-    canonical = '/blogi';
-    ogUrl = '/blogi';
-  } else {
-    canonical = `/blogi/sivu/${pageIndexInt}`;
-    ogUrl = canonical;
-  }
+  const pageData = getBlogPageData(pageIndex);
 
   const numPages = Math.ceil(
     getAllContentSlugs({ type: CONTENT_TYPES.POST }).length / POSTS_PER_PAGE
   );
-  const isFirst = pageIndexInt === 1;
-  const isLast = pageIndexInt === numPages;
+  const isFirst = pageData.pageIndexInt === 1;
+  const isLast = pageData.pageIndexInt === numPages;
+  const previousPagePath =
+    pageData.pageIndexInt === 2 ? '/blogi' : `/blogi/sivu/${pageData.pageIndexInt - 1}`;
 
   const customMetadata = {
     alternates: {
-      canonical,
+      canonical: pageData.pagePath,
     },
     openGraph: {
-      url: ogUrl,
+      url: pageData.pagePath,
     },
     pagination: {
-      ...(isFirst ? {} : { previous: `/blogi/sivu/${pageIndexInt - 1}` }),
-      ...(isLast ? {} : { next: `/blogi/sivu/${pageIndexInt + 1}` }),
+      ...(isFirst ? {} : { previous: previousPagePath }),
+      ...(isLast ? {} : { next: `/blogi/sivu/${pageData.pageIndexInt + 1}` }),
     },
   };
 

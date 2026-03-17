@@ -1,37 +1,33 @@
 import { POSTS_PER_PAGE } from '@/data/vars.mjs';
-import { getPostsByTag } from '@/lib/content/index.mjs';
+import { getBlogTagPageData, getPostsByTag } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 
 export default async function generateMetadata({ params }) {
   const { tag, pageIndex } = await params;
-  const tagName = tag.replaceAll('-', ' ');
-  const decodedTag = decodeURIComponent(tagName);
+  const pageData = getBlogTagPageData({ tag, pageIndex });
+  const { numPages } = getPostsByTag(
+    pageData.tagSlug,
+    pageData.pageIndexInt,
+    POSTS_PER_PAGE
+  );
 
-  const title = `Avainsana ${decodedTag} | Lieromaa`;
-  const description = `Julkaisut avainsanalla ${decodedTag}: Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.`;
-  const pageURL = `/blogi/${tag}/sivu/${pageIndex}`;
-
-  const pageIndexInt = parseInt(pageIndex, 10);
-
-  const { numPages } = getPostsByTag(decodeURIComponent(tag), pageIndex, POSTS_PER_PAGE);
-
-  const isFirst = pageIndexInt === 1;
-  const isLast = pageIndexInt === numPages;
+  const isFirst = pageData.pageIndexInt === 1;
+  const isLast = pageData.pageIndexInt === numPages;
 
   const customMetadata = {
-    title,
-    description,
+    title: pageData.title,
+    description: pageData.description,
     alternates: {
-      canonical: pageURL,
+      canonical: pageData.pagePath,
     },
     openGraph: {
-      title,
-      description,
-      url: pageURL,
+      title: pageData.title,
+      description: pageData.description,
+      url: pageData.pagePath,
     },
     pagination: {
-      ...(isFirst ? {} : { previous: `/blogi/${tag}/sivu/${pageIndexInt - 1}` }),
-      ...(isLast ? {} : { next: `/blogi/${tag}/sivu/${pageIndexInt + 1}` }),
+      ...(isFirst ? {} : { previous: `/blogi/${tag}/sivu/${pageData.pageIndexInt - 1}` }),
+      ...(isLast ? {} : { next: `/blogi/${tag}/sivu/${pageData.pageIndexInt + 1}` }),
     },
   };
 

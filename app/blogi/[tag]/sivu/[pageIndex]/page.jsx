@@ -6,10 +6,15 @@ import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SearchPosts from '@/components/SearchPosts/SearchPosts';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/data/vars.mjs';
-import { getAllContent, getAllPostTags, getPostsByTag } from '@/lib/content/index.mjs';
+import {
+  getAllContent,
+  getAllPostTags,
+  getBlogTagPageData,
+  getPostsByTag,
+} from '@/lib/content/index.mjs';
+import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
 import classes from './TagPage.module.css';
-import structuredData from './structuredData.json';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -38,12 +43,10 @@ export async function generateStaticParams() {
 
 export default async function BlogTagPage({ params }) {
   const { pageIndex, tag } = await params;
-
-  const decodedTag = decodeURIComponent(tag);
-  const pageIndexInt = parseInt(pageIndex) || 1;
+  const pageData = getBlogTagPageData({ tag, pageIndex });
   const { posts, numPages, allPostsForTag } = getPostsByTag(
-    decodedTag,
-    pageIndexInt,
+    pageData.tagSlug,
+    pageData.pageIndexInt,
     POSTS_PER_PAGE
   );
   if (posts.length === 0) {
@@ -51,20 +54,16 @@ export default async function BlogTagPage({ params }) {
   }
   const allTags = getAllPostTags();
 
-  const tagDisplay = decodedTag.replaceAll('-', ' ');
-  const pagePath = `/blogi/${tag}/sivu/${pageIndexInt}`;
-  const pageUrl = `${SITE_URL}${pagePath}`;
-
-  const ldJSON = JSON.parse(JSON.stringify(structuredData));
-  ldJSON['@graph'][0]['@id'] = `${pageUrl}#webpage`;
-  ldJSON['@graph'][0].url = pageUrl;
-  ldJSON['@graph'][0].name = `Blogi – ${tagDisplay} (sivu ${pageIndexInt})`;
-  ldJSON['@graph'][1]['@id'] = `${pageUrl}#itemlist`;
-  ldJSON['@graph'][1]['itemListElement'] = posts.map((post, i) => ({
-    '@type': 'ListItem',
-    position: (pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
-    url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
-  }));
+  const ldJSON = createCollectionStructuredData({
+    pageUrl: pageData.pageUrl,
+    pageName: pageData.pageName,
+    description: pageData.description,
+    itemListElement: posts.map((post, i) => ({
+      '@type': 'ListItem',
+      position: (pageData.pageIndexInt - 1) * POSTS_PER_PAGE + (i + 1),
+      url: `${SITE_URL}/blogi/julkaisu/${post.slug}`,
+    })),
+  });
 
   return (
     <>
@@ -74,7 +73,7 @@ export default async function BlogTagPage({ params }) {
           __html: JSON.stringify(ldJSON).replace(/</g, '\\u003c'),
         }}
       />
-      <h1>Julkaisut avainsanalla "{tagDisplay}"</h1>
+      <h1>Julkaisut avainsanalla "{pageData.tagName}"</h1>
 
       <SearchPosts
         list={allPostsForTag}
@@ -88,8 +87,7 @@ export default async function BlogTagPage({ params }) {
         </SafeLink>
         {allTags.map((t) => {
           const isActive =
-            t.toLowerCase().replaceAll(' ', '-') ===
-            decodedTag.toLowerCase().replaceAll(' ', '-');
+            t.toLowerCase().replaceAll(' ', '-') === pageData.tagSlug.toLowerCase();
           return (
             <SafeLink
               key={t}
@@ -108,7 +106,7 @@ export default async function BlogTagPage({ params }) {
 
       <Pagination
         numPages={numPages}
-        currentPage={pageIndexInt}
+        currentPage={pageData.pageIndexInt}
         basePath={`/blogi/${tag}`}
       />
       <Advert adClient="ca-pub-5560402633923389" adSlot="1051764153" />
