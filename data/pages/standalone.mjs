@@ -41,4 +41,11 @@ export const standalonePageDefinitions = {
       keywords: ['tietoa', 'lieromaa', 'joonas niemenjoki', 'sivusto'],
     },
   },
+  guideHub: {
+    canonicalUrl: '/opas',
+    pageName: 'Matokompostoinnin opas',
+    title: 'Matokompostoinnin opas | Lieromaa',
+    description:
+      'Lieromaan opas kokoaa käytännön ohjeet matokompostorin perustamiseen, hoitoon ja valmiin kompostin hyödyntämiseen.',
+  },
 };
