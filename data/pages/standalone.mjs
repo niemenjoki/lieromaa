@@ -4,7 +4,7 @@ export const standalonePageDefinitions = {
     pageName: 'Blogi',
     title: 'Blogi | Lieromaa',
     description:
-      'Lieromaan blogi käsittelee matokompostointia, kompostimatoja ja kestävää jätteenkäsittelyä.',
+      'Lue Lieromaan blogista käytännön vinkit matokompostorin hoitoon, kompostimatojen käyttöön ja kodin biojätteen fiksuun käsittelyyn.',
     shortLabel: 'Blogi',
     search: {
       contexts: ['notFound'],
@@ -16,7 +16,7 @@ export const standalonePageDefinitions = {
     pageName: 'Matolaskuri – arvioi tarvittava kompostimatojen määrä',
     title: 'Matolaskuri | Lieromaa',
     description:
-      'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.',
+      'Lieromaan matolaskuri auttaa arvioimaan kotitaloutesi biojätteen määrän ja sen, kuinka paljon kompostimatoja tarvitset alkuun.',
     pageDescription:
       'Lieromaan matolaskuri auttaa arvioimaan, kuinka paljon kompostimatoja (Eisenia fetida) tarvitaan kotitalouden biojätteen käsittelyyn. Syötä perheesi koko ja ruokavalio, ja laskuri kertoo suuntaa-antavan määrän.',
     shortLabel: 'Matolaskuri',

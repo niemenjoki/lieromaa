@@ -22,7 +22,7 @@ export const legalPageDefinitions = {
     pageName: 'Tilaus- ja toimitusehdot – Lieromaa',
     title: 'Tilaus- ja toimitusehdot | Lieromaa',
     description:
-      'Tutustu Lieromaan tilausta, maksua, toimitusta ja palautuksia koskeviin ehtoihin.',
+      'Tutustu Lieromaan tilausta, maksua, toimitusta, palautuksia ja asiakkaan oikeuksia koskeviin ehtoihin ennen tilauksen tekemistä.',
     shortLabel: 'Tilaus- ja toimitusehdot',
     publishedAt: '2025-10-16',
     updatedAt: '2026-03-16',
