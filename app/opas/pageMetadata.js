@@ -1,8 +1,6 @@
-export const pageName = 'Matokompostoinnin opas';
-export const title = 'Matokompostoinnin opas | Lieromaa';
-export const description =
-  'Lieromaan opas kokoaa käytännön ohjeet matokompostorin perustamiseen, hoitoon ja valmiin kompostin hyödyntämiseen.';
-export const canonicalUrl = '/opas';
+import { guideHubPage } from '@/lib/site/pageRecords.mjs';
+
+export const { pageName, title, description, canonicalUrl } = guideHubPage;
 
 const pageMetadata = {
   title,
