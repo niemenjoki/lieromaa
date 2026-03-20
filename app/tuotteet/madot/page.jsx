@@ -1,7 +1,6 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import StarterKitPromo from '@/components/StarterKitPromo/StarterKitPromo';
 import { ORDER_CONTACT_EMAIL, ORDER_WHATSAPP_URL } from '@/data/site/contact';
 import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 
@@ -27,7 +26,6 @@ export default async function Page() {
       />
 
       <article className={classes.ProductPage}>
-        <StarterKitPromo />
         <h1>{h1}</h1>
 
         <div className={classes.Content}>
