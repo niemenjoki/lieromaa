@@ -45,6 +45,7 @@ export default async function sitemap() {
 
   [
     ['/', latestPost],
+    ['/opas', latestGuide],
     [blogIndexPage.canonicalUrl, latestPost],
     [aboutPage.canonicalUrl, aboutPage.updatedAt],
     [privacyPolicyPage.canonicalUrl, getLegalPageLastModified(privacyPolicyPage)],
