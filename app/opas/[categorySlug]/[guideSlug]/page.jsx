@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
+import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import { CONTENT_TYPES } from '@/data/site/constants.mjs';
@@ -53,6 +54,14 @@ export default async function GuidePage({ params }) {
             ]}
           />
         }
+      />
+
+      <GuideFeedbackBox
+        title="Jäikö jokin epäselväksi?"
+        description="Jos tämä opas ei vielä vastannut kysymykseesi, voit pyytää tarkennusta tai ehdottaa aihetta, josta tarvitaan uusi opas."
+        sourceContext={`guide:${data.category.name}`}
+        pageTitle={data.title}
+        defaultType="question"
       />
 
       <SocialShareButtons
