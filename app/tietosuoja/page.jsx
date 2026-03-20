@@ -41,8 +41,9 @@ export default function PrivacyPage() {
             mahdolliset alennuskoodiin liittyvät tiedot.
           </li>
           <li>
-            Palautetiedot: palautewidgetin kautta lähetetty viesti, mahdollinen
-            sähköpostiosoite, nykyisen sivun URL-osoite ja viittaava sivu (referrer).
+            Kysymys- ja aihe-ehdotustiedot: oppaiden yhteydessä lähetetty viesti, viestin
+            tyyppi (kysymys tai aihe-ehdotus), mahdollinen sähköpostiosoite, nykyisen
+            sivun URL-osoite ja viittaava sivu (referrer).
           </li>
           <li>
             Tekninen käyttödata: esimerkiksi IP-osoite, selain- ja laitetiedot,
@@ -58,12 +59,12 @@ export default function PrivacyPage() {
         <h2>Tietojen kerääminen ja lähteet</h2>
         <p>
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
-          tilauslomakkeella tai viestin palautewidgetin kautta. Lisäksi kolmannen
-          osapuolen palvelut (esimerkiksi Google AdSense, Vercel Analytics, Speed Insights
-          ja Formspree) voivat kerätä teknisiä tietoja sivuston käytöstä.
-          Tilauslomakkeiden välityksessä käytetään lisäksi Verceliä ja Cloudflare Tunnel
-          -yhteyttä. Sivustoa voi käyttää myös mainostenesto-ohjelmien tai muiden
-          seurantaa estävien työkalujen kanssa.
+          tilauslomakkeella tai viestin oppaiden yhteydessä olevalla kysymys- ja
+          aihe-ehdotuslomakkeella. Lisäksi kolmannen osapuolen palvelut (esimerkiksi
+          Google AdSense, Vercel Analytics, Speed Insights ja Formspree) voivat kerätä
+          teknisiä tietoja sivuston käytöstä. Tilauslomakkeiden välityksessä käytetään
+          lisäksi Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa voi käyttää myös
+          mainostenesto-ohjelmien tai muiden seurantaa estävien työkalujen kanssa.
         </p>
 
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
@@ -75,9 +76,9 @@ export default function PrivacyPage() {
             edeltävät toimet (GDPR Art. 6(1)(b)).
           </li>
           <li>
-            Palautekysymysten vastaanotto, niihin vastaaminen sekä sisältöideoiden
-            kehittäminen palautteen perusteella: oikeusperusteena oikeutettu etu (GDPR
-            Art. 6(1)(f)).
+            Kysymysten vastaanotto, niihin vastaaminen sekä uusien opasaiheiden
+            kehittäminen viestien perusteella: oikeusperusteena oikeutettu etu (GDPR Art.
+            6(1)(f)).
           </li>
           <li>
             Kirjanpito ja lakisääteiset velvoitteet: oikeusperusteena lakisääteinen
@@ -97,9 +98,8 @@ export default function PrivacyPage() {
             kehittämiseksi.
           </li>
           <li>
-            Käyttäjäasetusten ja palautewidgetin näyttölogiikan tallentaminen
-            (localStorage): Oikeusperusteena oikeutettu etu (GDPR Art. 6(1)(f)) sivuston
-            käytettävyyden parantamiseksi.
+            Käyttäjäasetusten tallentaminen (localStorage): Oikeusperusteena oikeutettu
+            etu (GDPR Art. 6(1)(f)) sivuston käytettävyyden parantamiseksi.
           </li>
         </ul>
 
@@ -114,10 +114,11 @@ export default function PrivacyPage() {
           lähetetään Zoho Mailin SMTP-palvelun kautta.
         </p>
 
-        <h2>Palautewidget (Formspree)</h2>
+        <h2>Oppaiden kysymys- ja aihe-ehdotuslomake (Formspree)</h2>
         <p>
-          Palautewidgetin viestit välitetään edelleen Formspree-palvelun kautta.
-          Lähetyksessä välitetään viestin lisäksi myös sivun URL-osoite ja viittaava sivu
+          Oppaiden yhteydessä olevien kysymys- ja aihe-ehdotuslomakkeiden viestit
+          välitetään Formspree-palvelun kautta. Lähetyksessä välitetään viestin lisäksi
+          myös viestin tyyppi, sivun URL-osoite, sivun otsikko ja viittaava sivu
           (referrer), jos sellainen on saatavilla. Formspree voi käsitellä henkilötietoja
           EU-/ETA-alueen ulkopuolella (esimerkiksi Yhdysvalloissa). Tietosiirrot suojataan
           GDPR:n mukaisilla suojatoimilla, kuten vakiosopimuslausekkeilla.
@@ -210,13 +211,9 @@ export default function PrivacyPage() {
         <h2>LocalStorage</h2>
         <p>
           Kun vaihdat vaaleaan tai tummaan tilaan, sivusto tallentaa valitsemasi teeman
-          selaimesi paikalliseen tallennustilaan (localStorage). Lisäksi palautewidgetin
-          näyttämistä hallitaan localStorage-arvoilla <code>lieromaa_session_start</code>,{' '}
-          <code>lieromaa_pages_visited</code> ja <code>lieromaa_feedback_last_shown</code>
-          . Näillä varmistetaan, että widget näkyy vain aktiivisille kävijöille eikä liian
-          usein (korkeintaan 30 päivän välein). Tiedot tallennetaan ainoastaan
-          laitteellesi, eikä niitä siirretä eteenpäin. Tietoa säilytetään toistaiseksi,
-          kunnes poistat sen selaimestasi.
+          selaimesi paikalliseen tallennustilaan (localStorage). Tieto tallennetaan
+          ainoastaan laitteellesi, eikä sitä siirretä eteenpäin. Tietoa säilytetään
+          toistaiseksi, kunnes poistat sen selaimestasi.
         </p>
 
         <h2>Evästeet</h2>
@@ -240,9 +237,10 @@ export default function PrivacyPage() {
         <h2>Tietojen vastaanottajat</h2>
         <p>
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
-          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Formspree palautewidgetin
-          osalta, Posti, OP Kevytyrittäjä, Google ja Vercel). Henkilötietoja ei myydä eikä
-          luovuteta muihin tarkoituksiin ilman lainmukaista perustetta.
+          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Formspree oppaiden
+          kysymys- ja aihe-ehdotuslomakkeen osalta, Posti, OP Kevytyrittäjä, Google ja
+          Vercel). Henkilötietoja ei myydä eikä luovuteta muihin tarkoituksiin ilman
+          lainmukaista perustetta.
         </p>
 
         <h2>Tietojen säilytysaika</h2>
@@ -253,10 +251,10 @@ export default function PrivacyPage() {
             reklamaatioiden tai lakisääteisten velvoitteiden vuoksi.
           </li>
           <li>
-            Palautewidgetin kautta lähetettyjä viestejä säilytetään niin kauan kuin se on
-            tarpeen viestiin vastaamiseksi, palautteen käsittelemiseksi tai sivuston
-            sisällön kehittämiseksi, kuitenkin enintään 24 kuukautta ilman erillistä
-            perustetta.
+            Oppaiden kysymys- ja aihe-ehdotuslomakkeiden kautta lähetettyjä viestejä
+            säilytetään niin kauan kuin se on tarpeen viestiin vastaamiseksi,
+            aihe-ehdotusten käsittelemiseksi tai sivuston sisällön kehittämiseksi,
+            kuitenkin enintään 24 kuukautta ilman erillistä perustetta.
           </li>
           <li>
             Kirjanpitoon liittyviä tietoja säilytetään Suomen kirjanpitolainsäädännön

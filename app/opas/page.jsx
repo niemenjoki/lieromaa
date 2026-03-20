@@ -1,5 +1,6 @@
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
+import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import PostPreview from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { CONTENT_TYPES, GUIDE_CATEGORIES, SITE_URL } from '@/data/site/constants.mjs';
@@ -196,6 +197,14 @@ export default function GuideHubPage() {
             ))}
           </div>
         </section>
+
+        <GuideFeedbackBox
+          title="Puuttuuko oppaasta aihe?"
+          description="Voit ehdottaa uutta opasta tai kysyä asiasta, johon et vielä löytänyt vastausta. Näiden viestien perusteella päätän myös, mitä aiheita oppaaseen kannattaa kirjoittaa seuraavaksi."
+          sourceContext="opas-hub"
+          pageTitle={pageName}
+          defaultType="idea"
+        />
 
         {SHOW_FEATURED_GUIDES_SECTION ? (
           <section className={classes.Section}>

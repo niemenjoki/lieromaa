@@ -10,7 +10,7 @@ export const legalPageDefinitions = {
       'Lieromaan tietosuojaseloste henkilötietojen käsittelystä, evästeiden käytöstä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics, Speed Insights).',
     shortLabel: 'Tietosuojaseloste',
     publishedAt: '2025-10-16',
-    updatedAt: '2026-03-15',
+    updatedAt: '2026-03-20',
     search: {
       contexts: ['notFound'],
       keywords: ['tietosuoja', 'tietosuojaseloste', 'evästeet', 'henkilötiedot'],
