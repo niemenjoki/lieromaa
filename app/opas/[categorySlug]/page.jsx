@@ -65,7 +65,7 @@ export default async function GuideCategoryPage({ params }) {
         <Breadcrumbs
           items={[
             { name: 'Etusivu', href: '/' },
-            { name: 'Opas' },
+            { name: 'Opas', href: '/opas' },
             { name: pageData.categoryName, href: pageData.pagePath },
           ]}
         />
