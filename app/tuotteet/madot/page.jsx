@@ -2,10 +2,11 @@ import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { ORDER_CONTACT_EMAIL, ORDER_WHATSAPP_URL } from '@/data/site/contact';
-import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
+import { getProductVariants } from '@/lib/pricing/catalog';
 
 import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';
+import VariantPriceDisplay from '../VariantPriceDisplay';
 import { galleryImages, h1 } from './pageMetadata';
 import structuredData from './structuredData.js';
 
@@ -56,7 +57,10 @@ export default async function Page() {
             <ul>
               {wormVariants.map((variant) => (
                 <li key={variant.sku}>
-                  {variant.amount} matoa – {formatPrice(variant.price)} €
+                  <VariantPriceDisplay
+                    title={`${variant.amount} matoa`}
+                    variant={variant}
+                  />
                 </li>
               ))}
             </ul>

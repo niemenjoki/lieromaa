@@ -1,7 +1,7 @@
-import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
+import { createProductPageMetadata } from '@/lib/metadata/createProductPageMetadata';
 
 import pageMetadata from './pageMetadata';
 
 export default function generateMetadata() {
-  return createPageMetadata(pageMetadata);
+  return createProductPageMetadata('worms', pageMetadata);
 }
