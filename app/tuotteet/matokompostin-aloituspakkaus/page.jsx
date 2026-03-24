@@ -11,6 +11,7 @@ import {
 
 import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';
+import VariantPriceDisplay from '../VariantPriceDisplay';
 import { faqItems, galleryImages, h1 } from './pageMetadata';
 import structuredData from './structuredData.js';
 
@@ -23,9 +24,9 @@ const wormVariants = getProductVariants('worms');
 const starterKitShippingOptions = getProductShippingOptions('starterKit');
 const starterKitComponentCosts = starterKitPageContent.componentCosts;
 const starterKitBasePrice = starterKitVariants[0]
-  ? starterKitVariants[0].price -
+  ? starterKitVariants[0].basePrice -
     (wormVariants.find((variant) => variant.amount === starterKitVariants[0].amount)
-      ?.price ?? 0)
+      ?.basePrice ?? 0)
   : 0;
 const starterKitComponentCostTotal = Number(
   starterKitComponentCosts.reduce((sum, item) => sum + item.price, 0).toFixed(2)
@@ -71,7 +72,10 @@ export default async function Page() {
             <ul>
               {starterKitVariants.map((variant) => (
                 <li key={variant.sku}>
-                  Aloituspakkaus + {variant.amount} matoa - {formatPrice(variant.price)} €
+                  <VariantPriceDisplay
+                    title={`Aloituspakkaus + ${variant.amount} matoa`}
+                    variant={variant}
+                  />
                 </li>
               ))}
               <li>
@@ -214,7 +218,10 @@ export default async function Page() {
             <ul>
               {wormVariants.map((variant) => (
                 <li key={variant.sku}>
-                  + {variant.amount} matoa: {formatPrice(variant.price)} €
+                  <VariantPriceDisplay
+                    title={`+ ${variant.amount} matoa`}
+                    variant={variant}
+                  />
                 </li>
               ))}
             </ul>
@@ -223,7 +230,10 @@ export default async function Page() {
             <ul>
               {starterKitVariants.map((variant) => (
                 <li key={`${variant.sku}-final`}>
-                  Aloituspakkaus + {variant.amount} matoa: {formatPrice(variant.price)} €
+                  <VariantPriceDisplay
+                    title={`Aloituspakkaus + ${variant.amount} matoa`}
+                    variant={variant}
+                  />
                 </li>
               ))}
             </ul>

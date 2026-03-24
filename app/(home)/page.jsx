@@ -1,7 +1,9 @@
 import Post from '@/components/PostPreview/PostPreview';
+import PromoBanner from '@/components/PromoBanner/PromoBanner';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/data/site/constants.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
+import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 
 import classes from './HomePage.module.css';
 import structuredData from './structuredData.js';
@@ -34,9 +36,32 @@ function formatCategoryLabel(categoryName) {
   return categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
 }
 
+const promoDateFormatter = new Intl.DateTimeFormat('fi-FI', {
+  day: 'numeric',
+  month: 'numeric',
+  year: 'numeric',
+});
+
+function formatPromoDate(value) {
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime()) ? value : promoDateFormatter.format(date);
+}
+
+function formatDiscountLabel(discount) {
+  if (!discount) {
+    return '';
+  }
+
+  return discount.type === 'percentage'
+    ? `-${formatPrice(discount.value)} %`
+    : `-${formatPrice(discount.amount)} €`;
+}
+
 export default function HomePage() {
   const allGuides = getAllContent({ type: CONTENT_TYPES.GUIDE });
   const posts = getAllContent({ type: CONTENT_TYPES.POST }).slice(0, 3);
+  const wormSaleVariant = getProductVariants('worms').find((variant) => variant.discount);
+  const wormSaleDiscount = wormSaleVariant?.discount ?? null;
 
   const startPaths = GUIDE_CATEGORIES.map((categoryName) => {
     const guides = allGuides.filter((guide) => guide.category.name === categoryName);
@@ -66,6 +91,18 @@ export default function HomePage() {
       />
 
       <div className={classes.Page}>
+        {wormSaleDiscount ? (
+          <PromoBanner
+            badge="Kevättarjous"
+            href="/tuotteet/madot"
+            linkLabel="Osta kompostimatoja"
+          >
+            Kompostimadot {formatDiscountLabel(wormSaleDiscount)} nyt alkaen{' '}
+            <strong>{formatPrice(wormSaleVariant.price)} €</strong>. Tarjous voimassa{' '}
+            {formatPromoDate(wormSaleDiscount.validUntil)} asti.
+          </PromoBanner>
+        ) : null}
+
         <section className={classes.Hero}>
           <p className={classes.Eyebrow}>Lieromaa</p>
           <h1>Kompostimadot ja matokompostointi kotona</h1>

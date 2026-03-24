@@ -23,6 +23,39 @@ import {
 import classes from './ProductPage.module.css';
 import WormAmountFinePrint from './WormAmountFinePrint';
 
+const discountDateFormatter = new Intl.DateTimeFormat('fi-FI', {
+  day: 'numeric',
+  month: 'numeric',
+  year: 'numeric',
+});
+
+function formatAutomaticDiscountLabel(discount) {
+  if (!discount) {
+    return '';
+  }
+
+  return discount.type === 'percentage'
+    ? `-${formatPrice(discount.value)} %`
+    : `-${formatPrice(discount.amount)} €`;
+}
+
+function formatDiscountValidUntil(value) {
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime()) ? value : discountDateFormatter.format(date);
+}
+
+function getAutomaticDiscountNotice(variant) {
+  if (!variant?.discount) {
+    return '';
+  }
+
+  const validUntilText = variant.discount.validUntil
+    ? ` Tarjous voimassa ${formatDiscountValidUntil(variant.discount.validUntil)} asti.`
+    : '';
+
+  return `Norm. ${formatPrice(variant.basePrice)} € (${formatAutomaticDiscountLabel(variant.discount)}). 30 päivän alin hinta: ${formatPrice(variant.discount.lowestPrice30Days)} €.${validUntilText}`;
+}
+
 function PostiPickupHelp() {
   return (
     <>
@@ -174,21 +207,36 @@ export default function ProductOrderForm({ productKey }) {
       <fieldset>
         <legend>{orderConfig.variantLegend}</legend>
         {variants.map((variant) => (
-          <label key={variant.sku}>
+          <label
+            key={variant.sku}
+            className={variant.discount ? classes.VariantOptionLabel : undefined}
+          >
             <input
               type="radio"
               name="maara"
               value={variant.amount}
               checked={amount === String(variant.amount)}
               onChange={() => setAmount(String(variant.amount))}
-            />{' '}
-            {orderConfig.getVariantLabel({
-              amount: variant.amount,
-              price: variant.price,
-              priceFormatted: formatPrice(variant.price),
-              variant,
-              productKey,
-            })}
+            />
+            <span className={classes.VariantOptionContent}>
+              <span>
+                {orderConfig.getVariantLabel({
+                  amount: variant.amount,
+                  price: variant.price,
+                  priceFormatted: formatPrice(variant.price),
+                  basePrice: variant.basePrice,
+                  basePriceFormatted: formatPrice(variant.basePrice),
+                  discount: variant.discount,
+                  variant,
+                  productKey,
+                })}
+              </span>
+              {variant.discount ? (
+                <span className={classes.VariantDiscountNote}>
+                  {getAutomaticDiscountNotice(variant)}
+                </span>
+              ) : null}
+            </span>
           </label>
         ))}
       </fieldset>
