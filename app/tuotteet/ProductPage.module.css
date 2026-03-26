@@ -281,6 +281,166 @@
   gap: 0.15rem;
 }
 
+.ReviewsSection {
+  margin: 1rem 0 0;
+  padding: 12px 15px;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: var(--background-4);
+}
+
+.ReviewDetails {
+  margin: 0;
+}
+
+.ReviewDetails[open] {
+  padding-bottom: 0.15rem;
+}
+
+.ReviewDetails summary::-webkit-details-marker {
+  display: none;
+}
+
+.ReviewSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ReviewSummary h2 {
+  margin: 0;
+}
+
+.ReviewSummaryRating {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.ReviewSummaryStars,
+.ReviewStars {
+  color: var(--highlight);
+  letter-spacing: 0.15rem;
+}
+
+.ReviewSummaryMeta {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.82;
+}
+
+.ReviewActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.ReviewToggleButton,
+.ReviewMoreButton,
+.ReviewHideButton {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.ReviewToggleButton {
+  background: var(--highlight);
+  color: var(--text-on-accent);
+  border: none;
+}
+
+.ReviewToggleButton:hover {
+  background: var(--highlight-alt);
+  color: var(--text-on-accent);
+}
+
+.ReviewMoreButton {
+  background: var(--background-6);
+  color: var(--text-color);
+  border: 1px solid var(--highlight);
+}
+
+.ReviewMoreButton:hover,
+.ReviewHideButton:hover {
+  background: var(--highlight);
+  color: var(--text-on-accent);
+}
+
+.ReviewHideButton {
+  background: var(--background-6);
+  color: var(--text-color);
+  border: 1px solid var(--highlight);
+}
+
+.ReviewBottomActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.65rem;
+}
+
+.ReviewList {
+  list-style: none !important;
+  margin: 0.75rem 0 0;
+  padding: 0 !important;
+}
+
+.ReviewItem {
+  margin: 0;
+  padding: 0.55rem 0 0;
+  border-top: 1px solid var(--background-6);
+}
+
+.ReviewItem:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.ReviewHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.ReviewDate {
+  opacity: 0.72;
+}
+
+.ReviewStars {
+  margin: 0.12rem 0 0;
+  font-size: 0.95rem;
+}
+
+.ReviewBody {
+  margin: 0.3rem 0 0;
+  line-height: 1.4;
+}
+
+.ReviewBodyMuted {
+  margin: 0.22rem 0 0;
+  opacity: 0.8;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.ReviewToggleButton:disabled,
+.ReviewMoreButton:disabled,
+.ReviewHideButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 @media (min-width: 700px) {
   .CalculatorForm fieldset {
     flex-direction: row;

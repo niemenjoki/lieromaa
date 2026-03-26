@@ -4,5 +4,6 @@ Manual source-of-truth data lives here.
 - `pages/`: editable metadata and page-specific data for non-article pages
 - `products/`: product catalog source data
 - `commerce/`: editable pricing data, discount-code source data, and codeless per-SKU discount data
+- `reviews/`: manually approved public reviews for product pages
 
 Generated build outputs do not belong here. They live in `/generated`.

@@ -1,0 +1,235 @@
+.Page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.Intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 42rem;
+}
+
+.Intro p {
+  margin: 0.25rem 0;
+  line-height: 1.4;
+}
+
+.Card {
+  max-width: 600px;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: var(--background-4);
+  padding: 15px;
+  margin: 0.5rem 0 0;
+}
+
+.Header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.Header h2 {
+  color: var(--highlight-alt);
+}
+
+.OrderMeta {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.StatusRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2rem;
+}
+
+.Spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--background-6);
+  border-top-color: var(--highlight);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+}
+
+.Label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.Label legend {
+  margin-bottom: 0.15rem;
+}
+
+.Input,
+.Textarea {
+  width: 100%;
+  border: 1px solid var(--background-6);
+  border-radius: 4px;
+  background-color: var(--background-1);
+  color: var(--text-color);
+  font: inherit;
+  padding: 0.45rem 0.55rem;
+  caret-color: var(--highlight-alt);
+}
+
+.Input {
+  max-width: 18rem;
+}
+
+.Input::placeholder,
+.Textarea::placeholder {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.Textarea {
+  max-width: 100%;
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.Stars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.StarOption {
+  position: relative;
+}
+
+.StarInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.StarLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--background-6);
+  border-radius: 999px;
+  background-color: var(--background-1);
+  color: var(--text-color);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    border-color 0.12s ease,
+    background-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.StarInput:checked + .StarLabel {
+  background: var(--highlight);
+  border-color: var(--highlight);
+  color: var(--text-on-accent);
+}
+
+.StarInput:focus-visible + .StarLabel,
+.Input:focus-visible,
+.Textarea:focus-visible,
+.SubmitButton:focus-visible {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+.StarLabel:hover {
+  transform: translateY(-1px);
+  border-color: var(--highlight);
+}
+
+.StarGlyphs {
+  letter-spacing: 0.1rem;
+}
+
+.HelpText {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  opacity: 0.84;
+  margin: 0.25rem 0 0;
+}
+
+.Error {
+  color: #a32121;
+  font-weight: 600;
+  margin: 0.25rem 0 0;
+}
+
+.Success {
+  color: var(--highlight-alt);
+  font-weight: 600;
+  margin: 0.25rem 0 0;
+}
+
+.SubmitButton {
+  width: fit-content;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--highlight);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.SubmitButton:hover {
+  opacity: 0.7;
+}
+
+.SubmitButton:disabled {
+  opacity: 0.68;
+  cursor: not-allowed;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .Intro {
+    gap: 0.6rem;
+  }
+
+  .Input {
+    max-width: 100%;
+  }
+
+  .StarLabel {
+    min-width: 3.5rem;
+  }
+
+  .SubmitButton {
+    width: 100%;
+  }
+}

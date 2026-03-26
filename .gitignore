@@ -50,3 +50,4 @@ public/images/**/*.gif
 data/generated/
 generated/
 
+.env
