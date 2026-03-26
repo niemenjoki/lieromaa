@@ -66,7 +66,7 @@ export default function ProductReviewsSectionClient({ productKey, reviews, summa
           <span className={classes.ReviewSummaryStars} aria-hidden="true">
             {getStarString(Math.round(summary.averageRating))}
           </span>
-          <strong>{formatAverageRating(summary.averageRating)}</strong> / 5
+          {formatAverageRating(summary.averageRating)} / 5.0
         </p>
         <p className={classes.ReviewSummaryMeta}>
           {summary.reviewCount} vahvistetun ostajan arvostelua
