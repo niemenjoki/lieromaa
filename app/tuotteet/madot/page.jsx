@@ -6,6 +6,7 @@ import { getProductVariants } from '@/lib/pricing/catalog';
 
 import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';
+import ProductReviewsSection from '../ProductReviewsSection';
 import VariantPriceDisplay from '../VariantPriceDisplay';
 import { galleryImages, h1 } from './pageMetadata';
 import structuredData from './structuredData.js';
@@ -92,6 +93,8 @@ export default async function Page() {
               </a>
             </p>
           </section>
+
+          <ProductReviewsSection productKey="worms" />
 
           <section>
             <h2>Toimitus ja nouto</h2>

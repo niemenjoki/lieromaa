@@ -1,4 +1,5 @@
 import { ORDER_ERROR_MESSAGE } from '@/data/commerce/orderMessages';
+import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
 import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
@@ -18,15 +19,6 @@ function getRequiredEnv(name) {
 
 function buildOrderServiceEndpoint(baseUrl) {
   return `${baseUrl.replace(/\/+$/, '')}/api/public/orders`;
-}
-
-function isSameOriginRequest(request) {
-  const origin = request.headers.get('origin');
-  if (!origin) {
-    return true;
-  }
-
-  return origin === request.nextUrl.origin;
 }
 
 function jsonResponse(body, init) {
