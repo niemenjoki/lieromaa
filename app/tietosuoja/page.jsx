@@ -1,3 +1,9 @@
+import {
+  BUSINESS_ADDRESS_LINES,
+  BUSINESS_NAME,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+} from '@/data/site/contact';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 
 import classes from './Tietosuoja.module.css';
@@ -30,6 +36,17 @@ export default function PrivacyPage() {
           ilman tilausta, mutta tilausten tekeminen edellyttää tiettyjen henkilötietojen
           antamista. Sivustolla ei käytetä automaattista päätöksentekoa tai profilointia,
           joka tuottaisi oikeusvaikutuksia.
+        </p>
+
+        <h2>Rekisterinpitäjän yhteystiedot</h2>
+        <p>
+          Rekisterinpitäjä: <strong>{BUSINESS_NAME}</strong>
+          <br />
+          Osoite: <strong>{BUSINESS_ADDRESS_LINES.join(', ')}</strong>
+          <br />
+          Sähköposti: <strong>{CONTACT_EMAIL}</strong>
+          <br />
+          Puhelin / WhatsApp: <strong>{CONTACT_PHONE}</strong>
         </p>
 
         <h2>Mitä tietoja kerätään</h2>
@@ -242,6 +259,10 @@ export default function PrivacyPage() {
           EU-/ETA-alueen ulkopuolella. Tällöin siirrot toteutetaan GDPR:n edellyttämillä
           suojatoimilla, kuten vakiosopimuslausekkeilla.
         </p>
+        <p>
+          Voit pyytää lisätietoa käytetyistä siirtoperusteista ja suojatoimista ottamalla
+          yhteyttä rekisterinpitäjään.
+        </p>
 
         <h2>Tietojen vastaanottajat</h2>
         <p>
@@ -255,9 +276,17 @@ export default function PrivacyPage() {
         <h2>Tietojen säilytysaika</h2>
         <ul>
           <li>
-            Tilausviestejä ja tilauslomakkeiden tietoja säilytetään, kunnes maksu on
-            vastaanotettu ja tilaus on toimitettu, ellei säilytys ole tarpeen esimerkiksi
-            reklamaatioiden tai lakisääteisten velvoitteiden vuoksi.
+            Tilauspyyntöjä, joita ei vahvisteta, säilytetään enintään 12 kuukautta, ellei
+            pidempi säilytys ole tarpeen esimerkiksi väärinkäytösten selvittämiseksi.
+          </li>
+          <li>
+            Vahvistettuihin tilauksiin liittyviä yhteystietoja ja toimitustietoja
+            säilytetään niin kauan kuin se on tarpeen tilauksen toimittamiseksi,
+            asiakaspalvelun hoitamiseksi ja mahdollisten reklamaatioiden käsittelemiseksi.
+          </li>
+          <li>
+            Laskutukseen ja kirjanpitoon liittyviä tietoja säilytetään Suomen
+            kirjanpitolainsäädännön edellyttämän ajan.
           </li>
           <li>
             Oppaiden kysymys- ja aihe-ehdotuslomakkeiden kautta lähetettyjä viestejä
@@ -266,8 +295,9 @@ export default function PrivacyPage() {
             kuitenkin enintään 24 kuukautta ilman erillistä perustetta.
           </li>
           <li>
-            Kirjanpitoon liittyviä tietoja säilytetään Suomen kirjanpitolainsäädännön
-            edellyttämän ajan.
+            Reklamaatioihin, palautuksiin ja muihin jälkikäteisiin asiakaspalvelutilanteisiin
+            liittyviä tietoja säilytetään niin kauan kuin asian käsittely kohtuudella
+            edellyttää.
           </li>
           <li>
             Vercel Analyticsin ja Speed Insightsin tiedot säilyvät palveluntarjoajan
@@ -304,7 +334,7 @@ export default function PrivacyPage() {
         </ul>
         <p>
           Voit käyttää oikeuksiasi ottamalla yhteyttä sähköpostitse osoitteeseen
-          joonas.niemenjoki(a)gmail.com. Pyyntöihin vastataan kuukauden kuluessa.
+          {CONTACT_EMAIL}. Pyyntöihin vastataan kuukauden kuluessa.
         </p>
 
         <h2>Valitusoikeus</h2>
@@ -320,7 +350,7 @@ export default function PrivacyPage() {
         <h2>Yhteystiedot</h2>
         <p>
           Jos sinulla on kysyttävää tästä tietosuojaselosteesta, voit ottaa yhteyttä
-          sähköpostitse osoitteeseen joonas.niemenjoki(a)gmail.com.
+          sähköpostitse osoitteeseen {CONTACT_EMAIL}.
         </p>
       </div>
     </>
