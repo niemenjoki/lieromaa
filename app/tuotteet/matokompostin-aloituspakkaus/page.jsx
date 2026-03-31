@@ -255,6 +255,12 @@ export default async function Page() {
               sähköpostiin aikaisintaan silloin, kun lähetys on postitettu. Maksuaika on 7
               päivää.
             </p>
+            <p>
+              Aloituspakkauksella on 14 päivän peruuttamisoikeus itse pakkauksen osalta.
+              Pakettiin sisältyvien kompostimatojen osuutta ei kuitenkaan hyvitetä, jos
+              lähetys on ehditty toimittaa. Tarkemmat ehdot löytyvät{' '}
+              <SafeLink href="/tilausehdot">tilaus- ja toimitusehdoista</SafeLink>.
+            </p>
           </section>
 
           <section id="tilaa">

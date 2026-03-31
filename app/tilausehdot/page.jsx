@@ -89,17 +89,37 @@ export default function OrderPolicyPage() {
           Mahdolliset muut tuotteet toimitetaan erikseen vahvistettavan aikataulun mukaan.
         </p>
 
-        <h2>Palautusoikeus</h2>
+        <h2>Peruuttamisoikeus ja peruuttamisohje</h2>
         <p>
-          Asiakkaalla on kuluttajansuojalain mukainen 14 päivän peruuttamisoikeus
-          etämyynnissä. Palautusoikeus kuitenkin koskee vain käyttämättömiä tuotteita.
+          Kuluttaja-asiakkaalla on lähtökohtaisesti kuluttajansuojalain mukainen 14 päivän
+          peruuttamisoikeus etämyynnissä. Peruuttamisaika alkaa tavaran
+          vastaanottamisesta. Peruuttamisesta on ilmoitettava määräajan kuluessa
+          sähköpostitse osoitteeseen <strong>{ORDER_CONTACT_EMAIL}</strong>.
         </p>
         <p>
-          Madoilla ei ole palautusoikeutta kuluttajansuojalain 6 luvun 16 § perusteella.
+          Kompostimadoilla ei ole peruuttamisoikeutta kuluttajansuojalain 6 luvun 16 §:n
+          mukaisen poikkeuksen perusteella. Poikkeus liittyy siihen, että kyse on elävistä
+          kompostimadoista, joita ei voida palautuksen jälkeen käsitellä tai myydä edelleen
+          tavanomaisena tuotteena.
         </p>
         <p>
-          Jos haluat palauttaa tuotteesi, ota yhteyttä sähköpostitse{' '}
-          <strong>{ORDER_CONTACT_EMAIL}</strong>
+          Matokompostorin aloituspaketilla on peruuttamisoikeus itse pakkauksen osalta,
+          mutta ei siihen sisältyvien kompostimatojen osalta. Jos aloituspakkaus on
+          ehditty jo lähettää, palautettava summa on tuotteen ostohinta ilman
+          toimituskuluja, josta vähennetään pakettiin sisältyneiden matojen osuus. Matojen
+          osuus määräytyy sen hinnan mukaan, joka on ilmoitettu erikseen aloituspakkauksen
+          ostosivulla valitulle matomäärälle.
+        </p>
+        <p>
+          Palautettavan tuotteen tulee olla olennaisesti samassa kunnossa kuin
+          vastaanottohetkellä. Asiakas vastaa palautuskuluista, ellei toisin sovita. Ennen
+          palautuksen lähettämistä pyydän ottamaan yhteyttä sähköpostitse osoitteeseen{' '}
+          <strong>{ORDER_CONTACT_EMAIL}</strong>, jotta palautustavasta voidaan sopia.
+        </p>
+        <p>
+          Jos haluat käyttää peruuttamisoikeuttasi, ilmoita sähköpostissasi vähintään
+          nimesi, tilaamasi tuote, tilauspäivä tai vastaanottopäivä sekä tieto siitä, että
+          haluat peruuttaa kaupan kokonaan tai osittain.
         </p>
 
         <h2>Virhevastuu</h2>
