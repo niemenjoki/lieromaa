@@ -1,4 +1,10 @@
-import { ORDER_CONTACT_EMAIL } from '@/data/site/contact';
+import {
+  BUSINESS_ADDRESS_LINES,
+  BUSINESS_ID,
+  BUSINESS_NAME,
+  CONTACT_PHONE,
+  ORDER_CONTACT_EMAIL,
+} from '@/data/site/contact';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 
 import classes from './Tilausehdot.module.css';
@@ -31,11 +37,29 @@ export default function OrderPolicyPage() {
 
         <h2>Yleistä</h2>
         <p>
-          Lieromaan toiminta on omaa yritystoimintaani (Y-tunnus: 3002257-7), mutta
-          laskutus ja verotuksen hallinnointi hoidetaan
+          Lieromaan toimintaa harjoittaa <strong>{BUSINESS_NAME}</strong> (Y-tunnus:{' '}
+          {BUSINESS_ID}), mutta laskutus ja verotuksen hallinnointi hoidetaan
           <strong> OP Kevytyrittäjä </strong>-palvelun kautta. Myynti on
           arvonlisäverotonta arvonlisäverolain 2 luvun 3 § nojalla (vähäinen toiminta).
           Pidätän oikeuden hintojen ja toimitusehtojen muutoksiin.
+        </p>
+
+        <h2>Myyjän tiedot ja asiakaspalvelu</h2>
+        <p>
+          Myyjä: <strong>{BUSINESS_NAME}</strong>
+          <br />
+          Y-tunnus: <strong>{BUSINESS_ID}</strong>
+          <br />
+          Osoite: <strong>{BUSINESS_ADDRESS_LINES.join(', ')}</strong>
+          <br />
+          Sähköposti: <strong>{ORDER_CONTACT_EMAIL}</strong>
+          <br />
+          Puhelin / WhatsApp: <strong>{CONTACT_PHONE}</strong>
+        </p>
+        <p>
+          Kaikki tilauksiin, toimituksiin, palautuksiin, reklamaatioihin ja muihin
+          asiakaspalveluasioihin liittyvät yhteydenotot pyydetään ensisijaisesti
+          sähköpostitse osoitteeseen <strong>{ORDER_CONTACT_EMAIL}</strong>.
         </p>
 
         <h2>Tilaaminen</h2>
@@ -76,6 +100,34 @@ export default function OrderPolicyPage() {
         <p>
           Jos haluat palauttaa tuotteesi, ota yhteyttä sähköpostitse{' '}
           <strong>{ORDER_CONTACT_EMAIL}</strong>
+        </p>
+
+        <h2>Virhevastuu</h2>
+        <p>
+          Tuotteilla on kuluttajansuojalain mukainen virhevastuu. Jos toimitettu tuote on
+          virheellinen, vaurioitunut tai ei vastaa sovittua, ota yhteyttä viipymättä
+          sähköpostitse osoitteeseen <strong>{ORDER_CONTACT_EMAIL}</strong>, jotta asia
+          voidaan selvittää ja sopia tilanteeseen sopivasta hyvityksestä, korjauksesta,
+          uudesta toimituksesta tai muusta lainmukaisesta toimenpiteestä.
+        </p>
+
+        <h2>Erimielisyydet ja riidanratkaisu</h2>
+        <p>
+          Pyrin ratkaisemaan mahdolliset erimielisyydet ensisijaisesti suoraan asiakkaan
+          kanssa. Jos kauppasopimusta koskevaa erimielisyyttä ei saada ratkaistua
+          neuvottelemalla, kuluttaja voi ottaa yhteyttä kuluttajaneuvontaan (
+          <a
+            href="https://www.kkv.fi/kuluttaja-asiat/kuluttajaneuvonta/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            kkv.fi/kuluttajaneuvonta
+          </a>
+          ) ja tarvittaessa saattaa asian kuluttajariitalautakunnan käsiteltäväksi (
+          <a href="https://www.kuluttajariita.fi" target="_blank" rel="noreferrer">
+            kuluttajariita.fi
+          </a>
+          ).
         </p>
       </div>
     </>
