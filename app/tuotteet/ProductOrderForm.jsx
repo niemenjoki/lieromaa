@@ -19,6 +19,7 @@ import {
   getProductVariant,
   getProductVariants,
 } from '@/lib/pricing/catalog';
+import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './ProductPage.module.css';
 import WormAmountFinePrint from './WormAmountFinePrint';
@@ -388,6 +389,15 @@ export default function ProductOrderForm({ productKey }) {
 
       <p className={classes.OrderTotal}>
         Yhteensä: <strong>{totalFormatted} €</strong>
+      </p>
+      <p className={classes.Note}>
+        Painamalla alla olevaa painiketta teet sitovan tilauksen. Maksu tapahtuu
+        tilausvahvistuksen jälkeen OP Kevytyrittäjä -palvelun kautta lähetettävällä
+        laskulla.
+      </p>
+      <p className={classes.Note}>
+        Ennen tilausta tutustu <SafeLink href="/tilausehdot">tilaus- ja toimitusehtoihin</SafeLink>{' '}
+        sekä <SafeLink href="/tietosuoja">tietosuojaselosteeseen</SafeLink>.
       </p>
 
       {submitError ? (
