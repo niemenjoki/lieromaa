@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { usePathname } from 'next/navigation';
 
+import SafeLink from '@/components/SafeLink/SafeLink';
 import {
   ORDER_SUBMIT_ENDPOINT,
   ORDER_SUCCESS_MESSAGE,
@@ -19,7 +20,6 @@ import {
   getProductVariant,
   getProductVariants,
 } from '@/lib/pricing/catalog';
-import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './ProductPage.module.css';
 import WormAmountFinePrint from './WormAmountFinePrint';
@@ -396,8 +396,9 @@ export default function ProductOrderForm({ productKey }) {
         laskulla.
       </p>
       <p className={classes.Note}>
-        Ennen tilausta tutustu <SafeLink href="/tilausehdot">tilaus- ja toimitusehtoihin</SafeLink>{' '}
-        sekä <SafeLink href="/tietosuoja">tietosuojaselosteeseen</SafeLink>.
+        Ennen tilausta tutustu{' '}
+        <SafeLink href="/tilausehdot">tilaus- ja toimitusehtoihin</SafeLink> sekä{' '}
+        <SafeLink href="/tietosuoja">tietosuojaselosteeseen</SafeLink>.
       </p>
 
       {submitError ? (
