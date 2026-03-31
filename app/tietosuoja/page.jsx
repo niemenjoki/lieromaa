@@ -178,14 +178,23 @@ export default function PrivacyPage() {
         <h2>Vercel Analytics ja Speed Insights</h2>
         <p>
           Sivustolla käytetään myös Vercel Analyticsia ja Speed Insights -palvelua
-          sivuston käytön ja suorituskyvyn seuraamiseen. Kerätty tieto on tilastollista ja
-          anonymisoitua eikä sisällä henkilökohtaisesti tunnistettavia tietoja. Tietoja,
-          kuten reitti, URL, verkkonopeus, selain, laite, maa, käyttöjärjestelmä ja Web
-          Vitals -metriikit, käytetään aggregoidusti. Näiden palveluiden avulla voidaan
-          esimerkiksi seurata kävijämäärää ja kehittää sivuston käytettävyyttä.
-          Vierailijaistunnot hylätään 24 tunnin jälkeen, ja aggregoidut tiedot säilytetään
-          Vercelin käytäntöjen mukaisesti, tyypillisesti 30–90 päivää suunnitelmasta
-          riippuen.
+          sivuston käytön ja suorituskyvyn seuraamiseen. Vercelin dokumentaation mukaan
+          Web Analyticsin ja Speed Insightsin keräämät datapisteet ovat anonyymejä, eikä
+          niitä ole tarkoitettu yksittäisen käyttäjän tai IP-osoitteen tunnistamiseen.
+          Web Analytics ei käytä kolmannen osapuolen evästeitä, vaan kävijä tunnistetaan
+          pyynnöstä muodostettavan tiivisteen avulla. Näiden palveluiden avulla voidaan
+          seurata esimerkiksi sivulatauksia, reittejä, URL-osoitteita, viittaavia sivuja,
+          laitetyyppiä, selainta, käyttöjärjestelmää, maata, verkkonopeutta ja Web Vitals
+          -metriikoita aggregoidussa muodossa sivuston kehittämiseksi. Vierailijaistunnot
+          hylätään 24 tunnin jälkeen, ja aggregoidut tiedot säilytetään Vercelin
+          käytäntöjen mukaisesti.
+        </p>
+        <p>
+          Vercelin dokumentaatio korostaa myös sitä, että URL-osoitteet ja niiden
+          parametrit voivat joissakin toteutuksissa sisältää henkilötietoja. Lieromaan
+          sivusto on pyritty toteuttamaan niin, ettei URL-osoitteisiin sisällytetä
+          tarkoituksellisesti nimiä, sähköpostiosoitteita, tilausnumeroita tai muita
+          vastaavia tunnisteita.
         </p>
         <p>
           Lisätietoja löydät palveluntarjoajien sivuilta:
