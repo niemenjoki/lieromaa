@@ -179,7 +179,7 @@ export const productCatalogSource = {
     },
     schema: {
       returnPolicyText:
-        'Aloituspakkaus sisältää kompostimatoja, jotka eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §).',
+        'Aloituspakkauksella on 14 vrk peruuttamisoikeus itse pakkauksen osalta. Pakettiin sisältyvien kompostimatojen osuutta ei hyvitetä, jos lähetys on ehditty toimittaa.',
     },
     order: {
       defaultVariantAmount: 100,

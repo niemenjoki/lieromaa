@@ -80,6 +80,11 @@ export default async function Page() {
               aikaisintaan silloin, kun pakkaus on toimitettu postille. Maksuaika on 7
               päivää, ja toimitus tapahtuu Postin kautta koko Suomeen.
             </p>
+            <p>
+              Kompostimadoilla ei ole 14 päivän peruuttamisoikeutta, koska kyse on
+              elävistä kompostimadoista. Tarkemmat ehdot löytyvät{' '}
+              <SafeLink href="/tilausehdot">tilaus- ja toimitusehdoista</SafeLink>.
+            </p>
           </section>
 
           <ProductOrderForm productKey="worms" />
