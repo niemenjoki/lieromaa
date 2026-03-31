@@ -247,13 +247,17 @@ export default async function Page() {
             <h2>Toimitus ja maksaminen</h2>
             <p>
               Tee tilaus alla olevalla lomakkeella. Vahvistan tilauksen manuaalisesti 1-2
-              arkipäivän kuluessa varmistaakseni saatavuuden ja säiden puolesta
-              turvallisen lähetysajankohdan.
+              arkipäivän kuluessa varmistaakseni saatavuuden, valmisteluajan ja säiden
+              puolesta turvallisen lähetysajankohdan.
             </p>
             <p>
               Laskutus tulee <strong>OP Kevytyrittäjä</strong> -palvelun kautta
               sähköpostiin aikaisintaan silloin, kun lähetys on postitettu. Maksuaika on 7
               päivää.
+            </p>
+            <p>
+              Matokompostorin aloituspakkaus postitetaan 1-2 viikon kuluttua tilauksesta.
+              Tarkempi toimitusaika ilmoitetaan tilausvahvistuksessa.
             </p>
             <p>
               Aloituspakkauksella on 14 päivän peruuttamisoikeus itse pakkauksen osalta.
