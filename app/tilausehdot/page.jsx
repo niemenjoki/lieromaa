@@ -82,11 +82,14 @@ export default function OrderPolicyPage() {
 
         <h2>Toimitusaika</h2>
         <p>
-          Matojen postitus tapahtuu maanantaisin ja tiistaisin. Maanantaina klo 12
-          mennessä tehdyt tilaukset postitetaan tiistaina, ja myöhemmin tehdyt tilaukset
-          seuraavan viikon maanantaina. Matoja ei postiteta keskiviikon ja sunnuntain
-          välisenä aikana, jotta madot eivät jää Postin varastoon viikonlopuksi.
-          Mahdolliset muut tuotteet toimitetaan erikseen vahvistettavan aikataulun mukaan.
+          Eläviä matoja sisältäviä tuotteita postitetaan vain maanantaisin ja tiistaisin,
+          jotta madot eivät jää viikonlopuksi Postin varastoon. Maanantaina ennen klo 12
+          tilatut madot postitetaan tiistaina. Muut matotilaukset postitetaan seuraavan
+          viikon maanantaina.
+        </p>
+        <p>
+          Matokompostorin aloituspakkaus postitetaan 1-2 viikon kuluttua tilauksesta.
+          Tarkempi toimitusaika ilmoitetaan aina tilausvahvistuksessa.
         </p>
 
         <h2>Peruuttamisoikeus ja peruuttamisohje</h2>
@@ -99,8 +102,8 @@ export default function OrderPolicyPage() {
         <p>
           Kompostimadoilla ei ole peruuttamisoikeutta kuluttajansuojalain 6 luvun 16 §:n
           mukaisen poikkeuksen perusteella. Poikkeus liittyy siihen, että kyse on elävistä
-          kompostimadoista, joita ei voida palautuksen jälkeen käsitellä tai myydä edelleen
-          tavanomaisena tuotteena.
+          kompostimadoista, joita ei voida palautuksen jälkeen käsitellä tai myydä
+          edelleen tavanomaisena tuotteena.
         </p>
         <p>
           Matokompostorin aloituspaketilla on peruuttamisoikeus itse pakkauksen osalta,
