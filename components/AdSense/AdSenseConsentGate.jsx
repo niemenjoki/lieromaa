@@ -13,6 +13,14 @@ const consentBootstrap = `
 
     window.__lieromaaAdsConsentGranted = Boolean(window.__lieromaaAdsConsentGranted);
     window.__lieromaaAdSenseStatus = window.__lieromaaAdSenseStatus || 'idle';
+    window.__lieromaaOpenConsentPreferences = function () {
+      if (!window.googlefc || typeof window.googlefc.showRevocationMessage !== 'function') {
+        return false;
+      }
+
+      window.googlefc.showRevocationMessage();
+      return true;
+    };
 
     function emit(eventName) {
       window.dispatchEvent(new CustomEvent(eventName));
@@ -102,6 +110,8 @@ const consentBootstrap = `
 
     window.googlefc.callbackQueue.push({
       CONSENT_API_READY: function () {
+        emit('lieromaa:consent-api-ready');
+
         if (typeof window.__tcfapi !== 'function') return;
 
         window.__tcfapi('addEventListener', 2.2, function () {
