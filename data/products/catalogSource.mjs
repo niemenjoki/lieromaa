@@ -80,7 +80,7 @@ export const productCatalogSource = {
       },
       shippingHelperTexts: sharedPickupHelperTexts,
       submitButtonLabel() {
-        return 'Lähetä tilaus';
+        return 'Lähetä sitova tilaus';
       },
       confirmationNote:
         'Saat manuaalisen vahvistuksen ja laskun sähköpostiisi 1-2 arkipäivän sisällä.',
@@ -191,7 +191,7 @@ export const productCatalogSource = {
       },
       shippingHelperTexts: sharedPickupHelperTexts,
       submitButtonLabel({ totalFormatted }) {
-        return `Tilaa aloituspakkaus (${totalFormatted} €)`;
+        return `Lähetä sitova tilaus (${totalFormatted} €)`;
       },
       confirmationNote: 'Saat manuaalisen tilausvahvistuksen 1-2 arkipäivässä.',
     },
