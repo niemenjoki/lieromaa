@@ -197,8 +197,8 @@ export default function PrivacyPage() {
           Sivustolla käytetään myös Vercel Analyticsia ja Speed Insights -palvelua
           sivuston käytön ja suorituskyvyn seuraamiseen. Vercelin dokumentaation mukaan
           Web Analyticsin ja Speed Insightsin keräämät datapisteet ovat anonyymejä, eikä
-          niitä ole tarkoitettu yksittäisen käyttäjän tai IP-osoitteen tunnistamiseen.
-          Web Analytics ei käytä kolmannen osapuolen evästeitä, vaan kävijä tunnistetaan
+          niitä ole tarkoitettu yksittäisen käyttäjän tai IP-osoitteen tunnistamiseen. Web
+          Analytics ei käytä kolmannen osapuolen evästeitä, vaan kävijä tunnistetaan
           pyynnöstä muodostettavan tiivisteen avulla. Näiden palveluiden avulla voidaan
           seurata esimerkiksi sivulatauksia, reittejä, URL-osoitteita, viittaavia sivuja,
           laitetyyppiä, selainta, käyttöjärjestelmää, maata, verkkonopeutta ja Web Vitals
@@ -295,9 +295,9 @@ export default function PrivacyPage() {
             kuitenkin enintään 24 kuukautta ilman erillistä perustetta.
           </li>
           <li>
-            Reklamaatioihin, palautuksiin ja muihin jälkikäteisiin asiakaspalvelutilanteisiin
-            liittyviä tietoja säilytetään niin kauan kuin asian käsittely kohtuudella
-            edellyttää.
+            Reklamaatioihin, palautuksiin ja muihin jälkikäteisiin
+            asiakaspalvelutilanteisiin liittyviä tietoja säilytetään niin kauan kuin asian
+            käsittely kohtuudella edellyttää.
           </li>
           <li>
             Vercel Analyticsin ja Speed Insightsin tiedot säilyvät palveluntarjoajan
