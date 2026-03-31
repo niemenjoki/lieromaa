@@ -83,6 +83,28 @@
   text-decoration: underline;
 }
 
+.LinkButton {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: var(--text-color);
+  cursor: pointer;
+  font: inherit;
+  opacity: 0.9;
+  padding: 0;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.LinkButton:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.ConsentMessage {
+  margin: 0;
+}
+
 @media (min-width: 600px) {
   .Columns {
     grid-template-columns: repeat(2, 1fr);

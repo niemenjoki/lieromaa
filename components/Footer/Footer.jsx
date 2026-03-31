@@ -1,7 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+
 import SafeLink from '@/components/SafeLink/SafeLink';
 import Socials from '@/components/Socials/Socials';
+import { ADSENSE_CONSENT_ENABLED } from '@/data/site/adsense';
 import { LICENSE_URL, REPO_URL } from '@/data/site/constants.mjs';
 
 import classes from './Footer.module.css';
@@ -11,6 +14,20 @@ export default function Footer({ navigation }) {
   const currentYear = new Date().getFullYear();
   const yearRange =
     currentYear === startYear ? `${startYear}` : `${startYear}–${currentYear}`;
+  const [consentMessage, setConsentMessage] = useState('');
+  const canManageConsent = ADSENSE_CONSENT_ENABLED;
+
+  const handleConsentSettingsClick = () => {
+    const openConsentPreferences = globalThis.window?.__lieromaaOpenConsentPreferences;
+    const opened =
+      typeof openConsentPreferences === 'function' ? openConsentPreferences() : false;
+
+    setConsentMessage(
+      opened
+        ? ''
+        : 'Evästeasetuksia ei voitu avata juuri nyt. Yritä ladata sivu uudelleen.'
+    );
+  };
 
   return (
     <footer className={classes.Footer}>
@@ -38,6 +55,18 @@ export default function Footer({ navigation }) {
         <div className={classes.Bottom}>
           <p>&copy; {yearRange} Joonas Niemenjoki</p>
           <p className={classes.SafeLinks}>
+            {canManageConsent ? (
+              <>
+                <button
+                  type="button"
+                  className={classes.LinkButton}
+                  onClick={handleConsentSettingsClick}
+                >
+                  Muuta evästeasetuksia
+                </button>
+                {' | '}
+              </>
+            ) : null}
             <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer">
               Lisenssi
             </a>
@@ -46,6 +75,11 @@ export default function Footer({ navigation }) {
               Lähdekoodi
             </a>
           </p>
+          {consentMessage ? (
+            <p className={classes.ConsentMessage} role="status">
+              {consentMessage}
+            </p>
+          ) : null}
         </div>
       </div>
     </footer>
