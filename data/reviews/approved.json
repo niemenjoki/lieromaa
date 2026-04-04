@@ -2,23 +2,16 @@
   {
     "productKey": "worms",
     "rating": 5,
-    "review": "Hienosti toimi ja pakkaskaudella madot saapuivat hyväkuntoisina.",
-    "displayName": "SakuP",
-    "submittedAt": "2026-03-26T13:25:57.457Z"
+    "review": "",
+    "displayName": "",
+    "submittedAt": "2026-03-31T15:30:28.353Z"
   },
   {
     "productKey": "worms",
     "rating": 5,
-    "review": "Hyvin pakattu ja nopea toimitus. Kiitos.",
-    "displayName": "Susa",
-    "submittedAt": "2026-03-26T13:12:27.071Z"
-  },
-  {
-    "productKey": "worms",
-    "rating": 5,
-    "review": "Erinomaisia, elinvoimaisia kompostimatoja. Loistavaa palvelua ja sujuva toimitus. Suosittelen!",
-    "displayName": "Mari",
-    "submittedAt": "2026-03-26T16:20:50.836Z"
+    "review": "",
+    "displayName": "",
+    "submittedAt": "2026-03-27T19:49:27.895Z"
   },
   {
     "productKey": "worms",
@@ -30,8 +23,22 @@
   {
     "productKey": "worms",
     "rating": 5,
-    "review": "",
-    "displayName": "",
-    "submittedAt": "2026-03-27T19:49:27.895Z"
+    "review": "Erinomaisia, elinvoimaisia kompostimatoja. Loistavaa palvelua ja sujuva toimitus. Suosittelen!",
+    "displayName": "Mari",
+    "submittedAt": "2026-03-26T16:20:50.836Z"
+  },
+  {
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Hienosti toimi ja pakkaskaudella madot saapuivat hyväkuntoisina.",
+    "displayName": "SakuP",
+    "submittedAt": "2026-03-26T13:25:57.457Z"
+  },
+  {
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Hyvin pakattu ja nopea toimitus. Kiitos.",
+    "displayName": "Susa",
+    "submittedAt": "2026-03-26T13:12:27.071Z"
   }
 ]
