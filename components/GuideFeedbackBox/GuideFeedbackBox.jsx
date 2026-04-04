@@ -132,6 +132,7 @@ export default function GuideFeedbackBox({
             method="POST"
             onSubmit={handleSubmit}
             className={classes.Form}
+            data-analytics-form="guide-feedback"
           >
             <input
               type="text"

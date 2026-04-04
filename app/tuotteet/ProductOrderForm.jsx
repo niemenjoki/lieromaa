@@ -256,6 +256,7 @@ export default function ProductOrderForm({ productKey }) {
       action={ORDER_SUBMIT_ENDPOINT}
       method="POST"
       onSubmit={handleSubmit}
+      data-analytics-form="order"
     >
       <input type="text" name="_gotcha" style={{ display: 'none' }} />
       <input type="hidden" name="tuote" value={product.name} />

@@ -175,7 +175,11 @@ export default function ReviewPageClient() {
       {isSubmitted ? (
         <p className={classes.Success}>{REVIEW_SUCCESS_MESSAGE}</p>
       ) : (
-        <form className={classes.Form} onSubmit={handleSubmit}>
+        <form
+          className={classes.Form}
+          onSubmit={handleSubmit}
+          data-analytics-form="review"
+        >
           <fieldset className={classes.Label}>
             <legend>Tähtiarvio</legend>
             <div className={classes.Stars}>
