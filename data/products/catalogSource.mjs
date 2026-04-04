@@ -114,7 +114,7 @@ export const productCatalogSource = {
         'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.',
       h1: 'Lieromaan matokompostorin aloituspakkaus on nyt tilattavissa',
       navigationLabel: 'Aloituspakkaus',
-      updatedAt: '2026-03-01',
+      updatedAt: '2026-04-04',
     },
     search: {
       contexts: ['blog', 'notFound'],
