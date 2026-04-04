@@ -24,14 +24,10 @@ const starterKitVariants = getProductVariants('starterKit');
 const wormVariants = getProductVariants('worms');
 const starterKitShippingOptions = getProductShippingOptions('starterKit');
 const starterKitComponentCosts = starterKitPageContent.componentCosts;
-const starterKitBasePrice = starterKitVariants[0]
-  ? starterKitVariants[0].basePrice -
-    (wormVariants.find((variant) => variant.amount === starterKitVariants[0].amount)
-      ?.basePrice ?? 0)
-  : 0;
 const starterKitComponentCostTotal = Number(
   starterKitComponentCosts.reduce((sum, item) => sum + item.price, 0).toFixed(2)
 );
+const starterKitBasePrice = Math.ceil(starterKitComponentCostTotal);
 
 export default async function Page() {
   return (

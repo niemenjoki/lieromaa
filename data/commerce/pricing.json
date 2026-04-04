@@ -3,10 +3,10 @@
     "worms-50": 20,
     "worms-100": 30,
     "worms-200": 50,
-    "starterkit-50": 84,
-    "starterkit-100": 94,
-    "starterkit-200": 114,
+    "starterkit-50": 64,
+    "starterkit-100": 73,
+    "starterkit-200": 91,
     "postage-worms": 8.9,
-    "postage-starterkit": 10.9
+    "postage-starterkit": 8.9
   }
 }
