@@ -90,7 +90,7 @@ export default async function Page() {
                 käyttöönotto-ohje
               </SafeLink>
             </p>
-            <a className={classes.PrimaryCTA} href="#tilaa">
+            <a className={classes.PrimaryCTA} href="#tilaa" data-analytics-cta="order">
               Tilaa aloituspakkaus
             </a>
           </aside>

@@ -63,9 +63,10 @@ export default function PrivacyPage() {
             sivun URL-osoite ja viittaava sivu (referrer).
           </li>
           <li>
-            Tekninen käyttödata: esimerkiksi IP-osoite, selain- ja laitetiedot,
-            verkkokäyttäytymiseen liittyvät tiedot ja suorituskykymittarit kolmansien
-            osapuolten palveluissa.
+            Tekninen käyttödata: sivupolut, aikaleimat, anonyymi selainkohtainen tunniste,
+            istuntotieto, edellinen sisäinen sivu, ulkoisen viittaavan sivun host-nimi,
+            arvioitu viipymä, scrollaussyvyys, lomakealoitukset, lomakelähetykset,
+            tilaus-CTA-klikkaukset sekä suorituskykymittarit.
           </li>
           <li>
             Käyttäjäasetukset: teema-asetus (vaalea/tumma tila), joka tallennetaan
@@ -78,9 +79,11 @@ export default function PrivacyPage() {
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
           tilauslomakkeella tai viestin oppaiden yhteydessä olevalla kysymys- ja
           aihe-ehdotuslomakkeella. Lisäksi kolmannen osapuolen palvelut (esimerkiksi
-          Google AdSense, Vercel Analytics, Speed Insights ja Formspree) voivat kerätä
-          teknisiä tietoja sivuston käytöstä. Tilauslomakkeiden välityksessä käytetään
-          lisäksi Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa voi käyttää myös
+          Google AdSense, Speed Insights ja Formspree) voivat kerätä teknisiä tietoja
+          sivuston käytöstä. Lieromaa käyttää lisäksi omaa ensimmäisen osapuolen
+          analytiikkaa, joka tallentaa vain sivuston käytön kannalta olennaiset anonyymit
+          mittarit omalle palvelimelle. Tilauslomakkeiden välityksessä käytetään lisäksi
+          Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa voi käyttää myös
           mainostenesto-ohjelmien tai muiden seurantaa estävien työkalujen kanssa.
         </p>
 
@@ -110,9 +113,9 @@ export default function PrivacyPage() {
             suostumus (GDPR Art. 6(1)(a)).
           </li>
           <li>
-            Sivuston käytön ja suorituskyvyn analysointi (Vercel Analytics ja Speed
-            Insights): Oikeusperusteena oikeutettu etu (GDPR Art. 6(1)(f)) sivuston
-            kehittämiseksi.
+            Sivuston käytön ja suorituskyvyn analysointi (Lieromaan oma ensimmäisen
+            osapuolen analytiikka ja Speed Insights): Oikeusperusteena oikeutettu etu
+            (GDPR Art. 6(1)(f)) sivuston kehittämiseksi.
           </li>
           <li>
             Käyttäjäasetusten tallentaminen (localStorage): Oikeusperusteena oikeutettu
@@ -192,38 +195,30 @@ export default function PrivacyPage() {
           .
         </p>
 
-        <h2>Vercel Analytics ja Speed Insights</h2>
+        <h2>Ensimmäisen osapuolen analytiikka ja Speed Insights</h2>
         <p>
-          Sivustolla käytetään myös Vercel Analyticsia ja Speed Insights -palvelua
-          sivuston käytön ja suorituskyvyn seuraamiseen. Vercelin dokumentaation mukaan
-          Web Analyticsin ja Speed Insightsin keräämät datapisteet ovat anonyymejä, eikä
-          niitä ole tarkoitettu yksittäisen käyttäjän tai IP-osoitteen tunnistamiseen. Web
-          Analytics ei käytä kolmannen osapuolen evästeitä, vaan kävijä tunnistetaan
-          pyynnöstä muodostettavan tiivisteen avulla. Näiden palveluiden avulla voidaan
-          seurata esimerkiksi sivulatauksia, reittejä, URL-osoitteita, viittaavia sivuja,
-          laitetyyppiä, selainta, käyttöjärjestelmää, maata, verkkonopeutta ja Web Vitals
-          -metriikoita aggregoidussa muodossa sivuston kehittämiseksi. Vierailijaistunnot
-          hylätään 24 tunnin jälkeen, ja aggregoidut tiedot säilytetään Vercelin
-          käytäntöjen mukaisesti.
+          Sivustolla käytetään Lieromaan omaa kevyttä ensimmäisen osapuolen analytiikkaa
+          sekä Vercel Speed Insights -palvelua sivuston käytön ja suorituskyvyn
+          seuraamiseen. Ensimmäisen osapuolen analytiikka tallentaa omalle palvelimelle
+          anonyymin selaimeen tallennetun tunnisteen, istuntotunnisteen, sivupolun,
+          aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun host-nimen
+          (esimerkiksi google.com tai com.linkedin.android), arvioidun viipymän,
+          scrollaussyvyyden, lomakealoitukset, lomakelähetykset ja tilaus-CTA-klikkaukset.
+          Tietoja käytetään vain sen ymmärtämiseen, miten sivuilla liikutaan ja missä
+          kohtaa kävijät osoittavat kiinnostusta tilaamiseen tai muihin lomakkeisiin.
         </p>
         <p>
-          Vercelin dokumentaatio korostaa myös sitä, että URL-osoitteet ja niiden
-          parametrit voivat joissakin toteutuksissa sisältää henkilötietoja. Lieromaan
-          sivusto on pyritty toteuttamaan niin, ettei URL-osoitteisiin sisällytetä
-          tarkoituksellisesti nimiä, sähköpostiosoitteita, tilausnumeroita tai muita
-          vastaavia tunnisteita.
+          Ensimmäisen osapuolen analytiikka ei tallenna IP-osoitteita, selaimen tai
+          laitteen tarkkoja tunnistetietoja, maantieteellistä sijaintia eikä käytä
+          sormenjälkitunnistusta tai muita vastaavia tunnistuskeinoja. URL-parametreja ei
+          tallenneta analytiikkaan. Anonyymi kävijätunniste säilytetään selaimen
+          localStoragessa ja istuntotieto sessionStoragessa. Speed Insights kerää
+          suorituskykymittareita palveluntarjoajansa käytäntöjen mukaisesti.
         </p>
         <p>
-          Lisätietoja löydät palveluntarjoajien sivuilta:
-          <br />
-          <a
-            href="https://vercel.com/docs/analytics/privacy-policy"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Vercel Analyticsin tietosuoja
-          </a>{' '}
-          ja{' '}
+          Ensimmäisen osapuolen analytiikkadata tallennetaan Lieromaan hallinnoimaan
+          SQLite-tietokantaan kotipalvelimella. Lisätietoja Speed Insightsista löydät
+          palveluntarjoajan sivulta:{' '}
           <a
             href="https://vercel.com/docs/speed-insights/privacy-policy"
             target="_blank"
@@ -237,19 +232,23 @@ export default function PrivacyPage() {
         <h2>LocalStorage</h2>
         <p>
           Kun vaihdat vaaleaan tai tummaan tilaan, sivusto tallentaa valitsemasi teeman
-          selaimesi paikalliseen tallennustilaan (localStorage). Tieto tallennetaan
-          ainoastaan laitteellesi, eikä sitä siirretä eteenpäin. Tietoa säilytetään
-          toistaiseksi, kunnes poistat sen selaimestasi.
+          selaimesi paikalliseen tallennustilaan (localStorage). Lisäksi anonyymi
+          kävijätunniste tallennetaan localStorageen ja istuntotieto sessionStorageen
+          ensimmäisen osapuolen analytiikkaa varten. Näistä tunnisteista ei voida päätellä
+          henkilöllisyyttäsi. Tieto säilytetään ainoastaan laitteellasi, eikä sitä
+          siirretä eteenpäin muille osapuolille muuten kuin analytiikkapyynnön mukana
+          Lieromaan omalle palvelimelle.
         </p>
 
         <h2>Evästeet</h2>
         <p>
-          Sivusto ei itse käytä evästeitä, mutta Google AdSense sekä muut kolmannen
-          osapuolen palvelut voivat käyttää evästeitä mainosten näyttämiseen,
-          kohdentamiseen ja tilastointiin. Voit estää evästeiden käytön selaimesi
-          asetuksista tai asettaa ilmoituksen evästeiden lähettämisestä. Voit peruuttaa
-          suostumuksesi milloin tahansa suostumuksenhallintatyökalun kautta tai selaimen
-          asetuksista.
+          Sivusto ei itse käytä analytiikkaevästeitä. Ensimmäisen osapuolen analytiikka
+          käyttää selaimen localStoragea ja sessionStoragea, ei evästeitä. Google AdSense
+          sekä muut kolmannen osapuolen palvelut voivat kuitenkin käyttää evästeitä
+          mainosten näyttämiseen, kohdentamiseen ja tilastointiin. Voit estää evästeiden
+          käytön selaimesi asetuksista tai asettaa ilmoituksen evästeiden lähettämisestä.
+          Voit peruuttaa suostumuksesi milloin tahansa suostumuksenhallintatyökalun kautta
+          tai selaimen asetuksista.
         </p>
 
         <h2>Tietojen siirto EU-/ETA-alueen ulkopuolelle</h2>
@@ -269,7 +268,8 @@ export default function PrivacyPage() {
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
           palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Formspree oppaiden
           kysymys- ja aihe-ehdotuslomakkeen osalta, Posti, OP Kevytyrittäjä, Google ja
-          Vercel). Henkilötietoja ei myydä eikä luovuteta muihin tarkoituksiin ilman
+          Vercel). Ensimmäisen osapuolen analytiikkadata pysyy Lieromaan omassa
+          hallinnassa. Henkilötietoja ei myydä eikä luovuteta muihin tarkoituksiin ilman
           lainmukaista perustetta.
         </p>
 
@@ -300,12 +300,16 @@ export default function PrivacyPage() {
             käsittely kohtuudella edellyttää.
           </li>
           <li>
-            Vercel Analyticsin ja Speed Insightsin tiedot säilyvät palveluntarjoajan
-            käytäntöjen mukaisesti.
+            Ensimmäisen osapuolen analytiikkatiedot säilyvät Lieromaan omassa
+            SQLite-tietokannassa niin kauan kuin niitä tarvitaan sivuston käytön
+            seuraamiseen ja kuukausiraportointiin. Speed Insightsin tiedot säilyvät
+            palveluntarjoajan käytäntöjen mukaisesti.
           </li>
           <li>
-            LocalStorageen tallennettu teema-asetus säilyy käytössä olevassa selaimessa,
-            kunnes poistat sen.
+            LocalStorageen tallennettu teema-asetus ja anonyymi kävijätunniste sekä
+            sessionStorageen tallennettu istuntotieto säilyvät käytössä olevassa
+            selaimessa, kunnes poistat ne tai selain poistaa ne omien
+            säilytyskäytäntöjensä mukaisesti.
           </li>
         </ul>
 

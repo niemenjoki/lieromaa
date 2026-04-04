@@ -7,10 +7,10 @@ export const legalPageDefinitions = {
     description:
       'Lue, miten Lieromaa käsittelee henkilötietoja ja käyttää evästeitä. Sivulla kerrotaan tietosuojaperiaatteet ja käyttäjän oikeudet.',
     pageDescription:
-      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä, evästeiden käytöstä ja kolmansien osapuolten palveluista (Google AdSense, Vercel Analytics, Speed Insights).',
+      'Lieromaan tietosuojaseloste henkilötietojen käsittelystä, evästeiden käytöstä ja kolmansien osapuolten palveluista (Google AdSense, ensimmäisen osapuolen analytiikka, Speed Insights).',
     shortLabel: 'Tietosuojaseloste',
     publishedAt: '2025-10-16',
-    updatedAt: '2026-03-20',
+    updatedAt: '2026-04-04',
     search: {
       contexts: ['notFound'],
       keywords: ['tietosuoja', 'tietosuojaseloste', 'evästeet', 'henkilötiedot'],
