@@ -4,11 +4,18 @@ import { useEffect, useRef } from 'react';
 
 import { usePathname } from 'next/navigation';
 
+import {
+  ANALYTICS_OPT_OUT_PATH,
+  ANALYTICS_OPT_OUT_STORAGE_KEY,
+  ANALYTICS_OPT_OUT_STORAGE_VALUE,
+} from '@/lib/analytics/optOut';
+
 const ANALYTICS_ENDPOINT = '/api/analytics';
 const VISITOR_ID_STORAGE_KEY = 'lieromaa.analytics.visitor';
 const SESSION_STORAGE_KEY = 'lieromaa.analytics.session';
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
 const SESSION_TOUCH_INTERVAL_MS = 60 * 1000;
+const IGNORED_ANALYTICS_PATHS = new Set([ANALYTICS_OPT_OUT_PATH]);
 
 function createId(prefix) {
   return (
@@ -25,6 +32,13 @@ function getStorage(type) {
   }
 }
 
+function isAnalyticsOptedOut() {
+  const storage = getStorage('localStorage');
+  return (
+    storage?.getItem(ANALYTICS_OPT_OUT_STORAGE_KEY) === ANALYTICS_OPT_OUT_STORAGE_VALUE
+  );
+}
+
 function normalizePath(value) {
   const baseValue = String(value || '/').trim();
   const withoutHash = baseValue.split('#')[0] || '/';
@@ -32,6 +46,10 @@ function normalizePath(value) {
   const normalized = withoutQuery.startsWith('/') ? withoutQuery : `/${withoutQuery}`;
 
   return normalized.length > 200 ? normalized.slice(0, 200) : normalized;
+}
+
+function isIgnoredAnalyticsPath(value) {
+  return IGNORED_ANALYTICS_PATHS.has(normalizePath(value));
 }
 
 function normalizeHost(value) {
@@ -311,6 +329,21 @@ export default function FirstPartyAnalytics() {
   useEffect(() => {
     const nextPath = normalizePath(pathname || '/');
     const currentView = currentViewRef.current;
+    const shouldSkipTracking = isIgnoredAnalyticsPath(nextPath) || isAnalyticsOptedOut();
+
+    if (shouldSkipTracking) {
+      if (currentView) {
+        currentView.maxScrollPercent = Math.max(
+          currentView.maxScrollPercent,
+          getCurrentScrollDepth()
+        );
+        pauseView(currentView);
+        sendPayload(buildPayload(currentView));
+      }
+
+      currentViewRef.current = null;
+      return;
+    }
 
     if (currentView?.path === nextPath) {
       return;
