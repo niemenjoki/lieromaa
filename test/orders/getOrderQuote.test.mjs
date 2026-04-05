@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
 import { getOrderQuote } from '@/lib/orders/getOrderQuote';
+
 import { expectEqual } from '../helpers/assertions.mjs';
 
 describe('frontend order quote pricing', () => {

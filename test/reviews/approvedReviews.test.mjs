@@ -45,9 +45,9 @@ describe('frontend approved review data', () => {
       }
 
       const calculatedAverage = Number(
-        (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(
-          1
-        )
+        (
+          reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
+        ).toFixed(1)
       );
 
       expectEqual(

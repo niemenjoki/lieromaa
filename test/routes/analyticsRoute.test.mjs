@@ -44,7 +44,11 @@ describe('frontend analytics proxy route', () => {
       })
     );
 
-    expectEqual(response.status, 403, 'the analytics route should return HTTP 403 for cross-origin requests');
+    expectEqual(
+      response.status,
+      403,
+      'the analytics route should return HTTP 403 for cross-origin requests'
+    );
   });
 
   test('the analytics route should return 400 when the request body is not valid JSON', async () => {
@@ -55,7 +59,11 @@ describe('frontend analytics proxy route', () => {
       })
     );
 
-    expectEqual(response.status, 400, 'the analytics route should return HTTP 400 for malformed JSON payloads');
+    expectEqual(
+      response.status,
+      400,
+      'the analytics route should return HTTP 400 for malformed JSON payloads'
+    );
   });
 
   test('the analytics route should forward the payload to the order server when configuration is present', async () => {
@@ -97,8 +105,16 @@ describe('frontend analytics proxy route', () => {
             })
           );
 
-          expectEqual(response.status, 204, 'the analytics route should preserve the upstream 204 response status');
-          expectEqual(recordedCalls.length, 1, 'the analytics route should forward exactly one analytics request upstream');
+          expectEqual(
+            response.status,
+            204,
+            'the analytics route should preserve the upstream 204 response status'
+          );
+          expectEqual(
+            recordedCalls.length,
+            1,
+            'the analytics route should forward exactly one analytics request upstream'
+          );
           expectEqual(
             recordedCalls[0][0],
             'https://orders-ingest.lieromaa.fi/api/public/analytics',
@@ -133,7 +149,11 @@ describe('frontend analytics proxy route', () => {
             })
           );
 
-          expectEqual(response.status, 500, 'the analytics route should return HTTP 500 when server configuration is missing');
+          expectEqual(
+            response.status,
+            500,
+            'the analytics route should return HTTP 500 when server configuration is missing'
+          );
         })
     );
   });
