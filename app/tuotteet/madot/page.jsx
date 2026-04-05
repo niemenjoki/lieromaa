@@ -1,6 +1,7 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { WORMS_SHIPPING_SCHEDULE_TEXT } from '@/data/commerce/shippingSchedule.mjs';
 import { ORDER_CONTACT_EMAIL, ORDER_WHATSAPP_URL } from '@/data/site/contact';
 import { getProductVariants } from '@/lib/pricing/catalog';
 
@@ -104,9 +105,8 @@ export default async function Page() {
           <section>
             <h2>Toimitus ja nouto</h2>
             <p>
-              Madot ovat elävää materiaalia, joten lähetän niitä vain maanantaisin ja
-              tiistaisin. Maanantaina klo 12 mennessä tehdyt tilaukset postitan tiistaina,
-              ja myöhemmin saapuneet tilaukset seuraavan viikon maanantaina.
+              Madot ovat elävää materiaalia, joten postitan ne vain maanantaisin.{' '}
+              {WORMS_SHIPPING_SCHEDULE_TEXT}
             </p>
             <p>
               Näin varmistetaan, etteivät madot jää viikonlopuksi Postin kuljetukseen.

@@ -61,7 +61,11 @@ describe('frontend public order submit route', () => {
       })
     );
 
-    expectEqual(response.status, 200, 'the public order submit route should respond with HTTP 200 for ignored honeypot spam');
+    expectEqual(
+      response.status,
+      200,
+      'the public order submit route should respond with HTTP 200 for ignored honeypot spam'
+    );
     expectDeepEqual(
       await response.json(),
       {
@@ -105,11 +109,27 @@ describe('frontend public order submit route', () => {
             })
           );
 
-          expectEqual(response.status, 200, 'the public order submit route should return HTTP 200 when the upstream order creation succeeds');
+          expectEqual(
+            response.status,
+            200,
+            'the public order submit route should return HTTP 200 when the upstream order creation succeeds'
+          );
           const body = await response.json();
-          expectEqual(body.ok, true, 'the public order submit route should return ok=true when the upstream order creation succeeds');
-          expectEqual(body.orderId, 'LRM-123', 'the public order submit route should return the upstream order id');
-          expectEqual(recordedCalls.length, 1, 'the public order submit route should create exactly one upstream order request');
+          expectEqual(
+            body.ok,
+            true,
+            'the public order submit route should return ok=true when the upstream order creation succeeds'
+          );
+          expectEqual(
+            body.orderId,
+            'LRM-123',
+            'the public order submit route should return the upstream order id'
+          );
+          expectEqual(
+            recordedCalls.length,
+            1,
+            'the public order submit route should create exactly one upstream order request'
+          );
           expectEqual(
             recordedCalls[0][0],
             'https://orders-ingest.lieromaa.fi/api/public/orders',
@@ -127,7 +147,11 @@ describe('frontend public order submit route', () => {
           );
 
           const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
-          expectEqual(forwardedPayload.product.sku, 'worms-100', 'the public order submit route should forward the validated worm SKU');
+          expectEqual(
+            forwardedPayload.product.sku,
+            'worms-100',
+            'the public order submit route should forward the validated worm SKU'
+          );
           expectEqual(
             forwardedPayload.fulfillment.method,
             'postitus',
@@ -171,7 +195,11 @@ describe('frontend public order submit route', () => {
               })
             );
 
-            expectEqual(response.status, 409, 'the public order submit route should preserve the upstream rejection status code');
+            expectEqual(
+              response.status,
+              409,
+              'the public order submit route should preserve the upstream rejection status code'
+            );
             expectDeepEqual(
               await response.json(),
               {

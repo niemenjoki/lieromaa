@@ -1,3 +1,8 @@
+import {
+  STARTER_KIT_HANDLING_TIME,
+  WORMS_HANDLING_TIME,
+} from '../commerce/shippingSchedule.mjs';
+
 export const sharedPickupHelperTexts = [
   'Voit toivoa tiettyä Postin noutopaikkaa (pakettiautomaatti tai postitoimipaikka). Toiveen tulee löytyä Postin palvelupistekartalta. Jos et toivo noutopaikkaa, lähetys toimitetaan ilmoittamasi postinumeron mukaan ensimmäiseen Postin tarjoamaan noutopisteeseen.',
   'Huomioithan, että Posti saattaa toiveesta huolimatta toimittaa paketin eri toimipisteeseen, jos esimerkiksi noutopiste on täynnä.',
@@ -18,7 +23,7 @@ export const productCatalogSource = {
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
-      updatedAt: '2025-10-07',
+      updatedAt: '2026-04-05',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -55,6 +60,7 @@ export const productCatalogSource = {
       productType: 'Matokompostointi > Kompostimadot',
     },
     schema: {
+      handlingTime: WORMS_HANDLING_TIME,
       productAttributes: {
         category: 'GardenProduct',
         material: 'Kompostimulta, pahvisilppu, puukuitu, kookoskuitu',
@@ -114,7 +120,7 @@ export const productCatalogSource = {
         'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.',
       h1: 'Lieromaan matokompostorin aloituspakkaus on nyt tilattavissa',
       navigationLabel: 'Aloituspakkaus',
-      updatedAt: '2026-04-04',
+      updatedAt: '2026-04-05',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -178,6 +184,7 @@ export const productCatalogSource = {
       productType: 'Matokompostointi > Matokompostorit > Aloituspakkaukset',
     },
     schema: {
+      handlingTime: STARTER_KIT_HANDLING_TIME,
       returnPolicyText:
         'Aloituspakkauksella on 14 vrk peruuttamisoikeus itse pakkauksen osalta. Pakettiin sisältyvien kompostimatojen osuutta ei hyvitetä, jos lähetys on ehditty toimittaa.',
     },

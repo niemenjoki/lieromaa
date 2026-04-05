@@ -1,4 +1,9 @@
 import {
+  MONDAY_ONLY_SHIPPING_NOTE,
+  STARTER_KIT_SHIPPING_SCHEDULE_TEXT,
+  WORMS_SHIPPING_SCHEDULE_TEXT,
+} from '@/data/commerce/shippingSchedule.mjs';
+import {
   BUSINESS_ADDRESS_LINES,
   BUSINESS_ID,
   BUSINESS_NAME,
@@ -82,15 +87,10 @@ export default function OrderPolicyPage() {
 
         <h2>Toimitusaika</h2>
         <p>
-          Eläviä matoja sisältäviä tuotteita postitetaan vain maanantaisin ja tiistaisin,
-          jotta madot eivät jää viikonlopuksi Postin varastoon. Maanantaina ennen klo 12
-          tilatut madot postitetaan tiistaina. Muut matotilaukset postitetaan seuraavan
-          viikon maanantaina.
+          {MONDAY_ONLY_SHIPPING_NOTE} {WORMS_SHIPPING_SCHEDULE_TEXT}{' '}
+          {STARTER_KIT_SHIPPING_SCHEDULE_TEXT}
         </p>
-        <p>
-          Matokompostorin aloituspakkaus postitetaan 1-2 viikon kuluttua tilauksesta.
-          Tarkempi toimitusaika ilmoitetaan aina tilausvahvistuksessa.
-        </p>
+        <p>Tarkempi toimitusaika ilmoitetaan aina tilausvahvistuksessa.</p>
 
         <h2>Peruuttamisoikeus ja peruuttamisohje</h2>
         <p>

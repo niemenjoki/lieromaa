@@ -1,6 +1,7 @@
 import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { STARTER_KIT_SHIPPING_SCHEDULE_TEXT } from '@/data/commerce/shippingSchedule.mjs';
 import { starterKitPageContent } from '@/data/pages/products/starterKit.js';
 import { ORDER_CONTACT_EMAIL } from '@/data/site/contact';
 import {
@@ -252,8 +253,9 @@ export default async function Page() {
               päivää.
             </p>
             <p>
-              Matokompostorin aloituspakkaus postitetaan 1-2 viikon kuluttua tilauksesta.
-              Tarkempi toimitusaika ilmoitetaan tilausvahvistuksessa.
+              Aloituspakkaus sisältää eläviä kompostimatoja, joten lähetykset lähtevät
+              vain maanantaisin. {STARTER_KIT_SHIPPING_SCHEDULE_TEXT} Tarkempi
+              toimitusaika ilmoitetaan tilausvahvistuksessa.
             </p>
             <p>
               Aloituspakkauksella on 14 päivän peruuttamisoikeus itse pakkauksen osalta.

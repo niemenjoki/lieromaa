@@ -40,7 +40,11 @@ describe('frontend review proxy routes', () => {
       })
     );
 
-    expectEqual(response.status, 400, 'the review session route should return HTTP 400 when the review token is missing');
+    expectEqual(
+      response.status,
+      400,
+      'the review session route should return HTTP 400 when the review token is missing'
+    );
   });
 
   test('the review session route should forward the session lookup to the order server when a token is present', async () => {
@@ -72,7 +76,11 @@ describe('frontend review proxy routes', () => {
             })
           );
 
-          expectEqual(response.status, 200, 'the review session route should preserve the successful upstream status');
+          expectEqual(
+            response.status,
+            200,
+            'the review session route should preserve the successful upstream status'
+          );
           expectDeepEqual(
             await response.json(),
             {
@@ -128,7 +136,11 @@ describe('frontend review proxy routes', () => {
             'https://orders-ingest.lieromaa.fi/api/public/reviews',
             'the review submit route should post to the public review endpoint on the order server'
           );
-          expectEqual(response.status, 409, 'the review submit route should preserve the upstream rejection status');
+          expectEqual(
+            response.status,
+            409,
+            'the review submit route should preserve the upstream rejection status'
+          );
           expectDeepEqual(
             await response.json(),
             {

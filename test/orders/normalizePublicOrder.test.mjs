@@ -22,7 +22,11 @@ describe('frontend public order normalization', () => {
 
     const payload = normalizePublicOrderSubmission(formData, { now });
 
-    expectEqual(payload.source, 'website', 'normalizePublicOrderSubmission should label website orders with source=website');
+    expectEqual(
+      payload.source,
+      'website',
+      'normalizePublicOrderSubmission should label website orders with source=website'
+    );
     expectEqual(
       payload.sourceRequestId,
       'submission-123',
@@ -47,8 +51,16 @@ describe('frontend public order normalization', () => {
       },
       'normalizePublicOrderSubmission should map the postal address into the server payload'
     );
-    expectEqual(payload.product.key, 'worms', 'normalizePublicOrderSubmission should keep the product key');
-    expectEqual(payload.product.sku, 'worms-100', 'normalizePublicOrderSubmission should keep the selected SKU');
+    expectEqual(
+      payload.product.key,
+      'worms',
+      'normalizePublicOrderSubmission should keep the product key'
+    );
+    expectEqual(
+      payload.product.sku,
+      'worms-100',
+      'normalizePublicOrderSubmission should keep the selected SKU'
+    );
     expectEqual(
       payload.pricing.shippingPrice,
       8.9,
@@ -114,8 +126,8 @@ describe('frontend public order normalization', () => {
         normalizePublicOrderSubmission(
           createValidOrderFormData({
             _gotcha: 'bot',
-        })
-      ),
+          })
+        ),
       (error) => {
         expectOk(
           error instanceof PublicOrderValidationError,
@@ -166,8 +178,8 @@ describe('frontend public order normalization', () => {
           createValidOrderFormData({
             tuote_avain: 'starterKit',
             sku: 'worms-100',
-        })
-      ),
+          })
+        ),
       (error) => {
         expectOk(
           error instanceof PublicOrderValidationError,
