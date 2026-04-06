@@ -6,7 +6,8 @@
     "starterkit-50": 64,
     "starterkit-100": 73,
     "starterkit-200": 91,
-    "postage-worms": 8.9,
-    "postage-starterkit": 8.9
+    "postage-worms-pickup": 8.9,
+    "postage-starterkit-pickup": 8.9,
+    "postage-starterkit-home": 14.9
   }
 }

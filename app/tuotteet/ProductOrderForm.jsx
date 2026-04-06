@@ -24,6 +24,13 @@ import {
 import classes from './ProductPage.module.css';
 import WormAmountFinePrint from './WormAmountFinePrint';
 
+const PICKUP_POINT_SEARCH_ENDPOINT = '/api/pickup-points/search';
+const emptyAddressFields = {
+  line1: '',
+  postalCode: '',
+  city: '',
+};
+
 const discountDateFormatter = new Intl.DateTimeFormat('fi-FI', {
   day: 'numeric',
   month: 'numeric',
@@ -57,26 +64,60 @@ function getAutomaticDiscountNotice(variant) {
   return `Norm. ${formatPrice(variant.basePrice)} € (${formatAutomaticDiscountLabel(variant.discount)}). 30 päivän alin hinta: ${formatPrice(variant.discount.lowestPrice30Days)} €.${validUntilText}`;
 }
 
-function PostiPickupHelp() {
+function formatPickupPointDistance(distanceInMeters) {
+  const numericValue = Number(distanceInMeters);
+  if (!Number.isFinite(numericValue) || numericValue < 0) {
+    return '';
+  }
+
+  if (numericValue < 1000) {
+    return `${Math.round(numericValue)} m`;
+  }
+
+  return `${(numericValue / 1000).toLocaleString('fi-FI', {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  })} km`;
+}
+
+function joinPickupPointAddress(point) {
+  const postalLine = [point.postalCode, point.city || point.municipality]
+    .filter(Boolean)
+    .join(' ');
+
+  return [point.street, postalLine].filter(Boolean).join(', ');
+}
+
+function getPickupPointTypeLabel(point) {
+  return point.parcelLocker ? 'Pakettiautomaatti' : 'Postin palvelupiste';
+}
+
+function formatPickupPointOptionLabel(point) {
+  const postalLine = joinPickupPointAddress(point);
+  const distanceLabel = formatPickupPointDistance(point.distanceInMeters);
+
+  return [
+    point.name,
+    [getPickupPointTypeLabel(point), distanceLabel].filter(Boolean).join(', '),
+    point.specificLocation,
+    postalLine,
+  ]
+    .filter(Boolean)
+    .join(' | ');
+}
+
+function ShippingHelpTexts({ texts }) {
+  if (!Array.isArray(texts) || texts.length === 0) {
+    return null;
+  }
+
   return (
     <>
-      <p className={classes.HelperText}>
-        Voit toivoa tiettyä Postin noutopaikkaa (pakettiautomaatti tai postitoimipaikka).
-        Toiveen tulee löytyä Postin{' '}
-        <a
-          href="https://www.posti.fi/palvelupisteet-kartalla"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          palvelupistekartalta
-        </a>
-        . Jos et toivo noutopaikkaa, lähetys toimitetaan ilmoittamasi postinumeron mukaan
-        ensimmäiseen Postin tarjoamaan noutopisteeseen.
-      </p>
-      <p className={classes.HelperText}>
-        Huomioithan, että Posti saattaa toiveesta huolimatta toimittaa paketin eri
-        toimipisteeseen, jos esimerkiksi noutopiste on täynnä.
-      </p>
+      {texts.map((line) => (
+        <p key={line} className={classes.HelperText}>
+          {line}
+        </p>
+      ))}
     </>
   );
 }
@@ -91,12 +132,11 @@ export default function ProductOrderForm({ productKey }) {
     getProductVariant(productKey, orderConfig.defaultVariantAmount) ??
     variants[0] ??
     null;
-  const defaultDelivery = shippingOptions[0]?.id ?? 'postitus';
+  const defaultAmount = defaultVariant ? String(defaultVariant.amount) : '';
+  const defaultDelivery = shippingOptions[0]?.id ?? 'nouto';
 
   const [delivery, setDelivery] = useState(defaultDelivery);
-  const [amount, setAmount] = useState(
-    defaultVariant ? String(defaultVariant.amount) : ''
-  );
+  const [amount, setAmount] = useState(defaultAmount);
   const [selectedExtraCharges, setSelectedExtraCharges] = useState({});
   const [discountCode, setDiscountCode] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState(null);
@@ -107,10 +147,28 @@ export default function ProductOrderForm({ productKey }) {
   const [submitError, setSubmitError] = useState('');
   const [formStartedAt, setFormStartedAt] = useState('');
   const [submissionId, setSubmissionId] = useState('');
+  const [addressFields, setAddressFields] = useState(emptyAddressFields);
+  const [pickupPoints, setPickupPoints] = useState([]);
+  const [pickupPointError, setPickupPointError] = useState('');
+  const [isSearchingPickupPoints, setIsSearchingPickupPoints] = useState(false);
+  const [pickupPointFallbackAllowed, setPickupPointFallbackAllowed] = useState(false);
+  const [selectedPickupPointId, setSelectedPickupPointId] = useState('');
+  const [selectedPickupPoint, setSelectedPickupPoint] = useState(null);
 
   const currentVariant =
     variants.find((variant) => String(variant.amount) === amount) ?? defaultVariant;
   const currentSku = currentVariant?.sku ?? '';
+  const selectedShippingOption =
+    shippingOptions.find((option) => option.id === delivery) ??
+    shippingOptions[0] ??
+    null;
+  const selectedFulfillmentType =
+    selectedShippingOption?.fulfillmentType ?? 'local_pickup';
+  const deliveryRequiresPhone =
+    selectedFulfillmentType === 'pickup_point' ||
+    selectedFulfillmentType === 'home_delivery';
+  const pickupSearchVisible = selectedFulfillmentType === 'pickup_point';
+  const deliveryAddressVisible = selectedFulfillmentType === 'home_delivery';
   const quote =
     currentSku && delivery
       ? getOrderQuote({
@@ -135,14 +193,74 @@ export default function ProductOrderForm({ productKey }) {
   }, [appliedDiscount, currentSku]);
 
   useEffect(() => {
+    setDelivery(defaultDelivery);
+    setAmount(defaultAmount);
+    setSelectedExtraCharges({});
+    setDiscountCode('');
+    setAppliedDiscount(null);
+    setDiscountFeedback('');
+    setIsSubmitting(false);
+    setIsSubmitted(false);
+    setSubmitError('');
+    setAddressFields(emptyAddressFields);
+    setPickupPoints([]);
+    setPickupPointError('');
+    setIsSearchingPickupPoints(false);
+    setPickupPointFallbackAllowed(false);
+    setSelectedPickupPointId('');
+    setSelectedPickupPoint(null);
+  }, [defaultAmount, defaultDelivery, productKey]);
+
+  useEffect(() => {
     setFormStartedAt(String(Date.now()));
     setSubmissionId(globalThis.crypto?.randomUUID?.() || `${productKey}-${Date.now()}`);
   }, [productKey]);
+
+  useEffect(() => {
+    if (shippingOptions.some((option) => option.id === delivery)) {
+      return;
+    }
+
+    setDelivery(defaultDelivery);
+  }, [defaultDelivery, delivery, shippingOptions]);
 
   const handleDiscountChange = (event) => {
     setDiscountCode(event.target.value);
     setAppliedDiscount(null);
     setDiscountFeedback('');
+  };
+
+  const handleAddressFieldChange = (fieldName, value) => {
+    setAddressFields((current) => ({
+      ...current,
+      [fieldName]: value,
+    }));
+
+    if (pickupSearchVisible) {
+      setPickupPoints([]);
+      setPickupPointError('');
+      setSelectedPickupPointId('');
+      setSelectedPickupPoint(null);
+    }
+  };
+
+  const handleDeliveryChange = (nextDelivery) => {
+    setDelivery(nextDelivery);
+    setSubmitError('');
+    setPickupPoints([]);
+    setPickupPointError('');
+    setPickupPointFallbackAllowed(false);
+    setSelectedPickupPointId('');
+    setSelectedPickupPoint(null);
+  };
+
+  const handlePickupPointSelection = (pickupPointId) => {
+    const nextPoint = pickupPoints.find((point) => point.id === pickupPointId) ?? null;
+
+    setSelectedPickupPointId(pickupPointId);
+    setSelectedPickupPoint(nextPoint);
+    setPickupPointError('');
+    setSubmitError('');
   };
 
   const applyDiscount = async () => {
@@ -172,6 +290,73 @@ export default function ProductOrderForm({ productKey }) {
       setDiscountFeedback('Alennuskoodin tarkistus epäonnistui.');
     } finally {
       setIsCheckingDiscount(false);
+    }
+  };
+
+  const searchPickupPoints = async () => {
+    const postalCode = addressFields.postalCode.trim();
+    const street = addressFields.line1.trim();
+    const city = addressFields.city.trim();
+
+    if (!postalCode) {
+      setPickupPointError('Anna vähintään postinumero, niin voin hakea noutopaikat.');
+      return;
+    }
+
+    setIsSearchingPickupPoints(true);
+    setPickupPointError('');
+    setPickupPoints([]);
+    setPickupPointFallbackAllowed(false);
+    setSelectedPickupPointId('');
+    setSelectedPickupPoint(null);
+
+    try {
+      const searchParams = new URLSearchParams({
+        postalCode,
+      });
+      if (street) {
+        searchParams.set('street', street);
+      }
+      if (city) {
+        searchParams.set('city', city);
+      }
+
+      const response = await fetch(
+        `${PICKUP_POINT_SEARCH_ENDPOINT}?${searchParams.toString()}`,
+        {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+          },
+          cache: 'no-store',
+        }
+      );
+
+      const responseData = await response.json().catch(() => null);
+      if (!response.ok || !responseData?.ok) {
+        if (response.status >= 500) {
+          setPickupPointFallbackAllowed(true);
+        }
+        throw new Error(responseData?.message || 'Noutopisteiden haku epäonnistui.');
+      }
+
+      const nextPickupPoints = Array.isArray(responseData.pickupPoints)
+        ? responseData.pickupPoints
+        : [];
+      setPickupPoints(nextPickupPoints);
+
+      if (nextPickupPoints.length === 0) {
+        setPickupPointError(
+          'Noutopisteitä ei löytynyt tällä haulla. Kokeile toista postinumeroa tai tarkempaa osoitetta.'
+        );
+      }
+    } catch (error) {
+      setPickupPointFallbackAllowed(true);
+      setPickupPointError(
+        error instanceof Error ? error.message : 'Noutopisteiden haku epäonnistui.'
+      );
+    } finally {
+      setIsSearchingPickupPoints(false);
     }
   };
 
@@ -249,6 +434,8 @@ export default function ProductOrderForm({ productKey }) {
   const totalFormatted = formatPrice(total);
   const discountProductAmount = quote?.discountAmounts.productAmount ?? 0;
   const shippingDiscount = quote?.discountAmounts.shippingAmount ?? 0;
+  const selectedShippingHelpTexts =
+    selectedShippingOption?.helperTexts ?? orderConfig.shippingHelperTexts ?? [];
 
   return (
     <form
@@ -265,6 +452,61 @@ export default function ProductOrderForm({ productKey }) {
       <input type="hidden" name="lomake_aloitettu_ms" value={formStartedAt} />
       <input type="hidden" name="submission_id" value={submissionId} />
       <input type="hidden" name="sivu_polku" value={pathname ?? ''} />
+      <input type="hidden" name="pickup_point_id" value={selectedPickupPoint?.id ?? ''} />
+      <input
+        type="hidden"
+        name="pickup_point_name"
+        value={selectedPickupPoint?.name ?? ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_care_of"
+        value={selectedPickupPoint?.careOf ?? ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_street"
+        value={selectedPickupPoint?.street ?? ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_postal_code"
+        value={selectedPickupPoint?.postalCode ?? ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_city"
+        value={selectedPickupPoint?.city ?? ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_municipality"
+        value={selectedPickupPoint?.municipality ?? ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_specific_location"
+        value={selectedPickupPoint?.specificLocation ?? ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_parcel_locker"
+        value={selectedPickupPoint ? String(selectedPickupPoint.parcelLocker) : ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_routing_service_code"
+        value={selectedPickupPoint?.routingServiceCode ?? ''}
+      />
+      <input
+        type="hidden"
+        name="pickup_point_distance_meters"
+        value={
+          selectedPickupPoint?.distanceInMeters != null
+            ? String(selectedPickupPoint.distanceInMeters)
+            : ''
+        }
+      />
 
       <label>
         Nimi
@@ -278,7 +520,7 @@ export default function ProductOrderForm({ productKey }) {
 
       <label>
         Puhelinnumero
-        <input type="tel" name="phone" />
+        <input type="tel" name="phone" required={deliveryRequiresPhone} />
       </label>
 
       {orderConfig.variantSelectorPosition === 'beforeFulfillment'
@@ -294,7 +536,7 @@ export default function ProductOrderForm({ productKey }) {
               name="toimitus"
               value={option.id}
               checked={delivery === option.id}
-              onChange={() => setDelivery(option.id)}
+              onChange={() => handleDeliveryChange(option.id)}
             />{' '}
             {option.label}
             {option.price > 0 ? ` (${formatPrice(option.price)} €)` : ''}
@@ -330,19 +572,134 @@ export default function ProductOrderForm({ productKey }) {
         </fieldset>
       ))}
 
-      {delivery === 'postitus' ? (
+      {pickupSearchVisible ? (
+        <>
+          <div className={classes.AddressGroup}>
+            <label>
+              Katuosoite (valinnainen)
+              <input
+                type="text"
+                name="osoite"
+                value={addressFields.line1}
+                onChange={(event) =>
+                  handleAddressFieldChange('line1', event.target.value)
+                }
+                autoComplete="street-address"
+              />
+            </label>
+            <label>
+              Postinumero
+              <input
+                type="text"
+                name="postinumero"
+                value={addressFields.postalCode}
+                onChange={(event) =>
+                  handleAddressFieldChange('postalCode', event.target.value)
+                }
+                required={pickupSearchVisible}
+                autoComplete="postal-code"
+              />
+            </label>
+            <label>
+              Kaupunki (valinnainen)
+              <input
+                type="text"
+                name="toimipaikka"
+                value={addressFields.city}
+                onChange={(event) => handleAddressFieldChange('city', event.target.value)}
+                autoComplete="address-level2"
+              />
+            </label>
+          </div>
+
+          <button
+            type="button"
+            className={classes.SecondaryButton}
+            onClick={searchPickupPoints}
+            disabled={isSearchingPickupPoints}
+          >
+            {isSearchingPickupPoints ? 'Haetaan noutopaikkoja...' : 'Hae noutopaikat'}
+          </button>
+
+          {pickupPointError ? (
+            <p className={classes.HelperText} role="status">
+              {pickupPointError}
+            </p>
+          ) : null}
+
+          {pickupPoints.length > 0 ? (
+            <fieldset>
+              <legend>Valitse noutopaikka</legend>
+              <label className={classes.StackedField}>
+                <span className={classes.FieldLabel}>Noutopaikkalista</span>
+                <select
+                  name="pickup_point_selection"
+                  className={classes.PickupPointSelect}
+                  value={selectedPickupPointId}
+                  onChange={(event) => handlePickupPointSelection(event.target.value)}
+                >
+                  <option value="">Valitse noutopaikka listasta</option>
+                  {pickupPoints.map((point) => (
+                    <option key={point.id} value={point.id}>
+                      {formatPickupPointOptionLabel(point)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </fieldset>
+          ) : null}
+
+          {selectedPickupPoint ? (
+            <div className={classes.SelectedPickupPoint}>
+              <strong>Valittu noutopaikka:</strong>{' '}
+              {[
+                selectedPickupPoint.name,
+                selectedPickupPoint.specificLocation,
+                joinPickupPointAddress(selectedPickupPoint),
+              ]
+                .filter(Boolean)
+                .join(', ')}
+            </div>
+          ) : null}
+        </>
+      ) : null}
+
+      {deliveryAddressVisible ? (
         <div className={classes.AddressGroup}>
           <label>
-            Postiosoite
-            <input type="text" name="osoite" required={delivery === 'postitus'} />
+            Toimitusosoite
+            <input
+              type="text"
+              name="osoite"
+              value={addressFields.line1}
+              onChange={(event) => handleAddressFieldChange('line1', event.target.value)}
+              required={deliveryAddressVisible}
+              autoComplete="street-address"
+            />
           </label>
           <label>
             Postinumero
-            <input type="text" name="postinumero" required={delivery === 'postitus'} />
+            <input
+              type="text"
+              name="postinumero"
+              value={addressFields.postalCode}
+              onChange={(event) =>
+                handleAddressFieldChange('postalCode', event.target.value)
+              }
+              required={deliveryAddressVisible}
+              autoComplete="postal-code"
+            />
           </label>
           <label>
             Postitoimipaikka
-            <input type="text" name="toimipaikka" required={delivery === 'postitus'} />
+            <input
+              type="text"
+              name="toimipaikka"
+              value={addressFields.city}
+              onChange={(event) => handleAddressFieldChange('city', event.target.value)}
+              required={deliveryAddressVisible}
+              autoComplete="address-level2"
+            />
           </label>
         </div>
       ) : null}
@@ -386,7 +743,15 @@ export default function ProductOrderForm({ productKey }) {
         <textarea name="lisatiedot" rows="3" />
       </label>
 
-      {orderConfig.shippingHelperTexts.length > 0 ? <PostiPickupHelp /> : null}
+      {pickupSearchVisible && pickupPointFallbackAllowed ? (
+        <p className={classes.HelperText}>
+          Jos noutopistehaku ei ole käytettävissä tai haluat toivoa tiettyä noutopaikkaa
+          ilman valintaa, voit kirjoittaa tähän toivomasi Postin noutopaikan tai
+          automaatin. Muuten voin lähettää paketin myös pelkän postinumeron perusteella.
+        </p>
+      ) : null}
+
+      <ShippingHelpTexts texts={selectedShippingHelpTexts} />
 
       <p className={classes.OrderTotal}>
         Yhteensä: <strong>{totalFormatted} €</strong>

@@ -24,6 +24,13 @@ export const dynamic = 'force-static';
 const starterKitVariants = getProductVariants('starterKit');
 const wormVariants = getProductVariants('worms');
 const starterKitShippingOptions = getProductShippingOptions('starterKit');
+const starterKitPickupOption =
+  starterKitShippingOptions.find((option) => option.id === 'posti_noutopiste') ?? null;
+const starterKitHomeOption =
+  starterKitShippingOptions.find((option) => option.id === 'posti_kotiinkuljetus') ??
+  null;
+const starterKitLocalPickupOption =
+  starterKitShippingOptions.find((option) => option.id === 'nouto') ?? null;
 const starterKitComponentCosts = starterKitPageContent.componentCosts;
 const starterKitComponentCostTotal = Number(
   starterKitComponentCosts.reduce((sum, item) => sum + item.price, 0).toFixed(2)
@@ -256,6 +263,29 @@ export default async function Page() {
               Aloituspakkaus sisältää eläviä kompostimatoja, joten lähetykset lähtevät
               vain maanantaisin. {STARTER_KIT_SHIPPING_SCHEDULE_TEXT} Tarkempi
               toimitusaika ilmoitetaan tilausvahvistuksessa.
+            </p>
+            <p>
+              Toimitustavoiksi voit valita{' '}
+              <strong>
+                {starterKitPickupOption?.label} (
+                {formatPrice(starterKitPickupOption?.price ?? 0)} €)
+              </strong>
+              ,{' '}
+              <strong>
+                {starterKitHomeOption?.label} (
+                {formatPrice(starterKitHomeOption?.price ?? 0)} €)
+              </strong>{' '}
+              tai{' '}
+              <strong>
+                {starterKitLocalPickupOption?.label} (
+                {formatPrice(starterKitLocalPickupOption?.price ?? 0)} €)
+              </strong>
+              .
+            </p>
+            <p>
+              Kassalla voit hakea Postin noutopaikan suoraan. Jos noutopistehaku ei ole
+              hetkellisesti käytettävissä, voit kirjoittaa toivomasi noutopaikan
+              viestikenttään. Voin lähettää paketin myös pelkän postinumeron perusteella.
             </p>
             <p>
               Aloituspakkauksella on 14 päivän peruuttamisoikeus itse pakkauksen osalta.

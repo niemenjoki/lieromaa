@@ -10,13 +10,20 @@ import { expectDeepEqual, expectEqual, expectOk } from '../helpers/assertions.mj
 import { createValidOrderFormData } from '../helpers/orderForm.mjs';
 
 describe('frontend public order normalization', () => {
-  test('normalizePublicOrderSubmission should build the server payload when the public order form is valid', () => {
+  test('normalizePublicOrderSubmission should build the server payload for a pickup-point worm order', () => {
     const now = new Date('2026-01-15T10:00:00Z');
     const formData = createValidOrderFormData({
-      toimitus: 'postitus',
+      toimitus: 'posti_noutopiste',
       osoite: 'Kompostikuja 1',
       postinumero: '00100',
       toimipaikka: 'Helsinki',
+      pickup_point_id: 'POSTI-001',
+      pickup_point_name: 'Posti Pasila',
+      pickup_point_street: 'Ratapihantie 6',
+      pickup_point_postal_code: '00520',
+      pickup_point_city: 'Helsinki',
+      pickup_point_specific_location: '1. kerros',
+      pickup_point_parcel_locker: 'true',
       pakkastoimituslisa: 'maksan',
     });
 
@@ -39,17 +46,31 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.fulfillment.method,
-      'postitus',
+      'posti_noutopiste',
       'normalizePublicOrderSubmission should keep the selected fulfillment method'
     );
     expectDeepEqual(
       payload.fulfillment.address,
       {
+        line1: 'Posti Pasila',
+        postalCode: '00520',
+        city: 'Helsinki',
+      },
+      'normalizePublicOrderSubmission should map the selected pickup point into the server payload'
+    );
+    expectDeepEqual(
+      payload.fulfillment.searchAddress,
+      {
         line1: 'Kompostikuja 1',
         postalCode: '00100',
         city: 'Helsinki',
       },
-      'normalizePublicOrderSubmission should map the postal address into the server payload'
+      'normalizePublicOrderSubmission should preserve the search address for manual handling'
+    );
+    expectEqual(
+      payload.fulfillment.pickupPoint?.name,
+      'Posti Pasila',
+      'normalizePublicOrderSubmission should include the selected pickup point details'
     );
     expectEqual(
       payload.product.key,
@@ -64,7 +85,7 @@ describe('frontend public order normalization', () => {
     expectEqual(
       payload.pricing.shippingPrice,
       8.9,
-      'normalizePublicOrderSubmission should calculate the worm postal shipping price as 8.9 EUR'
+      'normalizePublicOrderSubmission should calculate the worm pickup-point shipping price as 8.9 EUR'
     );
     expectEqual(
       payload.pricing.frostProtectionSelected,
@@ -79,17 +100,16 @@ describe('frontend public order normalization', () => {
     expectEqual(
       payload.pricing.total,
       38.9,
-      'normalizePublicOrderSubmission should produce a 38.9 EUR total for the winter postal worm order'
+      'normalizePublicOrderSubmission should produce a 38.9 EUR total for the winter pickup-point worm order'
     );
   });
 
-  test('normalizePublicOrderSubmission should keep frost protection selected but uncharged outside the configured season', () => {
+  test('normalizePublicOrderSubmission should allow pickup-point shipping without a selected pickup point', () => {
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormData({
-        toimitus: 'postitus',
-        osoite: 'Kompostikuja 1',
+        toimitus: 'posti_noutopiste',
         postinumero: '00100',
-        toimipaikka: 'Helsinki',
+        lisatiedot: '',
         pakkastoimituslisa: 'maksan',
         alennuskoodi: 'ei-ole',
       }),
@@ -99,14 +119,14 @@ describe('frontend public order normalization', () => {
     );
 
     expectEqual(
-      payload.pricing.frostProtectionSelected,
-      true,
-      'normalizePublicOrderSubmission should preserve the frost protection selection outside the active season'
+      payload.fulfillment.pickupPoint,
+      null,
+      'normalizePublicOrderSubmission should allow a missing pickup point when the customer only gave a postal code'
     );
     expectEqual(
-      payload.pricing.frostProtectionPrice,
-      0,
-      'normalizePublicOrderSubmission should charge 0 EUR for frost protection outside the configured season'
+      payload.fulfillment.address.line1,
+      'Noutopaikka valitaan postinumeron perusteella',
+      'normalizePublicOrderSubmission should mark postal-code based pickup handling when no exact pickup point was provided'
     );
     expectEqual(
       payload.pricing.discount,
@@ -116,7 +136,51 @@ describe('frontend public order normalization', () => {
     expectEqual(
       payload.pricing.total,
       35.9,
-      'normalizePublicOrderSubmission should keep the summer postal worm total at 35.9 EUR'
+      'normalizePublicOrderSubmission should keep the summer pickup-point worm total at 35.9 EUR'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should build a starter-kit home-delivery order', () => {
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        tuote: 'Matokompostorin aloituspakkaus',
+        tuote_avain: 'starterKit',
+        sku: 'starterkit-100',
+        sivu_polku: '/tuotteet/matokompostin-aloituspakkaus',
+        toimitus: 'posti_kotiinkuljetus',
+        osoite: 'Kompostikuja 1',
+        postinumero: '00100',
+        toimipaikka: 'Helsinki',
+        lisatiedot: '',
+      }),
+      {
+        now: new Date('2026-04-05T10:00:00Z'),
+      }
+    );
+
+    expectEqual(
+      payload.fulfillment.method,
+      'posti_kotiinkuljetus',
+      'normalizePublicOrderSubmission should support the starter-kit home-delivery method'
+    );
+    expectDeepEqual(
+      payload.fulfillment.address,
+      {
+        line1: 'Kompostikuja 1',
+        postalCode: '00100',
+        city: 'Helsinki',
+      },
+      'normalizePublicOrderSubmission should keep the customer home address for home-delivery orders'
+    );
+    expectEqual(
+      payload.pricing.shippingPrice,
+      14.9,
+      'normalizePublicOrderSubmission should calculate the starter-kit home-delivery price as 14.9 EUR'
+    );
+    expectEqual(
+      payload.pricing.total,
+      87.9,
+      'normalizePublicOrderSubmission should produce an 87.9 EUR total for the starter-kit home-delivery order'
     );
   });
 

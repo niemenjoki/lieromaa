@@ -101,10 +101,15 @@ describe('frontend public order submit route', () => {
             createRouteRequest({
               url: 'https://www.lieromaa.fi/api/orders/submit',
               formData: createValidOrderFormData({
-                toimitus: 'postitus',
+                toimitus: 'posti_noutopiste',
                 osoite: 'Kompostikuja 1',
                 postinumero: '00100',
                 toimipaikka: 'Helsinki',
+                pickup_point_id: 'POSTI-001',
+                pickup_point_name: 'Posti Pasila',
+                pickup_point_street: 'Ratapihantie 6',
+                pickup_point_postal_code: '00520',
+                pickup_point_city: 'Helsinki',
               }),
             })
           );
@@ -154,8 +159,13 @@ describe('frontend public order submit route', () => {
           );
           expectEqual(
             forwardedPayload.fulfillment.method,
-            'postitus',
+            'posti_noutopiste',
             'the public order submit route should forward the selected fulfillment method'
+          );
+          expectEqual(
+            forwardedPayload.fulfillment.pickupPoint.name,
+            'Posti Pasila',
+            'the public order submit route should include the selected pickup point in the forwarded payload'
           );
           expectEqual(
             forwardedPayload.requestContext.origin,

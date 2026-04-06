@@ -3,7 +3,11 @@ import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { WORMS_SHIPPING_SCHEDULE_TEXT } from '@/data/commerce/shippingSchedule.mjs';
 import { ORDER_CONTACT_EMAIL, ORDER_WHATSAPP_URL } from '@/data/site/contact';
-import { getProductVariants } from '@/lib/pricing/catalog';
+import {
+  formatPrice,
+  getProductShippingOptions,
+  getProductVariants,
+} from '@/lib/pricing/catalog';
 
 import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';
@@ -17,6 +21,11 @@ export { default as generateMetadata } from './generateMetadata';
 export const dynamic = 'force-static';
 
 const wormVariants = getProductVariants('worms');
+const wormShippingOptions = getProductShippingOptions('worms');
+const wormPickupOption =
+  wormShippingOptions.find((option) => option.id === 'posti_noutopiste') ?? null;
+const wormLocalPickupOption =
+  wormShippingOptions.find((option) => option.id === 'nouto') ?? null;
 
 export default async function Page() {
   return (
@@ -79,7 +88,16 @@ export default async function Page() {
             <p>
               Saat laskun <strong>OP Kevytyrittäjä</strong> -palvelun kautta sähköpostitse
               aikaisintaan silloin, kun pakkaus on toimitettu postille. Maksuaika on 7
-              päivää, ja toimitus tapahtuu Postin kautta koko Suomeen.
+              päivää. Voit valita toimitukseksi{' '}
+              <strong>
+                {wormPickupOption?.label} ({formatPrice(wormPickupOption?.price ?? 0)} €)
+              </strong>{' '}
+              tai{' '}
+              <strong>
+                {wormLocalPickupOption?.label} (
+                {formatPrice(wormLocalPickupOption?.price ?? 0)} €)
+              </strong>
+              .
             </p>
             <p>
               Kompostimadoilla ei ole 14 päivän peruuttamisoikeutta, koska kyse on
@@ -110,16 +128,23 @@ export default async function Page() {
             </p>
             <p>
               Näin varmistetaan, etteivät madot jää viikonlopuksi Postin kuljetukseen.
-              Saat sähköpostiisi ilmoituksen, kun lähetys on postitettu.
+              Saat sähköpostiisi ilmoituksen, kun lähetys on postitettu. Kompostimadot
+              lähetetään Postin noutopisteeseen tai automaattiin, ei kotiinkuljetuksena.
             </p>
             <p>
-              Toimitusaika on yleensä 2–3 arkipäivää postituksesta. Aikataulu riippuu
-              Postin toiminnasta, johon en valitettavasti voi vaikuttaa.
+              Toimitusaika on yleensä 1–2 arkipäivää postituksesta. Aikataulu riippuu
+              Postin toiminnasta. Nouda paketti saapumisilmoituksen jälkeen mahdollisimman
+              pian, jotta madot eivät viivy pakkauksessa turhaan.
+            </p>
+            <p>
+              Kassalla voit hakea ja valita sopivan Postin noutopaikan. Jos haku ei ole
+              hetkellisesti käytettävissä, voit kirjoittaa toivomasi noutopaikan
+              viestikenttään. Voin lähettää paketin myös pelkän postinumeron perusteella.
             </p>
             <p>
               Halutessasi voit myös noutaa tilauksen Järvenpäästä sovittuna ajankohtana.
-              Valitse nouto toimitustavaksi tilauslomakkeessa, niin otan yhteyttä
-              sopiakseni tarkan ajan.
+              Valitse Järvenpää-nouto tilauslomakkeessa, niin otan yhteyttä sopiakseni
+              tarkan ajan.
             </p>
           </section>
         </div>

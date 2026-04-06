@@ -77,6 +77,13 @@ export default function OrderPolicyPage() {
           kun tuotteen saatavuus on tarkistettu. Vahvistuksessa ilmoitetaan tilauksen
           hinta, toimituskulut sekä tilatut tuotteet.
         </p>
+        <p>
+          Saatavilla olevat toimitustavat näkyvät aina kyseisen tuotteen kassalla.
+          Käytössä voivat olla nouto Postista tai automaatista, Postin kotiinkuljetus
+          sovittuna aikana tai nouto Järvenpäästä. Noutopiste lähetetään asiakkaan
+          kassalla valitsemaan Postin toimipisteeseen tai automaattiin, ellei Posti joudu
+          kapasiteettisyistä ohjaamaan lähetystä toiseen noutopaikkaan.
+        </p>
 
         <h2>Maksutavat</h2>
         <p>
@@ -91,6 +98,19 @@ export default function OrderPolicyPage() {
           {STARTER_KIT_SHIPPING_SCHEDULE_TEXT}
         </p>
         <p>Tarkempi toimitusaika ilmoitetaan aina tilausvahvistuksessa.</p>
+        <p>
+          Postin noutopistelähetykset saapuvat tavallisesti 1-2 arkipäivässä
+          postituksesta. Kotiinkuljetuksissa Posti sopii jakeluajan vastaanottajan kanssa.
+          Noutopistelähetys kannattaa hakea saapumisilmoituksen jälkeen mahdollisimman
+          pian.
+        </p>
+        <p>
+          Jos noutopistehaku ei ole kassalla hetkellisesti käytettävissä, asiakkaan tulee
+          halutessaan kirjoittaa toivottu Postin noutopaikka viestikenttään. Tällöin
+          noutopaikka asetetaan manuaalisesti tilauksen käsittelyn yhteydessä. Noutopaikan
+          voi jättää myös valitsematta, jolloin lähetys ohjataan ilmoitetun postinumeron
+          perusteella.
+        </p>
 
         <h2>Peruuttamisoikeus ja peruuttamisohje</h2>
         <p>
