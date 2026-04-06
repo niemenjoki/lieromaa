@@ -4,17 +4,15 @@ import {
 } from '../commerce/shippingSchedule.mjs';
 
 export const sharedPickupHelperTexts = [
-  'Hae ja valitse kassalla sopiva Postin noutopaikka. Saat saapumisilmoituksen tekstiviestillä tai OmaPostiin, joten käytäthän toimivaa matkapuhelinnumeroa.',
-  'Noutopaikan valinta on valinnainen. Jos et valitse pistettä, voin lähettää paketin ilmoittamasi postinumeron perusteella.',
-  'Posti voi ohjata lähetyksen toiseen toimipisteeseen, jos valitsemasi automaatti tai noutopaikka on täynnä.',
+  'Paketti toimitetaan valitsemaasi Postin noutopisteeseen. Huomaa, että Posti voi ohjata lähetyksen toiseen noutopisteeseen, jos esimerkiksi valitsemasi noutopaikka on täynnä.',
 ];
 
 export const sharedHomeDeliveryHelperTexts = [
-  'Posti sopii jakeluajan vastaanottajan kanssa. Anna kassalla tarkka toimitusosoite ja toimiva puhelinnumero.',
+  'Posti sopii jakeluajan kanssasi OmaPosti-sovelluksen kautta, tekstiviestillä tai sähköpostitse.',
 ];
 
 export const sharedLocalPickupHelperTexts = [
-  'Nouto sovitaan erikseen tilausvahvistuksen jälkeen Järvenpäähän.',
+  'Jos valitset toimitustavaksi noudon, olen sinuun yhteydessä, jotta voimme sopia noudosta tarkemmin',
 ];
 
 const localPickupOption = {
@@ -95,8 +93,11 @@ export const productCatalogSource = {
     },
     order: {
       defaultVariantAmount: 100,
-      variantLegend: 'Valitse määrä',
-      variantSelectorPosition: 'afterFulfillment',
+      variantLegend: 'Valitse matojen määrä',
+      variantSelectorPosition: 'beforeFulfillment',
+      variantDescriptionPrefix: 'Voi laskea taloudellesi sopivan matojen määrän',
+      variantDescriptionLinkHref: '/matolaskuri',
+      variantDescriptionLinkLabel: 'matolaskurilla',
       showWormAmountFinePrint: true,
       getVariantLabel({ amount, priceFormatted }) {
         return `${amount} matoa - ${priceFormatted} €`;
@@ -112,11 +113,16 @@ export const productCatalogSource = {
         localPickupOption,
       ],
       shippingHelperTexts: sharedPickupHelperTexts,
+      shippingDescription: null,
       submitButtonLabel() {
-        return 'Lähetä sitova tilaus';
+        return 'Lähetä tilaus';
       },
-      confirmationNote:
-        'Saat manuaalisen vahvistuksen ja laskun sähköpostiisi 1-2 arkipäivän sisällä.',
+      extraInfoDescription: null,
+      summaryDescription: null,
+      invoiceTimingByFulfillmentType: {
+        pickup_point: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
+        local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
+      },
       extraCharges: [
         {
           key: 'frostProtection',
@@ -143,9 +149,10 @@ export const productCatalogSource = {
     page: {
       canonicalUrl: '/tuotteet/matokompostin-aloituspakkaus',
       pageName: 'Matokompostorin aloituspakkaus ja madot',
+      title: 'Matokompostorin aloituspakkaus (sis. madot) | Lieromaa',
       description:
-        'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.',
-      h1: 'Lieromaan matokompostorin aloituspakkaus on nyt tilattavissa',
+        'Lieromaan aloituspakkaus tekee matokompostin ylläpidosta sujuvaa: kolmen laatikon kompostori, petimateriaali ja kompostimadot samassa paketissa.',
+      h1: 'Lieromaan matokompostorin aloituspakkaus',
       navigationLabel: 'Aloituspakkaus',
       updatedAt: '2026-04-05',
     },
@@ -157,7 +164,7 @@ export const productCatalogSource = {
     product: {
       name: 'Matokompostorin aloituspakkaus',
       description:
-        'Lieromaan aloituspakkaus tekee aloituksesta helppoa: kolmen laatikon kompostori, petimateriaali ja kompostimadot valmiina käyttöön.',
+        'Lieromaan aloituspakkaus on suunniteltu sujuvaan matokompostin ylläpitoon: kolmen laatikon kompostori, petimateriaali ja kompostimadot samassa paketissa.',
       sku: 'LM-STARTER-001',
     },
     media: {
@@ -206,7 +213,7 @@ export const productCatalogSource = {
         return `Matokompostorin aloituspakkaus + ${amount} kompostimatoa`;
       },
       description(amount) {
-        return `Lieromaan aloituspakkaus sisältää kolmen laatikon läpivirtauskompostorin, petimateriaalin ja ${amount} kompostimatoa. Paketti on suunniteltu helppoon matokompostoinnin aloitukseen kotona.`;
+        return `Lieromaan aloituspakkaus sisältää kolmen laatikon läpivirtauskompostorin, petimateriaalin ja ${amount} kompostimatoa. Paketti on suunniteltu sujuvaan matokompostin ylläpitoon kotona.`;
       },
       productType: 'Matokompostointi > Matokompostorit > Aloituspakkaukset',
     },
@@ -217,8 +224,11 @@ export const productCatalogSource = {
     },
     order: {
       defaultVariantAmount: 100,
-      variantLegend: 'Valitse paketti',
+      variantLegend: 'Valitse matojen määrä',
       variantSelectorPosition: 'beforeFulfillment',
+      variantDescriptionPrefix: 'Voi laskea taloudellesi sopivan matojen määrän',
+      variantDescriptionLinkHref: '/matolaskuri',
+      variantDescriptionLinkLabel: 'matolaskurilla',
       showWormAmountFinePrint: true,
       getVariantLabel({ amount, priceFormatted }) {
         return `Aloituspakkaus + ${amount} matoa - ${priceFormatted} €`;
@@ -241,10 +251,18 @@ export const productCatalogSource = {
         localPickupOption,
       ],
       shippingHelperTexts: sharedPickupHelperTexts,
+      shippingDescription: null,
       submitButtonLabel({ totalFormatted }) {
-        return `Lähetä sitova tilaus (${totalFormatted} €)`;
+        return `Lähetä tilaus (${totalFormatted} €)`;
       },
-      confirmationNote: 'Saat manuaalisen tilausvahvistuksen 1-2 arkipäivässä.',
+      extraInfoDescription: null,
+      summaryDescription: null,
+      invoiceTimingByFulfillmentType: {
+        pickup_point: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
+        home_delivery:
+          'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
+        local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
+      },
     },
   },
 };

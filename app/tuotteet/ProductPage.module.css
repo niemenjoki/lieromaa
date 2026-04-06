@@ -1,24 +1,57 @@
+.ProductPage {
+  max-width: 72rem;
+  margin: 0 auto;
+  --product-surface: var(--background-2);
+  --product-surface-muted: var(--background-3);
+  --product-surface-strong: hsla(0, 0%, 100%, 0.68);
+  --product-surface-border: var(--background-5);
+  --product-shadow: 0 18px 40px rgba(39, 29, 18, 0.08);
+}
+
+:global(body.dark) .ProductPage {
+  --product-surface: hsl(30, 20%, 11%);
+  --product-surface-muted: hsl(30, 18%, 14%);
+  --product-surface-strong: hsl(30, 18%, 8%);
+  --product-surface-border: hsl(30, 16%, 30%);
+  --product-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
 .ProductPage h1 {
-  margin: 0.25rem 0;
-  font-size: 1.75rem;
+  margin: 0.25rem 0 1.5rem;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  max-width: 18ch;
   overflow-wrap: break-word;
 }
 
+.Content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.Content section,
+.Content aside {
+  margin: 0;
+}
+
 .Content p {
-  margin: 1.5rem 0;
-  line-height: 1.4;
+  margin: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .Content ol,
 .Content ul {
-  margin: 0.5rem 0;
-  padding-left: 1rem;
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
   list-style-position: outside;
 }
 
 .Content ol li,
 .Content ul li {
-  margin: 0.5rem 0;
+  margin: 0.45rem 0;
+  line-height: 1.5;
 }
 
 .Content em {
@@ -36,188 +69,223 @@
 }
 
 .Content h2 {
-  font-size: 1.5em;
-  margin: 1.5rem 0;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.Content h3 {
+  margin: 0;
+  font-size: 1.08rem;
 }
 
 .Content a {
   color: var(--highlight-content-link);
   transition: opacity 0.1s ease-in-out;
 }
+
 .Content a:hover {
   opacity: 0.7;
 }
 
-.Flex {
+.ProductHero {
   display: flex;
   flex-direction: column;
+  gap: 1.25rem;
+}
+
+.HeroDetails,
+.HeroText,
+.SectionStack,
+.SummaryCard,
+.InfoCard,
+.OrderSection {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.HeroDetails,
+.SectionStack,
+.OrderSection {
   gap: 1rem;
 }
 
-.Flex img {
-  max-width: 30%;
+.HeroText,
+.SummaryCard,
+.InfoCard {
+  gap: 0.9rem;
+}
+
+.HeroDetails {
+  max-width: 48rem;
+}
+
+.SummaryCard {
+  align-self: flex-start;
+  width: 100%;
+  max-width: 34rem;
+}
+
+.Lead {
+  font-size: inherit;
+  line-height: inherit !important;
+}
+
+.SummaryCard,
+.InfoCard,
+.ReviewsSection {
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 18px;
+  background-color: var(--product-surface);
+  box-shadow: var(--product-shadow);
+}
+
+.OrderSection {
+  padding: 1.3rem 1.35rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    var(--product-surface) 0%,
+    var(--product-surface-muted) 100%
+  );
+  box-shadow: var(--product-shadow);
+}
+
+.CardGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+
+.CardGrid > * {
+  min-width: 0;
+}
+
+.FeatureList,
+.CleanList,
+.PriceList {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.FeatureList li,
+.CleanList li,
+.PriceList li {
+  margin: 0 !important;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--background-6);
+}
+
+.FeatureList li:first-child,
+.CleanList li:first-child,
+.PriceList li:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.FeatureList li:last-child,
+.CleanList li:last-child,
+.PriceList li:last-child {
+  padding-bottom: 0;
 }
 
 .Note {
-  font-size: 0.85rem;
-  margin-top: 2rem;
-  line-height: 1.4;
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  opacity: 0.92;
 }
 
 .FinePrint {
-  margin: -0.25rem 0 0.5rem;
-  font-size: 0.8rem;
-  line-height: 1.35;
-  color: var(--text-color);
-  opacity: 0.8;
-  align-self: flex-start;
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  opacity: 0.82;
   max-width: 42rem;
 }
 
-@media (max-width: 1000px) {
-  .Flex img {
-    max-width: 40%;
-  }
+.PrimaryCTA {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.8rem 1.25rem;
+  background-color: var(--highlight);
+  color: var(--text-on-accent) !important;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  margin-top: 0.35rem;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
-@media (max-width: 600px) {
-  .Flex img {
-    max-width: 60%;
-  }
+
+.PrimaryCTA:hover {
+  opacity: 1;
+  transform: translateY(-1px);
 }
-@media (max-width: 450px) {
-  .Flex img {
-    max-width: 80%;
-  }
+
+.OrderSectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 42rem;
 }
 
 .CalculatorForm {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  max-width: 600px;
-  margin: 1rem 0;
-}
-
-.CalculatorForm label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.CalculatorForm input,
-.CalculatorForm select {
-  margin-left: 0.5rem;
-  padding: 0.25rem;
-  margin: 0.25rem 0;
-  width: 10rem;
-}
-
-.CalculatorForm textarea {
-  margin-left: 0.5rem;
-  padding: 0.4rem;
+  gap: 0;
   width: 100%;
-  max-width: 100%;
-}
-
-.CalculatorForm input[type='checkbox'] {
-  width: 1rem;
-  height: 1rem;
+  max-width: 44rem;
   margin: 0;
-  padding: 0;
+  min-width: 0;
 }
 
-.CalculatorForm button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--highlight);
-  color: #fff;
+.FormSection {
+  padding: 1rem 0;
   border: none;
-  cursor: pointer;
-  border-radius: 4px;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-.CalculatorForm button:hover {
-  opacity: 0.7;
+.FormSection + .FormSection {
+  border-top: 1px solid var(--product-surface-border);
 }
 
-.SecondaryButton {
-  margin-top: 0.25rem !important;
-  align-self: flex-start;
-}
-
-.SecondaryButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* --- Custom radio buttons --- */
-.CalculatorForm fieldset {
-  border: none;
-  padding: 0;
-  margin-top: 0.5rem;
+.FormSectionHeader {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
 }
 
-.CalculatorForm legend {
-  font-weight: 600;
-  margin-bottom: 0.35rem;
-  margin-left: 2px;
+.FormSectionTitle {
+  margin: 0;
+  font-size: 1.02rem;
 }
 
-.CalculatorForm fieldset label {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 0.35rem;
-  cursor: pointer;
-  font-size: 0.95rem;
-  line-height: 1.4;
+.FormSectionDescription {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  opacity: 0.88;
 }
 
-.CalculatorForm input[type='radio'] {
-  appearance: none;
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid var(--highlight);
-  border-radius: 50%;
-  background-color: transparent;
-  cursor: pointer;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.CalculatorForm input[type='radio']:checked::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background-color: var(--highlight);
-}
-
-.CalculatorForm input[type='radio']:hover {
-  border-color: var(--highlight-alt);
-}
-
-.CalculatorForm input[type='radio']:focus-visible {
-  outline: 2px solid var(--highlight-alt);
-  outline-offset: 2px;
-}
-
-.CalculatorForm:has(input[name='toimitus'][value='nouto']:checked) .AddressGroup {
-  display: none;
-}
-
+.FormSectionBody,
+.FormFields,
 .AddressGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
+.CalculatorForm label,
 .StackedField {
   display: flex !important;
   flex-direction: column !important;
@@ -227,37 +295,255 @@
 }
 
 .FieldLabel {
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.CalculatorForm input,
+.CalculatorForm select,
+.CalculatorForm textarea {
+  width: 100%;
+  margin: 0;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 10px;
+  background-color: var(--product-surface-strong);
+  color: inherit;
+  font: inherit;
+}
+
+.CalculatorForm textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.CalculatorForm input:focus,
+.CalculatorForm select:focus,
+.CalculatorForm textarea:focus {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+  border-color: var(--highlight);
+}
+
+.CalculatorForm input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  accent-color: var(--highlight);
+}
+
+.CalculatorForm button {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background-color: var(--highlight);
+  color: var(--text-on-accent);
+  border: 1px solid transparent;
+  cursor: pointer;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.CalculatorForm button:hover {
+  opacity: 0.88;
+}
+
+.SecondaryButton {
+  align-self: flex-start;
+  background-color: transparent !important;
+  color: var(--highlight) !important;
+  border-color: var(--highlight) !important;
+}
+
+.SecondaryButton:hover {
+  background-color: var(--highlight) !important;
+  color: var(--text-on-accent) !important;
+}
+
+.SecondaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.SubmitButton {
+  width: 100%;
+}
+
+.FormActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.FormFieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ChoiceList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.FormOption {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0.35rem !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface-strong);
+  cursor: pointer;
+  min-width: 0;
+}
+
+.FormOption:has(input:checked) {
+  border-color: var(--highlight);
+  box-shadow: inset 0 0 0 1px var(--highlight);
+}
+
+.FormOption:has(input:focus-visible) {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+.CheckOption {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 0.7rem !important;
+  min-width: 0;
+}
+
+.OptionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.OptionHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.OptionMarker {
+  flex: 0 0 auto;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--highlight);
+}
+
+.OptionTitle {
+  font-weight: 600;
+  line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.OptionMeta {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  opacity: 0.86;
+}
+
+.ChoiceInput {
+  position: absolute;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.FormSubsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface-strong);
+}
+
+.FormSubsectionTitle {
+  margin: 0;
+  font-size: 0.98rem;
 }
 
 .PickupPointSelect {
   width: 100% !important;
   max-width: 100%;
-  margin-left: 0 !important;
-}
-
-.SelectedPickupPoint {
-  margin: 0.25rem 0 0.5rem;
-  padding: 0.75rem 0.9rem;
-  border-radius: 8px;
-  background-color: var(--background-4);
-  line-height: 1.4;
-}
-
-.FrostCharge {
-  flex-direction: column;
-  align-items: flex-start;
+  margin: 0 !important;
 }
 
 .Content .HelperText {
-  margin: 0.25rem 0 0.75rem 0;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.OrderSummaryBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface-strong);
+}
+
+.OrderSummaryLabel {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.8;
 }
 
 .OrderTotal {
-  margin: 0.5rem 0 0;
-  font-size: 1rem;
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.1;
+}
+
+.AlertText {
+  font-weight: 700;
+  opacity: 1;
+}
+
+.ScreenReaderOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .VariantPriceDisplay {
@@ -315,11 +601,7 @@
 }
 
 .ReviewsSection {
-  margin: 1rem 0 0;
-  padding: 12px 15px;
-  border: 2px solid black;
-  border-radius: 8px;
-  background-color: var(--background-4);
+  margin: 0;
 }
 
 .ReviewDetails {
@@ -474,51 +756,49 @@
   cursor: not-allowed;
 }
 
-@media (min-width: 700px) {
-  .CalculatorForm fieldset {
-    flex-direction: row;
+@media (max-width: 640px) {
+  .ProductPage h1 {
+    margin-bottom: 1.25rem;
+    max-width: none;
+    font-size: 1.8rem;
+  }
+
+  .Content {
     gap: 1.5rem;
   }
-  .CalculatorForm fieldset label {
-    margin-bottom: 0;
+
+  .SummaryCard,
+  .InfoCard,
+  .OrderSection,
+  .ReviewsSection {
+    padding: 1rem;
   }
-  .CalculatorForm input,
-  .CalculatorForm select {
-    width: 16rem;
+
+  .FormOption,
+  .FormSubsection,
+  .OrderSummaryBox {
+    padding: 0.8rem 0.85rem;
   }
-  .CalculatorForm fieldset.FrostCharge {
-    flex-direction: column;
-    gap: 0.5rem;
+
+  .PrimaryCTA {
+    width: 100%;
   }
-}
-.Content aside {
-  border: 2px solid black;
-  padding: 15px;
-  margin: 16px 0;
-  border-radius: 8px;
-  background-color: var(--background-4);
 }
 
-.Content aside > h3 {
-  margin: 0;
-  color: var(--highlight);
-}
+@media (max-width: 420px) {
+  .ProductPage {
+    max-width: 100%;
+  }
 
-.Content aside ul {
-  margin: 10px 0 0 0;
-  padding-left: 1rem;
-}
+  .Content h2 {
+    font-size: 1.3rem;
+  }
 
-.PrimaryCTA {
-  display: inline-block;
-  background-color: var(--highlight);
-  color: #fff !important;
-  padding: 0.75rem 1.25rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  margin: 1rem 0;
-}
-.PrimaryCTA:hover {
-  opacity: 0.85;
+  .OptionHeader {
+    gap: 0.4rem;
+  }
+
+  .OptionMarker {
+    font-size: 0.9rem;
+  }
 }
