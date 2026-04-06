@@ -40,7 +40,7 @@ describe('frontend order quote pricing', () => {
     const winterQuote = getOrderQuote({
       productKey: 'worms',
       sku: 'worms-100',
-      shippingMethod: 'postitus',
+      shippingMethod: 'posti_noutopiste',
       selectedExtraCharges: {
         pakkastoimituslisa: true,
       },
@@ -50,7 +50,7 @@ describe('frontend order quote pricing', () => {
     const summerQuote = getOrderQuote({
       productKey: 'worms',
       sku: 'worms-100',
-      shippingMethod: 'postitus',
+      shippingMethod: 'posti_noutopiste',
       selectedExtraCharges: {
         pakkastoimituslisa: true,
       },
@@ -76,6 +76,25 @@ describe('frontend order quote pricing', () => {
       summerQuote.total,
       35.9,
       'getOrderQuote should return a 35.9 EUR total when the frost charge is inactive'
+    );
+  });
+
+  test('getOrderQuote should price the starter-kit home delivery option separately', () => {
+    const quote = getOrderQuote({
+      productKey: 'starterKit',
+      sku: 'starterkit-100',
+      shippingMethod: 'posti_kotiinkuljetus',
+    });
+
+    expectEqual(
+      quote.shippingPrice,
+      14.9,
+      'getOrderQuote should use the configured 14.9 EUR price for starter-kit home delivery'
+    );
+    expectEqual(
+      quote.total,
+      87.9,
+      'getOrderQuote should return an 87.9 EUR total for the starter-kit home-delivery order'
     );
   });
 

@@ -4,15 +4,32 @@ import {
 } from '../commerce/shippingSchedule.mjs';
 
 export const sharedPickupHelperTexts = [
-  'Voit toivoa tiettyä Postin noutopaikkaa (pakettiautomaatti tai postitoimipaikka). Toiveen tulee löytyä Postin palvelupistekartalta. Jos et toivo noutopaikkaa, lähetys toimitetaan ilmoittamasi postinumeron mukaan ensimmäiseen Postin tarjoamaan noutopisteeseen.',
-  'Huomioithan, että Posti saattaa toiveesta huolimatta toimittaa paketin eri toimipisteeseen, jos esimerkiksi noutopiste on täynnä.',
+  'Hae ja valitse kassalla sopiva Postin noutopaikka. Saat saapumisilmoituksen tekstiviestillä tai OmaPostiin, joten käytäthän toimivaa matkapuhelinnumeroa.',
+  'Noutopaikan valinta on valinnainen. Jos et valitse pistettä, voin lähettää paketin ilmoittamasi postinumeron perusteella.',
+  'Posti voi ohjata lähetyksen toiseen toimipisteeseen, jos valitsemasi automaatti tai noutopaikka on täynnä.',
 ];
+
+export const sharedHomeDeliveryHelperTexts = [
+  'Posti sopii jakeluajan vastaanottajan kanssa. Anna kassalla tarkka toimitusosoite ja toimiva puhelinnumero.',
+];
+
+export const sharedLocalPickupHelperTexts = [
+  'Nouto sovitaan erikseen tilausvahvistuksen jälkeen Järvenpäähän.',
+];
+
+const localPickupOption = {
+  id: 'nouto',
+  label: 'Nouto Järvenpäästä',
+  price: 0,
+  fulfillmentType: 'local_pickup',
+  helperTexts: sharedLocalPickupHelperTexts,
+};
 
 export const productCatalogSource = {
   worms: {
     name: 'Kompostimadot',
     variantSkus: ['worms-50', 'worms-100', 'worms-200'],
-    shippingSku: 'postage-worms',
+    shippingSku: 'postage-worms-pickup',
     page: {
       canonicalUrl: '/tuotteet/madot',
       pageName: 'Osta kompostimatoja – Eisenia fetida matokompostointiin',
@@ -84,6 +101,16 @@ export const productCatalogSource = {
       getVariantLabel({ amount, priceFormatted }) {
         return `${amount} matoa - ${priceFormatted} €`;
       },
+      shippingOptions: [
+        {
+          id: 'posti_noutopiste',
+          label: 'Nouto Postista tai automaatista',
+          priceSku: 'postage-worms-pickup',
+          fulfillmentType: 'pickup_point',
+          helperTexts: sharedPickupHelperTexts,
+        },
+        localPickupOption,
+      ],
       shippingHelperTexts: sharedPickupHelperTexts,
       submitButtonLabel() {
         return 'Lähetä sitova tilaus';
@@ -112,7 +139,7 @@ export const productCatalogSource = {
   starterKit: {
     name: 'Matokompostorin aloituspakkaus',
     variantSkus: ['starterkit-50', 'starterkit-100', 'starterkit-200'],
-    shippingSku: 'postage-starterkit',
+    shippingSku: 'postage-starterkit-pickup',
     page: {
       canonicalUrl: '/tuotteet/matokompostin-aloituspakkaus',
       pageName: 'Matokompostorin aloituspakkaus ja madot',
@@ -196,6 +223,23 @@ export const productCatalogSource = {
       getVariantLabel({ amount, priceFormatted }) {
         return `Aloituspakkaus + ${amount} matoa - ${priceFormatted} €`;
       },
+      shippingOptions: [
+        {
+          id: 'posti_noutopiste',
+          label: 'Nouto Postista tai automaatista',
+          priceSku: 'postage-starterkit-pickup',
+          fulfillmentType: 'pickup_point',
+          helperTexts: sharedPickupHelperTexts,
+        },
+        {
+          id: 'posti_kotiinkuljetus',
+          label: 'Postin kotiinkuljetus sovittuna aikana',
+          priceSku: 'postage-starterkit-home',
+          fulfillmentType: 'home_delivery',
+          helperTexts: sharedHomeDeliveryHelperTexts,
+        },
+        localPickupOption,
+      ],
       shippingHelperTexts: sharedPickupHelperTexts,
       submitButtonLabel({ totalFormatted }) {
         return `Lähetä sitova tilaus (${totalFormatted} €)`;
