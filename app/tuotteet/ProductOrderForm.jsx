@@ -122,6 +122,28 @@ function ShippingHelpTexts({ texts }) {
   );
 }
 
+function FormSection({ title, description, children }) {
+  return (
+    <section className={classes.FormSection}>
+      <div className={classes.FormSectionHeader}>
+        <h3 className={classes.FormSectionTitle}>{title}</h3>
+        {description ? (
+          <p className={classes.FormSectionDescription}>{description}</p>
+        ) : null}
+      </div>
+      <div className={classes.FormSectionBody}>{children}</div>
+    </section>
+  );
+}
+
+function ensureSentencePunctuation(text) {
+  if (!text) {
+    return '';
+  }
+
+  return /[.!?]$/.test(text) ? text : `${text}.`;
+}
+
 export default function ProductOrderForm({ productKey }) {
   const pathname = usePathname();
   const product = getProductPricing(productKey);
@@ -164,9 +186,6 @@ export default function ProductOrderForm({ productKey }) {
     null;
   const selectedFulfillmentType =
     selectedShippingOption?.fulfillmentType ?? 'local_pickup';
-  const deliveryRequiresPhone =
-    selectedFulfillmentType === 'pickup_point' ||
-    selectedFulfillmentType === 'home_delivery';
   const pickupSearchVisible = selectedFulfillmentType === 'pickup_point';
   const deliveryAddressVisible = selectedFulfillmentType === 'home_delivery';
   const quote =
@@ -388,54 +407,88 @@ export default function ProductOrderForm({ productKey }) {
     }
   };
 
-  const renderVariantSection = () => (
-    <>
-      <fieldset>
-        <legend>{orderConfig.variantLegend}</legend>
-        {variants.map((variant) => (
-          <label
-            key={variant.sku}
-            className={variant.discount ? classes.VariantOptionLabel : undefined}
-          >
-            <input
-              type="radio"
-              name="maara"
-              value={variant.amount}
-              checked={amount === String(variant.amount)}
-              onChange={() => setAmount(String(variant.amount))}
-            />
-            <span className={classes.VariantOptionContent}>
-              <span>
-                {orderConfig.getVariantLabel({
-                  amount: variant.amount,
-                  price: variant.price,
-                  priceFormatted: formatPrice(variant.price),
-                  basePrice: variant.basePrice,
-                  basePriceFormatted: formatPrice(variant.basePrice),
-                  discount: variant.discount,
-                  variant,
-                  productKey,
-                })}
-              </span>
-              {variant.discount ? (
-                <span className={classes.VariantDiscountNote}>
-                  {getAutomaticDiscountNotice(variant)}
-                </span>
-              ) : null}
-            </span>
-          </label>
-        ))}
-      </fieldset>
-      {orderConfig.showWormAmountFinePrint ? <WormAmountFinePrint /> : null}
-    </>
-  );
-
   const total = quote?.total ?? 0;
   const totalFormatted = formatPrice(total);
   const discountProductAmount = quote?.discountAmounts.productAmount ?? 0;
   const shippingDiscount = quote?.discountAmounts.shippingAmount ?? 0;
   const selectedShippingHelpTexts =
     selectedShippingOption?.helperTexts ?? orderConfig.shippingHelperTexts ?? [];
+  const phoneLabel = 'Puhelinnumero';
+  const variantDescription =
+    orderConfig.variantDescriptionPrefix &&
+    orderConfig.variantDescriptionLinkHref &&
+    orderConfig.variantDescriptionLinkLabel ? (
+      <>
+        {orderConfig.variantDescriptionPrefix}{' '}
+        <SafeLink href={orderConfig.variantDescriptionLinkHref}>
+          {orderConfig.variantDescriptionLinkLabel}
+        </SafeLink>
+      </>
+    ) : (
+      (orderConfig.variantDescription ?? null)
+    );
+  const invoiceTimingNote = ensureSentencePunctuation(
+    orderConfig.invoiceTimingByFulfillmentType?.[selectedFulfillmentType] ??
+      orderConfig.invoiceTimingByFulfillmentType?.default ??
+      ''
+  );
+
+  const renderVariantSection = () => (
+    <FormSection title={orderConfig.variantLegend} description={variantDescription}>
+      <fieldset className={classes.FormFieldset}>
+        <legend className={classes.ScreenReaderOnly}>{orderConfig.variantLegend}</legend>
+
+        <div className={classes.ChoiceList}>
+          {variants.map((variant) => (
+            <label
+              key={variant.sku}
+              className={[
+                classes.FormOption,
+                variant.discount ? classes.VariantOptionLabel : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            >
+              <input
+                type="radio"
+                name="maara"
+                value={variant.amount}
+                checked={amount === String(variant.amount)}
+                onChange={() => setAmount(String(variant.amount))}
+                className={classes.ChoiceInput}
+              />
+              <span className={classes.OptionContent}>
+                <span className={classes.OptionHeader}>
+                  <span className={classes.OptionMarker} aria-hidden="true">
+                    {amount === String(variant.amount) ? '[x]' : '[ ]'}
+                  </span>
+                  <span className={classes.OptionTitle}>
+                    {orderConfig.getVariantLabel({
+                      amount: variant.amount,
+                      price: variant.price,
+                      priceFormatted: formatPrice(variant.price),
+                      basePrice: variant.basePrice,
+                      basePriceFormatted: formatPrice(variant.basePrice),
+                      discount: variant.discount,
+                      variant,
+                      productKey,
+                    })}
+                  </span>
+                </span>
+                {variant.discount ? (
+                  <span className={classes.VariantDiscountNote}>
+                    {getAutomaticDiscountNotice(variant)}
+                  </span>
+                ) : null}
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      {orderConfig.showWormAmountFinePrint ? <WormAmountFinePrint /> : null}
+    </FormSection>
+  );
 
   return (
     <form
@@ -508,75 +561,112 @@ export default function ProductOrderForm({ productKey }) {
         }
       />
 
-      <label>
-        Nimi
-        <input type="text" name="nimi" required />
-      </label>
-
-      <label>
-        Sähköposti
-        <input type="email" name="email" required />
-      </label>
-
-      <label>
-        Puhelinnumero
-        <input type="tel" name="phone" required={deliveryRequiresPhone} />
-      </label>
-
       {orderConfig.variantSelectorPosition === 'beforeFulfillment'
         ? renderVariantSection()
         : null}
 
-      <fieldset>
-        <legend>Toimitustapa</legend>
-        {shippingOptions.map((option) => (
-          <label key={option.id}>
-            <input
-              type="radio"
-              name="toimitus"
-              value={option.id}
-              checked={delivery === option.id}
-              onChange={() => handleDeliveryChange(option.id)}
-            />{' '}
-            {option.label}
-            {option.price > 0 ? ` (${formatPrice(option.price)} €)` : ''}
-          </label>
-        ))}
-      </fieldset>
+      <FormSection
+        title="Toimitustapa"
+        description={orderConfig.shippingDescription ?? null}
+      >
+        <fieldset className={classes.FormFieldset}>
+          <legend className={classes.ScreenReaderOnly}>Toimitustapa</legend>
 
-      {activeExtraCharges.map((charge) => (
-        <fieldset key={charge.key} className={classes.FrostCharge}>
-          <legend>{charge.label}</legend>
-          {charge.descriptionLines?.map((line) => (
-            <p key={line} className={classes.HelperText}>
-              {line}
-            </p>
-          ))}
-          <label>
-            <input
-              type="checkbox"
-              name={charge.fieldName}
-              value={charge.checkedValue ?? 'on'}
-              checked={Boolean(selectedExtraCharges[charge.fieldName])}
-              onChange={(event) =>
-                handleExtraChargeChange(charge.fieldName, event.target.checked)
-              }
-            />{' '}
-            {charge.checkboxLabel} ({formatPrice(charge.price)} €)
-          </label>
-          {charge.helperTextLines?.map((line) => (
-            <p key={line} className={classes.HelperText}>
-              {line}
-            </p>
-          ))}
+          <div className={classes.ChoiceList}>
+            {shippingOptions.map((option) => (
+              <label key={option.id} className={classes.FormOption}>
+                <input
+                  type="radio"
+                  name="toimitus"
+                  value={option.id}
+                  checked={delivery === option.id}
+                  onChange={() => handleDeliveryChange(option.id)}
+                  className={classes.ChoiceInput}
+                />
+                <span className={classes.OptionContent}>
+                  <span className={classes.OptionHeader}>
+                    <span className={classes.OptionMarker} aria-hidden="true">
+                      {delivery === option.id ? '[x]' : '[ ]'}
+                    </span>
+                    <span className={classes.OptionTitle}>{option.label}</span>
+                  </span>
+                  <span className={classes.OptionMeta}>
+                    {option.price > 0 ? `${formatPrice(option.price)} €` : '0 €'}
+                  </span>
+                </span>
+              </label>
+            ))}
+          </div>
         </fieldset>
-      ))}
+
+        {activeExtraCharges.map((charge) => (
+          <div key={charge.key} className={classes.FormSubsection}>
+            <h4 className={classes.FormSubsectionTitle}>{charge.label}</h4>
+
+            {charge.descriptionLines?.map((line) => (
+              <p key={line} className={classes.HelperText}>
+                {line}
+              </p>
+            ))}
+
+            <label className={classes.CheckOption}>
+              <input
+                type="checkbox"
+                name={charge.fieldName}
+                value={charge.checkedValue ?? 'on'}
+                checked={Boolean(selectedExtraCharges[charge.fieldName])}
+                onChange={(event) =>
+                  handleExtraChargeChange(charge.fieldName, event.target.checked)
+                }
+              />
+              <span className={classes.OptionContent}>
+                <span className={classes.OptionTitle}>
+                  {charge.checkboxLabel} ({formatPrice(charge.price)} €)
+                </span>
+              </span>
+            </label>
+
+            {charge.helperTextLines?.map((line) => (
+              <p key={line} className={classes.HelperText}>
+                {line}
+              </p>
+            ))}
+          </div>
+        ))}
+
+        <ShippingHelpTexts texts={selectedShippingHelpTexts} />
+      </FormSection>
+
+      <FormSection
+        title="Yhteystiedot"
+        description="Lähetän tilausvahvistuksen sähköpostiin. Puhelinnumeroa tarvitaan, jotta voin olla yhteydessä tilaukseen tarvittaessa."
+      >
+        <div className={classes.FormFields}>
+          <label className={classes.StackedField}>
+            <span className={classes.FieldLabel}>Nimi</span>
+            <input type="text" name="nimi" required />
+          </label>
+
+          <label className={classes.StackedField}>
+            <span className={classes.FieldLabel}>Sähköposti</span>
+            <input type="email" name="email" required />
+          </label>
+
+          <label className={classes.StackedField}>
+            <span className={classes.FieldLabel}>{phoneLabel}</span>
+            <input type="tel" name="phone" required />
+          </label>
+        </div>
+      </FormSection>
 
       {pickupSearchVisible ? (
-        <>
+        <FormSection
+          title="Noutopaikka"
+          description="Anna vähintään postinumero ja hae lähimmät Postin noutopaikat."
+        >
           <div className={classes.AddressGroup}>
-            <label>
-              Katuosoite (valinnainen)
+            <label className={classes.StackedField}>
+              <span className={classes.FieldLabel}>Katuosoite (valinnainen)</span>
               <input
                 type="text"
                 name="osoite"
@@ -587,8 +677,8 @@ export default function ProductOrderForm({ productKey }) {
                 autoComplete="street-address"
               />
             </label>
-            <label>
-              Postinumero
+            <label className={classes.StackedField}>
+              <span className={classes.FieldLabel}>Postinumero</span>
               <input
                 type="text"
                 name="postinumero"
@@ -600,8 +690,8 @@ export default function ProductOrderForm({ productKey }) {
                 autoComplete="postal-code"
               />
             </label>
-            <label>
-              Kaupunki (valinnainen)
+            <label className={classes.StackedField}>
+              <span className={classes.FieldLabel}>Kaupunki (valinnainen)</span>
               <input
                 type="text"
                 name="toimipaikka"
@@ -612,14 +702,16 @@ export default function ProductOrderForm({ productKey }) {
             </label>
           </div>
 
-          <button
-            type="button"
-            className={classes.SecondaryButton}
-            onClick={searchPickupPoints}
-            disabled={isSearchingPickupPoints}
-          >
-            {isSearchingPickupPoints ? 'Haetaan noutopaikkoja...' : 'Hae noutopaikat'}
-          </button>
+          <div className={classes.FormActions}>
+            <button
+              type="button"
+              className={classes.SecondaryButton}
+              onClick={searchPickupPoints}
+              disabled={isSearchingPickupPoints}
+            >
+              {isSearchingPickupPoints ? 'Haetaan noutopaikkoja...' : 'Hae noutopaikat'}
+            </button>
+          </div>
 
           {pickupPointError ? (
             <p className={classes.HelperText} role="status">
@@ -628,173 +720,177 @@ export default function ProductOrderForm({ productKey }) {
           ) : null}
 
           {pickupPoints.length > 0 ? (
-            <fieldset>
-              <legend>Valitse noutopaikka</legend>
-              <label className={classes.StackedField}>
-                <span className={classes.FieldLabel}>Noutopaikkalista</span>
-                <select
-                  name="pickup_point_selection"
-                  className={classes.PickupPointSelect}
-                  value={selectedPickupPointId}
-                  onChange={(event) => handlePickupPointSelection(event.target.value)}
-                >
-                  <option value="">Valitse noutopaikka listasta</option>
-                  {pickupPoints.map((point) => (
-                    <option key={point.id} value={point.id}>
-                      {formatPickupPointOptionLabel(point)}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </fieldset>
+            <label className={classes.StackedField}>
+              <span className={classes.FieldLabel}>Valitse noutopaikka</span>
+              <select
+                name="pickup_point_selection"
+                className={classes.PickupPointSelect}
+                value={selectedPickupPointId}
+                onChange={(event) => handlePickupPointSelection(event.target.value)}
+              >
+                <option value="">Valitse noutopaikka listasta</option>
+                {pickupPoints.map((point) => (
+                  <option key={point.id} value={point.id}>
+                    {formatPickupPointOptionLabel(point)}
+                  </option>
+                ))}
+              </select>
+            </label>
           ) : null}
 
-          {selectedPickupPoint ? (
-            <div className={classes.SelectedPickupPoint}>
-              <strong>Valittu noutopaikka:</strong>{' '}
-              {[
-                selectedPickupPoint.name,
-                selectedPickupPoint.specificLocation,
-                joinPickupPointAddress(selectedPickupPoint),
-              ]
-                .filter(Boolean)
-                .join(', ')}
-            </div>
+          {pickupPointFallbackAllowed ? (
+            <p className={classes.HelperText}>
+              Jos noutopistehaku ei ole käytettävissä tai haluat toivoa tiettyä
+              noutopaikkaa ilman valintaa, voit kirjoittaa toiveesi viestikenttään.
+            </p>
           ) : null}
-        </>
+        </FormSection>
       ) : null}
 
       {deliveryAddressVisible ? (
-        <div className={classes.AddressGroup}>
-          <label>
-            Toimitusosoite
-            <input
-              type="text"
-              name="osoite"
-              value={addressFields.line1}
-              onChange={(event) => handleAddressFieldChange('line1', event.target.value)}
-              required={deliveryAddressVisible}
-              autoComplete="street-address"
-            />
-          </label>
-          <label>
-            Postinumero
-            <input
-              type="text"
-              name="postinumero"
-              value={addressFields.postalCode}
-              onChange={(event) =>
-                handleAddressFieldChange('postalCode', event.target.value)
-              }
-              required={deliveryAddressVisible}
-              autoComplete="postal-code"
-            />
-          </label>
-          <label>
-            Postitoimipaikka
-            <input
-              type="text"
-              name="toimipaikka"
-              value={addressFields.city}
-              onChange={(event) => handleAddressFieldChange('city', event.target.value)}
-              required={deliveryAddressVisible}
-              autoComplete="address-level2"
-            />
-          </label>
-        </div>
+        <FormSection
+          title="Toimitusosoite"
+          description="Kotiinkuljetusta varten tarvitaan tarkka toimitusosoite."
+        >
+          <div className={classes.AddressGroup}>
+            <label className={classes.StackedField}>
+              <span className={classes.FieldLabel}>Toimitusosoite</span>
+              <input
+                type="text"
+                name="osoite"
+                value={addressFields.line1}
+                onChange={(event) =>
+                  handleAddressFieldChange('line1', event.target.value)
+                }
+                required={deliveryAddressVisible}
+                autoComplete="street-address"
+              />
+            </label>
+            <label className={classes.StackedField}>
+              <span className={classes.FieldLabel}>Postinumero</span>
+              <input
+                type="text"
+                name="postinumero"
+                value={addressFields.postalCode}
+                onChange={(event) =>
+                  handleAddressFieldChange('postalCode', event.target.value)
+                }
+                required={deliveryAddressVisible}
+                autoComplete="postal-code"
+              />
+            </label>
+            <label className={classes.StackedField}>
+              <span className={classes.FieldLabel}>Postitoimipaikka</span>
+              <input
+                type="text"
+                name="toimipaikka"
+                value={addressFields.city}
+                onChange={(event) => handleAddressFieldChange('city', event.target.value)}
+                required={deliveryAddressVisible}
+                autoComplete="address-level2"
+              />
+            </label>
+          </div>
+        </FormSection>
       ) : null}
 
       {orderConfig.variantSelectorPosition === 'afterFulfillment'
         ? renderVariantSection()
         : null}
 
-      <label>
-        Alennuskoodi (valinnainen)
-        <input
-          type="text"
-          name="alennuskoodi"
-          value={discountCode}
-          onChange={handleDiscountChange}
-          autoComplete="off"
-        />
-      </label>
-      <button
-        type="button"
-        className={classes.SecondaryButton}
-        onClick={applyDiscount}
-        disabled={isCheckingDiscount}
+      <FormSection
+        title="Lisätiedot"
+        description={orderConfig.extraInfoDescription ?? null}
       >
-        {isCheckingDiscount ? 'Tarkistetaan alennuskoodi...' : 'Käytä alennuskoodi'}
-      </button>
+        <label className={classes.StackedField}>
+          <span className={classes.FieldLabel}>Alennuskoodi (valinnainen)</span>
+          <input
+            type="text"
+            name="alennuskoodi"
+            value={discountCode}
+            onChange={handleDiscountChange}
+            autoComplete="off"
+          />
+        </label>
 
-      {discountFeedback ? <p className={classes.HelperText}>{discountFeedback}</p> : null}
-      {appliedDiscount ? (
-        <p className={classes.HelperText}>
-          {appliedDiscount.type === 'percentage'
-            ? `Alennus tuotteesta ${appliedDiscount.value} % (-${formatPrice(discountProductAmount)} €)`
-            : appliedDiscount.type === 'fixed'
-              ? `Alennus tuotteesta -${formatPrice(discountProductAmount)} €`
-              : `Toimitus alennuksella: -${formatPrice(shippingDiscount)} €`}
+        <div className={classes.FormActions}>
+          <button
+            type="button"
+            className={classes.SecondaryButton}
+            onClick={applyDiscount}
+            disabled={isCheckingDiscount}
+          >
+            {isCheckingDiscount ? 'Tarkistetaan alennuskoodi...' : 'Käytä alennuskoodi'}
+          </button>
+        </div>
+
+        {discountFeedback ? (
+          <p className={classes.HelperText}>{discountFeedback}</p>
+        ) : null}
+        {appliedDiscount ? (
+          <p className={classes.HelperText}>
+            {appliedDiscount.type === 'percentage'
+              ? `Alennus tuotteesta ${appliedDiscount.value} % (-${formatPrice(discountProductAmount)} €)`
+              : appliedDiscount.type === 'fixed'
+                ? `Alennus tuotteesta -${formatPrice(discountProductAmount)} €`
+                : `Toimitus alennuksella: -${formatPrice(shippingDiscount)} €`}
+          </p>
+        ) : null}
+
+        <label className={classes.StackedField}>
+          <span className={classes.FieldLabel}>Viesti (valinnainen)</span>
+          <textarea name="lisatiedot" rows="4" />
+        </label>
+      </FormSection>
+
+      <FormSection
+        title="Yhteenveto"
+        description={orderConfig.summaryDescription ?? null}
+      >
+        <div className={classes.OrderSummaryBox}>
+          <p className={classes.OrderSummaryLabel}>Yhteensä</p>
+          <p className={classes.OrderTotal}>
+            <strong>{totalFormatted} €</strong>
+          </p>
+        </div>
+
+        <p className={classes.Note}>
+          Lähettämällä tilauksen vahvistat, että olet tutustunut{' '}
+          <SafeLink href="/tilausehdot">tilaus- ja toimitusehtoihin</SafeLink> sekä{' '}
+          <SafeLink href="/tietosuoja">tietosuojaselosteeseen</SafeLink>. Maksu tapahtuu
+          OP Kevytyrittäjä-palvelun lähettämällä sähköpostilaskulla, jonka{' '}
+          <strong>maksuaika on 7 vuorokautta</strong>. {invoiceTimingNote}
         </p>
-      ) : null}
 
-      <label>
-        Viesti (valinnainen)
-        <textarea name="lisatiedot" rows="3" />
-      </label>
+        {submitError ? (
+          <p className={`${classes.HelperText} ${classes.AlertText}`} role="alert">
+            {submitError}
+          </p>
+        ) : null}
 
-      {pickupSearchVisible && pickupPointFallbackAllowed ? (
-        <p className={classes.HelperText}>
-          Jos noutopistehaku ei ole käytettävissä tai haluat toivoa tiettyä noutopaikkaa
-          ilman valintaa, voit kirjoittaa tähän toivomasi Postin noutopaikan tai
-          automaatin. Muuten voin lähettää paketin myös pelkän postinumeron perusteella.
-        </p>
-      ) : null}
+        {isSubmitted ? (
+          <p className={classes.Note} role="status">
+            {ORDER_SUCCESS_MESSAGE}
+          </p>
+        ) : null}
 
-      <ShippingHelpTexts texts={selectedShippingHelpTexts} />
-
-      <p className={classes.OrderTotal}>
-        Yhteensä: <strong>{totalFormatted} €</strong>
-      </p>
-      <p className={classes.Note}>
-        Painamalla alla olevaa painiketta teet sitovan tilauksen. Maksu tapahtuu
-        tilausvahvistuksen jälkeen OP Kevytyrittäjä -palvelun kautta lähetettävällä
-        laskulla.
-      </p>
-      <p className={classes.Note}>
-        Ennen tilausta tutustu{' '}
-        <SafeLink href="/tilausehdot">tilaus- ja toimitusehtoihin</SafeLink> sekä{' '}
-        <SafeLink href="/tietosuoja">tietosuojaselosteeseen</SafeLink>.
-      </p>
-
-      {submitError ? (
-        <p className={classes.HelperText} role="alert">
-          {submitError}
-        </p>
-      ) : null}
-
-      {isSubmitted ? (
-        <p className={classes.Note} role="status">
-          {ORDER_SUCCESS_MESSAGE}
-        </p>
-      ) : null}
-
-      <button type="submit" disabled={isSubmitting || isSubmitted}>
-        {isSubmitting
-          ? 'Lähetetään tilausta...'
-          : isSubmitted
-            ? 'Tilaus vastaanotettu'
-            : orderConfig.submitButtonLabel({
-                total,
-                totalFormatted,
-                productKey,
-                productName: product.name,
-              })}
-      </button>
-
-      {orderConfig.confirmationNote ? (
-        <p className={classes.Note}>{orderConfig.confirmationNote}</p>
-      ) : null}
+        <button
+          type="submit"
+          className={classes.SubmitButton}
+          disabled={isSubmitting || isSubmitted}
+        >
+          {isSubmitting
+            ? 'Lähetetään tilausta...'
+            : isSubmitted
+              ? 'Tilaus vastaanotettu'
+              : orderConfig.submitButtonLabel({
+                  total,
+                  totalFormatted,
+                  productKey,
+                  productName: product.name,
+                })}
+        </button>
+      </FormSection>
     </form>
   );
 }

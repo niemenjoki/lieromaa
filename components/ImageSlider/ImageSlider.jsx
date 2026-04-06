@@ -18,6 +18,8 @@ export default function ImageSlider({ images = [], maxWidth = '600px' }) {
       style={{
         width: '100%',
         maxWidth,
+        marginLeft: 0,
+        marginRight: 'auto',
         borderRadius: '12px',
         overflow: 'hidden',
       }}
