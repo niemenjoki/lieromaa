@@ -1,0 +1,34 @@
+{
+  "title": "Matokomposti haisee – yleiset syyt ja tehokkaat ratkaisut",
+  "description": "Haiseeko matokomposti? Tunnista yleisimmät syyt pahaan hajuun ja korjaa komposti nopeasti ilman turhaa säätöä tai koko järjestelmän uusimista.",
+  "publishedAt": "2026-04-07",
+  "updatedAt": "2026-04-07",
+  "keywords": [
+    "hajuhaitta",
+    "happamoituminen",
+    "kompostorin hoito",
+    "kosteus",
+    "matokomposti haisee",
+    "matokompostointi",
+    "ruokinta"
+  ],
+  "category": {
+    "name": "kompostorin hoito",
+    "pagePosition": 5
+  },
+  "articleSection": "Matokompostointi",
+  "faqItems": [
+    {
+      "question": "Miltä terve matokomposti tuoksuu?",
+      "answer": "Terve matokomposti tuoksuu yleensä korkeintaan kostealta maalta tai metsänpohjalta. Voimakas mädäntynyt, etikkainen tai ammoniakkinen haju kertoo tasapaino-ongelmasta."
+    },
+    {
+      "question": "Mikä on yleisin syy siihen, että matokomposti haisee?",
+      "answer": "Yleisin syy on liiallinen ruokinta yhdistettynä märkyyteen. Kun ruokaa on enemmän kuin madot ja mikrobit ehtivät käsitellä, massa alkaa käydä ja mädäntyä."
+    },
+    {
+      "question": "Pitääkö haiseva matokomposti tyhjentää kokonaan?",
+      "answer": "Yleensä ei. Useimmat hajuhaitat korjaantuvat vähentämällä ruokintaa, poistamalla sopimattoman jätteen ja lisäämällä runsaasti kuivaa petimateriaalia."
+    }
+  ]
+}
