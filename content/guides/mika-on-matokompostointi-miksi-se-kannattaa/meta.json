@@ -1,0 +1,34 @@
+{
+  "title": "Mikä on matokompostointi ja miksi se kannattaa kotona",
+  "description": "Mikä on matokompostointi käytännössä? Opit, miten järjestelmä toimii, kenelle se sopii ja miksi se on helppo tapa käsitellä biojätettä kotona.",
+  "publishedAt": "2026-04-07",
+  "updatedAt": "2026-04-07",
+  "keywords": [
+    "biojäte",
+    "kompostimadot",
+    "kompostorin perustaminen",
+    "matokompostointi",
+    "matolaskuri",
+    "opas",
+    "sisäkompostointi"
+  ],
+  "category": {
+    "name": "kompostorin perustaminen",
+    "pagePosition": 0
+  },
+  "articleSection": "Matokompostointi",
+  "faqItems": [
+    {
+      "question": "Haiseeko matokompostori kotona?",
+      "answer": "Oikein hoidettuna matokompostori ei haise voimakkaasti. Terve komposti tuoksuu yleensä korkeintaan kostealta metsänpohjalta. Hajuongelmat liittyvät tavallisesti liialliseen ruokintaan, märkyyteen tai vääränlaiseen jätteeseen."
+    },
+    {
+      "question": "Voiko matokompostorin pitää kerrostaloasunnossa?",
+      "answer": "Kyllä voi, jos kompostorille löytyy sopiva paikka ja ruokinta pidetään maltillisena. Moni pitää matokompostoria keittiössä, varastossa tai kodinhoitohuoneessa."
+    },
+    {
+      "question": "Tarvitseeko aloittamiseen paljon matoja?",
+      "answer": "Ei välttämättä. Pienelläkin määrällä pääsee alkuun, kun ruokintaa kasvatetaan hitaasti. Sopivan aloitusmäärän voi arvioida matolaskurilla kotitalouden biojätemäärän perusteella."
+    }
+  ]
+}
