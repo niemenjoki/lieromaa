@@ -1,4 +1,7 @@
 const nextConfig = {
+  env: {
+    NEXT_PUBLIC_ADSENSE_ENABLED: process.env.ADSENSE_ENABLED ?? '0',
+  },
   async headers() {
     return [
       {
