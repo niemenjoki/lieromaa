@@ -108,7 +108,9 @@ describe('frontend public order normalization', () => {
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormData({
         toimitus: 'posti_noutopiste',
+        osoite: 'Kompostikuja 1',
         postinumero: '00100',
+        toimipaikka: 'Helsinki',
         lisatiedot: '',
         pakkastoimituslisa: 'maksan',
         alennuskoodi: 'ei-ole',
@@ -137,6 +139,32 @@ describe('frontend public order normalization', () => {
       payload.pricing.total,
       35.9,
       'normalizePublicOrderSubmission should keep the summer pickup-point worm total at 35.9 EUR'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should require the full address for Posti deliveries', () => {
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({
+            toimitus: 'posti_noutopiste',
+            postinumero: '00100',
+            toimipaikka: 'Helsinki',
+          })
+        ),
+      (error) => {
+        expectOk(
+          error instanceof PublicOrderValidationError,
+          'normalizePublicOrderSubmission should throw a PublicOrderValidationError when a Posti address is incomplete'
+        );
+        expectEqual(
+          error.publicMessage,
+          'Täytä kaikki pakolliset kentät ennen lähetystä.',
+          'normalizePublicOrderSubmission should require the full address for Posti orders'
+        );
+        return true;
+      },
+      'normalizePublicOrderSubmission should reject pickup-point orders that are missing the street address'
     );
   });
 
