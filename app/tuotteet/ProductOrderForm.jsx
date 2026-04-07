@@ -317,8 +317,10 @@ export default function ProductOrderForm({ productKey }) {
     const street = addressFields.line1.trim();
     const city = addressFields.city.trim();
 
-    if (!postalCode) {
-      setPickupPointError('Anna vähintään postinumero, niin voin hakea noutopaikat.');
+    if (!street || !postalCode || !city) {
+      setPickupPointError(
+        'Anna katuosoite, postinumero ja postitoimipaikka, niin voin hakea noutopaikat.'
+      );
       return;
     }
 
@@ -662,11 +664,11 @@ export default function ProductOrderForm({ productKey }) {
       {pickupSearchVisible ? (
         <FormSection
           title="Noutopaikka"
-          description="Anna vähintään postinumero ja hae lähimmät Postin noutopaikat."
+          description="Anna koko osoite ja hae lähimmät Postin noutopaikat."
         >
           <div className={classes.AddressGroup}>
             <label className={classes.StackedField}>
-              <span className={classes.FieldLabel}>Katuosoite (valinnainen)</span>
+              <span className={classes.FieldLabel}>Katuosoite</span>
               <input
                 type="text"
                 name="osoite"
@@ -674,6 +676,7 @@ export default function ProductOrderForm({ productKey }) {
                 onChange={(event) =>
                   handleAddressFieldChange('line1', event.target.value)
                 }
+                required={pickupSearchVisible}
                 autoComplete="street-address"
               />
             </label>
@@ -691,12 +694,13 @@ export default function ProductOrderForm({ productKey }) {
               />
             </label>
             <label className={classes.StackedField}>
-              <span className={classes.FieldLabel}>Kaupunki (valinnainen)</span>
+              <span className={classes.FieldLabel}>Postitoimipaikka</span>
               <input
                 type="text"
                 name="toimipaikka"
                 value={addressFields.city}
                 onChange={(event) => handleAddressFieldChange('city', event.target.value)}
+                required={pickupSearchVisible}
                 autoComplete="address-level2"
               />
             </label>
