@@ -1,4 +1,3 @@
-import Advert from '@/components/Advert/Advert';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import { SITE_AUTHOR } from '@/data/site/author';
 
@@ -77,8 +76,6 @@ export default function AboutPage() {
           </p>
         </div>
       </div>
-
-      <Advert />
     </>
   );
 }
