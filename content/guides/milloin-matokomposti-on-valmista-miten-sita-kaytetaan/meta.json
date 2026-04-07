@@ -1,0 +1,33 @@
+{
+  "title": "Milloin matokomposti on valmista ja miten sitä käytetään",
+  "description": "Mistä tunnistaa valmiin matokakan? Opi arvioimaan kypsyys oikein ja käyttämään matokompostin tuotoksia huonekasveille, ruukkuihin ja kasvimaalle.",
+  "publishedAt": "2026-04-07",
+  "updatedAt": "2026-04-07",
+  "keywords": [
+    "kompostin hyödyntäminen",
+    "matokakan käyttö",
+    "matokakka",
+    "matokomposti valmis",
+    "matokompostointi",
+    "maanparannus"
+  ],
+  "category": {
+    "name": "kompostin hyödyntäminen",
+    "pagePosition": 0
+  },
+  "articleSection": "Matokompostointi",
+  "faqItems": [
+    {
+      "question": "Voiko matokakkaa käyttää sellaisenaan ruukussa?",
+      "answer": "Pieniä määriä voi käyttää sellaisenaan pintaan lisättynä, mutta koko ruukkua ei yleensä kannata täyttää pelkällä matokakalla. Useimmiten paras lopputulos syntyy, kun sitä sekoitetaan muun kasvualustan joukkoon."
+    },
+    {
+      "question": "Onko matokakka valmista, jos joukossa näkyy vielä vähän kuitua?",
+      "answer": "Usein kyllä. Pieni määrä pahvia, kookoskuitua tai yksittäisiä ruokapaloja ei vielä tee materiaalista käyttökelvotonta, jos kokonaisuus on muuten tummaa, murenevaa ja multamaisen tuoksuista."
+    },
+    {
+      "question": "Kuinka kauan matokakka säilyy?",
+      "answer": "Matokakka säilyy pitkään, kun se pidetään ilmavassa astiassa hieman kosteana ja suojassa suoralta auringolta. Täysin kuivuminen ei pilaa sitä, mutta voi heikentää osaa aktiivisesta mikrobitoiminnasta."
+    }
+  ]
+}
