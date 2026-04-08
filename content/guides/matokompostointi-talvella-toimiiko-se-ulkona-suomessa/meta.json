@@ -1,19 +1,33 @@
 {
   "title": "Matokompostointi talvella - toimiiko se ulkona Suomessa",
-  "description": "Voiko matokomposti toimia ulkona talvella? Luet, miten saat pidettyä madot elossa ja jatkettua kompostointia talvella",
+  "description": "Voiko matokomposti toimia ulkona talvella Suomessa? Lue, milloin madot selviävät, mitä munakoteloille tapahtuu ja miten kevätkäynnistys etenee.",
   "publishedAt": "2025-09-16",
-  "updatedAt": "2025-11-03",
+  "updatedAt": "2026-04-08",
   "keywords": [
     "kompostointi talvella",
-    "lämpökompostointi",
+    "lämpökompostori",
     "matokompostointi",
-    "suomi",
+    "munakotelot",
     "talvi",
     "ulkokompostointi"
   ],
   "category": {
-    "name": "kompostorin hoito",
-    "pagePosition": 1
+    "name": "kompostorin perustaminen",
+    "pagePosition": 4
   },
-  "articleSection": "Matokompostointi"
+  "articleSection": "Matokompostointi",
+  "faqItems": [
+    {
+      "question": "Voiko matokomposti toimia ulkona talvella Suomessa?",
+      "answer": "Voi vain rajallisesti. Jos komposti pysyy plussan puolella, toiminta voi jatkua hitaana, mutta jäätyessään aktiivinen biojätteen käsittely pysähtyy."
+    },
+    {
+      "question": "Selviävätkö kompostimadot talvesta, jos komposti jäätyy?",
+      "answer": "Aikuiset madot eivät yleensä selviä varsinaisesta jäätymisestä, mutta munakotelot voivat joissain oloissa selvitä talven yli ja kuoriutua keväällä."
+    },
+    {
+      "question": "Voiko lämpökompostori pitää kompostimadot hengissä talvella?",
+      "answer": "Siihen ei kannata luottaa varmana ratkaisuna. Pelkkä eristys ei yleensä riitä, vaan talven yli ulkona pidettävä matokanta tarvitsee käytännössä hyvin eristetyn rakenteen ja aktiivisen ulkoisen lämmityksen."
+    }
+  ]
 }
