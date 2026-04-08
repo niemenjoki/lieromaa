@@ -28,7 +28,9 @@
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, var(--highlight) 65%, transparent);
   text-underline-offset: 0.16em;
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
 }
 
 .InlineLink:hover {

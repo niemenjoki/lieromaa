@@ -149,8 +149,7 @@ export default function HomePage() {
           <h1>Kompostimadot ja matokompostointi kotona</h1>
           <p className={classes.Intro}>
             Lieromaa auttaa suomalaisia aloittamaan matokompostoinnin, hoitamaan
-            kompostoria arjessa ja hyödyntämään sen tuotokset. Täältä löydät myös
-            {' '}
+            kompostoria arjessa ja hyödyntämään sen tuotokset. Täältä löydät myös{' '}
             <SafeLink href="/tuotteet/madot" className={classes.InlineLink}>
               kompostimadot
             </SafeLink>{' '}
