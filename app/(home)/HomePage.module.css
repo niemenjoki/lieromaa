@@ -23,7 +23,19 @@
   line-height: 1.6;
 }
 
-.HeroActions,
+.InlineLink {
+  color: var(--highlight);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--highlight) 65%, transparent);
+  text-underline-offset: 0.16em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.InlineLink:hover {
+  color: var(--highlight-alt);
+  text-decoration-color: color-mix(in srgb, var(--highlight-alt) 65%, transparent);
+}
+
 .ActionRow {
   display: flex;
   flex-wrap: wrap;
@@ -31,9 +43,7 @@
   margin-top: 1.5rem;
 }
 
-.PrimaryAction,
-.SecondaryAction,
-.CategoryAction {
+.PrimaryAction {
   display: inline-block;
   width: fit-content;
   padding: 0.75rem 1.4rem;
@@ -53,17 +63,19 @@
   color: var(--text-on-accent);
 }
 
-.SecondaryAction,
 .CategoryAction {
-  background: var(--background-6);
-  color: var(--text-color);
-  border: 1px solid var(--highlight);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  color: var(--highlight);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.SecondaryAction:hover,
 .CategoryAction:hover {
-  background: var(--highlight);
-  color: var(--text-on-accent);
+  color: var(--highlight-alt);
 }
 
 .CategoryGrid {
@@ -72,6 +84,13 @@
   gap: 1rem;
 }
 
+.HighlightGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.HighlightCard,
 .CategoryCard {
   display: flex;
   flex-direction: column;
@@ -81,6 +100,10 @@
   background: var(--background-3);
   padding: 1rem;
   border-radius: 9px;
+}
+
+.HighlightCard {
+  border: 1px solid color-mix(in srgb, var(--highlight) 30%, transparent);
 }
 
 .Section {
@@ -96,7 +119,8 @@
 }
 
 .SectionHeading p,
-.CategoryCard p {
+.CategoryCard p,
+.HighlightCard p {
   max-width: 42rem;
   line-height: 1.7;
 }
@@ -113,14 +137,60 @@
   font-weight: 600;
 }
 
+.HighlightEyebrow {
+  margin: 0;
+  color: var(--highlight);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.HighlightCard h3,
 .CategoryCard h3 {
   color: var(--highlight-alt);
   font-size: 1.15rem;
   line-height: 1.35;
+  margin: 0;
 }
 
 .CategoryAction {
   margin-top: auto;
+}
+
+.ActionArrow {
+  display: inline-flex;
+}
+
+.ActionArrow > span {
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  opacity: 0;
+  transition: all 0.2s ease-out;
+  transition-delay: 0.15s;
+}
+
+.ActionArrow > span:nth-child(1) {
+  transform: rotate(-45deg);
+}
+
+.ActionArrow > span:nth-child(2) {
+  transform: translateX(-8px) rotate(-45deg);
+}
+
+.ActionArrow > span:nth-child(3) {
+  transform: translateX(-16px) rotate(-45deg);
+}
+
+.CategoryAction:hover .ActionArrow > span {
+  opacity: 1;
+}
+
+.CategoryAction:hover .ActionArrow > span:nth-child(2),
+.CategoryAction:hover .ActionArrow > span:nth-child(3) {
+  transform: rotate(-45deg);
 }
 
 .PostList {
