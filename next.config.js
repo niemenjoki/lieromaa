@@ -17,6 +17,13 @@ const nextConfig = {
         destination: '/tuotteet/madot',
         permanent: true,
       },
+      {
+        source:
+          '/opas/kompostorin-hoito/matokompostointi-talvella-toimiiko-se-ulkona-suomessa',
+        destination:
+          '/opas/kompostorin-perustaminen/matokompostointi-talvella-toimiiko-se-ulkona-suomessa',
+        permanent: true,
+      },
     ];
   },
   reactStrictMode: true,
