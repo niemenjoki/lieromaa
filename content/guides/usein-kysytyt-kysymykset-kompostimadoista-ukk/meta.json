@@ -1,14 +1,15 @@
 {
   "title": "Usein kysyttyjä kysymyksiä ja vastauksia kompostimadoista (UKK)",
-  "description": "Mikä kompostimato on, mitä se syö ja kuinka kauan elää? Tästä löydät vastaukset madon elämästä, hoidosta ja hankinnasta",
+  "description": "Mitkä madot sopivat matokompostiin, mitä ne syövät, miten ne lisääntyvät ja miltä munakotelot näyttävät? Lue kompostimatojen yleisimmät kysymykset.",
   "publishedAt": "2025-09-29",
-  "updatedAt": "2025-11-03",
+  "updatedAt": "2026-04-08",
   "keywords": [
     "matokompostointi",
     "kompostimadot",
+    "tunkioliero",
     "Eisenia fetida",
-    "biojäte",
     "madot",
+    "munakotelot",
     "UKK",
     "kompostointi"
   ],
@@ -20,43 +21,51 @@
   "faqItems": [
     {
       "question": "Mitkä madot sopivat matokompostointiin?",
-      "answer": "Yleisimmin käytetty kompostimatojen laji on tunkioliero (Eisenia fetida). Se on kastematoa pienempi, punertava ja erityisen tehokas biojätteen käsittelijä. Tunkiolierot viihtyvät kosteissa, tiiviissä ja pimeissä olosuhteissa, minkä vuoksi ne sopivat täydellisesti matokompostoriin. Muitakin lajeja voi käyttää, mutta Eisenia fetida on helppo, nopea ja laajimmin saatavilla oleva vaihtoehto."
+      "answer": "Yleisin ja käytännössä helpoin laji matokompostiin on tunkioliero eli Eisenia fetida. Se viihtyy kosteassa ja ravinteikkaassa biojäteympäristössä paljon tavallista kastematoa paremmin."
+    },
+    {
+      "question": "Voiko tavallisia kastematoja käyttää matokompostissa?",
+      "answer": "Yleensä ei kannata. Tavalliset kastemadot elävät maassa aivan erilaisissa oloissa kuin kompostiin sopivat tunkiolierot."
     },
     {
       "question": "Kuinka monta matoa tarvitsen aloittaakseni?",
-      "answer": "Tarvittava matojen määrä riippuu taloutesi koosta. Arvioinnissa voi käyttää Lieromaan matolaskuria, joka laskee sopivan määrän kotitalouden jätteiden perusteella."
+      "answer": "Tarvittava määrä riippuu siitä, kuinka paljon biojätettä taloudessa syntyy. Usein on järkevää aloittaa maltillisesti ja käyttää arvioinnissa matolaskuria."
     },
     {
       "question": "Mistä matoja saa hankittua?",
-      "answer": "Kompostimatoja voi joskus kerätä luonnosta, mutta käytännössä helpointa on tilata ne netistä. Kompostimatojen saatavuus vaihtelee, mutta Lieromaa myy pieniä määriä Eisenia fetida -matoja, kun oma kompostori tuottaa ylimääräisiä yksilöitä."
+      "answer": "Helpoin tapa on hankkia kompostimadot toiselta harrastajalta tai verkkokaupasta, joka myy nimenomaan kompostointiin sopivia matoja. Luonnosta keräämisessä ongelmana on oikean lajin tunnistaminen."
     },
     {
-      "question": "Onko madoilla suu?",
-      "answer": "Kyllä. Suu sijaitsee madon etupään ensimmäisessä jaokkeessa. Etupään iholäppä toimii aistimiseen ja avautuu syömistä varten, kun mato etsii ravintoa."
+      "question": "Mitä madot oikeasti syövät?",
+      "answer": "Madot hyödyntävät biojätettä hajottavaa mikrobistoa, joten niille sopii parhaiten pehmenevä kasvispainotteinen keittiöjäte, kuten kuoret, kahvinporot ja pehmeät kasvijätteet."
     },
     {
-      "question": "Kuolevatko madot kompostorissa?",
-      "answer": "Kyllä, madot kuolevat ajan myötä, mutta hyvin hoidetussa kompostissa kuolleita yksilöitä näkyy harvoin, koska muut eliöt hajottavat ne nopeasti. Jos kompostissa on paljon kuolleita matoja, olosuhteet eivät ole kunnossa — tarkista lämpötila, happamuus ja kosteus."
+      "question": "Syövätkö madot mitä tahansa biojätettä?",
+      "answer": "Eivät. Liha, kala, maitotuotteet ja rasvainen ruoka eivät yleensä sovi matokompostiin, koska ne hajoavat helposti väärällä tavalla ja tekevät järjestelmästä epävakaamman."
     },
     {
-      "question": "Mitä madot syövät?",
-      "answer": "Madot syövät luonnonmukaista biojätettä kuten vihannesten ja hedelmien kuoria. Ne eivät syö lihaa, maitotuotteita tai rasvaa, sillä ne hajoavat hitaasti ja voivat houkutella haittaeläimiä. Hapan ruoka kuten sitrushedelmät tulisi välttää."
+      "question": "Miten nopeasti kompostimadot lisääntyvät?",
+      "answer": "Hyvissä oloissa kompostimadot lisääntyvät tasaisesti, mutta eivät yhdessä yössä. Lisääntyminen riippuu paljon lämpötilasta, kosteudesta ja olosuhteiden tasaisuudesta."
     },
     {
-      "question": "Onko madoilla aivot?",
-      "answer": "On, mutta hyvin yksinkertaiset. Madon aivot koostuvat hermosolmukkeista, jotka ohjaavat sen perustoimintoja kuten liikkumista, ravinnon etsimistä ja vaarojen välttämistä."
+      "question": "Miltä madon munakotelot näyttävät?",
+      "answer": "Munakotelot ovat pieniä kellertäviä tai ruskehtavia koteloita, joita voi helposti luulla siemeniksi tai lannoiterakeiksi. Ne kertovat yleensä siitä, että kompostissa on lisääntymistoimintaa."
     },
     {
-      "question": "Onko madoilla silmiä?",
-      "answer": "Ei ole. Sen sijaan madoilla on valoa ja pimeyttä aistivia reseptorisoluja, joiden avulla ne osaavat väistää valoa ja pysytellä kompostorin suojassa."
+      "question": "Onko madoilla suu, aivot tai silmät?",
+      "answer": "Madoilla on suu ja hyvin yksinkertainen hermosto, mutta ei silmiä samalla tavalla kuin ihmisillä. Sen sijaan ne aistivat valoa ja pimeyttä ihonsa avulla."
     },
     {
       "question": "Tarvitsevatko madot happea?",
-      "answer": "Kyllä. Madot hengittävät ihonsa läpi, ja hapen siirtyminen tapahtuu diffuusion avulla kosteasta ihosta verenkiertoon. Kompostorin petimateriaalin pitää olla ilmavaa ja kosteaa, jotta madot saavat riittävästi happea."
+      "answer": "Kyllä. Madot hengittävät ihonsa läpi, joten petimateriaalin pitää olla samaan aikaan kostea ja ilmava, ei kuiva eikä vetiseksi tiivistynyt."
     },
     {
-      "question": "Kuinka kauan madot elävät?",
-      "answer": "Luonnossa kastemadon elinikä on noin vuoden, mutta hallituissa olosuhteissa tunkioliero voi elää jopa 4–5 vuotta. Hyvin hoidettu kompostori ylläpitää populaation, koska madot lisääntyvät jatkuvasti."
+      "question": "Kuinka kauan kompostimadot elävät?",
+      "answer": "Yksittäinen tunkioliero voi hyvissä oloissa elää useita vuosia. Kotikompostissa tärkeintä on kuitenkin se, että koko kanta pysyy elinvoimaisena ja uusiutuu."
+    },
+    {
+      "question": "Hidastuuko toiminta talvella?",
+      "answer": "Kyllä, jos komposti on viileässä. Kun lämpötila laskee, syöminen, liikkuminen ja lisääntyminen hidastuvat selvästi enemmän kuin lämpimissä sisätiloissa."
     }
   ]
 }
