@@ -6,6 +6,8 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 import Socials from '@/components/Socials/Socials';
 import { ADSENSE_CONSENT_ENABLED } from '@/data/site/adsense';
 import { LICENSE_URL, REPO_URL } from '@/data/site/constants.mjs';
+import { BUSINESS_ID, CONTACT_EMAIL } from '@/data/site/contact';
+import { ORGANIZATION_NAME } from '@/data/site/schema.mjs';
 
 import classes from './Footer.module.css';
 
@@ -14,6 +16,7 @@ export default function Footer({ navigation }) {
   const currentYear = new Date().getFullYear();
   const yearRange =
     currentYear === startYear ? `${startYear}` : `${startYear}–${currentYear}`;
+  const publicBusinessLocation = 'Järvenpää';
   const [consentMessage, setConsentMessage] = useState('');
   const canManageConsent = ADSENSE_CONSENT_ENABLED;
 
@@ -53,6 +56,14 @@ export default function Footer({ navigation }) {
         </div>
 
         <div className={classes.Bottom}>
+          <p className={classes.BusinessInfo}>
+            <strong>{ORGANIZATION_NAME}</strong>
+            {' | '}Y-tunnus {BUSINESS_ID}
+            {' | '}
+            {publicBusinessLocation}
+            {' | '}
+            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+          </p>
           <p>&copy; {yearRange} Joonas Niemenjoki</p>
           <p className={classes.SafeLinks}>
             {canManageConsent ? (
