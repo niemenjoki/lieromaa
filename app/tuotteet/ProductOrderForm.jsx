@@ -318,9 +318,7 @@ export default function ProductOrderForm({ productKey }) {
     const city = addressFields.city.trim();
 
     if (!street || !postalCode || !city) {
-      setPickupPointError(
-        'Anna katuosoite, postinumero ja postitoimipaikka, niin voin hakea noutopaikat.'
-      );
+      setPickupPointError('Anna osoite, postinumero ja postitoimipaikka ennen hakua.');
       return;
     }
 
@@ -639,10 +637,7 @@ export default function ProductOrderForm({ productKey }) {
         <ShippingHelpTexts texts={selectedShippingHelpTexts} />
       </FormSection>
 
-      <FormSection
-        title="Yhteystiedot"
-        description="Lähetän tilausvahvistuksen sähköpostiin. Puhelinnumeroa tarvitaan, jotta voin olla yhteydessä tilaukseen tarvittaessa."
-      >
+      <FormSection title="Yhteystiedot" description="">
         <div className={classes.FormFields}>
           <label className={classes.StackedField}>
             <span className={classes.FieldLabel}>Nimi</span>
@@ -662,10 +657,7 @@ export default function ProductOrderForm({ productKey }) {
       </FormSection>
 
       {pickupSearchVisible ? (
-        <FormSection
-          title="Noutopaikka"
-          description="Anna koko osoite ja hae lähimmät Postin noutopaikat."
-        >
+        <FormSection title="Osoite">
           <div className={classes.AddressGroup}>
             <label className={classes.StackedField}>
               <span className={classes.FieldLabel}>Katuosoite</span>
@@ -713,7 +705,9 @@ export default function ProductOrderForm({ productKey }) {
               onClick={searchPickupPoints}
               disabled={isSearchingPickupPoints}
             >
-              {isSearchingPickupPoints ? 'Haetaan noutopaikkoja...' : 'Hae noutopaikat'}
+              {isSearchingPickupPoints
+                ? 'Haetaan Postin noutopaikkoja...'
+                : 'Hae Postin noutopaikat'}
             </button>
           </div>
 
@@ -725,7 +719,7 @@ export default function ProductOrderForm({ productKey }) {
 
           {pickupPoints.length > 0 ? (
             <label className={classes.StackedField}>
-              <span className={classes.FieldLabel}>Valitse noutopaikka</span>
+              <span className={classes.FieldLabel}>Valitse Postin noutopaikka</span>
               <select
                 name="pickup_point_selection"
                 className={classes.PickupPointSelect}

@@ -168,6 +168,16 @@ describe('frontend public order submit route', () => {
             'the public order submit route should include the selected pickup point in the forwarded payload'
           );
           expectEqual(
+            forwardedPayload.fulfillment.address.line1,
+            'Kompostikuja 1',
+            'the public order submit route should keep the customer home address in the forwarded payload'
+          );
+          expectEqual(
+            forwardedPayload.fulfillment.searchAddress.line1,
+            'Kompostikuja 1',
+            'the public order submit route should also keep the pickup-point lookup address separately'
+          );
+          expectEqual(
             forwardedPayload.requestContext.origin,
             'https://www.lieromaa.fi',
             'the public order submit route should include the originating website in the forwarded request context'
