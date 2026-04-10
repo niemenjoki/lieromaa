@@ -52,11 +52,11 @@ describe('frontend public order normalization', () => {
     expectDeepEqual(
       payload.fulfillment.address,
       {
-        line1: 'Posti Pasila',
-        postalCode: '00520',
+        line1: 'Kompostikuja 1',
+        postalCode: '00100',
         city: 'Helsinki',
       },
-      'normalizePublicOrderSubmission should map the selected pickup point into the server payload'
+      'normalizePublicOrderSubmission should keep the customer home address in the server payload for pickup-point orders'
     );
     expectDeepEqual(
       payload.fulfillment.searchAddress,
@@ -127,8 +127,17 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.fulfillment.address.line1,
-      'Noutopaikka valitaan postinumeron perusteella',
-      'normalizePublicOrderSubmission should mark postal-code based pickup handling when no exact pickup point was provided'
+      'Kompostikuja 1',
+      'normalizePublicOrderSubmission should keep the customer home address even when no exact pickup point was provided'
+    );
+    expectDeepEqual(
+      payload.fulfillment.searchAddress,
+      {
+        line1: 'Kompostikuja 1',
+        postalCode: '00100',
+        city: 'Helsinki',
+      },
+      'normalizePublicOrderSubmission should preserve the pickup-point lookup address separately'
     );
     expectEqual(
       payload.pricing.discount,
