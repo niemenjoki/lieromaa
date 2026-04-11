@@ -47,5 +47,12 @@
     "review": "Kaikki toimi erittäin hyvin ja madot saapuivat hyvässä kunnossa. Voin suositella!",
     "displayName": "Päivi",
     "submittedAt": "2026-04-11T09:20:19.567Z"
+  },
+  {
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Lierot tulivat perille hyvin pakattuna ja nopeasti.",
+    "displayName": "Pääskyvuoren iltapäivätoiminta",
+    "submittedAt": "2026-04-11T12:54:42.863Z"
   }
 ]
