@@ -10,12 +10,21 @@ import useDebounce from '@/hooks/useDebounce';
 
 import classes from './WormCalculatorClient.module.css';
 
+function normalizePersonCount(value) {
+  const parsedValue = Number.parseInt(String(value ?? ''), 10);
+  if (!Number.isFinite(parsedValue) || parsedValue < 0) {
+    return 0;
+  }
+
+  return parsedValue;
+}
+
 export default function WormCalculatorClient({ recommendedPosts }) {
   const title = 'Matolaskuri';
   const description =
     'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.';
 
-  const [adults, setAdults] = useState(2);
+  const [adults, setAdults] = useState(0);
   const [teens, setTeens] = useState(0);
   const [children, setChildren] = useState(0);
   const [toddlers, setToddlers] = useState(0);
@@ -31,6 +40,12 @@ export default function WormCalculatorClient({ recommendedPosts }) {
   };
 
   function calculate() {
+    const householdSize = adults + teens + children + toddlers;
+    if (householdSize <= 0) {
+      setResult(null);
+      return;
+    }
+
     const factor = dietFactors[diet];
     const total =
       adults * baseWaste.adult +
@@ -82,95 +97,152 @@ export default function WormCalculatorClient({ recommendedPosts }) {
         <p>
           Arvio perustuu kotitalouden kokoon, ruokavalioon ja oletukseen, että
           matopopulaatio kaksinkertaistuu noin 3 kuukaudessa. Tulokset ovat
-          suuntaa-antavia – käytännössä biojätteen määrä ja matojen syönti riippuvat mm.
+          suuntaa-antavia - käytännössä biojätteen määrä ja matojen syönti riippuvat mm.
           lämpötilasta, kosteudesta ja ruoan laadusta.
         </p>
 
-        <div className={classes.CalculatorForm}>
-          <label>
-            Aikuiset:
-            <input
-              type="number"
-              value={adults}
-              onChange={(e) => setAdults(Number(e.target.value))}
-            />
-          </label>
-          <label>
-            Teinit (13–17 v.):
-            <input
-              type="number"
-              value={teens}
-              onChange={(e) => setTeens(Number(e.target.value))}
-            />
-          </label>
-          <label>
-            Lapset (4–12 v.):
-            <input
-              type="number"
-              value={children}
-              onChange={(e) => setChildren(Number(e.target.value))}
-            />
-          </label>
-          <label>
-            Taaperot (1–3 v.):
-            <input
-              type="number"
-              value={toddlers}
-              onChange={(e) => setToddlers(Number(e.target.value))}
-            />
-          </label>
-          <label>
-            Ruokavalio:
-            <select value={diet} onChange={(e) => setDiet(e.target.value)}>
-              <option value="sekaruoka">Sekaruokavalio</option>
-              <option value="kasvispainotteinen">Kasvispainotteinen</option>
-              <option value="kasvis">Kasvis</option>
-              <option value="vegaani">Vegaani</option>
-            </select>
-          </label>
-        </div>
-
-        {result && (
-          <div style={{ marginTop: '2rem' }}>
-            <h3>Tulokset</h3>
+        <section className={classes.Card}>
+          <div className={classes.CardHeader}>
+            <h3>Syötä kotitalouden tiedot</h3>
             <p>
-              Kotitaloutesi tuottaa arviolta {result.scraps[0]} – {result.scraps[1]} g
-              biojätettä viikossa. Sen käsittelemiseen tarvitaan noin{' '}
-              <strong>{result.wormsNeeded} matoa</strong>.
+              Laskurin tulos päivittyy automaattisesti, kun valitset talouden koon ja
+              ruokavalion.
             </p>
-            <p>
-              Koko suositellun määrän hankkimalla kompostori toimii heti täydellä teholla.
-              Käytännössä isoja matomääriä voi kuitenkin olla vaikea saada ostettua
-              kerralla. Toinen vaihtoehto on hankkia pieni määrä matoja ja odottaa, että
-              ne lisääntyy.
-            </p>
-
-            <ul>
-              <li>
-                Jos aloitat noin {result.options.halfStart} madolla, kestää noin 3
-                kuukautta, että sinulla on tarvittava määrä matoja.
-              </li>
-              <li>
-                Jos aloitat noin {result.options.quarterStart} madolla, aikaa kuluu noin 6
-                kuukautta.
-              </li>
-              <li>
-                Vähimmäisvaihtoehtona {result.options.eighthStart} madolla kompostori
-                toimii täysillä noin vuoden kuluttua.
-              </li>
-            </ul>
-
-            <small>
-              Laskelma perustuu oletukseen, että yksi mato painaa noin 0.5 g ja syö noin 1
-              g biojätettä viikossa. Populaatio tuplaantuu keskimäärin 3 kuukauden välein.
-            </small>
           </div>
-        )}
+
+          <div className={classes.FormGrid}>
+            <label className={classes.Field}>
+              <span className={classes.Label}>Aikuiset</span>
+              <input
+                className={classes.Input}
+                type="number"
+                min="0"
+                step="1"
+                inputMode="numeric"
+                value={adults}
+                onChange={(event) => setAdults(normalizePersonCount(event.target.value))}
+              />
+            </label>
+
+            <label className={classes.Field}>
+              <span className={classes.Label}>Teinit (13-17 v.)</span>
+              <input
+                className={classes.Input}
+                type="number"
+                min="0"
+                step="1"
+                inputMode="numeric"
+                value={teens}
+                onChange={(event) => setTeens(normalizePersonCount(event.target.value))}
+              />
+            </label>
+
+            <label className={classes.Field}>
+              <span className={classes.Label}>Lapset (4-12 v.)</span>
+              <input
+                className={classes.Input}
+                type="number"
+                min="0"
+                step="1"
+                inputMode="numeric"
+                value={children}
+                onChange={(event) =>
+                  setChildren(normalizePersonCount(event.target.value))
+                }
+              />
+            </label>
+
+            <label className={classes.Field}>
+              <span className={classes.Label}>Taaperot (1-3 v.)</span>
+              <input
+                className={classes.Input}
+                type="number"
+                min="0"
+                step="1"
+                inputMode="numeric"
+                value={toddlers}
+                onChange={(event) =>
+                  setToddlers(normalizePersonCount(event.target.value))
+                }
+              />
+            </label>
+
+            <label className={`${classes.Field} ${classes.FieldWide}`}>
+              <span className={classes.Label}>Ruokavalio</span>
+              <select
+                className={classes.Select}
+                value={diet}
+                onChange={(event) => setDiet(event.target.value)}
+              >
+                <option value="sekaruoka">Sekaruokavalio</option>
+                <option value="kasvispainotteinen">Kasvispainotteinen</option>
+                <option value="kasvis">Kasvis</option>
+                <option value="vegaani">Vegaani</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section className={classes.Card} aria-live="polite">
+          {result ? (
+            <>
+              <div className={classes.CardHeader}>
+                <h3>Tulokset</h3>
+                <p>
+                  Kotitaloutesi tuottaa arviolta {result.scraps[0]} - {result.scraps[1]} g
+                  biojätettä viikossa.
+                </p>
+              </div>
+
+              <p className={classes.ResultLead}>
+                Sen käsittelemiseen tarvitaan noin{' '}
+                <strong>{result.wormsNeeded} matoa</strong>.
+              </p>
+              <p>
+                Koko suositellun määrän hankkimalla kompostori toimii heti täydellä
+                teholla. Käytännössä isoja matomääriä voi kuitenkin olla vaikea saada
+                ostettua kerralla. Toinen vaihtoehto on hankkia pieni määrä matoja ja
+                odottaa, että ne lisääntyy.
+              </p>
+
+              <ul className={classes.ResultList}>
+                <li>
+                  Jos aloitat noin {result.options.halfStart} madolla, kestää noin 3
+                  kuukautta, että sinulla on tarvittava määrä matoja.
+                </li>
+                <li>
+                  Jos aloitat noin {result.options.quarterStart} madolla, aikaa kuluu noin
+                  6 kuukautta.
+                </li>
+                <li>
+                  Vähimmäisvaihtoehtona {result.options.eighthStart} madolla kompostori
+                  toimii täysillä noin vuoden kuluttua.
+                </li>
+              </ul>
+
+              <p className={classes.FinePrint}>
+                Laskelma perustuu oletukseen, että yksi mato painaa noin 0.5 g ja syö noin
+                1 g biojätettä viikossa. Populaatio tuplaantuu keskimäärin 3 kuukauden
+                välein.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className={classes.CardHeader}>
+                <h3>Tulokset</h3>
+                <p>
+                  Täytä kotitalouden henkilömäärät, niin laskuri näyttää arvion syntyvän
+                  biojätteen määrästä ja sopivasta matojen määrästä
+                </p>
+              </div>
+            </>
+          )}
+        </section>
 
         <h2>Vinkkejä tulosten tulkintaan</h2>
         <ul>
           <li>
-            Jos aloitat pienellä matomäärällä, anna populaation kasvaa rauhassa – vältä
+            Jos aloitat pienellä matomäärällä, anna populaation kasvaa rauhassa - vältä
             liiallista ruokintaa.
           </li>
           <li>
