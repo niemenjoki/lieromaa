@@ -1,4 +1,3 @@
-import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { WORMS_SHIPPING_SCHEDULE_TEXT } from '@/data/commerce/shippingSchedule.mjs';
@@ -167,8 +166,6 @@ export default async function Page() {
           </section>
         </div>
       </article>
-
-      <Advert />
     </>
   );
 }

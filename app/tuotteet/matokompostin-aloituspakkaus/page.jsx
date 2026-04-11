@@ -1,4 +1,3 @@
-import Advert from '@/components/Advert/Advert';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { starterKitPageContent } from '@/data/pages/products/starterKit.js';
@@ -378,8 +377,6 @@ export default async function Page() {
           </section>
         </div>
       </article>
-
-      <Advert />
     </>
   );
 }
