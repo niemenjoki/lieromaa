@@ -21,8 +21,8 @@ export default function ProductAvailabilityNotice({
           <strong>{prefix}</strong>{' '}
         </>
       ) : null}
-      Saatavuus on tilapäisesti rajallinen suuren kysynnän vuoksi. Tilauksia voi tehdä
-      normaalisti, mutta tämän hetken tilaukset toimitetaan aikaisintaan{' '}
+      Saatavuus on tilapäisesti rajallinen suuren kysynnän vuoksi. Tämän hetken tilaukset
+      toimitetaan aikaisintaan{' '}
       {formatFinnishDate(availability.earliestShippingDate, 'numeric')}.
     </p>
   );
