@@ -79,7 +79,7 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.product.sku,
-      'worms-100',
+      'worms-50',
       'normalizePublicOrderSubmission should keep the selected SKU'
     );
     expectEqual(
@@ -99,8 +99,8 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.pricing.total,
-      38.9,
-      'normalizePublicOrderSubmission should produce a 38.9 EUR total for the winter pickup-point worm order'
+      29.9,
+      'normalizePublicOrderSubmission should produce a 29.9 EUR total for the winter pickup-point worm order'
     );
   });
 
@@ -146,8 +146,8 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.pricing.total,
-      35.9,
-      'normalizePublicOrderSubmission should keep the summer pickup-point worm total at 35.9 EUR'
+      26.9,
+      'normalizePublicOrderSubmission should keep the summer pickup-point worm total at 26.9 EUR'
     );
   });
 
@@ -294,6 +294,30 @@ describe('frontend public order normalization', () => {
         return true;
       },
       'normalizePublicOrderSubmission should throw when the submitted product key and sku conflict'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should reject unavailable worm SKUs', () => {
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({
+            sku: 'worms-100',
+          })
+        ),
+      (error) => {
+        expectOk(
+          error instanceof PublicOrderValidationError,
+          'normalizePublicOrderSubmission should throw a PublicOrderValidationError for unavailable SKUs'
+        );
+        expectEqual(
+          error.publicMessage,
+          'Valittu pakkauskoko ei ole tällä hetkellä saatavilla. Päivitä sivu ja yritä uudelleen.',
+          'normalizePublicOrderSubmission should return the unavailable-SKU message'
+        );
+        return true;
+      },
+      'normalizePublicOrderSubmission should throw when the selected worm SKU is unavailable'
     );
   });
 });

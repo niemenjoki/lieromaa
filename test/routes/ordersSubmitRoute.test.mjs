@@ -154,7 +154,7 @@ describe('frontend public order submit route', () => {
           const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
           expectEqual(
             forwardedPayload.product.sku,
-            'worms-100',
+            'worms-50',
             'the public order submit route should forward the validated worm SKU'
           );
           expectEqual(

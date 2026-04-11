@@ -14,6 +14,7 @@ import { getOrderQuote } from '@/lib/orders/getOrderQuote';
 import { submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   formatPrice,
+  getAvailableProductVariants,
   getProductOrderConfig,
   getProductPricing,
   getProductShippingOptions,
@@ -21,6 +22,7 @@ import {
   getProductVariants,
 } from '@/lib/pricing/catalog';
 
+import ProductAvailabilityNotice from './ProductAvailabilityNotice';
 import classes from './ProductPage.module.css';
 import WormAmountFinePrint from './WormAmountFinePrint';
 
@@ -149,10 +151,13 @@ export default function ProductOrderForm({ productKey }) {
   const product = getProductPricing(productKey);
   const orderConfig = getProductOrderConfig(productKey);
   const variants = getProductVariants(productKey);
+  const availableVariants = getAvailableProductVariants(productKey);
   const shippingOptions = getProductShippingOptions(productKey);
   const defaultVariant =
-    getProductVariant(productKey, orderConfig.defaultVariantAmount) ??
-    variants[0] ??
+    getProductVariant(productKey, orderConfig.defaultVariantAmount, {
+      includeUnavailable: false,
+    }) ??
+    availableVariants[0] ??
     null;
   const defaultAmount = defaultVariant ? String(defaultVariant.amount) : '';
   const defaultDelivery = shippingOptions[0]?.id ?? 'nouto';
@@ -178,8 +183,13 @@ export default function ProductOrderForm({ productKey }) {
   const [selectedPickupPoint, setSelectedPickupPoint] = useState(null);
 
   const currentVariant =
-    variants.find((variant) => String(variant.amount) === amount) ?? defaultVariant;
+    availableVariants.find((variant) => String(variant.amount) === amount) ??
+    defaultVariant;
   const currentSku = currentVariant?.sku ?? '';
+  const hasOrderableVariants = availableVariants.length > 0;
+  const unavailableVariantCount = variants.filter(
+    (variant) => !variant.isAvailable
+  ).length;
   const selectedShippingOption =
     shippingOptions.find((option) => option.id === delivery) ??
     shippingOptions[0] ??
@@ -242,6 +252,17 @@ export default function ProductOrderForm({ productKey }) {
 
     setDelivery(defaultDelivery);
   }, [defaultDelivery, delivery, shippingOptions]);
+
+  useEffect(() => {
+    if (
+      !amount ||
+      availableVariants.some((variant) => String(variant.amount) === amount)
+    ) {
+      return;
+    }
+
+    setAmount(defaultAmount);
+  }, [amount, availableVariants, defaultAmount]);
 
   const handleDiscountChange = (event) => {
     setDiscountCode(event.target.value);
@@ -435,56 +456,84 @@ export default function ProductOrderForm({ productKey }) {
 
   const renderVariantSection = () => (
     <FormSection title={orderConfig.variantLegend} description={variantDescription}>
+      {!hasOrderableVariants ? (
+        <p className={classes.HelperText}>
+          Tällä hetkellä ei ole tilattavia vaihtoehtoja.
+        </p>
+      ) : null}
+
       <fieldset className={classes.FormFieldset}>
         <legend className={classes.ScreenReaderOnly}>{orderConfig.variantLegend}</legend>
 
         <div className={classes.ChoiceList}>
-          {variants.map((variant) => (
-            <label
-              key={variant.sku}
-              className={[
-                classes.FormOption,
-                variant.discount ? classes.VariantOptionLabel : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-            >
-              <input
-                type="radio"
-                name="maara"
-                value={variant.amount}
-                checked={amount === String(variant.amount)}
-                onChange={() => setAmount(String(variant.amount))}
-                className={classes.ChoiceInput}
-              />
-              <span className={classes.OptionContent}>
-                <span className={classes.OptionHeader}>
-                  <span className={classes.OptionMarker} aria-hidden="true">
-                    {amount === String(variant.amount) ? '[x]' : '[ ]'}
+          {variants.map((variant) => {
+            const isUnavailable = !variant.isAvailable;
+
+            return (
+              <label
+                key={variant.sku}
+                className={[
+                  classes.FormOption,
+                  variant.discount ? classes.VariantOptionLabel : '',
+                  isUnavailable ? classes.FormOptionDisabled : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                aria-disabled={isUnavailable ? 'true' : undefined}
+              >
+                <input
+                  type="radio"
+                  name="maara"
+                  value={variant.amount}
+                  checked={variant.isAvailable && amount === String(variant.amount)}
+                  onChange={() => setAmount(String(variant.amount))}
+                  className={classes.ChoiceInput}
+                  disabled={isUnavailable}
+                />
+                <span className={classes.OptionContent}>
+                  <span className={classes.OptionHeader}>
+                    <span className={classes.OptionMarker} aria-hidden="true">
+                      {isUnavailable
+                        ? '[-]'
+                        : amount === String(variant.amount)
+                          ? '[x]'
+                          : '[ ]'}
+                    </span>
+                    <span className={classes.OptionTitle}>
+                      {orderConfig.getVariantLabel({
+                        amount: variant.amount,
+                        price: variant.price,
+                        priceFormatted: formatPrice(variant.price),
+                        basePrice: variant.basePrice,
+                        basePriceFormatted: formatPrice(variant.basePrice),
+                        discount: variant.discount,
+                        variant,
+                        productKey,
+                      })}
+                    </span>
                   </span>
-                  <span className={classes.OptionTitle}>
-                    {orderConfig.getVariantLabel({
-                      amount: variant.amount,
-                      price: variant.price,
-                      priceFormatted: formatPrice(variant.price),
-                      basePrice: variant.basePrice,
-                      basePriceFormatted: formatPrice(variant.basePrice),
-                      discount: variant.discount,
-                      variant,
-                      productKey,
-                    })}
-                  </span>
+                  {isUnavailable ? (
+                    <span className={classes.AvailabilityStatus}>
+                      Ei saatavilla juuri nyt.
+                    </span>
+                  ) : null}
+                  {variant.discount && variant.isAvailable ? (
+                    <span className={classes.VariantDiscountNote}>
+                      {getAutomaticDiscountNotice(variant)}
+                    </span>
+                  ) : null}
                 </span>
-                {variant.discount ? (
-                  <span className={classes.VariantDiscountNote}>
-                    {getAutomaticDiscountNotice(variant)}
-                  </span>
-                ) : null}
-              </span>
-            </label>
-          ))}
+              </label>
+            );
+          })}
         </div>
       </fieldset>
+
+      {unavailableVariantCount > 0 ? (
+        <p className={classes.HelperText}>
+          Harmaat pakkauskoot eivät ole tällä hetkellä tilattavissa.
+        </p>
+      ) : null}
 
       {orderConfig.showWormAmountFinePrint ? <WormAmountFinePrint /> : null}
     </FormSection>
@@ -559,6 +608,12 @@ export default function ProductOrderForm({ productKey }) {
             ? String(selectedPickupPoint.distanceInMeters)
             : ''
         }
+      />
+
+      <ProductAvailabilityNotice
+        productKey={productKey}
+        className={classes.HelperText}
+        prefix="Saatavuustiedote:"
       />
 
       {orderConfig.variantSelectorPosition === 'beforeFulfillment'
@@ -875,7 +930,7 @@ export default function ProductOrderForm({ productKey }) {
         <button
           type="submit"
           className={classes.SubmitButton}
-          disabled={isSubmitting || isSubmitted}
+          disabled={isSubmitting || isSubmitted || !currentSku}
         >
           {isSubmitting
             ? 'Lähetetään tilausta...'
