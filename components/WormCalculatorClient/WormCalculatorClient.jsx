@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 
-import Advert from '@/components/Advert/Advert';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
@@ -257,7 +256,6 @@ export default function WormCalculatorClient({ recommendedPosts }) {
       </div>
 
       <SocialShareButtons title={title} text={description} tags={['matokomposti']} />
-      <Advert />
       <PostRecommendation
         posts={recommendedPosts}
         customTitle="Aiheeseen liittyviä blogijulkaisuja"
