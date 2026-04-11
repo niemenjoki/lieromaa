@@ -9,15 +9,15 @@ describe('frontend order quote pricing', () => {
   test('getOrderQuote should apply the active worm discount when worms are picked up', () => {
     const quote = getOrderQuote({
       productKey: 'worms',
-      sku: 'worms-100',
+      sku: 'worms-50',
       shippingMethod: 'nouto',
       now: new Date('2026-04-05T10:00:00Z'),
     });
 
     expectEqual(
       quote.itemPrice,
-      27,
-      'getOrderQuote should set the discounted pickup worm item price to 27 EUR'
+      18,
+      'getOrderQuote should set the discounted pickup worm item price to 18 EUR'
     );
     expectEqual(
       quote.shippingPrice,
@@ -31,15 +31,15 @@ describe('frontend order quote pricing', () => {
     );
     expectEqual(
       quote.total,
-      27,
-      'getOrderQuote should keep the total at 27 EUR for pickup worm orders'
+      18,
+      'getOrderQuote should keep the total at 18 EUR for pickup worm orders'
     );
   });
 
   test('getOrderQuote should only charge frost protection during the configured cold season', () => {
     const winterQuote = getOrderQuote({
       productKey: 'worms',
-      sku: 'worms-100',
+      sku: 'worms-50',
       shippingMethod: 'posti_noutopiste',
       selectedExtraCharges: {
         pakkastoimituslisa: true,
@@ -49,7 +49,7 @@ describe('frontend order quote pricing', () => {
 
     const summerQuote = getOrderQuote({
       productKey: 'worms',
-      sku: 'worms-100',
+      sku: 'worms-50',
       shippingMethod: 'posti_noutopiste',
       selectedExtraCharges: {
         pakkastoimituslisa: true,
@@ -64,8 +64,8 @@ describe('frontend order quote pricing', () => {
     );
     expectEqual(
       winterQuote.total,
-      38.9,
-      'getOrderQuote should return a 38.9 EUR total for the winter frost-protected worm shipment'
+      29.9,
+      'getOrderQuote should return a 29.9 EUR total for the winter frost-protected worm shipment'
     );
     expectEqual(
       summerQuote.extraChargeTotal,
@@ -74,8 +74,8 @@ describe('frontend order quote pricing', () => {
     );
     expectEqual(
       summerQuote.total,
-      35.9,
-      'getOrderQuote should return a 35.9 EUR total when the frost charge is inactive'
+      26.9,
+      'getOrderQuote should return a 26.9 EUR total when the frost charge is inactive'
     );
   });
 
@@ -103,11 +103,24 @@ describe('frontend order quote pricing', () => {
       () =>
         getOrderQuote({
           productKey: 'worms',
-          sku: 'worms-100',
+          sku: 'worms-50',
           shippingMethod: 'courier',
         }),
       /Unknown shipping option/,
       'getOrderQuote should throw when a worm order is quoted with an unsupported shipping method'
+    );
+  });
+
+  test('getOrderQuote should reject unavailable worm SKUs', () => {
+    assert.throws(
+      () =>
+        getOrderQuote({
+          productKey: 'worms',
+          sku: 'worms-100',
+          shippingMethod: 'nouto',
+        }),
+      /currently unavailable/,
+      'getOrderQuote should throw when the selected worm SKU is unavailable'
     );
   });
 });

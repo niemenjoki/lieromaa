@@ -26,6 +26,18 @@ function formatDiscountValidUntil(value) {
 export default function VariantPriceDisplay({ title, variant }) {
   const discount = variant.discount;
 
+  if (!variant.isAvailable) {
+    return (
+      <span className={classes.VariantPriceDisplay}>
+        <span className={classes.VariantPriceTitle}>{title}</span>
+        <span className={classes.VariantPriceRow}>
+          <span className={classes.RegularPrice}>{formatPrice(variant.price)} €</span>
+          <span className={classes.OutOfStockBadge}>Ei saatavilla</span>
+        </span>
+      </span>
+    );
+  }
+
   return (
     <span className={classes.VariantPriceDisplay}>
       <span className={classes.VariantPriceTitle}>{title}</span>

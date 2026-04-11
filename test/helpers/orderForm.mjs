@@ -4,7 +4,7 @@ export function createValidOrderFormData(overrides = {}) {
     _gotcha: '',
     tuote: 'Kompostimadot (Eisenia fetida)',
     tuote_avain: 'worms',
-    sku: 'worms-100',
+    sku: 'worms-50',
     toimitus: 'nouto',
     lomake_aloitettu_ms: '1700000000000',
     submission_id: 'submission-123',

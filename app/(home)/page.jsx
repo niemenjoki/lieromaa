@@ -3,7 +3,7 @@ import PromoBanner from '@/components/PromoBanner/PromoBanner';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/data/site/constants.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
-import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
+import { formatPrice, getAvailableProductVariants } from '@/lib/pricing/catalog';
 
 import classes from './HomePage.module.css';
 import structuredData from './structuredData.js';
@@ -87,7 +87,9 @@ function formatDiscountLabel(discount) {
 export default function HomePage() {
   const allGuides = getAllContent({ type: CONTENT_TYPES.GUIDE });
   const posts = getAllContent({ type: CONTENT_TYPES.POST }).slice(0, 3);
-  const wormSaleVariant = getProductVariants('worms').find((variant) => variant.discount);
+  const wormSaleVariant = getAvailableProductVariants('worms').find(
+    (variant) => variant.discount
+  );
   const wormSaleDiscount = wormSaleVariant?.discount ?? null;
   const editorialHighlights = EDITORIAL_HIGHLIGHT_SPECS.map(({ eyebrow, slug }) => {
     const guide = allGuides.find((entry) => entry.slug === slug);

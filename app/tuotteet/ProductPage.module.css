@@ -407,6 +407,11 @@
   min-width: 0;
 }
 
+.FormOptionDisabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
 .FormOption:has(input:checked) {
   border-color: var(--highlight);
   box-shadow: inset 0 0 0 1px var(--highlight);
@@ -582,11 +587,27 @@
   font-weight: 600;
 }
 
+.OutOfStockBadge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background-color: var(--background-6);
+  color: var(--text-color);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
 .LowestPriceNotice,
 .VariantDiscountNote {
   font-size: 0.82rem;
   line-height: 1.35;
   opacity: 0.85;
+}
+
+.AvailabilityStatus {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  font-weight: 700;
+  opacity: 0.9;
 }
 
 .VariantOptionLabel {

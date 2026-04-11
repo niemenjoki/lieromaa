@@ -8,6 +8,7 @@ import {
   getProductVariants,
 } from '@/lib/pricing/catalog';
 
+import ProductAvailabilityNotice from '../ProductAvailabilityNotice';
 import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';
 import ProductReviewsSection from '../ProductReviewsSection';
@@ -82,6 +83,12 @@ export default async function Page() {
                   ))}
                 </ul>
 
+                <ProductAvailabilityNotice
+                  productKey="worms"
+                  className={classes.HelperText}
+                  prefix="Saatavuustiedote:"
+                />
+
                 <p className={classes.HelperText}>
                   Vahvistan tilauksen kahden päivän kuluessa.
                 </p>
@@ -112,7 +119,7 @@ export default async function Page() {
                 </p>
                 <p>
                   Lasku tulee OP Kevytyrittäjä -palvelun kautta sähköpostiin.{' '}
-                  <stong>Maksuaika on 7 vuorokautta.</stong>
+                  <strong>Maksuaika on 7 vuorokautta.</strong>
                 </p>
               </div>
 
