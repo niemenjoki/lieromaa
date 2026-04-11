@@ -36,37 +36,86 @@
   opacity: 0.7;
 }
 
-.CalculatorForm {
+.Card {
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: var(--background-4);
+  padding: 15px;
+  margin: 1.5rem 0 0;
+}
+
+.CardHeader {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  max-width: 400px;
-  margin: 1rem 0;
+  gap: 0.35rem;
 }
 
-.CalculatorForm label {
+.CardHeader h3 {
+  margin: 0;
+}
+
+.CardHeader p {
+  margin: 0;
+}
+
+.FormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem 1rem;
+  margin-top: 1rem;
+}
+
+.Field {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.CalculatorForm input,
-.CalculatorForm select {
-  margin-left: 0.5rem;
-  padding: 0.25rem;
-  width: 10rem;
+.FieldWide {
+  grid-column: 1 / -1;
 }
 
-@media (max-width: 600px) {
-  .CalculatorForm label {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.Label {
+  font-weight: 600;
+}
 
-  .CalculatorForm input,
-  .CalculatorForm select {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 0.25rem;
+.Input,
+.Select {
+  width: 100%;
+  border: 1px solid var(--background-6);
+  border-radius: 4px;
+  background-color: var(--background-1);
+  color: var(--text-color);
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+  caret-color: var(--highlight-alt);
+}
+
+.Input:focus-visible,
+.Select:focus-visible {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+.HelpText,
+.PlaceholderText,
+.FinePrint {
+  margin: 1rem 0 0;
+  line-height: 1.5;
+  opacity: 0.84;
+}
+
+.ResultLead {
+  margin-top: 1rem;
+  font-size: 1.05rem;
+}
+
+.ResultList {
+  margin-top: 1rem;
+}
+
+@media (max-width: 720px) {
+  .FormGrid {
+    grid-template-columns: 1fr;
   }
 }
