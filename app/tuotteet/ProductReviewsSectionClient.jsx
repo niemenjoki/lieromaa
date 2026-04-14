@@ -33,7 +33,6 @@ function getStarString(value, maxValue = 5) {
 export default function ProductReviewsSectionClient({ productKey, reviews, summary }) {
   const [isOpen, setIsOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_REVIEWS);
-  const [hasShownMoreOnce, setHasShownMoreOnce] = useState(false);
   const visibleReviews = reviews.slice(0, visibleCount);
   const hasMoreReviews = visibleCount < reviews.length;
   const hiddenReviewCount = Math.max(reviews.length - visibleCount, 0);
@@ -52,7 +51,6 @@ export default function ProductReviewsSectionClient({ productKey, reviews, summa
   }
 
   function handleShowMoreReviews() {
-    setHasShownMoreOnce(true);
     setVisibleCount((currentValue) =>
       Math.min(currentValue + REVIEW_BATCH_SIZE, reviews.length)
     );
@@ -126,17 +124,18 @@ export default function ProductReviewsSectionClient({ productKey, reviews, summa
                   ? `Näytä ${Math.min(REVIEW_BATCH_SIZE, hiddenReviewCount)} lisää arvostelua`
                   : 'Näytä loput arvostelut'}
               </button>
-              {hasShownMoreOnce ? (
-                <button
-                  type="button"
-                  className={classes.ReviewHideButton}
-                  onClick={handleToggleReviews}
-                >
-                  Piilota arvostelut
-                </button>
-              ) : null}
             </div>
           ) : null}
+
+          <div className={classes.ReviewBottomActions}>
+            <button
+              type="button"
+              className={classes.ReviewHideButton}
+              onClick={handleToggleReviews}
+            >
+              Piilota arvostelut
+            </button>
+          </div>
         </div>
       ) : null}
     </section>
