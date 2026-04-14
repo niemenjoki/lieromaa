@@ -182,7 +182,7 @@ describe('frontend public order normalization', () => {
       createValidOrderFormData({
         tuote: 'Matokompostorin aloituspakkaus',
         tuote_avain: 'starterKit',
-        sku: 'starterkit-100',
+        sku: 'starterkit-50',
         sivu_polku: '/tuotteet/matokompostin-aloituspakkaus',
         toimitus: 'posti_kotiinkuljetus',
         osoite: 'Kompostikuja 1',
@@ -216,8 +216,8 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.pricing.total,
-      87.9,
-      'normalizePublicOrderSubmission should produce an 87.9 EUR total for the starter-kit home-delivery order'
+      78.9,
+      'normalizePublicOrderSubmission should produce a 78.9 EUR total for the starter-kit home-delivery order'
     );
   });
 

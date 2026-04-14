@@ -82,7 +82,7 @@ describe('frontend order quote pricing', () => {
   test('getOrderQuote should price the starter-kit home delivery option separately', () => {
     const quote = getOrderQuote({
       productKey: 'starterKit',
-      sku: 'starterkit-100',
+      sku: 'starterkit-50',
       shippingMethod: 'posti_kotiinkuljetus',
     });
 
@@ -93,8 +93,8 @@ describe('frontend order quote pricing', () => {
     );
     expectEqual(
       quote.total,
-      87.9,
-      'getOrderQuote should return an 87.9 EUR total for the starter-kit home-delivery order'
+      78.9,
+      'getOrderQuote should return a 78.9 EUR total for the starter-kit home-delivery order'
     );
   });
 

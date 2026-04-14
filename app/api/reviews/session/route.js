@@ -1,4 +1,4 @@
-import { REVIEW_ERROR_MESSAGE } from '@/data/commerce/reviewMessages';
+import { REVIEW_ERROR_MESSAGE } from '@/data/copy/reviewMessages';
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
 
 export const dynamic = 'force-dynamic';
