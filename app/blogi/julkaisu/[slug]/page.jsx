@@ -4,7 +4,6 @@ import Advert from '@/components/Advert/Advert';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
-import { CONTENT_TYPES } from '@/data/site/constants.mjs';
 import {
   getAllContentSlugs,
   getContentMdxSource,
@@ -12,6 +11,7 @@ import {
   getPostRecommendations,
 } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
+import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 
 export async function generateStaticParams() {
   const slugs = getAllContentSlugs({ type: CONTENT_TYPES.POST });

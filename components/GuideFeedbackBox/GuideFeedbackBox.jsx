@@ -2,7 +2,7 @@
 
 import { useId, useState } from 'react';
 
-import { CONTACT_EMAIL, GUIDE_FEEDBACK_FORMSPREE_ENDPOINT } from '@/data/site/contact';
+import { CONTACT_EMAIL, GUIDE_FEEDBACK_FORMSPREE_ENDPOINT } from '@/lib/site/contact';
 
 import classes from './GuideFeedbackBox.module.css';
 

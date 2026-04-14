@@ -1,7 +1,7 @@
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/data/site/constants.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
+import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/lib/site/constants.mjs';
 
 import classes from './HomePage.module.css';
 import structuredData from './structuredData.js';

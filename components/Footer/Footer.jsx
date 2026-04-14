@@ -4,10 +4,10 @@ import { useState } from 'react';
 
 import SafeLink from '@/components/SafeLink/SafeLink';
 import Socials from '@/components/Socials/Socials';
-import { ADSENSE_CONSENT_ENABLED } from '@/data/site/adsense';
-import { LICENSE_URL, REPO_URL } from '@/data/site/constants.mjs';
-import { BUSINESS_ID, CONTACT_EMAIL } from '@/data/site/contact';
-import { ORGANIZATION_NAME } from '@/data/site/schema.mjs';
+import { ADSENSE_CONSENT_ENABLED } from '@/lib/site/adsense';
+import { LICENSE_URL, REPO_URL } from '@/lib/site/constants.mjs';
+import { BUSINESS_ID, CONTACT_EMAIL } from '@/lib/site/contact';
+import { ORGANIZATION_NAME } from '@/lib/site/schema.mjs';
 
 import classes from './Footer.module.css';
 

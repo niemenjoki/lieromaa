@@ -7,7 +7,7 @@ import AdSenseConsentGate from '@/components/AdSense/AdSenseConsentGate';
 import Analytics from '@/components/Analytics/Analytics';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
-import { ADSENSE_CONSENT_ENABLED } from '@/data/site/adsense';
+import { ADSENSE_CONSENT_ENABLED } from '@/lib/site/adsense';
 import { getSiteNavigation } from '@/lib/siteStructure.mjs';
 import { createSiteStructuredData } from '@/lib/structuredData/createSiteStructuredData';
 

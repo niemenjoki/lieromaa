@@ -1,11 +1,11 @@
-import { SITE_AUTHOR } from '@/data/site/author';
+import { SITE_AUTHOR } from '@/lib/site/author';
 import {
   AUTHOR_ID,
   AUTHOR_IMAGE_PATH,
   AUTHOR_LINKEDIN_URL,
   ORGANIZATION_ID,
   WEBSITE_ID,
-} from '@/data/site/schema.mjs';
+} from '@/lib/site/schema.mjs';
 
 import { description, pageName, pageUrl } from './pageMetadata';
 

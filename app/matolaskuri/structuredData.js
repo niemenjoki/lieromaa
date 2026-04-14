@@ -1,4 +1,4 @@
-import { ORGANIZATION_ID, WEBSITE_ID } from '@/data/site/schema.mjs';
+import { ORGANIZATION_ID, WEBSITE_ID } from '@/lib/site/schema.mjs';
 
 import {
   mainEntityDescription,
