@@ -64,10 +64,11 @@ export default async function Page() {
                   aloittamaan heti, kun paketti on saapunut.
                 </p>
                 <p>
-                  Kolmen laatikon läpivirtauskompostori tekee ylläpidosta vaivatonta:
-                  ruokajäte lisätään ylimpään laatikkoon ja valmis matokakka kerätään
-                  alimmasta ilman, että koko järjestelmää tarvitsee tyhjentää tai
-                  käynnistää uudelleen sadonkorjuun jälkeen.
+                  Kolmen laatikon pinottu kompostori tekee ylläpidosta vaivatonta:
+                  ruokajäte lisätään aina ylimpään laatikkoon ja valmis matokakka kerätään
+                  alimmasta, kun madot ovat siirtyneet ylempään kerrokseen. Koko
+                  järjestelmää ei tarvitse tyhjentää tai käynnistää uudelleen sadonkorjuun
+                  jälkeen.
                 </p>
               </div>
 
@@ -122,12 +123,12 @@ export default async function Page() {
                 <h3>Hyvä valinta, jos haluat helpottaa ylläpitoa</h3>
                 <ul className={classes.CleanList}>
                   <li>
-                    lisätä biojätteen aina ylimpään laatikkoon ilman koko kompostorin
-                    läpikäyntiä
+                    lisätä biojätteen aina ylimpään aktiiviseen laatikkoon ilman koko
+                    kompostorin läpikäyntiä
                   </li>
                   <li>
-                    kerätä valmista matokakkaa alimmasta laatikosta ilman, että
-                    kompostointi pysähtyy
+                    kerätä valmista matokakkaa alimmasta laatikosta, kun madot ovat
+                    siirtyneet ylempään kerrokseen
                   </li>
                   <li>
                     rakenteen, jossa sadonkorjuu ei aiheuta yksilaatikkoisen kompostorin
@@ -245,14 +246,17 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Läpivirtausmallin etu</h3>
                 <p>
-                  Kolmen laatikon läpivirtausmallissa kompostointi etenee kerroksittain.
-                  Ruoka lisätään aina ylimpään laatikkoon ja madot siirtyvät vähitellen
+                  Kolmen laatikon pinotussa mallissa aktiivinen käsittely tapahtuu vain
+                  ylimmässä ruokintakerroksessa. Kun ylin kerros on suurimmaksi osaksi
+                  käsitelty, sen päälle lisätään uusi kerros ja madot siirtyvät vähitellen
                   ylöspäin ravinnon perässä.
                 </p>
                 <p>
-                  Kypsä matokakka siirtyy pikkuhiljaa kohti alinta kerrosta, josta sen voi
-                  kerätä ilman koko järjestelmän pysäyttämistä, vaikka ylin kerros olisi
-                  vielä täynnä prosessoimatonta materiaalia.
+                  Materiaali ei siirry laatikosta toiseen itsestään, vaan alemmat
+                  kerrokset sisältävät aiemmin käsiteltyä materiaalia, joka tekeytyy
+                  rauhassa matojen siirtyessä ylempiin kerroksiin. Kun alin kerros on
+                  valmis ja kerätty, ylempien kerrosten sisältö siirretään käsin yhden
+                  tason alas ja ylimpään laatikkoon lisätään uusi petimateriaali.
                 </p>
               </div>
             </div>
