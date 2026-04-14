@@ -9,7 +9,7 @@ import {
   REVIEW_SESSION_ENDPOINT,
   REVIEW_SUBMIT_ENDPOINT,
   REVIEW_SUCCESS_MESSAGE,
-} from '@/data/commerce/reviewMessages';
+} from '@/data/copy/reviewMessages';
 
 import classes from './ReviewPage.module.css';
 

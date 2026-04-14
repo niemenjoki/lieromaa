@@ -2,7 +2,7 @@ import {
   MONDAY_ONLY_SHIPPING_NOTE,
   STARTER_KIT_SHIPPING_SCHEDULE_TEXT,
   WORMS_SHIPPING_SCHEDULE_TEXT,
-} from '@/data/commerce/shippingSchedule.mjs';
+} from '@/data/operations/commerce/shippingSchedule.mjs';
 import {
   BUSINESS_ADDRESS_LINES,
   BUSINESS_ID,

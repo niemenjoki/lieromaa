@@ -5,10 +5,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import SafeLink from '@/components/SafeLink/SafeLink';
-import {
-  ORDER_SUBMIT_ENDPOINT,
-  ORDER_SUCCESS_MESSAGE,
-} from '@/data/commerce/orderMessages';
+import { ORDER_SUBMIT_ENDPOINT, ORDER_SUCCESS_MESSAGE } from '@/data/copy/orderMessages';
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
 import { getOrderQuote } from '@/lib/orders/getOrderQuote';
 import { submitOrderForm } from '@/lib/orders/submitOrderForm';

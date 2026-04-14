@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import approvedReviewsSource from '@/data/reviews/approved.json';
+import approvedReviewsSource from '@/data/published/reviews/approved.json';
 import { productDefinitions } from '@/lib/products/catalog.mjs';
 import {
   getApprovedProductReviewSummary,

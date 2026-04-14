@@ -1,4 +1,4 @@
-import { ORDER_ERROR_MESSAGE } from '@/data/commerce/orderMessages';
+import { ORDER_ERROR_MESSAGE } from '@/data/copy/orderMessages';
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
 import {
   PublicOrderValidationError,
