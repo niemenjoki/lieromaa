@@ -9,9 +9,28 @@ export default function ProductAvailabilityNotice({
   prefix = '',
 }) {
   const availability = getProductAvailability(productKey);
+  const hasUnavailableSkus = availability.unavailableSkus.length > 0;
+  const hasEarliestShippingDate = Boolean(availability.earliestShippingDate);
 
-  if (!availability.earliestShippingDate) {
+  if (!hasUnavailableSkus && !hasEarliestShippingDate) {
     return null;
+  }
+
+  const formattedEarliestShippingDate = hasEarliestShippingDate
+    ? formatFinnishDate(availability.earliestShippingDate, 'numeric')
+    : '';
+
+  let noticeText = '';
+
+  if (hasUnavailableSkus && hasEarliestShippingDate) {
+    noticeText =
+      'Olen joutunut rajoittamaan isompien matomäärien myyntiä sekä viivästyttämään tilausten lähettämistä suuren kysynnän vuoksi. Pienempiä tilauksia voi tehdä normaalisti. Nyt tehtävät tilaukset toimitetaan ';
+  } else if (hasUnavailableSkus) {
+    noticeText =
+      'Olen joutunut rajoittamaan isompien matomäärien myyntiä suuren kysynnän vuoksi. Pienempiä tilauksia voi tehdä normaalisti.';
+  } else {
+    noticeText =
+      'Joudun viivästyttämään tilausten lähettämistä suuren kysynnän vuoksi. Nyt tehtävät tilaukset toimitetaan ';
   }
 
   return (
@@ -21,9 +40,8 @@ export default function ProductAvailabilityNotice({
           <strong>{prefix}</strong>{' '}
         </>
       ) : null}
-      Saatavuus on tilapäisesti rajallinen suuren kysynnän vuoksi. Tämän hetken tilaukset
-      toimitetaan aikaisintaan{' '}
-      {formatFinnishDate(availability.earliestShippingDate, 'numeric')}.
+      {noticeText}
+      {hasEarliestShippingDate ? `${formattedEarliestShippingDate}.` : null}
     </p>
   );
 }
