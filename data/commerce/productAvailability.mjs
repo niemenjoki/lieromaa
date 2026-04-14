@@ -8,7 +8,10 @@ export const productAvailabilitySource = {
     earliestShippingDate: '2026-04-20',
     unavailableSkus: ['worms-100', 'worms-200'],
   },
-  starterKit: defaultProductAvailability,
+  starterKit: {
+    earliestShippingDate: '2026-04-20',
+    unavailableSkus: ['starterkit-100', 'starterkit-200'],
+  },
 };
 
 function normalizeEarliestShippingDate(value) {
