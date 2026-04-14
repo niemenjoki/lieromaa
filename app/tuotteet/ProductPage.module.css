@@ -719,7 +719,7 @@
 
 .ReviewBottomActions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-top: 0.65rem;
 }
 
