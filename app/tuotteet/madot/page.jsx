@@ -1,6 +1,6 @@
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { WORMS_SHIPPING_SCHEDULE_TEXT } from '@/data/operations/commerce/shippingSchedule.mjs';
+import { WORMS_SHIPPING_SCHEDULE_TEXT } from '@/lib/commerce/shippingSchedule.mjs';
 import {
   formatPrice,
   getProductShippingOptions,

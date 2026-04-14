@@ -1,5 +1,5 @@
 import SafeImage from '@/components/SafeImage/SafeImage';
-import { SITE_AUTHOR } from '@/data/site/author';
+import { SITE_AUTHOR } from '@/lib/site/author';
 
 import classes from './Tietoa.module.css';
 import structuredData from './structuredData.js';

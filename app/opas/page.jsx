@@ -3,9 +3,9 @@ import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import PostPreview from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { CONTENT_TYPES, GUIDE_CATEGORIES, SITE_URL } from '@/data/site/constants.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
+import { CONTENT_TYPES, GUIDE_CATEGORIES, SITE_URL } from '@/lib/site/constants.mjs';
 import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
 import classes from './GuideHubPage.module.css';

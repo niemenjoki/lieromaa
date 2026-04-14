@@ -1,6 +1,6 @@
 import ClientNotFoundPage from '@/components/NotFoundClient/NotFoundClient';
-import { CONTENT_TYPES } from '@/data/site/constants.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
+import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 import { getSearchableSitePages } from '@/lib/siteStructure.mjs';
 
 export const metadata = {

@@ -1,6 +1,6 @@
-import { CONTENT_TYPES } from '@/data/site/constants.mjs';
 import { getContentMetadata } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
+import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 
 export default async function generateMetadata({ params }) {
   const { slug } = await params;

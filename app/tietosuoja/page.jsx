@@ -1,10 +1,10 @@
+import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import {
   BUSINESS_ADDRESS_LINES,
   BUSINESS_NAME,
   CONTACT_EMAIL,
   CONTACT_PHONE,
-} from '@/data/site/contact';
-import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
+} from '@/lib/site/contact';
 
 import classes from './Tietosuoja.module.css';
 import { updatedAt } from './pageMetadata';

@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import approvedReviewsSource from '@/data/published/reviews/approved.json';
 import { productDefinitions } from '@/lib/products/catalog.mjs';
 import {
   getApprovedProductReviewSummary,
   getApprovedProductReviews,
 } from '@/lib/reviews/approvedReviews';
+import approvedReviewsSource from '@/lib/reviews/approvedReviewsSource';
 
 import { expectEqual } from '../helpers/assertions.mjs';
 

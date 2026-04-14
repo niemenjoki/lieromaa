@@ -1,6 +1,6 @@
-import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/data/site/constants.mjs';
 import { getAllContentSlugs, getBlogPageData } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
+import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/lib/site/constants.mjs';
 
 export default async function generateMetadata({ params }) {
   const { pageIndex } = await params;

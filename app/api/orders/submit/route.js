@@ -1,5 +1,5 @@
-import { ORDER_ERROR_MESSAGE } from '@/data/copy/orderMessages';
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
+import { ORDER_ERROR_MESSAGE } from '@/lib/copy/orderMessages';
 import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,

@@ -8,7 +8,7 @@ import {
   ADSENSE_CLIENT,
   ADSENSE_DEFAULT_SLOT,
   ADSENSE_ENABLED,
-} from '@/data/site/adsense';
+} from '@/lib/site/adsense';
 
 const Advert = ({ adClient = ADSENSE_CLIENT, adSlot = ADSENSE_DEFAULT_SLOT }) => {
   const pathname = usePathname();

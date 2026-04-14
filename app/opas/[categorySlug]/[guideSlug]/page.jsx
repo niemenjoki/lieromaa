@@ -5,13 +5,13 @@ import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
-import { CONTENT_TYPES } from '@/data/site/constants.mjs';
 import {
   getAllContent,
   getContentMdxSource,
   getContentMetadata,
 } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
+import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 
 export function generateStaticParams() {
   const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });

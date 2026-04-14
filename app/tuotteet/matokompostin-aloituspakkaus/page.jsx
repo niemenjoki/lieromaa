@@ -1,12 +1,12 @@
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import { starterKitPageContent } from '@/data/pages/products/starterKit.js';
-import { ORDER_CONTACT_EMAIL } from '@/data/site/contact';
 import {
   formatPrice,
   getProductShippingOptions,
   getProductVariants,
 } from '@/lib/pricing/catalog';
+import { starterKitPageContent } from '@/lib/products/starterKitPageContent';
+import { ORDER_CONTACT_EMAIL } from '@/lib/site/contact';
 
 import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';

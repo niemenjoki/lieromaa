@@ -1,4 +1,4 @@
-import { SOCIALS } from '@/data/site/socials';
+import { SOCIALS } from '@/lib/site/socials';
 
 import Icon from '../Icon/Icon';
 

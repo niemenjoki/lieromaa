@@ -1,5 +1,5 @@
-import { REVIEW_ERROR_MESSAGE } from '@/data/copy/reviewMessages';
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
+import { REVIEW_ERROR_MESSAGE } from '@/lib/copy/reviewMessages';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';

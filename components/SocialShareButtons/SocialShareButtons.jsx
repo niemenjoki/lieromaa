@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import { SITE_URL } from '@/data/site/constants.mjs';
+import { SITE_URL } from '@/lib/site/constants.mjs';
 
 import Icon from '../Icon/Icon';
 import classes from './SocialShareButtons.module.css';

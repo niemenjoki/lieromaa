@@ -2,15 +2,15 @@ import {
   MONDAY_ONLY_SHIPPING_NOTE,
   STARTER_KIT_SHIPPING_SCHEDULE_TEXT,
   WORMS_SHIPPING_SCHEDULE_TEXT,
-} from '@/data/operations/commerce/shippingSchedule.mjs';
+} from '@/lib/commerce/shippingSchedule.mjs';
+import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import {
   BUSINESS_ADDRESS_LINES,
   BUSINESS_ID,
   BUSINESS_NAME,
   CONTACT_PHONE,
   ORDER_CONTACT_EMAIL,
-} from '@/data/site/contact';
-import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
+} from '@/lib/site/contact';
 
 import classes from './Tilausehdot.module.css';
 import { effectiveFrom, updatedAt } from './pageMetadata';

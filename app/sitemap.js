@@ -6,6 +6,7 @@ import {
   getPostsByTag,
 } from '@/lib/content/index.mjs';
 import { productCatalog } from '@/lib/products/catalog.mjs';
+import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
 import {
   aboutPage,
   blogIndexPage,
@@ -15,8 +16,6 @@ import {
   starterKitSetupPage,
   wormCalculatorPage,
 } from '@/lib/site/pageRecords.mjs';
-
-import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '../data/site/constants.mjs';
 
 const toISODate = (d) => new Date(d).toISOString().split('T')[0];
 const slugify = (s) => s.replaceAll(' ', '-').trim().toLowerCase();
