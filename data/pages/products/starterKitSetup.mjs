@@ -3,8 +3,8 @@ export const starterKitSetupPageDefinition = {
   pageName: 'Aloituspakkauksen käyttöönotto',
   title: 'Aloituspakkauksen käyttöönotto | Lieromaa',
   description:
-    'Näin käynnistät aloituspakkauksen oikein: oikea kosteus, laatikoiden kerrokset, matojen totuttelu ja ensimmäiset ruokinnat.',
-  updatedAt: '2026-03-03',
+    'Näin käynnistät aloituspakkauksen oikein: yksi aktiivinen kerros alkuun, oikea kosteus, matojen totuttelu ja uusien kerrosten lisääminen vasta myöhemmin.',
+  updatedAt: '2026-04-13',
   image: {
     url: '/images/content/aloituspakkauksen_aloitus.avif',
     width: 1200,
@@ -29,16 +29,16 @@ export const starterKitSetupPageDefinition = {
         text: 'Poista matorasia ja lisää kuiva kookoskuitu umpipohjaiseen laatikkoon. Kaada joukkoon 4.5 litraa vettä tasaisesti koko pinnalle. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä, jotta kosteus jakautuu tasaisemmin.',
       },
       {
-        name: 'Kerrosten rakentaminen',
-        text: "Siirrä kostutettua materiaalia rei'itettyihin laatikoihin niin, että pohjalaatikkoon jää vain kevyt kerros. Kun laatikot pinotaan, petimateriaalin tulee painautua kevyesti mutta pysyä ilmavana.",
+        name: 'Ensimmäisen kerroksen käynnistys',
+        text: 'Siirrä kostutettu materiaali ensimmäiseen laatikkoon ja pidä muut laatikot aluksi tyhjinä. Kompostointi käynnistetään yhdellä aktiivisella kerroksella, ei täyttämällä kaikkia kerroksia heti.',
       },
       {
         name: 'Matojen lisääminen ja totuttelu',
-        text: 'Kaada madot ylimpään laatikkoon petimateriaalin päälle ja anna niiden kaivautua rauhassa. Sulje kansi ja anna matojen sopeutua ilman ruokintaa kaksi vuorokautta.',
+        text: 'Kaada madot samaan laatikkoon petimateriaalin päälle ja anna niiden kaivautua rauhassa. Sulje kansi ja anna matojen sopeutua ilman ruokintaa kaksi vuorokautta.',
       },
       {
-        name: 'Ensimmäinen ruokinta',
-        text: 'Aloita kahden vuorokauden jälkeen pienellä annoksella, esimerkiksi ruokalusikallisella banaania. Lisää uutta ruokaa vasta, kun edellinen annos on kadonnut kokonaan.',
+        name: 'Ensimmäinen ruokinta ja uudet kerrokset',
+        text: 'Aloita kahden vuorokauden jälkeen pienellä annoksella, esimerkiksi ruokalusikallisella banaania. Lisää uusi laatikko päälle vasta, kun nykyinen ylin kerros on osittain käsitelty, ja ruoki aina vain ylimmässä kerroksessa. Kun kaikki laatikot ovat käytössä, kerää alin kerros ja siirrä ylempien kerrosten sisältö käsin yhden tason alas.',
       },
     ],
   },

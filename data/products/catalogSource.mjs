@@ -151,7 +151,7 @@ export const productCatalogSource = {
       pageName: 'Matokompostorin aloituspakkaus ja madot',
       title: 'Matokompostorin aloituspakkaus (sis. madot) | Lieromaa',
       description:
-        'Lieromaan aloituspakkaus tekee matokompostin ylläpidosta sujuvaa: kolmen laatikon kompostori, petimateriaali ja kompostimadot samassa paketissa.',
+        'Lieromaan aloituspakkaus tekee matokompostin ylläpidosta sujuvaa: kolmen laatikon pinottu kompostori, petimateriaali ja kompostimadot samassa paketissa.',
       h1: 'Lieromaan matokompostorin aloituspakkaus',
       navigationLabel: 'Aloituspakkaus',
       updatedAt: '2026-04-05',
@@ -164,7 +164,7 @@ export const productCatalogSource = {
     product: {
       name: 'Matokompostorin aloituspakkaus',
       description:
-        'Lieromaan aloituspakkaus on suunniteltu sujuvaan matokompostin ylläpitoon: kolmen laatikon kompostori, petimateriaali ja kompostimadot samassa paketissa.',
+        'Lieromaan aloituspakkaus on suunniteltu sujuvaan matokompostin ylläpitoon: kolmen laatikon pinottu kompostori, petimateriaali ja kompostimadot samassa paketissa.',
       sku: 'LM-STARTER-001',
     },
     media: {
@@ -205,7 +205,7 @@ export const productCatalogSource = {
       {
         question: 'Voiko kompostoria pitää sisätiloissa?',
         answer:
-          'Kyllä. Läpivirtauskompostori soveltuu hyvin sisäkäyttöön, kun kosteustasapaino ja ruokinta pidetään hallinnassa.',
+          'Kyllä. Kolmen laatikon pinottu matokompostori soveltuu hyvin sisäkäyttöön, kun kosteustasapaino ja ruokinta pidetään hallinnassa.',
       },
     ],
     merchant: {
@@ -213,7 +213,7 @@ export const productCatalogSource = {
         return `Matokompostorin aloituspakkaus + ${amount} kompostimatoa`;
       },
       description(amount) {
-        return `Lieromaan aloituspakkaus sisältää kolmen laatikon läpivirtauskompostorin, petimateriaalin ja ${amount} kompostimatoa. Paketti on suunniteltu sujuvaan matokompostin ylläpitoon kotona.`;
+        return `Lieromaan aloituspakkaus sisältää kolmen laatikon pinotun matokompostorin, petimateriaalin ja ${amount} kompostimatoa. Paketti on suunniteltu sujuvaan matokompostin ylläpitoon kotona.`;
       },
       productType: 'Matokompostointi > Matokompostorit > Aloituspakkaukset',
     },

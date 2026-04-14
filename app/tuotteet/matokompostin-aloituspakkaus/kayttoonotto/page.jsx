@@ -25,10 +25,11 @@ export default function StarterKitSetupPage() {
           <li>Umpipohjainen laatikko - 1 kpl</li>
           <li>Rei'itetty laatikko - 2 kpl</li>
           <li>Kansi - 1 kpl</li>
-          <li>Kuiva kookoskuitu</li>
+          <li>Kuiva kookoskuitu petimateriaaliksi</li>
           <li>Kompostimadot ja vanhaa petimateriaalia sisältävä rasia</li>
         </ul>
-        <h2>1. Kookoskuidun kostutus pohjalaatikossa</h2>
+
+        <h2>1. Ensimmäisen kerroksen petimateriaali</h2>
 
         <SafeImage
           src="/images/starterkit/aloituspakkaus_pohjalaatikko_kuiva_kuitu.avif"
@@ -42,14 +43,16 @@ export default function StarterKitSetupPage() {
         />
 
         <p>
-          Ota kompostin laatikot erilleen toisistaan ja siirrä matorasia erilleen
-          laatikoista.
+          Ota laatikot erilleen toisistaan ja siirrä matorasia sivuun. Käyttöönotto
+          aloitetaan yhdellä laatikolla.
         </p>
 
         <p>
-          Varmista, että kookoskuitu on umpinaisessa pohjalaatikossa, ei rei'itetyssä
-          laatikossa. Kaada kuidun sekaan 4.5 litraa vettä tasaisesti koko pinnalle.
+          Lisää umpinaiseen pohjalaatikkoon noin<strong>3,5 litraa kookoskuitua</strong>.
+          Lisää tämän jälkeen noin <strong>1,5 litraa vettä</strong> tasaisesti koko
+          pinnalle.
         </p>
+
         <SafeImage
           src="/images/starterkit/aloituspakkaus_vesi_kuidun_seassa.avif"
           alt="Umpipohjainen laatikko, jossa kuivan kookoskuidun sekaan on kaadettu vettä"
@@ -60,14 +63,15 @@ export default function StarterKitSetupPage() {
           loading="lazy"
           style={{ maxWidth: '100%', height: 'auto' }}
         />
+
         <p>
-          Anna veden imeytyä 30 minuuttia. Sekoita kerran noin puolessa välissä, jotta
-          kosteus jakautuu tasaisemmin.
+          Anna veden imeytyä noin 30 minuuttia. Sekoita kerran puolivälissä, jotta kosteus
+          jakautuu tasaisemmin.
         </p>
 
         <SafeImage
           src="/images/starterkit/aloituspakkaus_kuidun_sekoittelu.avif"
-          alt="Kookoskuitua puristellaan ja hajotetaan käsin pohjalaatikossa, jotta kaikki kuiva materiaali kastuu"
+          alt="Kookoskuitua puristellaan ja hajotetaan käsin pohjalaatikossa"
           width={1200}
           height={800}
           sizes="(max-width: 800px) 100vw, 800px"
@@ -77,95 +81,125 @@ export default function StarterKitSetupPage() {
         />
 
         <p>
-          Puristele ja hajota suurimmat kuivat kuitupaakut. Kaiken materiaalin ei tarvitse
-          olla täysin tasaisen kosteaa - kosteus tasaantuu itsestään ja matojen liike
-          nopeuttaa prosessia.
+          Puristele suurimmat kuivat paakut auki. Kaiken materiaalin ei tarvitse olla
+          täysin tasaisen kosteaa - kosteus tasaantuu itsestään.
         </p>
 
-        <h2>2. Kerrosten rakentaminen</h2>
+        <h2>2. Matojen lisääminen ja käynnistys</h2>
 
         <p>
-          Siirrä osa kostutetusta materiaalista yhteen rei'itetyistä laatikoista.
-          Pohjalaatikkoon jätetään vain sen verran petimateriaalia, että kun rei'itetty
-          laatikko asetetaan sen päälle ja painetaan kevyesti alas, sen pohja koskettaa ja
-          painaa materiaalia aavistuksen.
-        </p>
-
-        <p>
-          Oikea määrä näkyy siitä, että materiaalin pinta tasoittuu. Huomaa, ettei
-          petimateriaali saa puristua tiiviiksi vaan sen tulee painautua vain kevyesti.
-        </p>
-        <SafeImage
-          src="/images/starterkit/aloituspakkaus_painauma_kuidussa.avif"
-          alt="Petimateriaalissa näkyy ylemmän laatikon jättämä pieni painauma."
-          width={1200}
-          height={800}
-          sizes="(max-width: 800px) 100vw, 800px"
-          priority={false}
-          loading="lazy"
-          style={{ maxWidth: '100%', height: 'auto' }}
-        />
-
-        <p>
-          Toista sama keskikerroksen kanssa. Kun ylin laatikko painetaan sen päälle,
-          petimateriaali painuu hieman kasaan. Loput materiaalista jää ylimpään
-          laatikkoon.
-        </p>
-
-        <p>
-          Nyt sinulla pitäisi olla kasassa kolmikerroksinen läpivirtauskompostori.
-          Alimmassa ja keskimmäisessä kerroksessa on juuri sen verran petimateriaalia,
-          että ylempi laatikko painaa sitä kevyesti kasaan. Ylimmässä laatikossa on hieman
-          enemmän petimateriaalia.
-        </p>
-
-        <h2>3. Matojen lisääminen ja totuttelu</h2>
-
-        <p>
-          Kaada koko matorasian sisältö ylimpään laatikkoon. Vanha petimateriaali sisältää
-          hyödyllisiä mikrobeja, jotka käynnistävät hajotusprosessin tehokkaasti.
+          Kaada koko matorasian sisältö petimateriaalin päälle. Matojen mukana tuleva
+          vanha petimateriaali sisältää valmiiksi mikrobeja, jotka tehostavat
+          hajotusprosessin käynnistymistä.
         </p>
 
         <p>Anna matojen kaivautua petimateriaaliin itse. Älä sekoita.</p>
 
-        <p>
-          Sulje kansi ja anna matojen olla rauhassa 48 tuntia ilman ruokintaa. Tämä
-          vähentää stressiä ja parantaa sopeutumista.
-        </p>
+        <p>Sulje kansi ja anna matojen olla rauhassa noin 48 tuntia ilman ruokintaa.</p>
 
-        <h2>4. Ensimmäinen ruokinta</h2>
+        <h2>3. Ensimmäinen ruokinta</h2>
 
         <p>
           Kahden vuorokauden jälkeen voit antaa ensimmäisen, hyvin pienen ruokinnan.
-          Esimerkiksi ruokalusikallinen banaania riittää. Jos olet epävarma, mitä madoille
-          voi antaa ruoaksi, katso{' '}
+          Esimerkiksi ruokalusikallinen banaania riittää. Jos olet epävarma, mitä
+          kompostoriin saa laittaa, katso{' '}
           <SafeLink href="/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa">
             Mitä kompostoriin saa laittaa ja mitä ei?
           </SafeLink>
         </p>
 
         <p>
-          Seuraava ruokinta annetaan noin viikon kuluttua ensimmäisestä. Varmista aina,
-          että edellinen ruoka on kadonnut kokonaan ennen uuden lisäämistä.
+          Jatka ruokintaa noin kerran viikossa. Tarkista aina ennen ruokintaa, onko ruokaa
+          jäljellä edelliseltä ruokinnalta. Jos ruokaa on vielä reilusti, älä lisää ruokaa
+          vaan odota toinen viikko ennen ruoan lisäämistä. Jos ruoka on kokonaan kadonnut,
+          voit lisätä hieman enemmän ruokaa kuin edellisellä ruokintakerralla. Ole
+          kuitenkin tarkkana, ettet ruoki liikaa. Liika ruoka ehtii mädäntyä ja alkaa
+          haista ennen kuin madot ehtivät prosessoida sen. Ruoki mieluummin liian vähän
+          kuin liian paljon. Madot selviävät pelkkää petimateriaalia syömällä useita
+          viikkoja.
+        </p>
+
+        <h2>4. Toisen kerroksen lisääminen</h2>
+
+        <p>
+          Kun ensimmäinen laatikko on pääasiassa prosessoitu (mutta ei vielä täysin
+          valmista), lisää sen päälle uusi rei'itetty laatikko.
+        </p>
+
+        <p>
+          Jos alemmassa laatikossa on liian paljon materiaalia, eikä uusi laatikko mahdu
+          tiiviisti sen päälle, voit siirtää osan vanhasta materiaalista uuteen
+          laatikkoon.
+        </p>
+
+        <p>
+          Sekoita 3,5 litraa kookoskuitua ja 1,5 litraa vettä ja sekoita sitä kevyesti.
+          Kun vesi on imeytynyt, lisää petimateriaali äsken lisättyyn laatikkoon.
+        </p>
+
+        <p>
+          Tämän jälkeen ruokinta tehdään aina vain ylimpään laatikkoon. Madot siirtyvät
+          ajan myötä ylöspäin ravinnon perässä.
+        </p>
+
+        <h2>5. Kolmannen kerroksen lisääminen</h2>
+
+        <p>
+          Kun toinenkin laatikko on pääasiassa prosessoitu, lisää kolmas laatikko samaan
+          tapaan kuin aiemmin lisäsit toisen laatikon.
+        </p>
+
+        <p>Nyt järjestelmä alkaa muodostaa selkeän rakenteen:</p>
+
+        <ul>
+          <li>
+            <strong>Ylin laatikko:</strong> Madot käsittelevät ruokajätettä aktiivisesti
+          </li>
+          <li>
+            <strong>Keskimmäinen:</strong> Siirtymäkerros, jossa madot prosessoivat vielä
+            ruokajätteen jäämiä kunnes siirtyvät hiljalleen kohti ylintä laatikkoa.
+          </li>
+          <li>
+            <strong>Alin laatikko:</strong> Kypsytyskerros, jossa mikrobit kypsyttävät
+            matojen prosessoiman jätteen loppuun
+          </li>
+        </ul>
+
+        <h2>6. Sadonkorjuu ja jatkuva käyttö</h2>
+
+        <p>
+          Kun ylin laatikko on jälleen lähes käsitelty, alin laatikko on valmis
+          käytettäväksi.
+        </p>
+
+        <p>Kerää alimman laatikon koko sisältö talteen. Sen jälkeen siirrä:</p>
+
+        <ul>
+          <li>keskimmäisen laatikon sisältö alimpaan laatikkoon</li>
+          <li>ylimmän laatikon sisältö keskimmäiseen laatikkoon</li>
+        </ul>
+
+        <p>
+          Lisää ylimpään laatikkoon uusi kerros kosteaa tuoretta petimateriaalia ja jatka
+          ruokintaa normaalisti.
         </p>
 
         <p>
           Pikkuhiljaa ruokintamäärää voidaan lisätä. Madot syövät noin kaksi kertaa
-          painonsa verran viikossa ja madot painaa keskimäärin 0.5 grammaa. Toisin sanoen
-          esimerkiksi 100 matoa käsittelee noin 100 grammaa biojätettä viikossa. Tarkempi
-          käsittelytahti vaihtelee lämpötilan, kosteuden ja jätteen sisällön mukaan.
+          painonsa verran viikossa. Esimerkiksi 100 matoa käsittelee noin 100 g biojätettä
+          viikossa, mutta määrä vaihtelee olosuhteiden mukaan.
         </p>
 
         <p>
-          Olosuhteiden ollessa kunnossa populaatio voi kaksinkertaistua noin kolmessa
-          kuukaudessa, jolloin myös käsittelykapasiteetti kasvaa.
+          Hyvissä olosuhteissa populaatio kaksinkertaistuu noin kolmessa kuukaudessa,
+          jolloin myös käsittelykapasiteetti kasvaa kolmessa kuukaudessa kaksinkertaiseksi
+          ja puolessa vuodessa nelinkertaiseksi.
         </p>
 
         <p>
-          Tarkemmat ohjeet jatkuvaan hoitoon löydät tältä sivustolta kohdasta{' '}
+          Tarkemmat ohjeet jatkuvaan hoitoon löydät sivulta{' '}
           <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>. Voit myös
-          laittaa sähköpostia <strong>{ORDER_CONTACT_EMAIL}</strong>, niin autan parhaani
-          mukaan.
+          ottaa yhteyttä osoitteeseen <strong>{ORDER_CONTACT_EMAIL}</strong>.
         </p>
       </div>
     </>
