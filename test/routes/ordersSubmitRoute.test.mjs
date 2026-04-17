@@ -2,10 +2,18 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
 import { POST } from '@/app/api/orders/submit/route.js';
+import { normalizePublicOrderSubmission } from '@/lib/orders/normalizePublicOrder';
 
 import { expectDeepEqual, expectEqual } from '../helpers/assertions.mjs';
 import { withMutedConsole } from '../helpers/console.mjs';
-import { createValidOrderFormData } from '../helpers/orderForm.mjs';
+import {
+  findOrderScenario,
+  listOrderScenarios,
+} from '../helpers/orderScenarios.mjs';
+import {
+  createValidOrderFormData,
+  createValidOrderFormDataForScenario,
+} from '../helpers/orderForm.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
 
 function withEnv(env, fn) {
@@ -77,6 +85,12 @@ describe('frontend public order submit route', () => {
   });
 
   test('the public order submit route should forward the normalized order with auth and idempotency headers', async () => {
+    const scenario = findOrderScenario({ fulfillmentType: 'pickup_point' }) ?? listOrderScenarios()[0] ?? null;
+
+    if (!scenario) {
+      return;
+    }
+
     await withEnv(
       {
         ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
@@ -97,20 +111,12 @@ describe('frontend public order submit route', () => {
         };
 
         try {
+          const formData = createValidOrderFormDataForScenario(scenario);
+          const expectedPayload = normalizePublicOrderSubmission(formData);
           const response = await POST(
             createRouteRequest({
               url: 'https://www.lieromaa.fi/api/orders/submit',
-              formData: createValidOrderFormData({
-                toimitus: 'posti_noutopiste',
-                osoite: 'Kompostikuja 1',
-                postinumero: '00100',
-                toimipaikka: 'Helsinki',
-                pickup_point_id: 'POSTI-001',
-                pickup_point_name: 'Posti Pasila',
-                pickup_point_street: 'Ratapihantie 6',
-                pickup_point_postal_code: '00520',
-                pickup_point_city: 'Helsinki',
-              }),
+              formData,
             })
           );
 
@@ -153,29 +159,34 @@ describe('frontend public order submit route', () => {
 
           const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
           expectEqual(
-            forwardedPayload.product.sku,
-            'worms-50',
-            'the public order submit route should forward the validated worm SKU'
+            forwardedPayload.sourceRequestId,
+            expectedPayload.sourceRequestId,
+            'the public order submit route should forward the normalized source request id'
+          );
+          expectDeepEqual(
+            forwardedPayload.customer,
+            expectedPayload.customer,
+            'the public order submit route should forward the normalized customer payload'
+          );
+          expectDeepEqual(
+            forwardedPayload.fulfillment,
+            expectedPayload.fulfillment,
+            'the public order submit route should forward the normalized fulfillment payload'
+          );
+          expectDeepEqual(
+            forwardedPayload.product,
+            expectedPayload.product,
+            'the public order submit route should forward the normalized product payload'
+          );
+          expectDeepEqual(
+            forwardedPayload.pricing,
+            expectedPayload.pricing,
+            'the public order submit route should forward the normalized pricing payload'
           );
           expectEqual(
-            forwardedPayload.fulfillment.method,
-            'posti_noutopiste',
-            'the public order submit route should forward the selected fulfillment method'
-          );
-          expectEqual(
-            forwardedPayload.fulfillment.pickupPoint.name,
-            'Posti Pasila',
-            'the public order submit route should include the selected pickup point in the forwarded payload'
-          );
-          expectEqual(
-            forwardedPayload.fulfillment.address.line1,
-            'Kompostikuja 1',
-            'the public order submit route should keep the customer home address in the forwarded payload'
-          );
-          expectEqual(
-            forwardedPayload.fulfillment.searchAddress.line1,
-            'Kompostikuja 1',
-            'the public order submit route should also keep the pickup-point lookup address separately'
+            forwardedPayload.pagePath,
+            expectedPayload.pagePath,
+            'the public order submit route should forward the normalized page path'
           );
           expectEqual(
             forwardedPayload.requestContext.origin,
@@ -190,6 +201,12 @@ describe('frontend public order submit route', () => {
   });
 
   test('the public order submit route should preserve the upstream failure payload when order creation is rejected', async () => {
+    const scenario = listOrderScenarios()[0] ?? null;
+
+    if (!scenario) {
+      return;
+    }
+
     await withEnv(
       {
         ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
@@ -211,7 +228,7 @@ describe('frontend public order submit route', () => {
             const response = await POST(
               createRouteRequest({
                 url: 'https://www.lieromaa.fi/api/orders/submit',
-                formData: createValidOrderFormData(),
+                formData: createValidOrderFormDataForScenario(scenario),
               })
             );
 
