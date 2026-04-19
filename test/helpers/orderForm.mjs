@@ -42,7 +42,8 @@ export function createValidOrderFormData(overrides = {}) {
 
 export function createValidOrderFormDataForScenario(scenario, overrides = {}) {
   const addressDefaults =
-    scenario.fulfillmentType === 'pickup_point' || scenario.fulfillmentType === 'home_delivery'
+    scenario.fulfillmentType === 'pickup_point' ||
+    scenario.fulfillmentType === 'home_delivery'
       ? {
           osoite: 'Kompostikuja 1',
           postinumero: '00100',
