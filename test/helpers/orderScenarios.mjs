@@ -57,7 +57,9 @@ export function getFallbackFormScenario(overrides = {}) {
     (productDefinitions[overrideProductKey] ? overrideProductKey : '') ||
     '';
   const fallbackScenario =
-    (preferredProductKey ? findOrderScenario({ productKey: preferredProductKey }) : null) ??
+    (preferredProductKey
+      ? findOrderScenario({ productKey: preferredProductKey })
+      : null) ??
     listOrderScenarios()[0] ??
     null;
   const productKey =
@@ -68,13 +70,12 @@ export function getFallbackFormScenario(overrides = {}) {
   const product = productKey ? getProductCatalogEntry(productKey) : null;
   const variant =
     (overrideSku ? getProductVariantBySku(overrideSku) : null) ??
-    (productKey ? getAvailableProductVariants(productKey)[0] ?? null : null);
+    (productKey ? (getAvailableProductVariants(productKey)[0] ?? null) : null);
   const overrideShippingMethod = String(overrides.toimitus ?? '').trim();
   const shippingOption =
     (productKey && overrideShippingMethod
       ? getShippingOption(productKey, overrideShippingMethod)
-      : null) ??
-    (productKey ? getProductShippingOptions(productKey)[0] ?? null : null);
+      : null) ?? (productKey ? (getProductShippingOptions(productKey)[0] ?? null) : null);
 
   return {
     productKey,
@@ -111,9 +112,7 @@ export function getDateForChargeActivity(charge, { active } = {}) {
     (month) => !activeMonths.includes(month)
   );
 
-  return inactiveMonth
-    ? new Date(Date.UTC(2026, inactiveMonth - 1, 15, 10, 0, 0))
-    : null;
+  return inactiveMonth ? new Date(Date.UTC(2026, inactiveMonth - 1, 15, 10, 0, 0)) : null;
 }
 
 export function buildExpectedQuoteFromSource({

@@ -8,14 +8,14 @@ import {
 
 import { expectDeepEqual, expectEqual, expectOk } from '../helpers/assertions.mjs';
 import {
+  createValidOrderFormData,
+  createValidOrderFormDataForScenario,
+} from '../helpers/orderForm.mjs';
+import {
   buildExpectedQuoteFromSource,
   findOrderScenario,
   listOrderScenarios,
 } from '../helpers/orderScenarios.mjs';
-import {
-  createValidOrderFormData,
-  createValidOrderFormDataForScenario,
-} from '../helpers/orderForm.mjs';
 import {
   getRequiredProductSku,
   withTemporaryProductAvailability,
@@ -342,30 +342,34 @@ describe('frontend public order normalization', () => {
       'normalizePublicOrderSubmission unavailable-SKU test needs at least one configured SKU'
     );
 
-    withTemporaryProductAvailability(scenario.productKey, {
-      unavailableSkus: [unavailableSku],
-    }, () => {
-      assert.throws(
-        () =>
-          normalizePublicOrderSubmission(
-            createValidOrderFormData({
-              sku: unavailableSku,
-            })
-          ),
-        (error) => {
-          expectOk(
-            error instanceof PublicOrderValidationError,
-            'normalizePublicOrderSubmission should throw a PublicOrderValidationError for unavailable SKUs'
-          );
-          expectEqual(
-            error.publicMessage,
-            'Valittu pakkauskoko ei ole tällä hetkellä saatavilla. Päivitä sivu ja yritä uudelleen.',
-            'normalizePublicOrderSubmission should return the unavailable-SKU message'
-          );
-          return true;
-        },
-        'normalizePublicOrderSubmission should throw when the selected SKU is unavailable'
-      );
-    });
+    withTemporaryProductAvailability(
+      scenario.productKey,
+      {
+        unavailableSkus: [unavailableSku],
+      },
+      () => {
+        assert.throws(
+          () =>
+            normalizePublicOrderSubmission(
+              createValidOrderFormData({
+                sku: unavailableSku,
+              })
+            ),
+          (error) => {
+            expectOk(
+              error instanceof PublicOrderValidationError,
+              'normalizePublicOrderSubmission should throw a PublicOrderValidationError for unavailable SKUs'
+            );
+            expectEqual(
+              error.publicMessage,
+              'Valittu pakkauskoko ei ole tällä hetkellä saatavilla. Päivitä sivu ja yritä uudelleen.',
+              'normalizePublicOrderSubmission should return the unavailable-SKU message'
+            );
+            return true;
+          },
+          'normalizePublicOrderSubmission should throw when the selected SKU is unavailable'
+        );
+      }
+    );
   });
 });

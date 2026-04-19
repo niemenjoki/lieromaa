@@ -7,13 +7,10 @@ import { normalizePublicOrderSubmission } from '@/lib/orders/normalizePublicOrde
 import { expectDeepEqual, expectEqual } from '../helpers/assertions.mjs';
 import { withMutedConsole } from '../helpers/console.mjs';
 import {
-  findOrderScenario,
-  listOrderScenarios,
-} from '../helpers/orderScenarios.mjs';
-import {
   createValidOrderFormData,
   createValidOrderFormDataForScenario,
 } from '../helpers/orderForm.mjs';
+import { findOrderScenario, listOrderScenarios } from '../helpers/orderScenarios.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
 
 function withEnv(env, fn) {
@@ -85,7 +82,10 @@ describe('frontend public order submit route', () => {
   });
 
   test('the public order submit route should forward the normalized order with auth and idempotency headers', async () => {
-    const scenario = findOrderScenario({ fulfillmentType: 'pickup_point' }) ?? listOrderScenarios()[0] ?? null;
+    const scenario =
+      findOrderScenario({ fulfillmentType: 'pickup_point' }) ??
+      listOrderScenarios()[0] ??
+      null;
 
     if (!scenario) {
       return;

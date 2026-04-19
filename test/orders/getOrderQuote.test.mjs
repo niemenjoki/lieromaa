@@ -64,7 +64,8 @@ describe('frontend order quote pricing', () => {
 
   test('getOrderQuote should respect the current extra-charge configuration', () => {
     const scenario =
-      listOrderScenarios().find((entry) => entry.orderConfig.extraCharges.length > 0) ?? null;
+      listOrderScenarios().find((entry) => entry.orderConfig.extraCharges.length > 0) ??
+      null;
 
     if (!scenario) {
       return;
@@ -193,19 +194,23 @@ describe('frontend order quote pricing', () => {
       'getOrderQuote unavailable-SKU test needs at least one configured SKU'
     );
 
-    withTemporaryProductAvailability(scenario.productKey, {
-      unavailableSkus: [unavailableSku],
-    }, () => {
-      assert.throws(
-        () =>
-          getOrderQuote({
-            productKey: scenario.productKey,
-            sku: unavailableSku,
-            shippingMethod: scenario.shippingOption.id,
-          }),
-        /currently unavailable/,
-        'getOrderQuote should throw when the selected SKU is unavailable'
-      );
-    });
+    withTemporaryProductAvailability(
+      scenario.productKey,
+      {
+        unavailableSkus: [unavailableSku],
+      },
+      () => {
+        assert.throws(
+          () =>
+            getOrderQuote({
+              productKey: scenario.productKey,
+              sku: unavailableSku,
+              shippingMethod: scenario.shippingOption.id,
+            }),
+          /currently unavailable/,
+          'getOrderQuote should throw when the selected SKU is unavailable'
+        );
+      }
+    );
   });
 });

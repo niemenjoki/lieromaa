@@ -7,10 +7,7 @@ export function getRequiredProductSku(productKey, behavior) {
   const product = getProductPricing(productKey);
   const sku = product.variantSkus[0];
 
-  assert.ok(
-    sku,
-    `${behavior}. No SKU is currently configured for "${productKey}".`
-  );
+  assert.ok(sku, `${behavior}. No SKU is currently configured for "${productKey}".`);
 
   return sku;
 }
