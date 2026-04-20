@@ -195,6 +195,7 @@ export default function ProductOrderForm({ productKey }) {
     selectedShippingOption?.fulfillmentType ?? 'local_pickup';
   const pickupSearchVisible = selectedFulfillmentType === 'pickup_point';
   const deliveryAddressVisible = selectedFulfillmentType === 'home_delivery';
+  const localPickupHintVisible = selectedFulfillmentType === 'local_pickup';
   const quote =
     currentSku && delivery
       ? getOrderQuote({
@@ -650,6 +651,14 @@ export default function ProductOrderForm({ productKey }) {
             ))}
           </div>
         </fieldset>
+
+        {localPickupHintVisible ? (
+          <p className={classes.HelperText}>
+            Jos valitset noudon Järvenpäästä, voit nopeuttaa noutoajan sopimista
+            kirjoittamalla viestikenttään, sopivatko sinulle paremmin päivä- vai ilta-ajat
+            tai ehdottamalla muutamaa sinulle sopivaa aikaa.
+          </p>
+        ) : null}
 
         {activeExtraCharges.map((charge) => (
           <div key={charge.key} className={classes.FormSubsection}>
