@@ -1,16 +1,16 @@
 const defaultProductAvailability = Object.freeze({
-  earliestShippingDate: false,
+  earliestShippingDate: false, // 'YYYY-MM-DD'
   unavailableSkus: [],
 });
 
 export const productAvailabilitySource = {
   worms: {
-    earliestShippingDate: false,
-    unavailableSkus: [], // 'worms-x'
+    earliestShippingDate: '2026-05-04', // 'YYYY-MM-DD'
+    unavailableSkus: [], // '[worms-x]'
   },
   starterKit: {
-    earliestShippingDate: false,
-    unavailableSkus: [], // 'starterkit-x'
+    earliestShippingDate: '2026-05-04', // 'YYYY-MM-DD'
+    unavailableSkus: [], // '[starterkit-x]'
   },
 };
 
