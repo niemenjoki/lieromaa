@@ -97,6 +97,11 @@ describe('frontend public order normalization', () => {
         expectedQuote.total,
         `normalizePublicOrderSubmission should calculate the current total for ${scenario.productKey}/${scenario.shippingOption.id}`
       );
+      expectEqual(
+        payload.availability.earliestShippingDate,
+        '',
+        `normalizePublicOrderSubmission should omit empty availability snapshots for ${scenario.productKey}/${scenario.shippingOption.id}`
+      );
 
       if (
         scenario.fulfillmentType === 'pickup_point' ||
@@ -211,6 +216,52 @@ describe('frontend public order normalization', () => {
       payload.pricing.total,
       expectedQuote.total,
       'normalizePublicOrderSubmission should keep the current source-data total when the pickup point is omitted'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should preserve the rendered earliest shipping date snapshot', () => {
+    const scenario = findOrderScenario({ fulfillmentType: 'pickup_point' });
+
+    if (!scenario) {
+      return;
+    }
+
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormDataForScenario(scenario, {
+        availability_earliest_shipping_date: '2026-05-04',
+      }),
+      {
+        now: new Date('2026-04-05T10:00:00Z'),
+      }
+    );
+
+    expectEqual(
+      payload.availability.earliestShippingDate,
+      '2026-05-04',
+      'normalizePublicOrderSubmission should preserve the storefront-rendered earliest shipping date'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should ignore invalid availability snapshot dates', () => {
+    const scenario = findOrderScenario({ fulfillmentType: 'pickup_point' });
+
+    if (!scenario) {
+      return;
+    }
+
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormDataForScenario(scenario, {
+        availability_earliest_shipping_date: 'not-a-date',
+      }),
+      {
+        now: new Date('2026-04-05T10:00:00Z'),
+      }
+    );
+
+    expectEqual(
+      payload.availability.earliestShippingDate,
+      '',
+      'normalizePublicOrderSubmission should not keep invalid availability snapshot dates'
     );
   });
 

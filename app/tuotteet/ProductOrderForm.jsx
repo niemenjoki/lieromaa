@@ -12,6 +12,7 @@ import { submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   formatPrice,
   getAvailableProductVariants,
+  getProductAvailability,
   getProductOrderConfig,
   getProductPricing,
   getProductShippingOptions,
@@ -19,7 +20,10 @@ import {
   getProductVariants,
 } from '@/lib/pricing/catalog';
 
-import ProductAvailabilityNotice from './ProductAvailabilityNotice';
+import ProductAvailabilityNotice, {
+  getTodayInBusinessTimeZone,
+  getVisibleEarliestShippingDate,
+} from './ProductAvailabilityNotice';
 import classes from './ProductPage.module.css';
 import WormAmountFinePrint from './WormAmountFinePrint';
 
@@ -146,6 +150,7 @@ function ensureSentencePunctuation(text) {
 export default function ProductOrderForm({ productKey }) {
   const pathname = usePathname();
   const product = getProductPricing(productKey);
+  const availability = getProductAvailability(productKey);
   const orderConfig = getProductOrderConfig(productKey);
   const variants = getProductVariants(productKey);
   const availableVariants = getAvailableProductVariants(productKey);
@@ -178,6 +183,9 @@ export default function ProductOrderForm({ productKey }) {
   const [pickupPointFallbackAllowed, setPickupPointFallbackAllowed] = useState(false);
   const [selectedPickupPointId, setSelectedPickupPointId] = useState('');
   const [selectedPickupPoint, setSelectedPickupPoint] = useState(null);
+  const [visibleEarliestShippingDate, setVisibleEarliestShippingDate] = useState(
+    availability.earliestShippingDate
+  );
 
   const currentVariant =
     availableVariants.find((variant) => String(variant.amount) === amount) ??
@@ -207,6 +215,17 @@ export default function ProductOrderForm({ productKey }) {
         })
       : null;
   const activeExtraCharges = quote?.extraCharges.filter((charge) => charge.active) ?? [];
+  const normalHandlingWindowDays = Number(product?.schema?.handlingTime?.maxValue);
+
+  useEffect(() => {
+    setVisibleEarliestShippingDate(
+      getVisibleEarliestShippingDate({
+        earliestShippingDate: availability.earliestShippingDate,
+        normalHandlingWindowDays,
+        now: getTodayInBusinessTimeZone(),
+      })
+    );
+  }, [availability.earliestShippingDate, normalHandlingWindowDays]);
 
   useEffect(() => {
     if (!appliedDiscount) {
@@ -552,6 +571,11 @@ export default function ProductOrderForm({ productKey }) {
       <input type="hidden" name="lomake_aloitettu_ms" value={formStartedAt} />
       <input type="hidden" name="submission_id" value={submissionId} />
       <input type="hidden" name="sivu_polku" value={pathname ?? ''} />
+      <input
+        type="hidden"
+        name="availability_earliest_shipping_date"
+        value={visibleEarliestShippingDate || ''}
+      />
       <input type="hidden" name="pickup_point_id" value={selectedPickupPoint?.id ?? ''} />
       <input
         type="hidden"
