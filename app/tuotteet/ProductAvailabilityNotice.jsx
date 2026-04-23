@@ -29,7 +29,11 @@ function getTodayInTimeZone(timeZone) {
   );
 }
 
-function getVisibleEarliestShippingDate({
+export function getTodayInBusinessTimeZone() {
+  return getTodayInTimeZone(BUSINESS_TIME_ZONE);
+}
+
+export function getVisibleEarliestShippingDate({
   earliestShippingDate,
   normalHandlingWindowDays,
   now = new Date(),
@@ -70,7 +74,7 @@ export default function ProductAvailabilityNotice({
       getVisibleEarliestShippingDate({
         earliestShippingDate: availability.earliestShippingDate,
         normalHandlingWindowDays,
-        now: getTodayInTimeZone(BUSINESS_TIME_ZONE),
+        now: getTodayInBusinessTimeZone(),
       })
     );
   }, [availability.earliestShippingDate, normalHandlingWindowDays]);
