@@ -283,10 +283,16 @@ export default function PrivacyPage() {
             Vahvistettuihin tilauksiin liittyviä yhteystietoja ja toimitustietoja
             säilytetään niin kauan kuin se on tarpeen tilauksen toimittamiseksi,
             asiakaspalvelun hoitamiseksi ja mahdollisten reklamaatioiden käsittelemiseksi.
+            Lähetettyihin ja peruttuihin tilauksiin liittyvät henkilötiedot anonymisoidaan
+            tilausjärjestelmässä pääsääntöisesti 12 kuukauden kuluttua lähetyksestä tai
+            peruutuksesta, minkä jälkeen järjestelmään jää vain tilaushistorian seurantaan
+            tarvittava ei-henkilökohtainen tieto.
           </li>
           <li>
             Laskutukseen ja kirjanpitoon liittyviä tietoja säilytetään Suomen
-            kirjanpitolainsäädännön edellyttämän ajan.
+            kirjanpitolainsäädännön edellyttämän ajan. OP Kevytyrittäjä voi säilyttää
+            laskutus- ja kirjanpitotietoja tätä pidempään oman lakisääteisen
+            velvollisuutensa perusteella.
           </li>
           <li>
             Oppaiden kysymys- ja aihe-ehdotuslomakkeiden kautta lähetettyjä viestejä
