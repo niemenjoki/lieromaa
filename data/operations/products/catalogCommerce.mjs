@@ -15,6 +15,51 @@ const sharedLocalPickupHelperTexts = [
   'Jos valitset toimitustavaksi noudon, olen sinuun yhteydessä, jotta voimme sopia noudosta tarkemmin',
 ];
 
+const orderUpsellExtraCharges = [
+  {
+    key: 'compostFood',
+    section: 'upsell',
+    fieldName: 'kompostiruoka_lisatilaus',
+    label: 'Lieromaan kompostiruoka 150g',
+    checkboxLabel: 'Lisää Lieromaan kompostiruoka 150g',
+    price: 3,
+    descriptionLines: [
+      'Viljapohjainen lisäruoka matokompostiin. Helpottaa kompostin ylläpitoa ja tasaa toimintaa, kun biojätteen määrä vaihtelee.',
+    ],
+    helperTextLines: ['Annostelu: n. 1 tl / 5-10 L kompostia, 1-2 kertaa viikossa.'],
+  },
+  {
+    key: 'compostBalancer',
+    section: 'upsell',
+    fieldName: 'tasapainottaja_lisatilaus',
+    label: 'Lieromaan kompostin tasapainottaja 50g',
+    checkboxLabel: 'Lisää Lieromaan kompostin tasapainottaja 50g',
+    price: 2,
+    descriptionLines: [
+      'Kalsiumkarbonaattipohjainen jauhe, joka vähentää kompostin happamuutta. Ehkäisee hajuhaittoja ja parantaa olosuhteita madoille.',
+    ],
+    helperTextLines: [
+      'Annostelu: n. 1 tl / 5-10 L kompostia 2-3 viikon välein tai tarpeen mukaan.',
+    ],
+  },
+];
+
+const frostProtectionExtraCharge = {
+  key: 'frostProtection',
+  fieldName: 'pakkastoimituslisa',
+  checkedValue: 'maksan',
+  label: 'Pakkastoimituslisä',
+  checkboxLabel: 'Maksan pakkastoimituslisän',
+  price: 3,
+  activeMonths: [9, 10, 11, 12, 1, 2, 3, 4, 5],
+  descriptionLines: [
+    'Kun ulkolämpötila on alle -5 C, matojen toimittaminen vaatii ylimääräistä pakkausmateriaalia matojen pitämiseksi elossa. Pakkastilanne määritetään alimmasta lämpötilaennusteesta matojen lähtöpaikan (Järvenpää) ja toimitusosoitteen perusteella.',
+  ],
+  helperTextLines: [
+    'Voit tehdä tilauksen myös ilman pakkaslisää, vaikka ulkona olisi pakkasta, jolloin paketti toimitetaan pikimmiten sään lämmettyä.',
+  ],
+};
+
 const localPickupOption = {
   id: 'nouto',
   label: 'Nouto Järvenpäästä',
@@ -62,23 +107,7 @@ export const productCatalogCommerceSource = {
         pickup_point: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
         local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
       },
-      extraCharges: [
-        {
-          key: 'frostProtection',
-          fieldName: 'pakkastoimituslisa',
-          checkedValue: 'maksan',
-          label: 'Pakkastoimituslisä',
-          checkboxLabel: 'Maksan pakkastoimituslisän',
-          price: 3,
-          activeMonths: [9, 10, 11, 12, 1, 2, 3, 4, 5],
-          descriptionLines: [
-            'Kun ulkolämpötila on alle -5 C, matojen toimittaminen vaatii ylimääräistä pakkausmateriaalia matojen pitämiseksi elossa. Pakkastilanne määritetään alimmasta lämpötilaennusteesta matojen lähtöpaikan (Järvenpää) ja toimitusosoitteen perusteella.',
-          ],
-          helperTextLines: [
-            'Voit tehdä tilauksen myös ilman pakkaslisää, vaikka ulkona olisi pakkasta, jolloin paketti toimitetaan pikimmiten sään lämmettyä.',
-          ],
-        },
-      ],
+      extraCharges: [frostProtectionExtraCharge, ...orderUpsellExtraCharges],
     },
   },
   starterKit: {
@@ -128,6 +157,7 @@ export const productCatalogCommerceSource = {
           'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
         local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
       },
+      extraCharges: orderUpsellExtraCharges,
     },
   },
 };

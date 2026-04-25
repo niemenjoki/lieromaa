@@ -215,6 +215,12 @@ export default function ProductOrderForm({ productKey }) {
         })
       : null;
   const activeExtraCharges = quote?.extraCharges.filter((charge) => charge.active) ?? [];
+  const activeFulfillmentExtraCharges = activeExtraCharges.filter(
+    (charge) => charge.section !== 'upsell'
+  );
+  const activeUpsellCharges = activeExtraCharges.filter(
+    (charge) => charge.section === 'upsell'
+  );
   const normalHandlingWindowDays = Number(product?.schema?.handlingTime?.maxValue);
 
   useEffect(() => {
@@ -684,7 +690,7 @@ export default function ProductOrderForm({ productKey }) {
           </p>
         ) : null}
 
-        {activeExtraCharges.map((charge) => (
+        {activeFulfillmentExtraCharges.map((charge) => (
           <div key={charge.key} className={classes.FormSubsection}>
             <h4 className={classes.FormSubsectionTitle}>{charge.label}</h4>
 
@@ -721,6 +727,46 @@ export default function ProductOrderForm({ productKey }) {
 
         <ShippingHelpTexts texts={selectedShippingHelpTexts} />
       </FormSection>
+
+      {activeUpsellCharges.length > 0 ? (
+        <FormSection
+          title="Lisätuotteet"
+          description="Voit halutessasi lisätä tilaukseen kompostin ylläpitoa helpottavia tuotteita."
+        >
+          {activeUpsellCharges.map((charge) => (
+            <div key={charge.key} className={classes.FormSubsection}>
+              <label className={classes.CheckOption}>
+                <input
+                  type="checkbox"
+                  name={charge.fieldName}
+                  value={charge.checkedValue ?? 'on'}
+                  checked={Boolean(selectedExtraCharges[charge.fieldName])}
+                  onChange={(event) =>
+                    handleExtraChargeChange(charge.fieldName, event.target.checked)
+                  }
+                />
+                <span className={classes.OptionContent}>
+                  <span className={classes.OptionTitle}>
+                    {charge.checkboxLabel} ({formatPrice(charge.price)} €)
+                  </span>
+                </span>
+              </label>
+
+              {charge.descriptionLines?.map((line) => (
+                <p key={line} className={classes.FinePrint}>
+                  {line}
+                </p>
+              ))}
+
+              {charge.helperTextLines?.map((line) => (
+                <p key={line} className={classes.FinePrint}>
+                  {line}
+                </p>
+              ))}
+            </div>
+          ))}
+        </FormSection>
+      ) : null}
 
       <FormSection title="Yhteystiedot" description="">
         <div className={classes.FormFields}>

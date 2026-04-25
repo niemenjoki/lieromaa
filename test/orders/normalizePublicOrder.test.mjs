@@ -219,6 +219,61 @@ describe('frontend public order normalization', () => {
     );
   });
 
+  test('normalizePublicOrderSubmission should include selected upsell products in pricing', () => {
+    const scenario =
+      findOrderScenario({ productKey: 'worms', fulfillmentType: 'pickup_point' }) ??
+      findOrderScenario({ productKey: 'worms' });
+
+    if (!scenario) {
+      return;
+    }
+
+    const now = new Date('2026-06-15T10:00:00Z');
+    const selectedExtraCharges = {
+      kompostiruoka_lisatilaus: true,
+      tasapainottaja_lisatilaus: true,
+    };
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormDataForScenario(scenario, {
+        kompostiruoka_lisatilaus: 'on',
+        tasapainottaja_lisatilaus: 'on',
+      }),
+      { now }
+    );
+    const expectedQuote = buildExpectedQuoteFromSource({
+      productKey: scenario.productKey,
+      sku: scenario.variant.sku,
+      shippingMethod: scenario.shippingOption.id,
+      selectedExtraCharges,
+      now,
+    });
+
+    expectDeepEqual(
+      payload.pricing.extraCharges
+        .filter((charge) => charge.selected)
+        .map((charge) => ({
+          label: charge.label,
+          appliedPrice: charge.appliedPrice,
+        })),
+      [
+        {
+          label: 'Lieromaan kompostiruoka 150g',
+          appliedPrice: 3,
+        },
+        {
+          label: 'Lieromaan kompostin tasapainottaja 50g',
+          appliedPrice: 2,
+        },
+      ],
+      'normalizePublicOrderSubmission should keep the selected upsell products in the forwarded pricing payload'
+    );
+    expectEqual(
+      payload.pricing.total,
+      expectedQuote.total,
+      'normalizePublicOrderSubmission should include selected upsell products in the total'
+    );
+  });
+
   test('normalizePublicOrderSubmission should preserve the rendered earliest shipping date snapshot', () => {
     const scenario = findOrderScenario({ fulfillmentType: 'pickup_point' });
 
