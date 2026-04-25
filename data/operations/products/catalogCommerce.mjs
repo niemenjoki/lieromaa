@@ -51,7 +51,7 @@ const frostProtectionExtraCharge = {
   label: 'Pakkastoimituslisä',
   checkboxLabel: 'Maksan pakkastoimituslisän',
   price: 3,
-  activeMonths: [9, 10, 11, 12, 1, 2, 3, 4, 5],
+  activeMonths: [9, 10, 11, 12, 1, 2, 3, 4],
   descriptionLines: [
     'Kun ulkolämpötila on alle -5 C, matojen toimittaminen vaatii ylimääräistä pakkausmateriaalia matojen pitämiseksi elossa. Pakkastilanne määritetään alimmasta lämpötilaennusteesta matojen lähtöpaikan (Järvenpää) ja toimitusosoitteen perusteella.',
   ],
