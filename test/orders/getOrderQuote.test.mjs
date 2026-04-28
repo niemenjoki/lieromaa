@@ -105,6 +105,68 @@ describe('frontend order quote pricing', () => {
     );
   });
 
+  test('getOrderQuote should only discount selected targeted extra charges', () => {
+    const scenario =
+      listOrderScenarios().find((entry) =>
+        entry.orderConfig.extraCharges.some((charge) => charge.key === 'compostFood')
+      ) ?? null;
+
+    if (!scenario) {
+      return;
+    }
+
+    const charge = scenario.orderConfig.extraCharges.find(
+      (entry) => entry.key === 'compostFood'
+    );
+    const now = new Date('2026-06-15T10:00:00Z');
+    const discount = {
+      type: 'fixed',
+      value: Number(charge.price) || 0,
+      appliesToExtraChargeKeys: [charge.key],
+    };
+    const unselectedQuote = getOrderQuote({
+      productKey: scenario.productKey,
+      sku: scenario.variant.sku,
+      shippingMethod: scenario.shippingOption.id,
+      discount,
+      now,
+    });
+    const selectedQuote = getOrderQuote({
+      productKey: scenario.productKey,
+      sku: scenario.variant.sku,
+      shippingMethod: scenario.shippingOption.id,
+      discount,
+      selectedExtraCharges: {
+        [charge.fieldName]: true,
+      },
+      now,
+    });
+    const expectedSelectedTotal = Number(
+      (scenario.variant.price + scenario.shippingOption.price).toFixed(2)
+    );
+
+    expectEqual(
+      unselectedQuote.discountAmounts.totalAmount,
+      0,
+      'getOrderQuote should not apply extra-charge discounts when the targeted extra is not selected'
+    );
+    expectEqual(
+      selectedQuote.discountAmounts.productAmount,
+      0,
+      'getOrderQuote should keep targeted extra-charge discounts separate from the base product'
+    );
+    expectEqual(
+      selectedQuote.discountAmounts.extraChargeAmount,
+      Number(charge.price) || 0,
+      'getOrderQuote should discount the selected targeted extra charge'
+    );
+    expectEqual(
+      selectedQuote.total,
+      expectedSelectedTotal,
+      'getOrderQuote should leave the base order total unchanged when a selected supplement is made free'
+    );
+  });
+
   test('getOrderQuote should respect seasonal extra-charge activity from source data', () => {
     const scenario =
       listOrderScenarios().find((entry) =>

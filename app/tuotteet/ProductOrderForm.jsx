@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { ORDER_SUBMIT_ENDPOINT, ORDER_SUCCESS_MESSAGE } from '@/lib/copy/orderMessages';
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
-import { getOrderQuote } from '@/lib/orders/getOrderQuote';
+import { getDiscountExtraChargeKeys, getOrderQuote } from '@/lib/orders/getOrderQuote';
 import { submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   formatPrice,
@@ -65,6 +65,18 @@ function getAutomaticDiscountNotice(variant) {
     : '';
 
   return `Norm. ${formatPrice(variant.basePrice)} € (${formatAutomaticDiscountLabel(variant.discount)}). 30 päivän alin hinta: ${formatPrice(variant.discount.lowestPrice30Days)} €.${validUntilText}`;
+}
+
+function getMatchingExtraChargeLabels(discount, extraCharges) {
+  const targetKeys = new Set(getDiscountExtraChargeKeys(discount));
+  if (!targetKeys.size) {
+    return [];
+  }
+
+  return extraCharges
+    .filter((charge) => targetKeys.has(charge.key))
+    .map((charge) => charge.label)
+    .filter(Boolean);
 }
 
 function formatPickupPointDistance(distanceInMeters) {
@@ -221,6 +233,11 @@ export default function ProductOrderForm({ productKey }) {
   const activeUpsellCharges = activeExtraCharges.filter(
     (charge) => charge.section === 'upsell'
   );
+  const selectedActiveExtraChargeKeySignature = activeExtraCharges
+    .filter((charge) => charge.selected && charge.appliedPrice > 0)
+    .map((charge) => charge.key)
+    .sort()
+    .join('|');
   const normalHandlingWindowDays = Number(product?.schema?.handlingTime?.maxValue);
 
   useEffect(() => {
@@ -243,6 +260,31 @@ export default function ProductOrderForm({ productKey }) {
       setDiscountFeedback('Alennus poistettiin, koska valittu tuote muuttui.');
     }
   }, [appliedDiscount, currentSku]);
+
+  useEffect(() => {
+    if (!appliedDiscount) {
+      return;
+    }
+
+    const targetKeys = getDiscountExtraChargeKeys(appliedDiscount);
+    if (!targetKeys.length) {
+      return;
+    }
+
+    const selectedKeys = new Set(
+      selectedActiveExtraChargeKeySignature
+        ? selectedActiveExtraChargeKeySignature.split('|')
+        : []
+    );
+    const targetIsSelected = targetKeys.some((key) => selectedKeys.has(key));
+
+    if (!targetIsSelected) {
+      setAppliedDiscount(null);
+      setDiscountFeedback(
+        'Alennus poistettiin, koska siihen liittyvä lisävalinta poistettiin.'
+      );
+    }
+  }, [appliedDiscount, selectedActiveExtraChargeKeySignature]);
 
   useEffect(() => {
     setDelivery(defaultDelivery);
@@ -343,10 +385,33 @@ export default function ProductOrderForm({ productKey }) {
         return;
       }
 
-      setAppliedDiscount({
+      const nextDiscount = {
         ...match,
         appliesToSku: currentSku,
+      };
+      const nextQuote = getOrderQuote({
+        productKey,
+        sku: currentSku,
+        shippingMethod: delivery,
+        discount: nextDiscount,
+        selectedExtraCharges,
       });
+
+      if (getDiscountExtraChargeKeys(nextDiscount).length > 0) {
+        if (nextQuote.discountAmounts.totalAmount <= 0) {
+          const labels = getMatchingExtraChargeLabels(nextDiscount, activeExtraCharges);
+
+          setAppliedDiscount(null);
+          setDiscountFeedback(
+            labels.length
+              ? `Alennuskoodi koskee lisävalintaa: ${labels.join(', ')}.`
+              : 'Alennuskoodi koskee lisävalintaa, joka ei ole valittavissa tässä tilauksessa.'
+          );
+          return;
+        }
+      }
+
+      setAppliedDiscount(nextDiscount);
       setDiscountFeedback('Alennuskoodi hyväksytty.');
     } catch {
       setAppliedDiscount(null);
@@ -454,7 +519,10 @@ export default function ProductOrderForm({ productKey }) {
   const total = quote?.total ?? 0;
   const totalFormatted = formatPrice(total);
   const discountProductAmount = quote?.discountAmounts.productAmount ?? 0;
+  const discountExtraChargeAmount = quote?.discountAmounts.extraChargeAmount ?? 0;
   const shippingDiscount = quote?.discountAmounts.shippingAmount ?? 0;
+  const appliedDiscountTargetsExtraCharges =
+    getDiscountExtraChargeKeys(appliedDiscount).length > 0;
   const selectedShippingHelpTexts =
     selectedShippingOption?.helperTexts ?? orderConfig.shippingHelperTexts ?? [];
   const phoneLabel = 'Puhelinnumero';
@@ -958,11 +1026,15 @@ export default function ProductOrderForm({ productKey }) {
         ) : null}
         {appliedDiscount ? (
           <p className={classes.HelperText}>
-            {appliedDiscount.type === 'percentage'
-              ? `Alennus tuotteesta ${appliedDiscount.value} % (-${formatPrice(discountProductAmount)} €)`
-              : appliedDiscount.type === 'fixed'
-                ? `Alennus tuotteesta -${formatPrice(discountProductAmount)} €`
-                : `Toimitus alennuksella: -${formatPrice(shippingDiscount)} €`}
+            {appliedDiscountTargetsExtraCharges
+              ? appliedDiscount.type === 'percentage'
+                ? `Alennus lisävalinnoista ${appliedDiscount.value} % (-${formatPrice(discountExtraChargeAmount)} €)`
+                : `Alennus lisävalinnoista -${formatPrice(discountExtraChargeAmount)} €`
+              : appliedDiscount.type === 'percentage'
+                ? `Alennus tuotteesta ${appliedDiscount.value} % (-${formatPrice(discountProductAmount)} €)`
+                : appliedDiscount.type === 'fixed'
+                  ? `Alennus tuotteesta -${formatPrice(discountProductAmount)} €`
+                  : `Toimitus alennuksella: -${formatPrice(shippingDiscount)} €`}
           </p>
         ) : null}
 
