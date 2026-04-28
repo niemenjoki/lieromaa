@@ -170,7 +170,7 @@ export default async function Page() {
                 </p>
                 <p>
                   Lasku tulee OP Kevytyrittäjä -palvelun kautta sähköpostiin.{' '}
-                  <stong>Maksuaika on 7 vuorokautta.</stong>
+                  <strong>Maksuaika on 7 vuorokautta.</strong>
                 </p>
               </div>
 
