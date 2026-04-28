@@ -93,10 +93,10 @@ export default function ProductAvailabilityNotice({
 
   if (hasUnavailableSkus && hasEarliestShippingDate) {
     noticeText =
-      'Olen joutunut rajoittamaan isompien matomäärien myyntiä sekä viivästyttämään tilausten lähettämistä suuren kysynnän vuoksi. Pienempiä tilauksia voi tehdä normaalisti. Nyt tehtävät tilaukset toimitetaan ';
+      'Olen joutunut rajoittamaan isompien matopakettien myyntiä sekä viivästyttämään tilausten lähettämistä suuren kysynnän vuoksi. Pienempiä tilauksia voi tehdä normaalisti. Nyt tehtävät tilaukset toimitetaan ';
   } else if (hasUnavailableSkus) {
     noticeText =
-      'Olen joutunut rajoittamaan isompien matomäärien myyntiä suuren kysynnän vuoksi. Pienempiä tilauksia voi tehdä normaalisti.';
+      'Olen joutunut rajoittamaan isompien matopakettien myyntiä suuren kysynnän vuoksi. Pienempiä tilauksia voi tehdä normaalisti.';
   } else {
     noticeText =
       'Joudun viivästyttämään tilausten lähettämistä suuren kysynnän vuoksi. Nyt tehtävät tilaukset toimitetaan ';

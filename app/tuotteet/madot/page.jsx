@@ -56,9 +56,9 @@ export default async function Page() {
                   kasvaa hyvissä olosuhteissa nopeasti.
                 </p>
                 <p>
-                  Pakkaus sisältää valitsemasi määrän kompostimatoja ja niiden
+                  Pakkaus sisältää valitsemasi painon verran kompostimatoja ja niiden
                   kasvualustaa (pahvi- ja puusilppu, kookoskuori, puutarhamulta). Jos et
-                  ole varma sopivasta määrästä, kokeile{' '}
+                  ole varma sopivasta aloitusmäärästä, kokeile{' '}
                   <SafeLink href="/matolaskuri">matolaskuria</SafeLink>.
                 </p>
               </div>
@@ -66,7 +66,7 @@ export default async function Page() {
               <aside className={classes.SummaryCard}>
                 <h2>Tilaa helposti</h2>
                 <ul className={classes.FeatureList}>
-                  <li>Valitse 50, 100 tai 200 kompostimatoa.</li>
+                  <li>Valitse 25 g, 50 g, 75 g tai 100 g kompostimatoja.</li>
                   <li>Pakkaus sisältää madot ja niiden kasvualustan.</li>
                 </ul>
 
@@ -75,7 +75,11 @@ export default async function Page() {
                   {wormVariants.map((variant) => (
                     <li key={variant.sku}>
                       <VariantPriceDisplay
-                        title={`${variant.amount} matoa`}
+                        title={`${variant.weightGrams ?? variant.amount} g${
+                          variant.estimatedWormCount
+                            ? ` (noin ${variant.estimatedWormCount} matoa)`
+                            : ''
+                        }`}
                         variant={variant}
                       />
                     </li>

@@ -1,11 +1,13 @@
 {
   "prices": {
-    "worms-50": 20,
-    "worms-100": 30,
-    "worms-200": 50,
-    "starterkit-50": 64,
-    "starterkit-100": 73,
-    "starterkit-200": 91,
+    "worms-25": 20,
+    "worms-50": 30,
+    "worms-75": 40,
+    "worms-100": 50,
+    "starterkit-25": 66,
+    "starterkit-50": 76,
+    "starterkit-75": 86,
+    "starterkit-100": 96,
     "postage-worms-pickup": 8.9,
     "postage-starterkit-pickup": 8.9,
     "postage-starterkit-home": 14.9

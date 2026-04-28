@@ -3,9 +3,9 @@ import classes from './ProductPage.module.css';
 export default function WormAmountFinePrint() {
   return (
     <p className={classes.FinePrint}>
-      Matomäärä arvioidaan painon perusteella. Kompostimadon keskipaino on tyypillisesti
-      noin 0,4-0,6 g, mutta käytän laskennassa arviota 0,6 g / mato. Todellinen
-      yksilömäärä voi vaihdella arviolta noin ±10 % matojen kokojakaumasta riippuen.
+      Madot myydään painon perusteella: 25 g, 50 g, 75 g ja 100 g vastaavat karkeasti noin
+      50, 100, 150 ja 200 matoa. Todellinen matojen määrä vaihtelee yksilöiden koon
+      mukaan.
     </p>
   );
 }

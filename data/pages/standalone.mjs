@@ -13,21 +13,21 @@ export const standalonePageDefinitions = {
   },
   wormCalculator: {
     canonicalUrl: '/matolaskuri',
-    pageName: 'Matolaskuri – arvioi tarvittava kompostimatojen määrä',
+    pageName: 'Matolaskuri – arvioi tarvittava kompostimatojen paino',
     title: 'Matolaskuri | Lieromaa',
     description:
-      'Lieromaan matolaskuri auttaa arvioimaan kotitaloutesi biojätteen määrän ja sen, kuinka paljon kompostimatoja tarvitset alkuun.',
+      'Lieromaan matolaskuri auttaa arvioimaan kotitaloutesi biojätteen määrän ja sen, kuinka paljon kompostimatoja tarvitset painona.',
     pageDescription:
-      'Lieromaan matolaskuri auttaa arvioimaan, kuinka paljon kompostimatoja (Eisenia fetida) tarvitaan kotitalouden biojätteen käsittelyyn. Syötä perheesi koko ja ruokavalio, ja laskuri kertoo suuntaa-antavan määrän.',
+      'Lieromaan matolaskuri auttaa arvioimaan, kuinka paljon kompostimatoja (Eisenia fetida) tarvitaan kotitalouden biojätteen käsittelyyn painona. Syötä perheesi koko ja ruokavalio, ja laskuri kertoo suuntaa-antavan määrän.',
     shortLabel: 'Matolaskuri',
-    updatedAt: '2025-10-07',
+    updatedAt: '2026-04-28',
     search: {
       contexts: ['blog', 'notFound'],
       keywords: ['matolaskuri', 'kompostimadot', 'laskuri', 'lieromaa', 'työkalut'],
     },
-    mainEntityName: 'Kompostimatojen määrän laskuri',
+    mainEntityName: 'Kompostimatojen painon laskuri',
     mainEntityDescription:
-      'Interaktiivinen työkalu, joka arvioi biojätteen määrän ja siihen tarvittavan kompostimatojen populaation.',
+      'Interaktiivinen työkalu, joka arvioi biojätteen määrän ja siihen tarvittavan kompostimatojen painon.',
   },
   about: {
     canonicalUrl: '/tietoa',

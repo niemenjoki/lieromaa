@@ -68,23 +68,127 @@ const localPickupOption = {
   helperTexts: sharedLocalPickupHelperTexts,
 };
 
+const wormVariantMetadata = {
+  'worms-25': {
+    amount: 25,
+    salesUnit: 'weight',
+    weightGrams: 25,
+    estimatedWormCount: 50,
+  },
+  'worms-50': {
+    amount: 50,
+    salesUnit: 'weight',
+    weightGrams: 50,
+    estimatedWormCount: 100,
+  },
+  'worms-75': {
+    amount: 75,
+    salesUnit: 'weight',
+    weightGrams: 75,
+    estimatedWormCount: 150,
+  },
+  'worms-100': {
+    amount: 100,
+    salesUnit: 'weight',
+    weightGrams: 100,
+    estimatedWormCount: 200,
+  },
+};
+
+const legacyWormVariants = [
+  {
+    sku: 'worms-50',
+    amount: 50,
+    salesUnit: 'worm_count',
+    estimatedWormCount: 50,
+    price: 20,
+  },
+  {
+    sku: 'worms-100',
+    amount: 100,
+    salesUnit: 'worm_count',
+    estimatedWormCount: 100,
+    price: 30,
+  },
+  {
+    sku: 'worms-200',
+    amount: 200,
+    salesUnit: 'worm_count',
+    estimatedWormCount: 200,
+    price: 50,
+  },
+];
+
+const starterKitBasePrice = 46;
+const wormPackagePricesByWeight = {
+  25: 20,
+  50: 30,
+  75: 40,
+  100: 50,
+};
+const starterKitVariantMetadata = Object.fromEntries(
+  Object.entries(wormVariantMetadata).map(([wormSku, variant]) => {
+    const weight = variant.weightGrams;
+
+    return [
+      `starterkit-${weight}`,
+      {
+        ...variant,
+        price: starterKitBasePrice + wormPackagePricesByWeight[weight],
+      },
+    ];
+  })
+);
+
+const legacyStarterKitVariants = [
+  {
+    sku: 'starterkit-50',
+    amount: 50,
+    salesUnit: 'worm_count',
+    estimatedWormCount: 50,
+    price: 64,
+  },
+  {
+    sku: 'starterkit-100',
+    amount: 100,
+    salesUnit: 'worm_count',
+    estimatedWormCount: 100,
+    price: 73,
+  },
+  {
+    sku: 'starterkit-200',
+    amount: 200,
+    salesUnit: 'worm_count',
+    estimatedWormCount: 200,
+    price: 91,
+  },
+];
+
 export const productCatalogCommerceSource = {
   worms: {
-    variantSkus: ['worms-50', 'worms-100', 'worms-200'],
+    variantSkus: ['worms-25', 'worms-50', 'worms-75', 'worms-100'],
+    variantMetadata: wormVariantMetadata,
+    legacyVariants: legacyWormVariants,
     shippingSku: 'postage-worms-pickup',
     schema: {
       handlingTime: WORMS_HANDLING_TIME,
     },
     order: {
-      defaultVariantAmount: 100,
-      variantLegend: 'Valitse matojen määrä',
+      defaultVariantAmount: 50,
+      variantLegend: 'Valitse matojen paino',
       variantSelectorPosition: 'beforeFulfillment',
-      variantDescriptionPrefix: 'Voi laskea taloudellesi sopivan matojen määrän',
+      variantDescriptionPrefix: 'Voit arvioida taloudellesi sopivan aloitusmäärän',
       variantDescriptionLinkHref: '/matolaskuri',
       variantDescriptionLinkLabel: 'matolaskurilla',
       showWormAmountFinePrint: true,
-      getVariantLabel({ amount, priceFormatted }) {
-        return `${amount} matoa - ${priceFormatted} €`;
+      getVariantLabel({ amount, priceFormatted, variant }) {
+        const weight = variant?.weightGrams ?? amount;
+        const estimatedWormCount = variant?.estimatedWormCount;
+        const estimateText = estimatedWormCount
+          ? ` (noin ${estimatedWormCount} matoa)`
+          : '';
+
+        return `${weight} g${estimateText} - ${priceFormatted} €`;
       },
       shippingOptions: [
         {
@@ -111,21 +215,29 @@ export const productCatalogCommerceSource = {
     },
   },
   starterKit: {
-    variantSkus: ['starterkit-50', 'starterkit-100', 'starterkit-200'],
+    variantSkus: ['starterkit-25', 'starterkit-50', 'starterkit-75', 'starterkit-100'],
+    variantMetadata: starterKitVariantMetadata,
+    legacyVariants: legacyStarterKitVariants,
     shippingSku: 'postage-starterkit-pickup',
     schema: {
       handlingTime: STARTER_KIT_HANDLING_TIME,
     },
     order: {
-      defaultVariantAmount: 100,
-      variantLegend: 'Valitse matojen määrä',
+      defaultVariantAmount: 50,
+      variantLegend: 'Valitse matojen paino',
       variantSelectorPosition: 'beforeFulfillment',
-      variantDescriptionPrefix: 'Voi laskea taloudellesi sopivan matojen määrän',
+      variantDescriptionPrefix: 'Voit arvioida taloudellesi sopivan aloitusmäärän',
       variantDescriptionLinkHref: '/matolaskuri',
       variantDescriptionLinkLabel: 'matolaskurilla',
       showWormAmountFinePrint: true,
-      getVariantLabel({ amount, priceFormatted }) {
-        return `Aloituspakkaus + ${amount} matoa - ${priceFormatted} €`;
+      getVariantLabel({ amount, priceFormatted, variant }) {
+        const weight = variant?.weightGrams ?? amount;
+        const estimatedWormCount = variant?.estimatedWormCount;
+        const estimateText = estimatedWormCount
+          ? ` (noin ${estimatedWormCount} matoa)`
+          : '';
+
+        return `Aloituspakkaus + ${weight} g matoja${estimateText} - ${priceFormatted} €`;
       },
       shippingOptions: [
         {
