@@ -11,7 +11,7 @@ export const productCatalogContentSource = {
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
-      updatedAt: '2026-04-05',
+      updatedAt: '2026-04-28',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -21,7 +21,7 @@ export const productCatalogContentSource = {
     product: {
       name: 'Kompostimadot (Eisenia fetida)',
       description:
-        'Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 50, 100 ja 200 madon pakkauksina. Sopivat sisä- ja ulkokäyttöön, hajuttomaan biojätteen käsittelyyn ja luonnonmukaiseen lannoitukseen.',
+        'Kotimaiset kompostimadot (Eisenia fetida) matokompostointiin. Myynnissä 25 g, 50 g, 75 g ja 100 g pakkauksina. Pakkausten arvioidut matomäärät ovat noin 50, 100, 150 ja 200 matoa, mutta todellinen määrä vaihtelee matojen koon mukaan.',
       sku: 'MADOT',
     },
     media: {
@@ -39,11 +39,21 @@ export const productCatalogContentSource = {
       ],
     },
     merchant: {
-      title(amount) {
-        return `Kompostimadot (${amount} kpl) | Eisenia fetida`;
+      title(amount, variant) {
+        const weight = variant?.weightGrams ?? amount;
+        const estimate = variant?.estimatedWormCount
+          ? `, noin ${variant.estimatedWormCount} matoa`
+          : '';
+
+        return `Kompostimadot (${weight} g${estimate}) | Eisenia fetida`;
       },
-      description(amount) {
-        return `Kotimaiset kompostimadot (${amount} kpl) matokompostointiin. Eisenia fetida -madot toimitetaan omassa kasvualustassaan, ja ne sopivat biojätteen hajuttomaan käsittelyyn sisällä tai ulkona.`;
+      description(amount, variant) {
+        const weight = variant?.weightGrams ?? amount;
+        const estimate = variant?.estimatedWormCount
+          ? `, arviolta noin ${variant.estimatedWormCount} matoa`
+          : '';
+
+        return `Kotimaiset kompostimadot (${weight} g${estimate}) matokompostointiin. Eisenia fetida -madot toimitetaan omassa kasvualustassaan, ja ne sopivat biojätteen hajuttomaan käsittelyyn sisällä tai ulkona. Todellinen matojen määrä vaihtelee yksilöiden koon mukaan.`;
       },
       productType: 'Matokompostointi > Kompostimadot',
     },
@@ -74,7 +84,7 @@ export const productCatalogContentSource = {
         'Lieromaan aloituspakkaus tekee matokompostin ylläpidosta sujuvaa: kolmen laatikon pinottu kompostori, petimateriaali ja kompostimadot samassa paketissa.',
       h1: 'Lieromaan matokompostorin aloituspakkaus',
       navigationLabel: 'Aloituspakkaus',
-      updatedAt: '2026-04-05',
+      updatedAt: '2026-04-28',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -129,11 +139,21 @@ export const productCatalogContentSource = {
       },
     ],
     merchant: {
-      title(amount) {
-        return `Matokompostorin aloituspakkaus + ${amount} kompostimatoa`;
+      title(amount, variant) {
+        const weight = variant?.weightGrams ?? amount;
+        const estimate = variant?.estimatedWormCount
+          ? `, noin ${variant.estimatedWormCount} matoa`
+          : '';
+
+        return `Matokompostorin aloituspakkaus + ${weight} g matoja${estimate}`;
       },
-      description(amount) {
-        return `Lieromaan aloituspakkaus sisältää kolmen laatikon pinotun matokompostorin, petimateriaalin ja ${amount} kompostimatoa. Paketti on suunniteltu sujuvaan matokompostin ylläpitoon kotona.`;
+      description(amount, variant) {
+        const weight = variant?.weightGrams ?? amount;
+        const estimate = variant?.estimatedWormCount
+          ? `, arviolta noin ${variant.estimatedWormCount} matoa`
+          : '';
+
+        return `Lieromaan aloituspakkaus sisältää kolmen laatikon pinotun matokompostorin, petimateriaalin ja ${weight} g kompostimatoja${estimate}. Paketti on suunniteltu sujuvaan matokompostin ylläpitoon kotona. Todellinen matojen määrä vaihtelee yksilöiden koon mukaan.`;
       },
       productType: 'Matokompostointi > Matokompostorit > Aloituspakkaukset',
     },

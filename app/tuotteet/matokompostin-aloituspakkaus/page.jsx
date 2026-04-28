@@ -35,6 +35,15 @@ const starterKitComponentCostTotal = Number(
 );
 const starterKitBasePrice = Math.ceil(starterKitComponentCostTotal);
 
+function formatWormPackageLabel(variant) {
+  const weight = variant.weightGrams ?? variant.amount;
+  const estimate = variant.estimatedWormCount
+    ? ` (noin ${variant.estimatedWormCount} matoa)`
+    : '';
+
+  return `${weight} g${estimate}`;
+}
+
 export default async function Page() {
   return (
     <>
@@ -84,7 +93,7 @@ export default async function Page() {
                   {starterKitVariants.map((variant) => (
                     <li key={variant.sku}>
                       <VariantPriceDisplay
-                        title={`Aloituspakkaus + ${variant.amount} matoa`}
+                        title={`Aloituspakkaus + ${formatWormPackageLabel(variant)}`}
                         variant={variant}
                       />
                     </li>
@@ -92,7 +101,7 @@ export default async function Page() {
                 </ul>
 
                 <p className={classes.HelperText}>
-                  Laske taloudellesi sopiva matojen määrä{' '}
+                  Laske taloudellesi sopiva aloitusmäärä{' '}
                   <SafeLink href="/matolaskuri">matolaskurilla.</SafeLink>
                 </p>
                 <p className={classes.HelperText}>
@@ -143,8 +152,8 @@ export default async function Page() {
                   <li>3 kestävää 14 L muovilaatikkoa, valmiiksi porattuina</li>
                   <li>valmiiksi mitattu määrä petimateriaalia</li>
                   <li>
-                    valitsemasi määrä kompostimatoja (
-                    {starterKitVariants.map((variant) => variant.amount).join(' / ')})
+                    valitsemasi paino kompostimatoja (
+                    {starterKitVariants.map(formatWormPackageLabel).join(' / ')})
                   </li>
                   <li id="mitat">koottuna leveys 30 cm, syvyys 40 cm, korkeus 27 cm</li>
                 </ul>
@@ -329,7 +338,7 @@ export default async function Page() {
                   {wormVariants.map((variant) => (
                     <li key={variant.sku}>
                       <VariantPriceDisplay
-                        title={`+ ${variant.amount} matoa`}
+                        title={`+ ${formatWormPackageLabel(variant)}`}
                         variant={variant}
                       />
                     </li>
@@ -343,7 +352,7 @@ export default async function Page() {
                   {starterKitVariants.map((variant) => (
                     <li key={`${variant.sku}-final`}>
                       <VariantPriceDisplay
-                        title={`Aloituspakkaus + ${variant.amount} matoa`}
+                        title={`Aloituspakkaus + ${formatWormPackageLabel(variant)}`}
                         variant={variant}
                       />
                     </li>

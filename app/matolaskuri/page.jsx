@@ -14,7 +14,7 @@ export default async function Page() {
       'kasvit',
       'kompostorin perustaminen',
       'matojen hankinta',
-      'matojen määrä',
+      'matojen paino',
       'matokompostointi',
       'npk',
       'opas',

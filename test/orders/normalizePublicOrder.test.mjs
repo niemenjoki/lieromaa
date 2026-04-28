@@ -108,7 +108,7 @@ describe('frontend public order normalization', () => {
       );
       expectEqual(
         payload.product.quantity,
-        scenario.variant.amount,
+        scenario.variant.estimatedWormCount ?? scenario.variant.amount,
         `normalizePublicOrderSubmission should keep the current quantity for ${scenario.productKey}/${scenario.shippingOption.id}`
       );
       expectEqual(
@@ -246,6 +246,90 @@ describe('frontend public order normalization', () => {
       expectedQuote.total,
       'normalizePublicOrderSubmission should keep the current source-data total when the pickup point is omitted'
     );
+  });
+
+  test('normalizePublicOrderSubmission should keep weight-based worm SKUs distinct from legacy count SKUs', () => {
+    const now = new Date('2026-04-28T10:00:00Z');
+    const weightPayload = withTemporaryProductAvailability(
+      'worms',
+      { earliestShippingDate: false, unavailableSkus: [] },
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({
+            tuote_avain: 'worms',
+            sku: 'worms-50',
+            maara: '50',
+            myyntiyksikko: 'weight',
+            paino_grammoina: '50',
+            arvioitu_matomäärä: '100',
+            toimitus: 'nouto',
+          }),
+          { now }
+        )
+    );
+
+    expectEqual(weightPayload.product.sku, 'worms-50');
+    expectEqual(weightPayload.product.salesUnit, 'weight');
+    expectEqual(weightPayload.product.weightGrams, 50);
+    expectEqual(weightPayload.product.quantity, 100);
+    expectEqual(weightPayload.product.estimatedWormCount, 100);
+
+    const legacyPayload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        tuote_avain: 'worms',
+        sku: 'worms-200',
+        maara: '200',
+        myyntiyksikko: '',
+        paino_grammoina: '',
+        arvioitu_matomäärä: '',
+        toimitus: 'nouto',
+      }),
+      { now }
+    );
+
+    expectEqual(legacyPayload.product.sku, 'worms-200');
+    expectEqual(legacyPayload.product.salesUnit, 'worm_count');
+    expectEqual(legacyPayload.product.weightGrams, null);
+    expectEqual(legacyPayload.product.quantity, 200);
+    expectEqual(legacyPayload.pricing.itemPrice, 50);
+
+    const starterKitPayload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        tuote_avain: 'starterKit',
+        sku: 'starterkit-50',
+        maara: '50',
+        myyntiyksikko: 'weight',
+        paino_grammoina: '50',
+        arvioitu_matomäärä: '100',
+        toimitus: 'nouto',
+      }),
+      { now }
+    );
+
+    expectEqual(starterKitPayload.product.sku, 'starterkit-50');
+    expectEqual(starterKitPayload.product.salesUnit, 'weight');
+    expectEqual(starterKitPayload.product.weightGrams, 50);
+    expectEqual(starterKitPayload.product.quantity, 100);
+    expectEqual(starterKitPayload.pricing.itemPrice, 76);
+
+    const legacyStarterKitPayload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        tuote_avain: 'starterKit',
+        sku: 'starterkit-200',
+        maara: '200',
+        myyntiyksikko: '',
+        paino_grammoina: '',
+        arvioitu_matomäärä: '',
+        toimitus: 'nouto',
+      }),
+      { now }
+    );
+
+    expectEqual(legacyStarterKitPayload.product.sku, 'starterkit-200');
+    expectEqual(legacyStarterKitPayload.product.salesUnit, 'worm_count');
+    expectEqual(legacyStarterKitPayload.product.weightGrams, null);
+    expectEqual(legacyStarterKitPayload.product.quantity, 200);
+    expectEqual(legacyStarterKitPayload.pricing.itemPrice, 91);
   });
 
   test('normalizePublicOrderSubmission should include selected upsell products in pricing', () => {

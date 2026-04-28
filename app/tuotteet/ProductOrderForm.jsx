@@ -642,6 +642,17 @@ export default function ProductOrderForm({ productKey }) {
       <input type="hidden" name="tuote" value={product.name} />
       <input type="hidden" name="tuote_avain" value={productKey} />
       <input type="hidden" name="sku" value={currentSku} />
+      <input type="hidden" name="myyntiyksikko" value={currentVariant?.salesUnit ?? ''} />
+      <input
+        type="hidden"
+        name="paino_grammoina"
+        value={currentVariant?.weightGrams ?? ''}
+      />
+      <input
+        type="hidden"
+        name="arvioitu_matomäärä"
+        value={currentVariant?.estimatedWormCount ?? ''}
+      />
       <input type="hidden" name="lomake_aloitettu_ms" value={formStartedAt} />
       <input type="hidden" name="submission_id" value={submissionId} />
       <input type="hidden" name="sivu_polku" value={pathname ?? ''} />

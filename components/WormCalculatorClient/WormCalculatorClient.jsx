@@ -18,10 +18,18 @@ function normalizePersonCount(value) {
   return parsedValue;
 }
 
+function formatWormWeightGrams(weightGrams) {
+  return `${weightGrams} g`;
+}
+
+function formatWormWeightInstrumental(weightGrams) {
+  return `${weightGrams} grammalla`;
+}
+
 export default function WormCalculatorClient({ recommendedPosts }) {
   const title = 'Matolaskuri';
   const description =
-    'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matomäärän.';
+    'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matojen painon.';
 
   const [adults, setAdults] = useState(0);
   const [teens, setTeens] = useState(0);
@@ -55,13 +63,22 @@ export default function WormCalculatorClient({ recommendedPosts }) {
     const min = Math.round(adjustedTotal * 0.8);
     const max = Math.round(adjustedTotal * 1.2);
     const wormsNeeded = adjustedTotal;
+    const wormWeightGrams = Math.round(wormsNeeded * 0.5);
     const halfStart = Math.round(wormsNeeded / 2);
     const quarterStart = Math.round(wormsNeeded / 4);
     const eighthStart = Math.round(wormsNeeded / 8);
     setResult({
       scraps: [min, max],
       wormsNeeded,
-      options: { halfStart, quarterStart, eighthStart },
+      wormWeightGrams,
+      options: {
+        halfStart,
+        halfStartWeightGrams: Math.round(halfStart * 0.5),
+        quarterStart,
+        quarterStartWeightGrams: Math.round(quarterStart * 0.5),
+        eighthStart,
+        eighthStartWeightGrams: Math.round(eighthStart * 0.5),
+      },
     });
   }
 
@@ -81,11 +98,11 @@ export default function WormCalculatorClient({ recommendedPosts }) {
       <div className={classes.Content}>
         <h2>Miksi laskuri on hyödyllinen?</h2>
         <p>
-          Kompostimatojen määrän mitoittaminen oikein auttaa pitämään kompostorin
+          Kompostimatojen aloitusmäärän mitoittaminen oikein auttaa pitämään kompostorin
           tasapainossa. Liian pieni populaatio ei ehdi käsittelemään kaikkea jätettä, ja
           liian suuri populaatio taas kärsii ruoan puutteesta. Laskurin avulla saat
-          karkean arvion siitä, kuinka monta matoa kotitaloutesi tuottaman biojätteen
-          käsittelyyn tarvitaan.
+          karkean arvion siitä, kuinka paljon matoja kotitaloutesi tuottaman biojätteen
+          käsittelyyn tarvitaan painona.
         </p>
         <p>
           Jos sinulla ei vielä ole matoja, voit ostaa niitä{' '}
@@ -195,27 +212,29 @@ export default function WormCalculatorClient({ recommendedPosts }) {
 
               <p className={classes.ResultLead}>
                 Sen käsittelemiseen tarvitaan noin{' '}
-                <strong>{result.wormsNeeded} matoa</strong>.
+                <strong>{formatWormWeightGrams(result.wormWeightGrams)} matoja</strong>.
               </p>
               <p>
                 Koko suositellun määrän hankkimalla kompostori toimii heti täydellä
-                teholla. Käytännössä isoja matomääriä voi kuitenkin olla vaikea saada
-                ostettua kerralla. Toinen vaihtoehto on hankkia pieni määrä matoja ja
-                odottaa, että ne lisääntyy.
+                teholla. Toinen vaihtoehto on hankkia pienempi määrä matoja ja odottaa,
+                että ne lisääntyvät.
               </p>
 
               <ul className={classes.ResultList}>
                 <li>
-                  Jos aloitat noin {result.options.halfStart} madolla, kestää noin 3
-                  kuukautta, että sinulla on tarvittava määrä matoja.
+                  {`Jos aloitat noin ${formatWormWeightInstrumental(
+                    result.options.halfStartWeightGrams
+                  )}, kestää noin 3 kuukautta, että sinulla on tarvittava määrä matoja.`}
                 </li>
                 <li>
-                  Jos aloitat noin {result.options.quarterStart} madolla, aikaa kuluu noin
-                  6 kuukautta.
+                  {`Jos aloitat noin ${formatWormWeightInstrumental(
+                    result.options.quarterStartWeightGrams
+                  )}, aikaa kuluu noin 6 kuukautta.`}
                 </li>
                 <li>
-                  Vähimmäisvaihtoehtona {result.options.eighthStart} madolla kompostori
-                  toimii täysillä noin vuoden kuluttua.
+                  {`Vähimmäisvaihtoehtona ${formatWormWeightInstrumental(
+                    result.options.eighthStartWeightGrams
+                  )} kompostori toimii täysillä noin vuoden kuluttua.`}
                 </li>
               </ul>
 
@@ -231,7 +250,7 @@ export default function WormCalculatorClient({ recommendedPosts }) {
                 <h3>Tulokset</h3>
                 <p>
                   Täytä kotitalouden henkilömäärät, niin laskuri näyttää arvion syntyvän
-                  biojätteen määrästä ja sopivasta matojen määrästä
+                  biojätteen määrästä ja sopivasta matojen painosta.
                 </p>
               </div>
             </>
@@ -241,7 +260,7 @@ export default function WormCalculatorClient({ recommendedPosts }) {
         <h2>Vinkkejä tulosten tulkintaan</h2>
         <ul>
           <li>
-            Jos aloitat pienellä matomäärällä, anna populaation kasvaa rauhassa - vältä
+            Jos aloitat pienellä määrällä, anna populaation kasvaa rauhassa - vältä
             liiallista ruokintaa.
           </li>
           <li>

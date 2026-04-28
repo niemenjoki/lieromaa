@@ -184,8 +184,9 @@ export default function HomePage() {
           <div className={classes.SectionHeading}>
             <h2>Etkö tiedä kuinka paljon matoja tarvitset aloittaaksesi?</h2>
             <p>
-              Matolaskuri auttaa arvioimaan taloudellesi sopivan matomäärän talouden koon
-              ja ruokavalion perusteella. Jos haluat valmiin kokonaisuuden, tutustu myös{' '}
+              Matolaskuri auttaa arvioimaan taloudellesi sopivan matojen painon talouden
+              koon ja ruokavalion perusteella. Jos haluat valmiin kokonaisuuden, tutustu
+              myös{' '}
               <SafeLink
                 href="/tuotteet/matokompostin-aloituspakkaus"
                 className={classes.InlineLink}
