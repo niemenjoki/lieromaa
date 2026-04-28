@@ -54,12 +54,21 @@ Generated build outputs do not belong here. They live in `/generated`.
   Use `unavailableSkus` to hide specific variants from ordering.
   Use `earliestShippingDate` when orders are still accepted but deliveries need to be delayed.
 - `operations/commerce/discounts.source.json`
-  Manual discount-code source data.
+  Generated discount-code source data for tracked, deployable obfuscated codes.
+  Each entry needs a stable `id` and a generated `obfuscatedCode`.
   Each discount entry is matched against specific SKUs in `appliesToSkus`.
+  Use optional `appliesToExtraChargeKeys` when the discount should only apply to
+  selected order extras such as supplement add-ons.
   `type` can be `percentage`, `fixed`, or `free_shipping`.
   `value` is the discount amount.
   `endsOn` must be `YYYY-MM-DD`.
-  `code` is only written here in the source file.
+  Plaintext codes live only in the git-ignored
+  `operations/commerce/discounts.local.json` file.
+  Edit the local file, then run `npm run discounts:generate` to regenerate the
+  tracked source file.
+  The local file controls ids, discount metadata, and which codes stay active.
+  Never commit a `code` field; tests block builds when tracked codes are missing
+  generated obfuscations or do not match the local file.
   During `prepare:site`, this file is transformed into `generated/commerce/discounts.json`, and the runtime build uses that generated file instead of this source file directly.
 - `operations/commerce/skuDiscounts.mjs`
   Automatic per-SKU sale configuration that affects visible storefront pricing without a code.

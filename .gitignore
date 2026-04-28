@@ -51,3 +51,4 @@ data/generated/
 generated/
 
 .env
+data/operations/commerce/discounts.local.json

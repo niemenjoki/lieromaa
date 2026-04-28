@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
+import discountData from '@/generated/commerce/discounts.json';
 import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
@@ -20,6 +21,34 @@ import {
   getRequiredProductSku,
   withTemporaryProductAvailability,
 } from '../helpers/productAvailability.mjs';
+
+const discountCodePepper = 'lieromaa-discount-v1';
+const textDecoder = new TextDecoder();
+const textEncoder = new TextEncoder();
+
+function deobfuscateDiscountCode(obfuscatedCode) {
+  const encodedCode = String(obfuscatedCode || '')
+    .split('')
+    .reverse()
+    .join('');
+  const codeBytes = Buffer.from(encodedCode, 'base64');
+  const pepperBytes = textEncoder.encode(discountCodePepper);
+  const output = new Uint8Array(codeBytes.length);
+
+  for (let i = 0; i < codeBytes.length; i += 1) {
+    output[i] = codeBytes[i] ^ pepperBytes[i % pepperBytes.length];
+  }
+
+  return textDecoder.decode(output);
+}
+
+function getDiscountCodeForExtraChargeKey(extraChargeKey) {
+  const discount = (discountData.discounts ?? []).find((entry) =>
+    entry.appliesToExtraChargeKeys?.includes(extraChargeKey)
+  );
+
+  return deobfuscateDiscountCode(discount?.obfuscatedCode);
+}
 
 describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should match the current runtime config for configured order scenarios', () => {
@@ -228,7 +257,7 @@ describe('frontend public order normalization', () => {
       return;
     }
 
-    const now = new Date('2026-06-15T10:00:00Z');
+    const now = new Date('2026-05-02T10:00:00Z');
     const selectedExtraCharges = {
       kompostiruoka_lisatilaus: true,
       tasapainottaja_lisatilaus: true,
@@ -271,6 +300,59 @@ describe('frontend public order normalization', () => {
       payload.pricing.total,
       expectedQuote.total,
       'normalizePublicOrderSubmission should include selected upsell products in the total'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should only apply supplement discount codes when the supplement is selected', () => {
+    const scenario =
+      findOrderScenario({ productKey: 'starterKit', fulfillmentType: 'pickup_point' }) ??
+      findOrderScenario({ productKey: 'starterKit' });
+
+    if (!scenario) {
+      return;
+    }
+
+    const now = new Date('2026-05-02T10:00:00Z');
+    const compostFoodDiscountCode = getDiscountCodeForExtraChargeKey('compostFood');
+    const unselectedPayload = normalizePublicOrderSubmission(
+      createValidOrderFormDataForScenario(scenario, {
+        alennuskoodi: compostFoodDiscountCode,
+      }),
+      { now }
+    );
+    const foodPayload = normalizePublicOrderSubmission(
+      createValidOrderFormDataForScenario(scenario, {
+        alennuskoodi: compostFoodDiscountCode,
+        kompostiruoka_lisatilaus: 'on',
+      }),
+      { now }
+    );
+    const expectedBaseQuote = buildExpectedQuoteFromSource({
+      productKey: scenario.productKey,
+      sku: scenario.variant.sku,
+      shippingMethod: scenario.shippingOption.id,
+      now,
+    });
+
+    expectEqual(
+      unselectedPayload.pricing.discount,
+      null,
+      'normalizePublicOrderSubmission should ignore supplement discount codes when the supplement is not selected'
+    );
+    expectEqual(
+      unselectedPayload.pricing.total,
+      expectedBaseQuote.total,
+      'normalizePublicOrderSubmission should not discount the base order for an unselected supplement code'
+    );
+    expectEqual(
+      foodPayload.pricing.discount?.extraChargeAmount,
+      3,
+      'normalizePublicOrderSubmission should make compost food free with its configured discount code'
+    );
+    expectEqual(
+      foodPayload.pricing.total,
+      expectedBaseQuote.total,
+      'normalizePublicOrderSubmission should add and then discount the compost food supplement'
     );
   });
 

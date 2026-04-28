@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "prepare:site": "node lib/prebuild/index.mjs",
+    "discounts:generate": "node lib/prebuild/generateDiscountCodes.mjs",
     "postinstall": "npm run prepare:site",
     "predev": "npm run format && npm run prepare:site",
     "prebuild": "npm test",
@@ -14,7 +15,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "node --import ./test/register.mjs --test ./test/orders/*.test.mjs ./test/routes/*.test.mjs ./test/reviews/*.test.mjs",
+    "test": "node --import ./test/register.mjs --test ./test/discounts/*.test.mjs ./test/orders/*.test.mjs ./test/routes/*.test.mjs ./test/reviews/*.test.mjs",
     "verify": "npm run format:check && npm run lint && npm run build",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

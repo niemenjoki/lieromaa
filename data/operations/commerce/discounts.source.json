@@ -3,5 +3,15 @@
     "algorithm": "XOR-BASE64-REVERSE",
     "pepperVersion": 1
   },
-  "discounts": []
+  "discounts": [
+    {
+      "id": "toripeuk",
+      "appliesToSkus": ["starterkit-50", "starterkit-100", "starterkit-200"],
+      "appliesToExtraChargeKeys": ["compostFood"],
+      "type": "fixed",
+      "value": 3,
+      "endsOn": "2026-05-03",
+      "obfuscatedCode": "8USJmRDJ90zNtAiO"
+    }
+  ]
 }
