@@ -19,7 +19,6 @@ import classes from './CheckoutPage.module.css';
 
 const PICKUP_POINT_SEARCH_ENDPOINT = '/api/pickup-points/search';
 const steps = ['Kori', 'Toimitus', 'Maksu', 'Tiedot', 'Vahvistus'];
-const DAY_IN_MS = 24 * 60 * 60 * 1000;
 const BUSINESS_TIME_ZONE = 'Europe/Helsinki';
 
 function formatPickupPointDistance(distanceInMeters) {
@@ -407,7 +406,12 @@ export default function CheckoutPageClient() {
   }
 
   return (
-    <form ref={formRef} className={classes.Form} onSubmit={handleSubmit}>
+    <form
+      ref={formRef}
+      className={classes.Form}
+      onSubmit={handleSubmit}
+      data-analytics-form="order"
+    >
       <input type="text" name="_gotcha" style={{ display: 'none' }} />
       <input type="hidden" name="cart_items_json" value={JSON.stringify(items)} />
       <input type="hidden" name="toimitus" value={shippingMethod} />
