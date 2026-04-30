@@ -70,9 +70,13 @@ export default async function Page() {
                   matokompostorin, jonka ylläpito on mahdollisimman sujuvaa arjessa.
                 </p>
                 <p>
-                  Paketissa on kompostorilaatikot ja petimateriaali. Voit lisätä samaan
-                  tilaukseen kuituseoksen, jos haluat ottaa myös ylläpidon lisäseoksen
-                  mukaan heti alussa.
+                  Paketissa on kompostorilaatikot ja petimateriaali. Voit lisätä
+                  tilaukseen myös Lieromaan{' '}
+                  <SafeLink href="/tuotteet/kompostorin-kuituseos">
+                    kuituseoksen,
+                  </SafeLink>
+                  jos epäilet, että madoille syötettävän biojätteen määrä vaihtelee
+                  paljon.
                 </p>
                 <p>
                   Kolmen laatikon pinottu kompostori tekee ylläpidosta vaivatonta:
