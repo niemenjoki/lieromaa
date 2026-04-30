@@ -13,6 +13,7 @@ export const image = product.image;
 export const imageUrl = product.imageUrl;
 export const galleryImages = product.images;
 export const productImageUrls = product.productImageUrls;
+export const breadcrumbItems = product.breadcrumbItems;
 export const productId = product.productId;
 export const productName = product.productName;
 export const productDescription = product.productDescription;
