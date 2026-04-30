@@ -389,15 +389,15 @@ describe('frontend public order normalization', () => {
         );
         assert.match(
           error.publicMessage,
-          /enintään 2 matopakettia/,
-          'normalizePublicOrderSubmission should explain the two-worm-package cart limit'
+          /enintään 1 matopaketti/,
+          'normalizePublicOrderSubmission should explain the one-worm-package cart limit'
         );
         return true;
       }
     );
   });
 
-  test('normalizePublicOrderSubmission should reject cart orders with more than four chow products', () => {
+  test('normalizePublicOrderSubmission should reject cart orders with more than two chow products', () => {
     const now = new Date('2026-05-02T10:00:00Z');
 
     assert.throws(
@@ -418,8 +418,8 @@ describe('frontend public order normalization', () => {
         );
         assert.match(
           error.publicMessage,
-          /enintään 4 kuituseosta/,
-          'normalizePublicOrderSubmission should explain the four-chow-product cart limit'
+          /enintään 2 kuituseosta/,
+          'normalizePublicOrderSubmission should explain the two-chow-product cart limit'
         );
         return true;
       }
