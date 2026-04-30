@@ -243,12 +243,12 @@ export const productCatalogCommerceSource = {
     },
   },
   compostChow: {
-    variantSkus: ['chow-400'],
+    variantSkus: ['chow-500'],
     variantMetadata: {
-      'chow-400': {
-        amount: 400,
+      'chow-500': {
+        amount: 500,
         salesUnit: 'weight',
-        weightGrams: 400,
+        weightGrams: 500,
       },
     },
     shippingSku: 'postage-pickup',
@@ -256,7 +256,7 @@ export const productCatalogCommerceSource = {
       handlingTime: STARTER_KIT_HANDLING_TIME,
     },
     order: {
-      defaultVariantAmount: 400,
+      defaultVariantAmount: 500,
       variantLegend: 'Pakkauskoko',
       variantSelectorPosition: 'beforeFulfillment',
       variantDescription: 'Yksi pakkauskoko saatavilla.',

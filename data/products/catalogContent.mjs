@@ -169,7 +169,7 @@ export const productCatalogContentSource = {
       name: 'Lieromaan kompostorin kuituseos',
       description:
         'Helppokäyttöinen lisäseos kompostiin. Helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee',
-      sku: 'chow-400',
+      sku: 'chow-500',
     },
     media: {
       images: [
