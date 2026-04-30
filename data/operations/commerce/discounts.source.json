@@ -6,7 +6,7 @@
   "discounts": [
     {
       "id": "toripeuk",
-      "appliesToSkus": ["chow-400"],
+      "appliesToSkus": ["chow-500"],
       "type": "fixed",
       "value": 3,
       "endsOn": "2026-05-03",

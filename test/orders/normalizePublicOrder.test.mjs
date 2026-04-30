@@ -311,7 +311,7 @@ describe('frontend public order normalization', () => {
         tuote_avain: '',
         cart_items_json: JSON.stringify([
           { sku: 'worms-25', quantity: 1 },
-          { sku: 'chow-400', quantity: 1 },
+          { sku: 'chow-500', quantity: 1 },
         ]),
         toimitus: 'posti_noutopiste',
         osoite: 'Kompostikuja 1',
@@ -334,7 +334,7 @@ describe('frontend public order normalization', () => {
           itemTotal: 20,
         },
         {
-          sku: 'chow-400',
+          sku: 'chow-500',
           packageQuantity: 1,
           itemTotal: 8.9,
         },
@@ -406,7 +406,7 @@ describe('frontend public order normalization', () => {
           createValidOrderFormData({
             sku: '',
             tuote_avain: '',
-            cart_items_json: JSON.stringify([{ sku: 'chow-400', quantity: 5 }]),
+            cart_items_json: JSON.stringify([{ sku: 'chow-500', quantity: 5 }]),
             toimitus: 'nouto',
           }),
           { now }
