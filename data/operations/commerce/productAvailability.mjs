@@ -8,10 +8,7 @@ export const productAvailabilitySource = {
     earliestShippingDate: '2026-05-11', // 'YYYY-MM-DD'
     unavailableSkus: ['worms-50', 'worms-75', 'worms-100'], // '[worms-x]'
   },
-  starterKit: {
-    earliestShippingDate: '2026-05-11', // 'YYYY-MM-DD'
-    unavailableSkus: ['starterkit-100'], // '[starterkit-x]'
-  },
+  starterKit: defaultProductAvailability,
 };
 
 function normalizeEarliestShippingDate(value) {

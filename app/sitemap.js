@@ -37,6 +37,7 @@ export default async function sitemap() {
 
   const latestPost = latest(posts, 'publishedAt');
   const latestGuide = latest(guides, 'updatedAt');
+  const latestProduct = latest(Object.values(productCatalog), 'updatedAt');
 
   const add = (url, lastmod) => {
     urls.push({ url: `${SITE_URL}${url}`, lastModified: toISODate(lastmod) });
@@ -44,13 +45,16 @@ export default async function sitemap() {
 
   [
     ['/', latestPost],
+    ['/tuotteet', latestProduct],
     ['/opas', latestGuide],
     [blogIndexPage.canonicalUrl, latestPost],
     [aboutPage.canonicalUrl, aboutPage.updatedAt],
     [privacyPolicyPage.canonicalUrl, getLegalPageLastModified(privacyPolicyPage)],
     [orderTermsPage.canonicalUrl, getLegalPageLastModified(orderTermsPage)],
-    [productCatalog.worms.canonicalUrl, productCatalog.worms.updatedAt],
-    [productCatalog.starterKit.canonicalUrl, productCatalog.starterKit.updatedAt],
+    ...Object.values(productCatalog).map((product) => [
+      product.canonicalUrl,
+      product.updatedAt,
+    ]),
     [starterKitSetupPage.canonicalUrl, starterKitSetupPage.updatedAt],
     [wormCalculatorPage.canonicalUrl, wormCalculatorPage.updatedAt],
   ].forEach(([url, lastmod]) => add(url, lastmod));

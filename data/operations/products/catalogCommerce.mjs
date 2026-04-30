@@ -15,32 +15,27 @@ const sharedLocalPickupHelperTexts = [
   'Jos valitset toimitustavaksi noudon, olen sinuun yhteydessä, jotta voimme sopia noudosta tarkemmin',
 ];
 
-const orderUpsellExtraCharges = [
+export const cartShippingOptionsSource = [
   {
-    key: 'compostFood',
-    section: 'upsell',
-    fieldName: 'kompostiruoka_lisatilaus',
-    label: 'Lieromaan kompostiruoka 150g',
-    checkboxLabel: 'Lisää Lieromaan kompostiruoka 150g',
-    price: 3,
-    descriptionLines: [
-      'Viljapohjainen lisäruoka matokompostiin. Helpottaa kompostin ylläpitoa ja tasaa toimintaa, kun biojätteen määrä vaihtelee.',
-    ],
-    helperTextLines: ['Annostelu: n. 1 tl / 5-10 L kompostia, 1-2 kertaa viikossa.'],
+    id: 'posti_noutopiste',
+    label: 'Nouto Postista tai automaatista',
+    priceSku: 'postage-pickup',
+    fulfillmentType: 'pickup_point',
+    helperTexts: sharedPickupHelperTexts,
   },
   {
-    key: 'compostBalancer',
-    section: 'upsell',
-    fieldName: 'tasapainottaja_lisatilaus',
-    label: 'Lieromaan kompostin tasapainottaja 50g',
-    checkboxLabel: 'Lisää Lieromaan kompostin tasapainottaja 50g',
-    price: 2,
-    descriptionLines: [
-      'Kalsiumkarbonaattipohjainen jauhe, joka vähentää kompostin happamuutta. Ehkäisee hajuhaittoja ja parantaa olosuhteita madoille.',
-    ],
-    helperTextLines: [
-      'Annostelu: n. 1 tl / 5-10 L kompostia 2-3 viikon välein tai tarpeen mukaan.',
-    ],
+    id: 'posti_kotiinkuljetus',
+    label: 'Postin kotiinkuljetus sovittuna aikana',
+    priceSku: 'postage-home',
+    fulfillmentType: 'home_delivery',
+    helperTexts: sharedHomeDeliveryHelperTexts,
+  },
+  {
+    id: 'nouto',
+    label: 'Nouto Järvenpäästä',
+    price: 0,
+    fulfillmentType: 'local_pickup',
+    helperTexts: sharedLocalPickupHelperTexts,
   },
 ];
 
@@ -58,14 +53,6 @@ const frostProtectionExtraCharge = {
   helperTextLines: [
     'Voit tehdä tilauksen myös ilman pakkaslisää, vaikka ulkona olisi pakkasta, jolloin paketti toimitetaan pikimmiten sään lämmettyä.',
   ],
-};
-
-const localPickupOption = {
-  id: 'nouto',
-  label: 'Nouto Järvenpäästä',
-  price: 0,
-  fulfillmentType: 'local_pickup',
-  helperTexts: sharedLocalPickupHelperTexts,
 };
 
 const wormVariantMetadata = {
@@ -140,7 +127,23 @@ const starterKitVariantMetadata = Object.fromEntries(
   })
 );
 
+const starterKitBaseVariantMetadata = {
+  'starterkit-base': {
+    amount: 1,
+    salesUnit: 'piece',
+    itemCount: 1,
+  },
+};
+
 const legacyStarterKitVariants = [
+  ...Object.entries(starterKitVariantMetadata).map(([sku, variant]) => ({
+    sku,
+    amount: variant.amount,
+    salesUnit: 'weight',
+    weightGrams: variant.weightGrams,
+    estimatedWormCount: variant.estimatedWormCount,
+    price: variant.price,
+  })),
   {
     sku: 'starterkit-50',
     amount: 50,
@@ -169,7 +172,7 @@ export const productCatalogCommerceSource = {
     variantSkus: ['worms-25', 'worms-50', 'worms-75', 'worms-100'],
     variantMetadata: wormVariantMetadata,
     legacyVariants: legacyWormVariants,
-    shippingSku: 'postage-worms-pickup',
+    shippingSku: 'postage-pickup',
     schema: {
       handlingTime: WORMS_HANDLING_TIME,
     },
@@ -190,16 +193,7 @@ export const productCatalogCommerceSource = {
 
         return `${weight} g${estimateText} - ${priceFormatted} €`;
       },
-      shippingOptions: [
-        {
-          id: 'posti_noutopiste',
-          label: 'Nouto Postista tai automaatista',
-          priceSku: 'postage-worms-pickup',
-          fulfillmentType: 'pickup_point',
-          helperTexts: sharedPickupHelperTexts,
-        },
-        localPickupOption,
-      ],
+      shippingOptions: [...cartShippingOptionsSource],
       shippingHelperTexts: sharedPickupHelperTexts,
       shippingDescription: null,
       submitButtonLabel() {
@@ -211,51 +205,27 @@ export const productCatalogCommerceSource = {
         pickup_point: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
         local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
       },
-      extraCharges: [frostProtectionExtraCharge, ...orderUpsellExtraCharges],
+      extraCharges: [frostProtectionExtraCharge],
     },
   },
   starterKit: {
-    variantSkus: ['starterkit-25', 'starterkit-50', 'starterkit-75', 'starterkit-100'],
-    variantMetadata: starterKitVariantMetadata,
+    variantSkus: ['starterkit-base'],
+    variantMetadata: starterKitBaseVariantMetadata,
     legacyVariants: legacyStarterKitVariants,
-    shippingSku: 'postage-starterkit-pickup',
+    shippingSku: 'postage-pickup',
     schema: {
       handlingTime: STARTER_KIT_HANDLING_TIME,
     },
     order: {
-      defaultVariantAmount: 50,
-      variantLegend: 'Valitse matojen paino',
+      defaultVariantAmount: 1,
+      variantLegend: 'Aloituspakkaus',
       variantSelectorPosition: 'beforeFulfillment',
-      variantDescriptionPrefix: 'Voit arvioida taloudellesi sopivan aloitusmäärän',
-      variantDescriptionLinkHref: '/matolaskuri',
-      variantDescriptionLinkLabel: 'matolaskurilla',
-      showWormAmountFinePrint: true,
+      variantDescription: 'Yksi pakkauskoko saatavilla.',
+      showWormAmountFinePrint: false,
       getVariantLabel({ amount, priceFormatted, variant }) {
-        const weight = variant?.weightGrams ?? amount;
-        const estimatedWormCount = variant?.estimatedWormCount;
-        const estimateText = estimatedWormCount
-          ? ` (noin ${estimatedWormCount} matoa)`
-          : '';
-
-        return `Aloituspakkaus + ${weight} g matoja${estimateText} - ${priceFormatted} €`;
+        return `Aloituspakkaus - ${priceFormatted} €`;
       },
-      shippingOptions: [
-        {
-          id: 'posti_noutopiste',
-          label: 'Nouto Postista tai automaatista',
-          priceSku: 'postage-starterkit-pickup',
-          fulfillmentType: 'pickup_point',
-          helperTexts: sharedPickupHelperTexts,
-        },
-        {
-          id: 'posti_kotiinkuljetus',
-          label: 'Postin kotiinkuljetus sovittuna aikana',
-          priceSku: 'postage-starterkit-home',
-          fulfillmentType: 'home_delivery',
-          helperTexts: sharedHomeDeliveryHelperTexts,
-        },
-        localPickupOption,
-      ],
+      shippingOptions: [...cartShippingOptionsSource],
       shippingHelperTexts: sharedPickupHelperTexts,
       shippingDescription: null,
       submitButtonLabel({ totalFormatted }) {
@@ -269,7 +239,46 @@ export const productCatalogCommerceSource = {
           'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
         local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
       },
-      extraCharges: orderUpsellExtraCharges,
+      extraCharges: [],
+    },
+  },
+  compostChow: {
+    variantSkus: ['chow-400'],
+    variantMetadata: {
+      'chow-400': {
+        amount: 400,
+        salesUnit: 'weight',
+        weightGrams: 400,
+      },
+    },
+    shippingSku: 'postage-pickup',
+    schema: {
+      handlingTime: STARTER_KIT_HANDLING_TIME,
+    },
+    order: {
+      defaultVariantAmount: 400,
+      variantLegend: 'Pakkauskoko',
+      variantSelectorPosition: 'beforeFulfillment',
+      variantDescription: 'Yksi pakkauskoko saatavilla.',
+      getVariantLabel({ amount, priceFormatted, variant }) {
+        const weight = variant?.weightGrams ?? amount;
+        return `${weight} g - ${priceFormatted} €`;
+      },
+      shippingOptions: [...cartShippingOptionsSource],
+      shippingHelperTexts: sharedPickupHelperTexts,
+      shippingDescription: null,
+      submitButtonLabel({ totalFormatted }) {
+        return `Lähetä tilaus (${totalFormatted} €)`;
+      },
+      extraInfoDescription: null,
+      summaryDescription: null,
+      invoiceTimingByFulfillmentType: {
+        pickup_point: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
+        home_delivery:
+          'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
+        local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
+      },
+      extraCharges: [],
     },
   },
 };

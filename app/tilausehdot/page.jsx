@@ -126,14 +126,6 @@ export default function OrderPolicyPage() {
           edelleen tavanomaisena tuotteena.
         </p>
         <p>
-          Matokompostorin aloituspaketilla on peruuttamisoikeus itse pakkauksen osalta,
-          mutta ei siihen sisältyvien kompostimatojen osalta. Jos aloituspakkaus on
-          ehditty jo lähettää, palautettava summa on tuotteen ostohinta ilman
-          toimituskuluja, josta vähennetään pakettiin sisältyneiden matojen osuus. Matojen
-          osuus määräytyy sen hinnan mukaan, joka on ilmoitettu erikseen aloituspakkauksen
-          ostosivulla valitulle matomäärälle.
-        </p>
-        <p>
           Palautettavan tuotteen tulee olla olennaisesti samassa kunnossa kuin
           vastaanottohetkellä. Asiakas vastaa palautuskuluista, ellei toisin sovita. Ennen
           palautuksen lähettämistä pyydän ottamaan yhteyttä sähköpostitse osoitteeseen{' '}

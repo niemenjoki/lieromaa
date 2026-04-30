@@ -31,10 +31,10 @@ export default function WormCalculatorClient({ recommendedPosts }) {
   const description =
     'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matojen painon.';
 
-  const [adults, setAdults] = useState(0);
-  const [teens, setTeens] = useState(0);
-  const [children, setChildren] = useState(0);
-  const [toddlers, setToddlers] = useState(0);
+  const [adults, setAdults] = useState('0');
+  const [teens, setTeens] = useState('0');
+  const [children, setChildren] = useState('0');
+  const [toddlers, setToddlers] = useState('0');
   const [diet, setDiet] = useState('sekaruoka');
   const [result, setResult] = useState(null);
 
@@ -47,7 +47,11 @@ export default function WormCalculatorClient({ recommendedPosts }) {
   };
 
   function calculate() {
-    const householdSize = adults + teens + children + toddlers;
+    const adultCount = normalizePersonCount(adults);
+    const teenCount = normalizePersonCount(teens);
+    const childCount = normalizePersonCount(children);
+    const toddlerCount = normalizePersonCount(toddlers);
+    const householdSize = adultCount + teenCount + childCount + toddlerCount;
     if (householdSize <= 0) {
       setResult(null);
       return;
@@ -55,10 +59,10 @@ export default function WormCalculatorClient({ recommendedPosts }) {
 
     const factor = dietFactors[diet];
     const total =
-      adults * baseWaste.adult +
-      teens * baseWaste.teen +
-      children * baseWaste.child +
-      toddlers * baseWaste.toddler;
+      adultCount * baseWaste.adult +
+      teenCount * baseWaste.teen +
+      childCount * baseWaste.child +
+      toddlerCount * baseWaste.toddler;
     const adjustedTotal = Math.round(total * factor);
     const min = Math.round(adjustedTotal * 0.8);
     const max = Math.round(adjustedTotal * 1.2);
@@ -89,6 +93,17 @@ export default function WormCalculatorClient({ recommendedPosts }) {
     2000,
     [adults, teens, children, toddlers, diet]
   );
+
+  const handlePersonCountChange = (setter) => (event) => {
+    const nextValue = event.target.value;
+    if (/^\d*$/.test(nextValue)) {
+      setter(nextValue);
+    }
+  };
+
+  const handlePersonCountBlur = (setter) => (event) => {
+    setter(String(normalizePersonCount(event.target.value)));
+  };
 
   return (
     <article className={classes.WormCalculatorClient}>
@@ -131,12 +146,12 @@ export default function WormCalculatorClient({ recommendedPosts }) {
               <span className={classes.Label}>Aikuiset</span>
               <input
                 className={classes.Input}
-                type="number"
-                min="0"
-                step="1"
+                type="text"
                 inputMode="numeric"
+                pattern="[0-9]*"
                 value={adults}
-                onChange={(event) => setAdults(normalizePersonCount(event.target.value))}
+                onChange={handlePersonCountChange(setAdults)}
+                onBlur={handlePersonCountBlur(setAdults)}
               />
             </label>
 
@@ -144,12 +159,12 @@ export default function WormCalculatorClient({ recommendedPosts }) {
               <span className={classes.Label}>Teinit (13-17 v.)</span>
               <input
                 className={classes.Input}
-                type="number"
-                min="0"
-                step="1"
+                type="text"
                 inputMode="numeric"
+                pattern="[0-9]*"
                 value={teens}
-                onChange={(event) => setTeens(normalizePersonCount(event.target.value))}
+                onChange={handlePersonCountChange(setTeens)}
+                onBlur={handlePersonCountBlur(setTeens)}
               />
             </label>
 
@@ -157,14 +172,12 @@ export default function WormCalculatorClient({ recommendedPosts }) {
               <span className={classes.Label}>Lapset (4-12 v.)</span>
               <input
                 className={classes.Input}
-                type="number"
-                min="0"
-                step="1"
+                type="text"
                 inputMode="numeric"
+                pattern="[0-9]*"
                 value={children}
-                onChange={(event) =>
-                  setChildren(normalizePersonCount(event.target.value))
-                }
+                onChange={handlePersonCountChange(setChildren)}
+                onBlur={handlePersonCountBlur(setChildren)}
               />
             </label>
 
@@ -172,14 +185,12 @@ export default function WormCalculatorClient({ recommendedPosts }) {
               <span className={classes.Label}>Taaperot (1-3 v.)</span>
               <input
                 className={classes.Input}
-                type="number"
-                min="0"
-                step="1"
+                type="text"
                 inputMode="numeric"
+                pattern="[0-9]*"
                 value={toddlers}
-                onChange={(event) =>
-                  setToddlers(normalizePersonCount(event.target.value))
-                }
+                onChange={handlePersonCountChange(setToddlers)}
+                onBlur={handlePersonCountBlur(setToddlers)}
               />
             </label>
 

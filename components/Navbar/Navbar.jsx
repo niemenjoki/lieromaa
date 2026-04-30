@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import CartButton from '@/components/Cart/CartButton';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import ThemeToggler from '@/components/ThemeToggler/ThemeToggler';
 
@@ -72,6 +73,8 @@ export default function Navbar({ navigation }) {
               <ThemeToggler style={{ fontSize: '24px' }} />
             </li>
           </ul>
+
+          <CartButton />
 
           <span className={classes.MobileThemeToggler}>
             <ThemeToggler style={{ fontSize: '26px' }} />

@@ -7,8 +7,8 @@ import {
   getProductVariants,
 } from '@/lib/pricing/catalog';
 
+import AddToCartPanel from '../AddToCartPanel';
 import ProductAvailabilityNotice from '../ProductAvailabilityNotice';
-import ProductOrderForm from '../ProductOrderForm';
 import classes from '../ProductPage.module.css';
 import ProductReviewsSection from '../ProductReviewsSection';
 import VariantPriceDisplay from '../VariantPriceDisplay';
@@ -23,6 +23,8 @@ const wormVariants = getProductVariants('worms');
 const wormShippingOptions = getProductShippingOptions('worms');
 const wormPickupOption =
   wormShippingOptions.find((option) => option.id === 'posti_noutopiste') ?? null;
+const wormHomeOption =
+  wormShippingOptions.find((option) => option.id === 'posti_kotiinkuljetus') ?? null;
 const wormLocalPickupOption =
   wormShippingOptions.find((option) => option.id === 'nouto') ?? null;
 
@@ -134,6 +136,10 @@ export default async function Page() {
                     {wormPickupOption?.label} ({formatPrice(wormPickupOption?.price ?? 0)}{' '}
                     €)
                   </strong>{' '}
+                  ,{' '}
+                  <strong>
+                    {wormHomeOption?.label} ({formatPrice(wormHomeOption?.price ?? 0)} €)
+                  </strong>{' '}
                   tai{' '}
                   <strong>
                     {wormLocalPickupOption?.label} (
@@ -166,7 +172,7 @@ export default async function Page() {
               <h2>Tilaa kompostimadot</h2>
             </div>
 
-            <ProductOrderForm productKey="worms" />
+            <AddToCartPanel productKey="worms" relatedProductKeys={['compostChow']} />
           </section>
         </div>
       </article>
