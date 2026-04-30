@@ -114,9 +114,23 @@ export default function HomePage() {
             Lieromaa auttaa suomalaisia aloittamaan matokompostoinnin, hoitamaan
             kompostoria arjessa ja hyödyntämään sen tuotokset. Täältä löydät myös{' '}
             <SafeLink href="/tuotteet/madot" className={classes.InlineLink}>
-              kompostimadot
+              kotimaiset kompostimadot
+            </SafeLink>
+            ,{' '}
+            <SafeLink
+              href="/tuotteet/matokompostin-aloituspakkaus"
+              className={classes.InlineLink}
+            >
+              matokompostorin aloituspakkauksen
             </SafeLink>{' '}
-            omaan matokompostoriisi.
+            sekä{' '}
+            <SafeLink
+              href="/tuotteet/kompostorin-kuituseos"
+              className={classes.InlineLink}
+            >
+              kompostorin ylläpitoa helpottavan kuituseoksen
+            </SafeLink>
+            .
           </p>
         </section>
 
