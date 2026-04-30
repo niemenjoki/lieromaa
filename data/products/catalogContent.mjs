@@ -27,14 +27,16 @@ export const productCatalogContentSource = {
     media: {
       images: [
         {
-          url: '/images/wormspage/kompostimadot_kammenella.avif',
+          url: '/images/products/worms-hero.avif',
           alt: 'Kompostimatoja ja matokompostin sisältöä kämmenellä',
-          width: 1536,
-          height: 1024,
+          width: 1200,
+          height: 900,
         },
         {
-          url: '/images/wormspage/madot_toimituspakkauksessa.avif',
+          url: '/images/products/worms-packaging.avif',
           alt: 'Kompostimadot toimituspakkauksessa',
+          width: 1200,
+          height: 900,
         },
       ],
     },
@@ -78,10 +80,10 @@ export const productCatalogContentSource = {
     name: 'Matokompostorin aloituspakkaus',
     page: {
       canonicalUrl: '/tuotteet/matokompostin-aloituspakkaus',
-      pageName: 'Matokompostorin aloituspakkaus ja madot',
-      title: 'Matokompostorin aloituspakkaus (sis. madot) | Lieromaa',
+      pageName: 'Matokompostorin aloituspakkaus',
+      title: 'Matokompostorin aloituspakkaus | Lieromaa',
       description:
-        'Lieromaan aloituspakkaus tekee matokompostin ylläpidosta sujuvaa: kolmen laatikon pinottu kompostori, petimateriaali ja kompostimadot samassa paketissa.',
+        'Lieromaan aloituspakkaus tekee matokompostin ylläpidosta sujuvaa: kolmen laatikon pinottu kompostori ja petimateriaali samassa paketissa.',
       h1: 'Lieromaan matokompostorin aloituspakkaus',
       navigationLabel: 'Aloituspakkaus',
       updatedAt: '2026-04-28',
@@ -94,30 +96,24 @@ export const productCatalogContentSource = {
     product: {
       name: 'Matokompostorin aloituspakkaus',
       description:
-        'Lieromaan aloituspakkaus on suunniteltu sujuvaan matokompostin ylläpitoon: kolmen laatikon pinottu kompostori, petimateriaali ja kompostimadot samassa paketissa.',
-      sku: 'LM-STARTER-001',
+        'Lieromaan aloituspakkaus on suunniteltu sujuvaan matokompostin ylläpitoon: kolmen laatikon pinottu kompostori ja petimateriaali samassa paketissa.',
+      sku: 'starterkit-base',
     },
     media: {
       images: [
         {
-          url: '/images/starterkit/aloituspakkaus_suljettu_matokompostori.avif',
+          url: '/images/products/starterkit-hero.avif',
           alt: 'Suljettu musta matokompostori oransseilla kahvoilla vaaleaa taustaa vasten.',
           width: 1200,
-          height: 800,
+          height: 900,
           priority: true,
           loading: 'eager',
         },
         {
-          url: '/images/starterkit/aloituspakkaus_sisalto_ylhaalta_kuvattuna.avif',
+          url: '/images/products/starterkit-contents.avif',
           alt: 'Matokompostin aloituspakkauksen sisältö ylhäältä kuvattuna: kolme mustaa laatikkoa, kookoskuituharkot ja erillinen astia kuivikkeelle.',
-        },
-        {
-          url: '/images/starterkit/aloituspakkaus_kompostimadot_toimitusastiassa.avif',
-          alt: 'Kompostimadot toimitusastiassa omassa kasvualustassaan valmiina siirrettäväksi kompostoriin.',
-        },
-        {
-          url: '/images/starterkit/aloituspakkaus_kompostimadot_lahella.avif',
-          alt: 'Lähikuva elävistä kompostimadoista kosteassa ja ilmavassa kasvualustassa.',
+          width: 1200,
+          height: 900,
         },
       ],
     },
@@ -140,26 +136,84 @@ export const productCatalogContentSource = {
     ],
     merchant: {
       title(amount, variant) {
-        const weight = variant?.weightGrams ?? amount;
-        const estimate = variant?.estimatedWormCount
-          ? `, noin ${variant.estimatedWormCount} matoa`
-          : '';
-
-        return `Matokompostorin aloituspakkaus + ${weight} g matoja${estimate}`;
+        return 'Matokompostorin aloituspakkaus ilman matoja';
       },
       description(amount, variant) {
-        const weight = variant?.weightGrams ?? amount;
-        const estimate = variant?.estimatedWormCount
-          ? `, arviolta noin ${variant.estimatedWormCount} matoa`
-          : '';
-
-        return `Lieromaan aloituspakkaus sisältää kolmen laatikon pinotun matokompostorin, petimateriaalin ja ${weight} g kompostimatoja${estimate}. Paketti on suunniteltu sujuvaan matokompostin ylläpitoon kotona. Todellinen matojen määrä vaihtelee yksilöiden koon mukaan.`;
+        return 'Lieromaan aloituspakkaus sisältää kolmen laatikon pinotun matokompostorin ja petimateriaalin. Kuituseoksen voi lisätä tilaukseen erikseen.';
       },
       productType: 'Matokompostointi > Matokompostorit > Aloituspakkaukset',
     },
     schema: {
       returnPolicyText:
-        'Aloituspakkauksella on 14 vrk peruuttamisoikeus itse pakkauksen osalta. Pakettiin sisältyvien kompostimatojen osuutta ei hyvitetä, jos lähetys on ehditty toimittaa.',
+        'Aloituspakkauksella on 14 vrk peruuttamisoikeus käyttämättömän tuotteen osalta. Elävien kompostimatojen peruuttamisoikeus arvioidaan erikseen, jos tilaukseen lisätään matoja.',
+    },
+  },
+  compostChow: {
+    name: 'Lieromaan kompostorin kuituseos',
+    page: {
+      canonicalUrl: '/tuotteet/kompostorin-kuituseos',
+      pageName: 'Lieromaan kompostorin kuituseos',
+      title: 'Kompostorin kuituseos | Lieromaa',
+      description:
+        'Lieromaan kompostorin kuituseos on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
+      h1: 'Lieromaan kompostorin kuituseos',
+      navigationLabel: 'Kuituseos',
+      updatedAt: '2026-04-30',
+    },
+    search: {
+      contexts: ['blog', 'notFound'],
+      title: 'Kompostorin kuituseos',
+      keywords: ['kuituseos', 'matokomposti', 'komposti', 'biojäte'],
+    },
+    product: {
+      name: 'Lieromaan kompostorin kuituseos',
+      description:
+        'Helppokäyttöinen lisäseos kompostiin. Helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee',
+      sku: 'chow-400',
+    },
+    media: {
+      images: [
+        {
+          url: '/images/products/chow-hero.avif',
+          alt: 'Lieromaan kompostorin kuituseoksen pakkaus vaaleaa taustaa vasten',
+          width: 1200,
+          height: 900,
+          priority: true,
+          loading: 'eager',
+        },
+        {
+          url: '/images/products/chow-usage.avif',
+          alt: 'Kuituseoksen lisääminen lusikalla matokompostoriin',
+          width: 1200,
+          height: 900,
+        },
+        {
+          url: '/images/products/chow-scale.avif',
+          alt: 'Lieromaan kompostorin kuituseos ja annostelulusikka',
+          width: 1200,
+          height: 900,
+        },
+      ],
+    },
+    merchant: {
+      title(amount, variant) {
+        const weight = variant?.weightGrams ?? amount;
+        return `Lieromaan kompostorin kuituseos (${weight} g)`;
+      },
+      description(amount, variant) {
+        const weight = variant?.weightGrams ?? amount;
+        return `Lieromaan kompostorin kuituseos (${weight} g) on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.`;
+      },
+      productType: 'Matokompostointi > Matokompostin hoito > Kuituseokset',
+    },
+    schema: {
+      productAttributes: {
+        category: 'GardenProduct',
+        material:
+          'Vehnälese, kauralese, soijarouhe, vehnäjauho, puutarhakalkki, zeoliitti, basaltti',
+      },
+      returnPolicyText:
+        'Avaamattomalla ja käyttämättömällä kuituseoksella on 14 vrk peruuttamisoikeus tilaus- ja toimitusehtojen mukaisesti.',
     },
   },
 };

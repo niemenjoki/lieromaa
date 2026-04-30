@@ -20,13 +20,13 @@ export const starterKitSetupPageDefinition = {
       "Rei'itetty laatikko (2 kpl)",
       'Kansi (1 kpl)',
       'Kuiva kookoskuitu',
-      'Kompostimadot ja vanhaa petimateriaalia sisältävä rasia',
+      'Kompostimadot ja vanhaa petimateriaalia sisältävä rasia, jos tilasit madot mukaan',
     ],
     tools: ['Mitta-astia (4.5 litraa vettä)', 'Kädet, kauha tai lusikka sekoitukseen'],
     steps: [
       {
         name: 'Kookoskuidun kostutus pohjalaatikossa',
-        text: 'Poista matorasia ja lisää kuiva kookoskuitu umpipohjaiseen laatikkoon. Kaada joukkoon 4.5 litraa vettä tasaisesti koko pinnalle. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä, jotta kosteus jakautuu tasaisemmin.',
+        text: 'Jos tilasit madot mukaan, siirrä matorasia sivuun. Lisää kuiva kookoskuitu umpipohjaiseen laatikkoon. Kaada joukkoon 4.5 litraa vettä tasaisesti koko pinnalle. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä, jotta kosteus jakautuu tasaisemmin.',
       },
       {
         name: 'Ensimmäisen kerroksen käynnistys',
@@ -34,7 +34,7 @@ export const starterKitSetupPageDefinition = {
       },
       {
         name: 'Matojen lisääminen ja totuttelu',
-        text: 'Kaada madot samaan laatikkoon petimateriaalin päälle ja anna niiden kaivautua rauhassa. Sulje kansi ja anna matojen sopeutua ilman ruokintaa kaksi vuorokautta.',
+        text: 'Jos tilasit madot mukaan, kaada madot samaan laatikkoon petimateriaalin päälle ja anna niiden kaivautua rauhassa. Sulje kansi ja anna matojen sopeutua ilman ruokintaa kaksi vuorokautta.',
       },
       {
         name: 'Ensimmäinen ruokinta ja uudet kerrokset',

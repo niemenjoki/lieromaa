@@ -26,7 +26,10 @@ export default function StarterKitSetupPage() {
           <li>Rei'itetty laatikko - 2 kpl</li>
           <li>Kansi - 1 kpl</li>
           <li>Kuiva kookoskuitu petimateriaaliksi</li>
-          <li>Kompostimadot ja vanhaa petimateriaalia sisältävä rasia</li>
+          <li>
+            Kompostimadot ja vanhaa petimateriaalia sisältävä rasia, jos tilasit madot
+            mukaan
+          </li>
         </ul>
 
         <h2>1. Ensimmäisen kerroksen petimateriaali</h2>
@@ -43,8 +46,8 @@ export default function StarterKitSetupPage() {
         />
 
         <p>
-          Ota laatikot erilleen toisistaan ja siirrä matorasia sivuun. Käyttöönotto
-          aloitetaan yhdellä laatikolla.
+          Ota laatikot erilleen toisistaan. Jos tilasit madot mukaan, siirrä matorasia
+          sivuun. Käyttöönotto aloitetaan yhdellä laatikolla.
         </p>
 
         <p>
@@ -88,9 +91,9 @@ export default function StarterKitSetupPage() {
         <h2>2. Matojen lisääminen ja käynnistys</h2>
 
         <p>
-          Kaada koko matorasian sisältö petimateriaalin päälle. Matojen mukana tuleva
-          vanha petimateriaali sisältää valmiiksi mikrobeja, jotka tehostavat
-          hajotusprosessin käynnistymistä.
+          Jos tilasit madot mukaan, kaada koko matorasian sisältö petimateriaalin päälle.
+          Matojen mukana tuleva vanha petimateriaali sisältää valmiiksi mikrobeja, jotka
+          tehostavat hajotusprosessin käynnistymistä.
         </p>
 
         <p>Anna matojen kaivautua petimateriaaliin itse. Älä sekoita.</p>

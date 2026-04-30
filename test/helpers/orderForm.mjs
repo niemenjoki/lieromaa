@@ -16,6 +16,7 @@ export function createValidOrderFormData(overrides = {}) {
     submission_id: 'submission-123',
     sivu_polku: scenario.product?.canonicalUrl || '/',
     availability_earliest_shipping_date: '',
+    maksu_vahvistettu: 'ymmarretty',
     nimi: 'Testi Asiakas',
     email: 'testi@example.com',
     phone: '0401234567',

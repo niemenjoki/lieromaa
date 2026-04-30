@@ -6,13 +6,7 @@
   "discounts": [
     {
       "id": "toripeuk",
-      "appliesToSkus": [
-        "starterkit-25",
-        "starterkit-50",
-        "starterkit-75",
-        "starterkit-100"
-      ],
-      "appliesToExtraChargeKeys": ["compostFood"],
+      "appliesToSkus": ["chow-400"],
       "type": "fixed",
       "value": 3,
       "endsOn": "2026-05-03",

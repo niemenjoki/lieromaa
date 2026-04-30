@@ -8,7 +8,7 @@ import {
 import { starterKitPageContent } from '@/lib/products/starterKitPageContent';
 import { ORDER_CONTACT_EMAIL } from '@/lib/site/contact';
 
-import ProductOrderForm from '../ProductOrderForm';
+import AddToCartPanel from '../AddToCartPanel';
 import classes from '../ProductPage.module.css';
 import ProductReviewsSection from '../ProductReviewsSection';
 import VariantPriceDisplay from '../VariantPriceDisplay';
@@ -68,9 +68,9 @@ export default async function Page() {
                   matokompostorin, jonka ylläpito on mahdollisimman sujuvaa arjessa.
                 </p>
                 <p>
-                  Paketissa on kompostorilaatikot, petimateriaali ja valitsemasi määrä
-                  kompostimatoja. Käyttöönotto-ohje löytyy verkosta, joten pääset
-                  aloittamaan heti, kun paketti on saapunut.
+                  Paketissa on kompostorilaatikot ja petimateriaali. Voit lisätä samaan
+                  tilaukseen kuituseoksen, jos haluat ottaa myös ylläpidon lisäseoksen
+                  mukaan heti alussa.
                 </p>
                 <p>
                   Kolmen laatikon pinottu kompostori tekee ylläpidosta vaivatonta:
@@ -84,18 +84,15 @@ export default async function Page() {
               <aside className={classes.SummaryCard}>
                 <h2>Tilaa helposti</h2>
                 <ul className={classes.FeatureList}>
-                  <li>Kompostori, petimateriaali ja madot samassa paketissa.</li>
+                  <li>Kompostori ja petimateriaali samassa paketissa.</li>
                   <li>Kolmen laatikon malli helpottaa ruokintaa ja sadonkorjuuta.</li>
                 </ul>
 
-                <h3>Paketit ja hinnat</h3>
+                <h3>Hinta</h3>
                 <ul className={classes.PriceList}>
                   {starterKitVariants.map((variant) => (
                     <li key={variant.sku}>
-                      <VariantPriceDisplay
-                        title={`Aloituspakkaus + ${formatWormPackageLabel(variant)}`}
-                        variant={variant}
-                      />
+                      <VariantPriceDisplay title="Aloituspakkaus" variant={variant} />
                     </li>
                   ))}
                 </ul>
@@ -151,10 +148,6 @@ export default async function Page() {
                 <ul className={classes.CleanList}>
                   <li>3 kestävää 14 L muovilaatikkoa, valmiiksi porattuina</li>
                   <li>valmiiksi mitattu määrä petimateriaalia</li>
-                  <li>
-                    valitsemasi paino kompostimatoja (
-                    {starterKitVariants.map(formatWormPackageLabel).join(' / ')})
-                  </li>
                   <li id="mitat">koottuna leveys 30 cm, syvyys 40 cm, korkeus 27 cm</li>
                 </ul>
                 <p>
@@ -173,9 +166,9 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Maksaminen</h3>
                 <p>
-                  Kun tilaat aloituspakkauksen alla olevalla lomakkeella, varmistan
-                  matojen saatavuuden ja lähetän manuaalisen tilausvahvistuksen
-                  viimeistään kahden päivän kuluessa.
+                  Kun tilaat aloituspakkauksen, lähetän manuaalisen tilausvahvistuksen
+                  viimeistään kahden päivän kuluessa. Jos lisäät mukaan kompostimatoja,
+                  varmistan samalla niiden saatavuuden.
                 </p>
                 <p>
                   Lasku tulee OP Kevytyrittäjä -palvelun kautta sähköpostiin.{' '}
@@ -186,10 +179,10 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Toimitus</h3>
                 <p>
-                  Aloituspakkauksen mukana tulee eläviä kompostimatoja. Lähetän tilauksia
-                  vain maanantaisin, jotta madot eivät jää postin varastoon viikonlopuksi.
-                  Aloituspakkaus toimitetaan viimeistään toisena tilaushetken jälkeisenä
-                  maanantaina.
+                  Aloituspakkaus toimitetaan Postin noutopisteeseen, kotiinkuljetuksella
+                  tai noutona Järvenpäästä. Jos tilaukseen kuuluu eläviä kompostimatoja,
+                  lähetän tilauksen maanantaina, jotta madot eivät jää postin varastoon
+                  viikonlopuksi.
                 </p>
                 <p>
                   Toimitustavoiksi voit valita{' '}
@@ -214,9 +207,10 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Palautukset</h3>
                 <p>
-                  Aloituspakkauksella on 14 päivän peruuttamisoikeus itse pakkauksen
-                  osalta. Pakettiin sisältyvien kompostimatojen osuutta ei kuitenkaan
-                  hyvitetä, jos lähetys on ehditty toimittaa.
+                  Aloituspakkauksella on 14 päivän peruuttamisoikeus käyttämättömän
+                  tuotteen osalta. Jos lisäät tilaukseen kompostimatoja, niiden
+                  peruuttamisoikeus arvioidaan erikseen, koska kyse on elävistä
+                  kompostimadoista.
                 </p>
                 <p>
                   Tarkemmat ehdot löytyvät{' '}
@@ -231,7 +225,11 @@ export default async function Page() {
               <h2>Tilaa aloituspakkaus</h2>
             </div>
 
-            <ProductOrderForm productKey="starterKit" />
+            <AddToCartPanel
+              productKey="starterKit"
+              showWormSuggestion
+              relatedProductKeys={['compostChow']}
+            />
           </section>
 
           <section id="miksi-lapivirtaus" className={classes.SectionStack}>
@@ -329,10 +327,11 @@ export default async function Page() {
               </div>
 
               <div className={classes.InfoCard}>
-                <h3>Matojen osuus</h3>
+                <h3>Kompostimadot lisätään erikseen</h3>
                 <p>
-                  Perusosa on hinnoiteltu {formatPrice(starterKitBasePrice)} euroon. Tähän
-                  lisätään madot samalla hinnalla kuin erikseen myytävissä matopaketeissa:
+                  Perusosa on hinnoiteltu {formatPrice(starterKitBasePrice)} euroon.
+                  Kompostimadot voi lisätä ostoskoriin samalla hinnalla kuin erikseen
+                  myytävissä matopaketeissa:
                 </p>
                 <ul className={classes.CleanList}>
                   {wormVariants.map((variant) => (
@@ -347,16 +346,11 @@ export default async function Page() {
               </div>
 
               <div className={classes.InfoCard}>
-                <h3>Valmiit paketit</h3>
+                <h3>Tilauksen kokoaminen</h3>
                 <ul className={classes.CleanList}>
-                  {starterKitVariants.map((variant) => (
-                    <li key={`${variant.sku}-final`}>
-                      <VariantPriceDisplay
-                        title={`Aloituspakkaus + ${formatWormPackageLabel(variant)}`}
-                        variant={variant}
-                      />
-                    </li>
-                  ))}
+                  <li>lisää ostoskoriin aloituspakkaus</li>
+                  <li>valitse halutessasi yksi matopaketti mukaan</li>
+                  <li>lisää halutessasi kuituseos kompostin ylläpitoon</li>
                 </ul>
                 <p>
                   Työosuus sisältyy perusosan hintaan, loput kulut muodostuvat

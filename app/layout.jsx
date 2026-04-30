@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 
 import AdSenseConsentGate from '@/components/AdSense/AdSenseConsentGate';
 import Analytics from '@/components/Analytics/Analytics';
+import { CartProvider } from '@/components/Cart/CartProvider';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
 import { ADSENSE_CONSENT_ENABLED } from '@/lib/site/adsense';
@@ -36,9 +37,11 @@ export default function RootLayout({ children }) {
           }}
         />
         <div className="container">
-          <Navbar navigation={navigation} />
-          <main>{children}</main>
-          <Footer navigation={navigation} />
+          <CartProvider>
+            <Navbar navigation={navigation} />
+            <main>{children}</main>
+            <Footer navigation={navigation} />
+          </CartProvider>
         </div>
         <Analytics />
         {ADSENSE_CONSENT_ENABLED ? <AdSenseConsentGate /> : null}

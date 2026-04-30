@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import discountData from '@/generated/commerce/discounts.json';
 import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
@@ -21,34 +20,6 @@ import {
   getRequiredProductSku,
   withTemporaryProductAvailability,
 } from '../helpers/productAvailability.mjs';
-
-const discountCodePepper = 'lieromaa-discount-v1';
-const textDecoder = new TextDecoder();
-const textEncoder = new TextEncoder();
-
-function deobfuscateDiscountCode(obfuscatedCode) {
-  const encodedCode = String(obfuscatedCode || '')
-    .split('')
-    .reverse()
-    .join('');
-  const codeBytes = Buffer.from(encodedCode, 'base64');
-  const pepperBytes = textEncoder.encode(discountCodePepper);
-  const output = new Uint8Array(codeBytes.length);
-
-  for (let i = 0; i < codeBytes.length; i += 1) {
-    output[i] = codeBytes[i] ^ pepperBytes[i % pepperBytes.length];
-  }
-
-  return textDecoder.decode(output);
-}
-
-function getDiscountCodeForExtraChargeKey(extraChargeKey) {
-  const discount = (discountData.discounts ?? []).find((entry) =>
-    entry.appliesToExtraChargeKeys?.includes(extraChargeKey)
-  );
-
-  return deobfuscateDiscountCode(discount?.obfuscatedCode);
-}
 
 describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should match the current runtime config for configured order scenarios', () => {
@@ -332,111 +303,126 @@ describe('frontend public order normalization', () => {
     expectEqual(legacyStarterKitPayload.pricing.itemPrice, 91);
   });
 
-  test('normalizePublicOrderSubmission should include selected upsell products in pricing', () => {
-    const scenario =
-      findOrderScenario({ productKey: 'worms', fulfillmentType: 'pickup_point' }) ??
-      findOrderScenario({ productKey: 'worms' });
-
-    if (!scenario) {
-      return;
-    }
-
+  test('normalizePublicOrderSubmission should normalize standalone cart upsells as order items', () => {
     const now = new Date('2026-05-02T10:00:00Z');
-    const selectedExtraCharges = {
-      kompostiruoka_lisatilaus: true,
-      tasapainottaja_lisatilaus: true,
-    };
     const payload = normalizePublicOrderSubmission(
-      createValidOrderFormDataForScenario(scenario, {
-        kompostiruoka_lisatilaus: 'on',
-        tasapainottaja_lisatilaus: 'on',
+      createValidOrderFormData({
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify([
+          { sku: 'worms-25', quantity: 1 },
+          { sku: 'chow-400', quantity: 1 },
+        ]),
+        toimitus: 'posti_noutopiste',
+        osoite: 'Kompostikuja 1',
+        postinumero: '00100',
+        toimipaikka: 'Helsinki',
       }),
       { now }
     );
-    const expectedQuote = buildExpectedQuoteFromSource({
-      productKey: scenario.productKey,
-      sku: scenario.variant.sku,
-      shippingMethod: scenario.shippingOption.id,
-      selectedExtraCharges,
-      now,
-    });
 
     expectDeepEqual(
-      payload.pricing.extraCharges
-        .filter((charge) => charge.selected)
-        .map((charge) => ({
-          label: charge.label,
-          appliedPrice: charge.appliedPrice,
-        })),
+      payload.items.map((item) => ({
+        sku: item.sku,
+        packageQuantity: item.packageQuantity,
+        itemTotal: item.itemTotal,
+      })),
       [
         {
-          label: 'Lieromaan kompostiruoka 150g',
-          appliedPrice: 3,
+          sku: 'worms-25',
+          packageQuantity: 1,
+          itemTotal: 20,
         },
         {
-          label: 'Lieromaan kompostin tasapainottaja 50g',
-          appliedPrice: 2,
+          sku: 'chow-400',
+          packageQuantity: 1,
+          itemTotal: 8.9,
         },
       ],
-      'normalizePublicOrderSubmission should keep the selected upsell products in the forwarded pricing payload'
+      'normalizePublicOrderSubmission should keep each standalone cart SKU in the forwarded items payload'
+    );
+    expectEqual(
+      payload.product.sku,
+      'worms-25',
+      'normalizePublicOrderSubmission should keep the first cart line as the compatibility product payload'
+    );
+    expectEqual(
+      payload.pricing.itemPrice,
+      28.9,
+      'normalizePublicOrderSubmission should subtotal standalone cart items'
+    );
+    expectEqual(
+      payload.pricing.shippingPrice,
+      8.9,
+      'normalizePublicOrderSubmission should use shared cart shipping prices'
     );
     expectEqual(
       payload.pricing.total,
-      expectedQuote.total,
-      'normalizePublicOrderSubmission should include selected upsell products in the total'
+      37.8,
+      'normalizePublicOrderSubmission should include standalone cart items and shipping in the total'
+    );
+    expectDeepEqual(
+      payload.pricing.extraCharges,
+      [],
+      'normalizePublicOrderSubmission should not attach cart upsells as legacy extra charges'
     );
   });
 
-  test('normalizePublicOrderSubmission should only apply supplement discount codes when the supplement is selected', () => {
-    const scenario =
-      findOrderScenario({ productKey: 'starterKit', fulfillmentType: 'pickup_point' }) ??
-      findOrderScenario({ productKey: 'starterKit' });
-
-    if (!scenario) {
-      return;
-    }
-
+  test('normalizePublicOrderSubmission should reject cart orders with more than two worm packages', () => {
     const now = new Date('2026-05-02T10:00:00Z');
-    const compostFoodDiscountCode = getDiscountCodeForExtraChargeKey('compostFood');
-    const unselectedPayload = normalizePublicOrderSubmission(
-      createValidOrderFormDataForScenario(scenario, {
-        alennuskoodi: compostFoodDiscountCode,
-      }),
-      { now }
-    );
-    const foodPayload = normalizePublicOrderSubmission(
-      createValidOrderFormDataForScenario(scenario, {
-        alennuskoodi: compostFoodDiscountCode,
-        kompostiruoka_lisatilaus: 'on',
-      }),
-      { now }
-    );
-    const expectedBaseQuote = buildExpectedQuoteFromSource({
-      productKey: scenario.productKey,
-      sku: scenario.variant.sku,
-      shippingMethod: scenario.shippingOption.id,
-      now,
-    });
 
-    expectEqual(
-      unselectedPayload.pricing.discount,
-      null,
-      'normalizePublicOrderSubmission should ignore supplement discount codes when the supplement is not selected'
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({
+            sku: '',
+            tuote_avain: '',
+            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 3 }]),
+            toimitus: 'nouto',
+          }),
+          { now }
+        ),
+      (error) => {
+        assert.ok(
+          error instanceof PublicOrderValidationError,
+          'normalizePublicOrderSubmission should throw a PublicOrderValidationError for cart quantity limits'
+        );
+        assert.match(
+          error.publicMessage,
+          /enintään 2 matopakettia/,
+          'normalizePublicOrderSubmission should explain the two-worm-package cart limit'
+        );
+        return true;
+      }
     );
-    expectEqual(
-      unselectedPayload.pricing.total,
-      expectedBaseQuote.total,
-      'normalizePublicOrderSubmission should not discount the base order for an unselected supplement code'
-    );
-    expectEqual(
-      foodPayload.pricing.discount?.extraChargeAmount,
-      3,
-      'normalizePublicOrderSubmission should make compost food free with its configured discount code'
-    );
-    expectEqual(
-      foodPayload.pricing.total,
-      expectedBaseQuote.total,
-      'normalizePublicOrderSubmission should add and then discount the compost food supplement'
+  });
+
+  test('normalizePublicOrderSubmission should reject cart orders with more than four chow products', () => {
+    const now = new Date('2026-05-02T10:00:00Z');
+
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({
+            sku: '',
+            tuote_avain: '',
+            cart_items_json: JSON.stringify([{ sku: 'chow-400', quantity: 5 }]),
+            toimitus: 'nouto',
+          }),
+          { now }
+        ),
+      (error) => {
+        assert.ok(
+          error instanceof PublicOrderValidationError,
+          'normalizePublicOrderSubmission should throw a PublicOrderValidationError for chow quantity limits'
+        );
+        assert.match(
+          error.publicMessage,
+          /enintään 4 kuituseosta/,
+          'normalizePublicOrderSubmission should explain the four-chow-product cart limit'
+        );
+        return true;
+      }
     );
   });
 

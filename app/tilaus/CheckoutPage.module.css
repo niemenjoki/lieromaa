@@ -1,0 +1,278 @@
+.CheckoutPage {
+  width: min(100%, 60rem);
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.CheckoutPage h1 {
+  margin: 0.25rem 0 1.5rem;
+  font-size: clamp(1.9rem, 4vw, 2.4rem);
+  line-height: 1.1;
+}
+
+.Layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.StepNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.StepPill {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--background-6);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  opacity: 0.78;
+}
+
+.StepPillActive {
+  border-color: var(--highlight);
+  color: var(--highlight-alt);
+  font-weight: 700;
+  opacity: 1;
+}
+
+.Panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--background-6);
+  border-radius: 12px;
+  background: var(--background-2);
+}
+
+.LineList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.LineItem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--background-6);
+}
+
+.LineItem:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.LineTitle {
+  font-weight: 700;
+}
+
+.LineMeta,
+.HelperText {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  opacity: 0.86;
+}
+
+.LineActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.QuantityInput {
+  width: 4.5rem;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.Fields,
+.AddressGrid,
+.ChoiceList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.Field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.Field span {
+  font-weight: 700;
+}
+
+.Field input,
+.Field textarea,
+.Field select,
+.QuantityInput {
+  width: 100%;
+  min-width: 0;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--background-6);
+  border-radius: 10px;
+  background: var(--background-1);
+  color: inherit;
+  font: inherit;
+}
+
+.LineActions .Field {
+  width: 5.2rem;
+  flex: 0 0 5.2rem;
+}
+
+.PickupPointSelect {
+  width: 100%;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
+
+.Choice {
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--background-6);
+  border-radius: 10px;
+  background: var(--background-1);
+}
+
+.Choice input {
+  margin-top: 0.2rem;
+}
+
+.Actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.Button,
+.SecondaryButton,
+.DangerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.72rem 1rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.Button {
+  background: var(--highlight);
+  color: var(--text-on-accent);
+}
+
+.SecondaryButton {
+  background: transparent;
+  color: var(--highlight);
+  border-color: var(--highlight);
+}
+
+.DangerButton {
+  background: transparent;
+  color: var(--highlight-alt);
+  border-color: var(--background-6);
+}
+
+.Button:disabled,
+.SecondaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.SummaryTotal {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--background-6);
+  font-size: 1.15rem;
+}
+
+.SummaryRows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--background-6);
+}
+
+.SummaryRows div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.InfoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--background-6);
+  border-radius: 10px;
+  background: var(--background-1);
+}
+
+.InfoBox h3,
+.InfoBox p {
+  margin: 0;
+}
+
+.CheckRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  line-height: 1.5;
+}
+
+.CheckRow input {
+  flex: 0 0 auto;
+  margin-top: 0.28rem;
+}
+
+.Panel a:not(.Button):not(.SecondaryButton):not(.DangerButton) {
+  color: var(--highlight-content-link);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.Alert {
+  font-weight: 700;
+  color: var(--highlight-alt);
+}
+
+@media (max-width: 640px) {
+  .Panel {
+    padding: 1rem;
+  }
+
+  .LineItem {
+    grid-template-columns: 1fr;
+  }
+
+  .Button,
+  .SecondaryButton,
+  .DangerButton {
+    width: 100%;
+  }
+}
