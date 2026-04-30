@@ -1,3 +1,4 @@
+import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { WORMS_SHIPPING_SCHEDULE_TEXT } from '@/lib/commerce/shippingSchedule.mjs';
@@ -12,7 +13,7 @@ import ProductAvailabilityNotice from '../ProductAvailabilityNotice';
 import classes from '../ProductPage.module.css';
 import ProductReviewsSection from '../ProductReviewsSection';
 import VariantPriceDisplay from '../VariantPriceDisplay';
-import { galleryImages, h1 } from './pageMetadata';
+import { breadcrumbItems, galleryImages, h1 } from './pageMetadata';
 import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
@@ -39,6 +40,7 @@ export default async function Page() {
       />
 
       <article className={classes.ProductPage}>
+        <Breadcrumbs items={breadcrumbItems} />
         <h1>{h1}</h1>
 
         <div className={classes.Content}>
