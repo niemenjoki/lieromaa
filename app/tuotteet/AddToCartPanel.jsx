@@ -371,6 +371,7 @@ export default function AddToCartPanel({
         type="button"
         className={classes.SubmitButton}
         onClick={handleAddToCart}
+        data-analytics-cta="order"
         disabled={showRelatedProducts ? !hasSelectedRelatedProducts : !selectedSku}
       >
         {showRelatedProducts ? 'Lisää valitut lisätuotteet' : 'Lisää ostoskoriin'}

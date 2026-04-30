@@ -8,6 +8,10 @@ const pageMetadata = {
   description:
     'Tarkista ostoskorisi, valitse toimitustapa ja lähetä Lieromaan tuotteiden tilaus helposti yhdeltä sivulta.',
   canonicalUrl: '/tilaus',
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export function generateMetadata() {
