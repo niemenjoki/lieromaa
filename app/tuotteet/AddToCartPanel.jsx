@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useCart } from '@/components/Cart/CartProvider';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { trackAnalyticsEvent } from '@/lib/analytics/events';
 import { formatCartLineLabel } from '@/lib/orders/cartOrder';
 import {
   formatPrice,
@@ -167,6 +168,13 @@ export default function AddToCartPanel({
           : 'Tuote lisättiin ostoskoriin.'
         : result.message || 'Tuotteiden lisääminen epäonnistui.'
     );
+
+    if (result.ok) {
+      trackAnalyticsEvent('add_to_cart', {
+        eventTarget: showRelatedProducts ? 'related-products' : productKey,
+        eventValue: nextItems.map((item) => item.sku).join(','),
+      });
+    }
 
     if (result.ok && relatedEntries.length > 0 && !showRelatedProducts) {
       setHasAddedPrimaryProduct(true);

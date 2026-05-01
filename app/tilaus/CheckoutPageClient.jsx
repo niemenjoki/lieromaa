@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useCart } from '@/components/Cart/CartProvider';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { trackAnalyticsEvent } from '@/lib/analytics/events';
 import { ORDER_SUCCESS_MESSAGE } from '@/lib/copy/orderMessages';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { getCartOrderQuote, getDefaultCartShippingOption } from '@/lib/orders/cartOrder';
@@ -374,6 +375,10 @@ export default function CheckoutPageClient() {
 
     try {
       await submitOrderForm(formRef.current);
+      trackAnalyticsEvent('order_submit_success', {
+        eventTarget: 'checkout',
+        eventValue: items.map((item) => item.sku).join(','),
+      });
       clearCart();
       setIsSubmitted(true);
     } catch (error) {
