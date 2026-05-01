@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import SafeLink from '@/components/SafeLink/SafeLink';
+import { trackAnalyticsEvent } from '@/lib/analytics/events';
 import { ORDER_SUBMIT_ENDPOINT, ORDER_SUCCESS_MESSAGE } from '@/lib/copy/orderMessages';
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
 import { getDiscountExtraChargeKeys, getOrderQuote } from '@/lib/orders/getOrderQuote';
@@ -506,6 +507,10 @@ export default function ProductOrderForm({ productKey }) {
 
     try {
       await submitOrderForm(event.currentTarget);
+      trackAnalyticsEvent('order_submit_success', {
+        eventTarget: 'product-form',
+        eventValue: currentSku,
+      });
       setIsSubmitted(true);
     } catch (error) {
       setSubmitError(

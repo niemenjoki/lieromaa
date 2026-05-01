@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 
 import { usePathname } from 'next/navigation';
 
+import { ANALYTICS_CUSTOM_EVENT_NAME } from '@/lib/analytics/events';
 import {
   ANALYTICS_OPT_OUT_PATH,
   ANALYTICS_OPT_OUT_STORAGE_KEY,
@@ -11,6 +12,7 @@ import {
 } from '@/lib/analytics/optOut';
 
 const ANALYTICS_ENDPOINT = '/api/analytics';
+const ANALYTICS_SCHEMA_VERSION = 2;
 const VISITOR_ID_STORAGE_KEY = 'lieromaa.analytics.visitor';
 const SESSION_STORAGE_KEY = 'lieromaa.analytics.session';
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
@@ -252,6 +254,7 @@ function getDwellMs(view, now = Date.now()) {
 
 function buildPayload(view, now = Date.now()) {
   return {
+    schemaVersion: ANALYTICS_SCHEMA_VERSION,
     pageViewId: view.pageViewId,
     visitorId: view.visitorId,
     sessionId: view.sessionId,
@@ -269,7 +272,7 @@ function buildPayload(view, now = Date.now()) {
   };
 }
 
-function sendPayload(payload) {
+function sendAnalyticsPayload(payload) {
   if (!payload) {
     return;
   }
@@ -295,6 +298,38 @@ function sendPayload(payload) {
       keepalive: true,
     }).catch(() => {});
   } catch {}
+}
+
+function buildEventPayload(view, { eventName, eventTarget = '', eventValue = '' } = {}) {
+  if (!view || !eventName) {
+    return null;
+  }
+
+  return {
+    schemaVersion: ANALYTICS_SCHEMA_VERSION,
+    eventId: createId('event'),
+    pageViewId: view.pageViewId,
+    visitorId: view.visitorId,
+    sessionId: view.sessionId,
+    path: view.path,
+    eventName: String(eventName || '')
+      .trim()
+      .slice(0, 80),
+    eventTarget: String(eventTarget || '')
+      .trim()
+      .slice(0, 120),
+    eventValue: String(eventValue || '')
+      .trim()
+      .slice(0, 120),
+    occurredAt: new Date().toISOString(),
+  };
+}
+
+function sendEvent(view, eventDetail) {
+  const payload = buildEventPayload(view, eventDetail);
+  if (payload) {
+    sendAnalyticsPayload(payload);
+  }
 }
 
 function createPageView(path, lastTouchedAtRef) {
@@ -338,7 +373,7 @@ export default function FirstPartyAnalytics() {
           getCurrentScrollDepth()
         );
         pauseView(currentView);
-        sendPayload(buildPayload(currentView));
+        sendAnalyticsPayload(buildPayload(currentView));
       }
 
       currentViewRef.current = null;
@@ -355,12 +390,15 @@ export default function FirstPartyAnalytics() {
         getCurrentScrollDepth()
       );
       pauseView(currentView);
-      sendPayload(buildPayload(currentView));
+      sendAnalyticsPayload(buildPayload(currentView));
     }
 
     const nextView = createPageView(nextPath, lastTouchedAtRef);
     currentViewRef.current = nextView;
-    sendPayload(buildPayload(nextView, nextView.startedAtMs));
+    sendAnalyticsPayload(buildPayload(nextView, nextView.startedAtMs));
+    if (nextView.path === '/tilaus') {
+      sendEvent(nextView, { eventName: 'checkout_view' });
+    }
   }, [pathname]);
 
   useEffect(() => {
@@ -375,7 +413,7 @@ export default function FirstPartyAnalytics() {
         getCurrentScrollDepth()
       );
       touchSession(currentView.path, lastTouchedAtRef);
-      sendPayload(buildPayload(currentView));
+      sendAnalyticsPayload(buildPayload(currentView));
     }
 
     function handleScroll() {
@@ -438,6 +476,10 @@ export default function FirstPartyAnalytics() {
       if (!currentView.startedForms.has(formId)) {
         currentView.startedForms.add(formId);
         touchSession(currentView.path, lastTouchedAtRef);
+        sendEvent(currentView, {
+          eventName: 'form_start',
+          eventTarget: formId,
+        });
         sendCurrentSnapshot();
       }
     }
@@ -452,6 +494,10 @@ export default function FirstPartyAnalytics() {
       currentView.startedForms.add(formId);
       currentView.submittedForms.add(formId);
       touchSession(currentView.path, lastTouchedAtRef);
+      sendEvent(currentView, {
+        eventName: formId === 'order' ? 'order_submit_attempt' : 'form_submit',
+        eventTarget: formId,
+      });
       sendCurrentSnapshot();
     }
 
@@ -468,7 +514,23 @@ export default function FirstPartyAnalytics() {
 
       currentView.orderClickCount += 1;
       touchSession(currentView.path, lastTouchedAtRef);
+      sendEvent(currentView, {
+        eventName: 'cta_click',
+        eventTarget: String(button.dataset.analyticsCta || '').trim(),
+        eventValue:
+          button.getAttribute('href') || button.getAttribute('aria-label') || '',
+      });
       sendCurrentSnapshot();
+    }
+
+    function handleCustomAnalyticsEvent(event) {
+      const currentView = currentViewRef.current;
+      if (!currentView) {
+        return;
+      }
+
+      touchSession(currentView.path, lastTouchedAtRef);
+      sendEvent(currentView, event.detail || {});
     }
 
     const interval = globalThis.setInterval(() => {
@@ -488,6 +550,7 @@ export default function FirstPartyAnalytics() {
     document.addEventListener('change', handleTrackedInput, true);
     document.addEventListener('submit', handleTrackedSubmit, true);
     document.addEventListener('click', handleTrackedClick, true);
+    globalThis.addEventListener(ANALYTICS_CUSTOM_EVENT_NAME, handleCustomAnalyticsEvent);
 
     return () => {
       globalThis.clearInterval(interval);
@@ -499,6 +562,10 @@ export default function FirstPartyAnalytics() {
       document.removeEventListener('change', handleTrackedInput, true);
       document.removeEventListener('submit', handleTrackedSubmit, true);
       document.removeEventListener('click', handleTrackedClick, true);
+      globalThis.removeEventListener(
+        ANALYTICS_CUSTOM_EVENT_NAME,
+        handleCustomAnalyticsEvent
+      );
 
       const currentView = currentViewRef.current;
       if (currentView) {
@@ -507,7 +574,7 @@ export default function FirstPartyAnalytics() {
           getCurrentScrollDepth()
         );
         pauseView(currentView);
-        sendPayload(buildPayload(currentView));
+        sendAnalyticsPayload(buildPayload(currentView));
       }
     };
   }, []);

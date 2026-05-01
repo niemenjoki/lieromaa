@@ -66,7 +66,8 @@ export default function PrivacyPage() {
             Tekninen käyttödata: sivupolut, aikaleimat, anonyymi selainkohtainen tunniste,
             istuntotieto, edellinen sisäinen sivu, ulkoisen viittaavan sivun host-nimi,
             arvioitu viipymä, scrollaussyvyys, lomakealoitukset, lomakelähetykset,
-            tilaus-CTA-klikkaukset sekä suorituskykymittarit.
+            tilaus-CTA-klikkaukset, ostoskori- ja tilauslomaketapahtumat sekä
+            suorituskykymittarit.
           </li>
           <li>
             Käyttäjäasetukset: teema-asetus (vaalea/tumma tila), joka tallennetaan
@@ -204,16 +205,24 @@ export default function PrivacyPage() {
           aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun host-nimen
           (esimerkiksi google.com tai com.linkedin.android), arvioidun viipymän,
           scrollaussyvyyden, lomakealoitukset, lomakelähetykset ja tilaus-CTA-klikkaukset.
-          Tietoja käytetään vain sen ymmärtämiseen, miten sivuilla liikutaan ja missä
-          kohtaa kävijät osoittavat kiinnostusta tilaamiseen tai muihin lomakkeisiin.
+          Lisäksi analytiikka voi tallentaa anonyymejä tapahtumia, kuten ostoskoriin
+          lisäämisen, tilauslomakkeen lähetysyrityksen ja onnistuneen tilauslomakkeen
+          lähetyksen. Tietoja käytetään vain sen ymmärtämiseen, miten sivuilla liikutaan
+          ja missä kohtaa kävijät osoittavat kiinnostusta tilaamiseen tai muihin
+          lomakkeisiin.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikka ei tallenna IP-osoitteita, selaimen tai
           laitteen tarkkoja tunnistetietoja, maantieteellistä sijaintia eikä käytä
-          sormenjälkitunnistusta tai muita vastaavia tunnistuskeinoja. URL-parametreja ei
-          tallenneta analytiikkaan. Anonyymi kävijätunniste säilytetään selaimen
-          localStoragessa ja istuntotieto sessionStoragessa. Speed Insights kerää
-          suorituskykymittareita palveluntarjoajansa käytäntöjen mukaisesti.
+          sormenjälkitunnistusta tai muita vastaavia tunnistuskeinoja. Analytiikan
+          tapahtumia ei yhdistetä yksittäisiin tilaustietoihin, kuten nimeen,
+          sähköpostiosoitteeseen, puhelinnumeroon, toimitusosoitteeseen tai
+          tilausnumeroon. Raportointi tehdään istunto- ja sivuryhmätasolla, jotta voidaan
+          nähdä yleisesti miten tilaavat istunnot etenevät sivustolla ilman yksittäisen
+          asiakkaan selaushistorian yhdistämistä tilaukseen. URL-parametreja ei tallenneta
+          analytiikkaan. Anonyymi kävijätunniste säilytetään selaimen localStoragessa ja
+          istuntotieto sessionStoragessa. Speed Insights kerää suorituskykymittareita
+          palveluntarjoajansa käytäntöjen mukaisesti.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikkadata tallennetaan Lieromaan hallinnoimaan
