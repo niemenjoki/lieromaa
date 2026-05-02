@@ -122,7 +122,7 @@ export default function AddToCartPanel({
   const [selectedSku, setSelectedSku] = useState(defaultVariant?.sku ?? '');
   const [selectedWormSku, setSelectedWormSku] = useState('');
   const [selectedRelatedProducts, setSelectedRelatedProducts] = useState({});
-  const [hasAddedPrimaryProduct, setHasAddedPrimaryProduct] = useState(false);
+  const [hasAddedToCart, setHasAddedToCart] = useState(false);
   const [feedback, setFeedback] = useState('');
   const product = getProductCatalogEntry(productKey);
   const wormVariants = showWormSuggestion ? getProductVariants('worms') : [];
@@ -138,46 +138,40 @@ export default function AddToCartPanel({
         .filter((entry) => entry.variant),
     [relatedProductKeys]
   );
-  const showRelatedProducts = hasAddedPrimaryProduct && relatedEntries.length > 0;
-  const hasSelectedRelatedProducts = relatedEntries.some(
-    (entry) => selectedRelatedProducts[entry.productKey]
-  );
+  const showRelatedProducts = relatedEntries.length > 0;
 
   const handleAddToCart = () => {
     const nextItems = [];
 
-    if (showRelatedProducts) {
-      for (const entry of relatedEntries) {
-        if (selectedRelatedProducts[entry.productKey]) {
-          nextItems.push({ sku: entry.variant.sku, quantity: 1 });
-        }
-      }
-    } else if (selectedSku) {
+    if (selectedSku) {
       nextItems.push({ sku: selectedSku, quantity: 1 });
 
       if (selectedWormSku) {
         nextItems.push({ sku: selectedWormSku, quantity: 1 });
+      }
+
+      for (const entry of relatedEntries) {
+        if (selectedRelatedProducts[entry.productKey]) {
+          nextItems.push({ sku: entry.variant.sku, quantity: 1 });
+        }
       }
     }
 
     const result = addItems(nextItems);
     setFeedback(
       result.ok
-        ? showRelatedProducts
-          ? 'Lisätuotteet lisättiin ostoskoriin.'
-          : 'Tuote lisättiin ostoskoriin.'
+        ? nextItems.length === 1
+          ? 'Tuote lisättiin ostoskoriin.'
+          : 'Tuotteet lisättiin ostoskoriin.'
         : result.message || 'Tuotteiden lisääminen epäonnistui.'
     );
 
     if (result.ok) {
       trackAnalyticsEvent('add_to_cart', {
-        eventTarget: showRelatedProducts ? 'related-products' : productKey,
+        eventTarget: productKey,
         eventValue: nextItems.map((item) => item.sku).join(','),
       });
-    }
-
-    if (result.ok && relatedEntries.length > 0 && !showRelatedProducts) {
-      setHasAddedPrimaryProduct(true);
+      setHasAddedToCart(true);
     }
   };
 
@@ -369,21 +363,43 @@ export default function AddToCartPanel({
       {feedback ? (
         <p className={classes.HelperText} role="status">
           {feedback}{' '}
-          {feedback.includes('lisättiin') ? (
+          {feedback.includes('lisättiin') && !hasAddedToCart ? (
             <SafeLink href="/tilaus">Siirry tarkistamaan tilaus</SafeLink>
           ) : null}
         </p>
       ) : null}
 
-      <button
-        type="button"
-        className={classes.SubmitButton}
-        onClick={handleAddToCart}
-        data-analytics-cta="order"
-        disabled={showRelatedProducts ? !hasSelectedRelatedProducts : !selectedSku}
-      >
-        {showRelatedProducts ? 'Lisää valitut lisätuotteet' : 'Lisää ostoskoriin'}
-      </button>
+      {hasAddedToCart ? (
+        <div className={classes.FormActions}>
+          <SafeLink
+            href="/tilaus"
+            className={[classes.CartActionLink, classes.SubmitButton]
+              .filter(Boolean)
+              .join(' ')}
+            data-analytics-cta="order"
+          >
+            Siirry ostoskoriin
+          </SafeLink>
+          <SafeLink
+            href="/tuotteet"
+            className={[classes.CartActionLink, classes.SecondaryButton]
+              .filter(Boolean)
+              .join(' ')}
+          >
+            Jatka ostoksia
+          </SafeLink>
+        </div>
+      ) : (
+        <button
+          type="button"
+          className={classes.SubmitButton}
+          onClick={handleAddToCart}
+          data-analytics-cta="order"
+          disabled={!selectedSku}
+        >
+          Lisää ostoskoriin
+        </button>
+      )}
     </div>
   );
 }

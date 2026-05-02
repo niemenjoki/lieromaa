@@ -373,6 +373,36 @@
   width: 100%;
 }
 
+.CartActionLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background-color: var(--highlight);
+  color: var(--text-on-accent);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.CartActionLink:hover {
+  opacity: 0.88;
+}
+
+.CartActionLink:focus-visible {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
 .FormActions {
   display: flex;
   flex-wrap: wrap;
