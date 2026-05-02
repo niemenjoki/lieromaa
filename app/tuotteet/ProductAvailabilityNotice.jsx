@@ -60,6 +60,7 @@ export default function ProductAvailabilityNotice({
   productKey,
   className = '',
   prefix = '',
+  context = 'product',
 }) {
   const availability = getProductAvailability(productKey);
   const product = getProductPricing(productKey);
@@ -91,7 +92,18 @@ export default function ProductAvailabilityNotice({
 
   let noticeText = '';
 
-  if (hasUnavailableSkus && hasEarliestShippingDate) {
+  if (context === 'starterKitWormSelection') {
+    if (hasUnavailableSkus && hasEarliestShippingDate) {
+      noticeText =
+        'Isompien matopakettien saatavuutta on rajoitettu suuren kysynnän vuoksi. Jos lisäät matoja aloituspakkaukseen, koko tilaus toimitetaan matojen saatavuuden mukaan aikaisintaan ';
+    } else if (hasUnavailableSkus) {
+      noticeText =
+        'Isompien matopakettien saatavuutta on rajoitettu suuren kysynnän vuoksi. Jos lisäät matoja aloituspakkaukseen, koko tilaus toimitetaan matojen saatavuuden mukaan.';
+    } else {
+      noticeText =
+        'Jos lisäät matoja aloituspakkaukseen, koko tilaus toimitetaan matojen saatavuuden mukaan aikaisintaan ';
+    }
+  } else if (hasUnavailableSkus && hasEarliestShippingDate) {
     noticeText =
       'Olen joutunut rajoittamaan isompien matopakettien myyntiä sekä viivästyttämään tilausten lähettämistä suuren kysynnän vuoksi. Pienempiä tilauksia voi tehdä normaalisti. Nyt tehtävät tilaukset toimitetaan ';
   } else if (hasUnavailableSkus) {
