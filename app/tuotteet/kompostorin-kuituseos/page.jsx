@@ -83,21 +83,26 @@ export default async function Page() {
             <h2>Käyttö</h2>
             <div className={classes.CardGrid}>
               <div className={classes.InfoCard}>
-                <h3>Biojätteen rinnalla</h3>
-                <p>Lisää noin 1 tl / 5-10 L kompostia kerran viikossa.</p>
-              </div>
-              <div className={classes.InfoCard}>
-                <h3>Tilapäisesti biojätteen sijaan</h3>
+                <h3>Lähtöannos</h3>
                 <p>
-                  Lisää noin 1 rkl / 5-10 L kompostia kerran viikossa. Älä käytä tätä
-                  suurempaa annosta yli 3 viikkoa putkeen.
+                  Aktiivisessa noin 15-25 °C matokompostissa voit aloittaa annoksella 0,5
+                  dl kuituseosta / 10 L kompostimassaa kerran viikossa.
                 </p>
               </div>
               <div className={classes.InfoCard}>
-                <h3>Hyvä tietää</h3>
+                <h3>Biojätteen rinnalla</h3>
                 <p>
-                  Sekoita kuituseos ripotellen kompostimassan sekaan, ei yhtenä kasana.
-                  Liiallinen käyttö voi aiheuttaa hajua ja kuumenemista.
+                  Jos lisäät kompostiin samaan aikaan myös keittiön biojätettä, vähennä
+                  kuituseoksen määrä noin puoleen eli 0,25 dl / 10 L kompostimassaa
+                  viikossa.
+                </p>
+              </div>
+              <div className={classes.InfoCard}>
+                <h3>Käyttötapa ja säätö</h3>
+                <p>
+                  Ripottele ohut kerros pintaan, kostuta kevyesti ja peitä kostealla
+                  paperilla tai kuivikkeella. Lisää määrää, jos seos häviää 1-2 päivässä.
+                  Vähennä määrää, jos kompostiin tulee hajua tai hometta.
                 </p>
               </div>
             </div>
