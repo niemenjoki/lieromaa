@@ -15,6 +15,7 @@ import {
 } from '@/lib/pricing/catalog';
 import { getProductCatalogEntry } from '@/lib/products/catalog.mjs';
 
+import ProductAvailabilityNotice from './ProductAvailabilityNotice';
 import classes from './ProductPage.module.css';
 
 function getDefaultVariant(productKey, variants) {
@@ -274,6 +275,12 @@ export default function AddToCartPanel({
           <p className={classes.HelperText}>
             Voit lisätä tilaukseen matopaketin tai ostaa pelkän aloituspakkauksen.
           </p>
+          <ProductAvailabilityNotice
+            productKey="worms"
+            className={classes.HelperText}
+            prefix="Matojen saatavuustiedote:"
+            context="starterKitWormSelection"
+          />
           <fieldset className={classes.FormFieldset}>
             <legend className={classes.ScreenReaderOnly}>Valitse matopaketti</legend>
             <div className={classes.ChoiceList}>
