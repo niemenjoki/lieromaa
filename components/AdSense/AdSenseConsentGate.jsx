@@ -22,8 +22,8 @@ const consentBootstrap = `
       return true;
     };
 
-    function emit(eventName) {
-      window.dispatchEvent(new CustomEvent(eventName));
+    function emit(eventName, detail) {
+      window.dispatchEvent(new CustomEvent(eventName, { detail: detail || {} }));
     }
 
     function getAllowedConsentStatuses() {
@@ -87,6 +87,8 @@ const consentBootstrap = `
       var isGranted = hasGrantedAdStorage(consentValues);
 
       window.__lieromaaAdsConsentGranted = isGranted;
+      window.__lieromaaAnalyticsConsentGranted = isGranted;
+      emit('lieromaa:analytics-consent-changed', { granted: isGranted });
 
       if (!wasGranted && isGranted) {
         emit('lieromaa:ads-consent-granted');

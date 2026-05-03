@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { usePathname } from 'next/navigation';
 
@@ -13,6 +13,7 @@ import {
 
 const ANALYTICS_ENDPOINT = '/api/analytics';
 const ANALYTICS_SCHEMA_VERSION = 2;
+const ANALYTICS_CONSENT_EVENT_NAME = 'lieromaa:analytics-consent-changed';
 const VISITOR_ID_STORAGE_KEY = 'lieromaa.analytics.visitor';
 const SESSION_STORAGE_KEY = 'lieromaa.analytics.session';
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
@@ -39,6 +40,10 @@ function isAnalyticsOptedOut() {
   return (
     storage?.getItem(ANALYTICS_OPT_OUT_STORAGE_KEY) === ANALYTICS_OPT_OUT_STORAGE_VALUE
   );
+}
+
+function hasAnalyticsConsent() {
+  return Boolean(globalThis.window?.__lieromaaAnalyticsConsentGranted);
 }
 
 function normalizePath(value) {
@@ -360,8 +365,35 @@ export default function FirstPartyAnalytics() {
   const pathname = usePathname();
   const currentViewRef = useRef(null);
   const lastTouchedAtRef = useRef(0);
+  const [analyticsConsentGranted, setAnalyticsConsentGranted] =
+    useState(hasAnalyticsConsent);
 
   useEffect(() => {
+    function handleAnalyticsConsentChange(event) {
+      setAnalyticsConsentGranted(Boolean(event.detail?.granted));
+    }
+
+    setAnalyticsConsentGranted(hasAnalyticsConsent());
+    globalThis.addEventListener(
+      ANALYTICS_CONSENT_EVENT_NAME,
+      handleAnalyticsConsentChange
+    );
+
+    return () => {
+      globalThis.removeEventListener(
+        ANALYTICS_CONSENT_EVENT_NAME,
+        handleAnalyticsConsentChange
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!analyticsConsentGranted) {
+      currentViewRef.current = null;
+      lastTouchedAtRef.current = 0;
+      return;
+    }
+
     const nextPath = normalizePath(pathname || '/');
     const currentView = currentViewRef.current;
     const shouldSkipTracking = isIgnoredAnalyticsPath(nextPath) || isAnalyticsOptedOut();
@@ -399,9 +431,13 @@ export default function FirstPartyAnalytics() {
     if (nextView.path === '/tilaus') {
       sendEvent(nextView, { eventName: 'checkout_view' });
     }
-  }, [pathname]);
+  }, [analyticsConsentGranted, pathname]);
 
   useEffect(() => {
+    if (!analyticsConsentGranted) {
+      return undefined;
+    }
+
     function sendCurrentSnapshot() {
       const currentView = currentViewRef.current;
       if (!currentView) {
@@ -577,7 +613,7 @@ export default function FirstPartyAnalytics() {
         sendAnalyticsPayload(buildPayload(currentView));
       }
     };
-  }, []);
+  }, [analyticsConsentGranted]);
 
   return null;
 }
