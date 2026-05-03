@@ -147,7 +147,7 @@ export default function PrivacyPage() {
         <p>
           Tilauslomakkeiden lähetykset vastaanotetaan ensin Lieromaan julkisella
           verkkosivustolla Vercelissä ja välitetään sieltä Lieromaan omaan
-          tilaustenhallinta- palveluun. Yhteys julkisen sivuston ja kotipalvelimella
+          tilaustenhallintapalveluun. Yhteys julkisen sivuston ja kotipalvelimella
           toimivan tilaustenhallinnan välillä kulkee Cloudflare Tunnel -palvelun kautta.
           Tilaustiedot tallennetaan Lieromaan hallinnoimaan paikalliseen
           SQLite-tietokantaan kotipalvelimella. Tilauksiin liittyviä sähköposteja
