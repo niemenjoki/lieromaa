@@ -67,11 +67,14 @@ export default function PrivacyPage() {
             arvostelu sekä mahdollinen näyttönimi.
           </li>
           <li>
-            Tekninen käyttödata: sivupolut, aikaleimat, anonyymi selainkohtainen tunniste,
-            istuntotieto, edellinen sisäinen sivu, ulkoisen viittaavan sivun host-nimi,
-            arvioitu viipymä, scrollaussyvyys, lomakealoitukset, lomakelähetykset,
-            tilaus-CTA-klikkaukset, ostoskori- ja tilauslomaketapahtumat sekä
-            suorituskykymittarit.
+            Tekninen käyttödata ja analytiikkamittarit: Lieromaan oma analytiikka kerää
+            vain anonyymejä mittareita, kuten selainkohtaisen tunnisteen,
+            istuntotunnisteen, sivupolut, aikaleimat, edellisen sisäisen sivun, ulkoisen
+            viittaavan sivun host-nimen, arvioidun viipymän, scrollaussyvyyden,
+            lomakealoitukset, lomakelähetykset, tilaus-CTA-klikkaukset, ostoskori- ja
+            tilauslomaketapahtumat sekä suorituskykymittarit. Lieromaan oma analytiikka ei
+            sisällä nimeä, sähköpostiosoitetta, puhelinnumeroa, toimitusosoitetta,
+            tilausnumeroa, IP-osoitetta, tarkkoja laitetietoja tai URL-parametreja.
           </li>
           <li>
             Käyttäjäasetukset: teema-asetus (vaalea/tumma tila), joka tallennetaan
@@ -79,7 +82,8 @@ export default function PrivacyPage() {
           </li>
           <li>
             Ostoskoritiedot: ostoskoriin lisättyjen tuotteiden tunnisteet, määrät ja korin
-            viimeisin muokkausaika.
+            viimeisin muokkausaika. Ostoskori tallennetaan vain selaimeesi, eikä sitä
+            lähetetä Lieromaalle ennen tilauslomakkeen lähettämistä.
           </li>
         </ul>
 
@@ -235,15 +239,15 @@ export default function PrivacyPage() {
           seuraamiseen. Ensimmäisen osapuolen analytiikka käynnistyy vasta, kun olet
           hyväksynyt analytiikan ja mainontaan liittyvän päätelaitetallennuksen
           suostumuksenhallintatyökalussa. Tällöin analytiikka tallentaa omalle
-          palvelimelle anonyymin selaimeen tallennetun tunnisteen, istuntotunnisteen,
-          sivupolun, aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun
-          host-nimen (esimerkiksi google.com tai com.linkedin.android), arvioidun
-          viipymän, scrollaussyvyyden, lomakealoitukset, lomakelähetykset ja
-          tilaus-CTA-klikkaukset. Lisäksi analytiikka voi tallentaa anonyymejä tapahtumia,
-          kuten ostoskoriin lisäämisen, tilauslomakkeen lähetysyrityksen ja onnistuneen
-          tilauslomakkeen lähetyksen. Tietoja käytetään vain sen ymmärtämiseen, miten
-          sivuilla liikutaan ja missä kohtaa kävijät osoittavat kiinnostusta tilaamiseen
-          tai muihin lomakkeisiin.
+          palvelimelle anonyymin selainkohtaisen tunnisteen, istuntotunnisteen, sivupolun,
+          aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun host-nimen
+          (esimerkiksi google.com tai com.linkedin.android), arvioidun viipymän,
+          scrollaussyvyyden, lomakealoitukset, lomakelähetykset ja tilaus-CTA-klikkaukset.
+          Lisäksi analytiikka voi tallentaa anonyymejä tapahtumia, kuten ostoskoriin
+          lisäämisen, tilauslomakkeen lähetysyrityksen ja onnistuneen tilauslomakkeen
+          lähetyksen. Tietoja käytetään vain sen ymmärtämiseen, miten sivuilla liikutaan
+          ja missä kohtaa kävijät osoittavat kiinnostusta tilaamiseen tai muihin
+          lomakkeisiin.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikka ei tallenna IP-osoitteita, selaimen tai
@@ -277,11 +281,11 @@ export default function PrivacyPage() {
           Kun vaihdat vaaleaan tai tummaan tilaan, sivusto tallentaa valitsemasi teeman
           selaimesi paikalliseen tallennustilaan (localStorage). Ostoskori tallentuu
           localStorageen, jotta voit jatkaa tilaamista myöhemmin samalla selaimella.
-          Ostoskori poistetaan automaattisesti, jos sitä ei muokata 7 päivään. Lisäksi
-          anonyymi kävijätunniste tallennetaan suostumuksen jälkeen localStorageen ja
-          istuntotieto sessionStorageen ensimmäisen osapuolen analytiikkaa varten. Näistä
-          tunnisteista ei voida päätellä henkilöllisyyttäsi. Analytiikan kieltomerkintä
-          voidaan tallentaa localStorageen, jos käytät erillistä analytiikan estolinkkiä.
+          Ostoskori poistetaan automaattisesti, jos sitä ei muokata 7 päivään. Ostoskorin
+          sisältö pysyy selaimessasi, eikä sitä lähetetä Lieromaalle ennen kuin lähetät
+          tilauslomakkeen. Lisäksi anonyymi kävijätunniste tallennetaan suostumuksen
+          jälkeen localStorageen ja istuntotieto sessionStorageen ensimmäisen osapuolen
+          analytiikkaa varten. Näistä tunnisteista ei voida päätellä henkilöllisyyttäsi.
         </p>
 
         <h2>Evästeet</h2>
