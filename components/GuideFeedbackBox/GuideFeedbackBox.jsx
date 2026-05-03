@@ -2,7 +2,7 @@
 
 import { useId, useState } from 'react';
 
-import { CONTACT_EMAIL, GUIDE_FEEDBACK_FORMSPREE_ENDPOINT } from '@/lib/site/contact';
+import { CONTACT_EMAIL } from '@/lib/site/contact';
 
 import classes from './GuideFeedbackBox.module.css';
 
@@ -23,6 +23,8 @@ const FEEDBACK_TYPES = {
     valueLabel: 'Kysymys',
   },
 };
+
+const GUIDE_FEEDBACK_ENDPOINT = '/api/guide-feedback/submit';
 
 export default function GuideFeedbackBox({
   title,
@@ -67,35 +69,41 @@ export default function GuideFeedbackBox({
     setSubmitError('');
 
     const formData = new FormData(event.currentTarget);
-    formData.set('viesti', trimmedMessage);
-    formData.set('viestin_tyyppi', activeType.valueLabel);
-    formData.set('sivu_konteksti', sourceContext);
-    formData.set('sivun_otsikko', pageTitle);
-    formData.set('sivu_url', window.location.href);
-    formData.set('referrer', document.referrer || '');
-
-    if (!email.trim()) {
-      formData.delete('email');
-    }
 
     try {
-      const response = await fetch(GUIDE_FEEDBACK_FORMSPREE_ENDPOINT, {
+      const response = await fetch(GUIDE_FEEDBACK_ENDPOINT, {
         method: 'POST',
-        body: formData,
         headers: {
           Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          _gotcha: String(formData.get('_gotcha') || ''),
+          feedbackType,
+          feedbackTypeLabel: activeType.valueLabel,
+          message: trimmedMessage,
+          email: email.trim(),
+          pageContext: sourceContext,
+          pageTitle,
+          pageUrl: window.location.href,
+          referrer: document.referrer || '',
+        }),
       });
 
-      if (!response.ok) {
-        throw new Error('Lomakkeen lähetys epäonnistui');
+      const data = await response.json().catch(() => null);
+      if (!response.ok || !data?.ok) {
+        throw new Error(data?.message || 'Lomakkeen lähetys epäonnistui');
       }
 
       setIsSubmitted(true);
       setMessage('');
       setEmail('');
-    } catch {
-      setSubmitError('Viestin lähetys epäonnistui. Yritä hetken kuluttua uudelleen.');
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : 'Viestin lähetys epäonnistui. Yritä hetken kuluttua uudelleen.'
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -128,7 +136,7 @@ export default function GuideFeedbackBox({
           </div>
 
           <form
-            action={GUIDE_FEEDBACK_FORMSPREE_ENDPOINT}
+            action={GUIDE_FEEDBACK_ENDPOINT}
             method="POST"
             onSubmit={handleSubmit}
             className={classes.Form}
