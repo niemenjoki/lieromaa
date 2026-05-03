@@ -94,8 +94,10 @@ export default function OrderPolicyPage() {
         <p>
           Maksamattomasta laskusta voidaan lähettää maksumuistutus, ja edelleen maksamatta
           oleva saatava voidaan siirtää perintään voimassa olevan lainsäädännön
-          mukaisesti. Pidätän oikeuden olla hyväksymättä uusia tilauksia asiakkaalta,
-          jolla on avoimia, erääntyneitä tai perintään siirrettyjä saatavia.
+          mukaisesti. Erääntyneelle saatavalle voidaan periä korkolain mukainen
+          viivästyskorko sekä lainmukaiset muistutus- ja perintäkulut. Pidätän oikeuden
+          olla hyväksymättä uusia tilauksia asiakkaalta, jolla on avoimia, erääntyneitä
+          tai perintään siirrettyjä saatavia.
         </p>
 
         <h2>Toimitusaika</h2>
@@ -141,6 +143,11 @@ export default function OrderPolicyPage() {
           Jos haluat käyttää peruuttamisoikeuttasi, ilmoita sähköpostissasi vähintään
           nimesi, tilaamasi tuote, tilauspäivä tai vastaanottopäivä sekä tieto siitä, että
           haluat peruuttaa kaupan kokonaan tai osittain.
+        </p>
+        <p>
+          Voit käyttää peruuttamisilmoituksessa esimerkiksi seuraavaa mallia: "Ilmoitan,
+          että haluan peruuttaa tekemäni sopimuksen. Nimi: [oma nimi]. Tilaus: [tuote tai
+          tilauksen tunnistetieto]. Tilauspäivä tai vastaanottopäivä: [päivämäärä]."
         </p>
 
         <h2>Virhevastuu</h2>
