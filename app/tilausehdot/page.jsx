@@ -91,6 +91,12 @@ export default function OrderPolicyPage() {
           sähköpostitse lähetettävällä laskulla. Maksuaika on 7 vuorokautta. Laskun voi
           maksaa normaalisti verkkopankissa tai mobiilissa.
         </p>
+        <p>
+          Maksamattomasta laskusta voidaan lähettää maksumuistutus, ja edelleen maksamatta
+          oleva saatava voidaan siirtää perintään voimassa olevan lainsäädännön
+          mukaisesti. Pidätän oikeuden olla hyväksymättä uusia tilauksia asiakkaalta,
+          jolla on avoimia, erääntyneitä tai perintään siirrettyjä saatavia.
+        </p>
 
         <h2>Toimitusaika</h2>
         <p>
