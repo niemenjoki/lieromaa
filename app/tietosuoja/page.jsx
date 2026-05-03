@@ -88,13 +88,13 @@ export default function PrivacyPage() {
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
           tilauslomakkeella, jätät arvostelun tai lähetät viestin oppaiden yhteydessä
           olevalla kysymys- ja aihe-ehdotuslomakkeella. Lisäksi kolmannen osapuolen
-          palvelut (esimerkiksi Google AdSense, Speed Insights ja Formspree) voivat kerätä
-          teknisiä tietoja sivuston käytöstä. Lieromaa käyttää lisäksi omaa ensimmäisen
-          osapuolen analytiikkaa, joka tallentaa vain sivuston käytön kannalta olennaiset
-          mittarit omalle palvelimelle suostumuksen perusteella. Tilaus- ja
-          arvostelulomakkeiden välityksessä käytetään lisäksi Verceliä ja Cloudflare
-          Tunnel -yhteyttä. Sivustoa voi käyttää myös mainostenesto-ohjelmien tai muiden
-          seurantaa estävien työkalujen kanssa.
+          palvelut (esimerkiksi Google AdSense ja Speed Insights) voivat kerätä teknisiä
+          tietoja sivuston käytöstä. Lieromaa käyttää lisäksi omaa ensimmäisen osapuolen
+          analytiikkaa, joka tallentaa vain sivuston käytön kannalta olennaiset mittarit
+          omalle palvelimelle suostumuksen perusteella. Tilaus- ja arvostelulomakkeiden
+          välityksessä käytetään lisäksi Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa
+          voi käyttää myös mainostenesto-ohjelmien tai muiden seurantaa estävien
+          työkalujen kanssa.
         </p>
 
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
@@ -166,14 +166,15 @@ export default function PrivacyPage() {
           ennen manuaalista hyväksyntää.
         </p>
 
-        <h2>Oppaiden kysymys- ja aihe-ehdotuslomake (Formspree)</h2>
+        <h2>Oppaiden kysymys- ja aihe-ehdotuslomake</h2>
         <p>
           Oppaiden yhteydessä olevien kysymys- ja aihe-ehdotuslomakkeiden viestit
-          välitetään Formspree-palvelun kautta. Lähetyksessä välitetään viestin lisäksi
-          myös viestin tyyppi, sivun URL-osoite, sivun otsikko ja viittaava sivu
-          (referrer), jos sellainen on saatavilla. Formspree voi käsitellä henkilötietoja
-          EU-/ETA-alueen ulkopuolella (esimerkiksi Yhdysvalloissa). Tietosiirrot suojataan
-          GDPR:n mukaisilla suojatoimilla, kuten vakiosopimuslausekkeilla.
+          vastaanotetaan ensin Lieromaan julkisella verkkosivustolla Vercelissä ja
+          välitetään sieltä Lieromaan omaan tilaustenhallintapalveluun Cloudflare Tunnel
+          -yhteyden kautta. Lähetyksessä välitetään viestin lisäksi myös viestin tyyppi,
+          mahdollinen sähköpostiosoite, sivun URL-osoite, sivun otsikko ja viittaava sivu
+          (referrer), jos sellainen on saatavilla. Uudesta viestistä lähetetään
+          sähköposti-ilmoitus Lieromaan ylläpitäjälle Zoho Mailin SMTP-palvelun kautta.
         </p>
 
         <h2>Toimitukset (Posti)</h2>
@@ -296,10 +297,10 @@ export default function PrivacyPage() {
 
         <h2>Tietojen siirto EU-/ETA-alueen ulkopuolelle</h2>
         <p>
-          Osa käytetyistä palveluista (kuten Google, Formspree, Cloudflare ja
-          mahdollisesti Zoho Mail käytetyn palvelinalueen mukaan) voi käsitellä tietoja
-          EU-/ETA-alueen ulkopuolella. Tällöin siirrot toteutetaan GDPR:n edellyttämillä
-          suojatoimilla, kuten vakiosopimuslausekkeilla.
+          Osa käytetyistä palveluista (kuten Google, Cloudflare, Vercel ja mahdollisesti
+          Zoho Mail käytetyn palvelinalueen mukaan) voi käsitellä tietoja EU-/ETA-alueen
+          ulkopuolella. Tällöin siirrot toteutetaan GDPR:n edellyttämillä suojatoimilla,
+          kuten vakiosopimuslausekkeilla.
         </p>
         <p>
           Voit pyytää lisätietoa käytetyistä siirtoperusteista ja suojatoimista ottamalla
@@ -309,10 +310,10 @@ export default function PrivacyPage() {
         <h2>Tietojen vastaanottajat</h2>
         <p>
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
-          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Formspree oppaiden
-          kysymys- ja aihe-ehdotuslomakkeen osalta, Posti, OP Kevytyrittäjä, Google ja
-          Vercel). Arvostelut välitetään Lieromaan omaan tilaustenhallintapalveluun
-          Vercelin kautta. Ensimmäisen osapuolen analytiikkadata pysyy Lieromaan omassa
+          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Posti, OP Kevytyrittäjä,
+          Google ja Vercel). Oppaiden kysymys- ja aihe-ehdotuslomakkeiden viestit sekä
+          arvostelut välitetään Lieromaan omaan tilaustenhallintapalveluun Vercelin
+          kautta. Ensimmäisen osapuolen analytiikkadata pysyy Lieromaan omassa
           hallinnassa. Henkilötietoja ei myydä eikä luovuteta muihin tarkoituksiin ilman
           lainmukaista perustetta.
         </p>
