@@ -63,6 +63,10 @@ export default function PrivacyPage() {
             sivun URL-osoite ja viittaava sivu (referrer).
           </li>
           <li>
+            Arvostelutiedot: arvostelulinkin tunniste, tuotetieto, tähtiarvio, kirjoitettu
+            arvostelu sekä mahdollinen näyttönimi.
+          </li>
+          <li>
             Tekninen käyttödata: sivupolut, aikaleimat, anonyymi selainkohtainen tunniste,
             istuntotieto, edellinen sisäinen sivu, ulkoisen viittaavan sivun host-nimi,
             arvioitu viipymä, scrollaussyvyys, lomakealoitukset, lomakelähetykset,
@@ -73,19 +77,24 @@ export default function PrivacyPage() {
             Käyttäjäasetukset: teema-asetus (vaalea/tumma tila), joka tallennetaan
             selaimen localStorageen.
           </li>
+          <li>
+            Ostoskoritiedot: ostoskoriin lisättyjen tuotteiden tunnisteet, määrät ja korin
+            viimeisin muokkausaika.
+          </li>
         </ul>
 
         <h2>Tietojen kerääminen ja lähteet</h2>
         <p>
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
-          tilauslomakkeella tai viestin oppaiden yhteydessä olevalla kysymys- ja
-          aihe-ehdotuslomakkeella. Lisäksi kolmannen osapuolen palvelut (esimerkiksi
-          Google AdSense, Speed Insights ja Formspree) voivat kerätä teknisiä tietoja
-          sivuston käytöstä. Lieromaa käyttää lisäksi omaa ensimmäisen osapuolen
-          analytiikkaa, joka tallentaa vain sivuston käytön kannalta olennaiset anonyymit
-          mittarit omalle palvelimelle. Tilauslomakkeiden välityksessä käytetään lisäksi
-          Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa voi käyttää myös
-          mainostenesto-ohjelmien tai muiden seurantaa estävien työkalujen kanssa.
+          tilauslomakkeella, jätät arvostelun tai lähetät viestin oppaiden yhteydessä
+          olevalla kysymys- ja aihe-ehdotuslomakkeella. Lisäksi kolmannen osapuolen
+          palvelut (esimerkiksi Google AdSense, Speed Insights ja Formspree) voivat kerätä
+          teknisiä tietoja sivuston käytöstä. Lieromaa käyttää lisäksi omaa ensimmäisen
+          osapuolen analytiikkaa, joka tallentaa vain sivuston käytön kannalta olennaiset
+          mittarit omalle palvelimelle suostumuksen perusteella. Tilaus- ja
+          arvostelulomakkeiden välityksessä käytetään lisäksi Verceliä ja Cloudflare
+          Tunnel -yhteyttä. Sivustoa voi käyttää myös mainostenesto-ohjelmien tai muiden
+          seurantaa estävien työkalujen kanssa.
         </p>
 
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
@@ -102,6 +111,11 @@ export default function PrivacyPage() {
             6(1)(f)).
           </li>
           <li>
+            Arvostelujen vastaanotto, tarkistaminen ja julkaiseminen: oikeusperusteena
+            suostumus (GDPR Art. 6(1)(a)) sekä väärinkäytösten torjunnan osalta oikeutettu
+            etu (GDPR Art. 6(1)(f)).
+          </li>
+          <li>
             Kirjanpito ja lakisääteiset velvoitteet: oikeusperusteena lakisääteinen
             velvoite (GDPR Art. 6(1)(c)).
           </li>
@@ -115,12 +129,17 @@ export default function PrivacyPage() {
           </li>
           <li>
             Sivuston käytön ja suorituskyvyn analysointi (Lieromaan oma ensimmäisen
-            osapuolen analytiikka ja Speed Insights): Oikeusperusteena oikeutettu etu
-            (GDPR Art. 6(1)(f)) sivuston kehittämiseksi.
+            osapuolen analytiikka ja Speed Insights): ensimmäisen osapuolen analytiikan
+            oikeusperusteena suostumus (GDPR Art. 6(1)(a)) ja Speed Insightsin osalta
+            oikeutettu etu (GDPR Art. 6(1)(f)) sivuston kehittämiseksi.
           </li>
           <li>
             Käyttäjäasetusten tallentaminen (localStorage): Oikeusperusteena oikeutettu
             etu (GDPR Art. 6(1)(f)) sivuston käytettävyyden parantamiseksi.
+          </li>
+          <li>
+            Ostoskorin tallentaminen selaimeen: oikeusperusteena oikeutettu etu (GDPR Art.
+            6(1)(f)) ostoskorin ja tilaamisen käytettävyyden parantamiseksi.
           </li>
         </ul>
 
@@ -132,7 +151,19 @@ export default function PrivacyPage() {
           toimivan tilaustenhallinnan välillä kulkee Cloudflare Tunnel -palvelun kautta.
           Tilaustiedot tallennetaan Lieromaan hallinnoimaan paikalliseen
           SQLite-tietokantaan kotipalvelimella. Tilauksiin liittyviä sähköposteja
-          lähetetään Zoho Mailin SMTP-palvelun kautta.
+          lähetetään Zoho Mailin SMTP-palvelun kautta. Tilauspyynnön yhteydessä voidaan
+          välittää myös tekninen pyyntökonteksti, kuten selaimen user agent, lähetyksen
+          alkuperä- ja viittaustieto sekä välittävän palvelun antama IP-osoitetieto, jotta
+          lomakkeen väärinkäyttöä voidaan selvittää ja palvelua suojata.
+        </p>
+
+        <h2>Arvostelulomake</h2>
+        <p>
+          Arvostelulomake toimii henkilökohtaisella arvostelulinkillä, joka liittyy
+          aiempaan tilaukseen. Arvostelun yhteydessä käsitellään arvostelulinkin tunniste,
+          tuotetieto, tähtiarvio, kirjoitettu arvostelu ja mahdollinen näyttönimi.
+          Arvostelu tallennetaan ensin tarkistettavaksi, eikä sitä julkaista sivustolla
+          ennen manuaalista hyväksyntää.
         </p>
 
         <h2>Oppaiden kysymys- ja aihe-ehdotuslomake (Formspree)</h2>
@@ -200,16 +231,18 @@ export default function PrivacyPage() {
         <p>
           Sivustolla käytetään Lieromaan omaa kevyttä ensimmäisen osapuolen analytiikkaa
           sekä Vercel Speed Insights -palvelua sivuston käytön ja suorituskyvyn
-          seuraamiseen. Ensimmäisen osapuolen analytiikka tallentaa omalle palvelimelle
-          anonyymin selaimeen tallennetun tunnisteen, istuntotunnisteen, sivupolun,
-          aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun host-nimen
-          (esimerkiksi google.com tai com.linkedin.android), arvioidun viipymän,
-          scrollaussyvyyden, lomakealoitukset, lomakelähetykset ja tilaus-CTA-klikkaukset.
-          Lisäksi analytiikka voi tallentaa anonyymejä tapahtumia, kuten ostoskoriin
-          lisäämisen, tilauslomakkeen lähetysyrityksen ja onnistuneen tilauslomakkeen
-          lähetyksen. Tietoja käytetään vain sen ymmärtämiseen, miten sivuilla liikutaan
-          ja missä kohtaa kävijät osoittavat kiinnostusta tilaamiseen tai muihin
-          lomakkeisiin.
+          seuraamiseen. Ensimmäisen osapuolen analytiikka käynnistyy vasta, kun olet
+          hyväksynyt analytiikan ja mainontaan liittyvän päätelaitetallennuksen
+          suostumuksenhallintatyökalussa. Tällöin analytiikka tallentaa omalle
+          palvelimelle anonyymin selaimeen tallennetun tunnisteen, istuntotunnisteen,
+          sivupolun, aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun
+          host-nimen (esimerkiksi google.com tai com.linkedin.android), arvioidun
+          viipymän, scrollaussyvyyden, lomakealoitukset, lomakelähetykset ja
+          tilaus-CTA-klikkaukset. Lisäksi analytiikka voi tallentaa anonyymejä tapahtumia,
+          kuten ostoskoriin lisäämisen, tilauslomakkeen lähetysyrityksen ja onnistuneen
+          tilauslomakkeen lähetyksen. Tietoja käytetään vain sen ymmärtämiseen, miten
+          sivuilla liikutaan ja missä kohtaa kävijät osoittavat kiinnostusta tilaamiseen
+          tai muihin lomakkeisiin.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikka ei tallenna IP-osoitteita, selaimen tai
@@ -220,9 +253,9 @@ export default function PrivacyPage() {
           tilausnumeroon. Raportointi tehdään istunto- ja sivuryhmätasolla, jotta voidaan
           nähdä yleisesti miten tilaavat istunnot etenevät sivustolla ilman yksittäisen
           asiakkaan selaushistorian yhdistämistä tilaukseen. URL-parametreja ei tallenneta
-          analytiikkaan. Anonyymi kävijätunniste säilytetään selaimen localStoragessa ja
-          istuntotieto sessionStoragessa. Speed Insights kerää suorituskykymittareita
-          palveluntarjoajansa käytäntöjen mukaisesti.
+          analytiikkaan. Anonyymi kävijätunniste säilytetään suostumuksen jälkeen selaimen
+          localStoragessa ja istuntotieto sessionStoragessa. Speed Insights kerää
+          suorituskykymittareita palveluntarjoajansa käytäntöjen mukaisesti.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikkadata tallennetaan Lieromaan hallinnoimaan
@@ -241,23 +274,24 @@ export default function PrivacyPage() {
         <h2>LocalStorage</h2>
         <p>
           Kun vaihdat vaaleaan tai tummaan tilaan, sivusto tallentaa valitsemasi teeman
-          selaimesi paikalliseen tallennustilaan (localStorage). Lisäksi anonyymi
-          kävijätunniste tallennetaan localStorageen ja istuntotieto sessionStorageen
-          ensimmäisen osapuolen analytiikkaa varten. Näistä tunnisteista ei voida päätellä
-          henkilöllisyyttäsi. Tieto säilytetään ainoastaan laitteellasi, eikä sitä
-          siirretä eteenpäin muille osapuolille muuten kuin analytiikkapyynnön mukana
-          Lieromaan omalle palvelimelle.
+          selaimesi paikalliseen tallennustilaan (localStorage). Ostoskori tallentuu
+          localStorageen, jotta voit jatkaa tilaamista myöhemmin samalla selaimella.
+          Ostoskori poistetaan automaattisesti, jos sitä ei muokata 7 päivään. Lisäksi
+          anonyymi kävijätunniste tallennetaan suostumuksen jälkeen localStorageen ja
+          istuntotieto sessionStorageen ensimmäisen osapuolen analytiikkaa varten. Näistä
+          tunnisteista ei voida päätellä henkilöllisyyttäsi. Analytiikan kieltomerkintä
+          voidaan tallentaa localStorageen, jos käytät erillistä analytiikan estolinkkiä.
         </p>
 
         <h2>Evästeet</h2>
         <p>
           Sivusto ei itse käytä analytiikkaevästeitä. Ensimmäisen osapuolen analytiikka
-          käyttää selaimen localStoragea ja sessionStoragea, ei evästeitä. Google AdSense
-          sekä muut kolmannen osapuolen palvelut voivat kuitenkin käyttää evästeitä
-          mainosten näyttämiseen, kohdentamiseen ja tilastointiin. Voit estää evästeiden
-          käytön selaimesi asetuksista tai asettaa ilmoituksen evästeiden lähettämisestä.
-          Voit peruuttaa suostumuksesi milloin tahansa suostumuksenhallintatyökalun kautta
-          tai selaimen asetuksista.
+          käyttää suostumuksen jälkeen selaimen localStoragea ja sessionStoragea, ei
+          evästeitä. Google AdSense sekä muut kolmannen osapuolen palvelut voivat
+          kuitenkin käyttää evästeitä mainosten näyttämiseen, kohdentamiseen ja
+          tilastointiin. Voit estää evästeiden käytön selaimesi asetuksista tai asettaa
+          ilmoituksen evästeiden lähettämisestä. Voit peruuttaa suostumuksesi milloin
+          tahansa suostumuksenhallintatyökalun kautta tai selaimen asetuksista.
         </p>
 
         <h2>Tietojen siirto EU-/ETA-alueen ulkopuolelle</h2>
@@ -277,7 +311,8 @@ export default function PrivacyPage() {
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
           palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Formspree oppaiden
           kysymys- ja aihe-ehdotuslomakkeen osalta, Posti, OP Kevytyrittäjä, Google ja
-          Vercel). Ensimmäisen osapuolen analytiikkadata pysyy Lieromaan omassa
+          Vercel). Arvostelut välitetään Lieromaan omaan tilaustenhallintapalveluun
+          Vercelin kautta. Ensimmäisen osapuolen analytiikkadata pysyy Lieromaan omassa
           hallinnassa. Henkilötietoja ei myydä eikä luovuteta muihin tarkoituksiin ilman
           lainmukaista perustetta.
         </p>
@@ -310,6 +345,12 @@ export default function PrivacyPage() {
             kuitenkin enintään 24 kuukautta ilman erillistä perustetta.
           </li>
           <li>
+            Arvostelut säilytetään niin kauan kuin arvostelua tarvitaan sivuston
+            asiakasarvostelujen näyttämiseen ja luotettavuuden varmistamiseen, ellei
+            poistopyyntöä tai muuta perustetta poistamiselle ole. Julkaistusta
+            arvostelusta voidaan poistaa näyttönimi tai muu tunnistettava tieto pyynnöstä.
+          </li>
+          <li>
             Reklamaatioihin, palautuksiin ja muihin jälkikäteisiin
             asiakaspalvelutilanteisiin liittyviä tietoja säilytetään niin kauan kuin asian
             käsittely kohtuudella edellyttää.
@@ -321,10 +362,11 @@ export default function PrivacyPage() {
             palveluntarjoajan käytäntöjen mukaisesti.
           </li>
           <li>
-            LocalStorageen tallennettu teema-asetus ja anonyymi kävijätunniste sekä
-            sessionStorageen tallennettu istuntotieto säilyvät käytössä olevassa
-            selaimessa, kunnes poistat ne tai selain poistaa ne omien
-            säilytyskäytäntöjensä mukaisesti.
+            LocalStorageen tallennettu teema-asetus, ostoskoritieto ja anonyymi
+            kävijätunniste sekä sessionStorageen tallennettu istuntotieto säilyvät
+            käytössä olevassa selaimessa, kunnes poistat ne tai selain poistaa ne omien
+            säilytyskäytäntöjensä mukaisesti. Ostoskori poistetaan sivuston toimesta
+            viimeistään 7 päivän käyttämättömyyden jälkeen.
           </li>
         </ul>
 
