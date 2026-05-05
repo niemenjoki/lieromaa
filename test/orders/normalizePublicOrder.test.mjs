@@ -366,6 +366,53 @@ describe('frontend public order normalization', () => {
       [],
       'normalizePublicOrderSubmission should not attach cart upsells as legacy extra charges'
     );
+    expectEqual(
+      payload.availability.earliestShippingDate,
+      '',
+      'normalizePublicOrderSubmission should omit empty cart availability snapshots'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should preserve the rendered cart earliest shipping date snapshot', () => {
+    const now = new Date('2026-05-02T10:00:00Z');
+
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+        toimitus: 'nouto',
+        availability_earliest_shipping_date: '2026-05-18',
+      }),
+      { now }
+    );
+
+    expectEqual(
+      payload.availability.earliestShippingDate,
+      '2026-05-18',
+      'normalizePublicOrderSubmission should preserve the storefront-rendered cart earliest shipping date'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should ignore invalid cart availability snapshot dates', () => {
+    const now = new Date('2026-05-02T10:00:00Z');
+
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+        toimitus: 'nouto',
+        availability_earliest_shipping_date: 'not-a-date',
+      }),
+      { now }
+    );
+
+    expectEqual(
+      payload.availability.earliestShippingDate,
+      '',
+      'normalizePublicOrderSubmission should not keep invalid cart availability snapshot dates'
+    );
   });
 
   test('normalizePublicOrderSubmission should reject cart orders with more than two worm packages', () => {
