@@ -435,6 +435,11 @@ export default function CheckoutPageClient() {
       <input type="hidden" name="lomake_aloitettu_ms" value={formStartedAt} />
       <input type="hidden" name="submission_id" value={submissionId} />
       <input type="hidden" name="sivu_polku" value="/tilaus" />
+      <input
+        type="hidden"
+        name="availability_earliest_shipping_date"
+        value={estimatedShippingDate || ''}
+      />
       <input type="hidden" name="pickup_point_id" value={selectedPickupPoint?.id ?? ''} />
       <input
         type="hidden"
