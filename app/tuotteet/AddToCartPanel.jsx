@@ -132,10 +132,14 @@ export default function AddToCartPanel({
   const relatedEntries = useMemo(
     () =>
       relatedProductKeys
-        .map((relatedProductKey) => ({
-          productKey: relatedProductKey,
-          variant: getAvailableProductVariants(relatedProductKey)[0] ?? null,
-        }))
+        .map((relatedProductKey) => {
+          const relatedVariants = getProductVariants(relatedProductKey);
+
+          return {
+            productKey: relatedProductKey,
+            variant: getDefaultVariant(relatedProductKey, relatedVariants),
+          };
+        })
         .filter((entry) => entry.variant),
     [relatedProductKeys]
   );
