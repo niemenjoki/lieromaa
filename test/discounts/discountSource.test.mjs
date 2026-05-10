@@ -122,4 +122,35 @@ describe('discount source data', () => {
     );
     assert.deepEqual(result.removedIds, ['remove_me']);
   });
+
+  test('expired local discount definitions should not generate deployable source entries', () => {
+    const result = createDiscountSourceData(
+      {
+        discounts: [
+          {
+            id: 'expired',
+            code: 'old-code',
+            appliesToSkus: ['chow-500'],
+            type: 'fixed',
+            value: 3,
+            endsOn: '2026-05-03',
+          },
+        ],
+      },
+      {
+        discounts: [
+          {
+            id: 'expired',
+            obfuscatedCode: 'old-value',
+            type: 'fixed',
+            value: 3,
+            endsOn: '2026-05-03',
+          },
+        ],
+      }
+    );
+
+    assert.deepEqual(result.sourceData.discounts, []);
+    assert.deepEqual(result.removedIds, ['expired']);
+  });
 });
