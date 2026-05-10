@@ -175,6 +175,7 @@ export default function AddToCartPanel({
       trackAnalyticsEvent('add_to_cart', {
         eventTarget: productKey,
         eventValue: nextItems.map((item) => item.sku).join(','),
+        eventItems: nextItems,
       });
       setHasAddedToCart(true);
     }
