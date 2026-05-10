@@ -158,7 +158,7 @@ export const productCatalogContentSource = {
         'Lieromaan kompostorin kuituseos on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
       h1: 'Lieromaan kompostorin kuituseos',
       navigationLabel: 'Kuituseos',
-      updatedAt: '2026-05-02',
+      updatedAt: '2026-05-10',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -169,7 +169,7 @@ export const productCatalogContentSource = {
       name: 'Lieromaan kompostorin kuituseos',
       description:
         'Helppokäyttöinen lisäseos kompostiin. Helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee',
-      sku: 'chow-500',
+      sku: 'chow-200',
     },
     media: {
       images: [

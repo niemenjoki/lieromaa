@@ -39,8 +39,9 @@ export default async function Page() {
                 </p>
                 <p>
                   Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen
-                  määrä vaihtelee. Kuituseos sopii käytettäväksi biojätteen rinnalla tai
-                  tilapäisesti sen sijaan.
+                  määrä vaihtelee. Kuituseos on tarkoitettu ensisijaisesti käytettäväksi
+                  biojätteen rinnalla, ja sitä voi käyttää tilapäisesti myös ruokinnan
+                  ylläpitoon, kun keittiöjätettä ei juuri synny.
                 </p>
                 <p>
                   Hienojakoinen koostumus hajoaa nopeasti ja tehostaa mikrobitoimintaa,
@@ -52,7 +53,7 @@ export default async function Page() {
               <aside className={classes.SummaryCard}>
                 <h2>Tilaa helposti</h2>
                 <ul className={classes.FeatureList}>
-                  <li>500 g pakkaus matokompostin ruokinnan tasaamiseen.</li>
+                  <li>200 g ja 500 g pakkaukset matokompostin ruokinnan tasaamiseen.</li>
                   <li>Koostumus: vehnälese, kauralese, soija, kalkki ja kivijauhe.</li>
                 </ul>
 
@@ -83,18 +84,19 @@ export default async function Page() {
             <h2>Käyttö</h2>
             <div className={classes.CardGrid}>
               <div className={classes.InfoCard}>
-                <h3>Lähtöannos</h3>
+                <h3>Biojätteen rinnalla</h3>
                 <p>
-                  Aktiivisessa noin 15-25 °C matokompostissa voit aloittaa annoksella 0,5
-                  dl kuituseosta / 10 L kompostimassaa kerran viikossa.
+                  Kun lisäät kompostiin keittiön biojätettä, ripottele kuituseosta
+                  pieneksi ylläpitoannokseksi noin 0,25 dl / 10 L kompostimassaa kerran
+                  viikossa.
                 </p>
               </div>
               <div className={classes.InfoCard}>
-                <h3>Biojätteen rinnalla</h3>
+                <h3>Tilapäisesti ilman biojätettä</h3>
                 <p>
-                  Jos lisäät kompostiin samaan aikaan myös keittiön biojätettä, vähennä
-                  kuituseoksen määrä noin puoleen eli 0,25 dl / 10 L kompostimassaa
-                  viikossa.
+                  Jos biojätettä ei synny hetkeen, voit käyttää aktiivisessa noin 15-25 °C
+                  matokompostissa annosta 0,5 dl / 10 L kompostimassaa kerran viikossa.
+                  Käytä tätä vain väliaikaisesti, enintään 3 viikkoa yhtäjaksoisesti.
                 </p>
               </div>
               <div className={classes.InfoCard}>
@@ -111,7 +113,7 @@ export default async function Page() {
           <section id="tilaa" className={classes.OrderSection}>
             <div className={classes.OrderSectionHeader}>
               <h2>Tilaa kuituseos</h2>
-              <p>Hinta {formatPrice(variants[0]?.price ?? 0)} €.</p>
+              <p>Hinta alkaen {formatPrice(variants[0]?.price ?? 0)} €.</p>
             </div>
 
             <AddToCartPanel productKey="compostChow" />

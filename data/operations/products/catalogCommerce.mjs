@@ -243,8 +243,13 @@ export const productCatalogCommerceSource = {
     },
   },
   compostChow: {
-    variantSkus: ['chow-500'],
+    variantSkus: ['chow-200', 'chow-500'],
     variantMetadata: {
+      'chow-200': {
+        amount: 200,
+        salesUnit: 'weight',
+        weightGrams: 200,
+      },
       'chow-500': {
         amount: 500,
         salesUnit: 'weight',
@@ -256,10 +261,10 @@ export const productCatalogCommerceSource = {
       handlingTime: STARTER_KIT_HANDLING_TIME,
     },
     order: {
-      defaultVariantAmount: 500,
+      defaultVariantAmount: 200,
       variantLegend: 'Pakkauskoko',
       variantSelectorPosition: 'beforeFulfillment',
-      variantDescription: 'Yksi pakkauskoko saatavilla.',
+      variantDescription: 'Valitse käyttömäärään sopiva pakkauskoko.',
       getVariantLabel({ amount, priceFormatted, variant }) {
         const weight = variant?.weightGrams ?? amount;
         return `${weight} g - ${priceFormatted} €`;
