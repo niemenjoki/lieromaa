@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useCart } from '@/components/Cart/CartProvider';
 import SafeLink from '@/components/SafeLink/SafeLink';
@@ -177,6 +177,7 @@ function CartQuantityEditor({ quantity, onCommit }) {
 
 export default function CheckoutPageClient() {
   const formRef = useRef(null);
+  const trackedCheckoutEventsRef = useRef(new Set());
   const { items, itemCount, isHydrated, setItemQuantity, removeItem, clearCart } =
     useCart();
   const shippingOptions = getCartShippingOptions();
@@ -211,6 +212,40 @@ export default function CheckoutPageClient() {
     setFormStartedAt(String(Date.now()));
     setSubmissionId(globalThis.crypto?.randomUUID?.() || `cart-${Date.now()}`);
   }, []);
+
+  const analyticsItems = useMemo(
+    () => items.map((item) => ({ sku: item.sku, quantity: item.quantity || 1 })),
+    [items]
+  );
+
+  const trackCheckoutStep = useCallback(
+    (eventName, detail = {}) => {
+      const eventKey = detail.onceKey || eventName;
+      if (eventKey && trackedCheckoutEventsRef.current.has(eventKey)) {
+        return;
+      }
+
+      if (eventKey) {
+        trackedCheckoutEventsRef.current.add(eventKey);
+      }
+
+      trackAnalyticsEvent(eventName, {
+        eventTarget: 'checkout',
+        eventValue: items.map((item) => item.sku).join(','),
+        eventItems: analyticsItems,
+        ...detail,
+      });
+    },
+    [analyticsItems, items]
+  );
+
+  useEffect(() => {
+    if (!isHydrated || !itemCount) {
+      return;
+    }
+
+    trackCheckoutStep('cart_view');
+  }, [isHydrated, itemCount, trackCheckoutStep]);
 
   const quoteResult = useMemo(() => {
     if (!items.length || !shippingMethod) {
@@ -279,6 +314,10 @@ export default function CheckoutPageClient() {
     setShippingMethod(nextShippingMethod);
     setSubmitError('');
     resetPickupPoint();
+    trackCheckoutStep('checkout_shipping_selected', {
+      eventTarget: nextShippingMethod,
+      onceKey: `checkout_shipping_selected:${nextShippingMethod}`,
+    });
   };
 
   const handleCustomerFieldChange = (fieldName, value) => {
@@ -286,6 +325,10 @@ export default function CheckoutPageClient() {
       ...current,
       [fieldName]: value,
     }));
+
+    if (String(value || '').trim()) {
+      trackCheckoutStep('checkout_contact_started');
+    }
   };
 
   const handleCartQuantityChange = (sku, quantity) => {
@@ -308,6 +351,12 @@ export default function CheckoutPageClient() {
     setSelectedPickupPoint(nextPoint);
     setPickupPointError('');
     setSubmitError('');
+
+    if (nextPoint) {
+      trackCheckoutStep('checkout_pickup_selected', {
+        eventTarget: 'pickup_point',
+      });
+    }
   };
 
   const searchPickupPoints = async () => {
@@ -325,6 +374,9 @@ export default function CheckoutPageClient() {
     setPickupPoints([]);
     setSelectedPickupPointId('');
     setSelectedPickupPoint(null);
+    trackCheckoutStep('checkout_pickup_search_started', {
+      eventTarget: 'pickup_point',
+    });
 
     try {
       const searchParams = new URLSearchParams({ postalCode });
@@ -378,10 +430,16 @@ export default function CheckoutPageClient() {
       trackAnalyticsEvent('order_submit_success', {
         eventTarget: 'checkout',
         eventValue: items.map((item) => item.sku).join(','),
+        eventItems: analyticsItems,
       });
       clearCart();
       setIsSubmitted(true);
     } catch (error) {
+      trackAnalyticsEvent('order_submit_failed', {
+        eventTarget: 'checkout',
+        eventValue: error instanceof Error ? 'submit_error' : 'unknown_error',
+        eventItems: analyticsItems,
+      });
       setSubmitError(
         error instanceof Error ? error.message : 'Tilauksen lähetys epäonnistui.'
       );
@@ -723,7 +781,12 @@ export default function CheckoutPageClient() {
             <input
               type="checkbox"
               checked={paymentAcknowledged}
-              onChange={(event) => setPaymentAcknowledged(event.target.checked)}
+              onChange={(event) => {
+                setPaymentAcknowledged(event.target.checked);
+                if (event.target.checked) {
+                  trackCheckoutStep('checkout_payment_acknowledged');
+                }
+              }}
             />
             <span>Ymmärrän, että tilaus maksetaan sähköpostilaskulla.</span>
           </label>

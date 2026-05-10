@@ -305,7 +305,38 @@ function sendAnalyticsPayload(payload) {
   } catch {}
 }
 
-function buildEventPayload(view, { eventName, eventTarget = '', eventValue = '' } = {}) {
+function normalizeEventItems(value) {
+  const sourceItems = Array.isArray(value) ? value : [];
+  return sourceItems
+    .map((item) => ({
+      sku: String(item?.sku || '')
+        .trim()
+        .slice(0, 80),
+      quantity: Math.max(1, Math.min(100, Math.round(Number(item?.quantity) || 1))),
+    }))
+    .filter((item) => item.sku)
+    .slice(0, 20);
+}
+
+function readCartItemsFromForm(formElement) {
+  if (!(formElement instanceof HTMLFormElement)) {
+    return [];
+  }
+
+  const rawValue = formElement.elements?.cart_items_json?.value || '';
+  if (!rawValue) {
+    return [];
+  }
+
+  try {
+    return normalizeEventItems(JSON.parse(rawValue));
+  } catch {
+    return [];
+  }
+}
+
+function buildEventPayload(view, eventDetail = {}) {
+  const { eventName, eventTarget = '', eventValue = '', eventItems = [] } = eventDetail;
   if (!view || !eventName) {
     return null;
   }
@@ -326,6 +357,7 @@ function buildEventPayload(view, { eventName, eventTarget = '', eventValue = '' 
     eventValue: String(eventValue || '')
       .trim()
       .slice(0, 120),
+    eventItems: normalizeEventItems(eventItems),
     occurredAt: new Date().toISOString(),
   };
 }
@@ -533,6 +565,7 @@ export default function FirstPartyAnalytics() {
       sendEvent(currentView, {
         eventName: formId === 'order' ? 'order_submit_attempt' : 'form_submit',
         eventTarget: formId,
+        eventItems: formId === 'order' ? readCartItemsFromForm(event.target) : [],
       });
       sendCurrentSnapshot();
     }
