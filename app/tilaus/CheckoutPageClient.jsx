@@ -14,6 +14,7 @@ import {
   formatPrice,
   getCartShippingOptions,
   getProductAvailability,
+  getProductPricing,
 } from '@/lib/pricing/catalog';
 
 import classes from './CheckoutPage.module.css';
@@ -21,6 +22,7 @@ import classes from './CheckoutPage.module.css';
 const PICKUP_POINT_SEARCH_ENDPOINT = '/api/pickup-points/search';
 const steps = ['Kori', 'Toimitus', 'Maksu', 'Tiedot', 'Vahvistus'];
 const BUSINESS_TIME_ZONE = 'Europe/Helsinki';
+const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 function formatPickupPointDistance(distanceInMeters) {
   const numericValue = Number(distanceInMeters);
@@ -136,6 +138,61 @@ function getEstimatedShippingDate(lines) {
   }
 
   return formatIsoDate(estimatedDate);
+}
+
+function getVisibleEarliestShippingDate({
+  earliestShippingDate,
+  normalHandlingWindowDays,
+  now = new Date(),
+}) {
+  if (!earliestShippingDate) {
+    return false;
+  }
+
+  if (!Number.isFinite(normalHandlingWindowDays) || normalHandlingWindowDays < 0) {
+    return earliestShippingDate;
+  }
+
+  const today = getTodayInBusinessTimeZone();
+  const referenceDate = now instanceof Date && !Number.isNaN(now.getTime()) ? now : today;
+  const targetDate = parseIsoDate(earliestShippingDate);
+  if (!targetDate) {
+    return false;
+  }
+
+  const daysUntilShipping = Math.round(
+    (targetDate.getTime() - referenceDate.getTime()) / DAY_IN_MS
+  );
+
+  return daysUntilShipping > normalHandlingWindowDays ? earliestShippingDate : false;
+}
+
+function getAvailabilityDelaySnapshot(lines) {
+  const today = getTodayInBusinessTimeZone();
+  const productKeys = [
+    ...new Set(
+      lines
+        .map((line) => line.productKey || findProductKeyBySku(line.sku))
+        .filter(Boolean)
+    ),
+  ];
+
+  return (
+    productKeys
+      .map((productKey) => {
+        const availability = getProductAvailability(productKey);
+        const product = getProductPricing(productKey);
+
+        return getVisibleEarliestShippingDate({
+          earliestShippingDate: availability.earliestShippingDate,
+          normalHandlingWindowDays: Number(product?.schema?.handlingTime?.maxValue),
+          now: today,
+        });
+      })
+      .filter(Boolean)
+      .sort()
+      .at(-1) ?? ''
+  );
 }
 
 function CartQuantityEditor({ quantity, onCommit }) {
@@ -287,6 +344,9 @@ export default function CheckoutPageClient() {
     customerFields.email.trim() &&
     customerFields.phone.trim();
   const estimatedShippingDate = quote ? getEstimatedShippingDate(quote.items) : '';
+  const availabilityDelaySnapshot = quote
+    ? getAvailabilityDelaySnapshot(quote.items)
+    : '';
   const estimatedShippingLabel =
     fulfillmentType === 'local_pickup'
       ? 'Arvioitu noutovalmiuspäivä'
@@ -496,7 +556,7 @@ export default function CheckoutPageClient() {
       <input
         type="hidden"
         name="availability_earliest_shipping_date"
-        value={estimatedShippingDate || ''}
+        value={availabilityDelaySnapshot}
       />
       <input type="hidden" name="pickup_point_id" value={selectedPickupPoint?.id ?? ''} />
       <input
