@@ -53,7 +53,7 @@ export default async function Page() {
               <aside className={classes.SummaryCard}>
                 <h2>Tilaa helposti</h2>
                 <ul className={classes.FeatureList}>
-                  <li>200 g ja 500 g pakkaukset matokompostin ruokinnan tasaamiseen.</li>
+                  <li>150 g ja 500 g pakkaukset matokompostin ruokinnan tasaamiseen.</li>
                   <li>Koostumus: vehnälese, kauralese, soija, kalkki ja kivijauhe.</li>
                 </ul>
 

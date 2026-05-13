@@ -311,7 +311,7 @@ describe('frontend public order normalization', () => {
         tuote_avain: '',
         cart_items_json: JSON.stringify([
           { sku: 'worms-25', quantity: 1 },
-          { sku: 'chow-200', quantity: 1 },
+          { sku: 'chow-150', quantity: 1 },
           { sku: 'chow-500', quantity: 1 },
         ]),
         toimitus: 'posti_noutopiste',
@@ -335,14 +335,14 @@ describe('frontend public order normalization', () => {
           itemTotal: 20,
         },
         {
-          sku: 'chow-200',
+          sku: 'chow-150',
           packageQuantity: 1,
-          itemTotal: 4,
+          itemTotal: 2.9,
         },
         {
           sku: 'chow-500',
           packageQuantity: 1,
-          itemTotal: 7,
+          itemTotal: 6.9,
         },
       ],
       'normalizePublicOrderSubmission should keep each standalone cart SKU in the forwarded items payload'
@@ -354,7 +354,7 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.pricing.itemPrice,
-      31,
+      29.8,
       'normalizePublicOrderSubmission should subtotal standalone cart items'
     );
     expectEqual(
@@ -364,7 +364,7 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.pricing.total,
-      39.9,
+      38.7,
       'normalizePublicOrderSubmission should include standalone cart items and shipping in the total'
     );
     expectDeepEqual(
