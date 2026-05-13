@@ -70,7 +70,7 @@ Generated build outputs do not belong here. They live in `/generated`.
   Never commit a `code` field; tests block builds when tracked codes are missing
   generated obfuscations or do not match the local file.
   During `prepare:site`, this file is transformed into `generated/commerce/discounts.json`, and the runtime build uses that generated file instead of this source file directly.
-- `operations/commerce/skuDiscounts.mjs`
+- `operations/commerce/skuDiscounts.json`
   Automatic per-SKU sale configuration that affects visible storefront pricing without a code.
   Set `active: true` to enable the discount.
   `type` can be `percentage` or `fixed`.
