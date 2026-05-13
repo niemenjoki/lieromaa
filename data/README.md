@@ -49,7 +49,7 @@ Generated build outputs do not belong here. They live in `/generated`.
 - `operations/commerce/pricing.json`
   Source of truth for SKU prices and shipping prices.
   Edit this when you need to change product or shipping prices.
-- `operations/commerce/productAvailability.mjs`
+- `operations/commerce/productAvailability.json`
   Temporary availability controls.
   Use `unavailableSkus` to hide specific variants from ordering.
   Use `earliestShippingDate` when orders are still accepted but deliveries need to be delayed.
