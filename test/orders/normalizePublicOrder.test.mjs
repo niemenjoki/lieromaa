@@ -5,6 +5,7 @@ import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
 } from '@/lib/orders/normalizePublicOrder';
+import { getCartOrderQuote } from '@/lib/orders/cartOrder';
 
 import { expectDeepEqual, expectEqual, expectOk } from '../helpers/assertions.mjs';
 import {
@@ -305,15 +306,20 @@ describe('frontend public order normalization', () => {
 
   test('normalizePublicOrderSubmission should normalize standalone cart upsells as order items', () => {
     const now = new Date('2026-05-02T10:00:00Z');
+    const cartItems = [
+      { sku: 'worms-25', quantity: 1 },
+      { sku: 'chow-150', quantity: 1 },
+      { sku: 'chow-500', quantity: 1 },
+    ];
+    const expectedQuote = getCartOrderQuote({
+      items: cartItems,
+      shippingMethod: 'posti_noutopiste',
+    });
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormData({
         sku: '',
         tuote_avain: '',
-        cart_items_json: JSON.stringify([
-          { sku: 'worms-25', quantity: 1 },
-          { sku: 'chow-150', quantity: 1 },
-          { sku: 'chow-500', quantity: 1 },
-        ]),
+        cart_items_json: JSON.stringify(cartItems),
         toimitus: 'posti_noutopiste',
         osoite: 'Kompostikuja 1',
         postinumero: '00100',
@@ -328,23 +334,11 @@ describe('frontend public order normalization', () => {
         packageQuantity: item.packageQuantity,
         itemTotal: item.itemTotal,
       })),
-      [
-        {
-          sku: 'worms-25',
-          packageQuantity: 1,
-          itemTotal: 20,
-        },
-        {
-          sku: 'chow-150',
-          packageQuantity: 1,
-          itemTotal: 2.9,
-        },
-        {
-          sku: 'chow-500',
-          packageQuantity: 1,
-          itemTotal: 6.9,
-        },
-      ],
+      expectedQuote.items.map((item) => ({
+        sku: item.sku,
+        packageQuantity: item.packageQuantity,
+        itemTotal: item.itemTotal,
+      })),
       'normalizePublicOrderSubmission should keep each standalone cart SKU in the forwarded items payload'
     );
     expectEqual(
@@ -354,7 +348,7 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.pricing.itemPrice,
-      29.8,
+      expectedQuote.itemSubtotal,
       'normalizePublicOrderSubmission should subtotal standalone cart items'
     );
     expectEqual(
@@ -364,7 +358,7 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.pricing.total,
-      38.7,
+      expectedQuote.total,
       'normalizePublicOrderSubmission should include standalone cart items and shipping in the total'
     );
     expectDeepEqual(
