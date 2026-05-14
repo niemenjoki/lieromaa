@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import Advert from '@/components/Advert/Advert';
 import ContentRecommendations from '@/components/ContentRecommendations/ContentRecommendations';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
-import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import {
   getAllContentSlugs,
   getContentMdxSource,
@@ -58,9 +57,12 @@ export default async function PostPage({ params }) {
           </>
         }
         source={mdxContent}
+        share={{
+          title: data.title,
+          tags: data.tags,
+        }}
       />
 
-      <SocialShareButtons title={data.title} text={data.description} tags={data.tags} />
       <Advert />
       <ContentRecommendations recommendations={recommendations} />
     </>
