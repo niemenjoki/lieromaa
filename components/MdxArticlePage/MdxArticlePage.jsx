@@ -2,6 +2,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 
 import AuthorCard from '../AuthorCard/AuthorCard';
 import classes from './MdxArticlePage.module.css';
@@ -34,6 +35,7 @@ export default function MdxArticlePage({
   dateContent,
   source,
   preTitle = null,
+  share = null,
 }) {
   return (
     <>
@@ -60,6 +62,9 @@ export default function MdxArticlePage({
           />
         </div>
 
+        {share ? (
+          <SocialShareButtons title={share.title} tags={share.tags ?? []} />
+        ) : null}
         <AuthorCard />
       </article>
     </>

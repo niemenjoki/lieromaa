@@ -5,7 +5,6 @@ import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import ContentRecommendations from '@/components/ContentRecommendations/ContentRecommendations';
 import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
-import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import {
   getAllContent,
   getContentMdxSource,
@@ -53,6 +52,10 @@ export default async function GuidePage({ params }) {
         title={data.title}
         dateContent={`Päivitetty: ${formatFinnishDate(data.updatedAt)}`}
         source={mdxContent}
+        share={{
+          title: data.title,
+          tags: data.keywords,
+        }}
         preTitle={
           <Breadcrumbs
             items={[
@@ -73,11 +76,6 @@ export default async function GuidePage({ params }) {
         defaultType="question"
       />
 
-      <SocialShareButtons
-        title={data.title}
-        text={data.description}
-        tags={data.keywords}
-      />
       <Advert />
       <ContentRecommendations recommendations={recommendations} />
     </>
