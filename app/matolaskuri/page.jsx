@@ -1,27 +1,30 @@
 import WormCalculatorClient from '@/components/WormCalculatorClient/WormCalculatorClient';
-import { getPostRecommendations } from '@/lib/content/index.mjs';
+import { getContentRecommendations } from '@/lib/content/index.mjs';
 
 import structuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 
 export default async function Page() {
-  const recommendedPosts = await getPostRecommendations({
-    self: 'laskuri',
-    keywords: [
-      'fosfori',
-      'kalium',
-      'kasvit',
-      'kompostorin perustaminen',
-      'matojen hankinta',
-      'matojen paino',
-      'matokompostointi',
-      'npk',
-      'opas',
-      'perustaminen',
-      'ravinteet',
-      'typpi',
-    ],
+  const recommendations = getContentRecommendations({
+    current: {
+      type: 'PAGE',
+      slug: 'matolaskuri',
+      keywords: [
+        'fosfori',
+        'kalium',
+        'kasvit',
+        'kompostorin perustaminen',
+        'matojen hankinta',
+        'matojen paino',
+        'matokompostointi',
+        'npk',
+        'opas',
+        'perustaminen',
+        'ravinteet',
+        'typpi',
+      ],
+    },
   });
 
   return (
@@ -32,7 +35,7 @@ export default async function Page() {
           __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
         }}
       />
-      <WormCalculatorClient recommendedPosts={recommendedPosts} />
+      <WormCalculatorClient recommendations={recommendations} />
     </>
   );
 }

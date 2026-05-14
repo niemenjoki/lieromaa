@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 
 import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
+import ContentRecommendations from '@/components/ContentRecommendations/ContentRecommendations';
 import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
@@ -9,6 +10,7 @@ import {
   getAllContent,
   getContentMdxSource,
   getContentMetadata,
+  getContentRecommendations,
 } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
@@ -36,6 +38,13 @@ export default async function GuidePage({ params }) {
   }
 
   const { structuredData } = data;
+  const recommendations = getContentRecommendations({
+    current: {
+      ...data,
+      type: CONTENT_TYPES.GUIDE,
+      slug: guideSlug,
+    },
+  });
 
   return (
     <>
@@ -70,6 +79,7 @@ export default async function GuidePage({ params }) {
         tags={data.keywords}
       />
       <Advert />
+      <ContentRecommendations recommendations={recommendations} />
     </>
   );
 }

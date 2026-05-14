@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
+import ContentRecommendations from '@/components/ContentRecommendations/ContentRecommendations';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import useDebounce from '@/hooks/useDebounce';
@@ -26,7 +26,7 @@ function formatWormWeightInstrumental(weightGrams) {
   return `${weightGrams} grammalla`;
 }
 
-export default function WormCalculatorClient({ recommendedPosts }) {
+export default function WormCalculatorClient({ recommendations }) {
   const title = 'Matolaskuri';
   const description =
     'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matojen painon.';
@@ -286,9 +286,9 @@ export default function WormCalculatorClient({ recommendedPosts }) {
       </div>
 
       <SocialShareButtons title={title} text={description} tags={['matokomposti']} />
-      <PostRecommendation
-        posts={recommendedPosts}
-        customTitle="Aiheeseen liittyviä blogijulkaisuja"
+      <ContentRecommendations
+        recommendations={recommendations}
+        title="Aiheeseen liittyvää luettavaa"
       />
     </article>
   );
