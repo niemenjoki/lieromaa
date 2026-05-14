@@ -15,10 +15,14 @@ export default async function generateMetadata({ params }) {
     pageData.pageIndexInt === 2 ? '/blogi' : `/blogi/sivu/${pageData.pageIndexInt - 1}`;
 
   const customMetadata = {
+    title: pageData.pageName,
+    description: pageData.description,
     alternates: {
       canonical: pageData.pagePath,
     },
     openGraph: {
+      title: pageData.pageName,
+      description: pageData.description,
       url: pageData.pagePath,
     },
     pagination: {
