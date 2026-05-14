@@ -1,0 +1,35 @@
+{
+  "title": "Voiko kompostimadot laittaa lämpökompostoriin kotona?",
+  "description": "Voiko kompostimadot laittaa lämpökompostoriin? Madoista ei yleensä ole haittaa, mutta ne eivät välttämättä viihdy siellä pysyvästi.",
+  "publishedAt": "2026-05-14",
+  "updatedAt": "2026-05-14",
+  "keywords": [
+    "kompostimadot lämpökompostoriin",
+    "madot lämpökompostoriin",
+    "lämpökompostori",
+    "kompostimadot",
+    "tunkioliero",
+    "Eisenia fetida",
+    "matokompostointi",
+    "kompostointi"
+  ],
+  "category": {
+    "name": "kompostorin perustaminen",
+    "pagePosition": 5
+  },
+  "articleSection": "Matokompostointi",
+  "faqItems": [
+    {
+      "question": "Voiko kompostimadot laittaa lämpökompostoriin?",
+      "answer": "Voi kokeilla, eikä madoista yleensä ole haittaa. Lämpökompostorin olosuhteet voivat kuitenkin olla liian kuumat, kuivat tai vaihtelevat, joten madot eivät välttämättä viihdy siellä pysyvästi."
+    },
+    {
+      "question": "Kuolevatko madot lämpökompostorissa?",
+      "answer": "Ne voivat kuolla, jos kompostori kuumenee liikaa, kuivuu tai jäätyy talvella. Jos lämpötila nousee hitaasti, madot voivat kuitenkin ehtiä siirtyä kompostorin viileämpiin reunoihin."
+    },
+    {
+      "question": "Voivatko kompostimatojen munakotelot selvitä lämpökompostorissa?",
+      "answer": "Mahdollisesti voivat. Munakotelot kestävät kylmää aikuisia matoja paremmin, joten keväällä kompostissa voi näkyä uusia matoja, vaikka aikuiset madot eivät olisi selvinneet talvesta."
+    }
+  ]
+}
