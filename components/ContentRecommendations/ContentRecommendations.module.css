@@ -1,0 +1,74 @@
+.Recommendations {
+  margin-top: 2.5rem;
+  color: var(--text-color);
+}
+
+.Header {
+  margin-bottom: 1rem;
+}
+
+.Eyebrow {
+  margin: 0 0 0.25rem;
+  color: var(--highlight);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.Header h2 {
+  margin: 0;
+  color: var(--highlight-alt);
+}
+
+.Grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.Card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--background-3);
+}
+
+.Card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  overflow-wrap: break-word;
+}
+
+.Card p {
+  margin: 0;
+}
+
+.Meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.Meta span {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: var(--highlight);
+  color: var(--background-1);
+  font-weight: 700;
+}
+
+.Action {
+  width: fit-content;
+  margin-top: auto;
+  font-weight: 700;
+}
+
+@media (min-width: 720px) {
+  .Grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

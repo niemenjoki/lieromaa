@@ -1,14 +1,14 @@
 import { notFound } from 'next/navigation';
 
 import Advert from '@/components/Advert/Advert';
+import ContentRecommendations from '@/components/ContentRecommendations/ContentRecommendations';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
-import PostRecommendation from '@/components/PostRecommendation/PostRecommendation';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import {
   getAllContentSlugs,
   getContentMdxSource,
   getContentMetadata,
-  getPostRecommendations,
+  getContentRecommendations,
 } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
@@ -33,9 +33,13 @@ export default async function PostPage({ params }) {
     notFound();
   }
 
-  const recommendedPosts = await getPostRecommendations({
-    self: slug,
-    keywords: [...data.tags, ...data.keywords],
+  const recommendations = getContentRecommendations({
+    current: {
+      ...data,
+      type: CONTENT_TYPES.POST,
+      slug,
+      keywords: [...(data.tags ?? []), ...(data.keywords ?? [])],
+    },
   });
 
   const { structuredData } = data;
@@ -58,7 +62,7 @@ export default async function PostPage({ params }) {
 
       <SocialShareButtons title={data.title} text={data.description} tags={data.tags} />
       <Advert />
-      <PostRecommendation posts={recommendedPosts} />
+      <ContentRecommendations recommendations={recommendations} />
     </>
   );
 }
