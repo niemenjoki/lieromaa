@@ -6,7 +6,24 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 import AuthorCard from '../AuthorCard/AuthorCard';
 import classes from './MdxArticlePage.module.css';
 
+function ArticleLink({ href, children, ...props }) {
+  if (typeof href === 'string' && href.startsWith('/')) {
+    return (
+      <SafeLink href={href} {...props}>
+        {children}
+      </SafeLink>
+    );
+  }
+
+  return (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  );
+}
+
 const mdxComponents = {
+  a: ArticleLink,
   SafeLink,
   SafeImage,
 };
