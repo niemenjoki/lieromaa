@@ -15,7 +15,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "node --import ./test/register.mjs --test ./test/content/*.test.mjs ./test/discounts/*.test.mjs ./test/orders/*.test.mjs ./test/routes/*.test.mjs ./test/reviews/*.test.mjs",
+    "test": "node --import ./test/register.mjs --test ./test/content/*.test.mjs ./test/discounts/*.test.mjs ./test/metadata/*.test.mjs ./test/orders/*.test.mjs ./test/routes/*.test.mjs ./test/reviews/*.test.mjs",
     "verify": "npm run format:check && npm run lint && npm run build",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

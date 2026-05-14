@@ -6,7 +6,7 @@ export const productCatalogContentSource = {
       pageName: 'Osta kompostimatoja – Eisenia fetida matokompostointiin',
       title: 'Osta kompostimatoja | Lieromaa',
       description:
-        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) helposti postitettuna koko Suomeen. Aloita oma matokomposti Lieromaan madoilla!',
+        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitettuna koko Suomeen. Aloita matokomposti Lieromaan madoilla!',
       pageDescription:
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',

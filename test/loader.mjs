@@ -35,21 +35,47 @@ function resolveFilePath(candidatePath) {
   return null;
 }
 
+function resolveRelativeSpecifier(specifier, parentURL) {
+  if (
+    !specifier.startsWith('./') &&
+    !specifier.startsWith('../') &&
+    !specifier.startsWith('/')
+  ) {
+    return null;
+  }
+
+  const parentPath = parentURL ? path.dirname(fileURLToPath(parentURL)) : rootDir;
+  const candidatePath = specifier.startsWith('/')
+    ? specifier
+    : path.resolve(parentPath, specifier);
+
+  return resolveFilePath(candidatePath);
+}
+
 export async function resolve(specifier, context, nextResolve) {
   const aliasPath = resolveAliasSpecifier(specifier);
-  if (!aliasPath) {
-    return nextResolve(specifier, context);
+
+  if (aliasPath) {
+    const resolvedPath = resolveFilePath(aliasPath);
+    if (!resolvedPath) {
+      throw new Error(`Unable to resolve aliased specifier "${specifier}"`);
+    }
+
+    return {
+      shortCircuit: true,
+      url: pathToFileURL(resolvedPath).href,
+    };
   }
 
-  const resolvedPath = resolveFilePath(aliasPath);
-  if (!resolvedPath) {
-    throw new Error(`Unable to resolve aliased specifier "${specifier}"`);
+  const relativePath = resolveRelativeSpecifier(specifier, context.parentURL);
+  if (relativePath) {
+    return {
+      shortCircuit: true,
+      url: pathToFileURL(relativePath).href,
+    };
   }
 
-  return {
-    shortCircuit: true,
-    url: pathToFileURL(resolvedPath).href,
-  };
+  return nextResolve(specifier, context);
 }
 
 export async function load(url, context, nextLoad) {
