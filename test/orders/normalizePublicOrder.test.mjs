@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
+import { getCartOrderQuote } from '@/lib/orders/cartOrder';
 import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
 } from '@/lib/orders/normalizePublicOrder';
-import { getCartOrderQuote } from '@/lib/orders/cartOrder';
 
 import { expectDeepEqual, expectEqual, expectOk } from '../helpers/assertions.mjs';
 import {
