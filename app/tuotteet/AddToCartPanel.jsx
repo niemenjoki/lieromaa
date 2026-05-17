@@ -37,38 +37,86 @@ function formatVariantLabel(productKey, variant) {
   return `${label} - ${formatPrice(variant.price)} €`;
 }
 
-function ProductOptionCheckbox({ productKey, checked, onChange }) {
-  const product = getProductCatalogEntry(productKey);
-  const variant = getAvailableProductVariants(productKey)[0] ?? null;
+function formatRelatedVariantLabel(productKey, variant) {
+  const weight = variant.weightGrams ?? variant.amount;
+  if (weight) {
+    return `${weight} g - ${formatPrice(variant.price)} €`;
+  }
 
-  if (!variant) {
+  return formatVariantLabel(productKey, variant);
+}
+
+function RelatedProductSelector({ productKey, variants, selectedSku, onChange }) {
+  const product = getProductCatalogEntry(productKey);
+
+  if (!variants.length) {
     return null;
   }
 
   return (
-    <label className={classes.CheckOption}>
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={(event) => onChange(event.target.checked)}
-      />
-      {product.image ? (
-        <SafeImage
-          src={product.image.url}
-          alt=""
-          width={72}
-          height={54}
-          sizes="72px"
-          className={classes.AddOnImage}
-        />
-      ) : null}
-      <span className={classes.OptionContent}>
-        <span className={classes.OptionTitle}>
-          {formatVariantLabel(productKey, variant)}
+    <div className={classes.AddOnProduct}>
+      <div className={classes.CheckOption}>
+        {product.image ? (
+          <SafeImage
+            src={product.image.url}
+            alt=""
+            width={72}
+            height={54}
+            sizes="72px"
+            className={classes.AddOnImage}
+          />
+        ) : null}
+        <span className={classes.OptionContent}>
+          <span className={classes.OptionTitle}>{product.productName}</span>
+          <span className={classes.FinePrint}>{product.productDescription}</span>
         </span>
-        <span className={classes.FinePrint}>{product.productDescription}</span>
-      </span>
-    </label>
+      </div>
+
+      <fieldset className={classes.FormFieldset}>
+        <legend className={classes.ScreenReaderOnly}>
+          Valitse tuotteen {product.productName} pakkauskoko
+        </legend>
+        <div className={classes.ChoiceList}>
+          <label className={classes.FormOption}>
+            <input
+              type="radio"
+              name={`related-${productKey}`}
+              value=""
+              checked={!selectedSku}
+              onChange={() => onChange('')}
+              className={classes.ChoiceInput}
+            />
+            <span className={classes.OptionHeader}>
+              <span className={classes.OptionMarker} aria-hidden="true">
+                {!selectedSku ? '[x]' : '[ ]'}
+              </span>
+              <span className={classes.OptionTitle}>Ei kuituseosta</span>
+            </span>
+          </label>
+
+          {variants.map((variant) => (
+            <label key={variant.sku} className={classes.FormOption}>
+              <input
+                type="radio"
+                name={`related-${productKey}`}
+                value={variant.sku}
+                checked={selectedSku === variant.sku}
+                onChange={() => onChange(variant.sku)}
+                className={classes.ChoiceInput}
+              />
+              <span className={classes.OptionHeader}>
+                <span className={classes.OptionMarker} aria-hidden="true">
+                  {selectedSku === variant.sku ? '[x]' : '[ ]'}
+                </span>
+                <span className={classes.OptionTitle}>
+                  {formatRelatedVariantLabel(productKey, variant)}
+                </span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    </div>
   );
 }
 
@@ -129,21 +177,21 @@ export default function AddToCartPanel({
   const wormVariants = showWormSuggestion ? getProductVariants('worms') : [];
   const selectedCartItem = items.find((item) => item.sku === selectedSku) ?? null;
 
-  const relatedEntries = useMemo(
+  const relatedProductGroups = useMemo(
     () =>
       relatedProductKeys
         .map((relatedProductKey) => {
-          const relatedVariants = getProductVariants(relatedProductKey);
+          const relatedVariants = getAvailableProductVariants(relatedProductKey);
 
           return {
             productKey: relatedProductKey,
-            variant: getDefaultVariant(relatedProductKey, relatedVariants),
+            variants: relatedVariants,
           };
         })
-        .filter((entry) => entry.variant),
+        .filter((entry) => entry.variants.length),
     [relatedProductKeys]
   );
-  const showRelatedProducts = relatedEntries.length > 0;
+  const showRelatedProducts = relatedProductGroups.length > 0;
 
   const handleAddToCart = () => {
     const nextItems = [];
@@ -155,9 +203,10 @@ export default function AddToCartPanel({
         nextItems.push({ sku: selectedWormSku, quantity: 1 });
       }
 
-      for (const entry of relatedEntries) {
-        if (selectedRelatedProducts[entry.productKey]) {
-          nextItems.push({ sku: entry.variant.sku, quantity: 1 });
+      for (const group of relatedProductGroups) {
+        const selectedRelatedSku = selectedRelatedProducts[group.productKey];
+        if (selectedRelatedSku) {
+          nextItems.push({ sku: selectedRelatedSku, quantity: 1 });
         }
       }
     }
@@ -355,16 +404,20 @@ export default function AddToCartPanel({
 
       {showRelatedProducts ? (
         <div className={classes.FormSubsection}>
-          <h4 className={classes.FormSubsectionTitle}>Lisätuotteet</h4>
-          {relatedEntries.map((entry) => (
-            <ProductOptionCheckbox
-              key={entry.productKey}
-              productKey={entry.productKey}
-              checked={Boolean(selectedRelatedProducts[entry.productKey])}
-              onChange={(checked) =>
+          <h4 className={classes.FormSubsectionTitle}>Kuituseos</h4>
+          <p className={classes.HelperText}>
+            Voit lisätä samaan tilaukseen kompostin ylläpitoa helpottavan kuituseoksen.
+          </p>
+          {relatedProductGroups.map((group) => (
+            <RelatedProductSelector
+              key={group.productKey}
+              productKey={group.productKey}
+              variants={group.variants}
+              selectedSku={selectedRelatedProducts[group.productKey] ?? ''}
+              onChange={(sku) =>
                 setSelectedRelatedProducts((current) => ({
                   ...current,
-                  [entry.productKey]: checked,
+                  [group.productKey]: sku,
                 }))
               }
             />
