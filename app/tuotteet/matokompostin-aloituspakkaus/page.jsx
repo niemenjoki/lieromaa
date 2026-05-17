@@ -305,6 +305,13 @@ export default async function Page() {
                   vetinen.
                 </li>
               </ul>
+              <p>
+                Jos haluat viikko viikolta etenevän aloitusrytmin, katso opas{' '}
+                <SafeLink href="/opas/kompostorin-hoito/ensimmaiset-30-paivaa-matokompostorin-kaynnistys">
+                  Ensimmäiset 30 päivää uudessa matokompostorissa
+                </SafeLink>
+                .
+              </p>
             </div>
           </section>
 

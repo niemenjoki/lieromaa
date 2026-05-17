@@ -68,6 +68,14 @@ export default async function Page() {
                   aloitusmäärästä, kokeile{' '}
                   <SafeLink href="/matolaskuri">matolaskuria</SafeLink>.
                 </p>
+                <p>
+                  Kun madot on lisätty kompostoriin, ensimmäiset viikot kannattaa ottaa
+                  rauhallisesti. Kirjoitin aloitusvaiheesta erillisen oppaan:{' '}
+                  <SafeLink href="/opas/kompostorin-hoito/ensimmaiset-30-paivaa-matokompostorin-kaynnistys">
+                    ensimmäiset 30 päivää uudessa matokompostorissa
+                  </SafeLink>
+                  .
+                </p>
               </div>
 
               <aside className={classes.SummaryCard}>
