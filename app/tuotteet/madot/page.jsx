@@ -60,9 +60,12 @@ export default async function Page() {
                   kasvaa hyvissä olosuhteissa nopeasti.
                 </p>
                 <p>
-                  Pakkaus sisältää valitsemasi painon verran kompostimatoja ja niiden
-                  kasvualustaa (pahvi- ja puusilppu, kookoskuori, puutarhamulta). Jos et
-                  ole varma sopivasta aloitusmäärästä, kokeile{' '}
+                  Pakkaus sisältää valitsemasi painon verran kompostimatoja ja noin 0,5
+                  litraa kasvualustaa kuljetusta varten. Mukana tulevaa kasvualustaa ei
+                  ole tarkoitettu matojen ainoaksi kodiksi, vaan madot siirretään
+                  kasvualustoineen kompostorin omaan petimateriaaliin. Samalla uuteen
+                  kompostoriin tulee hyödyllistä mikrobielämää. Jos et ole varma sopivasta
+                  aloitusmäärästä, kokeile{' '}
                   <SafeLink href="/matolaskuri">matolaskuria</SafeLink>.
                 </p>
               </div>
@@ -71,7 +74,7 @@ export default async function Page() {
                 <h2>Tilaa helposti</h2>
                 <ul className={classes.FeatureList}>
                   <li>Valitse 25 g, 50 g, 75 g tai 100 g kompostimatoja.</li>
-                  <li>Pakkaus sisältää madot ja niiden kasvualustan.</li>
+                  <li>Pakkaus sisältää madot ja noin 0,5 L kasvualustaa.</li>
                 </ul>
 
                 <h3>Hinnat</h3>

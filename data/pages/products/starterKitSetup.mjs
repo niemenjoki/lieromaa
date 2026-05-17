@@ -4,7 +4,7 @@ export const starterKitSetupPageDefinition = {
   title: 'Aloituspakkauksen käyttöönotto | Lieromaa',
   description:
     'Näin käynnistät aloituspakkauksen oikein: yksi aktiivinen kerros alkuun, oikea kosteus, matojen totuttelu ja uusien kerrosten lisääminen vasta myöhemmin.',
-  updatedAt: '2026-04-13',
+  updatedAt: '2026-05-16',
   image: {
     url: '/images/content/aloituspakkauksen_aloitus.avif',
     width: 1200,
@@ -20,13 +20,16 @@ export const starterKitSetupPageDefinition = {
       "Rei'itetty laatikko (2 kpl)",
       'Kansi (1 kpl)',
       'Kuiva kookoskuitu',
-      'Kompostimadot ja vanhaa petimateriaalia sisältävä rasia, jos tilasit madot mukaan',
+      'Kompostimadot ja noin 0,5 litraa kasvualustaa sisältävä rasia, jos tilasit madot mukaan',
     ],
-    tools: ['Mitta-astia (4.5 litraa vettä)', 'Kädet, kauha tai lusikka sekoitukseen'],
+    tools: [
+      'Mitta-astia (noin 3,5 litraa vettä)',
+      'Kädet, kauha tai lusikka sekoitukseen',
+    ],
     steps: [
       {
         name: 'Kookoskuidun kostutus pohjalaatikossa',
-        text: 'Jos tilasit madot mukaan, siirrä matorasia sivuun. Lisää kuiva kookoskuitu umpipohjaiseen laatikkoon. Kaada joukkoon 4.5 litraa vettä tasaisesti koko pinnalle. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä, jotta kosteus jakautuu tasaisemmin.',
+        text: 'Jos tilasit madot mukaan, siirrä matorasia sivuun. Lisää noin 1,5 litraa kuivaa kookoskuitua umpipohjaiseen laatikkoon. Lisää vettä vähitellen pienissä erissä ja sekoita välillä. Vettä kuluu yleensä noin 3,5 litraa, mutta oikea määrä riippuu kuidun kuivuudesta. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä. Sopiva kosteus on saavutettu, kun voimakkaasti nyrkissä puristettaessa materiaalista irtoaa 1-2 tippaa vettä, ei enempää eikä vähempää.',
       },
       {
         name: 'Ensimmäisen kerroksen käynnistys',
@@ -34,7 +37,7 @@ export const starterKitSetupPageDefinition = {
       },
       {
         name: 'Matojen lisääminen ja totuttelu',
-        text: 'Jos tilasit madot mukaan, kaada madot samaan laatikkoon petimateriaalin päälle ja anna niiden kaivautua rauhassa. Sulje kansi ja anna matojen sopeutua ilman ruokintaa kaksi vuorokautta.',
+        text: 'Jos tilasit madot mukaan, kaada madot ja noin 0,5 litraa kasvualustaa samaan laatikkoon petimateriaalin päälle ja anna niiden kaivautua rauhassa. Mukana tuleva kasvualusta tuo uuteen kompostoriin valmiiksi mikrobeja. Sulje kansi ja anna matojen sopeutua ilman ruokintaa kaksi vuorokautta.',
       },
       {
         name: 'Ensimmäinen ruokinta ja uudet kerrokset',

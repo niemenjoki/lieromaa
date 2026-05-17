@@ -27,8 +27,8 @@ export default function StarterKitSetupPage() {
           <li>Kansi - 1 kpl</li>
           <li>Kuiva kookoskuitu petimateriaaliksi</li>
           <li>
-            Kompostimadot ja vanhaa petimateriaalia sisältävä rasia, jos tilasit madot
-            mukaan
+            Kompostimadot ja noin 0,5 litraa kasvualustaa sisältävä rasia, jos tilasit
+            madot mukaan
           </li>
         </ul>
 
@@ -51,9 +51,10 @@ export default function StarterKitSetupPage() {
         </p>
 
         <p>
-          Lisää umpinaiseen pohjalaatikkoon noin<strong>3,5 litraa kookoskuitua</strong>.
-          Lisää tämän jälkeen noin <strong>1,5 litraa vettä</strong> tasaisesti koko
-          pinnalle.
+          Lisää umpinaiseen pohjalaatikkoon noin <strong>1,5 litraa kookoskuitua</strong>.
+          Lisää vettä vähitellen pienissä erissä ja sekoita välillä. Vettä kuluu yleensä
+          noin <strong>3,5 litraa</strong>, mutta oikea määrä riippuu siitä, miten kuivaa
+          kuitu on.
         </p>
 
         <SafeImage
@@ -69,7 +70,9 @@ export default function StarterKitSetupPage() {
 
         <p>
           Anna veden imeytyä noin 30 minuuttia. Sekoita kerran puolivälissä, jotta kosteus
-          jakautuu tasaisemmin.
+          jakautuu tasaisemmin. Tarkista kosteus puristamalla materiaalia voimakkaasti
+          nyrkissä: sopivan kosteasta kuidusta irtoaa 1-2 tippaa vettä, ei enempää eikä
+          vähempää.
         </p>
 
         <SafeImage
@@ -92,8 +95,8 @@ export default function StarterKitSetupPage() {
 
         <p>
           Jos tilasit madot mukaan, kaada koko matorasian sisältö petimateriaalin päälle.
-          Matojen mukana tuleva vanha petimateriaali sisältää valmiiksi mikrobeja, jotka
-          tehostavat hajotusprosessin käynnistymistä.
+          Matojen mukana tuleva noin 0,5 litran kasvualusta sisältää valmiiksi mikrobeja,
+          jotka auttavat hajotusprosessia käynnistymään uudessa petimateriaalissa.
         </p>
 
         <p>Anna matojen kaivautua petimateriaaliin itse. Älä sekoita.</p>
@@ -118,8 +121,8 @@ export default function StarterKitSetupPage() {
           voit lisätä hieman enemmän ruokaa kuin edellisellä ruokintakerralla. Ole
           kuitenkin tarkkana, ettet ruoki liikaa. Liika ruoka ehtii mädäntyä ja alkaa
           haista ennen kuin madot ehtivät prosessoida sen. Ruoki mieluummin liian vähän
-          kuin liian paljon. Madot selviävät pelkkää petimateriaalia syömällä useita
-          viikkoja.
+          kuin liian paljon. Madot selviävät kompostorin omaa kosteaa petimateriaalia
+          syömällä useita viikkoja.
         </p>
 
         <h2>4. Toisen kerroksen lisääminen</h2>
@@ -136,8 +139,10 @@ export default function StarterKitSetupPage() {
         </p>
 
         <p>
-          Sekoita 3,5 litraa kookoskuitua ja 1,5 litraa vettä ja sekoita sitä kevyesti.
-          Kun vesi on imeytynyt, lisää petimateriaali äsken lisättyyn laatikkoon.
+          Sekoita 1,5 litraa kookoskuitua ja lisää vettä vähitellen pienissä erissä. Vettä
+          kuluu yleensä noin 3,5 litraa, mutta tarkista kosteus puristustestillä:
+          voimakkaasti nyrkissä puristettaessa materiaalista pitäisi irrota 1-2 tippaa
+          vettä. Kun vesi on imeytynyt, lisää petimateriaali äsken lisättyyn laatikkoon.
         </p>
 
         <p>

@@ -295,9 +295,9 @@ export default async function Page() {
                   vasta, kun edellinen jäte on kokonaan kadonnut kompostorista.
                 </li>
                 <li>
-                  Madot selviävät useita viikkoja pelkällä kostealla petimateriaalilla.
-                  Jos olet epävarma ruokamäärästä, on turvallisempaa lisätä liian vähän
-                  kuin liikaa jätettä.
+                  Madot selviävät useita viikkoja kompostorin omalla kostealla
+                  petimateriaalilla. Jos olet epävarma ruokamäärästä, on turvallisempaa
+                  lisätä liian vähän kuin liikaa jätettä.
                 </li>
                 <li>Mieto metsämäinen tuoksu kertoo, että komposti on kunnossa.</li>
                 <li>
