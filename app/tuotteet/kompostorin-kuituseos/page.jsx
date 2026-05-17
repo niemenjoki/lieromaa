@@ -84,10 +84,10 @@ export default async function Page() {
             <h2>Käyttö</h2>
             <div className={classes.CardGrid}>
               <div className={classes.InfoCard}>
-                <h3>Biojätteen rinnalla</h3>
+                <h3>Biojätteen kanssa</h3>
                 <p>
                   Kun lisäät kompostiin keittiön biojätettä, ripottele kuituseosta
-                  pieneksi ylläpitoannokseksi noin 0,25 dl / 10 L kompostimassaa kerran
+                  pieneksi ylläpitoannokseksi noin 1 rkl / 10 L kompostimassaa kerran
                   viikossa.
                 </p>
               </div>
