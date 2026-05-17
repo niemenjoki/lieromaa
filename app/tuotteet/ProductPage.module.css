@@ -468,6 +468,13 @@
   border-radius: 8px;
 }
 
+.AddOnProduct {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
 .OptionContent {
   display: flex;
   flex-direction: column;
