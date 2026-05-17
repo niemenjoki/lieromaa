@@ -11,7 +11,7 @@ export const productCatalogContentSource = {
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
-      updatedAt: '2026-04-28',
+      updatedAt: '2026-05-16',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -55,7 +55,7 @@ export const productCatalogContentSource = {
           ? `, arviolta noin ${variant.estimatedWormCount} matoa`
           : '';
 
-        return `Kotimaiset kompostimadot (${weight} g${estimate}) matokompostointiin. Eisenia fetida -madot toimitetaan omassa kasvualustassaan, ja ne sopivat biojätteen hajuttomaan käsittelyyn sisällä tai ulkona. Todellinen matojen määrä vaihtelee yksilöiden koon mukaan.`;
+        return `Kotimaiset kompostimadot (${weight} g${estimate}) matokompostointiin. Eisenia fetida -madot toimitetaan noin 0,5 litrassa kasvualustaa, joka suojaa niitä kuljetuksessa ja tuo uuteen kompostoriin mikrobeja. Tilauksen jälkeen madot siirretään kasvualustoineen kompostorin omaan petimateriaaliin. Todellinen matojen määrä vaihtelee yksilöiden koon mukaan.`;
       },
       productType: 'Matokompostointi > Kompostimadot',
     },
@@ -86,7 +86,7 @@ export const productCatalogContentSource = {
         'Lieromaan aloituspakkaus tekee matokompostin ylläpidosta sujuvaa: kolmen laatikon pinottu kompostori ja petimateriaali samassa paketissa.',
       h1: 'Lieromaan matokompostorin aloituspakkaus',
       navigationLabel: 'Aloituspakkaus',
-      updatedAt: '2026-04-28',
+      updatedAt: '2026-05-16',
     },
     search: {
       contexts: ['blog', 'notFound'],
