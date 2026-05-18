@@ -4,7 +4,7 @@ export const starterKitSetupPageDefinition = {
   title: 'Aloituspakkauksen käyttöönotto | Lieromaa',
   description:
     'Näin käynnistät aloituspakkauksen oikein: yksi aktiivinen kerros alkuun, oikea kosteus, matojen totuttelu ja uusien kerrosten lisääminen vasta myöhemmin.',
-  updatedAt: '2026-05-16',
+  updatedAt: '2026-05-18',
   image: {
     url: '/images/content/aloituspakkauksen_aloitus.avif',
     width: 1200,

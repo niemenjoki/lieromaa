@@ -129,7 +129,7 @@ export default function StarterKitSetupPage() {
 
         <p>
           Kun ensimmäinen laatikko on pääasiassa prosessoitu (mutta ei vielä täysin
-          valmista), lisää sen päälle uusi rei'itetty laatikko.
+          valmis), lisää sen päälle uusi rei'itetty laatikko.
         </p>
 
         <p>
@@ -200,8 +200,8 @@ export default function StarterKitSetupPage() {
 
         <p>
           Hyvissä olosuhteissa populaatio kaksinkertaistuu noin kolmessa kuukaudessa,
-          jolloin myös käsittelykapasiteetti kasvaa kolmessa kuukaudessa kaksinkertaiseksi
-          ja puolessa vuodessa nelinkertaiseksi.
+          jolloin myös käsittelykapasiteetti kasvaa vähitellen: noin kaksinkertaiseksi
+          kolmessa kuukaudessa ja nelinkertaiseksi puolessa vuodessa.
         </p>
 
         <p>
