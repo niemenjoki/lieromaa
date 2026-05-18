@@ -5,7 +5,7 @@ export const homePageDefinition = {
   description:
     'Selkeät aloitusoppaat, matolaskuri ja käytännön vinkit matokompostointiin. Löydät myös kotimaiset kompostimadot omaan matokompostoriisi.',
   pageDescription:
-    'Lieromaa auttaa aloittamaan matokompostoinnin, hoitamaan kompostoria arjessa ja hyödyntämään sen tuotokset. Sivustolta löydät myös kotimaiset kompostimadot omaan matokompostoriisi.',
+    'Lieromaa auttaa aloittamaan matokompostoinnin, hoitamaan kompostoria arjessa ja hyödyntämään matokakan. Sivustolta löydät myös kotimaiset kompostimadot omaan matokompostoriisi.',
   image: {
     url: '/images/lieromaa_logo_1024.avif',
     width: 1024,

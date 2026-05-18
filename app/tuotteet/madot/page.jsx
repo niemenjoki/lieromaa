@@ -54,9 +54,9 @@ export default async function Page() {
                   omasta kotikompostistani.
                 </p>
                 <p>
-                  Kompostimadot muuttavat biojätteen ravinteikkaaksi mullaksi kotona.
+                  Kompostimadot muuttavat biojätteen ravinteikkaaksi matokakaksi kotona.
                   Matokompostori voidaan pitää sisätiloissa, se on hajuton ja
-                  helppohoitoinen. Madot hajottavat jätettä tehokkaasti, ja populaatio
+                  helppohoitoinen. Madot hajottavat jätettä tehokkaasti, ja matojen määrä
                   kasvaa hyvissä olosuhteissa nopeasti.
                 </p>
                 <p>
@@ -64,8 +64,8 @@ export default async function Page() {
                   litraa kasvualustaa kuljetusta varten. Mukana tulevaa kasvualustaa ei
                   ole tarkoitettu matojen ainoaksi kodiksi, vaan madot siirretään
                   kasvualustoineen kompostorin omaan petimateriaaliin. Samalla uuteen
-                  kompostoriin tulee hyödyllistä mikrobielämää. Jos et ole varma sopivasta
-                  aloitusmäärästä, kokeile{' '}
+                  matokompostiin tulee hyödyllistä mikrobielämää. Jos et ole varma
+                  sopivasta aloitusmäärästä, kokeile{' '}
                   <SafeLink href="/matolaskuri">matolaskuria</SafeLink>.
                 </p>
                 <p>
