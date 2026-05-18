@@ -1,4 +1,5 @@
 const nextConfig = {
+  allowedDevOrigins: ['192.168.0.10'],
   env: {
     NEXT_PUBLIC_ADSENSE_ENABLED: process.env.ADSENSE_ENABLED ?? '0',
   },
