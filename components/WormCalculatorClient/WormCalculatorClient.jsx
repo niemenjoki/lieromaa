@@ -114,8 +114,8 @@ export default function WormCalculatorClient({ recommendations }) {
         <h2>Miksi laskuri on hyödyllinen?</h2>
         <p>
           Kompostimatojen aloitusmäärän mitoittaminen oikein auttaa pitämään kompostorin
-          tasapainossa. Liian pieni populaatio ei ehdi käsittelemään kaikkea jätettä, ja
-          liian suuri populaatio taas kärsii ruoan puutteesta. Laskurin avulla saat
+          tasapainossa. Liian pieni määrä matoja ei ehdi käsittelemään kaikkea jätettä, ja
+          liian suuri määrä matoja taas kärsii ruoan puutteesta. Laskurin avulla saat
           karkean arvion siitä, kuinka paljon matoja kotitaloutesi tuottaman biojätteen
           käsittelyyn tarvitaan painona.
         </p>
@@ -126,10 +126,10 @@ export default function WormCalculatorClient({ recommendations }) {
 
         <h2>Laskuri</h2>
         <p>
-          Arvio perustuu kotitalouden kokoon, ruokavalioon ja oletukseen, että
-          matopopulaatio kaksinkertaistuu noin 3 kuukaudessa. Tulokset ovat
-          suuntaa-antavia - käytännössä biojätteen määrä ja matojen syönti riippuvat mm.
-          lämpötilasta, kosteudesta ja ruoan laadusta.
+          Arvio perustuu kotitalouden kokoon, ruokavalioon ja oletukseen, että matojen
+          määrä kaksinkertaistuu noin 3 kuukaudessa. Tulokset ovat suuntaa-antavia -
+          käytännössä biojätteen määrä ja matojen syönti riippuvat mm. lämpötilasta,
+          kosteudesta ja ruoan laadusta.
         </p>
 
         <section className={classes.Card}>
@@ -251,7 +251,7 @@ export default function WormCalculatorClient({ recommendations }) {
 
               <p className={classes.FinePrint}>
                 Laskelma perustuu oletukseen, että yksi mato painaa noin 0.5 g ja syö noin
-                1 g biojätettä viikossa. Populaatio tuplaantuu keskimäärin 3 kuukauden
+                1 g biojätettä viikossa. Matojen määrä tuplaantuu keskimäärin 3 kuukauden
                 välein.
               </p>
             </>
@@ -271,7 +271,7 @@ export default function WormCalculatorClient({ recommendations }) {
         <h2>Vinkkejä tulosten tulkintaan</h2>
         <ul>
           <li>
-            Jos aloitat pienellä määrällä, anna populaation kasvaa rauhassa - vältä
+            Jos aloitat pienellä määrällä, anna matojen määrän kasvaa rauhassa - vältä
             liiallista ruokintaa.
           </li>
           <li>

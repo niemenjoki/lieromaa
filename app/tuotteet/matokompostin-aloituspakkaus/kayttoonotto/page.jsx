@@ -199,7 +199,7 @@ export default function StarterKitSetupPage() {
         </p>
 
         <p>
-          Hyvissä olosuhteissa populaatio kaksinkertaistuu noin kolmessa kuukaudessa,
+          Hyvissä olosuhteissa matojen määrä kaksinkertaistuu noin kolmessa kuukaudessa,
           jolloin myös käsittelykapasiteetti kasvaa vähitellen: noin kaksinkertaiseksi
           kolmessa kuukaudessa ja nelinkertaiseksi puolessa vuodessa.
         </p>

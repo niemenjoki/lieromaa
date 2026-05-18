@@ -36,7 +36,7 @@ export async function GET() {
       <title><![CDATA[ Lieromaa ]]></title>
       <link>${SITE_URL}</link>
       <atom:link href="${SITE_URL}/rss" rel="self" type="application/rss+xml" />
-      <description><![CDATA[ Tietoa ja vinkkejä matokompostoinnista, kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta multaa! ]]></description>
+      <description><![CDATA[ Tietoa ja vinkkejä matokompostoinnista ja kierrätyksestä. Lieromaa auttaa tekemään jätteestä ravinnerikasta matokakkaa! ]]></description>
       <language>fi</language>
       <lastBuildDate>${new Date(`${latestPostDate}T00:00:00Z`).toUTCString()}</lastBuildDate>
       ${xmlItems}

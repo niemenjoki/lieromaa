@@ -12,7 +12,7 @@ const CATEGORY_SUMMARIES = {
   'kompostin hyödyntäminen': {
     actionLabel: 'Selaa hyödyntämisoppaita',
     description:
-      'Opi keräämään matokakka talteen ja käyttämään kompostin tuotoksia kasveille ilman arvailua.',
+      'Opi keräämään matokakka talteen ja käyttämään sitä kasveille ilman arvailua.',
   },
   'kompostorin perustaminen': {
     actionLabel: 'Selaa perustamisoppaita',
@@ -112,7 +112,7 @@ export default function HomePage() {
           <h1>Kompostimadot ja matokompostointi kotona</h1>
           <p className={classes.Intro}>
             Lieromaa auttaa suomalaisia aloittamaan matokompostoinnin, hoitamaan
-            kompostoria arjessa ja hyödyntämään sen tuotokset. Täältä löydät myös{' '}
+            kompostoria arjessa ja hyödyntämään matokakan. Täältä löydät myös{' '}
             <SafeLink href="/tuotteet/madot" className={classes.InlineLink}>
               kotimaiset kompostimadot
             </SafeLink>
@@ -139,8 +139,7 @@ export default function HomePage() {
             <h2>Aloita näistä oppaista</h2>
             <p>
               Näissä oppaissa käydään läpi matokompostoinnin tärkeimmät vaiheet
-              aloituksesta ruokintaan, hajuhaittojen ehkäisyyn ja valmiin kompostin
-              käyttöön.
+              aloituksesta ruokintaan, hajuhaittojen ehkäisyyn ja matokakan käyttöön.
             </p>
           </div>
 
@@ -169,7 +168,7 @@ export default function HomePage() {
             <p>
               Oppaat on jaettu kolmeen aihealueeseen: perustaminen kokoaa yhteen
               aloitusvaiheen ohjeet, hoito auttaa arjen ongelmissa ja hyödyntäminen
-              keskittyy valmiin kompostin käyttöön.
+              keskittyy matokakan käyttöön.
             </p>
           </div>
 

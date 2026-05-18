@@ -25,6 +25,13 @@ const nextConfig = {
           '/opas/kompostorin-perustaminen/matokompostointi-talvella-toimiiko-se-ulkona-suomessa',
         permanent: true,
       },
+      {
+        source:
+          '/opas/kompostin-hyödyntäminen/kompostitee-matokakasta-valmistus-ja-kaytto',
+        destination:
+          '/opas/kompostin-hyödyntäminen/matotee-matokakasta-valmistus-ja-kaytto',
+        permanent: true,
+      },
     ];
   },
   reactStrictMode: true,

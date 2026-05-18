@@ -17,7 +17,7 @@ const SHOW_FEATURED_GUIDES_SECTION = false;
 
 const CATEGORY_SUMMARIES = {
   'kompostin hyödyntäminen':
-    'Kun komposti alkaa tuottaa valmista tavaraa, tämä osio auttaa keräämään matokakan ja käyttämään sen hyödyksi kasveille.',
+    'Kun matokakka alkaa olla valmista, tämä osio auttaa keräämään sen ja käyttämään hyödyksi kasveille.',
   'kompostorin perustaminen':
     'Aloita tästä, jos mietit millainen kompostori kannattaa valita, miten madot hankitaan ja mitä ensimmäisinä viikkoina pitää tehdä.',
   'kompostorin hoito':
@@ -152,7 +152,7 @@ export default function GuideHubPage() {
             <div className={classes.StatCard}>
               <span className={classes.StatValue}>{categories.length}</span>
               <p className={classes.StatLabel}>
-                pääaihetta aloituksesta kompostin tuotosten hyödyntämiseen
+                pääaihetta aloituksesta matokakan hyödyntämiseen
               </p>
             </div>
             <div className={classes.StatCard}>
