@@ -7,8 +7,12 @@ import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButto
 import AuthorCard from '../AuthorCard/AuthorCard';
 import classes from './MdxArticlePage.module.css';
 
-function ArticleLink({ href, children, ...props }) {
-  if (typeof href === 'string' && href.startsWith('/')) {
+function isInternalMarkdownHref(href) {
+  return typeof href === 'string' && href.startsWith('/') && !href.startsWith('//');
+}
+
+function MarkdownLink({ href, children, ...props }) {
+  if (isInternalMarkdownHref(href)) {
     return (
       <SafeLink href={href} {...props}>
         {children}
@@ -24,8 +28,7 @@ function ArticleLink({ href, children, ...props }) {
 }
 
 const mdxComponents = {
-  a: ArticleLink,
-  SafeLink,
+  a: MarkdownLink,
   SafeImage,
 };
 
