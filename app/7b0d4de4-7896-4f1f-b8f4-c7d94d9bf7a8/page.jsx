@@ -1,26 +1,17 @@
-'use client';
+import OptOutRedirect from './OptOutRedirect';
 
-import { useEffect } from 'react';
-
-import {
-  ANALYTICS_OPT_OUT_STORAGE_KEY,
-  ANALYTICS_OPT_OUT_STORAGE_VALUE,
-} from '@/lib/analytics/optOut';
+export const metadata = {
+  title: 'Analytiikan poisto käytöstä | Lieromaa',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function Page() {
-  useEffect(() => {
-    try {
-      globalThis.localStorage?.setItem(
-        ANALYTICS_OPT_OUT_STORAGE_KEY,
-        ANALYTICS_OPT_OUT_STORAGE_VALUE
-      );
-    } catch {}
-
-    globalThis.location.replace('/');
-  }, []);
-
   return (
     <main style={{ padding: '24px', fontFamily: 'Georgia, serif' }}>
+      <OptOutRedirect />
       <p>Hetki...</p>
     </main>
   );
