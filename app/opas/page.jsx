@@ -1,4 +1,3 @@
-import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import PostPreview from '@/components/PostPreview/PostPreview';
@@ -260,8 +259,6 @@ export default function GuideHubPage() {
             ))}
           </div>
         </section>
-
-        <Advert />
       </div>
     </>
   );
