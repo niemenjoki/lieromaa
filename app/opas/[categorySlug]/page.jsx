@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 
-import Advert from '@/components/Advert/Advert';
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import PostPreview from '@/components/PostPreview/PostPreview';
 import {
@@ -77,7 +76,6 @@ export default async function GuideCategoryPage({ params }) {
             overrideHref={`/opas/${categorySlug}/${guide.slug}`}
           />
         ))}
-        <Advert />
       </div>
     </>
   );

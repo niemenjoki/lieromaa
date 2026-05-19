@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 
-import Advert from '@/components/Advert/Advert';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
@@ -112,7 +111,6 @@ export default async function BlogTagPage({ params }) {
         currentPage={pageData.pageIndexInt}
         basePath={`/blogi/${tag}`}
       />
-      <Advert />
     </>
   );
 }
