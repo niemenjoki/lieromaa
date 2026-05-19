@@ -1,0 +1,32 @@
+.Advert {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.75rem;
+  border: 1px solid var(--background-4);
+  border-radius: 8px;
+  background: var(--background-2);
+  color: var(--text-color);
+}
+
+.Pending {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.Visible {
+  visibility: visible;
+}
+
+.Label {
+  margin: 0 0 0.5rem;
+  color: var(--highlight);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.Slot {
+  display: block;
+  min-height: 90px;
+}
