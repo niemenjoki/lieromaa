@@ -1,3 +1,4 @@
+import { ADSENSE_CLIENT } from './adsense.js';
 import { SITE_URL } from './constants.mjs';
 
 const title = 'Lieromaa – Kompostimadot ja matokompostointi kotona';
@@ -42,6 +43,9 @@ export const defaultMetadata = {
   icons: {
     icon: '/icons/favicon.ico',
     apple: '/images/lieromaa_logo_1024.avif',
+  },
+  other: {
+    'google-adsense-account': ADSENSE_CLIENT,
   },
   manifest: '/site.webmanifest',
 };
