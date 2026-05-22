@@ -2,8 +2,10 @@ import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import PostPreview from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import SiteSearch from '@/components/SiteSearch/SiteSearch';
 import { getAllContent } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
+import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { CONTENT_TYPES, GUIDE_CATEGORIES, SITE_URL } from '@/lib/site/constants.mjs';
 import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
@@ -64,6 +66,7 @@ function sortGuidesForCategory(a, b) {
 
 export default function GuideHubPage() {
   const allGuides = getAllContent({ type: CONTENT_TYPES.GUIDE });
+  const searchItems = getSiteSearchIndex();
   const categories = Array.from(new Set(allGuides.map((guide) => guide.category.name)))
     .sort(sortCategories)
     .map((categoryName) => {
@@ -130,6 +133,16 @@ export default function GuideHubPage() {
             lähtökohdasta ja siirry syvemmälle vasta silloin kun tarvitset lisää
             yksityiskohtia.
           </p>
+
+          <div className={classes.HeroSearch}>
+            <SiteSearch
+              searchItems={searchItems}
+              variant="guide"
+              label="Etsi Lieromaasta"
+              placeholder="Etsi oppaita, blogijulkaisuja tai tuotteita..."
+              resultLimit={5}
+            />
+          </div>
 
           <div className={classes.HeroActions}>
             <SafeLink

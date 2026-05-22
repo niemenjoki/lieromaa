@@ -9,7 +9,14 @@ import {
   faXTwitter,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
-import { faCartShopping, faMoon, faRss, faSun } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCartShopping,
+  faMagnifyingGlass,
+  faMoon,
+  faRss,
+  faSun,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const icons = {
@@ -26,6 +33,8 @@ const icons = {
   moon: faMoon,
   tiktok: faTiktok,
   cart: faCartShopping,
+  close: faXmark,
+  search: faMagnifyingGlass,
 };
 
 export default function Icon({ name, ...rest }) {

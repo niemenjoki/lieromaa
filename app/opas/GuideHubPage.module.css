@@ -23,6 +23,10 @@
   line-height: 1.6;
 }
 
+.HeroSearch {
+  margin-top: 1.5rem;
+}
+
 .HeroActions {
   display: flex;
   flex-wrap: wrap;

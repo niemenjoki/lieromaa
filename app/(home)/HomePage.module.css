@@ -23,6 +23,10 @@
   line-height: 1.6;
 }
 
+.HeroSearch {
+  margin-top: 1.5rem;
+}
+
 .InlineLink {
   color: var(--highlight);
   text-decoration: underline;

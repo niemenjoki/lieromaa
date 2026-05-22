@@ -6,8 +6,12 @@ import Link from 'next/link';
 
 import safeLinks from '@/generated/site/safeRoutes.json';
 
+function getHrefPath(href) {
+  return href.split(/[?#]/)[0] || '/';
+}
+
 function isSafeHref(href) {
-  return safeLinks.includes(decodeURIComponent(href));
+  return safeLinks.includes(decodeURIComponent(getHrefPath(href)));
 }
 
 export default function SafeLink({ href, children, ...props }) {

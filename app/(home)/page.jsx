@@ -1,6 +1,8 @@
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import SiteSearch from '@/components/SiteSearch/SiteSearch';
 import { getAllContent } from '@/lib/content/index.mjs';
+import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/lib/site/constants.mjs';
 
 import classes from './HomePage.module.css';
@@ -64,6 +66,7 @@ function getGuideHref(guide) {
 export default function HomePage() {
   const allGuides = getAllContent({ type: CONTENT_TYPES.GUIDE });
   const posts = getAllContent({ type: CONTENT_TYPES.POST }).slice(0, 3);
+  const searchItems = getSiteSearchIndex();
   const editorialHighlights = EDITORIAL_HIGHLIGHT_SPECS.map(({ eyebrow, slug }) => {
     const guide = allGuides.find((entry) => entry.slug === slug);
 
@@ -132,6 +135,16 @@ export default function HomePage() {
             </SafeLink>
             .
           </p>
+
+          <div className={classes.HeroSearch}>
+            <SiteSearch
+              searchItems={searchItems}
+              variant="home"
+              label="Etsi Lieromaasta"
+              placeholder="Etsi oppaita, blogijulkaisuja tai tuotteita..."
+              resultLimit={5}
+            />
+          </div>
         </section>
 
         <section className={classes.Section}>

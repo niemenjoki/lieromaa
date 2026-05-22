@@ -14,8 +14,29 @@
   margin: 3rem 0 1rem 0;
 }
 
+.Results {
+  max-width: 42rem;
+}
+
 .LinkWrapper {
-  font-size: 1.2rem;
-  color: var(--highlight);
-  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0 1rem;
+}
+
+.LinkWrapper a {
+  display: inline-block;
+  padding: 0.75rem 1.2rem;
+  border-radius: 6px;
+  background: var(--highlight);
+  color: var(--text-on-accent);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.LinkWrapper a:hover {
+  background: var(--highlight-alt);
+  opacity: 1;
 }
