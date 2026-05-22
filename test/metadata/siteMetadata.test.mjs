@@ -45,6 +45,14 @@ const reviewPage = {
   robots: { index: false, follow: false },
 };
 
+const searchPage = {
+  canonicalUrl: '/haku',
+  title: 'Haku | Lieromaa',
+  description:
+    'Hae Lieromaan oppaita, tuotteita, blogijulkaisuja ja matokompostointiin liittyviä aiheita.',
+  robots: { index: false, follow: true },
+};
+
 const explicitNonMetadataRoutes = new Map([
   ['/7b0d4de4-7896-4f1f-b8f4-c7d94d9bf7a8', 'analytics opt-out client redirect'],
   ['/madot', 'legacy redirect to /tuotteet/madot'],
@@ -87,6 +95,7 @@ function collectMetadataScenarios() {
     wormCalculatorPage,
     checkoutPage,
     reviewPage,
+    searchPage,
   ].forEach((page) => addScenario(scenarios, page.canonicalUrl ?? '/arvostele', page));
 
   addScenario(scenarios, '/blogi/sivu/1', createBlogPageScenario(1, '/blogi/sivu/1'));

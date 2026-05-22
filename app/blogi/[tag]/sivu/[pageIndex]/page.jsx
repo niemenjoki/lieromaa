@@ -3,15 +3,15 @@ import { notFound } from 'next/navigation';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
-import SearchPosts from '@/components/SearchPosts/SearchPosts';
+import SiteSearch from '@/components/SiteSearch/SiteSearch';
 import {
   getAllContent,
   getAllPostTags,
   getBlogTagPageData,
   getPostsByTag,
 } from '@/lib/content/index.mjs';
+import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
-import { getSearchableSitePages } from '@/lib/siteStructure.mjs';
 import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
 
 import classes from './TagPage.module.css';
@@ -44,12 +44,12 @@ export async function generateStaticParams() {
 export default async function BlogTagPage({ params }) {
   const { pageIndex, tag } = await params;
   const pageData = getBlogTagPageData({ tag, pageIndex });
-  const { posts, numPages, allPostsForTag } = getPostsByTag(
+  const { posts, numPages } = getPostsByTag(
     pageData.tagSlug,
     pageData.pageIndexInt,
     POSTS_PER_PAGE
   );
-  const searchablePages = getSearchableSitePages({ context: 'blog' });
+  const searchItems = getSiteSearchIndex();
   if (posts.length === 0) {
     notFound();
   }
@@ -76,11 +76,12 @@ export default async function BlogTagPage({ params }) {
       />
       <h1>Julkaisut avainsanalla "{pageData.tagName}"</h1>
 
-      <SearchPosts
-        list={allPostsForTag}
-        keys={['title', 'description', 'keywords', 'tags']}
-        placeholder="Etsi julkaisun nimellä tai avainsanalla.."
-        extraItems={searchablePages}
+      <SiteSearch
+        searchItems={searchItems}
+        variant="blog"
+        label="Hae sivustolta"
+        placeholder="Hae oppaita, tuotteita tai blogijulkaisuja"
+        resultLimit={5}
       />
 
       <div className={classes.Taglist}>

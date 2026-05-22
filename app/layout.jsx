@@ -8,6 +8,7 @@ import Analytics from '@/components/Analytics/Analytics';
 import { CartProvider } from '@/components/Cart/CartProvider';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
+import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { ADSENSE_CONSENT_ENABLED } from '@/lib/site/adsense';
 import { getSiteNavigation } from '@/lib/siteStructure.mjs';
 import { createSiteStructuredData } from '@/lib/structuredData/createSiteStructuredData';
@@ -25,6 +26,7 @@ const rubik = Rubik({
 
 export default function RootLayout({ children }) {
   const navigation = getSiteNavigation();
+  const searchItems = getSiteSearchIndex();
   const structuredData = createSiteStructuredData();
 
   return (
@@ -38,7 +40,7 @@ export default function RootLayout({ children }) {
         />
         <div className="container">
           <CartProvider>
-            <Navbar navigation={navigation} />
+            <Navbar navigation={navigation} searchItems={searchItems} />
             <main>{children}</main>
             <Footer navigation={navigation} />
           </CartProvider>

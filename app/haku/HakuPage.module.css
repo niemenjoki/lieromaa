@@ -1,0 +1,10 @@
+.Page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.Intro {
+  max-width: 42rem;
+  line-height: 1.7;
+}

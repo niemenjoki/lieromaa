@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import CartButton from '@/components/Cart/CartButton';
 import SafeImage from '@/components/SafeImage/SafeImage';
+import SiteSearch from '@/components/SiteSearch/SiteSearch';
 import ThemeToggler from '@/components/ThemeToggler/ThemeToggler';
 
 import Toggler from '../NavToggler/NavToggler.jsx';
@@ -34,8 +35,15 @@ function renderDesktopItem(item) {
   );
 }
 
-export default function Navbar({ navigation }) {
+export default function Navbar({ navigation, searchItems }) {
   const [isOpen, setIsOpen] = useState(false);
+  const closeMenu = () => {
+    setIsOpen(false);
+    if (typeof document !== 'undefined') {
+      document.body.classList.remove('nav-open');
+    }
+  };
+
   const toggleIsOpen = () => {
     setIsOpen((prev) => {
       const newState = !prev;
@@ -74,6 +82,13 @@ export default function Navbar({ navigation }) {
             </li>
           </ul>
 
+          <SiteSearch
+            searchItems={searchItems}
+            variant="navbar"
+            resultLimit={5}
+            label="Hae sivustolta"
+          />
+
           <CartButton />
 
           <span className={classes.MobileThemeToggler}>
@@ -94,6 +109,15 @@ export default function Navbar({ navigation }) {
       {/* MOBILE OVERLAY */}
       <div className={`${classes.MobileMenu} ${isOpen ? classes.MobileOpen : ''}`}>
         <div className={classes.MobileContent}>
+          <div className={classes.MobileSearch}>
+            <SiteSearch
+              searchItems={searchItems}
+              variant="mobile"
+              resultLimit={4}
+              label="Hae sivustolta"
+              onNavigate={closeMenu}
+            />
+          </div>
           {navigation.mobileSections.map((section, sectionIndex) => (
             <div
               key={section.heading ?? `mobile-section-${sectionIndex}`}
@@ -103,7 +127,7 @@ export default function Navbar({ navigation }) {
               <ul>
                 {section.items.map((link) => (
                   <li key={link.href}>
-                    <SafeLink href={link.href} onClick={toggleIsOpen}>
+                    <SafeLink href={link.href} onClick={closeMenu}>
                       {link.label}
                     </SafeLink>
                   </li>
