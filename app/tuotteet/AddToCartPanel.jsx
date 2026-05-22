@@ -167,15 +167,25 @@ export default function AddToCartPanel({
 }) {
   const { addItems, items, removeItem, setItemQuantity } = useCart();
   const variants = getProductVariants(productKey);
-  const defaultVariant = getDefaultVariant(productKey, variants);
+  const visibleVariants = variants.filter((variant) => !variant.hideFromVariantSelector);
+  const defaultVariant = getDefaultVariant(productKey, visibleVariants);
   const [selectedSku, setSelectedSku] = useState(defaultVariant?.sku ?? '');
+  const [usesExpansionMode, setUsesExpansionMode] = useState(false);
   const [selectedWormSku, setSelectedWormSku] = useState('');
   const [selectedRelatedProducts, setSelectedRelatedProducts] = useState({});
   const [hasAddedToCart, setHasAddedToCart] = useState(false);
   const [feedback, setFeedback] = useState('');
   const product = getProductCatalogEntry(productKey);
+  const orderConfig = getProductOrderConfig(productKey);
   const wormVariants = showWormSuggestion ? getProductVariants('worms') : [];
-  const selectedCartItem = items.find((item) => item.sku === selectedSku) ?? null;
+  const selectedVariant =
+    variants.find((variant) => variant.sku === selectedSku) ?? defaultVariant;
+  const selectedExpansionVariant =
+    usesExpansionMode && selectedVariant?.expansionSku
+      ? variants.find((variant) => variant.sku === selectedVariant.expansionSku)
+      : null;
+  const selectedOrderSku = selectedExpansionVariant?.sku ?? selectedSku;
+  const selectedCartItem = items.find((item) => item.sku === selectedOrderSku) ?? null;
 
   const relatedProductGroups = useMemo(
     () =>
@@ -196,8 +206,8 @@ export default function AddToCartPanel({
   const handleAddToCart = () => {
     const nextItems = [];
 
-    if (selectedSku) {
-      nextItems.push({ sku: selectedSku, quantity: 1 });
+    if (selectedOrderSku) {
+      nextItems.push({ sku: selectedOrderSku, quantity: 1 });
 
       if (selectedWormSku) {
         nextItems.push({ sku: selectedWormSku, quantity: 1 });
@@ -231,7 +241,7 @@ export default function AddToCartPanel({
   };
 
   const handleCartQuantityChange = (quantity) => {
-    const result = setItemQuantity(selectedSku, quantity);
+    const result = setItemQuantity(selectedOrderSku, quantity);
     if (!result.ok) {
       setFeedback(result.message || 'Määrän päivittäminen epäonnistui.');
     }
@@ -246,11 +256,11 @@ export default function AddToCartPanel({
         <p className={classes.FormSectionDescription}>{product.productDescription}</p>
       </div>
 
-      {variants.length > 1 ? (
+      {visibleVariants.length > 1 ? (
         <fieldset className={classes.FormFieldset}>
           <legend className={classes.ScreenReaderOnly}>Valitse vaihtoehto</legend>
           <div className={classes.ChoiceList}>
-            {variants.map((variant) => {
+            {visibleVariants.map((variant) => {
               const isUnavailable = !variant.isAvailable;
 
               return (
@@ -307,6 +317,30 @@ export default function AddToCartPanel({
         <p className={classes.HelperText}>Tuote ei ole tällä hetkellä tilattavissa.</p>
       )}
 
+      {orderConfig.expansionOption && selectedVariant?.expansionSku ? (
+        <label className={classes.FormOption}>
+          <input
+            type="checkbox"
+            checked={usesExpansionMode}
+            onChange={(event) => setUsesExpansionMode(event.target.checked)}
+            className={classes.ChoiceInput}
+          />
+          <span className={classes.OptionContent}>
+            <span className={classes.OptionHeader}>
+              <span className={classes.OptionMarker} aria-hidden="true">
+                {usesExpansionMode ? '[x]' : '[ ]'}
+              </span>
+              <span className={classes.OptionTitle}>
+                {orderConfig.expansionOption.checkboxLabel}
+              </span>
+            </span>
+            <span className={classes.FinePrint}>
+              {orderConfig.expansionOption.helperText}
+            </span>
+          </span>
+        </label>
+      ) : null}
+
       {selectedCartItem ? (
         <div className={classes.CartQuantityBox}>
           <QuantityEditor
@@ -316,7 +350,7 @@ export default function AddToCartPanel({
           <button
             type="button"
             className={classes.InlineDangerButton}
-            onClick={() => removeItem(selectedSku)}
+            onClick={() => removeItem(selectedOrderSku)}
           >
             Poista
           </button>

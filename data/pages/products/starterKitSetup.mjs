@@ -3,8 +3,8 @@ export const starterKitSetupPageDefinition = {
   pageName: 'Aloituspakkauksen käyttöönotto',
   title: 'Aloituspakkauksen käyttöönotto | Lieromaa',
   description:
-    'Näin käynnistät aloituspakkauksen oikein: yksi aktiivinen kerros alkuun, oikea kosteus, matojen totuttelu ja uusien kerrosten lisääminen vasta myöhemmin.',
-  updatedAt: '2026-05-18',
+    'Näin käynnistät 1, 2 tai 3 laatikon aloituspakkauksen oikein: yksi aktiivinen kerros alkuun, oikea kosteus ja lisäkerrokset vasta myöhemmin.',
+  updatedAt: '2026-05-21',
   image: {
     url: '/images/content/aloituspakkauksen_aloitus.avif',
     width: 1200,
@@ -16,9 +16,9 @@ export const starterKitSetupPageDefinition = {
   howTo: {
     name: 'Matokompostorin aloituspakkauksen käyttöönotto',
     supplies: [
-      'Umpipohjainen laatikko (1 kpl)',
-      "Rei'itetty laatikko (2 kpl)",
-      'Kansi (1 kpl)',
+      'Valitsemasi määrä laatikoita: aloittavassa kompostorissa 1 umpohjainen laatikko ja mallista riippuen 0-2 rei’itettyä laatikkoa',
+      'Nykyisen kompostorin lisäkerroksiksi valitsemasi määrä rei’itettyjä laatikoita',
+      'Kansi (1 kpl tilausta kohti)',
       'Kuiva kookoskuitu',
       'Kompostimadot ja noin 0,5 litraa kasvualustaa sisältävä rasia, jos tilasit madot mukaan',
     ],
@@ -28,12 +28,12 @@ export const starterKitSetupPageDefinition = {
     ],
     steps: [
       {
-        name: 'Kookoskuidun kostutus pohjalaatikossa',
-        text: 'Jos tilasit madot mukaan, siirrä matorasia sivuun. Lisää noin 1,5 litraa kuivaa kookoskuitua umpipohjaiseen laatikkoon. Lisää vettä vähitellen pienissä erissä ja sekoita välillä. Vettä kuluu yleensä noin 3,5 litraa, mutta oikea määrä riippuu kuidun kuivuudesta. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä. Sopiva kosteus on saavutettu, kun voimakkaasti nyrkissä puristettaessa materiaalista irtoaa 1-2 tippaa vettä, ei enempää eikä vähempää.',
+        name: 'Aloita yhdestä aktiivisesta laatikosta',
+        text: 'Jos tilasit 1, 2 tai 3 laatikon aloittavan kompostorin, käynnistä komposti vain umpohjaisessa laatikossa ja pidä mahdolliset rei’itetyt lisälaatikot aluksi sivussa. Jos tilasit laatikoita nykyisen Lieromaan kompostorin lisäkerroksiksi, lisää uusi rei’itetty laatikko vasta, kun nykyinen ylin kerros on valmis ottamaan uuden ruokintakerroksen päälleen.',
       },
       {
-        name: 'Ensimmäisen kerroksen käynnistys',
-        text: 'Siirrä kostutettu materiaali ensimmäiseen laatikkoon ja pidä muut laatikot aluksi tyhjinä. Kompostointi käynnistetään yhdellä aktiivisella kerroksella, ei täyttämällä kaikkia kerroksia heti.',
+        name: 'Kookoskuidun kostutus',
+        text: 'Lisää noin 1,5 litraa kuivaa kookoskuitua ensimmäiseen aktiiviseen laatikkoon. Lisää vettä vähitellen pienissä erissä ja sekoita välillä. Vettä kuluu yleensä noin 3,5 litraa, mutta oikea määrä riippuu kuidun kuivuudesta. Anna veden imeytyä 30 minuuttia ja sekoita kerran noin puolessa välissä. Sopiva kosteus on saavutettu, kun voimakkaasti nyrkissä puristettaessa materiaalista irtoaa 1-2 tippaa vettä.',
       },
       {
         name: 'Matojen lisääminen ja totuttelu',
@@ -41,7 +41,7 @@ export const starterKitSetupPageDefinition = {
       },
       {
         name: 'Ensimmäinen ruokinta ja uudet kerrokset',
-        text: 'Aloita kahden vuorokauden jälkeen pienellä annoksella, esimerkiksi ruokalusikallisella banaania. Lisää uusi laatikko päälle vasta, kun nykyinen ylin kerros on osittain käsitelty, ja ruoki aina vain ylimmässä kerroksessa. Kun kaikki laatikot ovat käytössä, kerää alin kerros ja siirrä ylempien kerrosten sisältö käsin yhden tason alas.',
+        text: 'Aloita kahden vuorokauden jälkeen pienellä annoksella, esimerkiksi ruokalusikallisella banaania. Lisää uusi rei’itetty laatikko päälle vasta, kun nykyinen ylin kerros on osittain käsitelty ja ruokintarytmi on vakaa. Ruoki aina vain ylimmässä aktiivisessa kerroksessa. Yhden laatikon mallissa sadonkorjuu tehdään käsin; kahden ja kolmen laatikon malleissa alemmat kerrokset voivat kypsyä rauhallisemmin.',
       },
     ],
   },

@@ -6,7 +6,6 @@ import {
   getProductShippingOptions,
   getProductVariants,
 } from '@/lib/pricing/catalog';
-import { starterKitPageContent } from '@/lib/products/starterKitPageContent';
 import { ORDER_CONTACT_EMAIL } from '@/lib/site/contact';
 
 import AddToCartPanel from '../AddToCartPanel';
@@ -20,7 +19,9 @@ export { default as generateMetadata } from './generateMetadata';
 
 export const dynamic = 'force-static';
 
-const starterKitVariants = getProductVariants('starterKit');
+const starterKitVariants = getProductVariants('starterKit').filter(
+  (variant) => !variant.hideFromVariantSelector
+);
 const wormVariants = getProductVariants('worms');
 const starterKitShippingOptions = getProductShippingOptions('starterKit');
 const starterKitPickupOption =
@@ -30,11 +31,6 @@ const starterKitHomeOption =
   null;
 const starterKitLocalPickupOption =
   starterKitShippingOptions.find((option) => option.id === 'nouto') ?? null;
-const starterKitComponentCosts = starterKitPageContent.componentCosts;
-const starterKitComponentCostTotal = Number(
-  starterKitComponentCosts.reduce((sum, item) => sum + item.price, 0).toFixed(2)
-);
-const starterKitBasePrice = Math.ceil(starterKitComponentCostTotal);
 
 function formatWormPackageLabel(variant) {
   const weight = variant.weightGrams ?? variant.amount;
@@ -43,6 +39,11 @@ function formatWormPackageLabel(variant) {
     : '';
 
   return `${weight} g${estimate}`;
+}
+
+function formatBoxCount(count) {
+  const numericCount = Number(count) || 0;
+  return numericCount === 1 ? '1 laatikko' : `${numericCount} laatikkoa`;
 }
 
 export default async function Page() {
@@ -66,47 +67,50 @@ export default async function Page() {
             <div className={classes.HeroDetails}>
               <div className={classes.HeroText}>
                 <p className={classes.Lead}>
-                  Tämä aloituspakkaus on suunniteltu niille, jotka haluavat
-                  matokompostorin, jonka ylläpito on mahdollisimman sujuvaa arjessa.
+                  Tämä aloituspakkaus on suunniteltu niille, jotka haluavat aloittaa
+                  matokompostoinnin valmiiksi valmistellulla laatikkomallilla ja laajentaa
+                  samaa järjestelmää myöhemmin tarvittaessa.
                 </p>
                 <p>
-                  Paketissa on kompostorilaatikot ja petimateriaali. Voit lisätä
-                  tilaukseen myös Lieromaan{' '}
+                  Valitse tilaukseen yksi, kaksi tai kolme laatikkoa. Mukana tulee kansi
+                  ja kookoskuitua uuden kompostorin käynnistämiseen. Voit lisätä
+                  ostoskoriin myös kompostimadot ja Lieromaan{' '}
                   <SafeLink href="/tuotteet/kompostorin-kuituseos">
                     kuituseoksen,
-                  </SafeLink>
-                  jos epäilet, että madoille syötettävän biojätteen määrä vaihtelee
-                  paljon.
+                  </SafeLink>{' '}
+                  jos haluat varautua biojätteen määrän vaihteluun.
                 </p>
                 <p>
-                  Kolmen laatikon pinottu kompostori tekee ylläpidosta vaivatonta:
-                  ruokajäte lisätään aina ylimpään laatikkoon ja valmis matokakka kerätään
-                  alimmasta, kun madot ovat siirtyneet ylempään kerrokseen. Koko
-                  järjestelmää ei tarvitse tyhjentää tai käynnistää uudelleen sadonkorjuun
-                  jälkeen.
+                  Yhden laatikon malli on edullisin tapa kokeilla. Kahden ja kolmen
+                  laatikon mallit helpottavat kierron rakentamista, kun komposti kasvaa ja
+                  haluat erottaa aktiivisen ruokintakerroksen kypsyvästä materiaalista.
                 </p>
               </div>
 
               <aside className={classes.SummaryCard}>
                 <h2>Tilaa helposti</h2>
                 <ul className={classes.FeatureList}>
-                  <li>Kompostori ja petimateriaali samassa paketissa.</li>
-                  <li>Kolmen laatikon malli helpottaa ruokintaa ja sadonkorjuuta.</li>
+                  <li>
+                    Valitse 1, 2 tai 3 laatikkoa saman modulaarisen järjestelmän mukaan.
+                  </li>
+                  <li>Laatikot, kansi ja kookoskuitu toimitetaan samassa paketissa.</li>
+                  <li>
+                    Useampi laatikko tekee ruokinnasta ja sadonkorjuusta sujuvampaa.
+                  </li>
                 </ul>
 
                 <h3>Hinta</h3>
                 <ul className={classes.PriceList}>
                   {starterKitVariants.map((variant) => (
                     <li key={variant.sku}>
-                      <VariantPriceDisplay title="Aloituspakkaus" variant={variant} />
+                      <VariantPriceDisplay
+                        title={formatBoxCount(variant.binCount ?? variant.amount)}
+                        variant={variant}
+                      />
                     </li>
                   ))}
                 </ul>
 
-                <p className={classes.HelperText}>
-                  Laske taloudellesi sopiva aloitusmäärä{' '}
-                  <SafeLink href="/matolaskuri">matolaskurilla.</SafeLink>
-                </p>
                 <p className={classes.HelperText}>
                   Katso aloituspakkauksen{' '}
                   <SafeLink href="/tuotteet/matokompostin-aloituspakkaus/kayttoonotto">
@@ -132,29 +136,56 @@ export default async function Page() {
 
             <div className={classes.CardGrid}>
               <div className={classes.InfoCard}>
-                <h3>Hyvä valinta, jos haluat helpottaa ylläpitoa</h3>
+                <h3>1 laatikko: edullinen kokeilu</h3>
+                <p>
+                  Sopii pienelle biojätemäärälle ja matokompostoinnin kokeiluun.
+                  Sadonkorjuu tehdään käsin, koska erillisiä kypsytys- ja
+                  ruokintakerroksia ei vielä ole.
+                </p>
+              </div>
+
+              <div className={classes.InfoCard}>
+                <h3>2 laatikkoa: tilaa kasvuun</h3>
+                <p>
+                  Sopii, kun haluat aloittaa yhdestä aktiivisesta kerroksesta mutta pitää
+                  valmiina seuraavan rei'itetyn laatikon kompostin kasvattamista varten.
+                </p>
+              </div>
+
+              <div className={classes.InfoCard}>
+                <h3>3 laatikkoa: sujuvin arki</h3>
+                <p>
+                  Paras valinta, jos haluat alusta asti koko pinottavan järjestelmän.
+                  Useampi kerros helpottaa ruokinnan, kypsymisen ja matokakan keräämisen
+                  rytmittämistä.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="sisalto" className={classes.SectionStack}>
+            <h2>Mitä paketti sisältää?</h2>
+
+            <div className={classes.CardGrid}>
+              <div className={classes.InfoCard}>
+                <h3>Laatikot mallin mukaan</h3>
                 <ul className={classes.CleanList}>
+                  <li>1 laatikko: 1 umpohjainen laatikko ja kansi</li>
+                  <li>2 laatikkoa: 1 umpohjainen ja 1 rei'itetty laatikko sekä kansi</li>
                   <li>
-                    lisätä biojätteen aina ylimpään aktiiviseen laatikkoon ilman koko
-                    kompostorin läpikäyntiä
-                  </li>
-                  <li>
-                    kerätä valmista matokakkaa alimmasta laatikosta, kun madot ovat
-                    siirtyneet ylempään kerrokseen
-                  </li>
-                  <li>
-                    rakenteen, jossa sadonkorjuu ei aiheuta yksilaatikkoisen kompostorin
-                    resetointia
+                    3 laatikkoa: 1 umpohjainen ja 2 rei'itettyä laatikkoa sekä kansi
                   </li>
                 </ul>
               </div>
 
-              <div id="sisalto" className={classes.InfoCard}>
-                <h3>Mitä paketti sisältää</h3>
+              <div className={classes.InfoCard}>
+                <h3>Kaikissa malleissa</h3>
                 <ul className={classes.CleanList}>
-                  <li>3 kestävää 14 L muovilaatikkoa, valmiiksi porattuina</li>
-                  <li>valmiiksi mitattu määrä petimateriaalia</li>
-                  <li id="mitat">koottuna leveys 30 cm, syvyys 40 cm, korkeus 27 cm</li>
+                  <li>kestävät 14 L muovilaatikot, valmiiksi valmisteltuina</li>
+                  <li>valmiiksi mitattu määrä kookoskuitua petimateriaaliksi</li>
+                  <li id="mitat">yhden laatikon ulkomitat 40 x 30 x 19 cm</li>
+                  <li>pinossa jokainen lisälaatikko kasvattaa korkeutta noin 4 cm</li>
+                  <li>2 laatikkoa pinottuna noin 23 cm, 3 laatikkoa noin 27 cm</li>
                 </ul>
                 <p>
                   <SafeLink href="/tuotteet/matokompostin-aloituspakkaus/kayttoonotto">
@@ -185,10 +216,8 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Toimitus</h3>
                 <p>
-                  Aloituspakkaus toimitetaan Postin noutopisteeseen, kotiinkuljetuksella
-                  tai noutona Järvenpäästä. Jos tilaukseen kuuluu eläviä kompostimatoja,
-                  lähetän tilauksen maanantaina, jotta madot eivät jää postin varastoon
-                  viikonlopuksi.
+                  Jos tilaukseen kuuluu eläviä kompostimatoja, lähetän tilauksen
+                  maanantaina, jotta madot eivät jää postin varastoon viikonlopuksi.
                 </p>
                 <p>
                   Toimitustavoiksi voit valita{' '}
@@ -239,37 +268,33 @@ export default async function Page() {
           </section>
 
           <section id="miksi-lapivirtaus" className={classes.SectionStack}>
-            <h2>Miksi läpivirtauskompostori on toimiva valinta</h2>
+            <h2>Miksi valita useampi laatikko?</h2>
 
             <div className={classes.CardGrid}>
               <div className={classes.InfoCard}>
-                <h3>Yksilaatikkoisen kompostorin rytmi</h3>
+                <h3>Yksi laatikko pitää aloituksen pienenä</h3>
                 <p>
-                  Yksilaatikkoisessa kompostorissa kaikki materiaali prosessoituu samassa
-                  tilassa, johon uutta biojätettä lisätään. Ennen matokakan keräämistä on
-                  yleensä odotettava useita kuukausia, että koko kompostorin sisältö on
-                  prosessoitunut.
+                  Yksi laatikko sopii kokeiluun ja pienelle biojätemäärälle. Komposti
+                  käynnistyy samalla tavalla kuin isommissa malleissa: ensin rakennetaan
+                  yksi kostea petikerros ja ruokinta pidetään maltillisena.
                 </p>
                 <p>
-                  Sen jälkeen koko kompostori tyhjennetään, täytetään petimateriaalilla ja
-                  odotus aloitetaan uudestaan.
+                  Kun komposti kasvaa, samaan järjestelmään voi lisätä uusia laatikoita ja
+                  siirtää ruokinnan seuraavaan kerrokseen.
                 </p>
               </div>
 
               <div className={classes.InfoCard}>
-                <h3>Läpivirtausmallin etu</h3>
+                <h3>Lisälaatikot helpottavat kiertoa</h3>
                 <p>
-                  Kolmen laatikon pinotussa mallissa aktiivinen käsittely tapahtuu vain
-                  ylimmässä ruokintakerroksessa. Kun ylin kerros on suurimmaksi osaksi
-                  käsitelty, sen päälle lisätään uusi kerros ja madot siirtyvät vähitellen
-                  ylöspäin ravinnon perässä.
+                  Kun uusi rei'itetty laatikko lisätään päälle, ruokinta siirtyy ylimpään
+                  kerrokseen ja alempi kerros saa kypsyä rauhallisemmin. Madot hakeutuvat
+                  vähitellen uutta ruokaa kohti.
                 </p>
                 <p>
-                  Materiaali ei siirry laatikosta toiseen itsestään, vaan alemmat
-                  kerrokset sisältävät aiemmin käsiteltyä materiaalia, joka tekeytyy
-                  rauhassa matojen siirtyessä ylempiin kerroksiin. Kun alin kerros on
-                  valmis ja kerätty, ylempien kerrosten sisältö siirretään käsin yhden
-                  tason alas ja ylimpään laatikkoon lisätään uusi petimateriaali.
+                  Kolmen laatikon malli antaa eniten joustoa: ylhäällä on aktiivinen
+                  ruokintakerros, keskellä siirtyvä kerros ja alimpana kypsyvä materiaali,
+                  joka on helpompi ottaa talteen oikeaan aikaan.
                 </p>
               </div>
             </div>
@@ -316,35 +341,31 @@ export default async function Page() {
           </section>
 
           <section id="hinnoittelu" className={classes.SectionStack}>
-            <h2>Mistä hinta muodostuu</h2>
+            <h2>Mallien hinnat</h2>
 
             <div className={classes.CardGrid}>
               <div className={classes.InfoCard}>
-                <h3>Perusosa ilman matoja</h3>
+                <h3>Aloituspakkaus ilman matoja</h3>
                 <p>
-                  Haluan hinnoitella paketin läpinäkyvästi. Alla on perusosan
-                  kustannusrakenne ilman matoja.
+                  Kaikissa malleissa on mukana valitsemasi laatikot, yksi kansi ja
+                  kookoskuitua käynnistämiseen. Kompostimadot lisätään ostoskoriin
+                  erikseen, jos tarvitset ne mukaan.
                 </p>
                 <ul className={classes.CleanList}>
-                  {starterKitComponentCosts.map((item) => (
-                    <li key={item.label}>
-                      {item.label}: {formatPrice(item.price)} €
+                  {starterKitVariants.map((variant) => (
+                    <li key={variant.sku}>
+                      {formatBoxCount(variant.binCount ?? variant.amount)}:{' '}
+                      {formatPrice(variant.price)} €
                     </li>
                   ))}
-                  <li>
-                    <strong>
-                      Yhteensä: {formatPrice(starterKitComponentCostTotal)} €
-                    </strong>
-                  </li>
                 </ul>
               </div>
 
               <div className={classes.InfoCard}>
                 <h3>Kompostimadot lisätään erikseen</h3>
                 <p>
-                  Perusosa on hinnoiteltu {formatPrice(starterKitBasePrice)} euroon.
                   Kompostimadot voi lisätä ostoskoriin samalla hinnalla kuin erikseen
-                  myytävissä matopaketeissa:
+                  myytävissä matopaketeissa.
                 </p>
                 <ul className={classes.CleanList}>
                   {wormVariants.map((variant) => (
@@ -356,19 +377,6 @@ export default async function Page() {
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              <div className={classes.InfoCard}>
-                <h3>Tilauksen kokoaminen</h3>
-                <ul className={classes.CleanList}>
-                  <li>lisää ostoskoriin aloituspakkaus</li>
-                  <li>valitse halutessasi yksi matopaketti mukaan</li>
-                  <li>lisää halutessasi kuituseos kompostin ylläpitoon</li>
-                </ul>
-                <p>
-                  Työosuus sisältyy perusosan hintaan, loput kulut muodostuvat
-                  materiaaleista.
-                </p>
               </div>
             </div>
           </section>

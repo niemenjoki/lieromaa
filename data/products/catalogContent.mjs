@@ -83,10 +83,10 @@ export const productCatalogContentSource = {
       pageName: 'Matokompostorin aloituspakkaus',
       title: 'Matokompostorin aloituspakkaus | Lieromaa',
       description:
-        'Lieromaan aloituspakkaus tekee matokompostin ylläpidosta sujuvaa: kolmen laatikon pinottu kompostori ja petimateriaali samassa paketissa.',
+        'Lieromaan aloituspakkaus tekee matokompostoinnin aloittamisesta helppoa: valitse 1, 2 tai 3 laatikkoa ja laajenna myöhemmin tarvittaessa.',
       h1: 'Lieromaan matokompostorin aloituspakkaus',
       navigationLabel: 'Aloituspakkaus',
-      updatedAt: '2026-05-16',
+      updatedAt: '2026-05-21',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -96,8 +96,8 @@ export const productCatalogContentSource = {
     product: {
       name: 'Matokompostorin aloituspakkaus',
       description:
-        'Lieromaan aloituspakkaus on suunniteltu sujuvaan matokompostin ylläpitoon: kolmen laatikon pinottu kompostori ja petimateriaali samassa paketissa.',
-      sku: 'starterkit-base',
+        'Lieromaan aloituspakkaus on modulaarinen matokompostori kotikäyttöön: valitse 1, 2 tai 3 laatikkoa ja laajenna samaa järjestelmää myöhemmin.',
+      sku: 'starterkit',
     },
     media: {
       images: [
@@ -131,15 +131,19 @@ export const productCatalogContentSource = {
       {
         question: 'Voiko kompostoria pitää sisätiloissa?',
         answer:
-          'Kyllä. Kolmen laatikon pinottu matokompostori soveltuu hyvin sisäkäyttöön, kun kosteustasapaino ja ruokinta pidetään hallinnassa.',
+          'Kyllä. Lieromaan laatikkomalli soveltuu hyvin sisäkäyttöön, kun kosteustasapaino ja ruokinta pidetään hallinnassa.',
       },
     ],
     merchant: {
       title(amount, variant) {
-        return 'Matokompostorin aloituspakkaus ilman matoja';
+        const boxCount = variant?.binCount ?? amount;
+        const boxLabel = boxCount === 1 ? '1 laatikko' : `${boxCount} laatikkoa`;
+        return `Matokompostorin aloituspakkaus (${boxLabel})`;
       },
       description(amount, variant) {
-        return 'Lieromaan aloituspakkaus sisältää kolmen laatikon pinotun matokompostorin ja petimateriaalin. Kuituseoksen voi lisätä tilaukseen erikseen.';
+        const boxCount = variant?.binCount ?? amount;
+        const boxLabel = boxCount === 1 ? 'yhden laatikon' : `${boxCount} laatikon`;
+        return `Lieromaan ${boxLabel} aloituspakkaus sisältää valmiiksi valmistellut laatikot, kannen ja kookoskuitua uuden matokompostorin käynnistämiseen. Kompostimadot ja kuituseoksen voi lisätä tilaukseen erikseen.`;
       },
       productType: 'Matokompostointi > Matokompostorit > Aloituspakkaukset',
     },

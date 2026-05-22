@@ -373,6 +373,73 @@ describe('frontend public order normalization', () => {
     );
   });
 
+  test('normalizePublicOrderSubmission should preserve starter kit expansion intent in cart items', () => {
+    const now = new Date('2026-05-21T10:00:00Z');
+    const cartItems = [{ sku: 'starterkit-expansion-2', quantity: 1 }];
+    const expectedQuote = getCartOrderQuote({
+      items: cartItems,
+      shippingMethod: 'nouto',
+    });
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify(cartItems),
+        toimitus: 'nouto',
+      }),
+      { now }
+    );
+
+    expectEqual(
+      expectedQuote.items[0].label,
+      'Laajennus nykyiseen kompostoriin, 2 laatikkoa',
+      'getCartOrderQuote should label expansion starter-kit SKUs clearly'
+    );
+    expectEqual(
+      payload.items[0].sku,
+      'starterkit-expansion-2',
+      'normalizePublicOrderSubmission should keep the expansion SKU'
+    );
+    expectEqual(
+      payload.items[0].label,
+      'Laajennus nykyiseen kompostoriin, 2 laatikkoa',
+      'normalizePublicOrderSubmission should forward the expansion label'
+    );
+    expectEqual(
+      payload.items[0].quantity,
+      2,
+      'normalizePublicOrderSubmission should keep the selected expansion box count'
+    );
+    expectEqual(
+      payload.pricing.itemPrice,
+      44,
+      'normalizePublicOrderSubmission should use the configured expansion price'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should migrate old starter kit cart SKUs', () => {
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify([{ sku: 'starterkit-base', quantity: 1 }]),
+        toimitus: 'nouto',
+      }),
+      { now: new Date('2026-05-21T10:00:00Z') }
+    );
+
+    expectEqual(
+      payload.items[0].sku,
+      'starterkit-3',
+      'normalizePublicOrderSubmission should map old cart starter kits to the current three-box SKU'
+    );
+    expectEqual(
+      payload.pricing.itemPrice,
+      64,
+      'normalizePublicOrderSubmission should price migrated starter kit carts from current source data'
+    );
+  });
+
   test('normalizePublicOrderSubmission should preserve the rendered cart earliest shipping date snapshot', () => {
     const now = new Date('2026-05-02T10:00:00Z');
 

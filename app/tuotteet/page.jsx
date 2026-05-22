@@ -22,7 +22,9 @@ const breadcrumbItems = [
 ];
 
 function formatProductPrice(productKey) {
-  const variants = getProductVariants(productKey);
+  const variants = getProductVariants(productKey).filter(
+    (variant) => !variant.hideFromPublicOffers
+  );
 
   if (!variants.length) {
     return 'Ei saatavilla';
