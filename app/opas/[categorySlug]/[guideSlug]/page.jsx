@@ -6,6 +6,10 @@ import ContentRecommendations from '@/components/ContentRecommendations/ContentR
 import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import {
+  getGuideCategorySlug,
+  isMatchingGuideCategorySlug,
+} from '@/lib/content/guideRoutes.mjs';
+import {
   getAllContent,
   getContentMdxSource,
   getContentMetadata,
@@ -18,7 +22,7 @@ export function generateStaticParams() {
   const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
 
   return guides.map((guide) => ({
-    categorySlug: guide.category.name.replaceAll(' ', '-'),
+    categorySlug: getGuideCategorySlug(guide.category.name),
     guideSlug: guide.slug,
   }));
 }
@@ -36,6 +40,16 @@ export default async function GuidePage({ params }) {
     notFound();
   }
 
+  if (
+    !isMatchingGuideCategorySlug({
+      categoryName: data.category.name,
+      categorySlug,
+    })
+  ) {
+    notFound();
+  }
+
+  const canonicalCategorySlug = getGuideCategorySlug(data.category.name);
   const { structuredData } = data;
   const recommendations = getContentRecommendations({
     current: {
@@ -61,7 +75,7 @@ export default async function GuidePage({ params }) {
             items={[
               { name: 'Etusivu', href: '/' },
               { name: 'Opas', href: '/opas' },
-              { name: data.category.name, href: `/opas/${categorySlug}` },
+              { name: data.category.name, href: `/opas/${canonicalCategorySlug}` },
               { name: data.title },
             ]}
           />
