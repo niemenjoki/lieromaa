@@ -90,12 +90,11 @@ export default async function Page() {
               <aside className={classes.SummaryCard}>
                 <h2>Tilaa helposti</h2>
                 <ul className={classes.FeatureList}>
-                  <li>
-                    Valitse 1, 2 tai 3 laatikkoa saman modulaarisen järjestelmän mukaan.
-                  </li>
+                  <li>Valitse 1, 2 tai 3 laatikkoa</li>
                   <li>Laatikot, kansi ja kookoskuitu toimitetaan samassa paketissa.</li>
                   <li>
-                    Useampi laatikko tekee ruokinnasta ja sadonkorjuusta sujuvampaa.
+                    Useamman laatikon avulla voit luoda läpivirtauskompostorin, mikä
+                    helpottaa matokakan keräystä.
                   </li>
                 </ul>
 
@@ -139,25 +138,23 @@ export default async function Page() {
                 <h3>1 laatikko: edullinen kokeilu</h3>
                 <p>
                   Sopii pienelle biojätemäärälle ja matokompostoinnin kokeiluun.
-                  Sadonkorjuu tehdään käsin, koska erillisiä kypsytys- ja
-                  ruokintakerroksia ei vielä ole.
+                  Matokakkaa 3-4 kuukauden välein.
                 </p>
               </div>
 
               <div className={classes.InfoCard}>
                 <h3>2 laatikkoa: tilaa kasvuun</h3>
                 <p>
-                  Sopii, kun haluat aloittaa yhdestä aktiivisesta kerroksesta mutta pitää
-                  valmiina seuraavan rei'itetyn laatikon kompostin kasvattamista varten.
+                  Matokakka kerätään 2-3 kuukauden välein alemmasta laatikosta ylemmän
+                  kerroksen yhä prosessoituessa.
                 </p>
               </div>
 
               <div className={classes.InfoCard}>
                 <h3>3 laatikkoa: sujuvin arki</h3>
                 <p>
-                  Paras valinta, jos haluat alusta asti koko pinottavan järjestelmän.
-                  Useampi kerros helpottaa ruokinnan, kypsymisen ja matokakan keräämisen
-                  rytmittämistä.
+                  Matokakkaa voi kerätä 1-2 kuukauden välein alimmasta laatikosta,
+                  ylempien prosessoituessa.
                 </p>
               </div>
             </div>
@@ -170,10 +167,17 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Laatikot mallin mukaan</h3>
                 <ul className={classes.CleanList}>
-                  <li>1 laatikko: 1 umpohjainen laatikko ja kansi</li>
-                  <li>2 laatikkoa: 1 umpohjainen ja 1 rei'itetty laatikko sekä kansi</li>
                   <li>
-                    3 laatikkoa: 1 umpohjainen ja 2 rei'itettyä laatikkoa sekä kansi
+                    1 laatikko: 1 umpipohjainen kompostorilaatikko, petimateriaali ja
+                    kansi
+                  </li>
+                  <li>
+                    2 laatikkoa: 1 umpipohjainen ja 1 rei'itetty kompostorilaatikko,
+                    petimateriaali kumpaankin laatikkoon ja kansi
+                  </li>
+                  <li>
+                    3 laatikkoa: 1 umpipohjainen ja 2 rei'itettyä kompostorilaatikkoa,
+                    petimateriaali jokaiseen laatikkoon ja kansi
                   </li>
                 </ul>
               </div>
@@ -184,7 +188,7 @@ export default async function Page() {
                   <li>kestävät 14 L muovilaatikot, valmiiksi valmisteltuina</li>
                   <li>valmiiksi mitattu määrä kookoskuitua petimateriaaliksi</li>
                   <li id="mitat">yhden laatikon ulkomitat 40 x 30 x 19 cm</li>
-                  <li>pinossa jokainen lisälaatikko kasvattaa korkeutta noin 4 cm</li>
+                  <li>pinottuna jokainen lisälaatikko kasvattaa korkeutta noin 4 cm</li>
                   <li>2 laatikkoa pinottuna noin 23 cm, 3 laatikkoa noin 27 cm</li>
                 </ul>
                 <p>
@@ -209,15 +213,17 @@ export default async function Page() {
                 </p>
                 <p>
                   Lasku tulee OP Kevytyrittäjä -palvelun kautta sähköpostiin.{' '}
-                  <strong>Maksuaika on 7 vuorokautta.</strong>
+                  <strong>
+                    Maksuaika on 7 vuorokautta tilauksen noudosta tai postituksesta.
+                  </strong>
                 </p>
               </div>
 
               <div className={classes.InfoCard}>
                 <h3>Toimitus</h3>
                 <p>
-                  Jos tilaukseen kuuluu eläviä kompostimatoja, lähetän tilauksen
-                  maanantaina, jotta madot eivät jää postin varastoon viikonlopuksi.
+                  Lähetän matoja sisältäviä tilauksia vain maanantaisin, jotta madot eivät
+                  jää postin varastoon viikonlopuksi.
                 </p>
                 <p>
                   Toimitustavoiksi voit valita{' '}
@@ -242,10 +248,14 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Palautukset</h3>
                 <p>
-                  Aloituspakkauksella on 14 päivän peruuttamisoikeus käyttämättömän
-                  tuotteen osalta. Jos lisäät tilaukseen kompostimatoja, niiden
-                  peruuttamisoikeus arvioidaan erikseen, koska kyse on elävistä
-                  kompostimadoista.
+                  Aloituspakkauksella on 14 päivän peruuttamisoikeus käyttämättömälle
+                  tuotteelle.
+                </p>
+                <p>
+                  Kompostimadoilla ei niiden luonteen vuoksi ole normaalia 14 päivän
+                  peruuttamisoikeutta, koska kyseessä on elävä tuote. Mahdolliset
+                  vialliset tai kuljetuksessa vaurioituneet toimitukset kuitenkin
+                  korvataan.
                 </p>
                 <p>
                   Tarkemmat ehdot löytyvät{' '}
