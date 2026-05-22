@@ -23,8 +23,6 @@ Generated build outputs do not belong here. They live in `/generated`.
   Metadata for static utility pages like the blog index, guide hub, about page, and worm calculator.
 - `pages/products/starterKitSetup.mjs`
   Metadata and how-to step content for the starter kit setup page.
-- `pages/products/starterKit.js`
-  The starter kit component cost breakdown shown on the product page.
 - `products/catalogContent.mjs`
   Product marketing content shared across metadata, structured data, sitemap, and product pages.
   Edit this when you want to change product page copy, SEO text, FAQ content, product descriptions, merchant feed copy, or product images.

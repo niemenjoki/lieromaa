@@ -106,43 +106,114 @@ const legacyWormVariants = [
   },
 ];
 
-const starterKitBasePrice = 46;
 const wormPackagePricesByWeight = {
   25: 20,
   50: 30,
   75: 40,
   100: 50,
 };
-const starterKitVariantMetadata = Object.fromEntries(
-  Object.entries(wormVariantMetadata).map(([wormSku, variant]) => {
-    const weight = variant.weightGrams;
-
-    return [
-      `starterkit-${weight}`,
-      {
-        ...variant,
-        price: starterKitBasePrice + wormPackagePricesByWeight[weight],
-      },
-    ];
-  })
-);
-
-const starterKitBaseVariantMetadata = {
-  'starterkit-base': {
+const starterKitModelSkus = ['starterkit-1', 'starterkit-2', 'starterkit-3'];
+const starterKitExpansionSkus = [
+  'starterkit-expansion-1',
+  'starterkit-expansion-2',
+  'starterkit-expansion-3',
+];
+const starterKitVariantMetadata = {
+  'starterkit-1': {
     amount: 1,
     salesUnit: 'piece',
     itemCount: 1,
+    binCount: 1,
+    solidBinCount: 1,
+    drilledBinCount: 0,
+    lidCount: 1,
+    includedCoirLiters: 1.5,
+    expansionSku: 'starterkit-expansion-1',
+  },
+  'starterkit-2': {
+    amount: 2,
+    salesUnit: 'piece',
+    itemCount: 2,
+    binCount: 2,
+    solidBinCount: 1,
+    drilledBinCount: 1,
+    lidCount: 1,
+    includedCoirLiters: 1.5,
+    expansionSku: 'starterkit-expansion-2',
+  },
+  'starterkit-3': {
+    amount: 3,
+    salesUnit: 'piece',
+    itemCount: 3,
+    binCount: 3,
+    solidBinCount: 1,
+    drilledBinCount: 2,
+    lidCount: 1,
+    includedCoirLiters: 1.5,
+    expansionSku: 'starterkit-expansion-3',
+  },
+  'starterkit-expansion-1': {
+    amount: 1,
+    salesUnit: 'piece',
+    itemCount: 1,
+    binCount: 1,
+    solidBinCount: 0,
+    drilledBinCount: 1,
+    lidCount: 1,
+    includedCoirLiters: 1.5,
+    isExpansion: true,
+    baseSku: 'starterkit-1',
+    hideFromVariantSelector: true,
+    hideFromPublicOffers: true,
+    hideFromMerchantFeed: true,
+  },
+  'starterkit-expansion-2': {
+    amount: 2,
+    salesUnit: 'piece',
+    itemCount: 2,
+    binCount: 2,
+    solidBinCount: 0,
+    drilledBinCount: 2,
+    lidCount: 1,
+    includedCoirLiters: 1.5,
+    isExpansion: true,
+    baseSku: 'starterkit-2',
+    hideFromVariantSelector: true,
+    hideFromPublicOffers: true,
+    hideFromMerchantFeed: true,
+  },
+  'starterkit-expansion-3': {
+    amount: 3,
+    salesUnit: 'piece',
+    itemCount: 3,
+    binCount: 3,
+    solidBinCount: 0,
+    drilledBinCount: 3,
+    lidCount: 1,
+    includedCoirLiters: 1.5,
+    isExpansion: true,
+    baseSku: 'starterkit-3',
+    hideFromVariantSelector: true,
+    hideFromPublicOffers: true,
+    hideFromMerchantFeed: true,
   },
 };
 
 const legacyStarterKitVariants = [
-  ...Object.entries(starterKitVariantMetadata).map(([sku, variant]) => ({
-    sku,
+  {
+    sku: 'starterkit-base',
+    amount: 1,
+    salesUnit: 'piece',
+    itemCount: 1,
+    price: 46,
+  },
+  ...Object.entries(wormVariantMetadata).map(([, variant]) => ({
+    sku: `starterkit-${variant.weightGrams}`,
     amount: variant.amount,
     salesUnit: 'weight',
     weightGrams: variant.weightGrams,
     estimatedWormCount: variant.estimatedWormCount,
-    price: variant.price,
+    price: 46 + wormPackagePricesByWeight[variant.weightGrams],
   })),
   {
     sku: 'starterkit-50',
@@ -166,6 +237,10 @@ const legacyStarterKitVariants = [
     price: 91,
   },
 ];
+
+function formatStarterKitBoxCount(count) {
+  return count === 1 ? '1 laatikko' : `${count} laatikkoa`;
+}
 
 export const productCatalogCommerceSource = {
   worms: {
@@ -209,8 +284,8 @@ export const productCatalogCommerceSource = {
     },
   },
   starterKit: {
-    variantSkus: ['starterkit-base'],
-    variantMetadata: starterKitBaseVariantMetadata,
+    variantSkus: [...starterKitModelSkus, ...starterKitExpansionSkus],
+    variantMetadata: starterKitVariantMetadata,
     legacyVariants: legacyStarterKitVariants,
     shippingSku: 'postage-pickup',
     schema: {
@@ -218,12 +293,20 @@ export const productCatalogCommerceSource = {
     },
     order: {
       defaultVariantAmount: 1,
-      variantLegend: 'Aloituspakkaus',
+      variantLegend: 'Valitse laatikoiden määrä',
       variantSelectorPosition: 'beforeFulfillment',
-      variantDescription: 'Yksi pakkauskoko saatavilla.',
+      variantDescription:
+        'Voit aloittaa pienellä mallilla ja laajentaa samaa kompostoria myöhemmin.',
       showWormAmountFinePrint: false,
       getVariantLabel({ amount, priceFormatted, variant }) {
-        return `Aloituspakkaus - ${priceFormatted} €`;
+        const boxCount = variant?.binCount ?? variant?.itemCount ?? amount;
+        return `${formatStarterKitBoxCount(boxCount)} - ${priceFormatted} €`;
+      },
+      expansionOption: {
+        checkboxLabel:
+          'Käytän laatikot lisäkerroksina nykyiseen Lieromaan matokompostoriin',
+        helperText:
+          'Valitse tämä, jos sinulla on jo Lieromaan pohjalaatikko. Tällöin kaikki tilauksen laatikot toimitetaan rei’itettyinä lisäkerroksina. Mukana tulee yksi kansi ja kookoskuitua uuden kerroksen käynnistämiseen.',
       },
       shippingOptions: [...cartShippingOptionsSource],
       shippingHelperTexts: sharedPickupHelperTexts,
