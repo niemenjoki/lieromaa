@@ -86,7 +86,7 @@ export const productCatalogContentSource = {
         'Lieromaan aloituspakkaus tekee matokompostoinnin aloittamisesta helppoa: valitse 1, 2 tai 3 laatikkoa ja laajenna myöhemmin tarvittaessa.',
       h1: 'Lieromaan matokompostorin aloituspakkaus',
       navigationLabel: 'Aloituspakkaus',
-      updatedAt: '2026-05-21',
+      updatedAt: '2026-05-22',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -111,7 +111,7 @@ export const productCatalogContentSource = {
         },
         {
           url: '/images/products/starterkit-contents.avif',
-          alt: 'Matokompostin aloituspakkauksen sisältö ylhäältä kuvattuna: kolme mustaa laatikkoa, kookoskuituharkot ja erillinen astia kuivikkeelle.',
+          alt: 'Matokompostin aloituspakkauksen sisältö ylhäältä kuvattuna: kolme mustaa laatikkoa, kookoskuituharkot ja erillinen astia petimateriaalille.',
           width: 1200,
           height: 900,
         },
@@ -126,7 +126,7 @@ export const productCatalogContentSource = {
       {
         question: 'Kuinka nopeasti kompostointi käynnistyy?',
         answer:
-          'Madot alkavat käsitellä biojätettä heti, mutta ensimmäisten viikkojen aikana ruokintaa suositellaan maltillisena.',
+          'Madot alkavat käsitellä biojätettä heti, mutta ensimmäisten viikkojen aikana ruokinta kannattaa pitää maltillisena.',
       },
       {
         question: 'Voiko kompostoria pitää sisätiloissa?',
@@ -149,7 +149,7 @@ export const productCatalogContentSource = {
     },
     schema: {
       returnPolicyText:
-        'Aloituspakkauksella on 14 vrk peruuttamisoikeus käyttämättömän tuotteen osalta. Elävien kompostimatojen peruuttamisoikeus arvioidaan erikseen, jos tilaukseen lisätään matoja.',
+        'Aloituspakkauksella on 14 päivän peruuttamisoikeus käyttämättömälle tuotteelle. Kompostimadoilla ei niiden luonteen vuoksi ole normaalia 14 päivän peruuttamisoikeutta, koska kyseessä on elävä tuote. Mahdolliset vialliset tai kuljetuksessa vaurioituneet toimitukset kuitenkin korvataan.',
     },
   },
   compostChow: {
