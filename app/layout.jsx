@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import AdSenseConsentGate from '@/components/AdSense/AdSenseConsentGate';
 import Analytics from '@/components/Analytics/Analytics';
 import { CartProvider } from '@/components/Cart/CartProvider';
+import { DeliveryBreakBanner } from '@/components/DeliveryBreakNotice/DeliveryBreakNotice';
 import Footer from '@/components/Footer/Footer';
 import Navbar from '@/components/Navbar/Navbar';
 import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
         <div className="container">
           <CartProvider>
             <Navbar navigation={navigation} searchItems={searchItems} />
+            <DeliveryBreakBanner />
             <main>{children}</main>
             <Footer navigation={navigation} />
           </CartProvider>

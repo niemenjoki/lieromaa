@@ -208,8 +208,8 @@ export default async function Page() {
                 <h3>Maksaminen</h3>
                 <p>
                   Kun tilaat aloituspakkauksen, lähetän manuaalisen tilausvahvistuksen
-                  viimeistään kahden päivän kuluessa. Jos lisäät mukaan kompostimatoja,
-                  varmistan samalla niiden saatavuuden.
+                  normaalisti viimeistään kahden päivän kuluessa. Jos lisäät mukaan
+                  kompostimatoja, varmistan samalla niiden saatavuuden.
                 </p>
                 <p>
                   Lasku tulee OP Kevytyrittäjä -palvelun kautta sähköpostiin.{' '}

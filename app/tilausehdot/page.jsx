@@ -73,8 +73,10 @@ export default function OrderPolicyPage() {
           myös sähköpostitse tai pikaviestinten avulla.{' '}
         </p>
         <p>
-          Kaikki tilaukset vahvistetaan manuaalisesti erikseen 1-2 arkipäivän kuluessa,
-          kun tuotteen saatavuus on tarkistettu. Vahvistuksessa ilmoitetaan tilauksen
+          Kaikki tilaukset vahvistetaan manuaalisesti erikseen normaalisti 1-2 arkipäivän
+          kuluessa, kun tuotteen saatavuus on tarkistettu. Sivustolla erikseen ilmoitetut
+          loma- ja poissaoloajat voivat siirtää tilausten käsittelyn, vahvistuksen ja
+          toimituksen loman jälkeiseen käsittelyyn. Vahvistuksessa ilmoitetaan tilauksen
           hinta, toimituskulut sekä tilatut tuotteet.
         </p>
         <p>
