@@ -108,7 +108,7 @@ export default async function Page() {
                 />
 
                 <p className={classes.HelperText}>
-                  Vahvistan tilauksen kahden päivän kuluessa.
+                  Vahvistan tilaukset normaalisti kahden päivän kuluessa.
                 </p>
 
                 <a
@@ -132,8 +132,8 @@ export default async function Page() {
                 <h3>Maksaminen</h3>
                 <p>
                   Kun tilaat kompostimatoja alla olevalla lomakkeella, varmistan matojen
-                  saatavuuden ja lähetän manuaalisen tilausvahvistuksen viimeistään kahden
-                  päivän kuluessa.
+                  saatavuuden ja lähetän manuaalisen tilausvahvistuksen normaalisti
+                  viimeistään kahden päivän kuluessa.
                 </p>
                 <p>
                   Lasku tulee OP Kevytyrittäjä -palvelun kautta sähköpostiin.{' '}

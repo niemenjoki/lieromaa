@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useCart } from '@/components/Cart/CartProvider';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { trackAnalyticsEvent } from '@/lib/analytics/events';
+import { adjustShippingDateForDeliveryBreak } from '@/lib/commerce/deliveryBreak.mjs';
 import { ORDER_SUCCESS_MESSAGE } from '@/lib/copy/orderMessages';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { getCartOrderQuote, getDefaultCartShippingOption } from '@/lib/orders/cartOrder';
@@ -137,7 +138,10 @@ function getEstimatedShippingDate(lines) {
     }
   }
 
-  return formatIsoDate(estimatedDate);
+  return adjustShippingDateForDeliveryBreak({
+    estimatedShippingDate: formatIsoDate(estimatedDate),
+    orderDate: formatIsoDate(today),
+  });
 }
 
 function getVisibleEarliestShippingDate({
