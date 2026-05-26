@@ -110,5 +110,19 @@
     "review": "Toimitus ja ohjeet olivat erinomaiset.\nMadot olivat virkeitä.\nNyt sitten odotetaan miten kasvavat ja lisääntyvätköhän.",
     "displayName": "Hannu P",
     "submittedAt": "2026-05-18T12:55:29.497Z"
+  },
+  {
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Madot saapuivat perille hyvässä kunnossa ja nopeasti. Ja olivat hyvässä kunnossa",
+    "displayName": "Toni",
+    "submittedAt": "2026-05-26T05:06:16.918Z"
+  },
+  {
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Ystävällinen palvelu. Sujuva toimitus.",
+    "displayName": "Markku",
+    "submittedAt": "2026-05-26T05:44:09.819Z"
   }
 ]
