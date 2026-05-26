@@ -1,6 +1,7 @@
 import {
   getApprovedProductReviewSummary,
   getApprovedProductReviews,
+  getApprovedProductWrittenReviews,
 } from '@/lib/reviews/approvedReviews';
 
 import ProductReviewsSectionClient from './ProductReviewsSectionClient';
@@ -12,11 +13,12 @@ export default function ProductReviewsSection({ productKey }) {
   }
 
   const summary = getApprovedProductReviewSummary(productKey);
+  const writtenReviews = getApprovedProductWrittenReviews(productKey);
 
   return (
     <ProductReviewsSectionClient
       productKey={productKey}
-      reviews={reviews}
+      reviews={writtenReviews}
       summary={summary}
     />
   );

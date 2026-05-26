@@ -64,7 +64,8 @@ export default function PrivacyPage() {
           </li>
           <li>
             Arvostelutiedot: arvostelulinkin tunniste, tuotetieto, tähtiarvio, kirjoitettu
-            arvostelu sekä mahdollinen näyttönimi.
+            arvostelu, mahdollinen yksityinen palaute, mahdollinen näyttönimi sekä tieto
+            siitä, mitä tilauksen tuotteita arvostelu koskee.
           </li>
           <li>
             Tekninen käyttödata ja analytiikkamittarit: Lieromaan oma analytiikka kerää
@@ -165,9 +166,11 @@ export default function PrivacyPage() {
         <p>
           Arvostelulomake toimii henkilökohtaisella arvostelulinkillä, joka liittyy
           aiempaan tilaukseen. Arvostelun yhteydessä käsitellään arvostelulinkin tunniste,
-          tuotetieto, tähtiarvio, kirjoitettu arvostelu ja mahdollinen näyttönimi.
-          Arvostelu tallennetaan ensin tarkistettavaksi, eikä sitä julkaista sivustolla
-          ennen manuaalista hyväksyntää.
+          tuotetieto, tähtiarvio, kirjoitettu arvostelu, mahdollinen yksityinen palaute,
+          mahdollinen näyttönimi sekä tieto siitä, mitä tilauksen tuotteita arvostelu
+          koskee. Arvostelu tallennetaan ensin tarkistettavaksi, eikä sitä julkaista
+          sivustolla ennen manuaalista hyväksyntää. Yksityistä palautetta ei julkaista
+          asiakasarvosteluna.
         </p>
 
         <h2>Oppaiden kysymys- ja aihe-ehdotuslomake</h2>

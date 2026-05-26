@@ -66,6 +66,12 @@ describe('frontend review proxy routes', () => {
             orderId: 'LRM-123',
             productKey: 'worms',
             productName: 'Kompostimadot',
+            productTargets: [
+              {
+                productKey: 'worms',
+                productName: 'Kompostimadot',
+              },
+            ],
           });
         };
 
@@ -89,6 +95,13 @@ describe('frontend review proxy routes', () => {
               orderId: 'LRM-123',
               productKey: 'worms',
               productName: 'Kompostimadot',
+              productTargets: [
+                {
+                  productKey: 'worms',
+                  productName: 'Kompostimadot',
+                },
+              ],
+              testMode: false,
             },
             'the review session route should return the normalized review session payload from the order server'
           );

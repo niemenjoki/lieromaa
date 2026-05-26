@@ -89,6 +89,10 @@ export async function GET(request) {
       orderId: responseData.orderId || '',
       productKey: responseData.productKey || '',
       productName: responseData.productName || '',
+      productTargets: Array.isArray(responseData.productTargets)
+        ? responseData.productTargets
+        : [],
+      testMode: Boolean(responseData.testMode),
     });
   } catch (error) {
     console.error('Review session forwarding failed:', error);

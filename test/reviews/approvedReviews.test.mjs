@@ -35,6 +35,18 @@ describe('frontend approved review data', () => {
         `approved review summaries should report the correct review count for ${productKey}`
       );
 
+      expectEqual(
+        Object.values(summary.ratingCounts).reduce((sum, count) => sum + count, 0),
+        reviews.length,
+        `approved review summaries should report a complete star breakdown for ${productKey}`
+      );
+
+      expectEqual(
+        summary.writtenReviewCount + summary.ratingOnlyCount,
+        reviews.length,
+        `approved review summaries should separate written and rating-only reviews for ${productKey}`
+      );
+
       if (!reviews.length) {
         expectEqual(
           summary.averageRating,
