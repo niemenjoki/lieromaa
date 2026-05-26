@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
+import SafeLink from '@/components/SafeLink/SafeLink';
 import {
   REVIEW_ERROR_MESSAGE,
   REVIEW_SESSION_ENDPOINT,
@@ -232,12 +233,12 @@ export default function ReviewPageClient() {
             <p>Seuraavaksi voit jatkaa näistä:</p>
             <ul>
               <li>
-                <a href={FIRST_MONTH_GUIDE_PATH}>
+                <SafeLink href={FIRST_MONTH_GUIDE_PATH}>
                   Ensimmäiset 30 päivää uudessa matokompostorissa
-                </a>
+                </SafeLink>
               </li>
               <li>
-                <a href="/opas">Matokompostoinnin oppaat</a>
+                <SafeLink href="/opas">Matokompostoinnin oppaat</SafeLink>
               </li>
             </ul>
           </div>
