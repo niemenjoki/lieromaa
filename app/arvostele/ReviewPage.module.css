@@ -109,6 +109,29 @@
   resize: vertical;
 }
 
+.ProductTargetList {
+  display: grid;
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.ProductTargetOption {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--background-6);
+  border-radius: 6px;
+  background-color: var(--background-1);
+  font-weight: 600;
+}
+
+.ProductTargetOption input {
+  margin-top: 0.2rem;
+  accent-color: var(--highlight);
+}
+
 .Stars {
   display: flex;
   flex-wrap: wrap;
@@ -173,16 +196,51 @@
   margin: 0.25rem 0 0;
 }
 
+.TestModeNotice {
+  border-left: 4px solid var(--highlight);
+  background: var(--background-1);
+  padding: 0.7rem 0.85rem;
+  margin: 0;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
 .Error {
   color: #a32121;
   font-weight: 600;
   margin: 0.25rem 0 0;
 }
 
+.SuccessBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
 .Success {
   color: var(--highlight-alt);
   font-weight: 600;
   margin: 0.25rem 0 0;
+}
+
+.NextSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.NextSteps p,
+.NextSteps ul {
+  margin: 0;
+}
+
+.NextSteps ul {
+  padding-left: 1.25rem;
+}
+
+.NextSteps a {
+  color: var(--highlight-alt);
+  font-weight: 700;
 }
 
 .SubmitButton {

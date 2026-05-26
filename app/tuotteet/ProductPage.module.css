@@ -832,6 +832,58 @@
   opacity: 0.82;
 }
 
+.StarBreakdown {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 24rem;
+  margin: 0.65rem 0 0;
+}
+
+.StarBreakdownRow {
+  display: grid;
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.StarBreakdownLabel,
+.StarBreakdownValue {
+  margin: 0;
+}
+
+.StarBreakdownLabel {
+  font-size: 0.88rem;
+  opacity: 0.86;
+}
+
+.StarBreakdownValue {
+  display: grid;
+  grid-template-columns: minmax(4rem, 1fr) 1.5rem;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.StarBreakdownTrack {
+  display: block;
+  height: 0.45rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--background-6);
+}
+
+.StarBreakdownFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--highlight);
+}
+
+.StarBreakdownCount {
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: right;
+}
+
 .ReviewActions {
   display: flex;
   flex-wrap: wrap;
@@ -932,6 +984,13 @@
   opacity: 0.8;
   font-style: italic;
   line-height: 1.35;
+}
+
+.ReviewRatingOnlyNote {
+  margin: 0.85rem 0 0 !important;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  opacity: 0.82;
 }
 
 .ReviewToggleButton:disabled,

@@ -14,9 +14,24 @@ import {
 import classes from './ReviewPage.module.css';
 
 const STAR_OPTIONS = [1, 2, 3, 4, 5];
+const FIRST_MONTH_GUIDE_PATH =
+  '/opas/kompostorin-hoito/ensimmaiset-30-paivaa-matokompostorin-kaynnistys';
 
 function getStars(value) {
   return '\u2605'.repeat(value);
+}
+
+function normalizeProductTargets(value, fallback) {
+  const targets = Array.isArray(value)
+    ? value
+        .map((target) => ({
+          productKey: String(target?.productKey || target?.key || '').trim(),
+          productName: String(target?.productName || target?.name || '').trim(),
+        }))
+        .filter((target) => target.productKey && target.productName)
+    : [];
+
+  return targets.length ? targets : fallback ? [fallback] : [];
 }
 
 export default function ReviewPageClient() {
@@ -27,7 +42,9 @@ export default function ReviewPageClient() {
   const [sessionError, setSessionError] = useState('');
   const [rating, setRating] = useState(5);
   const [review, setReview] = useState('');
+  const [privateFeedback, setPrivateFeedback] = useState('');
   const [displayName, setDisplayName] = useState('');
+  const [selectedProductKeys, setSelectedProductKeys] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -39,6 +56,7 @@ export default function ReviewPageClient() {
     setSubmitError('');
     setSessionError('');
     setIsSubmitted(false);
+    setSelectedProductKeys([]);
 
     if (!nextToken) {
       setIsLoadingSession(false);
@@ -65,11 +83,26 @@ export default function ReviewPageClient() {
           throw new Error(data?.message || REVIEW_ERROR_MESSAGE);
         }
 
+        const fallbackTarget =
+          data.productKey && data.productName
+            ? {
+                productKey: data.productKey,
+                productName: data.productName,
+              }
+            : null;
+        const productTargets = normalizeProductTargets(
+          data.productTargets,
+          fallbackTarget
+        );
+
         setSession({
           orderId: data.orderId || '',
           productKey: data.productKey || '',
           productName: data.productName || '',
+          productTargets,
+          testMode: Boolean(data.testMode),
         });
+        setSelectedProductKeys(productTargets.map((target) => target.productKey));
       } catch (error) {
         if (controller.signal.aborted) {
           return;
@@ -110,6 +143,11 @@ export default function ReviewPageClient() {
       return;
     }
 
+    if ((session?.productTargets?.length || 0) > 1 && selectedProductKeys.length === 0) {
+      setSubmitError('Valitse vähintään yksi tuote, jota arvostelu koskee.');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitError('');
 
@@ -124,7 +162,9 @@ export default function ReviewPageClient() {
           token,
           rating,
           review,
+          privateFeedback,
           displayName,
+          productKeys: selectedProductKeys,
         }),
       });
 
@@ -136,6 +176,7 @@ export default function ReviewPageClient() {
       setIsSubmitted(true);
       setSessionError('');
       setReview('');
+      setPrivateFeedback('');
       setDisplayName('');
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : REVIEW_ERROR_MESSAGE);
@@ -163,6 +204,14 @@ export default function ReviewPageClient() {
     );
   }
 
+  function handleProductTargetChange(productKey) {
+    setSelectedProductKeys((currentValue) =>
+      currentValue.includes(productKey)
+        ? currentValue.filter((value) => value !== productKey)
+        : [...currentValue, productKey]
+    );
+  }
+
   return (
     <section className={classes.Card} aria-live="polite">
       <div className={classes.Header}>
@@ -173,7 +222,26 @@ export default function ReviewPageClient() {
       </div>
 
       {isSubmitted ? (
-        <p className={classes.Success}>{REVIEW_SUCCESS_MESSAGE}</p>
+        <div className={classes.SuccessBlock}>
+          <p className={classes.Success}>
+            {session?.testMode
+              ? 'Testiarvostelun lähetys onnistui. Testiarvostelua ei tallenneta eikä se estä linkin käyttöä uudelleen.'
+              : REVIEW_SUCCESS_MESSAGE}
+          </p>
+          <div className={classes.NextSteps}>
+            <p>Seuraavaksi voit jatkaa näistä:</p>
+            <ul>
+              <li>
+                <a href={FIRST_MONTH_GUIDE_PATH}>
+                  Ensimmäiset 30 päivää uudessa matokompostorissa
+                </a>
+              </li>
+              <li>
+                <a href="/opas">Matokompostoinnin oppaat</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       ) : (
         <form
           className={classes.Form}
@@ -202,6 +270,36 @@ export default function ReviewPageClient() {
             </div>
           </fieldset>
 
+          {session?.testMode ? (
+            <p className={classes.TestModeNotice}>
+              Testitilassa lähetystä ei tallenneta eikä linkki vanhene.
+            </p>
+          ) : null}
+
+          {session?.productTargets?.length > 1 ? (
+            <fieldset className={classes.Label}>
+              <legend>Mitä tuotteita arvostelu koskee?</legend>
+              <div className={classes.ProductTargetList}>
+                {session.productTargets.map((target) => (
+                  <label key={target.productKey} className={classes.ProductTargetOption}>
+                    <input
+                      type="checkbox"
+                      name="productKeys"
+                      value={target.productKey}
+                      checked={selectedProductKeys.includes(target.productKey)}
+                      onChange={() => handleProductTargetChange(target.productKey)}
+                    />
+                    <span>{target.productName}</span>
+                  </label>
+                ))}
+              </div>
+              <p className={classes.HelpText}>
+                Valitse tuotteet, joihin arvostelusi liittyy. Tarkistan valinnan vielä
+                ennen julkaisua.
+              </p>
+            </fieldset>
+          ) : null}
+
           <label className={classes.Label}>
             Kirjoitettu arvostelu (valinnainen)
             <textarea
@@ -211,6 +309,18 @@ export default function ReviewPageClient() {
               value={review}
               onChange={(event) => setReview(event.target.value)}
               placeholder="Millainen kokemus sinulla oli tuotteesta tai toimituksesta?"
+            />
+          </label>
+
+          <label className={classes.Label}>
+            Yksityinen palaute Joonakselle (valinnainen)
+            <textarea
+              className={classes.Textarea}
+              name="privateFeedback"
+              rows="4"
+              value={privateFeedback}
+              onChange={(event) => setPrivateFeedback(event.target.value)}
+              placeholder="Jos jokin ei toiminut odotetusti, voit kertoa sen tässä. Tätä kenttää ei julkaista sivustolla."
             />
           </label>
 
