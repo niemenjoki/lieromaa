@@ -1,7 +1,9 @@
 {
   "worms": {
     "earliestShippingDate": false,
-    "unavailableSkus": []
+    "unavailableSkus": [
+      "worms-100"
+    ]
   },
   "starterKit": {
     "earliestShippingDate": false,
