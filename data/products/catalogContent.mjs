@@ -73,7 +73,7 @@ export const productCatalogContentSource = {
         },
       },
       returnPolicyText:
-        'Kompostimadot eivät kuulu 14 vrk peruuttamisoikeuden piiriin (Kuluttajansuojalaki 6 luku 16 §).',
+        'Postitettuja matotilauksia ei voi peruuttaa, koska kompostimatoja ei voida palautuksen jälkeen käsitellä tai myydä edelleen tavanomaisena tuotteena. Jos tuotteessa tai toimituksessa on virhe, asia käsitellään erikseen asiakaspalvelun kautta.',
     },
   },
   starterKit: {
@@ -149,7 +149,7 @@ export const productCatalogContentSource = {
     },
     schema: {
       returnPolicyText:
-        'Aloituspakkauksella on 14 päivän peruuttamisoikeus käyttämättömälle tuotteelle. Kompostimadoilla ei niiden luonteen vuoksi ole normaalia 14 päivän peruuttamisoikeutta, koska kyseessä on elävä tuote. Mahdolliset vialliset tai kuljetuksessa vaurioituneet toimitukset kuitenkin korvataan.',
+        'Aloituspakkauksella on 14 päivän peruuttamisoikeus käyttämättömälle tuotteelle. Postitettuja matotilauksia ei voi peruuttaa, mutta muilla tuotteilla on normaali peruuttamisoikeus, vaikka ne olisi tilattu samassa tilauksessa matojen kanssa.',
     },
   },
   compostChow: {
@@ -217,7 +217,7 @@ export const productCatalogContentSource = {
           'Vehnälese, kauralese, soijarouhe, vehnäjauho, puutarhakalkki, zeoliitti, basaltti',
       },
       returnPolicyText:
-        'Avaamattomalla ja käyttämättömällä kuituseoksella on 14 vrk peruuttamisoikeus tilaus- ja toimitusehtojen mukaisesti.',
+        'Avaamattomalla ja käyttämättömällä kuituseoksella on 14 vrk peruuttamisoikeus tilaus- ja toimitusehtojen mukaisesti. Jos tuotteessa tai toimituksessa on virhe, asia käsitellään erikseen asiakaspalvelun kautta.',
     },
   },
 };

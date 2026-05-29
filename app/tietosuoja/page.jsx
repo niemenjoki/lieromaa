@@ -58,6 +58,12 @@ export default function PrivacyPage() {
             mahdolliset alennuskoodiin liittyvät tiedot.
           </li>
           <li>
+            Peruuttamisilmoitustiedot: nimi, sähköpostiosoite, mahdollinen puhelinnumero,
+            toivottu yhteydenottotapa, tilauksen tunnistetieto, ilmoituksen laajuus,
+            ilmoituksessa kuvatut tuotteet tai tilauksen tiedot sekä ilmoituksen
+            lähetysaika.
+          </li>
+          <li>
             Kysymys- ja aihe-ehdotustiedot: oppaiden yhteydessä lähetetty viesti, viestin
             tyyppi (kysymys tai aihe-ehdotus), mahdollinen sähköpostiosoite, nykyisen
             sivun URL-osoite ja viittaava sivu (referrer).
@@ -91,15 +97,15 @@ export default function PrivacyPage() {
         <h2>Tietojen kerääminen ja lähteet</h2>
         <p>
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
-          tilauslomakkeella, jätät arvostelun tai lähetät viestin oppaiden yhteydessä
-          olevalla kysymys- ja aihe-ehdotuslomakkeella. Lisäksi kolmannen osapuolen
-          palvelut (esimerkiksi Google AdSense ja Speed Insights) voivat kerätä teknisiä
-          tietoja sivuston käytöstä. Lieromaa käyttää lisäksi omaa ensimmäisen osapuolen
-          analytiikkaa, joka tallentaa vain sivuston käytön kannalta olennaiset mittarit
-          omalle palvelimelle suostumuksen perusteella. Tilaus- ja arvostelulomakkeiden
-          välityksessä käytetään lisäksi Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa
-          voi käyttää myös mainostenesto-ohjelmien tai muiden seurantaa estävien
-          työkalujen kanssa.
+          tilauslomakkeella, lähetät peruuttamisilmoituksen, jätät arvostelun tai lähetät
+          viestin oppaiden yhteydessä olevalla kysymys- ja aihe-ehdotuslomakkeella.
+          Lisäksi kolmannen osapuolen palvelut (esimerkiksi Google AdSense ja Speed
+          Insights) voivat kerätä teknisiä tietoja sivuston käytöstä. Lieromaa käyttää
+          lisäksi omaa ensimmäisen osapuolen analytiikkaa, joka tallentaa vain sivuston
+          käytön kannalta olennaiset mittarit omalle palvelimelle suostumuksen
+          perusteella. Tilaus-, peruuttamisilmoitus- ja arvostelulomakkeiden välityksessä
+          käytetään lisäksi Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa voi käyttää
+          myös mainostenesto-ohjelmien tai muiden seurantaa estävien työkalujen kanssa.
         </p>
 
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
@@ -109,6 +115,11 @@ export default function PrivacyPage() {
             Tilausten vastaanotto, käsittely, toimituksen järjestäminen ja
             asiakasviestintä: oikeusperusteena sopimuksen täytäntöönpano tai sopimusta
             edeltävät toimet (GDPR Art. 6(1)(b)).
+          </li>
+          <li>
+            Peruuttamisilmoitusten vastaanotto, vahvistaminen ja jatkokäsittely:
+            oikeusperusteena sopimuksen täytäntöönpano, sopimusta edeltävät toimet tai
+            lakisääteinen velvoite (GDPR Art. 6(1)(b) ja 6(1)(c)).
           </li>
           <li>
             Kysymysten vastaanotto, niihin vastaaminen sekä uusien opasaiheiden
@@ -160,6 +171,17 @@ export default function PrivacyPage() {
           välittää myös tekninen pyyntökonteksti, kuten selaimen user agent, lähetyksen
           alkuperä- ja viittaustieto sekä välittävän palvelun antama IP-osoitetieto, jotta
           lomakkeen väärinkäyttöä voidaan selvittää ja palvelua suojata.
+        </p>
+
+        <h2>Peruuttamisilmoituslomake</h2>
+        <p>
+          Peruuttamisilmoituslomakkeen tiedot vastaanotetaan ensin Lieromaan julkisella
+          verkkosivustolla Vercelissä ja välitetään sieltä Lieromaan omaan
+          tilaustenhallintapalveluun Cloudflare Tunnel -yhteyden kautta. Ilmoituksesta
+          tallennetaan asiakkaan antamat tiedot, lähetysaika ja tekninen pyyntökonteksti.
+          Asiakkaalle lähetetään automaattinen sähköpostivahvistus ilmoituksen
+          vastaanottamisesta, ja Lieromaan ylläpitäjälle lähetetään sähköposti-ilmoitus
+          asian manuaalista käsittelyä varten.
         </p>
 
         <h2>Arvostelulomake</h2>
@@ -362,6 +384,11 @@ export default function PrivacyPage() {
             Reklamaatioihin, palautuksiin ja muihin jälkikäteisiin
             asiakaspalvelutilanteisiin liittyviä tietoja säilytetään niin kauan kuin asian
             käsittely kohtuudella edellyttää.
+          </li>
+          <li>
+            Peruuttamisilmoituksiin liittyviä tietoja säilytetään niin kauan kuin
+            ilmoituksen käsittely, mahdolliset palautus- ja maksujärjestelyt sekä
+            lakisääteisten velvoitteiden osoittaminen kohtuudella edellyttävät.
           </li>
           <li>
             Ensimmäisen osapuolen analytiikkatiedot säilyvät Lieromaan omassa

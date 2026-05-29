@@ -252,13 +252,14 @@ export default async function Page() {
                   tuotteelle.
                 </p>
                 <p>
-                  Kompostimadoilla ei niiden luonteen vuoksi ole normaalia 14 päivän
-                  peruuttamisoikeutta, koska kyseessä on elävä tuote. Mahdolliset
-                  vialliset tai kuljetuksessa vaurioituneet toimitukset kuitenkin
-                  korvataan.
+                  Postitettuja matotilauksia ei voi peruuttaa, koska kompostimatoja ei
+                  voida palautuksen jälkeen käsitellä tai myydä edelleen tavanomaisena
+                  tuotteena. Muilla tuotteilla on kuitenkin normaali peruuttamisoikeus,
+                  vaikka ne olisi tilattu samassa tilauksessa matojen kanssa.
                 </p>
                 <p>
-                  Tarkemmat ehdot löytyvät{' '}
+                  Jos tuotteessa tai toimituksessa on virhe, ole yhteydessä suoraan
+                  asiakaspalveluun. Tarkemmat ehdot löytyvät{' '}
                   <SafeLink href="/tilausehdot">tilaus- ja toimitusehdoista</SafeLink>.
                 </p>
               </div>
