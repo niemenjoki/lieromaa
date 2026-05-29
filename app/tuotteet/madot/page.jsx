@@ -169,11 +169,13 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Hyvä tietää</h3>
                 <p>
-                  Kompostimadoilla ei ole 14 päivän peruuttamisoikeutta, koska kyse on
-                  elävistä kompostimadoista.
+                  Postitettuja matotilauksia ei voi peruuttaa, koska kompostimatoja ei
+                  voida palautuksen jälkeen käsitellä tai myydä edelleen tavanomaisena
+                  tuotteena.
                 </p>
                 <p>
-                  Tarkemmat ehdot löytyvät{' '}
+                  Jos tuotteessa tai toimituksessa on virhe, ole yhteydessä suoraan
+                  asiakaspalveluun. Tarkemmat ehdot löytyvät{' '}
                   <SafeLink href="/tilausehdot">tilaus- ja toimitusehdoista</SafeLink>.
                 </p>
               </div>

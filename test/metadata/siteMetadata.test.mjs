@@ -17,6 +17,7 @@ import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/lib/site/constants.mjs';
 import {
   aboutPage,
   blogIndexPage,
+  cancellationRequestPage,
   guideHubPage,
   homePage,
   orderTermsPage,
@@ -89,6 +90,7 @@ function collectMetadataScenarios() {
     productIndexPage,
     guideHubPage,
     aboutPage,
+    cancellationRequestPage,
     privacyPolicyPage,
     orderTermsPage,
     starterKitSetupPage,

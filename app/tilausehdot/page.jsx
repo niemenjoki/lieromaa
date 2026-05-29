@@ -1,3 +1,4 @@
+import SafeLink from '@/components/SafeLink/SafeLink';
 import {
   MONDAY_ONLY_SHIPPING_NOTE,
   STARTER_KIT_SHIPPING_SCHEDULE_TEXT,
@@ -10,6 +11,7 @@ import {
   BUSINESS_NAME,
   CONTACT_PHONE,
   ORDER_CONTACT_EMAIL,
+  ORDER_WHATSAPP_URL,
 } from '@/lib/site/contact';
 
 import classes from './Tilausehdot.module.css';
@@ -126,30 +128,46 @@ export default function OrderPolicyPage() {
         <p>
           Kuluttaja-asiakkaalla on lähtökohtaisesti kuluttajansuojalain mukainen 14 päivän
           peruuttamisoikeus etämyynnissä. Peruuttamisaika alkaa tavaran
-          vastaanottamisesta. Peruuttamisesta on ilmoitettava määräajan kuluessa
-          sähköpostitse osoitteeseen <strong>{ORDER_CONTACT_EMAIL}</strong>.
+          vastaanottamisesta.
         </p>
         <p>
-          Kompostimadoilla ei ole peruuttamisoikeutta kuluttajansuojalain 6 luvun 16 §:n
-          mukaisen poikkeuksen perusteella. Poikkeus liittyy siihen, että kyse on elävistä
-          kompostimadoista, joita ei voida palautuksen jälkeen käsitellä tai myydä
-          edelleen tavanomaisena tuotteena.
+          Jos haluat tehdä peruuttamisilmoituksen muusta syystä kuin tuotteen virheen
+          vuoksi, voit käyttää verkkolomaketta sivulla{' '}
+          <SafeLink href="/peruuta-tilaus">peruuta tilaus</SafeLink>. Ilmoituksen voi
+          tehdä myös sähköpostitse osoitteeseen <strong>{ORDER_CONTACT_EMAIL}</strong>.
+          Verkkolomakkeen lähettämisestä lähetetään automaattinen vahvistus sähköpostitse.
+          Vahvistus koskee ilmoituksen vastaanottamista; vastaan erikseen mahdollisista
+          palautus- ja maksujärjestelyistä tilauksen tilanteen ja sisällön mukaan.
+        </p>
+        <p>
+          Huomaathan, että postitettuja matotilauksia ei voi peruuttaa, koska
+          kompostimatoja ei voida palautuksen jälkeen käsitellä tai myydä edelleen
+          tavanomaisena tuotteena. Muilla tuotteilla on kuitenkin normaali
+          peruuttamisoikeus, vaikka ne olisi tilattu samassa tilauksessa matojen kanssa.
         </p>
         <p>
           Palautettavan tuotteen tulee olla olennaisesti samassa kunnossa kuin
           vastaanottohetkellä. Asiakas vastaa palautuskuluista, ellei toisin sovita. Ennen
           palautuksen lähettämistä pyydän ottamaan yhteyttä sähköpostitse osoitteeseen{' '}
-          <strong>{ORDER_CONTACT_EMAIL}</strong>, jotta palautustavasta voidaan sopia.
+          <strong>{ORDER_CONTACT_EMAIL}</strong>, jotta palautustavasta voidaan sopia. Jos
+          peruutat tilauksesi peruutuslomakkeella, sähköpostia ei tarvitse lähettää, vaan
+          olen sinuun yhteydessä saatuani peruutusilmoituksen.
         </p>
         <p>
-          Jos haluat käyttää peruuttamisoikeuttasi, ilmoita sähköpostissasi vähintään
-          nimesi, tilaamasi tuote, tilauspäivä tai vastaanottopäivä sekä tieto siitä, että
-          haluat peruuttaa kaupan kokonaan tai osittain.
+          Jos tuotteessa tai toimituksessa on virhe, peruuttamisilmoituksen lomake ei ole
+          oikea ensisijainen kanava. Ota silloin yhteyttä sähköpostitse osoitteeseen{' '}
+          <strong>{ORDER_CONTACT_EMAIL}</strong>, puhelimitse tai WhatsAppilla numeroon{' '}
+          <strong>{CONTACT_PHONE}</strong> tai{' '}
+          <a href={ORDER_WHATSAPP_URL} target="_blank" rel="noreferrer">
+            WhatsAppin kautta.
+          </a>{' '}
+          Selvitetään ja korjataan virhe erikseen.
         </p>
         <p>
-          Voit käyttää peruuttamisilmoituksessa esimerkiksi seuraavaa mallia: "Ilmoitan,
-          että haluan peruuttaa tekemäni sopimuksen. Nimi: [oma nimi]. Tilaus: [tuote tai
-          tilauksen tunnistetieto]. Tilauspäivä tai vastaanottopäivä: [päivämäärä]."
+          Jos haluat käyttää peruuttamisoikeuttasi sähköpostitse, kerro viestissäsi
+          mahdollisuuksien mukaan nimesi, tilausnumero tai muu tunnistetieto, tilaamasi
+          tuotteet, tilauspäivä tai vastaanottopäivä sekä tieto siitä, haluatko peruuttaa
+          kaupan kokonaan vai osittain.
         </p>
 
         <h2>Virhevastuu</h2>

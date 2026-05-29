@@ -523,6 +523,13 @@ export default function CheckoutPageClient() {
     return (
       <div className={classes.Panel}>
         <p>{isSubmitted ? ORDER_SUCCESS_MESSAGE : 'Ostoskori on tyhjä.'}</p>
+        {isSubmitted ? (
+          <p className={classes.HelperText}>
+            Jos haluat tehdä peruuttamisilmoituksen muusta syystä kuin tuotteen virheen
+            vuoksi, voit käyttää{' '}
+            <SafeLink href="/peruuta-tilaus">peruuttamisilmoituksen lomaketta</SafeLink>.
+          </p>
+        ) : null}
         <div className={classes.Actions}>
           <SafeLink href={followUpHref} className={classes.Button}>
             {followUpLabel}
