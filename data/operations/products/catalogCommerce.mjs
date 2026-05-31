@@ -1,4 +1,5 @@
 import {
+  COMPOST_CHOW_HANDLING_TIME,
   STARTER_KIT_HANDLING_TIME,
   WORMS_HANDLING_TIME,
 } from '../commerce/shippingSchedule.mjs';
@@ -341,7 +342,7 @@ export const productCatalogCommerceSource = {
     },
     shippingSku: 'postage-pickup',
     schema: {
-      handlingTime: STARTER_KIT_HANDLING_TIME,
+      handlingTime: COMPOST_CHOW_HANDLING_TIME,
     },
     order: {
       defaultVariantAmount: 150,

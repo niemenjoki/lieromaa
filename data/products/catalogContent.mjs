@@ -11,7 +11,7 @@ export const productCatalogContentSource = {
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
-      updatedAt: '2026-05-16',
+      updatedAt: '2026-05-31',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -162,7 +162,7 @@ export const productCatalogContentSource = {
         'Lieromaan kompostorin kuituseos on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
       h1: 'Lieromaan kompostorin kuituseos',
       navigationLabel: 'Kuituseos',
-      updatedAt: '2026-05-10',
+      updatedAt: '2026-05-31',
     },
     search: {
       contexts: ['blog', 'notFound'],

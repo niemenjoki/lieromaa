@@ -16,18 +16,27 @@ describe('delivery break shipping date adjustments', () => {
     );
   });
 
-  test('moves pre-break orders that would ship during the break to the final pre-break shipping day', () => {
+  test('moves cutoff-day orders that would ship during the break to the final pre-break shipping day', () => {
     expectEqual(
       adjustShippingDateForDeliveryBreak({
         estimatedShippingDate: '2026-07-06',
-        orderDate: '2026-06-28',
+        orderDate: '2026-06-27',
       }),
       '2026-06-29',
       'delivery break adjustment should use the announced final pre-break shipping date'
     );
   });
 
-  test('moves holiday orders to the first post-break shipping day', () => {
+  test('moves post-cutoff and holiday orders to the first post-break shipping day', () => {
+    expectEqual(
+      adjustShippingDateForDeliveryBreak({
+        estimatedShippingDate: '2026-07-06',
+        orderDate: '2026-06-28',
+      }),
+      '2026-07-13',
+      'delivery break adjustment should not include Sunday orders in the final pre-break shipping day'
+    );
+
     expectEqual(
       adjustShippingDateForDeliveryBreak({
         estimatedShippingDate: '2026-07-06',
