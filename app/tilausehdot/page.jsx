@@ -1,5 +1,6 @@
 import SafeLink from '@/components/SafeLink/SafeLink';
 import {
+  COMPOST_CHOW_SHIPPING_SCHEDULE_TEXT,
   MONDAY_ONLY_SHIPPING_NOTE,
   STARTER_KIT_SHIPPING_SCHEDULE_TEXT,
   WORMS_SHIPPING_SCHEDULE_TEXT,
@@ -107,6 +108,8 @@ export default function OrderPolicyPage() {
         <h2>Toimitusaika</h2>
         <p>
           {MONDAY_ONLY_SHIPPING_NOTE} {WORMS_SHIPPING_SCHEDULE_TEXT}{' '}
+          {COMPOST_CHOW_SHIPPING_SCHEDULE_TEXT} Sunnuntaina tai maanantaina tehty mato-
+          tai kuituseostilaus siirtyy seuraavan viikon maanantailähetykseen.{' '}
           {STARTER_KIT_SHIPPING_SCHEDULE_TEXT}
         </p>
         <p>Tarkempi toimitusaika ilmoitetaan aina tilausvahvistuksessa.</p>

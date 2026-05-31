@@ -1,5 +1,6 @@
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import ImageSlider from '@/components/ImageSlider/ImageSlider';
+import { COMPOST_CHOW_SHIPPING_SCHEDULE_TEXT } from '@/lib/commerce/shippingSchedule.mjs';
 import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 
 import AddToCartPanel from '../AddToCartPanel';
@@ -105,6 +106,13 @@ export default async function Page() {
                   Ripottele ohut kerros pintaan, kostuta kevyesti ja peitä kostealla
                   paperilla tai kuivikkeella. Lisää määrää, jos seos häviää 1-2 päivässä.
                   Vähennä määrää, jos kompostiin tulee hajua tai hometta.
+                </p>
+              </div>
+              <div className={classes.InfoCard}>
+                <h3>Toimitus</h3>
+                <p>
+                  {COMPOST_CHOW_SHIPPING_SCHEDULE_TEXT} Sunnuntaina tai maanantaina tehty
+                  tilaus siirtyy seuraavan viikon maanantailähetykseen.
                 </p>
               </div>
             </div>

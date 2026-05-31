@@ -5,7 +5,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useCart } from '@/components/Cart/CartProvider';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { trackAnalyticsEvent } from '@/lib/analytics/events';
-import { adjustShippingDateForDeliveryBreak } from '@/lib/commerce/deliveryBreak.mjs';
+import {
+  getEstimatedShippingDate as getEstimatedShippingDateForProducts,
+  getTodayInBusinessTimeZone,
+  getVisibleEarliestShippingDate,
+} from '@/lib/commerce/shippingEstimate.mjs';
 import { ORDER_SUCCESS_MESSAGE } from '@/lib/copy/orderMessages';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { getCartOrderQuote, getDefaultCartShippingOption } from '@/lib/orders/cartOrder';
@@ -22,8 +26,6 @@ import classes from './CheckoutPage.module.css';
 
 const PICKUP_POINT_SEARCH_ENDPOINT = '/api/pickup-points/search';
 const steps = ['Kori', 'Toimitus', 'Maksu', 'Tiedot', 'Vahvistus'];
-const BUSINESS_TIME_ZONE = 'Europe/Helsinki';
-const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 function formatPickupPointDistance(distanceInMeters) {
   const numericValue = Number(distanceInMeters);
@@ -57,129 +59,34 @@ function formatPickupPointOptionLabel(point) {
     .join(' | ');
 }
 
-function getTodayInBusinessTimeZone() {
-  const formatter = new Intl.DateTimeFormat('en-US', {
-    timeZone: BUSINESS_TIME_ZONE,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
-  const parts = formatter.formatToParts(new Date());
-  const valueByType = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-
-  return new Date(
-    Date.UTC(
-      Number(valueByType.year),
-      Number(valueByType.month) - 1,
-      Number(valueByType.day)
-    )
-  );
-}
-
-function addDays(date, days) {
-  const nextDate = new Date(date);
-  nextDate.setUTCDate(nextDate.getUTCDate() + days);
-  return nextDate;
-}
-
-function getFollowingMonday(date, weeksAhead = 1) {
-  const day = date.getUTCDay();
-  const daysUntilMonday = (8 - day) % 7 || 7;
-  return addDays(date, daysUntilMonday + (weeksAhead - 1) * 7);
-}
-
-function getNextBusinessDay(date) {
-  let nextDate = addDays(date, 1);
-
-  while (nextDate.getUTCDay() === 0 || nextDate.getUTCDay() === 6) {
-    nextDate = addDays(nextDate, 1);
-  }
-
-  return nextDate;
-}
-
-function parseIsoDate(value) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ''))) {
-    return null;
-  }
-
-  const [year, month, day] = value.split('-').map(Number);
-  return new Date(Date.UTC(year, month - 1, day));
-}
-
-function formatIsoDate(date) {
-  const year = date.getUTCFullYear();
-  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(date.getUTCDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
-function getEstimatedShippingDate(lines) {
-  const today = getTodayInBusinessTimeZone();
-  const productKeys = [
+function getProductKeysFromLines(lines) {
+  return [
     ...new Set(
       lines
         .map((line) => line.productKey || findProductKeyBySku(line.sku))
         .filter(Boolean)
     ),
   ];
-  let estimatedDate = productKeys.includes('starterKit')
-    ? getFollowingMonday(today, 2)
-    : productKeys.includes('worms')
-      ? getFollowingMonday(today, 1)
-      : getNextBusinessDay(today);
-
-  for (const productKey of productKeys) {
-    const earliestShippingDate = getProductAvailability(productKey).earliestShippingDate;
-    const parsedDate = parseIsoDate(earliestShippingDate);
-
-    if (parsedDate && parsedDate.getTime() > estimatedDate.getTime()) {
-      estimatedDate = parsedDate;
-    }
-  }
-
-  return adjustShippingDateForDeliveryBreak({
-    estimatedShippingDate: formatIsoDate(estimatedDate),
-    orderDate: formatIsoDate(today),
-  });
 }
 
-function getVisibleEarliestShippingDate({
-  earliestShippingDate,
-  normalHandlingWindowDays,
-  now = new Date(),
-}) {
-  if (!earliestShippingDate) {
-    return false;
-  }
-
-  if (!Number.isFinite(normalHandlingWindowDays) || normalHandlingWindowDays < 0) {
-    return earliestShippingDate;
-  }
-
-  const today = getTodayInBusinessTimeZone();
-  const referenceDate = now instanceof Date && !Number.isNaN(now.getTime()) ? now : today;
-  const targetDate = parseIsoDate(earliestShippingDate);
-  if (!targetDate) {
-    return false;
-  }
-
-  const daysUntilShipping = Math.round(
-    (targetDate.getTime() - referenceDate.getTime()) / DAY_IN_MS
+function getEstimatedShippingDate(lines) {
+  const productKeys = getProductKeysFromLines(lines);
+  const availabilityDatesByProductKey = Object.fromEntries(
+    productKeys.map((productKey) => [
+      productKey,
+      getProductAvailability(productKey).earliestShippingDate,
+    ])
   );
 
-  return daysUntilShipping > normalHandlingWindowDays ? earliestShippingDate : false;
+  return getEstimatedShippingDateForProducts({
+    productKeys,
+    availabilityDatesByProductKey,
+  });
 }
 
 function getAvailabilityDelaySnapshot(lines) {
   const today = getTodayInBusinessTimeZone();
-  const productKeys = [
-    ...new Set(
-      lines
-        .map((line) => line.productKey || findProductKeyBySku(line.sku))
-        .filter(Boolean)
-    ),
-  ];
+  const productKeys = getProductKeysFromLines(lines);
 
   return (
     productKeys

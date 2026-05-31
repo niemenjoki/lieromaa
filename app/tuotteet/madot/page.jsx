@@ -162,7 +162,8 @@ export default async function Page() {
                 </p>
                 <p>
                   Madot ovat elävää materiaalia, joten postitan ne vain maanantaisin.{' '}
-                  {WORMS_SHIPPING_SCHEDULE_TEXT}
+                  {WORMS_SHIPPING_SCHEDULE_TEXT} Sunnuntaina tai maanantaina tehty tilaus
+                  siirtyy seuraavan viikon maanantailähetykseen.
                 </p>
               </div>
 
