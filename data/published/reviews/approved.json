@@ -124,5 +124,19 @@
     "review": "Ystävällinen palvelu. Sujuva toimitus.",
     "displayName": "Markku",
     "submittedAt": "2026-05-26T05:44:09.819Z"
+  },
+  {
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Paketti ja toimitus ok, kaverit voivat hyvin, karkulaisia pari kappaletta. Kunhan vaan maltan olla kurkkimatta joka päivä, niin homma etenee hyvin.",
+    "displayName": "Riku",
+    "submittedAt": "2026-06-01T13:19:29.225Z"
+  },
+  {
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Nopea toimitus ja ekologisesti kestävä pakkaus, kiitos! Madot ovat elinvoimaisia ja harrastus lähti hyvin käyntiin.",
+    "displayName": "Matomehuharrastaja",
+    "submittedAt": "2026-06-01T12:47:45.947Z"
   }
 ]
