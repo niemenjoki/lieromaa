@@ -1,11 +1,15 @@
-import { getBlogTagPageData, getPostsByTag } from '@/lib/content/index.mjs';
+import {
+  getBlogTagPageData,
+  getPostsByTag,
+  isIndexableBlogTag,
+} from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 import { POSTS_PER_PAGE } from '@/lib/site/constants.mjs';
 
 export default async function generateMetadata({ params }) {
   const { tag, pageIndex } = await params;
   const pageData = getBlogTagPageData({ tag, pageIndex });
-  const { numPages } = getPostsByTag(
+  const { numPages, total } = getPostsByTag(
     pageData.tagSlug,
     pageData.pageIndexInt,
     POSTS_PER_PAGE
@@ -29,6 +33,14 @@ export default async function generateMetadata({ params }) {
       ...(isFirst ? {} : { previous: `/blogi/${tag}/sivu/${pageData.pageIndexInt - 1}` }),
       ...(isLast ? {} : { next: `/blogi/${tag}/sivu/${pageData.pageIndexInt + 1}` }),
     },
+    ...(!isIndexableBlogTag(total)
+      ? {
+          robots: {
+            index: false,
+            follow: true,
+          },
+        }
+      : {}),
   };
 
   return withDefaultMetadata(customMetadata);

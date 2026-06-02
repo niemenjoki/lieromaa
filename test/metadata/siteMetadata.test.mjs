@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
+import generateBlogTagMetadata from '@/app/blogi/[tag]/sivu/[pageIndex]/generateMetadata';
+import sitemap from '@/app/sitemap';
 import safeRoutes from '@/generated/site/safeRoutes.json';
 import {
   getAllContent,
@@ -10,10 +12,11 @@ import {
   getBlogTagPageData,
   getGuideCategoryPageData,
   getPostsByTag,
+  isIndexableBlogTag,
 } from '@/lib/content/index.mjs';
 import { createProductPageMetadata } from '@/lib/metadata/createProductPageMetadata';
 import { productCatalog } from '@/lib/products/catalog.mjs';
-import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/lib/site/constants.mjs';
+import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
 import {
   aboutPage,
   blogIndexPage,
@@ -143,11 +146,15 @@ function collectMetadataScenarios() {
 
     for (let pageIndex = 1; pageIndex <= numPages; pageIndex += 1) {
       const pageData = getBlogTagPageData({ tag: tagSlug, pageIndex });
+      const tagPosts = getPostsByTag(tagSlug, pageIndex, POSTS_PER_PAGE);
 
       addScenario(scenarios, pageData.pagePath, {
         canonicalUrl: pageData.pagePath,
         description: pageData.description,
         title: pageData.title,
+        ...(!isIndexableBlogTag(tagPosts.total)
+          ? { robots: { index: false, follow: true } }
+          : {}),
       });
     }
   });
@@ -212,4 +219,34 @@ test('product page metadata descriptions stay valid after dynamic offer copy', (
 
     assertMetadataShape(product.canonicalUrl, metadata);
   }
+});
+
+test('low-count blog tag pages are noindexed', async () => {
+  const metadata = await generateBlogTagMetadata({
+    params: { tag: 'lapset', pageIndex: '1' },
+  });
+
+  assert.deepEqual(metadata.robots, { index: false, follow: true });
+});
+
+test('indexable blog tag pages do not get explicit noindex metadata', async () => {
+  const metadata = await generateBlogTagMetadata({
+    params: { tag: 'matokompostointi', pageIndex: '1' },
+  });
+
+  assert.equal(metadata.robots, undefined);
+});
+
+test('sitemap excludes low-count blog tag pages', async () => {
+  const sitemapPaths = new Set(
+    (await sitemap()).map(({ url }) => url.replace(SITE_URL, ''))
+  );
+
+  getAllPostTags().forEach((tag) => {
+    const tagSlug = slugifySegment(tag);
+    const { total } = getPostsByTag(tagSlug, 1, POSTS_PER_PAGE);
+    const tagPath = `/blogi/${tagSlug}/sivu/1`;
+
+    assert.equal(sitemapPaths.has(tagPath), isIndexableBlogTag(total), tagPath);
+  });
 });
