@@ -13,6 +13,17 @@
   margin: 1rem 0;
 }
 
+.InlineLink {
+  color: var(--highlight-content-link);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.InlineLink:hover {
+  opacity: 0.75;
+}
+
 .Info img {
   filter: grayscale(0.3);
 }

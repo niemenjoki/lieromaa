@@ -108,6 +108,14 @@ export default async function Page() {
                 />
 
                 <p className={classes.HelperText}>
+                  Katso myös,{' '}
+                  <SafeLink href="/tietoa/mista-lieromaan-madot-tulevat">
+                    mistä Lieromaan madot tulevat
+                  </SafeLink>
+                  .
+                </p>
+
+                <p className={classes.HelperText}>
                   Vahvistan tilaukset normaalisti kahden päivän kuluessa.
                 </p>
 

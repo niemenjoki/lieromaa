@@ -11,7 +11,7 @@ export const productCatalogContentSource = {
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
-      updatedAt: '2026-05-31',
+      updatedAt: '2026-06-03',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -86,7 +86,7 @@ export const productCatalogContentSource = {
         'Lieromaan aloituspakkaus tekee matokompostoinnin aloittamisesta helppoa: valitse 1, 2 tai 3 laatikkoa ja laajenna myöhemmin tarvittaessa.',
       h1: 'Lieromaan matokompostorin aloituspakkaus',
       navigationLabel: 'Aloituspakkaus',
-      updatedAt: '2026-05-22',
+      updatedAt: '2026-06-03',
     },
     search: {
       contexts: ['blog', 'notFound'],

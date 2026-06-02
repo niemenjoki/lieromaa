@@ -35,11 +35,46 @@ export const standalonePageDefinitions = {
     description:
       'Tutustu Lieromaan perustajaan Joonas Niemenjokeen ja siihen, miten sivusto syntyi käytännön matokompostointikokemusten pohjalta.',
     shortLabel: 'Tietoa Lieromaasta',
-    updatedAt: '2025-09-08',
+    updatedAt: '2026-06-03',
     search: {
       contexts: ['notFound'],
       keywords: ['tietoa', 'lieromaa', 'joonas niemenjoki', 'sivusto'],
     },
+  },
+  wormSource: {
+    canonicalUrl: '/tietoa/mista-lieromaan-madot-tulevat',
+    pageName: 'Mistä Lieromaan kompostimadot tulevat?',
+    title: 'Mistä Lieromaan kompostimadot tulevat? | Lieromaa',
+    description:
+      'Katso, missä Lieromaan kompostimadot kasvavat ennen tilausta: lämmitetyssä kotitallissa, pääkompostorissa ja varmistuslaatikoissa.',
+    pageDescription:
+      'Lieromaan kompostimadot kasvavat lämmitetyssä kotitallissa. Pääjärjestelmänä on kolmen 50 litran laatikon läpivirtauskompostori, ja kolme 14 litran laatikkoa toimivat varmistuksena sekä kokeilukompostoreina.',
+    shortLabel: 'Mistä madot tulevat?',
+    navigationLabel: 'Mistä madot tulevat?',
+    updatedAt: '2026-06-03',
+    image: {
+      url: '/images/content/lieromaan_matojen_hoitopiste.avif',
+      width: 1200,
+      height: 900,
+      alt: 'Lieromaan matojen hoitopiste ja pakkaustarvikkeet lämmitetyssä kotitallissa',
+    },
+    search: {
+      contexts: ['blog', 'notFound'],
+      title: 'Mistä Lieromaan madot tulevat?',
+      description:
+        'Lue, miten Lieromaan kompostimadot kasvavat ja miten tilattavat madot kerätään.',
+      tags: ['tietoa', 'kompostimadot'],
+      keywords: [
+        'lieromaan madot',
+        'mistä madot tulevat',
+        'kompostimadot',
+        'matojen kasvatus',
+        'kotimaiset kompostimadot',
+      ],
+    },
+    mainEntityName: 'Lieromaan kompostimatojen kasvatus',
+    mainEntityDescription:
+      'Kuvaus Lieromaan lämmitetyssä kotitallissa ylläpidetystä kompostimatojen pääkompostorista, varmistuslaatikoista ja tilausten keräämisestä.',
   },
   guideHub: {
     canonicalUrl: '/opas',
