@@ -16,6 +16,10 @@ const pageMetadata = {
   title,
   description,
   canonicalUrl,
+  robots: {
+    index: false,
+    follow: true,
+  },
   twitter: {},
 };
 

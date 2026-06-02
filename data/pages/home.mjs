@@ -1,11 +1,11 @@
 export const homePageDefinition = {
   canonicalUrl: '/',
-  pageName: 'Lieromaa – Kompostimadot ja matokompostointi kotona',
-  title: 'Lieromaa – Opas matokompostointiin ja kompostimadot',
+  pageName: 'Lieromaa – Käytännön opas matokompostointiin',
+  title: 'Lieromaa – Käytännön opas matokompostointiin kotona',
   description:
-    'Selkeät aloitusoppaat, matolaskuri ja käytännön vinkit matokompostointiin. Löydät myös kotimaiset kompostimadot omaan matokompostoriisi.',
+    'Selkeät aloitusoppaat, matolaskuri, omat kokeilut ja käytännön vinkit matokompostoinnin aloittamiseen ja hoitoon kotona.',
   pageDescription:
-    'Lieromaa auttaa aloittamaan matokompostoinnin, hoitamaan kompostoria arjessa ja hyödyntämään matokakan. Sivustolta löydät myös kotimaiset kompostimadot omaan matokompostoriisi.',
+    'Lieromaa auttaa aloittamaan matokompostoinnin, hoitamaan kompostoria arjessa ja hyödyntämään matokakan käytännön oppaiden, havaintojen ja laskurin avulla.',
   image: {
     url: '/images/lieromaa_logo_1024.avif',
     width: 1024,

@@ -27,6 +27,33 @@
   margin-top: 1.5rem;
 }
 
+.SignalGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.SignalCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--background-3);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.SignalValue {
+  color: var(--highlight-alt);
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.SignalCard p {
+  line-height: 1.5;
+}
+
 .InlineLink {
   color: var(--highlight);
   text-decoration: underline;

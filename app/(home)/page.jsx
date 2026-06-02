@@ -65,7 +65,8 @@ function getGuideHref(guide) {
 
 export default function HomePage() {
   const allGuides = getAllContent({ type: CONTENT_TYPES.GUIDE });
-  const posts = getAllContent({ type: CONTENT_TYPES.POST }).slice(0, 3);
+  const allPosts = getAllContent({ type: CONTENT_TYPES.POST });
+  const posts = allPosts.slice(0, 3);
   const searchItems = getSiteSearchIndex();
   const editorialHighlights = EDITORIAL_HIGHLIGHT_SPECS.map(({ eyebrow, slug }) => {
     const guide = allGuides.find((entry) => entry.slug === slug);
@@ -112,28 +113,12 @@ export default function HomePage() {
       <div className={classes.Page}>
         <section className={classes.Hero}>
           <p className={classes.Eyebrow}>Lieromaa</p>
-          <h1>Kompostimadot ja matokompostointi kotona</h1>
+          <h1>Matokompostoinnin käytännön opas kotikeittiöstä puutarhaan</h1>
           <p className={classes.Intro}>
-            Lieromaa auttaa suomalaisia aloittamaan matokompostoinnin, hoitamaan
-            kompostoria arjessa ja hyödyntämään matokakan. Täältä löydät myös{' '}
-            <SafeLink href="/tuotteet/madot" className={classes.InlineLink}>
-              kotimaiset kompostimadot
-            </SafeLink>
-            ,{' '}
-            <SafeLink
-              href="/tuotteet/matokompostin-aloituspakkaus"
-              className={classes.InlineLink}
-            >
-              matokompostorin aloituspakkauksen
-            </SafeLink>{' '}
-            sekä{' '}
-            <SafeLink
-              href="/tuotteet/kompostorin-kuituseos"
-              className={classes.InlineLink}
-            >
-              kompostorin ylläpitoa helpottavan kuituseoksen
-            </SafeLink>
-            .
+            Lieromaa kokoaa omiin kokeiluihin ja arjen havaintoihin perustuvat ohjeet
+            matokompostorin perustamiseen, hoitoon, vianetsintään ja matokakan
+            hyödyntämiseen. Aloita oppaista, hae vastauksia ongelmiin tai arvioi sopiva
+            matomäärä laskurilla.
           </p>
 
           <div className={classes.HeroSearch}>
@@ -144,6 +129,17 @@ export default function HomePage() {
               placeholder="Etsi oppaita, blogijulkaisuja tai tuotteita..."
               resultLimit={5}
             />
+          </div>
+
+          <div className={classes.SignalGrid} aria-label="Lieromaan sisältö">
+            <div className={classes.SignalCard}>
+              <span className={classes.SignalValue}>{allGuides.length}</span>
+              <p>opasta matokompostoinnin eri vaiheisiin</p>
+            </div>
+            <div className={classes.SignalCard}>
+              <span className={classes.SignalValue}>{allPosts.length}</span>
+              <p>blogijulkaisua kokeiluista ja havainnoista</p>
+            </div>
           </div>
         </section>
 
@@ -211,15 +207,8 @@ export default function HomePage() {
             <h2>Etkö tiedä kuinka paljon matoja tarvitset aloittaaksesi?</h2>
             <p>
               Matolaskuri auttaa arvioimaan taloudellesi sopivan matojen painon talouden
-              koon ja ruokavalion perusteella. Jos haluat valmiin kokonaisuuden, tutustu
-              myös{' '}
-              <SafeLink
-                href="/tuotteet/matokompostin-aloituspakkaus"
-                className={classes.InlineLink}
-              >
-                matokompostorin aloituspakkaukseen
-              </SafeLink>
-              .
+              koon ja ruokavalion perusteella. Se on suuntaa-antava työkalu, jonka avulla
+              pääset alkuun.
             </p>
           </div>
 
@@ -248,6 +237,56 @@ export default function HomePage() {
           <SafeLink href="/blogi" className={classes.PrimaryAction}>
             Siirry blogiin
           </SafeLink>
+        </section>
+
+        <section className={classes.Section}>
+          <div className={classes.SectionHeading}>
+            <h2>Tarvikkeet oppaiden tueksi</h2>
+            <p>
+              Jos päätät perustaa oman kompostorin, tuotteet löytyvät erillisiltä
+              tuotesivuilta. Oppaat toimivat myös silloin, kun rakennat kompostorin itse
+              tai hankit madot muuta kautta.
+            </p>
+          </div>
+
+          <div className={classes.CategoryGrid}>
+            <article className={classes.CategoryCard}>
+              <h3>Kompostimadot</h3>
+              <p>
+                Tunkiolieroja matokompostorin käynnistämiseen ja olemassa olevan
+                kompostorin vahvistamiseen.
+              </p>
+              <SafeLink href="/tuotteet/madot" className={classes.CategoryAction}>
+                Avaa tuotesivu
+              </SafeLink>
+            </article>
+            <article className={classes.CategoryCard}>
+              <h3>Matokompostorin aloituspakkaus</h3>
+              <p>
+                Valmis kerrosmalli niille, jotka haluavat aloittaa ilman omaa
+                rakennusprojektia.
+              </p>
+              <SafeLink
+                href="/tuotteet/matokompostin-aloituspakkaus"
+                className={classes.CategoryAction}
+              >
+                Avaa tuotesivu
+              </SafeLink>
+            </article>
+            <article className={classes.CategoryCard}>
+              <h3>Kompostorin kuituseos</h3>
+              <p>
+                Petimateriaaliin ja ruokinnan tasaukseen tarkoitettu seos tilanteisiin,
+                joissa biojätteen määrä vaihtelee.
+              </p>
+              <SafeLink
+                href="/tuotteet/kompostorin-kuituseos"
+                className={classes.CategoryAction}
+              >
+                Avaa tuotesivu
+              </SafeLink>
+            </article>
+          </div>
         </section>
       </div>
     </>

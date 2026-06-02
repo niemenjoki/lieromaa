@@ -1,9 +1,9 @@
 import { ADSENSE_CLIENT } from './adsense.js';
 import { SITE_URL } from './constants.mjs';
 
-const title = 'Lieromaa – Kompostimadot ja matokompostointi kotona';
+const title = 'Lieromaa – Käytännön opas matokompostointiin kotona';
 const description =
-  'Matokompostointi kotona on helppoa! Tilaa kotimaiset kompostimadot (Eisenia fetida) ja tutustu käytännön oppaisiin ja kompostointivinkkeihin.';
+  'Lieromaa kokoaa käytännön oppaat, kokemukset ja työkalut matokompostoinnin aloittamiseen, hoitoon ja matokakan hyödyntämiseen.';
 const siteName = 'Lieromaa';
 const logoURL = '/images/lieromaa_logo_1024.avif';
 
@@ -36,7 +36,7 @@ export const defaultMetadata = {
   twitter: {
     card: 'summary_large_image',
     title: siteName,
-    description: 'Kompostimadot ja matokompostointi helposti kotona.',
+    description: 'Käytännön oppaat matokompostointiin kotona.',
     images: [logoURL],
   },
 
