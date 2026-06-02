@@ -1,4 +1,5 @@
 import SafeImage from '@/components/SafeImage/SafeImage';
+import SafeLink from '@/components/SafeLink/SafeLink';
 import { SITE_AUTHOR } from '@/lib/site/author';
 
 import classes from './Tietoa.module.css';
@@ -47,6 +48,15 @@ export default function AboutPage() {
             <em>matokompostoinnista</em>, innostuin kokeilemaan. Aloitin pienellä määrällä
             kompostimatoja, ja nyt suuri osa kotimme biojätteestä kiertää niiden kautta
             takaisin maaperään.
+          </p>
+          <p>
+            Jos haluat nähdä, mistä tilattavat madot tulevat, kurkkaa sivu{' '}
+            <SafeLink
+              href="/tietoa/mista-lieromaan-madot-tulevat"
+              className={classes.InlineLink}
+            >
+              Mistä Lieromaan kompostimadot tulevat?
+            </SafeLink>
           </p>
 
           <h2>Miksi perustin Lieromaan</h2>

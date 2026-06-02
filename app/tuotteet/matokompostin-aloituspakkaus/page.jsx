@@ -117,6 +117,14 @@ export default async function Page() {
                   </SafeLink>
                 </p>
 
+                <p className={classes.HelperText}>
+                  Jos mietit, mistä Lieromaan madot ovat peräisin,{' '}
+                  <SafeLink href="/tietoa/mista-lieromaan-madot-tulevat">
+                    kurkkaa tänne
+                  </SafeLink>
+                  .
+                </p>
+
                 <a
                   className={classes.PrimaryCTA}
                   href="#tilaa"

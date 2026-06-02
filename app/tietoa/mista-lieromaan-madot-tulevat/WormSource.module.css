@@ -1,0 +1,204 @@
+.WormSourcePage {
+  max-width: 72rem;
+  margin: 0 auto;
+  --source-surface: var(--background-2);
+  --source-surface-muted: var(--background-3);
+  --source-border: var(--background-5);
+  --source-shadow: 0 18px 36px rgba(39, 29, 18, 0.08);
+}
+
+:global(body.dark) .WormSourcePage {
+  --source-surface: hsl(30, 20%, 11%);
+  --source-surface-muted: hsl(30, 18%, 14%);
+  --source-border: hsl(30, 16%, 30%);
+  --source-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+}
+
+.WormSourcePage h1 {
+  margin: 0;
+  max-width: 18ch;
+  color: var(--highlight-alt);
+  font-size: clamp(1.9rem, 4vw, 2.55rem);
+  line-height: 1.1;
+  text-transform: none;
+  overflow-wrap: break-word;
+}
+
+.WormSourcePage h2 {
+  margin: 0;
+  color: var(--highlight-alt);
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.WormSourcePage h3 {
+  margin: 0;
+  color: var(--highlight-alt);
+  font-size: 1.05rem;
+}
+
+.WormSourcePage p {
+  margin: 0;
+  line-height: 1.62;
+  overflow-wrap: anywhere;
+}
+
+.WormSourcePage a {
+  color: var(--highlight-content-link);
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.WormSourcePage a:hover {
+  opacity: 0.72;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.Hero,
+.FeatureSection,
+.SplitSection,
+.Callout {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.Hero {
+  align-items: end;
+}
+
+.HeroCopy,
+.TextStack,
+.InfoCard,
+.CalloutText {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.Eyebrow {
+  color: var(--highlight);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.Lead {
+  max-width: 44rem;
+  font-size: 1.05rem;
+}
+
+.HeroImage,
+.ImageFrame {
+  margin: 0;
+}
+
+.HeroImage img,
+.ImageFrame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--source-border);
+  background: var(--source-surface-muted);
+  box-shadow: var(--source-shadow);
+}
+
+.Caption {
+  margin-top: 0.55rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  opacity: 0.78;
+}
+
+.FactList,
+.CardGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.FactList {
+  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+}
+
+.Fact {
+  padding: 1rem;
+  border: 1px solid var(--source-border);
+  border-radius: 8px;
+  background: var(--source-surface);
+}
+
+.Fact dt {
+  margin: 0 0 0.3rem;
+  color: var(--highlight);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.Fact dd {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.CardGrid {
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+
+.InfoCard {
+  padding: 1.1rem;
+  border: 1px solid var(--source-border);
+  border-radius: 8px;
+  background: var(--source-surface);
+  box-shadow: var(--source-shadow);
+}
+
+.SplitSection {
+  align-items: start;
+}
+
+.Callout {
+  padding: 1.15rem;
+  align-items: center;
+  border: 1px solid var(--source-border);
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    var(--source-surface) 0%,
+    var(--source-surface-muted) 100%
+  );
+  box-shadow: var(--source-shadow);
+}
+
+.PrimaryLink {
+  display: inline-flex;
+  align-self: flex-start;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: var(--highlight);
+  color: var(--text-on-accent) !important;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+@media (min-width: 760px) {
+  .Hero,
+  .SplitSection,
+  .Callout {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.9fr);
+  }
+
+  .HeroImage {
+    order: 2;
+  }
+
+  .Callout {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}

@@ -24,6 +24,7 @@ import {
   privacyPolicyPage,
   starterKitSetupPage,
   wormCalculatorPage,
+  wormSourcePage,
 } from '@/lib/site/pageRecords.mjs';
 
 const productIndexPage = {
@@ -95,6 +96,7 @@ function collectMetadataScenarios() {
     orderTermsPage,
     starterKitSetupPage,
     wormCalculatorPage,
+    wormSourcePage,
     checkoutPage,
     reviewPage,
     searchPage,

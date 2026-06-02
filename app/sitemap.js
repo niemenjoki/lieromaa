@@ -15,6 +15,7 @@ import {
   privacyPolicyPage,
   starterKitSetupPage,
   wormCalculatorPage,
+  wormSourcePage,
 } from '@/lib/site/pageRecords.mjs';
 
 const toISODate = (d) => new Date(d).toISOString().split('T')[0];
@@ -49,6 +50,7 @@ export default async function sitemap() {
     ['/opas', latestGuide],
     [blogIndexPage.canonicalUrl, latestPost],
     [aboutPage.canonicalUrl, aboutPage.updatedAt],
+    [wormSourcePage.canonicalUrl, wormSourcePage.updatedAt],
     [privacyPolicyPage.canonicalUrl, getLegalPageLastModified(privacyPolicyPage)],
     [orderTermsPage.canonicalUrl, getLegalPageLastModified(orderTermsPage)],
     ...Object.values(productCatalog).map((product) => [
