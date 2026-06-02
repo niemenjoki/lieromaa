@@ -4,6 +4,7 @@ import {
   getAllGuideCategories,
   getAllPostTags,
   getPostsByTag,
+  isIndexableBlogTag,
 } from '@/lib/content/index.mjs';
 import { productCatalog } from '@/lib/products/catalog.mjs';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
@@ -64,7 +65,10 @@ export default async function sitemap() {
   // --- Tag pages
   for (const tag of postTags) {
     const slug = slugify(tag);
-    const { numPages } = getPostsByTag(slug, 1, POSTS_PER_PAGE);
+    const { numPages, total } = getPostsByTag(slug, 1, POSTS_PER_PAGE);
+    if (!isIndexableBlogTag(total)) {
+      continue;
+    }
     for (let i = 1; i <= numPages; i++) add(`/blogi/${slug}/sivu/${i}`, latestPost);
   }
 
