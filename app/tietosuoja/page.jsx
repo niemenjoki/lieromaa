@@ -75,13 +75,14 @@ export default function PrivacyPage() {
           </li>
           <li>
             Tekninen käyttödata ja analytiikkamittarit: Lieromaan oma analytiikka kerää
-            vain anonyymejä mittareita, kuten selainkohtaisen tunnisteen,
+            vain pseudonyymejä käyttömittareita, kuten selainkohtaisen tunnisteen,
             istuntotunnisteen, sivupolut, aikaleimat, edellisen sisäisen sivun, ulkoisen
-            viittaavan sivun host-nimen, arvioidun viipymän, scrollaussyvyyden,
-            lomakealoitukset, lomakelähetykset, tilaus-CTA-klikkaukset, ostoskori- ja
+            viittaavan sivun host-nimen, mahdolliset UTM-kampanjaparametrit, arvioidun
+            viipymän, scrollaussyvyyden, tilaus-CTA-klikkaukset, ostoskori- ja
             tilauslomaketapahtumat sekä suorituskykymittarit. Lieromaan oma analytiikka ei
             sisällä nimeä, sähköpostiosoitetta, puhelinnumeroa, toimitusosoitetta,
-            tilausnumeroa, IP-osoitetta, tarkkoja laitetietoja tai URL-parametreja.
+            tilausnumeroa, IP-osoitetta, tarkkoja laitetietoja tai muita URL-parametreja
+            kuin UTM-kampanjaparametrit.
           </li>
           <li>
             Käyttäjäasetukset: teema-asetus (vaalea/tumma tila), joka tallennetaan
@@ -264,15 +265,16 @@ export default function PrivacyPage() {
           seuraamiseen. Ensimmäisen osapuolen analytiikka käynnistyy vasta, kun olet
           hyväksynyt analytiikan ja mainontaan liittyvän päätelaitetallennuksen
           suostumuksenhallintatyökalussa. Tällöin analytiikka tallentaa omalle
-          palvelimelle anonyymin selainkohtaisen tunnisteen, istuntotunnisteen, sivupolun,
-          aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun host-nimen
-          (esimerkiksi google.com tai com.linkedin.android), arvioidun viipymän,
-          scrollaussyvyyden, lomakealoitukset, lomakelähetykset ja tilaus-CTA-klikkaukset.
-          Lisäksi analytiikka voi tallentaa anonyymejä tapahtumia, kuten ostoskoriin
-          lisäämisen, tilauslomakkeen lähetysyrityksen ja onnistuneen tilauslomakkeen
-          lähetyksen. Tietoja käytetään vain sen ymmärtämiseen, miten sivuilla liikutaan
-          ja missä kohtaa kävijät osoittavat kiinnostusta tilaamiseen tai muihin
-          lomakkeisiin.
+          palvelimelle pseudonyymin selainkohtaisen tunnisteen, istuntotunnisteen,
+          sivupolun, aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun
+          host-nimen (esimerkiksi google.com tai com.linkedin.android), mahdolliset UTM-parametrit
+          (utm_source, utm_medium, utm_campaign, utm_content ja utm_term), arvioidun
+          viipymän, scrollaussyvyyden ja tilaus-CTA-klikkaukset. Lisäksi analytiikka voi
+          tallentaa pseudonyymejä tapahtumia, kuten ostoskoriin lisäämisen, ostoskorin
+          toimitustapavaiheesta jatkamisen, tilauslomakkeen lähetysyrityksen ja
+          onnistuneen tilauslomakkeen lähetyksen. Tietoja käytetään vain sen
+          ymmärtämiseen, miten sivuilla liikutaan ja miten kiinnostus tuotteisiin,
+          ostoskoriin ja tilaamiseen muuttuu ajan kuluessa.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikka ei tallenna IP-osoitteita, selaimen tai
@@ -280,11 +282,15 @@ export default function PrivacyPage() {
           sormenjälkitunnistusta tai muita vastaavia tunnistuskeinoja. Analytiikan
           tapahtumia ei yhdistetä yksittäisiin tilaustietoihin, kuten nimeen,
           sähköpostiosoitteeseen, puhelinnumeroon, toimitusosoitteeseen tai
-          tilausnumeroon. Raportointi tehdään istunto- ja sivuryhmätasolla, jotta voidaan
-          nähdä yleisesti miten tilaavat istunnot etenevät sivustolla ilman yksittäisen
-          asiakkaan selaushistorian yhdistämistä tilaukseen. URL-parametreja ei tallenneta
-          analytiikkaan. Anonyymi kävijätunniste säilytetään suostumuksen jälkeen selaimen
-          localStoragessa ja istuntotieto sessionStoragessa. Speed Insights kerää
+          tilausnumeroon. Raakatason analytiikkatiedot ovat pseudonyymejä. Raportointi
+          tehdään istunto- ja sivuryhmätasolla, jotta voidaan nähdä yleisesti miten tilaavat
+          istunnot etenevät sivustolla ilman yksittäisen asiakkaan selaushistorian
+          yhdistämistä tilaukseen. Analytiikka tallentaa
+          URL-parametreista vain UTM-kampanjaparametrit, jos niitä on linkissä mukana.
+          Muita URL-parametreja ei tallenneta analytiikkaan. Pseudonyymi kävijätunniste
+          säilytetään suostumuksen jälkeen selaimen localStoragessa ja istuntotieto
+          sessionStoragessa. Jos peruutat analytiikkasuostumuksen, nämä analytiikan
+          tunnisteet poistetaan selaimen tallennustilasta. Speed Insights kerää
           suorituskykymittareita palveluntarjoajansa käytäntöjen mukaisesti.
         </p>
         <p>
@@ -308,9 +314,11 @@ export default function PrivacyPage() {
           localStorageen, jotta voit jatkaa tilaamista myöhemmin samalla selaimella.
           Ostoskori poistetaan automaattisesti, jos sitä ei muokata 7 päivään. Ostoskorin
           sisältö pysyy selaimessasi, eikä sitä lähetetä Lieromaalle ennen kuin lähetät
-          tilauslomakkeen. Lisäksi anonyymi kävijätunniste tallennetaan suostumuksen
+          tilauslomakkeen. Lisäksi pseudonyymi kävijätunniste tallennetaan suostumuksen
           jälkeen localStorageen ja istuntotieto sessionStorageen ensimmäisen osapuolen
-          analytiikkaa varten. Näistä tunnisteista ei voida päätellä henkilöllisyyttäsi.
+          analytiikkaa varten. Näistä tunnisteista ei voi suoraan päätellä
+          henkilöllisyyttäsi, mutta niitä käsitellään henkilötietoina, koska sama selain
+          voidaan tunnistaa eri käyntikerroilla suostumuksen voimassa ollessa.
         </p>
 
         <h2>Evästeet</h2>
@@ -397,11 +405,12 @@ export default function PrivacyPage() {
             palveluntarjoajan käytäntöjen mukaisesti.
           </li>
           <li>
-            LocalStorageen tallennettu teema-asetus, ostoskoritieto ja anonyymi
+            LocalStorageen tallennettu teema-asetus, ostoskoritieto ja pseudonyymi
             kävijätunniste sekä sessionStorageen tallennettu istuntotieto säilyvät
-            käytössä olevassa selaimessa, kunnes poistat ne tai selain poistaa ne omien
-            säilytyskäytäntöjensä mukaisesti. Ostoskori poistetaan sivuston toimesta
-            viimeistään 7 päivän käyttämättömyyden jälkeen.
+            käytössä olevassa selaimessa, kunnes poistat ne, peruutat
+            analytiikkasuostumuksen tai selain poistaa ne omien säilytyskäytäntöjensä
+            mukaisesti. Ostoskori poistetaan sivuston toimesta viimeistään 7 päivän
+            käyttämättömyyden jälkeen.
           </li>
         </ul>
 
