@@ -9,16 +9,25 @@ import {
   ANALYTICS_OPT_OUT_PATH,
   ANALYTICS_OPT_OUT_STORAGE_KEY,
   ANALYTICS_OPT_OUT_STORAGE_VALUE,
+  ANALYTICS_SESSION_STORAGE_KEY,
+  ANALYTICS_VISITOR_STORAGE_KEY,
+  clearStoredAnalyticsState,
 } from '@/lib/analytics/optOut';
 
 const ANALYTICS_ENDPOINT = '/api/analytics';
 const ANALYTICS_SCHEMA_VERSION = 2;
 const ANALYTICS_CONSENT_EVENT_NAME = 'lieromaa:analytics-consent-changed';
-const VISITOR_ID_STORAGE_KEY = 'lieromaa.analytics.visitor';
-const SESSION_STORAGE_KEY = 'lieromaa.analytics.session';
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
 const SESSION_TOUCH_INTERVAL_MS = 60 * 1000;
 const IGNORED_ANALYTICS_PATHS = new Set([ANALYTICS_OPT_OUT_PATH]);
+const UTM_FIELDS = ['utmSource', 'utmMedium', 'utmCampaign', 'utmContent', 'utmTerm'];
+const UTM_QUERY_KEYS = {
+  utmSource: 'utm_source',
+  utmMedium: 'utm_medium',
+  utmCampaign: 'utm_campaign',
+  utmContent: 'utm_content',
+  utmTerm: 'utm_term',
+};
 
 function createId(prefix) {
   return (
@@ -82,6 +91,40 @@ function normalizeHost(value) {
   }
 }
 
+function normalizeCampaignValue(value) {
+  return String(value || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 120);
+}
+
+function emptyCampaignParams() {
+  return Object.fromEntries(UTM_FIELDS.map((fieldName) => [fieldName, '']));
+}
+
+function getCurrentCampaignParams() {
+  const campaign = emptyCampaignParams();
+  let searchParams;
+
+  try {
+    searchParams = new URLSearchParams(globalThis.location?.search || '');
+  } catch {
+    return campaign;
+  }
+
+  for (const fieldName of UTM_FIELDS) {
+    campaign[fieldName] = normalizeCampaignValue(
+      searchParams.get(UTM_QUERY_KEYS[fieldName])
+    );
+  }
+
+  return campaign;
+}
+
+function hasCampaignParams(campaign) {
+  return UTM_FIELDS.some((fieldName) => Boolean(campaign?.[fieldName]));
+}
+
 function getExternalReferrerHost() {
   const referrerHost = normalizeHost(document.referrer || '');
   const currentHost = normalizeHost(globalThis.location?.host || '');
@@ -95,24 +138,25 @@ function getExternalReferrerHost() {
 
 function getOrCreateVisitorId() {
   const storage = getStorage('localStorage');
-  const existingId = storage?.getItem(VISITOR_ID_STORAGE_KEY);
+  const existingId = storage?.getItem(ANALYTICS_VISITOR_STORAGE_KEY);
   if (existingId) {
     return existingId;
   }
 
   const nextId = createId('visitor');
-  storage?.setItem(VISITOR_ID_STORAGE_KEY, nextId);
+  storage?.setItem(ANALYTICS_VISITOR_STORAGE_KEY, nextId);
   return nextId;
 }
 
 function loadSessionState(currentPath) {
   const storage = getStorage('sessionStorage');
   const now = Date.now();
+  const currentCampaign = getCurrentCampaignParams();
   let session = null;
 
   if (storage) {
     try {
-      session = JSON.parse(storage.getItem(SESSION_STORAGE_KEY) || 'null');
+      session = JSON.parse(storage.getItem(ANALYTICS_SESSION_STORAGE_KEY) || 'null');
     } catch {
       session = null;
     }
@@ -130,6 +174,16 @@ function loadSessionState(currentPath) {
       lastPath: '',
       lastActivityAt: now,
       referrerHost: getExternalReferrerHost(),
+      campaign: currentCampaign,
+    };
+  }
+
+  if (hasCampaignParams(currentCampaign)) {
+    session.campaign = currentCampaign;
+  } else {
+    session.campaign = {
+      ...emptyCampaignParams(),
+      ...(session.campaign || {}),
     };
   }
 
@@ -140,13 +194,14 @@ function loadSessionState(currentPath) {
   session.lastPath = currentPath;
   session.lastActivityAt = now;
 
-  storage?.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
+  storage?.setItem(ANALYTICS_SESSION_STORAGE_KEY, JSON.stringify(session));
 
   return {
     sessionId: session.id,
     sessionPageIndex: session.pageCount,
     previousPath,
     referrerHost: String(session.referrerHost || ''),
+    campaign: session.campaign,
   };
 }
 
@@ -167,13 +222,15 @@ function touchSession(path, lastTouchedAtRef) {
   }
 
   try {
-    const session = JSON.parse(storage.getItem(SESSION_STORAGE_KEY) || 'null');
+    const session = JSON.parse(
+      storage.getItem(ANALYTICS_SESSION_STORAGE_KEY) || 'null'
+    );
     if (!session?.id) {
       return;
     }
 
     storage.setItem(
-      SESSION_STORAGE_KEY,
+      ANALYTICS_SESSION_STORAGE_KEY,
       JSON.stringify({
         ...session,
         lastActivityAt: now,
@@ -267,6 +324,7 @@ function buildPayload(view, now = Date.now()) {
     path: view.path,
     previousPath: view.previousPath,
     referrerHost: view.referrerHost,
+    ...view.campaign,
     startedAt: new Date(view.startedAtMs).toISOString(),
     endedAt: new Date(now).toISOString(),
     dwellMs: Math.max(0, Math.round(getDwellMs(view, now))),
@@ -358,6 +416,7 @@ function buildEventPayload(view, eventDetail = {}) {
       .trim()
       .slice(0, 120),
     eventItems: normalizeEventItems(eventItems),
+    ...view.campaign,
     occurredAt: new Date().toISOString(),
   };
 }
@@ -383,6 +442,10 @@ function createPageView(path, lastTouchedAtRef) {
     path: normalizedPath,
     previousPath: session.previousPath || '',
     referrerHost: session.referrerHost,
+    campaign: {
+      ...emptyCampaignParams(),
+      ...(session.campaign || {}),
+    },
     startedAtMs: Date.now(),
     visibleStartedAtMs: document.visibilityState === 'hidden' ? 0 : Date.now(),
     accumulatedVisibleMs: 0,
@@ -402,7 +465,14 @@ export default function FirstPartyAnalytics() {
 
   useEffect(() => {
     function handleAnalyticsConsentChange(event) {
-      setAnalyticsConsentGranted(Boolean(event.detail?.granted));
+      const granted = Boolean(event.detail?.granted);
+      if (!granted) {
+        clearStoredAnalyticsState();
+        currentViewRef.current = null;
+        lastTouchedAtRef.current = 0;
+      }
+
+      setAnalyticsConsentGranted(granted);
     }
 
     setAnalyticsConsentGranted(hasAnalyticsConsent());
@@ -431,16 +501,9 @@ export default function FirstPartyAnalytics() {
     const shouldSkipTracking = isIgnoredAnalyticsPath(nextPath) || isAnalyticsOptedOut();
 
     if (shouldSkipTracking) {
-      if (currentView) {
-        currentView.maxScrollPercent = Math.max(
-          currentView.maxScrollPercent,
-          getCurrentScrollDepth()
-        );
-        pauseView(currentView);
-        sendAnalyticsPayload(buildPayload(currentView));
-      }
-
+      clearStoredAnalyticsState();
       currentViewRef.current = null;
+      lastTouchedAtRef.current = 0;
       return;
     }
 
@@ -637,7 +700,7 @@ export default function FirstPartyAnalytics() {
       );
 
       const currentView = currentViewRef.current;
-      if (currentView) {
+      if (currentView && hasAnalyticsConsent() && !isAnalyticsOptedOut()) {
         currentView.maxScrollPercent = Math.max(
           currentView.maxScrollPercent,
           getCurrentScrollDepth()

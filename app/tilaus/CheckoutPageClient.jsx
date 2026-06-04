@@ -291,6 +291,13 @@ export default function CheckoutPageClient() {
     });
   };
 
+  const handleShippingContinue = () => {
+    trackCheckoutStep('cart_shipping_continue', {
+      eventTarget: shippingMethod,
+    });
+    setStep(2);
+  };
+
   const handleCustomerFieldChange = (fieldName, value) => {
     setCustomerFields((current) => ({
       ...current,
@@ -737,7 +744,7 @@ export default function CheckoutPageClient() {
             <button
               type="button"
               className={classes.Button}
-              onClick={() => setStep(2)}
+              onClick={handleShippingContinue}
               disabled={!addressFieldsReady}
             >
               Jatka
