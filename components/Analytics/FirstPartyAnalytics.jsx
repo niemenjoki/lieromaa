@@ -222,9 +222,7 @@ function touchSession(path, lastTouchedAtRef) {
   }
 
   try {
-    const session = JSON.parse(
-      storage.getItem(ANALYTICS_SESSION_STORAGE_KEY) || 'null'
-    );
+    const session = JSON.parse(storage.getItem(ANALYTICS_SESSION_STORAGE_KEY) || 'null');
     if (!session?.id) {
       return;
     }
