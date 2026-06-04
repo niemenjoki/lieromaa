@@ -267,14 +267,14 @@ export default function PrivacyPage() {
           suostumuksenhallintatyökalussa. Tällöin analytiikka tallentaa omalle
           palvelimelle pseudonyymin selainkohtaisen tunnisteen, istuntotunnisteen,
           sivupolun, aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun
-          host-nimen (esimerkiksi google.com tai com.linkedin.android), mahdolliset UTM-parametrit
-          (utm_source, utm_medium, utm_campaign, utm_content ja utm_term), arvioidun
-          viipymän, scrollaussyvyyden ja tilaus-CTA-klikkaukset. Lisäksi analytiikka voi
-          tallentaa pseudonyymejä tapahtumia, kuten ostoskoriin lisäämisen, ostoskorin
-          toimitustapavaiheesta jatkamisen, tilauslomakkeen lähetysyrityksen ja
-          onnistuneen tilauslomakkeen lähetyksen. Tietoja käytetään vain sen
-          ymmärtämiseen, miten sivuilla liikutaan ja miten kiinnostus tuotteisiin,
-          ostoskoriin ja tilaamiseen muuttuu ajan kuluessa.
+          host-nimen (esimerkiksi google.com tai com.linkedin.android), mahdolliset
+          UTM-parametrit (utm_source, utm_medium, utm_campaign, utm_content ja utm_term),
+          arvioidun viipymän, scrollaussyvyyden ja tilaus-CTA-klikkaukset. Lisäksi
+          analytiikka voi tallentaa pseudonyymejä tapahtumia, kuten ostoskoriin
+          lisäämisen, ostoskorin toimitustapavaiheesta jatkamisen, tilauslomakkeen
+          lähetysyrityksen ja onnistuneen tilauslomakkeen lähetyksen. Tietoja käytetään
+          vain sen ymmärtämiseen, miten sivuilla liikutaan ja miten kiinnostus
+          tuotteisiin, ostoskoriin ja tilaamiseen muuttuu ajan kuluessa.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikka ei tallenna IP-osoitteita, selaimen tai
@@ -283,15 +283,15 @@ export default function PrivacyPage() {
           tapahtumia ei yhdistetä yksittäisiin tilaustietoihin, kuten nimeen,
           sähköpostiosoitteeseen, puhelinnumeroon, toimitusosoitteeseen tai
           tilausnumeroon. Raakatason analytiikkatiedot ovat pseudonyymejä. Raportointi
-          tehdään istunto- ja sivuryhmätasolla, jotta voidaan nähdä yleisesti miten tilaavat
-          istunnot etenevät sivustolla ilman yksittäisen asiakkaan selaushistorian
-          yhdistämistä tilaukseen. Analytiikka tallentaa
-          URL-parametreista vain UTM-kampanjaparametrit, jos niitä on linkissä mukana.
-          Muita URL-parametreja ei tallenneta analytiikkaan. Pseudonyymi kävijätunniste
-          säilytetään suostumuksen jälkeen selaimen localStoragessa ja istuntotieto
-          sessionStoragessa. Jos peruutat analytiikkasuostumuksen, nämä analytiikan
-          tunnisteet poistetaan selaimen tallennustilasta. Speed Insights kerää
-          suorituskykymittareita palveluntarjoajansa käytäntöjen mukaisesti.
+          tehdään istunto- ja sivuryhmätasolla, jotta voidaan nähdä yleisesti miten
+          tilaavat istunnot etenevät sivustolla ilman yksittäisen asiakkaan
+          selaushistorian yhdistämistä tilaukseen. Analytiikka tallentaa URL-parametreista
+          vain UTM-kampanjaparametrit, jos niitä on linkissä mukana. Muita URL-parametreja
+          ei tallenneta analytiikkaan. Pseudonyymi kävijätunniste säilytetään suostumuksen
+          jälkeen selaimen localStoragessa ja istuntotieto sessionStoragessa. Jos peruutat
+          analytiikkasuostumuksen, nämä analytiikan tunnisteet poistetaan selaimen
+          tallennustilasta. Speed Insights kerää suorituskykymittareita
+          palveluntarjoajansa käytäntöjen mukaisesti.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikkadata tallennetaan Lieromaan hallinnoimaan
