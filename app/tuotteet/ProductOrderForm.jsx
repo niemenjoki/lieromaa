@@ -65,7 +65,7 @@ function getAutomaticDiscountNotice(variant) {
     ? ` Tarjous voimassa ${formatDiscountValidUntil(variant.discount.validUntil)} asti.`
     : '';
 
-  return `Norm. ${formatPrice(variant.basePrice)} € (${formatAutomaticDiscountLabel(variant.discount)}). 30 päivän alin hinta: ${formatPrice(variant.discount.lowestPrice30Days)} €.${validUntilText}`;
+  return `Norm. ${formatPrice(variant.basePrice)} € (${formatAutomaticDiscountLabel(variant.discount)}). 30 päivän alin hinta ennen tätä alennusta: ${formatPrice(variant.discount.lowestPrice30Days)} €.${validUntilText}`;
 }
 
 function getMatchingExtraChargeLabels(discount, extraCharges) {

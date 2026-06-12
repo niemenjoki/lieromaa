@@ -54,8 +54,9 @@ export default function VariantPriceDisplay({ title, variant }) {
             <span className={classes.DiscountBadge}>{formatDiscountLabel(discount)}</span>
           </span>
           <span className={classes.LowestPriceNotice}>
-            30 päivän alin hinta: {formatPrice(discount.lowestPrice30Days)} €. Tarjous
-            voimassa {formatDiscountValidUntil(discount.validUntil)} asti.
+            30 päivän alin hinta ennen tätä alennusta:{' '}
+            {formatPrice(discount.lowestPrice30Days)} €. Tarjous voimassa{' '}
+            {formatDiscountValidUntil(discount.validUntil)} asti.
           </span>
         </>
       ) : (
