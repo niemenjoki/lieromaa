@@ -482,6 +482,24 @@ describe('frontend public order normalization', () => {
     );
   });
 
+  test('normalizePublicOrderSubmission should accept cart orders with two worm packages', () => {
+    const now = new Date('2026-05-02T10:00:00Z');
+
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 2 }]),
+        toimitus: 'nouto',
+      }),
+      { now }
+    );
+
+    expectEqual(payload.product.sku, 'worms-25');
+    expectEqual(payload.product.packageQuantity, 2);
+    expectEqual(payload.product.quantity, 100);
+  });
+
   test('normalizePublicOrderSubmission should reject cart orders with more than two worm packages', () => {
     const now = new Date('2026-05-02T10:00:00Z');
 
@@ -503,8 +521,8 @@ describe('frontend public order normalization', () => {
         );
         assert.match(
           error.publicMessage,
-          /enintään 1 matopaketti/,
-          'normalizePublicOrderSubmission should explain the one-worm-package cart limit'
+          /enintään 2 matopakettia/,
+          'normalizePublicOrderSubmission should explain the two-worm-package cart limit'
         );
         return true;
       }
