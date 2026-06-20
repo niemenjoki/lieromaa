@@ -21,6 +21,7 @@ import {
   aboutPage,
   blogIndexPage,
   cancellationRequestPage,
+  dataRequestPage,
   guideHubPage,
   homePage,
   orderTermsPage,
@@ -48,6 +49,11 @@ const checkoutPage = {
 const reviewPage = {
   title: 'Jätä arvostelu | Lieromaa',
   robots: { index: false, follow: false },
+};
+
+const dataDownloadPage = {
+  title: 'Lataa tietosi | Lieromaa',
+  robots: { index: false, follow: false, nocache: true },
 };
 
 const searchPage = {
@@ -95,6 +101,7 @@ function collectMetadataScenarios() {
     guideHubPage,
     aboutPage,
     cancellationRequestPage,
+    dataRequestPage,
     privacyPolicyPage,
     orderTermsPage,
     starterKitSetupPage,
@@ -102,8 +109,12 @@ function collectMetadataScenarios() {
     wormSourcePage,
     checkoutPage,
     reviewPage,
+    dataDownloadPage,
     searchPage,
-  ].forEach((page) => addScenario(scenarios, page.canonicalUrl ?? '/arvostele', page));
+  ].forEach((page) => {
+    const fallbackPath = page === reviewPage ? '/arvostele' : '/tietopyynto/lataa';
+    addScenario(scenarios, page.canonicalUrl ?? fallbackPath, page);
+  });
 
   addScenario(scenarios, '/blogi/sivu/1', createBlogPageScenario(1, '/blogi/sivu/1'));
 

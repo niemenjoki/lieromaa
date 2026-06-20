@@ -1,5 +1,7 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
+
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import FirstPartyAnalytics from './FirstPartyAnalytics';
@@ -12,7 +14,9 @@ const isDev =
       window.location.hostname === '127.0.0.1'));
 
 export default function AnalyticsWrapper() {
-  if (isDev) return null;
+  const pathname = usePathname();
+
+  if (isDev || pathname === '/tietopyynto/lataa') return null;
 
   return (
     <>
