@@ -1,3 +1,4 @@
+import SafeLink from '@/components/SafeLink/SafeLink';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import {
   BUSINESS_ADDRESS_LINES,
@@ -74,6 +75,14 @@ export default function PrivacyPage() {
             siitä, mitä tilauksen tuotteita arvostelu koskee.
           </li>
           <li>
+            Tietopyyntötiedot: tietopyyntölomakkeella annettu tilausnumero ja
+            sähköpostiosoite käsitellään tilausta vastaavan latauslinkin lähettämiseksi.
+            Väärinkäytösten rajoittamista varten pyynnöistä tallennetaan enintään 24
+            tunniksi salaisella avaimella muodostettuja teknisiä tunnisteita, joista
+            alkuperäistä tilausnumeroa, sähköpostiosoitetta tai verkko-osoitetta ei voi
+            suoraan lukea.
+          </li>
+          <li>
             Tekninen käyttödata ja analytiikkamittarit: Lieromaan oma analytiikka kerää
             vain pseudonyymejä käyttömittareita, kuten selainkohtaisen tunnisteen,
             istuntotunnisteen, sivupolut, aikaleimat, edellisen sisäisen sivun, ulkoisen
@@ -98,15 +107,16 @@ export default function PrivacyPage() {
         <h2>Tietojen kerääminen ja lähteet</h2>
         <p>
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
-          tilauslomakkeella, lähetät peruuttamisilmoituksen, jätät arvostelun tai lähetät
-          viestin oppaiden yhteydessä olevalla kysymys- ja aihe-ehdotuslomakkeella.
-          Lisäksi kolmannen osapuolen palvelut (esimerkiksi Google AdSense ja Speed
-          Insights) voivat kerätä teknisiä tietoja sivuston käytöstä. Lieromaa käyttää
-          lisäksi omaa ensimmäisen osapuolen analytiikkaa, joka tallentaa vain sivuston
-          käytön kannalta olennaiset mittarit omalle palvelimelle suostumuksen
-          perusteella. Tilaus-, peruuttamisilmoitus- ja arvostelulomakkeiden välityksessä
-          käytetään lisäksi Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa voi käyttää
-          myös mainostenesto-ohjelmien tai muiden seurantaa estävien työkalujen kanssa.
+          tilauslomakkeella, lähetät peruuttamisilmoituksen, jätät arvostelun, teet
+          tietopyynnön tai lähetät viestin oppaiden yhteydessä olevalla kysymys- ja
+          aihe-ehdotuslomakkeella. Lisäksi kolmannen osapuolen palvelut (esimerkiksi
+          Google AdSense ja Speed Insights) voivat kerätä teknisiä tietoja sivuston
+          käytöstä. Lieromaa käyttää lisäksi omaa ensimmäisen osapuolen analytiikkaa, joka
+          tallentaa vain sivuston käytön kannalta olennaiset mittarit omalle palvelimelle
+          suostumuksen perusteella. Tilaus-, peruuttamisilmoitus- ja arvostelulomakkeiden
+          välityksessä käytetään lisäksi Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa
+          voi käyttää myös mainostenesto-ohjelmien tai muiden seurantaa estävien
+          työkalujen kanssa.
         </p>
 
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
@@ -131,6 +141,11 @@ export default function PrivacyPage() {
             Arvostelujen vastaanotto, tarkistaminen ja julkaiseminen: oikeusperusteena
             suostumus (GDPR Art. 6(1)(a)) sekä väärinkäytösten torjunnan osalta oikeutettu
             etu (GDPR Art. 6(1)(f)).
+          </li>
+          <li>
+            Rekisteröidyn tietopyynnön toteuttaminen ja latauslinkin toimittaminen:
+            oikeusperusteena lakisääteinen velvoite (GDPR Art. 6(1)(c)). Pyynnön
+            väärinkäytösten rajoittaminen perustuu oikeutettuun etuun (GDPR Art. 6(1)(f)).
           </li>
           <li>
             Kirjanpito ja lakisääteiset velvoitteet: oikeusperusteena lakisääteinen
@@ -205,6 +220,26 @@ export default function PrivacyPage() {
           mahdollinen sähköpostiosoite, sivun URL-osoite, sivun otsikko ja viittaava sivu
           (referrer), jos sellainen on saatavilla. Uudesta viestistä lähetetään
           sähköposti-ilmoitus Lieromaan ylläpitäjälle Zoho Mailin SMTP-palvelun kautta.
+        </p>
+
+        <h2>Tietopyyntölomake ja tietojen lataaminen</h2>
+        <p>
+          Tietopyyntölomakkeella annettua tilausnumeroa ja sähköpostiosoitetta verrataan
+          tilaustenhallintapalvelussa olevaan tilaukseen. Lomake näyttää aina saman
+          yleisen vahvistuksen riippumatta siitä, löytyykö vastaavaa tilausta. Näin
+          ulkopuolinen ei voi päätellä, onko tietty sähköpostiosoite tai tilausnumero
+          järjestelmässä. Jos tiedot vastaavat toisiaan, latauslinkki lähetetään
+          tilaukseen tallennettuun sähköpostiosoitteeseen Zoho Mailin SMTP-palvelun
+          kautta.
+        </p>
+        <p>
+          Latauslinkki sisältää satunnaisen kertakäyttöisen tunnisteen, joka on voimassa
+          24 tuntia. Palvelimelle tallennetaan tunnisteesta vain tiiviste, eikä tunniste
+          sisälly sivuston analytiikkaan. Lataussivulla ei käytetä Lieromaan analytiikkaa
+          tai Speed Insightsia. Ladattava JSON-tiedosto sisältää tilaukseen liittyvät
+          tiedot, jotka ovat edelleen Lieromaan tilaustenhallinnassa. Lataus ei sisällä
+          sisäisiä ylläpitäjätunnisteita, sähköpostipalvelun viestitunnisteita tai
+          salaisuuksia.
         </p>
 
         <h2>Toimitukset (Posti)</h2>
@@ -367,8 +402,12 @@ export default function PrivacyPage() {
             asiakaspalvelun hoitamiseksi ja mahdollisten reklamaatioiden käsittelemiseksi.
             Lähetettyihin ja peruttuihin tilauksiin liittyvät henkilötiedot anonymisoidaan
             tilausjärjestelmässä pääsääntöisesti 12 kuukauden kuluttua lähetyksestä tai
-            peruutuksesta, minkä jälkeen järjestelmään jää vain tilaushistorian seurantaan
-            tarvittava ei-henkilökohtainen tieto.
+            peruutuksesta. Tällöin järjestelmästä poistetaan asiakkaan yhteys- ja
+            osoitetiedot, viestit, tekninen pyyntökonteksti, lähetystunnus sekä ulkoisiin
+            järjestelmiin yhdistämisen mahdollistavat tilaus-, lasku- ja viestitunnisteet.
+            Tilauksesta säilytetään vain tilaushistorian seurantaan tarvittavat
+            ei-henkilökohtaiset tiedot, kuten tuotteet, määrät, hinnat, toimitustapa,
+            tilat ja tapahtumien ajankohdat.
           </li>
           <li>
             Laskutukseen ja kirjanpitoon liittyviä tietoja säilytetään Suomen
@@ -385,8 +424,13 @@ export default function PrivacyPage() {
           <li>
             Arvostelut säilytetään niin kauan kuin arvostelua tarvitaan sivuston
             asiakasarvostelujen näyttämiseen ja luotettavuuden varmistamiseen, ellei
-            poistopyyntöä tai muuta perustetta poistamiselle ole. Julkaistusta
-            arvostelusta voidaan poistaa näyttönimi tai muu tunnistettava tieto pyynnöstä.
+            poistopyyntöä tai muuta perustetta poistamiselle ole. Kun arvosteluun liittyvä
+            tilaus anonymisoidaan, arvostelun yksityinen palaute, tekninen
+            pyyntökonteksti, tilauskytkentä ja tarkistamiseen liittyvät tiedot poistetaan.
+            Hyväksytystä arvostelusta säilytetään tämän jälkeen vain sivustolla
+            julkaistavat tiedot: tuote, tähtiarvio, kirjoitettu arvostelu, mahdollinen
+            näyttönimi ja lähetysaika. Julkaistusta arvostelusta voidaan poistaa
+            näyttönimi tai muu tunnistettava tieto pyynnöstä.
           </li>
           <li>
             Reklamaatioihin, palautuksiin ja muihin jälkikäteisiin
@@ -397,6 +441,15 @@ export default function PrivacyPage() {
             Peruuttamisilmoituksiin liittyviä tietoja säilytetään niin kauan kuin
             ilmoituksen käsittely, mahdolliset palautus- ja maksujärjestelyt sekä
             lakisääteisten velvoitteiden osoittaminen kohtuudella edellyttävät.
+            Tilaustunnuksella tilaukseen yhdistetyn peruuttamisilmoituksen henkilötiedot
+            poistetaan viimeistään kyseisen tilauksen anonymisoinnin yhteydessä.
+          </li>
+          <li>
+            Tietopyynnön latauslinkki on voimassa enintään 24 tuntia ja vain yhden
+            latauksen ajan. Vanhentuneet, käytetyt ja mitätöidyt latauspyynnöt poistetaan
+            järjestelmästä. Väärinkäytösten rajoittamiseen käytetyt tekniset tunnisteet
+            poistetaan viimeistään 24 tunnin kuluttua. Tilauksen anonymisointi mitätöi
+            siihen liittyvät avoimet latauspyynnöt.
           </li>
           <li>
             Ensimmäisen osapuolen analytiikkatiedot säilyvät Lieromaan omassa
@@ -438,7 +491,9 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p>
-          Voit käyttää oikeuksiasi ottamalla yhteyttä sähköpostitse osoitteeseen
+          Voit ladata tilaukseesi liittyvät tiedot{' '}
+          <SafeLink href="/tietopyynto">tietopyyntösivulla</SafeLink>. Muita oikeuksia
+          koskevan pyynnön tai ongelmatilanteen voit lähettää sähköpostitse osoitteeseen{' '}
           {CONTACT_EMAIL}. Pyyntöihin vastataan kuukauden kuluessa.
         </p>
 

@@ -11,6 +11,7 @@ import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mj
 import {
   aboutPage,
   blogIndexPage,
+  dataRequestPage,
   getLegalPageLastModified,
   orderTermsPage,
   privacyPolicyPage,
@@ -53,6 +54,7 @@ export default async function sitemap() {
     [aboutPage.canonicalUrl, aboutPage.updatedAt],
     [wormSourcePage.canonicalUrl, wormSourcePage.updatedAt],
     [privacyPolicyPage.canonicalUrl, getLegalPageLastModified(privacyPolicyPage)],
+    [dataRequestPage.canonicalUrl, getLegalPageLastModified(dataRequestPage)],
     [orderTermsPage.canonicalUrl, getLegalPageLastModified(orderTermsPage)],
     ...Object.values(productCatalog).map((product) => [
       product.canonicalUrl,

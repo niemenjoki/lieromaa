@@ -10,7 +10,7 @@ export const legalPageDefinitions = {
       'Lieromaan tietosuojaseloste henkilötietojen käsittelystä, evästeiden käytöstä ja kolmansien osapuolten palveluista (Google AdSense, ensimmäisen osapuolen analytiikka, Speed Insights).',
     shortLabel: 'Tietosuojaseloste',
     publishedAt: '2025-10-16',
-    updatedAt: '2026-06-04',
+    updatedAt: '2026-06-21',
     search: {
       contexts: ['notFound'],
       keywords: ['tietosuoja', 'tietosuojaseloste', 'evästeet', 'henkilötiedot'],
@@ -52,6 +52,30 @@ export const legalPageDefinitions = {
         'peruutus',
         'palautus',
         'tilaus',
+      ],
+    },
+  },
+  dataRequest: {
+    canonicalUrl: '/tietopyynto',
+    pageIdSuffix: '#datarequest',
+    pageName: 'Omien tietojen lataaminen – Lieromaa',
+    title: 'Lataa tilaukseen liittyvät tietosi | Lieromaa',
+    description:
+      'Pyydä sähköpostiisi turvallinen kertakäyttöinen latauslinkki kaikkiin Lieromaan tilausjärjestelmässä tilaukseesi liittyviin henkilötietoihin.',
+    pageDescription:
+      'Lieromaan omien tietojen latauspalvelu tilausnumerolla ja tilaukseen liitetyllä sähköpostiosoitteella.',
+    shortLabel: 'Omien tietojen lataaminen',
+    navigationLabel: 'Omat tiedot',
+    publishedAt: '2026-06-21',
+    updatedAt: '2026-06-21',
+    search: {
+      contexts: ['notFound'],
+      keywords: [
+        'omat tiedot',
+        'tietopyyntö',
+        'henkilötiedot',
+        'tilauksen tiedot',
+        'lataa tiedot',
       ],
     },
   },

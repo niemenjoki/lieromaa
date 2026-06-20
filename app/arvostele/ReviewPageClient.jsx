@@ -313,6 +313,12 @@ export default function ReviewPageClient() {
             />
           </label>
 
+          <p className={classes.HelpText}>
+            Älä kirjoita lomakkeelle tunnistettavia henkilötietoja, kuten koko nimeä,
+            osoitetta, sähköpostiosoitetta tai puhelinnumeroa. Käytä näyttönimenä etunimeä
+            tai nimimerkkiä.
+          </p>
+
           <label className={classes.Label}>
             Yksityinen palaute Joonakselle (valinnainen)
             <textarea
