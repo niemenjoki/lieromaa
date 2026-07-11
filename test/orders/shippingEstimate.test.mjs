@@ -101,42 +101,4 @@ describe('checkout shipping date estimates', () => {
       'earlier manual availability dates should not shorten the normal estimate'
     );
   });
-
-  test('summer break estimates keep product-specific cutoffs', () => {
-    expectEqual(
-      getEstimatedShippingDate({
-        productKeys: ['worms'],
-        orderDate: '2026-06-27',
-      }),
-      '2026-06-29',
-      'Saturday worm orders before the break should still estimate the final pre-break Monday'
-    );
-
-    expectEqual(
-      getEstimatedShippingDate({
-        productKeys: ['worms'],
-        orderDate: '2026-06-28',
-      }),
-      '2026-07-13',
-      'Sunday worm orders before the break should move to the first post-break Monday'
-    );
-
-    expectEqual(
-      getEstimatedShippingDate({
-        productKeys: ['starterKit'],
-        orderDate: '2026-06-21',
-      }),
-      '2026-06-29',
-      'starter-kit orders made far enough ahead should still estimate the final pre-break Monday'
-    );
-
-    expectEqual(
-      getEstimatedShippingDate({
-        productKeys: ['starterKit'],
-        orderDate: '2026-06-22',
-      }),
-      '2026-07-13',
-      'starter-kit orders should not be shortened into the final pre-break Monday'
-    );
-  });
 });

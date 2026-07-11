@@ -1,4 +1,3 @@
-import { DeliveryBreakCheckoutNotice } from '@/components/DeliveryBreakNotice/DeliveryBreakNotice';
 import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
 
 import classes from './CheckoutPage.module.css';
@@ -23,7 +22,6 @@ export default function CheckoutPage() {
   return (
     <div className={classes.CheckoutPage}>
       <h1>Tilaus</h1>
-      <DeliveryBreakCheckoutNotice />
       <CheckoutPageClient />
     </div>
   );
