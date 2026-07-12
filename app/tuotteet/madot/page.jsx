@@ -14,13 +14,12 @@ import classes from '../ProductPage.module.css';
 import ProductReviewsSection from '../ProductReviewsSection';
 import VariantPriceDisplay from '../VariantPriceDisplay';
 import { breadcrumbItems, galleryImages, h1 } from './pageMetadata';
-import structuredData from './structuredData.js';
+import getStructuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 
-export const dynamic = 'force-static';
+export const revalidate = 300;
 
-const wormVariants = getProductVariants('worms');
 const wormShippingOptions = getProductShippingOptions('worms');
 const wormPickupOption =
   wormShippingOptions.find((option) => option.id === 'posti_noutopiste') ?? null;
@@ -30,6 +29,9 @@ const wormLocalPickupOption =
   wormShippingOptions.find((option) => option.id === 'nouto') ?? null;
 
 export default async function Page() {
+  const wormVariants = getProductVariants('worms');
+  const structuredData = getStructuredData();
+
   return (
     <>
       <script

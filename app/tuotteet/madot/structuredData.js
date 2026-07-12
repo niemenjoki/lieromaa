@@ -1,5 +1,5 @@
 import { createProductStructuredData } from '@/lib/structuredData/createProductStructuredData';
 
-const structuredData = createProductStructuredData('worms');
-
-export default structuredData;
+export default function getStructuredData() {
+  return createProductStructuredData('worms');
+}

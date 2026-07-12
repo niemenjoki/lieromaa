@@ -7,15 +7,16 @@ import AddToCartPanel from '../AddToCartPanel';
 import classes from '../ProductPage.module.css';
 import VariantPriceDisplay from '../VariantPriceDisplay';
 import { breadcrumbItems, galleryImages, h1 } from './pageMetadata';
-import structuredData from './structuredData.js';
+import getStructuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 
-export const dynamic = 'force-static';
-
-const variants = getProductVariants('compostChow');
+export const revalidate = 300;
 
 export default async function Page() {
+  const variants = getProductVariants('compostChow');
+  const structuredData = getStructuredData();
+
   return (
     <>
       <script

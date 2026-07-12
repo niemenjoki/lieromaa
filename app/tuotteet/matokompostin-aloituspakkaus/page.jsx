@@ -13,16 +13,12 @@ import classes from '../ProductPage.module.css';
 import ProductReviewsSection from '../ProductReviewsSection';
 import VariantPriceDisplay from '../VariantPriceDisplay';
 import { breadcrumbItems, faqItems, galleryImages, h1 } from './pageMetadata';
-import structuredData from './structuredData.js';
+import getStructuredData from './structuredData.js';
 
 export { default as generateMetadata } from './generateMetadata';
 
-export const dynamic = 'force-static';
+export const revalidate = 300;
 
-const starterKitVariants = getProductVariants('starterKit').filter(
-  (variant) => !variant.hideFromVariantSelector
-);
-const wormVariants = getProductVariants('worms');
 const starterKitShippingOptions = getProductShippingOptions('starterKit');
 const starterKitPickupOption =
   starterKitShippingOptions.find((option) => option.id === 'posti_noutopiste') ?? null;
@@ -47,6 +43,12 @@ function formatBoxCount(count) {
 }
 
 export default async function Page() {
+  const starterKitVariants = getProductVariants('starterKit').filter(
+    (variant) => !variant.hideFromVariantSelector
+  );
+  const wormVariants = getProductVariants('worms');
+  const structuredData = getStructuredData();
+
   return (
     <>
       <script
