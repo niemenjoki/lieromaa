@@ -1,1 +1,34 @@
-{}
+{
+  "worms-25": {
+    "active": true,
+    "type": "percentage",
+    "value": 10,
+    "lowestPrice30Days": 20,
+    "validFrom": "2026-07-15",
+    "validUntil": "2026-07-21"
+  },
+  "worms-50": {
+    "active": true,
+    "type": "percentage",
+    "value": 10,
+    "lowestPrice30Days": 30,
+    "validFrom": "2026-07-15",
+    "validUntil": "2026-07-21"
+  },
+  "worms-75": {
+    "active": true,
+    "type": "percentage",
+    "value": 10,
+    "lowestPrice30Days": 40,
+    "validFrom": "2026-07-15",
+    "validUntil": "2026-07-21"
+  },
+  "worms-100": {
+    "active": true,
+    "type": "percentage",
+    "value": 10,
+    "lowestPrice30Days": 50,
+    "validFrom": "2026-07-15",
+    "validUntil": "2026-07-21"
+  }
+}

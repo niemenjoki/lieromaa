@@ -74,6 +74,7 @@ Generated build outputs do not belong here. They live in `/generated`.
   `type` can be `percentage` or `fixed`.
   `value` is the discount amount.
   `lowestPrice30Days` is the required comparison price shown in the UI.
+  `validFrom` optionally sets the first active date in `YYYY-MM-DD` format.
   `validUntil` must be `YYYY-MM-DD`.
 - `operations/commerce/shippingSchedule.mjs`
   Shipping timing notes and machine-readable handling times used in product/order pages and schema.
