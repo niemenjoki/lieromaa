@@ -21,6 +21,8 @@ const breadcrumbItems = [
   { name: 'Tuotteet', href: '/tuotteet', url: `${SITE_URL}/tuotteet` },
 ];
 
+export const revalidate = 300;
+
 function formatProductPrice(productKey) {
   const variants = getProductVariants(productKey).filter(
     (variant) => !variant.hideFromPublicOffers
