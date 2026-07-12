@@ -65,7 +65,6 @@ export const productCatalogContentSource = {
         material: 'Kompostimulta, pahvisilppu, puukuitu, kookoskuitu',
       },
       offerAttributes: {
-        priceValidUntil: '2026-06-30',
         seller: {
           '@type': 'Organization',
           name: 'Lieromaa / Joonas Niemenjoki',
