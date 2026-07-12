@@ -121,8 +121,8 @@ export default function HomePage() {
             <SafeLink href="/tuotteet/madot" className={classes.InlineLink}>
               kotimaisia kompostimatoja
             </SafeLink>{' '}
-            matokompostorin käynnistämiseen. Aloita oppaista, hae vastauksia ongelmiin
-            tai arvioi sopiva matomäärä laskurilla.
+            matokompostorin käynnistämiseen. Aloita oppaista, hae vastauksia ongelmiin tai
+            arvioi sopiva matomäärä laskurilla.
           </p>
 
           <div className={classes.HeroSearch}>
