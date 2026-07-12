@@ -117,8 +117,12 @@ export default function HomePage() {
           <p className={classes.Intro}>
             Lieromaa kokoaa omiin kokeiluihin ja arjen havaintoihin perustuvat ohjeet
             matokompostorin perustamiseen, hoitoon, vianetsintään ja matokakan
-            hyödyntämiseen. Aloita oppaista, hae vastauksia ongelmiin tai arvioi sopiva
-            matomäärä laskurilla.
+            hyödyntämiseen. Oppaiden lisäksi Lieromaasta voi tilata myös{' '}
+            <SafeLink href="/tuotteet/madot" className={classes.InlineLink}>
+              kotimaisia kompostimatoja
+            </SafeLink>{' '}
+            matokompostorin käynnistämiseen. Aloita oppaista, hae vastauksia ongelmiin
+            tai arvioi sopiva matomäärä laskurilla.
           </p>
 
           <div className={classes.HeroSearch}>
