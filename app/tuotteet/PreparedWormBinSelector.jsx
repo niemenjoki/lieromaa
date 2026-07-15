@@ -6,7 +6,13 @@ import { formatPrice } from '@/lib/pricing/catalog';
 import classes from './ProductPage.module.css';
 
 const preparedBinShippingDelay =
-  'Käyttövalmis kompostori lähetetään kolmantena tilauksen jälkeisenä maanantaina. Noin kahden viikon odotusaikana kompostorin mikrobitoiminta ehtii käynnistyä ja madot kotiutuvat uuteen ympäristöönsä, joten kompostori on saapuessaan heti käyttövalmis.';
+  'Valmisteluaika on noin kaksi viikkoa. Käyttövalmis kompostori lähetetään kolmantena tilauksen jälkeisenä maanantaina, jotta petimateriaalin mikrobitoiminta ehtii käynnistyä ja madot kotiutua ennen kuljetusta.';
+
+function closePreparedBinDetails(event) {
+  const details = event.currentTarget.closest('details');
+  details?.removeAttribute('open');
+  details?.querySelector('summary')?.focus();
+}
 
 export default function PreparedWormBinSelector({
   addOn,
@@ -19,7 +25,8 @@ export default function PreparedWormBinSelector({
       <div className={classes.FormSubsectionHeader}>
         <h4 className={classes.FormSubsectionTitle}>Valitse aloitustapa</h4>
         <p className={classes.HelperText}>
-          Tilaa pelkät madot omaan kompostoriisi tai valitse mahdollisimman helppo alku.
+          Tilaa pelkät madot omaan kompostoriisi tai valitse käyttövalmis 14 litran
+          matokompostori, joka on valmisteltu ja käynnistetty puolestasi.
         </p>
       </div>
 
@@ -37,10 +44,6 @@ export default function PreparedWormBinSelector({
             <span className={classes.PreparedBinNewBadge}>Uusi</span>
             <span className={classes.OptionTitle}>Valmis matokompostori</span>
           </span>
-          <span className={classes.FinePrint}>
-            Madot toimitetaan 14 litran muovilaatikossa, joka on heti valmis käyttöön
-            sellaisenaan
-          </span>
         </span>
 
         <details className={classes.PreparedBinDetails}>
@@ -51,28 +54,114 @@ export default function PreparedWormBinSelector({
           >
             <span aria-hidden="true">i</span>
           </summary>
-          <div className={classes.PreparedBinPopover}>
-            <SafeImage
-              src={addOn.image.src}
-              alt={addOn.image.alt}
-              width={addOn.image.width}
-              height={addOn.image.height}
-              sizes="(max-width: 640px) 80vw, 160px"
-              className={classes.PreparedBinImage}
-            />
-            <div className={classes.PreparedBinPopoverText}>
-              <strong className={classes.PreparedBinPromise}>
-                Osta, vastaanota ja aloita ruokinta – matokompostoinnin aloittaminen ei
-                juuri helpommaksi muutu.
-              </strong>
-              <p className={classes.FinePrint}>
-                Valmistelen petimateriaalin, lisään madot, annan ensimmäiset
-                ruoka-annokset sekä valvon kompostorin käynnistymistä ennen lähetystä. Kun
-                saat kompostorin, voit heti varovasti aloittaa ruokinnan. Erillistä
-                kokoamista tai käyttöönottoa ei tarvita.
-              </p>
+          <div
+            className={classes.PreparedBinPopover}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="prepared-bin-dialog-title"
+          >
+            <div className={classes.PreparedBinModalHeader}>
+              <h5 id="prepared-bin-dialog-title">Valmis matokompostori</h5>
+              <button
+                type="button"
+                className={classes.PreparedBinModalClose}
+                onClick={closePreparedBinDetails}
+                aria-label="Sulje lisätiedot"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
             </div>
-            <p className={classes.PreparedBinPopoverDelay}>{preparedBinShippingDelay}</p>
+
+            <div className={classes.PreparedBinModalIntro}>
+              <SafeImage
+                src={addOn.image.src}
+                alt={addOn.image.alt}
+                width={addOn.image.width}
+                height={addOn.image.height}
+                sizes="(max-width: 36rem) 100vw, 160px"
+                className={classes.PreparedBinImage}
+              />
+              <div className={classes.PreparedBinPopoverText}>
+                <strong className={classes.PreparedBinPromise}>
+                  Osta, vastaanota ja aloita ruokinta – matokompostoinnin aloittaminen ei
+                  juuri helpommaksi muutu.
+                </strong>
+                <p>
+                  Saat valitsemasi määrän kompostimatoja valmiiksi käynnistetyssä 14
+                  litran kompostorissa. Erillistä kokoamista, petimateriaalin valmistelua
+                  tai käyttöönottoa ei tarvita.
+                </p>
+              </div>
+            </div>
+
+            <div className={classes.PreparedBinModalBody}>
+              <section>
+                <h6>Mitä kompostori sisältää?</h6>
+                <p>Kompostoriin kuuluu:</p>
+                <ul>
+                  <li>ilmanvaihtoaukoilla varustettu 14 litran muovilaatikko</li>
+                  <li>valitsemasi määrä kompostimatoja</li>
+                  <li>sopivan kosteaksi valmisteltu petimateriaali</li>
+                  <li>
+                    pieni määrä aiemmin käytössä ollutta, hyvin toimivaa petimateriaalia
+                  </li>
+                  <li>ensimmäinen maltillinen ruokinta</li>
+                </ul>
+              </section>
+
+              <section>
+                <h6>Miten kompostori käynnistetään?</h6>
+                <p>
+                  Valmistelen petimateriaalin sopivan kosteaksi ja sekoitan siihen pienen
+                  määrän aiemmin toiminnassa ollutta petimateriaalia. Se tuo uuteen
+                  kompostoriin valmiin mikrobikannan ja auttaa hajotustoimintaa
+                  käynnistymään nopeammin.
+                </p>
+                <p>
+                  Tämän jälkeen lisään valitsemasi madot ja ensimmäisen pienen
+                  ruoka-annoksen. Kompostori saa toimia noin kaksi viikkoa ennen
+                  lähetystä, jotta madot ehtivät kotiutua ja petimateriaalin
+                  mikrobitoiminta käynnistyä.
+                </p>
+              </section>
+
+              <section>
+                <h6>Kun kompostori saapuu</h6>
+                <p>
+                  Kompostori on saapuessaan valmis käytettäväksi sellaisenaan. Valitse
+                  sille sopiva paikka ja aloita jatkoruokinta varovasti. Ruokamäärää voi
+                  kasvattaa vähitellen matojen lisääntyessä ja kompostorin toiminnan
+                  vakiintuessa.
+                </p>
+                <p>
+                  Kompostoria ei tarvitse koota, eikä petimateriaalia tarvitse erikseen
+                  kostuttaa tai valmistella.
+                </p>
+              </section>
+
+              <section>
+                <h6>Toimitusaika</h6>
+                <p>
+                  Käyttövalmis kompostori lähetetään kolmantena tilauksen jälkeisenä
+                  maanantaina.
+                </p>
+                <p>
+                  Noin kahden viikon valmisteluaika tarvitaan siihen, että madot ehtivät
+                  kotiutua uuteen ympäristöönsä ja kompostorin mikrobitoiminta käynnistyä
+                  ennen kuljetusta.
+                </p>
+              </section>
+
+              <section>
+                <h6>Millainen kompostori on?</h6>
+                <p>
+                  Kompostori on kestävä, elintarvikekelpoisesta muovista valmistettu 14
+                  litran laatikko, jonka ulkomitat ovat 40 × 30 × 19 cm. Tarvittavat
+                  ilmanvaihtoaukot on tehty valmiiksi. Kompostori soveltuu pieneen
+                  sisätiloissa tapahtuvaan matokompostointiin.
+                </p>
+              </section>
+            </div>
           </div>
         </details>
       </div>
