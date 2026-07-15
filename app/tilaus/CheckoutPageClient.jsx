@@ -69,6 +69,15 @@ function getProductKeysFromLines(lines) {
   ];
 }
 
+function getShippingScheduleKeysFromLines(lines) {
+  return [
+    ...new Set([
+      ...getProductKeysFromLines(lines),
+      ...lines.map((line) => line.shippingScheduleKey).filter(Boolean),
+    ]),
+  ];
+}
+
 function getEstimatedShippingDate(lines) {
   const productKeys = getProductKeysFromLines(lines);
   const availabilityDatesByProductKey = Object.fromEntries(
@@ -79,7 +88,7 @@ function getEstimatedShippingDate(lines) {
   );
 
   return getEstimatedShippingDateForProducts({
-    productKeys,
+    productKeys: getShippingScheduleKeysFromLines(lines),
     availabilityDatesByProductKey,
   });
 }
@@ -574,15 +583,19 @@ export default function CheckoutPageClient() {
                     {formatPrice(line.unitPrice)} € / kpl
                   </p>
                   <div className={classes.LineActions}>
-                    <label className={classes.Field}>
-                      <span>Määrä</span>
-                      <CartQuantityEditor
-                        quantity={line.packageQuantity}
-                        onCommit={(quantity) =>
-                          handleCartQuantityChange(line.sku, quantity)
-                        }
-                      />
-                    </label>
+                    {line.isQuantityEditable ? (
+                      <label className={classes.Field}>
+                        <span>Määrä</span>
+                        <CartQuantityEditor
+                          quantity={line.packageQuantity}
+                          onCommit={(quantity) =>
+                            handleCartQuantityChange(line.sku, quantity)
+                          }
+                        />
+                      </label>
+                    ) : (
+                      <span className={classes.FixedQuantity}>Määrä 1</span>
+                    )}
                     <button
                       type="button"
                       className={classes.DangerButton}

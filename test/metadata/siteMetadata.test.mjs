@@ -35,7 +35,7 @@ const productIndexPage = {
   canonicalUrl: '/tuotteet',
   title: 'Tuotteet | Lieromaa',
   description:
-    'Lieromaan tuotteet matokompostoinnin aloittamiseen ja ylläpitoon: kompostimadot, matokompostorin aloituspakkaus ja kompostorin kuituseos.',
+    'Lieromaan tuotteet matokompostoinnin aloittamiseen ja ylläpitoon: kompostimadot, käyttövalmis 14 litran matokompostori ja kompostorin kuituseos.',
 };
 
 const checkoutPage = {
@@ -260,4 +260,10 @@ test('sitemap excludes low-count blog tag pages', async () => {
 
     assert.equal(sitemapPaths.has(tagPath), isIndexableBlogTag(total), tagPath);
   });
+
+  assert.equal(
+    sitemapPaths.has(starterKitSetupPage.canonicalUrl),
+    false,
+    'archived starter-kit setup guide should be excluded from the sitemap'
+  );
 });

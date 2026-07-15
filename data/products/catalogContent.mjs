@@ -6,17 +6,25 @@ export const productCatalogContentSource = {
       pageName: 'Osta kompostimatoja – Eisenia fetida matokompostointiin',
       title: 'Osta kompostimatoja | Lieromaa',
       description:
-        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitettuna koko Suomeen. Aloita matokomposti Lieromaan madoilla!',
+        'Tilaa kotimaisia kompostimatoja koko Suomeen. Valitse pelkät madot tai madot käyttövalmiissa 14 litran matokompostorissa.',
       pageDescription:
-        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Lieromaa kasvattaa ja myy kompostimatoja vastuullisesti pienimuotoisena yritystoimintana.',
+        'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Voit valita pelkät madot tai käyttövalmiin 14 litran matokompostorin, jossa madot ovat jo asettuneet petimateriaaliin.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
-      updatedAt: '2026-06-03',
+      updatedAt: '2026-07-14',
     },
     search: {
       contexts: ['blog', 'notFound'],
       title: 'Osta kompostimatoja',
-      keywords: ['kompostimadot', 'ostos', 'lieromaa', 'madot', 'myynti'],
+      keywords: [
+        'kompostimadot',
+        'ostos',
+        'lieromaa',
+        'madot',
+        'myynti',
+        'käyttövalmis matokompostori',
+        '14 litran matokompostori',
+      ],
     },
     product: {
       name: 'Kompostimadot (Eisenia fetida)',
@@ -73,82 +81,6 @@ export const productCatalogContentSource = {
       },
       returnPolicyText:
         'Postitettuja matotilauksia ei voi peruuttaa, koska kompostimatoja ei voida palautuksen jälkeen käsitellä tai myydä edelleen tavanomaisena tuotteena. Jos tuotteessa tai toimituksessa on virhe, asia käsitellään erikseen asiakaspalvelun kautta.',
-    },
-  },
-  starterKit: {
-    name: 'Matokompostorin aloituspakkaus',
-    page: {
-      canonicalUrl: '/tuotteet/matokompostin-aloituspakkaus',
-      pageName: 'Matokompostorin aloituspakkaus',
-      title: 'Matokompostorin aloituspakkaus | Lieromaa',
-      description:
-        'Lieromaan aloituspakkaus tekee matokompostoinnin aloittamisesta helppoa: valitse 1, 2 tai 3 laatikkoa ja laajenna myöhemmin tarvittaessa.',
-      h1: 'Lieromaan matokompostorin aloituspakkaus',
-      navigationLabel: 'Aloituspakkaus',
-      updatedAt: '2026-06-03',
-    },
-    search: {
-      contexts: ['blog', 'notFound'],
-      title: 'Matokompostorin aloituspakkaus',
-      keywords: ['aloituspakkaus', 'matokompostori', 'kompostori', 'kompostimadot'],
-    },
-    product: {
-      name: 'Matokompostorin aloituspakkaus',
-      description:
-        'Lieromaan aloituspakkaus on modulaarinen matokompostori kotikäyttöön: valitse 1, 2 tai 3 laatikkoa ja laajenna samaa järjestelmää myöhemmin.',
-      sku: 'starterkit',
-    },
-    media: {
-      images: [
-        {
-          url: '/images/products/starterkit-hero.avif',
-          alt: 'Suljettu musta matokompostori oransseilla kahvoilla vaaleaa taustaa vasten.',
-          width: 1200,
-          height: 900,
-          priority: true,
-          loading: 'eager',
-        },
-        {
-          url: '/images/products/starterkit-contents.avif',
-          alt: 'Matokompostin aloituspakkauksen sisältö ylhäältä kuvattuna: kolme mustaa laatikkoa, kookoskuituharkot ja erillinen astia petimateriaalille.',
-          width: 1200,
-          height: 900,
-        },
-      ],
-    },
-    faqItems: [
-      {
-        question: 'Haiseeko matokompostori?',
-        answer:
-          'Oikein hoidettuna matokompostori on hajuton. Hajuhaitat liittyvät yleensä liialliseen ruokintaan tai liian kosteaan massaan.',
-      },
-      {
-        question: 'Kuinka nopeasti kompostointi käynnistyy?',
-        answer:
-          'Madot alkavat käsitellä biojätettä heti, mutta ensimmäisten viikkojen aikana ruokinta kannattaa pitää maltillisena.',
-      },
-      {
-        question: 'Voiko kompostoria pitää sisätiloissa?',
-        answer:
-          'Kyllä. Lieromaan laatikkomalli soveltuu hyvin sisäkäyttöön, kun kosteustasapaino ja ruokinta pidetään hallinnassa.',
-      },
-    ],
-    merchant: {
-      title(amount, variant) {
-        const boxCount = variant?.binCount ?? amount;
-        const boxLabel = boxCount === 1 ? '1 laatikko' : `${boxCount} laatikkoa`;
-        return `Matokompostorin aloituspakkaus (${boxLabel})`;
-      },
-      description(amount, variant) {
-        const boxCount = variant?.binCount ?? amount;
-        const boxLabel = boxCount === 1 ? 'yhden laatikon' : `${boxCount} laatikon`;
-        return `Lieromaan ${boxLabel} aloituspakkaus sisältää valmiiksi valmistellut laatikot, kannen ja kookoskuitua uuden matokompostorin käynnistämiseen. Kompostimadot ja kuituseoksen voi lisätä tilaukseen erikseen.`;
-      },
-      productType: 'Matokompostointi > Matokompostorit > Aloituspakkaukset',
-    },
-    schema: {
-      returnPolicyText:
-        'Aloituspakkauksella on 14 päivän peruuttamisoikeus käyttämättömälle tuotteelle. Postitettuja matotilauksia ei voi peruuttaa, mutta muilla tuotteilla on normaali peruuttamisoikeus, vaikka ne olisi tilattu samassa tilauksessa matojen kanssa.',
     },
   },
   compostChow: {

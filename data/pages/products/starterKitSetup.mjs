@@ -1,18 +1,19 @@
 export const starterKitSetupPageDefinition = {
   canonicalUrl: '/tuotteet/matokompostin-aloituspakkaus/kayttoonotto',
-  pageName: 'Aloituspakkauksen käyttöönotto',
-  title: 'Aloituspakkauksen käyttöönotto | Lieromaa',
+  pageName: 'Aiemman aloituspakkauksen käyttöönotto',
+  title: 'Aiemman aloituspakkauksen käyttöönotto | Lieromaa',
   description:
-    'Näin käynnistät 1, 2 tai 3 laatikon aloituspakkauksen oikein: yksi aktiivinen kerros alkuun, oikea kosteus ja lisäkerrokset vasta myöhemmin.',
-  updatedAt: '2026-05-21',
+    'Arkistoitu käyttöönotto-ohje Lieromaan aiemmin myymälle 1, 2 tai 3 laatikon aloituspakkaukselle: kokoaminen, kostutus ja ruokinnan aloitus.',
+  updatedAt: '2026-07-14',
+  robots: { index: false, follow: true },
   image: {
     url: '/images/content/aloituspakkauksen_aloitus.avif',
     width: 1200,
     height: 900,
     alt: 'Matokompostorin aloituspakkauksen käyttöönotto',
   },
-  parentPageCanonicalUrl: '/tuotteet/matokompostin-aloituspakkaus',
-  parentPageName: 'Matokompostorin aloituspakkaus',
+  parentPageCanonicalUrl: '/tuotteet/madot',
+  parentPageName: 'Kompostimadot ja käyttövalmis matokompostori',
   howTo: {
     name: 'Matokompostorin aloituspakkauksen käyttöönotto',
     supplies: [

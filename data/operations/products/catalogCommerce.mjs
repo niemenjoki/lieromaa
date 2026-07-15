@@ -1,6 +1,6 @@
 import {
   COMPOST_CHOW_HANDLING_TIME,
-  STARTER_KIT_HANDLING_TIME,
+  PREPARED_WORM_BIN_SHIPPING_KEY,
   WORMS_HANDLING_TIME,
 } from '../commerce/shippingSchedule.mjs';
 
@@ -107,141 +107,25 @@ const legacyWormVariants = [
   },
 ];
 
-const wormPackagePricesByWeight = {
-  25: 20,
-  50: 30,
-  75: 40,
-  100: 50,
-};
-const starterKitModelSkus = ['starterkit-1', 'starterkit-2', 'starterkit-3'];
-const starterKitExpansionSkus = [
-  'starterkit-expansion-1',
-  'starterkit-expansion-2',
-  'starterkit-expansion-3',
-];
-const starterKitVariantMetadata = {
-  'starterkit-1': {
-    amount: 1,
-    salesUnit: 'piece',
-    itemCount: 1,
-    binCount: 1,
-    solidBinCount: 1,
-    drilledBinCount: 0,
-    lidCount: 1,
-    includedCoirLiters: 1.5,
-    expansionSku: 'starterkit-expansion-1',
-  },
-  'starterkit-2': {
-    amount: 2,
-    salesUnit: 'piece',
-    itemCount: 2,
-    binCount: 2,
-    solidBinCount: 1,
-    drilledBinCount: 1,
-    lidCount: 1,
-    includedCoirLiters: 1.5,
-    expansionSku: 'starterkit-expansion-2',
-  },
-  'starterkit-3': {
-    amount: 3,
-    salesUnit: 'piece',
-    itemCount: 3,
-    binCount: 3,
-    solidBinCount: 1,
-    drilledBinCount: 2,
-    lidCount: 1,
-    includedCoirLiters: 1.5,
-    expansionSku: 'starterkit-expansion-3',
-  },
-  'starterkit-expansion-1': {
-    amount: 1,
-    salesUnit: 'piece',
-    itemCount: 1,
-    binCount: 1,
-    solidBinCount: 0,
-    drilledBinCount: 1,
-    lidCount: 1,
-    includedCoirLiters: 1.5,
-    isExpansion: true,
-    baseSku: 'starterkit-1',
-    hideFromVariantSelector: true,
-    hideFromPublicOffers: true,
-    hideFromMerchantFeed: true,
-  },
-  'starterkit-expansion-2': {
-    amount: 2,
-    salesUnit: 'piece',
-    itemCount: 2,
-    binCount: 2,
-    solidBinCount: 0,
-    drilledBinCount: 2,
-    lidCount: 1,
-    includedCoirLiters: 1.5,
-    isExpansion: true,
-    baseSku: 'starterkit-2',
-    hideFromVariantSelector: true,
-    hideFromPublicOffers: true,
-    hideFromMerchantFeed: true,
-  },
-  'starterkit-expansion-3': {
-    amount: 3,
-    salesUnit: 'piece',
-    itemCount: 3,
-    binCount: 3,
-    solidBinCount: 0,
-    drilledBinCount: 3,
-    lidCount: 1,
-    includedCoirLiters: 1.5,
-    isExpansion: true,
-    baseSku: 'starterkit-3',
-    hideFromVariantSelector: true,
-    hideFromPublicOffers: true,
-    hideFromMerchantFeed: true,
+export const cartAddOnsSource = {
+  'worms-ready-bin-14l': {
+    key: 'preparedWormBin',
+    sku: 'worms-ready-bin-14l',
+    parentProductKey: 'worms',
+    name: 'Käyttövalmis 14 litran matokompostori',
+    label: 'Käyttövalmis 14 litran matokompostori',
+    priceSku: 'worms-ready-bin-14l',
+    maxQuantity: 1,
+    fixedQuantity: true,
+    shippingScheduleKey: PREPARED_WORM_BIN_SHIPPING_KEY,
+    image: {
+      src: '/images/content/kompostori_avattuna.avif',
+      alt: 'Avattu 14 litran matokompostori, jossa on valmiiksi kostutettu petimateriaali',
+      width: 1200,
+      height: 900,
+    },
   },
 };
-
-const legacyStarterKitVariants = [
-  {
-    sku: 'starterkit-base',
-    amount: 1,
-    salesUnit: 'piece',
-    itemCount: 1,
-    price: 46,
-  },
-  ...Object.entries(wormVariantMetadata).map(([, variant]) => ({
-    sku: `starterkit-${variant.weightGrams}`,
-    amount: variant.amount,
-    salesUnit: 'weight',
-    weightGrams: variant.weightGrams,
-    estimatedWormCount: variant.estimatedWormCount,
-    price: 46 + wormPackagePricesByWeight[variant.weightGrams],
-  })),
-  {
-    sku: 'starterkit-50',
-    amount: 50,
-    salesUnit: 'worm_count',
-    estimatedWormCount: 50,
-    price: 64,
-  },
-  {
-    sku: 'starterkit-100',
-    amount: 100,
-    salesUnit: 'worm_count',
-    estimatedWormCount: 100,
-    price: 73,
-  },
-  {
-    sku: 'starterkit-200',
-    amount: 200,
-    salesUnit: 'worm_count',
-    estimatedWormCount: 200,
-    price: 91,
-  },
-];
-
-function formatStarterKitBoxCount(count) {
-  return count === 1 ? '1 laatikko' : `${count} laatikkoa`;
-}
 
 export const productCatalogCommerceSource = {
   worms: {
@@ -282,48 +166,6 @@ export const productCatalogCommerceSource = {
         local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
       },
       extraCharges: [frostProtectionExtraCharge],
-    },
-  },
-  starterKit: {
-    variantSkus: [...starterKitModelSkus, ...starterKitExpansionSkus],
-    variantMetadata: starterKitVariantMetadata,
-    legacyVariants: legacyStarterKitVariants,
-    shippingSku: 'postage-pickup',
-    schema: {
-      handlingTime: STARTER_KIT_HANDLING_TIME,
-    },
-    order: {
-      defaultVariantAmount: 1,
-      variantLegend: 'Valitse laatikoiden määrä',
-      variantSelectorPosition: 'beforeFulfillment',
-      variantDescription:
-        'Voit aloittaa pienellä mallilla ja laajentaa samaa kompostoria myöhemmin.',
-      showWormAmountFinePrint: false,
-      getVariantLabel({ amount, priceFormatted, variant }) {
-        const boxCount = variant?.binCount ?? variant?.itemCount ?? amount;
-        return `${formatStarterKitBoxCount(boxCount)} - ${priceFormatted} €`;
-      },
-      expansionOption: {
-        checkboxLabel:
-          'Käytän laatikot lisäkerroksina nykyiseen Lieromaan matokompostoriin',
-        helperText:
-          'Valitse tämä, jos sinulla on jo Lieromaan pohjalaatikko. Tällöin kaikki tilauksen laatikot toimitetaan rei’itettyinä lisäkerroksina. Mukana tulee yksi kansi ja kookoskuitua uuden kerroksen käynnistämiseen.',
-      },
-      shippingOptions: [...cartShippingOptionsSource],
-      shippingHelperTexts: sharedPickupHelperTexts,
-      shippingDescription: null,
-      submitButtonLabel({ totalFormatted }) {
-        return `Lähetä tilaus (${totalFormatted} €)`;
-      },
-      extraInfoDescription: null,
-      summaryDescription: null,
-      invoiceTimingByFulfillmentType: {
-        pickup_point: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
-        home_delivery:
-          'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
-        local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
-      },
-      extraCharges: [],
     },
   },
   compostChow: {

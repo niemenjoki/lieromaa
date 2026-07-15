@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import { getCartOrderQuote } from '@/lib/orders/cartOrder';
+import { getCartItemsAfterRemoval, getCartOrderQuote } from '@/lib/orders/cartOrder';
 import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
@@ -264,44 +264,6 @@ describe('frontend public order normalization', () => {
     expectEqual(legacyPayload.product.weightGrams, null);
     expectEqual(legacyPayload.product.quantity, 200);
     expectEqual(legacyPayload.pricing.itemPrice, 50);
-
-    const starterKitPayload = normalizePublicOrderSubmission(
-      createValidOrderFormData({
-        tuote_avain: 'starterKit',
-        sku: 'starterkit-50',
-        maara: '50',
-        myyntiyksikko: 'weight',
-        paino_grammoina: '50',
-        arvioitu_matomäärä: '100',
-        toimitus: 'nouto',
-      }),
-      { now }
-    );
-
-    expectEqual(starterKitPayload.product.sku, 'starterkit-50');
-    expectEqual(starterKitPayload.product.salesUnit, 'weight');
-    expectEqual(starterKitPayload.product.weightGrams, 50);
-    expectEqual(starterKitPayload.product.quantity, 100);
-    expectEqual(starterKitPayload.pricing.itemPrice, 76);
-
-    const legacyStarterKitPayload = normalizePublicOrderSubmission(
-      createValidOrderFormData({
-        tuote_avain: 'starterKit',
-        sku: 'starterkit-200',
-        maara: '200',
-        myyntiyksikko: '',
-        paino_grammoina: '',
-        arvioitu_matomäärä: '',
-        toimitus: 'nouto',
-      }),
-      { now }
-    );
-
-    expectEqual(legacyStarterKitPayload.product.sku, 'starterkit-200');
-    expectEqual(legacyStarterKitPayload.product.salesUnit, 'worm_count');
-    expectEqual(legacyStarterKitPayload.product.weightGrams, null);
-    expectEqual(legacyStarterKitPayload.product.quantity, 200);
-    expectEqual(legacyStarterKitPayload.pricing.itemPrice, 91);
   });
 
   test('normalizePublicOrderSubmission should normalize standalone cart upsells as order items', () => {
@@ -373,9 +335,12 @@ describe('frontend public order normalization', () => {
     );
   });
 
-  test('normalizePublicOrderSubmission should preserve starter kit expansion intent in cart items', () => {
-    const now = new Date('2026-05-21T10:00:00Z');
-    const cartItems = [{ sku: 'starterkit-expansion-2', quantity: 1 }];
+  test('normalizePublicOrderSubmission should include a prepared worm bin as a fixed-price worm add-on', () => {
+    const now = new Date('2026-07-14T10:00:00Z');
+    const cartItems = [
+      { sku: 'worms-50', quantity: 1 },
+      { sku: 'worms-ready-bin-14l', quantity: 1 },
+    ];
     const expectedQuote = getCartOrderQuote({
       items: cartItems,
       shippingMethod: 'nouto',
@@ -390,53 +355,49 @@ describe('frontend public order normalization', () => {
       { now }
     );
 
-    expectEqual(
-      expectedQuote.items[0].label,
-      'Laajennus nykyiseen kompostoriin, 2 laatikkoa',
-      'getCartOrderQuote should label expansion starter-kit SKUs clearly'
+    expectEqual(payload.items[1].sku, 'worms-ready-bin-14l');
+    expectEqual(payload.items[1].key, 'worms');
+    expectEqual(payload.items[1].label, 'Käyttövalmis 14 litran matokompostori');
+    expectEqual(payload.items[1].quantity, 1);
+    expectEqual(payload.items[1].packageQuantity, 1);
+    expectEqual(payload.items[1].unitPrice, 30);
+    expectEqual(payload.pricing.itemPrice, expectedQuote.itemSubtotal);
+  });
+
+  test('prepared worm bins require worms and are limited to one', () => {
+    assert.throws(
+      () =>
+        getCartOrderQuote({
+          items: [{ sku: 'worms-ready-bin-14l', quantity: 1 }],
+          shippingMethod: 'nouto',
+        }),
+      /vain kompostimatojen kanssa/
     );
-    expectEqual(
-      payload.items[0].sku,
-      'starterkit-expansion-2',
-      'normalizePublicOrderSubmission should keep the expansion SKU'
-    );
-    expectEqual(
-      payload.items[0].label,
-      'Laajennus nykyiseen kompostoriin, 2 laatikkoa',
-      'normalizePublicOrderSubmission should forward the expansion label'
-    );
-    expectEqual(
-      payload.items[0].quantity,
-      2,
-      'normalizePublicOrderSubmission should keep the selected expansion box count'
-    );
-    expectEqual(
-      payload.pricing.itemPrice,
-      44,
-      'normalizePublicOrderSubmission should use the configured expansion price'
+
+    assert.throws(
+      () =>
+        getCartOrderQuote({
+          items: [
+            { sku: 'worms-25', quantity: 1 },
+            { sku: 'worms-ready-bin-14l', quantity: 2 },
+          ],
+          shippingMethod: 'nouto',
+        }),
+      /enintään yksi käyttövalmis matokompostori/
     );
   });
 
-  test('normalizePublicOrderSubmission should migrate old starter kit cart SKUs', () => {
-    const payload = normalizePublicOrderSubmission(
-      createValidOrderFormData({
-        sku: '',
-        tuote_avain: '',
-        cart_items_json: JSON.stringify([{ sku: 'starterkit-base', quantity: 1 }]),
-        toimitus: 'nouto',
-      }),
-      { now: new Date('2026-05-21T10:00:00Z') }
-    );
+  test('removing the last worm package also removes its prepared-bin add-on', () => {
+    const cartItems = [
+      { sku: 'worms-25', quantity: 1 },
+      { sku: 'worms-ready-bin-14l', quantity: 1 },
+      { sku: 'chow-150', quantity: 1 },
+    ];
 
-    expectEqual(
-      payload.items[0].sku,
-      'starterkit-3',
-      'normalizePublicOrderSubmission should map old cart starter kits to the current three-box SKU'
-    );
-    expectEqual(
-      payload.pricing.itemPrice,
-      64,
-      'normalizePublicOrderSubmission should price migrated starter kit carts from current source data'
+    expectDeepEqual(
+      getCartItemsAfterRemoval(cartItems, 'worms-25'),
+      [{ sku: 'chow-150', quantity: 1 }],
+      'removing the last worm package should not leave an orphaned prepared bin'
     );
   });
 

@@ -85,6 +85,10 @@ export default async function Page() {
                 <ul className={classes.FeatureList}>
                   <li>Valitse 25 g, 50 g, 75 g tai 100 g kompostimatoja.</li>
                   <li>Pakkaus sisältää madot ja noin 0,5 L kasvualustaa.</li>
+                  <li>
+                    Lisää halutessasi käyttövalmis 14 L matokompostori 30 eurolla – osta,
+                    vastaanota ja aloita ruokinta.
+                  </li>
                 </ul>
 
                 <h3>Hinnat</h3>
@@ -194,6 +198,11 @@ export default async function Page() {
           </section>
 
           <section id="tilaa" className={classes.OrderSection}>
+            <span
+              id="valmis-matokompostori"
+              className={classes.AnchorTarget}
+              aria-hidden="true"
+            />
             <div className={classes.OrderSectionHeader}>
               <h2>Tilaa kompostimadot</h2>
             </div>
