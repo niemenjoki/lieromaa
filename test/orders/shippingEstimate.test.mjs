@@ -45,34 +45,34 @@ describe('checkout shipping date estimates', () => {
     );
   });
 
-  test('starter kit estimates keep the existing second-following-Monday schedule', () => {
+  test('prepared worm bins ship on the third following Monday', () => {
     expectEqual(
       getEstimatedShippingDate({
-        productKeys: ['starterKit'],
+        productKeys: ['preparedWormBin'],
         orderDate: '2026-05-31',
       }),
-      '2026-06-08',
-      'Sunday starter-kit orders should keep the existing one-week-plus schedule'
+      '2026-06-15',
+      'Sunday prepared-bin orders should skip the next two Mondays'
     );
 
     expectEqual(
       getEstimatedShippingDate({
-        productKeys: ['starterKit'],
+        productKeys: ['preparedWormBin'],
         orderDate: '2026-06-01',
       }),
-      '2026-06-15',
-      'Monday starter-kit orders should keep the second-following-Monday schedule'
+      '2026-06-22',
+      'Monday prepared-bin orders should use the third upcoming Monday'
     );
   });
 
   test('mixed carts use the slowest product schedule', () => {
     expectEqual(
       getEstimatedShippingDate({
-        productKeys: ['worms', 'starterKit', 'compostChow'],
+        productKeys: ['worms', 'preparedWormBin', 'compostChow'],
         orderDate: '2026-06-01',
       }),
-      '2026-06-15',
-      'mixed carts should use the starter-kit schedule when it is later'
+      '2026-06-22',
+      'mixed carts should use the prepared-bin schedule when it is later'
     );
   });
 

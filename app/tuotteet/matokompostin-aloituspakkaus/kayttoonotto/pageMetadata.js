@@ -14,6 +14,7 @@ export const {
   pageName,
   pageUrl,
   parentPageUrl,
+  robots,
   title,
 } = page;
 
@@ -22,6 +23,7 @@ const pageMetadata = {
   description,
   canonicalUrl,
   image,
+  robots,
 };
 
 export default pageMetadata;

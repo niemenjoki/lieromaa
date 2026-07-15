@@ -2,7 +2,7 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 import {
   COMPOST_CHOW_SHIPPING_SCHEDULE_TEXT,
   MONDAY_ONLY_SHIPPING_NOTE,
-  STARTER_KIT_SHIPPING_SCHEDULE_TEXT,
+  PREPARED_WORM_BIN_SHIPPING_SCHEDULE_TEXT,
   WORMS_SHIPPING_SCHEDULE_TEXT,
 } from '@/lib/commerce/shippingSchedule.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
@@ -85,9 +85,9 @@ export default function OrderPolicyPage() {
         <p>
           Saatavilla olevat toimitustavat näkyvät aina kyseisen tuotteen kassalla.
           Käytössä voivat olla nouto Postista tai automaatista, Postin kotiinkuljetus
-          sovittuna aikana tai nouto Järvenpäästä. Noutopiste lähetetään asiakkaan
-          kassalla valitsemaan Postin toimipisteeseen tai automaattiin, ellei Posti joudu
-          kapasiteettisyistä ohjaamaan lähetystä toiseen noutopaikkaan.
+          sovittuna aikana tai nouto Järvenpäästä. Postista tai automaatista noudettava
+          lähetys toimitetaan lähtökohtaisesti asiakkaan valitsemaan noutopaikkaan, mutta
+          Posti voi kapasiteettisyistä ohjata sen muualle.
         </p>
 
         <h2>Maksutavat</h2>
@@ -110,7 +110,9 @@ export default function OrderPolicyPage() {
           {MONDAY_ONLY_SHIPPING_NOTE} {WORMS_SHIPPING_SCHEDULE_TEXT}{' '}
           {COMPOST_CHOW_SHIPPING_SCHEDULE_TEXT} Sunnuntaina tai maanantaina tehty mato-
           tai kuituseostilaus siirtyy seuraavan viikon maanantailähetykseen.{' '}
-          {STARTER_KIT_SHIPPING_SCHEDULE_TEXT}
+          {PREPARED_WORM_BIN_SHIPPING_SCHEDULE_TEXT} Käyttövalmista matokompostoria ei
+          siis postiteta seuraavana eikä sitä seuraavana maanantaina, vaan vasta
+          kolmantena tilaushetkeä seuraavana maanantaina.
         </p>
         <p>Tarkempi toimitusaika ilmoitetaan aina tilausvahvistuksessa.</p>
         <p>

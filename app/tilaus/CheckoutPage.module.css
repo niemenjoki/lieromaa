@@ -88,6 +88,13 @@
   margin-top: 0.5rem;
 }
 
+.FixedQuantity {
+  align-self: center;
+  font-size: 0.92rem;
+  font-weight: 700;
+  opacity: 0.86;
+}
+
 .QuantityInput {
   width: 4.5rem;
 }

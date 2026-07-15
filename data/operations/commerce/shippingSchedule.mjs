@@ -7,8 +7,10 @@ export const WORMS_SHIPPING_SCHEDULE_TEXT =
 export const COMPOST_CHOW_SHIPPING_SCHEDULE_TEXT =
   'Kuituseos postitetaan maanantaisin. Lauantai on viimeinen tilauspäivä seuraavan maanantain lähetykseen.';
 
-export const STARTER_KIT_SHIPPING_SCHEDULE_TEXT =
-  'Matokompostorin aloituspakkaus postitetaan aina toisena tilaushetkeä seuraavana maanantaina.';
+export const PREPARED_WORM_BIN_SHIPPING_KEY = 'preparedWormBin';
+
+export const PREPARED_WORM_BIN_SHIPPING_SCHEDULE_TEXT =
+  'Käyttövalmiin matokompostorin sisältävä tilaus postitetaan kolmantena tilaushetkeä seuraavana maanantaina. Näin kompostori saa asettua noin kaksi viikkoa pidempään kuin tavallinen matotilaus.';
 
 export const WORMS_HANDLING_TIME = {
   minValue: 2,
@@ -22,8 +24,8 @@ export const COMPOST_CHOW_HANDLING_TIME = {
   unitCode: 'd',
 };
 
-export const STARTER_KIT_HANDLING_TIME = {
-  minValue: 8,
-  maxValue: 14,
+export const PREPARED_WORM_BIN_HANDLING_TIME = {
+  minValue: 15,
+  maxValue: 21,
   unitCode: 'd',
 };

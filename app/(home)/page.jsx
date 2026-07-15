@@ -258,22 +258,11 @@ export default function HomePage() {
               <h3>Kompostimadot</h3>
               <p>
                 Tunkiolieroja matokompostorin käynnistämiseen ja olemassa olevan
-                kompostorin vahvistamiseen.
+                kompostorin vahvistamiseen. Voit tilata madot sellaisenaan tai
+                käyttövalmiissa 14 litran matokompostorissa: vastaanota ja aloita
+                ruokinta.
               </p>
               <SafeLink href="/tuotteet/madot" className={classes.CategoryAction}>
-                Avaa tuotesivu
-              </SafeLink>
-            </article>
-            <article className={classes.CategoryCard}>
-              <h3>Matokompostorin aloituspakkaus</h3>
-              <p>
-                Valmis kerrosmalli niille, jotka haluavat aloittaa ilman omaa
-                rakennusprojektia.
-              </p>
-              <SafeLink
-                href="/tuotteet/matokompostin-aloituspakkaus"
-                className={classes.CategoryAction}
-              >
                 Avaa tuotesivu
               </SafeLink>
             </article>

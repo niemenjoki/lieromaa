@@ -10,12 +10,13 @@ import { formatCartLineLabel } from '@/lib/orders/cartOrder';
 import {
   formatPrice,
   getAvailableProductVariants,
+  getProductCartAddOns,
   getProductOrderConfig,
   getProductVariants,
 } from '@/lib/pricing/catalog';
 import { getProductCatalogEntry } from '@/lib/products/catalog.mjs';
 
-import ProductAvailabilityNotice from './ProductAvailabilityNotice';
+import PreparedWormBinSelector from './PreparedWormBinSelector';
 import classes from './ProductPage.module.css';
 
 function getDefaultVariant(productKey, variants) {
@@ -160,24 +161,27 @@ function QuantityEditor({ quantity, onCommit }) {
   );
 }
 
-export default function AddToCartPanel({
-  productKey,
-  relatedProductKeys = [],
-  showWormSuggestion = false,
-}) {
+export default function AddToCartPanel({ productKey, relatedProductKeys = [] }) {
   const { addItems, items, removeItem, setItemQuantity } = useCart();
   const variants = getProductVariants(productKey);
   const visibleVariants = variants.filter((variant) => !variant.hideFromVariantSelector);
   const defaultVariant = getDefaultVariant(productKey, visibleVariants);
   const [selectedSku, setSelectedSku] = useState(defaultVariant?.sku ?? '');
   const [usesExpansionMode, setUsesExpansionMode] = useState(false);
-  const [selectedWormSku, setSelectedWormSku] = useState('');
   const [selectedRelatedProducts, setSelectedRelatedProducts] = useState({});
+  const [selectedAddOnSku, setSelectedAddOnSku] = useState('');
   const [hasAddedToCart, setHasAddedToCart] = useState(false);
   const [feedback, setFeedback] = useState('');
   const product = getProductCatalogEntry(productKey);
   const orderConfig = getProductOrderConfig(productKey);
-  const wormVariants = showWormSuggestion ? getProductVariants('worms') : [];
+  const productAddOns = getProductCartAddOns(productKey);
+  const preparedWormBin = productAddOns[0] ?? null;
+  const preparedWormBinInCart = preparedWormBin
+    ? items.some((item) => item.sku === preparedWormBin.sku)
+    : false;
+  const isPreparedWormBinSelected = preparedWormBin
+    ? selectedAddOnSku === preparedWormBin.sku || preparedWormBinInCart
+    : false;
   const selectedVariant =
     variants.find((variant) => variant.sku === selectedSku) ?? defaultVariant;
   const selectedExpansionVariant =
@@ -209,8 +213,8 @@ export default function AddToCartPanel({
     if (selectedOrderSku) {
       nextItems.push({ sku: selectedOrderSku, quantity: 1 });
 
-      if (selectedWormSku) {
-        nextItems.push({ sku: selectedWormSku, quantity: 1 });
+      if (isPreparedWormBinSelected && !preparedWormBinInCart) {
+        nextItems.push({ sku: preparedWormBin.sku, quantity: 1 });
       }
 
       for (const group of relatedProductGroups) {
@@ -357,83 +361,13 @@ export default function AddToCartPanel({
         </div>
       ) : null}
 
-      {showWormSuggestion && wormVariants.length > 0 ? (
-        <div className={classes.FormSubsection}>
-          <h4 className={classes.FormSubsectionTitle}>Kompostimadot</h4>
-          <p className={classes.HelperText}>
-            Voit lisätä tilaukseen matopaketin tai ostaa pelkän aloituspakkauksen.
-          </p>
-          <ProductAvailabilityNotice
-            productKey="worms"
-            className={classes.HelperText}
-            prefix="Matojen saatavuustiedote:"
-            context="starterKitWormSelection"
-          />
-          <fieldset className={classes.FormFieldset}>
-            <legend className={classes.ScreenReaderOnly}>Valitse matopaketti</legend>
-            <div className={classes.ChoiceList}>
-              <label className={classes.FormOption}>
-                <input
-                  type="radio"
-                  name="starterkit-worms"
-                  value=""
-                  checked={!selectedWormSku}
-                  onChange={() => setSelectedWormSku('')}
-                  className={classes.ChoiceInput}
-                />
-                <span className={classes.OptionHeader}>
-                  <span className={classes.OptionMarker} aria-hidden="true">
-                    {!selectedWormSku ? '[x]' : '[ ]'}
-                  </span>
-                  <span className={classes.OptionTitle}>Ei matoja</span>
-                </span>
-              </label>
-              {wormVariants.map((variant) => {
-                const isUnavailable = !variant.isAvailable;
-
-                return (
-                  <label
-                    key={variant.sku}
-                    className={[
-                      classes.FormOption,
-                      isUnavailable ? classes.FormOptionDisabled : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    aria-disabled={isUnavailable ? 'true' : undefined}
-                  >
-                    <input
-                      type="radio"
-                      name="starterkit-worms"
-                      value={variant.sku}
-                      checked={!isUnavailable && selectedWormSku === variant.sku}
-                      onChange={() => setSelectedWormSku(variant.sku)}
-                      className={classes.ChoiceInput}
-                      disabled={isUnavailable}
-                    />
-                    <span className={classes.OptionHeader}>
-                      <span className={classes.OptionMarker} aria-hidden="true">
-                        {isUnavailable
-                          ? '[-]'
-                          : selectedWormSku === variant.sku
-                            ? '[x]'
-                            : '[ ]'}
-                      </span>
-                      <span className={classes.OptionTitle}>
-                        {formatVariantLabel('worms', variant)}
-                      </span>
-                    </span>
-                    {isUnavailable ? (
-                      <span className={classes.AvailabilityStatus}>
-                        Ei saatavilla juuri nyt.
-                      </span>
-                    ) : null}
-                  </label>
-                );
-              })}
-            </div>
-          </fieldset>
-        </div>
+      {preparedWormBin ? (
+        <PreparedWormBinSelector
+          addOn={preparedWormBin}
+          selected={isPreparedWormBinSelected}
+          onChange={setSelectedAddOnSku}
+          alreadyInCart={preparedWormBinInCart}
+        />
       ) : null}
 
       {showRelatedProducts ? (

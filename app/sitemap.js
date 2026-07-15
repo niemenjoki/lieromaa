@@ -15,7 +15,6 @@ import {
   getLegalPageLastModified,
   orderTermsPage,
   privacyPolicyPage,
-  starterKitSetupPage,
   wormCalculatorPage,
   wormSourcePage,
 } from '@/lib/site/pageRecords.mjs';
@@ -60,7 +59,6 @@ export default async function sitemap() {
       product.canonicalUrl,
       product.updatedAt,
     ]),
-    [starterKitSetupPage.canonicalUrl, starterKitSetupPage.updatedAt],
     [wormCalculatorPage.canonicalUrl, wormCalculatorPage.updatedAt],
   ].forEach(([url, lastmod]) => add(url, lastmod));
 

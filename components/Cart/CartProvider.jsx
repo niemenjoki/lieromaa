@@ -2,7 +2,11 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 
-import { getCartLineItems, normalizeCartItems } from '@/lib/orders/cartOrder';
+import {
+  getCartItemsAfterRemoval,
+  getCartLineItems,
+  normalizeCartItems,
+} from '@/lib/orders/cartOrder';
 
 const CART_STORAGE_KEY = 'lieromaaCartV1';
 const CART_MAX_IDLE_MS = 7 * 24 * 60 * 60 * 1000;
@@ -25,6 +29,13 @@ function readStoredCart() {
     const items = normalizeCartItems(isLegacyCart ? parsed : parsed?.items);
 
     if (!items.length) {
+      localStorage.removeItem(CART_STORAGE_KEY);
+      return { items: [], lastEditedAt: null };
+    }
+
+    try {
+      getCartLineItems(items);
+    } catch {
       localStorage.removeItem(CART_STORAGE_KEY);
       return { items: [], lastEditedAt: null };
     }
@@ -139,7 +150,7 @@ export function CartProvider({ children }) {
     },
     removeItem(sku) {
       const normalizedSku = String(sku || '').trim();
-      return commitItems(items.filter((item) => item.sku !== normalizedSku));
+      return commitItems(getCartItemsAfterRemoval(items, normalizedSku));
     },
     clearCart() {
       setItems([]);

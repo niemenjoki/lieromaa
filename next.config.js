@@ -19,6 +19,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/tuotteet/matokompostin-aloituspakkaus',
+        destination: '/tuotteet/madot#valmis-matokompostori',
+        permanent: true,
+      },
+      {
         source:
           '/opas/kompostorin-hoito/matokompostointi-talvella-toimiiko-se-ulkona-suomessa',
         destination:

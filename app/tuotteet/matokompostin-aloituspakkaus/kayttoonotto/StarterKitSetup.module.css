@@ -63,3 +63,15 @@
   border-radius: 4px;
   margin: 1rem 0;
 }
+
+.LegacyNotice {
+  margin: 1.5rem 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--highlight);
+  border-radius: 10px;
+  background-color: var(--background-2);
+}
+
+.LegacyNotice p {
+  margin: 0.65rem 0 0;
+}

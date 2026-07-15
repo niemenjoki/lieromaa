@@ -18,7 +18,20 @@ export default function StarterKitSetupPage() {
       />
 
       <div className={classes.Content}>
-        <h1>Aloituspakkauksen käyttöönotto</h1>
+        <h1>Aiemman aloituspakkauksen käyttöönotto</h1>
+
+        <aside className={classes.LegacyNotice}>
+          <strong>Tämä on arkistoitu ohje aiemmin myydylle aloituspakkaukselle.</strong>
+          <p>
+            Ohje koskee kuivalla kookoskuidulla toimitettua 1–3 laatikon mallia, joka
+            koottiin ja käynnistettiin itse. Sitä ei enää myydä. Nykyinen{' '}
+            <SafeLink href="/tuotteet/madot#valmis-matokompostori">
+              käyttövalmis 14 litran matokompostori
+            </SafeLink>{' '}
+            toimitetaan valmiiksi kostutetulla petimateriaalilla, madoilla ja
+            ensimmäisellä ruokinnalla, joten sitä ei oteta käyttöön tämän ohjeen mukaan.
+          </p>
+        </aside>
 
         <h2>Pakkauksen sisältö</h2>
         <p>

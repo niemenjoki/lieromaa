@@ -60,19 +60,19 @@ export default function WormSourcePage() {
               <h2>Pienestä alusta omaan järjestelmään</h2>
               <p>
                 Aloitin keväällä 2024 noin tuhannella kompostimadolla. Nyt pääjärjestelmä
-                on kolmen noin 50 litran laatikon pino, joka toimii samalla
-                läpivirtausperiaatteella kuin Lieromaan{' '}
-                <SafeLink href="/tuotteet/matokompostin-aloituspakkaus">
-                  matokompostorin aloituspakkaus
-                </SafeLink>
-                .
+                on kolmen noin 50 litran laatikon pino. Myyntiin tulevat madot kasvavat
+                tässä ja pienemmissä varmistuskompostoreissa.
               </p>
               <p>
                 Kolme pienempää 14 litran laatikkoa ovat erillisiä varmistus- ja
                 kokeilukompostoreita. Niissä testaan esimerkiksi petimateriaaleja ja
                 ilmanvaihdon vaikutusta kosteuden hallintaan. Tärkein tehtävä on kuitenkin
                 varmistus: kaikki madot eivät ole yhden järjestelmän varassa, jos jotain
-                odottamatonta tapahtuu.
+                odottamatonta tapahtuu. Samaa helposti käsiteltävää kokoluokkaa käytän{' '}
+                <SafeLink href="/tuotteet/madot#valmis-matokompostori">
+                  käyttövalmiissa 14 litran matokompostorissa
+                </SafeLink>
+                , jonka voi tilata matojen mukana.
               </p>
             </div>
 
