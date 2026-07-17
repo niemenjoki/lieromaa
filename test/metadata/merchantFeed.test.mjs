@@ -45,3 +45,14 @@ test('Merchant feed includes configured sale prices and effective dates', () => 
     }
   }
 });
+
+test('Merchant feed remains Finnish-only with Finnish product URLs and FI shipping', () => {
+  const feed = fs.readFileSync(merchantFeedPath, 'utf8');
+
+  assert.match(feed, /Tuotefeed Lieromaan Google Merchant Centeria varten\./);
+  assert.match(feed, /<g:country>FI<\/g:country>/);
+  assert.match(feed, /https:\/\/www\.lieromaa\.fi\/tuotteet\/madot/);
+  assert.match(feed, /https:\/\/www\.lieromaa\.fi\/tuotteet\/kompostorin-kuituseos/);
+  assert.match(feed, /Kompostimadot|kompostorin kuituseos/);
+  assert.doesNotMatch(feed, /https:\/\/www\.lieromaa\.fi\/en(?:\/|<)/);
+});

@@ -1,16 +1,32 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { usePathname } from 'next/navigation';
 
 import CartButton from '@/components/Cart/CartButton';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SiteSearch from '@/components/SiteSearch/SiteSearch';
 import ThemeToggler from '@/components/ThemeToggler/ThemeToggler';
+import {
+  getLanguageSwitchHref,
+  getRouteKeyForPath,
+  getRoutePath,
+} from '@/lib/i18n/routes.mjs';
 
 import Toggler from '../NavToggler/NavToggler.jsx';
 import SafeLink from '../SafeLink/SafeLink';
 import Socials from '../Socials/Socials.jsx';
 import classes from './Navbar.module.css';
+
+function renderNavigationLink(link, onClick) {
+  return (
+    <SafeLink href={link.href} lang={link.lang} onClick={onClick}>
+      {link.label}
+      {link.badge ? <span className={classes.LanguageBadge}>{link.badge}</span> : null}
+    </SafeLink>
+  );
+}
 
 function renderDesktopItem(item) {
   if (item.kind === 'menu') {
@@ -19,24 +35,44 @@ function renderDesktopItem(item) {
         <span>{item.label}</span>
         <ul className={classes.DropdownMenu}>
           {item.items.map((link) => (
-            <li key={link.href}>
-              <SafeLink href={link.href}>{link.label}</SafeLink>
-            </li>
+            <li key={link.href}>{renderNavigationLink(link)}</li>
           ))}
         </ul>
       </li>
     );
   }
 
-  return (
-    <li key={item.href}>
-      <SafeLink href={item.href}>{item.label}</SafeLink>
-    </li>
-  );
+  return <li key={item.href}>{renderNavigationLink(item)}</li>;
 }
 
-export default function Navbar({ navigation, searchItems }) {
+export default function Navbar({ language, navigation, searchItems, copy }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [locationSuffix, setLocationSuffix] = useState('');
+  const pathname = usePathname();
+  const targetLanguage = language === 'en' ? 'fi' : 'en';
+  const pageKey = getRouteKeyForPath(pathname);
+  const currentHref = `${pathname}${locationSuffix}`;
+  const languageSwitchHref = pageKey
+    ? getLanguageSwitchHref({
+        pageKey,
+        language: targetLanguage,
+        currentHref,
+      })
+    : getRoutePath('home', targetLanguage);
+
+  useEffect(() => {
+    const updateLocationSuffix = () =>
+      setLocationSuffix(
+        `${globalThis.location?.search || ''}${globalThis.location?.hash || ''}`
+      );
+    updateLocationSuffix();
+    globalThis.addEventListener?.('hashchange', updateLocationSuffix);
+    globalThis.addEventListener?.('popstate', updateLocationSuffix);
+    return () => {
+      globalThis.removeEventListener?.('hashchange', updateLocationSuffix);
+      globalThis.removeEventListener?.('popstate', updateLocationSuffix);
+    };
+  }, [pathname]);
   const closeMenu = () => {
     setIsOpen(false);
     if (typeof document !== 'undefined') {
@@ -59,10 +95,10 @@ export default function Navbar({ navigation, searchItems }) {
       <div className={classes.Inner}>
         {/* LEFT */}
         <div className={classes.Left}>
-          <SafeLink href="/" className={classes.LogoLink}>
+          <SafeLink href={getRoutePath('home', language)} className={classes.LogoLink}>
             <SafeImage
               src="/images/lieromaa_logo.svg"
-              alt="Lieromaa logo"
+              alt={copy.navbar.logoAlt}
               width={40}
               height={40}
               className={classes.Logo}
@@ -78,21 +114,31 @@ export default function Navbar({ navigation, searchItems }) {
           <ul className={classes.Links}>
             {navigation.desktopItems.map((item) => renderDesktopItem(item))}
             <li>
-              <ThemeToggler style={{ fontSize: '24px' }} />
+              <ThemeToggler copy={copy.theme} style={{ fontSize: '24px' }} />
             </li>
           </ul>
 
-          <SiteSearch
-            searchItems={searchItems}
-            variant="navbar"
-            resultLimit={5}
-            label="Hae sivustolta"
-          />
+          {searchItems ? (
+            <SiteSearch
+              searchItems={searchItems}
+              variant="navbar"
+              resultLimit={5}
+              label={copy.navbar.searchLabel}
+            />
+          ) : null}
 
-          <CartButton />
+          <CartButton language={language} copy={copy.cart} />
+
+          <SafeLink
+            href={languageSwitchHref}
+            lang={copy.navbar.languageSwitchLanguage}
+            className={classes.LanguageSwitch}
+          >
+            {copy.navbar.languageSwitchLabel}
+          </SafeLink>
 
           <span className={classes.MobileThemeToggler}>
-            <ThemeToggler style={{ fontSize: '26px' }} />
+            <ThemeToggler copy={copy.theme} style={{ fontSize: '26px' }} />
           </span>
 
           {/* Mobile toggler */}
@@ -101,6 +147,7 @@ export default function Navbar({ navigation, searchItems }) {
               className={classes.Toggler}
               drawerOpen={isOpen}
               clicked={toggleIsOpen}
+              copy={copy.navigation}
             />
           </span>
         </div>
@@ -109,15 +156,17 @@ export default function Navbar({ navigation, searchItems }) {
       {/* MOBILE OVERLAY */}
       <div className={`${classes.MobileMenu} ${isOpen ? classes.MobileOpen : ''}`}>
         <div className={classes.MobileContent}>
-          <div className={classes.MobileSearch}>
-            <SiteSearch
-              searchItems={searchItems}
-              variant="mobile"
-              resultLimit={4}
-              label="Hae sivustolta"
-              onNavigate={closeMenu}
-            />
-          </div>
+          {searchItems ? (
+            <div className={classes.MobileSearch}>
+              <SiteSearch
+                searchItems={searchItems}
+                variant="mobile"
+                resultLimit={4}
+                label={copy.navbar.searchLabel}
+                onNavigate={closeMenu}
+              />
+            </div>
+          ) : null}
           {navigation.mobileSections.map((section, sectionIndex) => (
             <div
               key={section.heading ?? `mobile-section-${sectionIndex}`}
@@ -126,17 +175,26 @@ export default function Navbar({ navigation, searchItems }) {
               {section.heading && <h3>{section.heading}</h3>}
               <ul>
                 {section.items.map((link) => (
-                  <li key={link.href}>
-                    <SafeLink href={link.href} onClick={closeMenu}>
-                      {link.label}
-                    </SafeLink>
-                  </li>
+                  <li key={link.href}>{renderNavigationLink(link, closeMenu)}</li>
                 ))}
               </ul>
             </div>
           ))}
           <div className={classes.MobileSection}>
-            <h3>Seuraa</h3>
+            <ul>
+              <li>
+                <SafeLink
+                  href={languageSwitchHref}
+                  lang={copy.navbar.languageSwitchLanguage}
+                  onClick={closeMenu}
+                >
+                  {copy.navbar.languageSwitchLabel}
+                </SafeLink>
+              </li>
+            </ul>
+          </div>
+          <div className={classes.MobileSection}>
+            <h3>{copy.navbar.followHeading}</h3>
             <ul>
               <li className={classes.Socials}>
                 <Socials />

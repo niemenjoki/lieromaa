@@ -1,5 +1,10 @@
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
-import { REVIEW_ERROR_MESSAGE } from '@/lib/copy/reviewMessages';
+import {
+  LIEROMAA_LANGUAGE_HEADER,
+  PUBLIC_MESSAGE_CODES,
+  createPublicErrorBody,
+  getPublicRequestLanguage,
+} from '@/lib/api/publicLanguage';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -22,12 +27,10 @@ function jsonResponse(body, init) {
 }
 
 export async function POST(request) {
+  const language = getPublicRequestLanguage(request);
   if (!isSameOriginRequest(request)) {
     return jsonResponse(
-      {
-        ok: false,
-        message: 'Virheellinen lähetyspyyntö.',
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.SAME_ORIGIN_REQUIRED, language),
       { status: 403 }
     );
   }
@@ -37,10 +40,7 @@ export async function POST(request) {
     payload = await request.json();
   } catch {
     return jsonResponse(
-      {
-        ok: false,
-        message: 'Arvostelun lukeminen epäonnistui.',
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.INVALID_REQUEST, language),
       { status: 400 }
     );
   }
@@ -51,10 +51,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Review service configuration error:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: REVIEW_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 500 }
     );
   }
@@ -65,6 +62,7 @@ export async function POST(request) {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        [LIEROMAA_LANGUAGE_HEADER]: language,
       },
       body: JSON.stringify(payload || {}),
       signal: AbortSignal.timeout(Number(process.env.ORDER_SERVICE_TIMEOUT_MS) || 10000),
@@ -73,10 +71,11 @@ export async function POST(request) {
     const responseData = await upstreamResponse.json().catch(() => null);
     if (!upstreamResponse.ok || !responseData?.ok) {
       return jsonResponse(
-        {
-          ok: false,
-          message: responseData?.message || REVIEW_ERROR_MESSAGE,
-        },
+        createPublicErrorBody(
+          responseData?.code || PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE,
+          language,
+          responseData?.message || undefined
+        ),
         { status: upstreamResponse.status || 502 }
       );
     }
@@ -88,10 +87,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Review submission forwarding failed:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: REVIEW_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 502 }
     );
   }

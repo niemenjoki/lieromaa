@@ -49,6 +49,16 @@ describe('frontend public order normalization', () => {
         `normalizePublicOrderSubmission should preserve the submission id for ${scenario.productKey}/${scenario.shippingOption.id}`
       );
       expectEqual(
+        payload.language,
+        'fi',
+        `normalizePublicOrderSubmission should default legacy ${scenario.productKey}/${scenario.shippingOption.id} orders to Finnish`
+      );
+      expectEqual(
+        payload.country,
+        'FI',
+        `normalizePublicOrderSubmission should default legacy ${scenario.productKey}/${scenario.shippingOption.id} orders to Finland`
+      );
+      expectEqual(
         payload.customer.email,
         'testi@example.com',
         `normalizePublicOrderSubmission should keep the customer email for ${scenario.productKey}/${scenario.shippingOption.id}`
@@ -335,6 +345,67 @@ describe('frontend public order normalization', () => {
     );
   });
 
+  test('normalizePublicOrderSubmission should localize English cart labels without changing commerce identifiers', () => {
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        language: 'en',
+        country: 'FI',
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+        toimitus: 'posti_noutopiste',
+        osoite: 'Compost Lane 1',
+        postinumero: '00100',
+        toimipaikka: 'Helsinki',
+        sivu_polku: '/en/checkout',
+      }),
+      { now: new Date('2026-07-17T10:00:00Z') }
+    );
+
+    expectEqual(payload.language, 'en');
+    expectEqual(payload.country, 'FI');
+    expectEqual(payload.pagePath, '/en/checkout');
+    expectEqual(payload.product.sku, 'worms-25');
+    assert.match(payload.product.label, /compost worms/);
+    expectEqual(payload.fulfillment.method, 'posti_noutopiste');
+    expectEqual(payload.fulfillment.label, 'Posti pickup point or parcel locker');
+    expectEqual(payload.pricing.shippingLabel, 'Posti pickup point or parcel locker');
+  });
+
+  test('normalizePublicOrderSubmission should reject foreign countries and malformed Finnish postcodes with stable codes', () => {
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({
+            language: 'en',
+            country: 'SE',
+          })
+        ),
+      (error) => {
+        expectEqual(error.code, 'invalid_country');
+        return true;
+      }
+    );
+
+    const pickupScenario = findOrderScenario({ fulfillmentType: 'pickup_point' });
+    if (!pickupScenario) return;
+
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormDataForScenario(pickupScenario, {
+            language: 'en',
+            country: 'FI',
+            postinumero: '1234',
+          })
+        ),
+      (error) => {
+        expectEqual(error.code, 'invalid_postcode');
+        return true;
+      }
+    );
+  });
+
   test('normalizePublicOrderSubmission should include a prepared worm bin as a fixed-price worm add-on', () => {
     const now = new Date('2026-07-14T10:00:00Z');
     const cartItems = [
@@ -371,7 +442,7 @@ describe('frontend public order normalization', () => {
           items: [{ sku: 'worms-ready-bin-14l', quantity: 1 }],
           shippingMethod: 'nouto',
         }),
-      /vain kompostimatojen kanssa/
+      (error) => error?.code === 'prepared_bin_requires_worms'
     );
 
     assert.throws(
@@ -383,7 +454,7 @@ describe('frontend public order normalization', () => {
           ],
           shippingMethod: 'nouto',
         }),
-      /enintään yksi käyttövalmis matokompostori/
+      (error) => error?.code === 'prepared_bin_limit'
     );
   });
 

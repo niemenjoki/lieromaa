@@ -2,7 +2,9 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 
+import { DEFAULT_LANGUAGE } from '@/lib/i18n/config.mjs';
 import {
+  getCartErrorMessage,
   getCartItemsAfterRemoval,
   getCartLineItems,
   normalizeCartItems,
@@ -17,7 +19,7 @@ function normalizeTimestamp(value) {
   return Number.isFinite(numericValue) && numericValue > 0 ? numericValue : null;
 }
 
-function readStoredCart() {
+function readStoredCart(language) {
   try {
     const rawValue = localStorage.getItem(CART_STORAGE_KEY);
     if (!rawValue) {
@@ -34,7 +36,7 @@ function readStoredCart() {
     }
 
     try {
-      getCartLineItems(items);
+      getCartLineItems(items, { language });
     } catch {
       localStorage.removeItem(CART_STORAGE_KEY);
       return { items: [], lastEditedAt: null };
@@ -84,20 +86,20 @@ function createResult(ok, message = '') {
   };
 }
 
-export function CartProvider({ children }) {
+export function CartProvider({ children, language = DEFAULT_LANGUAGE }) {
   const [items, setItems] = useState([]);
   const [lastEditedAt, setLastEditedAt] = useState(null);
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    const storedCart = readStoredCart();
+    const storedCart = readStoredCart(language);
     setItems(storedCart.items);
     setLastEditedAt(storedCart.lastEditedAt);
     setIsHydrated(true);
 
     const handleStorage = (event) => {
       if (event.key === CART_STORAGE_KEY) {
-        const nextStoredCart = readStoredCart();
+        const nextStoredCart = readStoredCart(language);
         setItems(nextStoredCart.items);
         setLastEditedAt(nextStoredCart.lastEditedAt);
       }
@@ -105,17 +107,17 @@ export function CartProvider({ children }) {
 
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
-  }, []);
+  }, [language]);
 
   const commitItems = (nextItems) => {
     const normalizedItems = normalizeCartItems(nextItems);
 
     try {
-      getCartLineItems(normalizedItems);
+      getCartLineItems(normalizedItems, { language });
     } catch (error) {
       return createResult(
         false,
-        error instanceof Error ? error.message : 'Korin päivittäminen epäonnistui.'
+        getCartErrorMessage(error, language, 'cart_update_failed')
       );
     }
 
@@ -134,6 +136,7 @@ export function CartProvider({ children }) {
     itemCount,
     isHydrated,
     lastEditedAt,
+    language,
     expiresAt: lastEditedAt ? lastEditedAt + CART_MAX_IDLE_MS : null,
     addItems,
     addItem(sku, quantity = 1) {

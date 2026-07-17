@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import generateBlogTagMetadata from '@/app/blogi/[tag]/sivu/[pageIndex]/generateMetadata';
+import generateBlogTagMetadata from '@/app/(fi)/blogi/[tag]/sivu/[pageIndex]/generateMetadata';
 import sitemap from '@/app/sitemap';
+import { englishPageDefinitions } from '@/data/pages/english.mjs';
 import safeRoutes from '@/generated/site/safeRoutes.json';
 import {
   getAllContent,
@@ -67,6 +68,7 @@ const searchPage = {
 const explicitNonMetadataRoutes = new Map([
   ['/7b0d4de4-7896-4f1f-b8f4-c7d94d9bf7a8', 'analytics opt-out client redirect'],
   ['/madot', 'legacy redirect to /tuotteet/madot'],
+  ['/en/products', 'legacy redirect to the English product-led landing page'],
 ]);
 
 function slugifySegment(value) {
@@ -114,6 +116,10 @@ function collectMetadataScenarios() {
   ].forEach((page) => {
     const fallbackPath = page === reviewPage ? '/arvostele' : '/tietopyynto/lataa';
     addScenario(scenarios, page.canonicalUrl ?? fallbackPath, page);
+  });
+
+  englishPageDefinitions.forEach((page) => {
+    addScenario(scenarios, page.canonicalUrl, page);
   });
 
   addScenario(scenarios, '/blogi/sivu/1', createBlogPageScenario(1, '/blogi/sivu/1'));

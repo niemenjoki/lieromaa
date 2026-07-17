@@ -1,5 +1,10 @@
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
-import { REVIEW_ERROR_MESSAGE } from '@/lib/copy/reviewMessages';
+import {
+  LIEROMAA_LANGUAGE_HEADER,
+  PUBLIC_MESSAGE_CODES,
+  createPublicErrorBody,
+  getPublicRequestLanguage,
+} from '@/lib/api/publicLanguage';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -24,12 +29,10 @@ function jsonResponse(body, init) {
 }
 
 export async function GET(request) {
+  const language = getPublicRequestLanguage(request);
   if (!isSameOriginRequest(request)) {
     return jsonResponse(
-      {
-        ok: false,
-        message: 'Virheellinen tarkistuspyyntö.',
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.SAME_ORIGIN_REQUIRED, language),
       { status: 403 }
     );
   }
@@ -37,10 +40,7 @@ export async function GET(request) {
   const token = request.nextUrl.searchParams.get('token')?.trim() || '';
   if (!token) {
     return jsonResponse(
-      {
-        ok: false,
-        message: 'Arvostelulinkki puuttuu.',
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.INVALID_REQUEST, language),
       { status: 400 }
     );
   }
@@ -54,10 +54,7 @@ export async function GET(request) {
   } catch (error) {
     console.error('Review service configuration error:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: REVIEW_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 500 }
     );
   }
@@ -67,6 +64,7 @@ export async function GET(request) {
       method: 'GET',
       headers: {
         Accept: 'application/json',
+        [LIEROMAA_LANGUAGE_HEADER]: language,
       },
       signal: AbortSignal.timeout(Number(process.env.ORDER_SERVICE_TIMEOUT_MS) || 10000),
       cache: 'no-store',
@@ -75,10 +73,11 @@ export async function GET(request) {
     const responseData = await upstreamResponse.json().catch(() => null);
     if (!upstreamResponse.ok || !responseData?.ok) {
       return jsonResponse(
-        {
-          ok: false,
-          message: responseData?.message || REVIEW_ERROR_MESSAGE,
-        },
+        createPublicErrorBody(
+          responseData?.code || PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE,
+          language,
+          responseData?.message || undefined
+        ),
         { status: upstreamResponse.status || 502 }
       );
     }
@@ -93,14 +92,12 @@ export async function GET(request) {
         ? responseData.productTargets
         : [],
       testMode: Boolean(responseData.testMode),
+      language: responseData.language === 'en' ? 'en' : 'fi',
     });
   } catch (error) {
     console.error('Review session forwarding failed:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: REVIEW_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 502 }
     );
   }

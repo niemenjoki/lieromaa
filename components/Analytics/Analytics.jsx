@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation';
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
+import { isAnalyticsExcludedPath } from '@/lib/analytics/pathPolicy.mjs';
+
 import FirstPartyAnalytics from './FirstPartyAnalytics';
 
 const isDev =
@@ -16,7 +18,7 @@ const isDev =
 export default function AnalyticsWrapper() {
   const pathname = usePathname();
 
-  if (isDev || pathname === '/tietopyynto/lataa') return null;
+  if (isDev || isAnalyticsExcludedPath(pathname)) return null;
 
   return (
     <>

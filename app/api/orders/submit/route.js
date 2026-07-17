@@ -1,7 +1,13 @@
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
-import { ORDER_ERROR_MESSAGE } from '@/lib/copy/orderMessages';
+import {
+  LIEROMAA_LANGUAGE_HEADER,
+  PUBLIC_MESSAGE_CODES,
+  createPublicErrorBody,
+  getPublicRequestLanguage,
+} from '@/lib/api/publicLanguage';
 import {
   PublicOrderValidationError,
+  getOrderValidationMessage,
   normalizePublicOrderSubmission,
 } from '@/lib/orders/normalizePublicOrder';
 
@@ -26,12 +32,10 @@ function jsonResponse(body, init) {
 }
 
 export async function POST(request) {
+  const language = getPublicRequestLanguage(request);
   if (!isSameOriginRequest(request)) {
     return jsonResponse(
-      {
-        ok: false,
-        message: 'Virheellinen lähetyspyyntö.',
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.SAME_ORIGIN_REQUIRED, language),
       { status: 403 }
     );
   }
@@ -41,10 +45,7 @@ export async function POST(request) {
     formData = await request.formData();
   } catch {
     return jsonResponse(
-      {
-        ok: false,
-        message: 'Lomakkeen lukeminen epäonnistui.',
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.INVALID_REQUEST, language),
       { status: 400 }
     );
   }
@@ -59,20 +60,20 @@ export async function POST(request) {
       }
 
       return jsonResponse(
-        {
-          ok: false,
-          message: error.publicMessage,
-        },
+        createPublicErrorBody(
+          error.code,
+          language,
+          language === 'fi'
+            ? error.publicMessage
+            : getOrderValidationMessage(error, language)
+        ),
         { status: error.statusCode }
       );
     }
 
     console.error('Unexpected order validation error:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: ORDER_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UNKNOWN_ERROR, language),
       { status: 500 }
     );
   }
@@ -85,10 +86,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Order service configuration error:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: ORDER_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 500 }
     );
   }
@@ -108,6 +106,7 @@ export async function POST(request) {
         'Content-Type': 'application/json',
         'X-Order-Token': orderServiceToken,
         'X-Idempotency-Key': normalizedOrder.sourceRequestId,
+        [LIEROMAA_LANGUAGE_HEADER]: normalizedOrder.language,
       },
       body: JSON.stringify({
         ...normalizedOrder,
@@ -120,10 +119,11 @@ export async function POST(request) {
     if (!upstreamResponse.ok || !responseData?.ok) {
       console.error('Order service rejected request:', responseData);
       return jsonResponse(
-        {
-          ok: false,
-          message: responseData?.message || ORDER_ERROR_MESSAGE,
-        },
+        createPublicErrorBody(
+          responseData?.code || PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE,
+          language,
+          responseData?.message || undefined
+        ),
         { status: upstreamResponse.status || 502 }
       );
     }
@@ -136,10 +136,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Order service forwarding failed:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: ORDER_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 502 }
     );
   }

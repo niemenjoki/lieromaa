@@ -1,4 +1,10 @@
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
+import {
+  PUBLIC_MESSAGE_CODES,
+  createPublicErrorBody,
+  getPublicRequestLanguage,
+} from '@/lib/api/publicLanguage';
+import { getTransactionMessages } from '@/lib/i18n/messages.mjs';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -6,8 +12,6 @@ export const runtime = 'nodejs';
 const DEFAULT_POSTI_AUTH_URL = 'https://gateway-auth.posti.fi/api/v1/token';
 const DEFAULT_POSTI_GATEWAY_URL = 'https://gateway.posti.fi';
 const DEFAULT_POSTI_API_VERSION = '2025-04';
-const PICKUP_POINT_ERROR_MESSAGE = 'Noutopistehaku ei ole juuri nyt käytettävissä.';
-
 let tokenCache = {
   accessToken: '',
   expiresAt: 0,
@@ -135,12 +139,11 @@ async function getAccessToken() {
 }
 
 export async function GET(request) {
+  const language = getPublicRequestLanguage(request);
+  const copy = getTransactionMessages(language).checkout;
   if (!isSameOriginRequest(request)) {
     return jsonResponse(
-      {
-        ok: false,
-        message: 'Virheellinen noutopistehaku.',
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.SAME_ORIGIN_REQUIRED, language),
       { status: 403 }
     );
   }
@@ -154,21 +157,20 @@ export async function GET(request) {
 
   if (!postalCode) {
     return jsonResponse(
-      {
-        ok: false,
-        message: 'Anna vähintään postinumero noutopistehakua varten.',
-      },
+      createPublicErrorBody('invalid_postcode', language, copy.postcodeInvalid),
       { status: 400 }
     );
   }
 
   if (!isMainlandFinlandPostalCode(postalCode)) {
     return jsonResponse(
-      {
-        ok: false,
-        message:
-          'Noutopistehaku on käytettävissä vain manner-Suomen 5-numeroisilla postinumeroilla.',
-      },
+      createPublicErrorBody(
+        'invalid_postcode',
+        language,
+        language === 'en'
+          ? 'Pickup-point search is available only for five-digit postcodes in mainland Finland.'
+          : 'Noutopistehaku on käytettävissä vain manner-Suomen 5-numeroisilla postinumeroilla.'
+      ),
       { status: 400 }
     );
   }
@@ -179,10 +181,7 @@ export async function GET(request) {
   } catch (error) {
     console.error('Pickup point search configuration error:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: PICKUP_POINT_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 503 }
     );
   }
@@ -192,7 +191,7 @@ export async function GET(request) {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Accept-Language': 'fi',
+        'Accept-Language': language,
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
       },
@@ -212,10 +211,7 @@ export async function GET(request) {
     if (!response.ok || !Array.isArray(responseData?.pickupPoints)) {
       console.error('Pickup point search failed:', responseData);
       return jsonResponse(
-        {
-          ok: false,
-          message: PICKUP_POINT_ERROR_MESSAGE,
-        },
+        createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
         { status: response.status || 502 }
       );
     }
@@ -229,10 +225,7 @@ export async function GET(request) {
   } catch (error) {
     console.error('Pickup point search request failed:', error);
     return jsonResponse(
-      {
-        ok: false,
-        message: PICKUP_POINT_ERROR_MESSAGE,
-      },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 502 }
     );
   }

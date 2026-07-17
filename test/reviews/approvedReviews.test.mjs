@@ -24,6 +24,26 @@ describe('frontend approved review data', () => {
     );
   });
 
+  test('approved reviews without a language remain Finnish for compatibility', () => {
+    const rawEntries = Array.isArray(approvedReviewsSource) ? approvedReviewsSource : [];
+    const normalizedEntries = Object.keys(productDefinitions).flatMap((productKey) =>
+      getApprovedProductReviews(productKey)
+    );
+
+    rawEntries.forEach((entry) => {
+      if (entry.language !== undefined) return;
+
+      const normalizedEntry = normalizedEntries.find(
+        (candidate) =>
+          candidate.productKey === entry.productKey &&
+          candidate.submittedAt === entry.submittedAt &&
+          candidate.review === String(entry.review || '').trim()
+      );
+
+      assert.equal(normalizedEntry?.language, 'fi');
+    });
+  });
+
   test('approved review summaries should stay internally consistent for each product', () => {
     for (const productKey of Object.keys(productDefinitions)) {
       const reviews = getApprovedProductReviews(productKey);

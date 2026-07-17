@@ -44,6 +44,30 @@
   position: relative;
 }
 
+.LanguageSwitch {
+  color: var(--text-color);
+  font-weight: 600;
+  opacity: 0.9;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.LanguageSwitch:hover {
+  color: var(--highlight);
+  opacity: 1;
+}
+
+.LanguageBadge {
+  display: inline-flex;
+  margin-left: 0.45rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.08rem 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
 .MobileThemeToggler {
   display: none;
   line-height: 1;
@@ -211,6 +235,10 @@
 
   .Toggler {
     display: block;
+  }
+
+  .LanguageSwitch {
+    display: none;
   }
 }
 

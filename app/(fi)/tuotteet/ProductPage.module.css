@@ -1,0 +1,1359 @@
+.ProductPage {
+  max-width: 72rem;
+  margin: 0 auto;
+  --product-surface: var(--background-2);
+  --product-surface-muted: var(--background-3);
+  --product-surface-strong: hsla(0, 0%, 100%, 0.68);
+  --product-surface-border: var(--background-5);
+  --product-shadow: 0 18px 40px rgba(39, 29, 18, 0.08);
+}
+
+:global(body.dark) .ProductPage {
+  --product-surface: hsl(30, 20%, 11%);
+  --product-surface-muted: hsl(30, 18%, 14%);
+  --product-surface-strong: hsl(30, 18%, 8%);
+  --product-surface-border: hsl(30, 16%, 30%);
+  --product-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.ProductPage h1 {
+  margin: 0.25rem 0 1.5rem;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  line-height: 1.1;
+  max-width: 18ch;
+  overflow-wrap: break-word;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.Content section,
+.Content aside {
+  margin: 0;
+}
+
+.Content p {
+  margin: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.Content ol,
+.Content ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.15rem;
+  list-style-position: outside;
+}
+
+.Content ol li,
+.Content ul li {
+  margin: 0.45rem 0;
+  line-height: 1.5;
+}
+
+.Content em {
+  font-weight: lighter;
+  letter-spacing: initial;
+}
+
+.Content h1,
+.Content h2,
+.Content h3,
+.Content h4,
+.Content h5,
+.Content h6 {
+  color: var(--highlight-alt);
+}
+
+.Content h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.Content h3 {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.Content a {
+  color: var(--highlight-content-link);
+  transition: opacity 0.1s ease-in-out;
+}
+
+.Content a:hover {
+  opacity: 0.7;
+}
+
+.ProductHero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.HeroDetails,
+.HeroText,
+.SectionStack,
+.SummaryCard,
+.InfoCard,
+.OrderSection {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.AnchorTarget {
+  display: block;
+  scroll-margin-top: 1.5rem;
+}
+
+.HeroDetails,
+.SectionStack,
+.OrderSection {
+  gap: 1rem;
+}
+
+.HeroText,
+.SummaryCard,
+.InfoCard {
+  gap: 0.9rem;
+}
+
+.HeroDetails {
+  max-width: 48rem;
+}
+
+.SummaryCard {
+  align-self: flex-start;
+  width: 100%;
+  max-width: 34rem;
+}
+
+.Lead {
+  font-size: inherit;
+  line-height: inherit !important;
+}
+
+.SummaryCard,
+.InfoCard,
+.ReviewsSection {
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 18px;
+  background-color: var(--product-surface);
+  box-shadow: var(--product-shadow);
+}
+
+.OrderSection {
+  padding: 1.3rem 1.35rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    var(--product-surface) 0%,
+    var(--product-surface-muted) 100%
+  );
+  box-shadow: var(--product-shadow);
+}
+
+.CardGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+
+.CardGrid > * {
+  min-width: 0;
+}
+
+.FeatureList,
+.CleanList,
+.PriceList {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.FeatureList li,
+.CleanList li,
+.PriceList li {
+  margin: 0 !important;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--background-6);
+}
+
+.FeatureList li:first-child,
+.CleanList li:first-child,
+.PriceList li:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.FeatureList li:last-child,
+.CleanList li:last-child,
+.PriceList li:last-child {
+  padding-bottom: 0;
+}
+
+.Note {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.FinePrint {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  opacity: 0.82;
+  max-width: 42rem;
+}
+
+.PrimaryCTA {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.8rem 1.25rem;
+  background-color: var(--highlight);
+  color: var(--text-on-accent) !important;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  margin-top: 0.35rem;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.PrimaryCTA:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.OrderSectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 42rem;
+}
+
+.CalculatorForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-width: 44rem;
+  margin: 0;
+  min-width: 0;
+}
+
+.FormSection {
+  padding: 1rem 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.FormSection + .FormSection {
+  border-top: 1px solid var(--product-surface-border);
+}
+
+.FormSectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.FormSectionTitle {
+  margin: 0;
+  font-size: 1.02rem;
+}
+
+.FormSectionDescription {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  opacity: 0.88;
+}
+
+.FormSectionBody,
+.FormFields,
+.AddressGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.CalculatorForm label,
+.StackedField {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100%;
+  gap: 0.35rem;
+}
+
+.FieldLabel {
+  font-weight: 600;
+}
+
+.CalculatorForm input,
+.CalculatorForm select,
+.CalculatorForm textarea {
+  width: 100%;
+  margin: 0;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 10px;
+  background-color: var(--product-surface-strong);
+  color: inherit;
+  font: inherit;
+}
+
+.CalculatorForm textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.CalculatorForm input:focus,
+.CalculatorForm select:focus,
+.CalculatorForm textarea:focus {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+  border-color: var(--highlight);
+}
+
+.CalculatorForm input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  accent-color: var(--highlight);
+}
+
+.CalculatorForm button {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background-color: var(--highlight);
+  color: var(--text-on-accent);
+  border: 1px solid transparent;
+  cursor: pointer;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.CalculatorForm button:hover {
+  opacity: 0.88;
+}
+
+.SecondaryButton {
+  align-self: flex-start;
+  background-color: transparent !important;
+  color: var(--highlight) !important;
+  border-color: var(--highlight) !important;
+}
+
+.SecondaryButton:hover {
+  background-color: var(--highlight) !important;
+  color: var(--text-on-accent) !important;
+}
+
+.SecondaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.SubmitButton {
+  width: 100%;
+}
+
+.CartActionLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background-color: var(--highlight);
+  color: var(--text-on-accent);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.CartActionLink:not(.SecondaryButton) {
+  color: var(--text-on-accent) !important;
+}
+
+.CartActionLink:hover {
+  opacity: 0.88;
+}
+
+.CartActionLink:focus-visible {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+.FormActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.FormFieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ChoiceList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.FormOption {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0.35rem !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface-strong);
+  cursor: pointer;
+  min-width: 0;
+}
+
+.FormOptionDisabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
+.FormOption:has(input:checked) {
+  border-color: var(--highlight);
+  box-shadow: inset 0 0 0 1px var(--highlight);
+}
+
+.FormOption:has(input:focus-visible) {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+.CheckOption {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 0.7rem !important;
+  min-width: 0;
+}
+
+.AddOnImage {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.AddOnProduct {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.OptionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.OptionHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.OptionMarker {
+  flex: 0 0 auto;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.96rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--highlight);
+}
+
+.OptionTitle {
+  font-weight: 600;
+  line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.OptionMeta {
+  font-size: 0.92rem;
+  line-height: 1.45;
+  opacity: 0.86;
+}
+
+.ChoiceInput {
+  position: absolute;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.FormSubsection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface-strong);
+}
+
+.FormSubsectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.PreparedBinProductIntro {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.PreparedBinChoice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.PreparedBinOptionSummary {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.15rem 0.75rem;
+  min-width: 0;
+}
+
+.PreparedBinOptionPrice {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.PreparedBinTitleStack {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.PreparedBinNewBadge {
+  flex: 0 0 auto;
+  padding: 0.15rem 0.4rem;
+  border: 1px solid var(--highlight);
+  border-radius: 999px;
+  background-color: var(--highlight);
+  color: var(--text-on-accent);
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.PreparedBinDetails {
+  position: relative;
+}
+
+.PreparedBinDetails[open] {
+  z-index: 11;
+}
+
+.PreparedBinDetailsSummary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 999px;
+  background-color: var(--product-surface-strong);
+  color: var(--highlight-alt);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  list-style: none;
+}
+
+.PreparedBinDetailsSummary::-webkit-details-marker {
+  display: none;
+}
+
+.PreparedBinDetailsSummary::marker {
+  content: '';
+}
+
+.PreparedBinDetailsSummary:focus-visible {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+.PreparedBinPopover {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  z-index: 10;
+  width: min(42rem, calc(100vw - 3rem));
+  max-height: calc(100dvh - 3rem);
+  padding: 0.9rem;
+  overflow-y: auto;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface-strong);
+  box-shadow: var(--product-shadow);
+}
+
+.PreparedBinPopover::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  right: 0;
+  left: 0;
+  height: 0.5rem;
+}
+
+.PreparedBinDetails[open] .PreparedBinPopover {
+  display: block;
+}
+
+.PreparedBinModalHeader {
+  position: sticky;
+  top: -0.9rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: -0.9rem -0.9rem 0.9rem;
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--product-surface-border);
+  background-color: var(--product-surface-strong);
+}
+
+.PreparedBinModalHeader h5 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.CartPanel .PreparedBinModalClose {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 999px;
+  background-color: var(--product-surface-strong);
+  color: inherit;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.PreparedBinModalIntro {
+  display: grid;
+  grid-template-columns: minmax(7rem, 10rem) minmax(0, 1fr);
+  gap: 0.9rem;
+}
+
+.PreparedBinPopoverText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.PreparedBinPopoverText p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.PreparedBinModalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--product-surface-border);
+}
+
+.PreparedBinModalBody section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.PreparedBinModalBody h6,
+.PreparedBinModalBody p,
+.PreparedBinModalBody ul {
+  margin: 0;
+}
+
+.PreparedBinModalBody h6 {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.PreparedBinModalBody p,
+.PreparedBinModalBody li {
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.PreparedBinModalBody ul {
+  padding-left: 1.25rem;
+}
+
+.PreparedBinImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 9px;
+}
+
+.PreparedBinPromise {
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.PreparedBinShippingDelay {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-left: 3px solid var(--highlight);
+  background-color: var(--product-surface-muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.PreparedBinCartStatus {
+  margin: 0;
+  color: var(--highlight-alt);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.FormSubsectionTitle {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.PickupPointSelect {
+  width: 100% !important;
+  max-width: 100%;
+  margin: 0 !important;
+}
+
+.Content .HelperText {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.OrderSummaryBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface-strong);
+}
+
+.CartPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  width: 100%;
+  max-width: 44rem;
+  min-width: 0;
+}
+
+.CartPanel button {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background-color: var(--highlight);
+  color: var(--text-on-accent);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.CartPanel button:hover {
+  opacity: 0.88;
+}
+
+.CartPanel button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.CartQuantityBox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface-strong);
+}
+
+.QuantityField {
+  display: flex;
+  flex: 0 0 8rem;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.QuantityInput {
+  width: 100%;
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 10px;
+  background-color: var(--product-surface-strong);
+  color: inherit;
+  font: inherit;
+}
+
+.InlineDangerButton {
+  background-color: transparent !important;
+  color: var(--highlight-alt) !important;
+  border-color: var(--product-surface-border) !important;
+}
+
+.ProductListPage h1 {
+  max-width: none;
+}
+
+.ProductGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  gap: 1rem;
+}
+
+.ProductCard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--product-surface-border);
+  border-radius: 12px;
+  background-color: var(--product-surface);
+  color: inherit !important;
+  text-decoration: none;
+  box-shadow: var(--product-shadow);
+}
+
+.ProductCardImage {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: auto;
+  object-fit: cover;
+}
+
+.ProductCardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.ProductCardTitle,
+.ProductCardPrice {
+  font-weight: 700;
+}
+
+.ProductCardDescription {
+  flex: 1;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  opacity: 0.88;
+}
+
+.OrderSummaryLabel {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.OrderTotal {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.1;
+}
+
+.AlertText {
+  font-weight: 700;
+  opacity: 1;
+}
+
+.ScreenReaderOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 36rem) {
+  .PreparedBinDetails[open] {
+    z-index: 110;
+  }
+
+  .PreparedBinPopover {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-height: none;
+    height: 100dvh;
+    padding: 1rem;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .PreparedBinModalHeader {
+    top: -1rem;
+    margin: -1rem -1rem 1rem;
+    padding: max(0.75rem, env(safe-area-inset-top)) 1rem 0.75rem;
+  }
+
+  .PreparedBinModalIntro {
+    grid-template-columns: 1fr;
+  }
+
+  .PreparedBinImage {
+    max-width: none;
+  }
+}
+
+.VariantPriceDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.VariantPriceTitle {
+  font-weight: 500;
+}
+
+.VariantPriceRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.RegularPrice,
+.DiscountedPrice {
+  font-weight: 700;
+}
+
+.OriginalPrice {
+  opacity: 0.72;
+  text-decoration: line-through;
+}
+
+.DiscountBadge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background-color: var(--highlight);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.OutOfStockBadge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background-color: var(--background-6);
+  color: var(--text-color);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.LowestPriceNotice,
+.VariantDiscountNote {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  opacity: 0.85;
+}
+
+.AvailabilityStatus {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.VariantOptionLabel {
+  align-items: flex-start !important;
+  gap: 0.6rem !important;
+}
+
+.VariantOptionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.ReviewsSection {
+  margin: 0;
+}
+
+.ReviewDetails {
+  margin: 0;
+}
+
+.ReviewDetails[open] {
+  padding-bottom: 0.15rem;
+}
+
+.ReviewDetails summary::-webkit-details-marker {
+  display: none;
+}
+
+.ReviewSummary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ReviewSummary h2 {
+  margin: 0;
+}
+
+.ReviewSummaryRating {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0 !important;
+  font-size: 1rem;
+}
+
+.ReviewSummaryStars,
+.ReviewStars {
+  color: var(--highlight);
+  letter-spacing: 0.15rem;
+}
+
+.ReviewSummaryMeta {
+  margin: 0 !important;
+  font-size: 0.95rem;
+  opacity: 0.82;
+}
+
+.StarBreakdown {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 24rem;
+  margin: 0.65rem 0 0;
+}
+
+.StarBreakdownRow {
+  display: grid;
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.StarBreakdownLabel,
+.StarBreakdownValue {
+  margin: 0;
+}
+
+.StarBreakdownLabel {
+  font-size: 0.88rem;
+  opacity: 0.86;
+}
+
+.StarBreakdownValue {
+  display: grid;
+  grid-template-columns: minmax(4rem, 1fr) 1.5rem;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.StarBreakdownTrack {
+  display: block;
+  height: 0.45rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--background-6);
+}
+
+.StarBreakdownFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--highlight);
+}
+
+.StarBreakdownCount {
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.ReviewActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.ReviewToggleButton,
+.ReviewMoreButton,
+.ReviewHideButton {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.ReviewToggleButton {
+  background: var(--highlight);
+  color: var(--text-on-accent);
+  border: none;
+}
+
+.ReviewToggleButton:hover {
+  background: var(--highlight-alt);
+  color: var(--text-on-accent);
+}
+
+.ReviewMoreButton {
+  background: var(--background-6);
+  color: var(--text-color);
+  border: 1px solid var(--highlight);
+}
+
+.ReviewMoreButton:hover,
+.ReviewHideButton:hover {
+  background: var(--highlight);
+  color: var(--text-on-accent);
+}
+
+.ReviewHideButton {
+  background: var(--background-6);
+  color: var(--text-color);
+  border: 1px solid var(--highlight);
+}
+
+.ReviewBottomActions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.65rem;
+}
+
+.ReviewList {
+  list-style: none !important;
+  margin: 0.75rem 0 0;
+  padding: 0 !important;
+}
+
+.ReviewItem {
+  margin: 2rem 0 !important;
+  padding: 0.55rem 0 0;
+  border-top: 1px solid var(--background-6);
+}
+
+.ReviewItem:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.ReviewHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0 !important;
+  font-size: 0.95rem;
+}
+
+.ReviewDate {
+  opacity: 0.72;
+}
+
+.ReviewStars {
+  margin: 0.12rem 0 0 !important;
+  font-size: 0.95rem;
+}
+
+.ReviewBody {
+  margin: 0.3rem 0 0 !important;
+  line-height: 1.4;
+}
+
+.ReviewLanguageNotice {
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.ReviewLanguageNoticePlain {
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+
+.ReviewLanguageBadge {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid var(--highlight);
+  border-radius: 999px;
+  color: var(--highlight-content-link);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+}
+
+.ReviewBodyMuted {
+  margin: 0.22rem 0 0;
+  opacity: 0.8;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.ReviewRatingOnlyNote {
+  margin: 0.85rem 0 0 !important;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  opacity: 0.82;
+}
+
+.ReviewToggleButton:disabled,
+.ReviewMoreButton:disabled,
+.ReviewHideButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .ProductPage h1 {
+    margin-bottom: 1.25rem;
+    max-width: none;
+    font-size: 1.8rem;
+  }
+
+  .Content {
+    gap: 1.5rem;
+  }
+
+  .SummaryCard,
+  .InfoCard,
+  .OrderSection,
+  .ReviewsSection {
+    padding: 1rem;
+  }
+
+  .FormOption,
+  .FormSubsection,
+  .OrderSummaryBox {
+    padding: 0.8rem 0.85rem;
+  }
+
+  .PrimaryCTA {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .ProductPage {
+    max-width: 100%;
+  }
+
+  .Content h2 {
+    font-size: 1.3rem;
+  }
+
+  .OptionHeader {
+    gap: 0.4rem;
+  }
+
+  .OptionMarker {
+    font-size: 0.9rem;
+  }
+}

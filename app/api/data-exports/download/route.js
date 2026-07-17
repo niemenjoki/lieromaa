@@ -1,4 +1,10 @@
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
+import {
+  LIEROMAA_LANGUAGE_HEADER,
+  PUBLIC_MESSAGE_CODES,
+  createPublicErrorBody,
+  getPublicRequestLanguage,
+} from '@/lib/api/publicLanguage';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -14,15 +20,22 @@ function safeFilename(value) {
 }
 
 export async function POST(request) {
+  const language = getPublicRequestLanguage(request);
   if (!isSameOriginRequest(request)) {
-    return Response.json({ ok: false }, { status: 403 });
+    return Response.json(
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.SAME_ORIGIN_REQUIRED, language),
+      { status: 403 }
+    );
   }
 
   let payload;
   try {
     payload = await request.json();
   } catch {
-    return Response.json({ ok: false }, { status: 400 });
+    return Response.json(
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.INVALID_REQUEST, language),
+      { status: 400 }
+    );
   }
 
   try {
@@ -33,6 +46,7 @@ export async function POST(request) {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'X-Order-Token': getRequiredEnv('ORDER_SERVICE_TOKEN'),
+        [LIEROMAA_LANGUAGE_HEADER]: language,
       },
       body: JSON.stringify({ token: payload?.token }),
       cache: 'no-store',
@@ -41,10 +55,11 @@ export async function POST(request) {
     const result = await response.json().catch(() => null);
     if (!response.ok || !result?.ok) {
       return Response.json(
-        {
-          ok: false,
-          message: result?.message || 'Latauslinkki ei ole enää voimassa.',
-        },
+        createPublicErrorBody(
+          result?.code || PUBLIC_MESSAGE_CODES.INVALID_REQUEST,
+          language,
+          result?.message || undefined
+        ),
         { status: response.status || 502, headers: { 'Cache-Control': 'no-store' } }
       );
     }
@@ -62,7 +77,7 @@ export async function POST(request) {
   } catch (error) {
     console.error('Data export download forwarding failed:', error);
     return Response.json(
-      { ok: false, message: 'Tietojen lataaminen epäonnistui.' },
+      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
       { status: 502 }
     );
   }
