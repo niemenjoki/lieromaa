@@ -3,34 +3,20 @@
 import { useState } from 'react';
 
 import ContentRecommendations from '@/components/ContentRecommendations/ContentRecommendations';
+import FinnishContentLinks from '@/components/FinnishContentLinks/FinnishContentLinks';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
 import useDebounce from '@/hooks/useDebounce';
+import { getMessage } from '@/lib/i18n/messages.mjs';
+import {
+  calculateWormRecommendation,
+  normalizePersonCount,
+} from '@/lib/wormCalculator/calculateWormRecommendation.mjs';
 
 import classes from './WormCalculatorClient.module.css';
 
-function normalizePersonCount(value) {
-  const parsedValue = Number.parseInt(String(value ?? ''), 10);
-  if (!Number.isFinite(parsedValue) || parsedValue < 0) {
-    return 0;
-  }
-
-  return parsedValue;
-}
-
-function formatWormWeightGrams(weightGrams) {
-  return `${weightGrams} g`;
-}
-
-function formatWormWeightInstrumental(weightGrams) {
-  return `${weightGrams} grammalla`;
-}
-
-export default function WormCalculatorClient({ recommendations }) {
-  const title = 'Matolaskuri';
-  const description =
-    'Syötä kotitaloutesi tiedot ja laskuri arvioi tuottamasi biojätteen määrän sekä tarvittavan matojen painon.';
-
+export default function WormCalculatorClient({ language = 'fi', recommendations = [] }) {
+  const copy = getMessage(language, 'pages.wormCalculator');
   const [adults, setAdults] = useState('0');
   const [teens, setTeens] = useState('0');
   const [children, setChildren] = useState('0');
@@ -38,61 +24,11 @@ export default function WormCalculatorClient({ recommendations }) {
   const [diet, setDiet] = useState('sekaruoka');
   const [result, setResult] = useState(null);
 
-  const baseWaste = { adult: 250, teen: 300, child: 200, toddler: 120 };
-  const dietFactors = {
-    sekaruoka: 1.0,
-    kasvispainotteinen: 1.1,
-    kasvis: 1.2,
-    vegaani: 1.3,
-  };
-
   function calculate() {
-    const adultCount = normalizePersonCount(adults);
-    const teenCount = normalizePersonCount(teens);
-    const childCount = normalizePersonCount(children);
-    const toddlerCount = normalizePersonCount(toddlers);
-    const householdSize = adultCount + teenCount + childCount + toddlerCount;
-    if (householdSize <= 0) {
-      setResult(null);
-      return;
-    }
-
-    const factor = dietFactors[diet];
-    const total =
-      adultCount * baseWaste.adult +
-      teenCount * baseWaste.teen +
-      childCount * baseWaste.child +
-      toddlerCount * baseWaste.toddler;
-    const adjustedTotal = Math.round(total * factor);
-    const min = Math.round(adjustedTotal * 0.8);
-    const max = Math.round(adjustedTotal * 1.2);
-    const wormsNeeded = adjustedTotal;
-    const wormWeightGrams = Math.round(wormsNeeded * 0.5);
-    const halfStart = Math.round(wormsNeeded / 2);
-    const quarterStart = Math.round(wormsNeeded / 4);
-    const eighthStart = Math.round(wormsNeeded / 8);
-    setResult({
-      scraps: [min, max],
-      wormsNeeded,
-      wormWeightGrams,
-      options: {
-        halfStart,
-        halfStartWeightGrams: Math.round(halfStart * 0.5),
-        quarterStart,
-        quarterStartWeightGrams: Math.round(quarterStart * 0.5),
-        eighthStart,
-        eighthStartWeightGrams: Math.round(eighthStart * 0.5),
-      },
-    });
+    setResult(calculateWormRecommendation({ adults, teens, children, toddlers, diet }));
   }
 
-  useDebounce(
-    () => {
-      calculate();
-    },
-    2000,
-    [adults, teens, children, toddlers, diet]
-  );
+  useDebounce(calculate, 2000, [adults, teens, children, toddlers, diet]);
 
   const handlePersonCountChange = (setter) => (event) => {
     const nextValue = event.target.value;
@@ -107,43 +43,37 @@ export default function WormCalculatorClient({ recommendations }) {
 
   return (
     <article className={classes.WormCalculatorClient}>
-      <h1>{title}</h1>
-      <p>{description}</p>
+      <h1>{copy.title}</h1>
+      <p>{copy.description}</p>
 
       <div className={classes.Content}>
-        <h2>Miksi laskuri on hyödyllinen?</h2>
-        <p>
-          Kompostimatojen aloitusmäärän mitoittaminen oikein auttaa pitämään kompostorin
-          tasapainossa. Liian pieni määrä matoja ei ehdi käsittelemään kaikkea jätettä, ja
-          liian suuri määrä matoja taas kärsii ruoan puutteesta. Laskurin avulla saat
-          karkean arvion siitä, kuinka paljon matoja kotitaloutesi tuottaman biojätteen
-          käsittelyyn tarvitaan painona.
-        </p>
-        <p>
-          Jos sinulla ei vielä ole matoja, voit ostaa niitä{' '}
-          <SafeLink href="/tuotteet/madot">täältä</SafeLink>.
-        </p>
+        <h2>{copy.whyHeading}</h2>
+        <p>{copy.whyBody}</p>
+        {language === 'fi' ? (
+          <p>
+            {copy.productPrompt}{' '}
+            <SafeLink href="/tuotteet/madot">{copy.productLinkLabel}</SafeLink>.
+          </p>
+        ) : (
+          <p>
+            {copy.productPrompt}{' '}
+            <SafeLink href="/en/products/compost-worms">{copy.productLinkLabel}</SafeLink>
+            .
+          </p>
+        )}
 
-        <h2>Laskuri</h2>
-        <p>
-          Arvio perustuu kotitalouden kokoon, ruokavalioon ja oletukseen, että matojen
-          määrä kaksinkertaistuu noin 3 kuukaudessa. Tulokset ovat suuntaa-antavia -
-          käytännössä biojätteen määrä ja matojen syönti riippuvat mm. lämpötilasta,
-          kosteudesta ja ruoan laadusta.
-        </p>
+        <h2>{copy.calculatorHeading}</h2>
+        <p>{copy.calculatorIntro}</p>
 
         <section className={classes.Card}>
           <div className={classes.CardHeader}>
-            <h3>Syötä kotitalouden tiedot</h3>
-            <p>
-              Laskurin tulos päivittyy automaattisesti, kun valitset talouden koon ja
-              ruokavalion.
-            </p>
+            <h3>{copy.formHeading}</h3>
+            <p>{copy.formHelp}</p>
           </div>
 
           <div className={classes.FormGrid}>
             <label className={classes.Field}>
-              <span className={classes.Label}>Aikuiset</span>
+              <span className={classes.Label}>{copy.fields.adults}</span>
               <input
                 className={classes.Input}
                 type="text"
@@ -156,7 +86,7 @@ export default function WormCalculatorClient({ recommendations }) {
             </label>
 
             <label className={classes.Field}>
-              <span className={classes.Label}>Teinit (13-17 v.)</span>
+              <span className={classes.Label}>{copy.fields.teens}</span>
               <input
                 className={classes.Input}
                 type="text"
@@ -169,7 +99,7 @@ export default function WormCalculatorClient({ recommendations }) {
             </label>
 
             <label className={classes.Field}>
-              <span className={classes.Label}>Lapset (4-12 v.)</span>
+              <span className={classes.Label}>{copy.fields.children}</span>
               <input
                 className={classes.Input}
                 type="text"
@@ -182,7 +112,7 @@ export default function WormCalculatorClient({ recommendations }) {
             </label>
 
             <label className={classes.Field}>
-              <span className={classes.Label}>Taaperot (1-3 v.)</span>
+              <span className={classes.Label}>{copy.fields.toddlers}</span>
               <input
                 className={classes.Input}
                 type="text"
@@ -195,16 +125,16 @@ export default function WormCalculatorClient({ recommendations }) {
             </label>
 
             <label className={`${classes.Field} ${classes.FieldWide}`}>
-              <span className={classes.Label}>Ruokavalio</span>
+              <span className={classes.Label}>{copy.fields.diet}</span>
               <select
                 className={classes.Select}
                 value={diet}
                 onChange={(event) => setDiet(event.target.value)}
               >
-                <option value="sekaruoka">Sekaruokavalio</option>
-                <option value="kasvispainotteinen">Kasvispainotteinen</option>
-                <option value="kasvis">Kasvis</option>
-                <option value="vegaani">Vegaani</option>
+                <option value="sekaruoka">{copy.diets.omnivore}</option>
+                <option value="kasvispainotteinen">{copy.diets.plantForward}</option>
+                <option value="kasvis">{copy.diets.vegetarian}</option>
+                <option value="vegaani">{copy.diets.vegan}</option>
               </select>
             </label>
           </div>
@@ -214,82 +144,64 @@ export default function WormCalculatorClient({ recommendations }) {
           {result ? (
             <>
               <div className={classes.CardHeader}>
-                <h3>Tulokset</h3>
+                <h3>{copy.resultsHeading}</h3>
                 <p>
-                  Kotitaloutesi tuottaa arviolta {result.scraps[0]} - {result.scraps[1]} g
-                  biojätettä viikossa.
+                  {copy.scrapsResult({ min: result.scraps[0], max: result.scraps[1] })}
                 </p>
               </div>
 
               <p className={classes.ResultLead}>
-                Sen käsittelemiseen tarvitaan noin{' '}
-                <strong>{formatWormWeightGrams(result.wormWeightGrams)} matoja</strong>.
+                {copy.wormResultPrefix}{' '}
+                <strong>
+                  {result.wormWeightGrams} {copy.wormResultUnit}
+                </strong>
+                .
               </p>
-              <p>
-                Koko suositellun määrän hankkimalla kompostori toimii heti täydellä
-                teholla. Toinen vaihtoehto on hankkia pienempi määrä matoja ja odottaa,
-                että ne lisääntyvät.
-              </p>
+              <p>{copy.resultExplanation}</p>
 
               <ul className={classes.ResultList}>
+                <li>{copy.halfStart({ weight: result.options.halfStartWeightGrams })}</li>
                 <li>
-                  {`Jos aloitat noin ${formatWormWeightInstrumental(
-                    result.options.halfStartWeightGrams
-                  )}, kestää noin 3 kuukautta, että sinulla on tarvittava määrä matoja.`}
+                  {copy.quarterStart({
+                    weight: result.options.quarterStartWeightGrams,
+                  })}
                 </li>
                 <li>
-                  {`Jos aloitat noin ${formatWormWeightInstrumental(
-                    result.options.quarterStartWeightGrams
-                  )}, aikaa kuluu noin 6 kuukautta.`}
-                </li>
-                <li>
-                  {`Vähimmäisvaihtoehtona ${formatWormWeightInstrumental(
-                    result.options.eighthStartWeightGrams
-                  )} kompostori toimii täysillä noin vuoden kuluttua.`}
+                  {copy.eighthStart({ weight: result.options.eighthStartWeightGrams })}
                 </li>
               </ul>
 
-              <p className={classes.FinePrint}>
-                Laskelma perustuu oletukseen, että yksi mato painaa noin 0.5 g ja syö noin
-                1 g biojätettä viikossa. Matojen määrä tuplaantuu keskimäärin 3 kuukauden
-                välein.
-              </p>
+              <p className={classes.FinePrint}>{copy.finePrint}</p>
             </>
           ) : (
-            <>
-              <div className={classes.CardHeader}>
-                <h3>Tulokset</h3>
-                <p>
-                  Täytä kotitalouden henkilömäärät, niin laskuri näyttää arvion syntyvän
-                  biojätteen määrästä ja sopivasta matojen painosta.
-                </p>
-              </div>
-            </>
+            <div className={classes.CardHeader}>
+              <h3>{copy.resultsHeading}</h3>
+              <p>{copy.emptyResult}</p>
+            </div>
           )}
         </section>
 
-        <h2>Vinkkejä tulosten tulkintaan</h2>
+        <h2>{copy.tipsHeading}</h2>
         <ul>
-          <li>
-            Jos aloitat pienellä määrällä, anna matojen määrän kasvaa rauhassa - vältä
-            liiallista ruokintaa.
-          </li>
-          <li>
-            Jos aloitat suurella määrällä, varmista että biojätettä riittää heti alusta
-            asti.
-          </li>
-          <li>
-            Muista, että matojen kasvu ja syönti vaihtelevat kompostorin olosuhteiden
-            mukaan.
-          </li>
+          {copy.tips.map((tip) => (
+            <li key={tip}>{tip}</li>
+          ))}
         </ul>
       </div>
 
-      <SocialShareButtons title={title} text={description} tags={['matokomposti']} />
-      <ContentRecommendations
-        recommendations={recommendations}
-        title="Aiheeseen liittyvää luettavaa"
+      <SocialShareButtons
+        title={copy.title}
+        tags={[language === 'en' ? 'worm-composting' : 'matokomposti']}
+        copy={copy.share}
       />
+      {language === 'en' ? (
+        <FinnishContentLinks compact />
+      ) : (
+        <ContentRecommendations
+          recommendations={recommendations}
+          title={copy.recommendationsHeading}
+        />
+      )}
     </article>
   );
 }

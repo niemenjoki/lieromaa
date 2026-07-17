@@ -4,6 +4,7 @@ import Icon from '../Icon/Icon';
 import classes from './ThemeToggler.module.css';
 
 const ThemeToggler = (props) => {
+  const { copy, ...iconProps } = props;
   const [isDarkMode, setDarkMode] = useState(false);
   useEffect(() => {
     const modeInStorage = localStorage.getItem('darkMode');
@@ -25,7 +26,8 @@ const ThemeToggler = (props) => {
       name={isDarkMode ? 'sun' : 'moon'}
       className={classes.ThemeToggler}
       onClick={handleClick}
-      {...props}
+      aria-label={isDarkMode ? copy.useLight : copy.useDark}
+      {...iconProps}
     />
   );
 };

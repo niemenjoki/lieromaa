@@ -1,0 +1,45 @@
+.Notice {
+  display: flex;
+  max-width: 1300px;
+  margin: 0 auto 1rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--highlight);
+  border-radius: 8px;
+  background: var(--background-3);
+  padding: 0.8rem 1rem;
+}
+
+.Notice p {
+  margin: 0;
+}
+
+.Actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.Actions a,
+.Actions button {
+  color: var(--highlight-content-link);
+  font: inherit;
+  font-weight: 600;
+}
+
+.Actions button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .Notice {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

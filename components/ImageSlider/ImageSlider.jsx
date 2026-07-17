@@ -2,18 +2,32 @@
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import { A11y, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { getProductMessages } from '@/lib/i18n/messages.mjs';
 
 import SafeImage from '../SafeImage/SafeImage';
 
-export default function ImageSlider({ images = [], maxWidth = '600px' }) {
+export default function ImageSlider({
+  images = [],
+  maxWidth = '600px',
+  language = 'fi',
+}) {
   if (!images.length) return null;
+  const copy = getProductMessages(language).imageSlider;
 
   return (
     <Swiper
-      modules={[Pagination]}
+      modules={[A11y, Pagination]}
       pagination={{ clickable: true }}
+      a11y={{
+        firstSlideMessage: copy.firstSlide,
+        lastSlideMessage: copy.lastSlide,
+        nextSlideMessage: copy.nextSlide,
+        prevSlideMessage: copy.previousSlide,
+        paginationBulletMessage: copy.paginationBullet,
+      }}
       spaceBetween={20}
       style={{
         width: '100%',

@@ -63,11 +63,31 @@ describe('frontend pickup-point search route', () => {
       await response.json(),
       {
         ok: false,
+        code: 'invalid_postcode',
         message:
           'Noutopistehaku on käytettävissä vain manner-Suomen 5-numeroisilla postinumeroilla.',
       },
       'the pickup-point search route should explain that the search is limited to mainland Finland postal codes'
     );
+  });
+
+  test('the pickup-point search route should return stable English postcode errors', async () => {
+    const response = await GET(
+      createRouteRequest({
+        url: 'https://www.lieromaa.fi/api/pickup-points/search?postalCode=22100',
+        extraHeaders: {
+          'X-Lieromaa-Language': 'en',
+        },
+      })
+    );
+
+    expectEqual(response.status, 400);
+    expectDeepEqual(await response.json(), {
+      ok: false,
+      code: 'invalid_postcode',
+      message:
+        'Pickup-point search is available only for five-digit postcodes in mainland Finland.',
+    });
   });
 
   test('the pickup-point search route should fetch an access token and normalize Posti pickup points', async () => {
@@ -174,6 +194,11 @@ describe('frontend pickup-point search route', () => {
             recordedCalls[1][1].headers.Authorization,
             'Bearer posti-token',
             'the pickup-point search route should authenticate the pickup-point request with the fetched bearer token'
+          );
+          expectEqual(
+            recordedCalls[1][1].headers['Accept-Language'],
+            'fi',
+            'the pickup-point search route should default legacy requests to Finnish upstream'
           );
           expectDeepEqual(
             JSON.parse(recordedCalls[1][1].body),

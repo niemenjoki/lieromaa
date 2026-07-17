@@ -102,6 +102,7 @@ describe('frontend review proxy routes', () => {
                 },
               ],
               testMode: false,
+              language: 'fi',
             },
             'the review session route should return the normalized review session payload from the order server'
           );
@@ -125,6 +126,7 @@ describe('frontend review proxy routes', () => {
           return Response.json(
             {
               ok: false,
+              code: 'upstream_unavailable',
               message: 'Tälle tilaukselle on jo lähetetty arvostelu.',
             },
             { status: 409 }
@@ -158,10 +160,50 @@ describe('frontend review proxy routes', () => {
             await response.json(),
             {
               ok: false,
+              code: 'upstream_unavailable',
               message: 'Tälle tilaukselle on jo lähetetty arvostelu.',
             },
             'the review submit route should preserve the upstream rejection message'
           );
+        } finally {
+          globalThis.fetch = originalFetch;
+        }
+      }
+    );
+  });
+
+  test('the review routes should forward and expose the English language contract', async () => {
+    await withEnv(
+      {
+        ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
+      },
+      async () => {
+        const originalFetch = globalThis.fetch;
+        const recordedCalls = [];
+        globalThis.fetch = async (url, init = {}) => {
+          recordedCalls.push([url, init]);
+          return Response.json({
+            ok: true,
+            orderId: 'LRM-EN-123',
+            productKey: 'worms',
+            productName: 'Compost worms',
+            productTargets: [{ productKey: 'worms', productName: 'Compost worms' }],
+            language: 'en',
+          });
+        };
+
+        try {
+          const response = await getReviewSession(
+            createRouteRequest({
+              url: 'https://www.lieromaa.fi/api/reviews/session?token=review-token',
+              extraHeaders: {
+                'X-Lieromaa-Language': 'en',
+              },
+            })
+          );
+
+          expectEqual(recordedCalls[0][1].headers['X-Lieromaa-Language'], 'en');
+          expectEqual((await response.json()).language, 'en');
         } finally {
           globalThis.fetch = originalFetch;
         }

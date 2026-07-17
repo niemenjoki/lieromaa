@@ -2,9 +2,9 @@
 
 import React from 'react';
 
-import Link from 'next/link';
+import SafeLink from '@/components/SafeLink/SafeLink';
 
-export default function Breadcrumbs({ items = [] }) {
+export default function Breadcrumbs({ items = [], ariaLabel = 'Breadcrumb' }) {
   if (!Array.isArray(items) || items.length === 0) return null;
 
   const containerStyle = {
@@ -26,15 +26,15 @@ export default function Breadcrumbs({ items = [] }) {
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
   return (
-    <nav style={containerStyle} aria-label="Breadcrumb">
+    <nav style={containerStyle} aria-label={ariaLabel}>
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
         return (
           <React.Fragment key={index}>
             {item.href && !isLast ? (
-              <Link href={item.href} style={linkStyle}>
+              <SafeLink href={item.href} style={linkStyle}>
                 {capitalize(item.name)}
-              </Link>
+              </SafeLink>
             ) : (
               <span style={{ fontWeight: isLast ? 600 : 400 }}>
                 {capitalize(item.name)}

@@ -4,56 +4,34 @@ import {
   WORMS_HANDLING_TIME,
 } from '../commerce/shippingSchedule.mjs';
 
-const sharedPickupHelperTexts = [
-  'Paketti toimitetaan valitsemaasi Postin noutopisteeseen. Huomaa, että Posti voi ohjata lähetyksen toiseen noutopisteeseen, jos esimerkiksi valitsemasi noutopaikka on täynnä.',
-];
-
-const sharedHomeDeliveryHelperTexts = [
-  'Posti sopii jakeluajan kanssasi OmaPosti-sovelluksen kautta, tekstiviestillä tai sähköpostitse.',
-];
-
-const sharedLocalPickupHelperTexts = [
-  'Jos valitset toimitustavaksi noudon, olen sinuun yhteydessä, jotta voimme sopia noudosta tarkemmin',
-];
-
 export const cartShippingOptionsSource = [
   {
     id: 'posti_noutopiste',
-    label: 'Nouto Postista tai automaatista',
+    copyKey: 'postiPickup',
     priceSku: 'postage-pickup',
     fulfillmentType: 'pickup_point',
-    helperTexts: sharedPickupHelperTexts,
   },
   {
     id: 'posti_kotiinkuljetus',
-    label: 'Postin kotiinkuljetus sovittuna aikana',
+    copyKey: 'postiHome',
     priceSku: 'postage-home',
     fulfillmentType: 'home_delivery',
-    helperTexts: sharedHomeDeliveryHelperTexts,
   },
   {
     id: 'nouto',
-    label: 'Nouto Järvenpäästä',
+    copyKey: 'localPickup',
     price: 0,
     fulfillmentType: 'local_pickup',
-    helperTexts: sharedLocalPickupHelperTexts,
   },
 ];
 
 const frostProtectionExtraCharge = {
   key: 'frostProtection',
+  copyKey: 'frostProtection',
   fieldName: 'pakkastoimituslisa',
   checkedValue: 'maksan',
-  label: 'Pakkastoimituslisä',
-  checkboxLabel: 'Maksan pakkastoimituslisän',
   price: 3,
   activeMonths: [9, 10, 11, 12, 1, 2, 3, 4],
-  descriptionLines: [
-    'Kun ulkolämpötila on alle -5 C, matojen toimittaminen vaatii ylimääräistä pakkausmateriaalia matojen pitämiseksi elossa. Pakkastilanne määritetään alimmasta lämpötilaennusteesta matojen lähtöpaikan (Järvenpää) ja toimitusosoitteen perusteella.',
-  ],
-  helperTextLines: [
-    'Voit tehdä tilauksen myös ilman pakkaslisää, vaikka ulkona olisi pakkasta, jolloin paketti toimitetaan pikimmiten sään lämmettyä.',
-  ],
 };
 
 const wormVariantMetadata = {
@@ -110,17 +88,16 @@ const legacyWormVariants = [
 export const cartAddOnsSource = {
   'worms-ready-bin-14l': {
     key: 'preparedWormBin',
+    copyKey: 'preparedWormBin',
     sku: 'worms-ready-bin-14l',
     parentProductKey: 'worms',
-    name: 'Käyttövalmis 14 litran matokompostori',
-    label: 'Käyttövalmis 14 litran matokompostori',
     priceSku: 'worms-ready-bin-14l',
     maxQuantity: 1,
     fixedQuantity: true,
     shippingScheduleKey: PREPARED_WORM_BIN_SHIPPING_KEY,
     image: {
       src: '/images/content/kompostori_avattuna.avif',
-      alt: 'Avattu 14 litran matokompostori, jossa on valmiiksi kostutettu petimateriaali',
+      altKey: 'imageAlt',
       width: 1200,
       height: 900,
     },
@@ -137,33 +114,19 @@ export const productCatalogCommerceSource = {
       handlingTime: WORMS_HANDLING_TIME,
     },
     order: {
+      copyKey: 'worms',
       defaultVariantAmount: 50,
-      variantLegend: 'Valitse matojen paino',
       variantSelectorPosition: 'beforeFulfillment',
-      variantDescriptionPrefix: 'Voit arvioida taloudellesi sopivan aloitusmäärän',
-      variantDescriptionLinkHref: '/matolaskuri',
-      variantDescriptionLinkLabel: 'matolaskurilla',
+      variantDescriptionLinkPageKey: 'wormCalculator',
       showWormAmountFinePrint: true,
-      getVariantLabel({ amount, priceFormatted, variant }) {
-        const weight = variant?.weightGrams ?? amount;
-        const estimatedWormCount = variant?.estimatedWormCount;
-        const estimateText = estimatedWormCount
-          ? ` (noin ${estimatedWormCount} matoa)`
-          : '';
-
-        return `${weight} g${estimateText} - ${priceFormatted} €`;
-      },
       shippingOptions: [...cartShippingOptionsSource],
-      shippingHelperTexts: sharedPickupHelperTexts,
+      shippingHelperTextKey: 'postiPickup',
       shippingDescription: null,
-      submitButtonLabel() {
-        return 'Lähetä tilaus';
-      },
       extraInfoDescription: null,
       summaryDescription: null,
-      invoiceTimingByFulfillmentType: {
-        pickup_point: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
-        local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
+      invoiceTimingKeysByFulfillmentType: {
+        pickup_point: 'postal',
+        local_pickup: 'localPickup',
       },
       extraCharges: [frostProtectionExtraCharge],
     },
@@ -187,27 +150,18 @@ export const productCatalogCommerceSource = {
       handlingTime: COMPOST_CHOW_HANDLING_TIME,
     },
     order: {
+      copyKey: 'compostChow',
       defaultVariantAmount: 150,
-      variantLegend: 'Pakkauskoko',
       variantSelectorPosition: 'beforeFulfillment',
-      variantDescription: 'Valitse käyttömäärään sopiva pakkauskoko.',
-      getVariantLabel({ amount, priceFormatted, variant }) {
-        const weight = variant?.weightGrams ?? amount;
-        return `${weight} g - ${priceFormatted} €`;
-      },
       shippingOptions: [...cartShippingOptionsSource],
-      shippingHelperTexts: sharedPickupHelperTexts,
+      shippingHelperTextKey: 'postiPickup',
       shippingDescription: null,
-      submitButtonLabel({ totalFormatted }) {
-        return `Lähetä tilaus (${totalFormatted} €)`;
-      },
       extraInfoDescription: null,
       summaryDescription: null,
-      invoiceTimingByFulfillmentType: {
-        pickup_point: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
-        home_delivery:
-          'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
-        local_pickup: 'Lasku lähetetään, kun olet noutanut tilauksen',
+      invoiceTimingKeysByFulfillmentType: {
+        pickup_point: 'postal',
+        home_delivery: 'postal',
+        local_pickup: 'localPickup',
       },
       extraCharges: [],
     },

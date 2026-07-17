@@ -1,6 +1,6 @@
 import classes from './NavToggler.module.css';
 
-const NavToggler = ({ drawerOpen, clicked }) => {
+const NavToggler = ({ drawerOpen, clicked, copy }) => {
   const classList = [classes.Toggler];
   if (drawerOpen) classList.push(classes.IsOpen);
 
@@ -9,7 +9,7 @@ const NavToggler = ({ drawerOpen, clicked }) => {
       className={classList.join(' ')}
       type="button"
       onClick={clicked}
-      aria-label="Navbar Toggler"
+      aria-label={drawerOpen ? copy.closeMenu : copy.openMenu}
     >
       <span className={classes.TogglerBox}>
         <span className={classes.TogglerInner}></span>

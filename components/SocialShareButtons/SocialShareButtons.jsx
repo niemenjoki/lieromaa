@@ -11,26 +11,38 @@ export const sharelinks = [
   {
     iconName: 'facebook',
     href: 'https://www.facebook.com/sharer/sharer.php?u=__URL__',
-    ariaLabel: 'Jaa Facebookissa',
+    copyKey: 'facebook',
   },
   {
     iconName: 'twitter',
     href: 'https://x.com/intent/tweet?url=__URL__&hashtags=__TAGS__',
-    ariaLabel: 'Jaa X:ssä',
+    copyKey: 'x',
   },
   {
     iconName: 'whatsapp',
     href: 'https://api.whatsapp.com/send?text=__URL__',
-    ariaLabel: 'Jaa WhatsAppissa',
+    copyKey: 'whatsapp',
   },
   {
     iconName: 'linkedin',
     href: 'https://www.linkedin.com/shareArticle?mini=true&url=__URL__&text=__TITLE__',
-    ariaLabel: 'Jaa LinkedInissä',
+    copyKey: 'linkedin',
   },
 ];
 
-export default function SocialShareButtons({ title = '', tags = [] }) {
+const defaultCopy = Object.freeze({
+  heading: 'Jaa tämä somessa:',
+  facebook: 'Jaa Facebookissa',
+  x: 'Jaa X:ssä',
+  whatsapp: 'Jaa WhatsAppissa',
+  linkedin: 'Jaa LinkedInissä',
+});
+
+export default function SocialShareButtons({
+  title = '',
+  tags = [],
+  copy = defaultCopy,
+}) {
   const pathname = usePathname();
   const currentUrl = SITE_URL + pathname;
 
@@ -38,7 +50,7 @@ export default function SocialShareButtons({ title = '', tags = [] }) {
 
   return (
     <div className={classes.SocialShareButtons}>
-      <div>Jaa tämä somessa:</div>
+      <div>{copy.heading}</div>
       <div>
         {sharelinks.map((sharelink) => {
           const href = sharelink.href
@@ -52,7 +64,7 @@ export default function SocialShareButtons({ title = '', tags = [] }) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={sharelink.ariaLabel}
+              aria-label={copy[sharelink.copyKey]}
               data-testid={sharelink.iconName}
             >
               <Icon name={sharelink.iconName} />

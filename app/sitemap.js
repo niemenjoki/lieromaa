@@ -1,3 +1,4 @@
+import { englishIndexablePageDefinitions } from '@/data/pages/english.mjs';
 import safeLinks from '@/generated/site/safeRoutes.json';
 import {
   getAllContent,
@@ -61,6 +62,10 @@ export default async function sitemap() {
     ]),
     [wormCalculatorPage.canonicalUrl, wormCalculatorPage.updatedAt],
   ].forEach(([url, lastmod]) => add(url, lastmod));
+
+  englishIndexablePageDefinitions.forEach(({ canonicalUrl, updatedAt }) =>
+    add(canonicalUrl, updatedAt)
+  );
 
   // --- Tag pages
   for (const tag of postTags) {

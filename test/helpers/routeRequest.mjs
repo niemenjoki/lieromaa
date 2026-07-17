@@ -15,6 +15,7 @@ export function createRouteRequest({
   host = 'www.lieromaa.fi',
   xForwardedHost = '',
   xForwardedProto = 'https',
+  extraHeaders = {},
   formData = null,
   json = null,
 } = {}) {
@@ -24,6 +25,7 @@ export function createRouteRequest({
     origin,
     'x-forwarded-host': xForwardedHost || host,
     'x-forwarded-proto': xForwardedProto,
+    ...extraHeaders,
   });
 
   return {

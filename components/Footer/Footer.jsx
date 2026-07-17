@@ -11,7 +11,7 @@ import { ORGANIZATION_NAME } from '@/lib/site/schema.mjs';
 
 import classes from './Footer.module.css';
 
-export default function Footer({ navigation }) {
+export default function Footer({ navigation, copy }) {
   const startYear = 2025;
   const currentYear = new Date().getFullYear();
   const yearRange =
@@ -25,11 +25,7 @@ export default function Footer({ navigation }) {
     const opened =
       typeof openConsentPreferences === 'function' ? openConsentPreferences() : false;
 
-    setConsentMessage(
-      opened
-        ? ''
-        : 'Evästeasetuksia ei voitu avata juuri nyt. Yritä ladata sivu uudelleen.'
-    );
+    setConsentMessage(opened ? '' : copy.consentFailure);
   };
 
   return (
@@ -42,7 +38,16 @@ export default function Footer({ navigation }) {
               <ul>
                 {column.items.map((link) => (
                   <li key={link.href}>
-                    <SafeLink href={link.href}>{link.label}</SafeLink>
+                    {link.external ? (
+                      <a href={link.href}>{link.label}</a>
+                    ) : (
+                      <SafeLink href={link.href} lang={link.lang}>
+                        {link.label}
+                        {link.badge ? (
+                          <span className={classes.LanguageBadge}>{link.badge}</span>
+                        ) : null}
+                      </SafeLink>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -50,7 +55,7 @@ export default function Footer({ navigation }) {
           ))}
 
           <div className={classes.Socials}>
-            <h3>Seuraa</h3>
+            <h3>{copy.followHeading}</h3>
             <Socials />
           </div>
         </div>
@@ -58,7 +63,8 @@ export default function Footer({ navigation }) {
         <div className={classes.Bottom}>
           <p className={classes.BusinessInfo}>
             <strong>{ORGANIZATION_NAME}</strong>
-            {' | '}Y-tunnus {BUSINESS_ID}
+            {' | '}
+            {copy.businessIdLabel} {BUSINESS_ID}
             {' | '}
             {publicBusinessLocation}
             {' | '}
@@ -73,17 +79,17 @@ export default function Footer({ navigation }) {
                   className={classes.LinkButton}
                   onClick={handleConsentSettingsClick}
                 >
-                  Muuta evästeasetuksia
+                  {copy.consentSettings}
                 </button>
                 {' | '}
               </>
             ) : null}
             <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer">
-              Lisenssi
+              {copy.licence}
             </a>
             {' | '}
             <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-              Lähdekoodi
+              {copy.sourceCode}
             </a>
           </p>
           {consentMessage ? (

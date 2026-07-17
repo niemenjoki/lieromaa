@@ -156,6 +156,11 @@ describe('frontend public order submit route', () => {
             'submission-123',
             'the public order submit route should reuse the submission id as the upstream idempotency key'
           );
+          expectEqual(
+            recordedCalls[0][1].headers['X-Lieromaa-Language'],
+            'fi',
+            'the public order submit route should default legacy submissions to Finnish upstream'
+          );
 
           const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
           expectEqual(
@@ -219,6 +224,7 @@ describe('frontend public order submit route', () => {
             Response.json(
               {
                 ok: false,
+                code: 'upstream_unavailable',
                 message: 'Palvelin hylkäsi tilauksen.',
               },
               { status: 409 }
@@ -241,6 +247,7 @@ describe('frontend public order submit route', () => {
               await response.json(),
               {
                 ok: false,
+                code: 'upstream_unavailable',
                 message: 'Palvelin hylkäsi tilauksen.',
               },
               'the public order submit route should return the upstream rejection message to the user'
@@ -250,5 +257,27 @@ describe('frontend public order submit route', () => {
           }
         })
     );
+  });
+
+  test('the public order submit route should return stable English validation errors', async () => {
+    const response = await POST(
+      createRouteRequest({
+        url: 'https://www.lieromaa.fi/api/orders/submit',
+        extraHeaders: {
+          'X-Lieromaa-Language': 'en',
+        },
+        formData: createValidOrderFormData({
+          language: 'en',
+          country: 'SE',
+        }),
+      })
+    );
+
+    expectEqual(response.status, 400);
+    expectDeepEqual(await response.json(), {
+      ok: false,
+      code: 'invalid_country',
+      message: 'The delivery country must be Finland.',
+    });
   });
 });
