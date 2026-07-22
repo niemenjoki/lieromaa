@@ -5,7 +5,7 @@ import Analytics from '@/components/Analytics/Analytics';
 import { CartProvider } from '@/components/Cart/CartProvider';
 import FinnishContentLanguageNotice from '@/components/FinnishContentLanguageNotice/FinnishContentLanguageNotice';
 import Footer from '@/components/Footer/Footer';
-import Navbar from '@/components/Navbar/Navbar';
+import NavigationShell from '@/components/Navigation/NavigationShell';
 import { getCommonMessages } from '@/lib/i18n/messages.mjs';
 import { ADSENSE_CONSENT_ENABLED } from '@/lib/site/adsense';
 import { createSiteStructuredData } from '@/lib/structuredData/createSiteStructuredData';
@@ -15,9 +15,22 @@ const rubik = Rubik({
   weight: ['400', '700', '800'],
   style: ['normal', 'italic'],
   display: 'swap',
+  variable: '--font-site',
 });
 
 export const siteFontClassName = rubik.variable;
+
+const themeInitializationScript = `(() => {
+  let isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  try {
+    const storedTheme = window.localStorage.getItem('darkMode');
+    if (storedTheme === 'true') isDark = true;
+    else if (storedTheme === 'false') isDark = false;
+    else if (storedTheme !== null) window.localStorage.removeItem('darkMode');
+  } catch {}
+  document.documentElement.classList.toggle('dark', isDark);
+  document.body.classList.toggle('dark', isDark);
+})();`;
 
 export default function SiteShell({
   children,
@@ -30,6 +43,7 @@ export default function SiteShell({
 
   return (
     <>
+      <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -38,7 +52,10 @@ export default function SiteShell({
       />
       <div className="container">
         <CartProvider language={language}>
-          <Navbar
+          <a className="skip-link" href="#main-content">
+            {language === 'fi' ? 'Siirry sisältöön' : 'Skip to content'}
+          </a>
+          <NavigationShell
             language={language}
             navigation={navigation}
             searchItems={searchItems}
@@ -47,8 +64,15 @@ export default function SiteShell({
           {language === 'fi' ? (
             <FinnishContentLanguageNotice copy={copy.finnishContentNotice} />
           ) : null}
-          <main>{children}</main>
-          <Footer navigation={navigation} copy={copy.footer} />
+          <main id="main-content" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer
+            language={language}
+            navigation={navigation}
+            copy={copy.footer}
+            themeCopy={copy.theme}
+          />
         </CartProvider>
       </div>
       <Analytics />

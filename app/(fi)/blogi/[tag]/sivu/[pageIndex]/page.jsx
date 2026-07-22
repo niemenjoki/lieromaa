@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 
+import BlogTagNavigation from '@/components/BlogTagNavigation/BlogTagNavigation';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
-import SafeLink from '@/components/SafeLink/SafeLink';
 import SiteSearch from '@/components/SiteSearch/SiteSearch';
 import {
   getAllContent,
@@ -13,8 +13,6 @@ import {
 import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
 import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
-
-import classes from './TagPage.module.css';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -84,27 +82,10 @@ export default async function BlogTagPage({ params }) {
         resultLimit={5}
       />
 
-      <div className={classes.Taglist}>
-        <SafeLink href="/blogi" className={classes.Tag}>
-          Kaikki
-        </SafeLink>
-        {allTags.map((t) => {
-          const isActive =
-            t.toLowerCase().replaceAll(' ', '-') === pageData.tagSlug.toLowerCase();
-          return (
-            <SafeLink
-              key={t}
-              href={`/blogi/${t.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
-              className={`${classes.Tag} ${isActive ? classes.ActiveTag : ''}`}
-            >
-              {t}
-            </SafeLink>
-          );
-        })}
-      </div>
+      <BlogTagNavigation activeTagSlug={pageData.tagSlug} tags={allTags} />
 
-      {posts.map((post, i) => (
-        <Post key={i} post={post} />
+      {posts.map((post) => (
+        <Post key={post.slug} post={post} />
       ))}
 
       <Pagination

@@ -2,19 +2,13 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 
 import classes from './PostPreview.module.css';
 
-const PostPreview = ({ post, compact = false, overrideHref = false }) => {
+const PostPreview = ({ post }) => {
+  const href = `/${post.altPath || 'blogi/julkaisu'}/${post.slug}`;
+
   return (
     <div className={classes.PostPreview}>
       <h2 className={classes.Title}>
-        <SafeLink
-          href={
-            overrideHref
-              ? overrideHref
-              : `/${post.altPath || `blogi/julkaisu`}/${post.slug}`
-          }
-        >
-          {post.title}
-        </SafeLink>
+        <SafeLink href={href}>{post.title}</SafeLink>
       </h2>
       <p className={classes.description}>{post.description}</p>
       <p className={classes.Tags}>
@@ -29,25 +23,16 @@ const PostPreview = ({ post, compact = false, overrideHref = false }) => {
             </SafeLink>
           ))}
       </p>
-      {!compact && (
-        <SafeLink
-          aria-label={`Avaa julkaisu ${post.title}`}
-          href={
-            overrideHref
-              ? overrideHref
-              : `/${post.altPath || `blogi/julkaisu`}/${post.slug}`
-          }
-        >
-          <span>
-            Lue lisää{' '}
-            <span className={classes.Arrow}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
+      <SafeLink aria-label={`Avaa julkaisu ${post.title}`} href={href}>
+        <span>
+          Lue lisää{' '}
+          <span className={classes.Arrow}>
+            <span></span>
+            <span></span>
+            <span></span>
           </span>
-        </SafeLink>
-      )}
+        </span>
+      </SafeLink>
     </div>
   );
 };

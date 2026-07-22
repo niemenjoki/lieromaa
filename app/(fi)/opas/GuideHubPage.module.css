@@ -1,174 +1,95 @@
 .Page {
   display: flex;
+  min-width: 0;
   flex-direction: column;
-  gap: 2rem;
+  gap: clamp(2rem, 5vw, 3.5rem);
 }
 
 .Hero {
-  padding-bottom: 1rem;
+  padding: 0.5rem 0 1.75rem;
+  border-bottom: 1px solid var(--background-5);
 }
 
 .Eyebrow {
-  display: inline-block;
+  margin: 0 0 0.6rem;
   color: var(--highlight);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
+.Hero h1 {
+  max-width: 48rem;
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+  text-transform: none;
+}
+
 .Intro {
-  max-width: 42rem;
-  margin-top: 0.75rem;
-  line-height: 1.6;
-}
-
-.HeroSearch {
-  margin-top: 1.5rem;
-}
-
-.HeroActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.PrimaryAction,
-.SecondaryAction,
-.CategoryAction,
-.RecentAction {
-  display: inline-block;
-  width: fit-content;
-  padding: 0.75rem 1.4rem;
-  border-radius: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-.PrimaryAction,
-.RecentAction {
-  background: var(--highlight);
-  color: var(--text-on-accent);
-}
-
-.PrimaryAction:hover,
-.RecentAction:hover {
-  background: var(--highlight-alt);
-  color: var(--text-on-accent);
-}
-
-.SecondaryAction,
-.CategoryAction {
-  background: var(--background-6);
-  color: var(--text-color);
-  border: 1px solid var(--highlight);
-}
-
-.SecondaryAction:hover,
-.CategoryAction:hover {
-  background: var(--highlight);
-  color: var(--text-on-accent);
-}
-
-.StatsGrid,
-.CategoryGrid,
-.RecentGrid,
-.FeaturedGrid {
-  display: grid;
-  gap: 1rem;
+  max-width: 48rem;
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.72;
 }
 
 .StatsGrid {
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 2rem 0 0;
+  border-top: 1px solid var(--background-5);
+  border-bottom: 1px solid var(--background-5);
 }
 
-.CategoryGrid,
-.RecentGrid {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-
-.StatCard,
-.CategoryCard,
-.RecentCard {
+.StatItem {
   display: flex;
+  min-width: 0;
   flex-direction: column;
-  gap: 1rem;
-  height: 100%;
-  margin: 0;
-  background: var(--background-3);
+  gap: 0.25rem;
   padding: 1rem;
-  border-radius: 9px;
 }
 
-.StatCard {
-  justify-content: space-between;
+.StatItem + .StatItem {
+  border-left: 1px solid var(--background-5);
 }
 
-.StatValue {
-  display: block;
+.StatItem dd {
+  order: 1;
+  margin: 0;
   color: var(--highlight-alt);
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
   font-weight: 800;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
-.StatLabel {
-  margin-top: auto;
-  line-height: 1.5;
-}
-
-.Section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.SectionHeading h2 {
-  color: var(--highlight-alt);
-  font-size: 1.45rem;
-  margin-bottom: 0.5rem;
-}
-
-.SectionHeading p {
-  max-width: 42rem;
-  line-height: 1.7;
-}
-
-.CategoryMeta,
-.RecentMeta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  color: var(--highlight);
-  font-size: 0.95rem;
-}
-
-.CategoryCount,
-.RecentLabel {
-  font-weight: 600;
-}
-
-.CategoryCard h3,
-.RecentCard h3 {
-  color: var(--highlight-alt);
-  font-size: 1.15rem;
+.StatItem dt {
+  order: 2;
+  color: var(--text-color);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   line-height: 1.35;
+  text-transform: uppercase;
 }
 
-.CategoryCard p,
-.RecentCard p {
-  line-height: 1.7;
-}
+@media (max-width: 620px) {
+  .Hero {
+    padding-bottom: 1.25rem;
+  }
 
-.CategoryAction,
-.RecentAction {
-  margin-top: auto;
-}
+  .StatsGrid {
+    grid-template-columns: 1fr;
+  }
 
-@media (max-width: 768px) {
-  .Page {
-    gap: 1.75rem;
+  .StatItem {
+    padding: 0.85rem 0;
+  }
+
+  .StatItem + .StatItem {
+    border-top: 1px solid var(--background-5);
+    border-left: 0;
   }
 }

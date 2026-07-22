@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+
+import { useRouter } from 'next/navigation';
 
 import Icon from '@/components/Icon/Icon';
 import SafeLink from '@/components/SafeLink/SafeLink';
@@ -26,9 +28,22 @@ function getSearchUrl(query) {
   return `/haku?${searchParams.toString()}`;
 }
 
+function getResultStatus({ hasSearched, isSearching, normalizedQuery, resultCount }) {
+  if (isSearching) {
+    return `Haetaan tuloksia haulle ”${normalizedQuery}”…`;
+  }
+
+  if (!hasSearched) return '';
+  if (resultCount === 0) return `Ei hakutuloksia haulle ”${normalizedQuery}”.`;
+  if (resultCount === 1) return `1 hakutulos haulle ”${normalizedQuery}”.`;
+  return `${resultCount} hakutulosta haulle ”${normalizedQuery}”.`;
+}
+
 export default function SiteSearch({
   autoFocus = false,
   className = '',
+  clearLabel = 'Tyhjennä haku',
+  closeLabel = 'Sulje haku',
   initialQuery = '',
   label = 'Hae sivustolta',
   onNavigate,
@@ -38,15 +53,46 @@ export default function SiteSearch({
   showAllLink = true,
   variant = 'inline',
 }) {
+  const router = useRouter();
+  const instanceId = useId().replaceAll(':', '');
+  const inputId = `site-search-${variant}-${instanceId}`;
+  const panelId = `site-search-panel-${instanceId}`;
+  const resultsId = `site-search-results-${instanceId}`;
+  const resultsHeadingId = `site-search-heading-${instanceId}`;
+  const resultsStatusId = `site-search-status-${instanceId}`;
+  const resultGroupIdPrefix = `site-search-group-${instanceId}`;
   const [isOpen, setIsOpen] = useState(variant !== 'navbar');
   const [query, setQuery] = useState(initialQuery);
   const [results, setResults] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const containerRef = useRef(null);
   const inputRef = useRef(null);
+  const triggerRef = useRef(null);
   const isNavbar = variant === 'navbar';
   const normalizedQuery = useMemo(() => normalizeSearchQuery(query), [query]);
   const canSearch = normalizedQuery.length >= MIN_QUERY_LENGTH;
   const searchHref = canSearch ? getSearchUrl(normalizedQuery) : '/haku';
+  const showResults = canSearch && (isSearching || hasSearched);
+  const variantClassName = classes[`Variant_${variant}`] ?? '';
+  const resultStatus = getResultStatus({
+    hasSearched,
+    isSearching,
+    normalizedQuery,
+    resultCount: results.length,
+  });
+
+  const closeNavbarSearch = useCallback(({ restoreFocus = false } = {}) => {
+    setIsOpen(false);
+    setQuery('');
+    setResults([]);
+    setHasSearched(false);
+    setIsSearching(false);
+
+    if (restoreFocus) {
+      globalThis.requestAnimationFrame?.(() => triggerRef.current?.focus());
+    }
+  }, []);
 
   useEffect(() => {
     if (!initialQuery) return;
@@ -65,8 +111,13 @@ export default function SiteSearch({
       if (!canSearch) {
         setResults([]);
         setHasSearched(false);
+        setIsSearching(false);
         return;
       }
+
+      setResults([]);
+      setHasSearched(false);
+      setIsSearching(true);
 
       const { default: Fuse } = await import('fuse.js');
       const fuse = new Fuse(searchItems, {
@@ -86,6 +137,7 @@ export default function SiteSearch({
       if (!isCurrent) return;
       setResults(nextResults);
       setHasSearched(true);
+      setIsSearching(false);
     }
 
     runSearch();
@@ -95,68 +147,111 @@ export default function SiteSearch({
     };
   }, [canSearch, normalizedQuery, resultLimit, searchItems]);
 
+  useEffect(() => {
+    if (!isNavbar || !isOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      closeNavbarSearch({ restoreFocus: true });
+    };
+    const handlePointerDown = (event) => {
+      if (!containerRef.current?.contains(event.target)) closeNavbarSearch();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [closeNavbarSearch, isNavbar, isOpen]);
+
   const submitSearch = (event) => {
     event.preventDefault();
-    if (!canSearch) return;
+    if (!canSearch) {
+      inputRef.current?.focus();
+      return;
+    }
 
-    window.location.assign(searchHref);
+    onNavigate?.();
+    if (isNavbar) closeNavbarSearch();
+    router.push(searchHref);
   };
 
   const openNavbarSearch = () => {
     setIsOpen(true);
-    window.setTimeout(() => inputRef.current?.focus(), 0);
-  };
-
-  const closeNavbarSearch = () => {
-    setIsOpen(false);
-    setQuery('');
-    setResults([]);
-    setHasSearched(false);
+    globalThis.requestAnimationFrame?.(() => inputRef.current?.focus());
   };
 
   const handleNavigate = () => {
     onNavigate?.();
-    if (isNavbar) {
-      closeNavbarSearch();
-    }
+    if (isNavbar) closeNavbarSearch();
+  };
+
+  const clearSearch = () => {
+    setQuery('');
+    setResults([]);
+    setHasSearched(false);
+    setIsSearching(false);
+    inputRef.current?.focus();
   };
 
   return (
     <div
-      className={`${classes.SiteSearch} ${classes[`Variant_${variant}`]} ${className}`}
+      ref={containerRef}
+      className={`${classes.SiteSearch} ${variantClassName} ${className}`.trim()}
+      data-search-open={isOpen ? 'true' : 'false'}
     >
-      {isNavbar && !isOpen ? (
+      {isNavbar ? (
         <button
+          ref={triggerRef}
           type="button"
-          className={classes.IconButton}
+          className={`${classes.IconButton} ${isOpen ? classes.IconButtonHidden : ''}`}
           aria-label={label}
+          aria-controls={panelId}
+          aria-expanded={isOpen}
           onClick={openNavbarSearch}
         >
           <Icon name="search" aria-hidden="true" />
         </button>
-      ) : (
-        <div className={classes.SearchPanel}>
+      ) : null}
+
+      {!isNavbar || isOpen ? (
+        <div id={panelId} className={classes.SearchPanel}>
           <form className={classes.Form} role="search" onSubmit={submitSearch}>
-            <label className={classes.Label} htmlFor={`site-search-${variant}`}>
+            <label className={classes.Label} htmlFor={inputId}>
               {label}
             </label>
             <div className={classes.InputWrap}>
               <Icon name="search" className={classes.InputIcon} aria-hidden="true" />
               <input
                 ref={inputRef}
-                id={`site-search-${variant}`}
+                id={inputId}
                 type="search"
                 value={query}
                 placeholder={placeholder}
                 onChange={(event) => setQuery(event.target.value)}
                 className={classes.Input}
+                autoComplete="off"
+                aria-controls={resultsId}
+                aria-describedby={showResults ? resultsStatusId : undefined}
               />
               {isNavbar ? (
                 <button
                   type="button"
                   className={classes.CloseButton}
-                  aria-label="Sulje haku"
-                  onClick={closeNavbarSearch}
+                  aria-label={closeLabel}
+                  onClick={() => closeNavbarSearch({ restoreFocus: true })}
+                >
+                  <Icon name="close" aria-hidden="true" />
+                </button>
+              ) : query ? (
+                <button
+                  type="button"
+                  className={classes.CloseButton}
+                  aria-label={clearLabel}
+                  onClick={clearSearch}
                 >
                   <Icon name="close" aria-hidden="true" />
                 </button>
@@ -164,22 +259,55 @@ export default function SiteSearch({
             </div>
           </form>
 
-          {(hasSearched || canSearch) && (
-            <div className={classes.ResultsPanel}>
-              <SiteSearchResults
-                results={results}
-                emptyMessage={`Ei tuloksia haulle "${normalizedQuery}".`}
-                onNavigate={handleNavigate}
-              />
-              {showAllLink && canSearch ? (
-                <SafeLink href={searchHref} className={classes.AllResultsLink}>
+          {showResults ? (
+            <section
+              id={resultsId}
+              className={classes.ResultsPanel}
+              aria-labelledby={resultsHeadingId}
+            >
+              <div className={classes.ResultsHeader}>
+                <h2 id={resultsHeadingId}>Hakutulokset</h2>
+                <p
+                  id={resultsStatusId}
+                  className={classes.ResultsStatus}
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  {resultStatus}
+                </p>
+              </div>
+
+              {isSearching ? (
+                <div className={classes.Searching} aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              ) : (
+                <SiteSearchResults
+                  headingLevel={3}
+                  idPrefix={resultGroupIdPrefix}
+                  results={results}
+                  emptyMessage={`Ei tuloksia haulle ”${normalizedQuery}”.`}
+                  onNavigate={handleNavigate}
+                />
+              )}
+
+              {showAllLink && canSearch && !isSearching ? (
+                <SafeLink
+                  href={searchHref}
+                  className={classes.AllResultsLink}
+                  onClick={handleNavigate}
+                >
                   Näytä kaikki tulokset
+                  <span aria-hidden="true">→</span>
                 </SafeLink>
               ) : null}
-            </div>
-          )}
+            </section>
+          ) : null}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

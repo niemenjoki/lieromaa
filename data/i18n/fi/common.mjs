@@ -18,6 +18,7 @@ export const commonMessages = Object.freeze({
     itemLabel: 'Ostoskori, {count} tuotetta',
   }),
   theme: Object.freeze({
+    toggle: 'Vaihda väriteemaa',
     useLight: 'Käytä vaaleaa teemaa',
     useDark: 'Käytä tummaa teemaa',
   }),

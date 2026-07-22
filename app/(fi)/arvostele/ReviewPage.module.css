@@ -18,7 +18,7 @@
 
 .Card {
   max-width: 600px;
-  border: 2px solid black;
+  border: 2px solid var(--line-color);
   border-radius: 8px;
   background-color: var(--background-4);
   padding: 15px;
@@ -206,7 +206,7 @@
 }
 
 .Error {
-  color: #a32121;
+  color: var(--danger-text);
   font-weight: 600;
   margin: 0.25rem 0 0;
 }
@@ -250,7 +250,7 @@
   border: none;
   border-radius: 4px;
   background-color: var(--highlight);
-  color: #fff;
+  color: var(--text-on-accent);
   font: inherit;
   font-weight: 700;
   cursor: pointer;

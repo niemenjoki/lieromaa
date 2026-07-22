@@ -18,6 +18,7 @@ export const commonMessages = Object.freeze({
     itemLabel: 'Shopping cart, {count} items',
   }),
   theme: Object.freeze({
+    toggle: 'Toggle color theme',
     useLight: 'Use light theme',
     useDark: 'Use dark theme',
   }),

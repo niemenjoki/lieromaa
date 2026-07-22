@@ -1,14 +1,10 @@
 import { notFound } from 'next/navigation';
 
-import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
-import PostPreview from '@/components/PostPreview/PostPreview';
-import {
-  getAllContent,
-  getGuideCategoryPageData,
-  getGuidesByCategory,
-} from '@/lib/content/index.mjs';
+import { getAllContent, getGuideCategoryPageData } from '@/lib/content/index.mjs';
 import { CONTENT_TYPES, GUIDE_CATEGORIES, SITE_URL } from '@/lib/site/constants.mjs';
 import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
+
+import GuideHub, { getGuideHubData } from '../GuideHub';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -32,12 +28,14 @@ export function generateStaticParams() {
 export default async function GuideCategoryPage({ params }) {
   const { categorySlug } = await params;
   const pageData = getGuideCategoryPageData(categorySlug);
-  const guides = getGuidesByCategory(pageData.categoryName).sort(
-    (a, b) => a.category.pagePosition - b.category.pagePosition
+  const data = getGuideHubData();
+  const category = data.categories.find(
+    (candidate) => candidate.name === pageData.categoryName
   );
-  if (guides.length === 0) {
+  if (!category) {
     notFound();
   }
+  const guides = data.guides.filter((guide) => guide.category === pageData.categoryName);
 
   const ldJSON = createCollectionStructuredData({
     pageUrl: pageData.pageUrl,
@@ -48,7 +46,7 @@ export default async function GuideCategoryPage({ params }) {
       '@type': 'ListItem',
       name: guide.title,
       position: i + 1,
-      url: `${SITE_URL}/opas/${categorySlug}/${guide.slug}`,
+      url: `${SITE_URL}${guide.href}`,
     })),
   });
 
@@ -60,23 +58,19 @@ export default async function GuideCategoryPage({ params }) {
           __html: JSON.stringify(ldJSON).replace(/</g, '\\u003c'),
         }}
       />
-      <div>
-        <Breadcrumbs
-          items={[
-            { name: 'Etusivu', href: '/' },
-            { name: 'Opas', href: '/opas' },
-            { name: pageData.categoryName, href: pageData.pagePath },
-          ]}
-        />
-        <h1>Oppaat: {pageData.categoryName}</h1>
-        {guides.map((guide, index) => (
-          <PostPreview
-            key={index}
-            post={guide}
-            overrideHref={`/opas/${categorySlug}/${guide.slug}`}
-          />
-        ))}
-      </div>
+      <GuideHub
+        breadcrumbItems={[
+          { name: 'Etusivu', href: '/' },
+          { name: 'Opas', href: '/opas' },
+          { name: category.label, href: pageData.pagePath },
+        ]}
+        data={data}
+        description={`${pageData.description} Hae aiheen sisältä tai vaihda rajaus toiseen aihealueeseen.`}
+        eyebrow={`Lieromaan opas · ${category.label}`}
+        initialCategoryName={category.name}
+        pageName={pageData.pageName}
+        title={`Oppaat: ${category.label}`}
+      />
     </>
   );
 }

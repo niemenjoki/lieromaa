@@ -1,19 +1,13 @@
 .ProductPage {
+  width: 100%;
   max-width: 72rem;
+  min-width: 0;
   margin: 0 auto;
-  --product-surface: var(--background-2);
+  --product-surface: var(--surface-elevated);
   --product-surface-muted: var(--background-3);
-  --product-surface-strong: hsla(0, 0%, 100%, 0.68);
-  --product-surface-border: var(--background-5);
-  --product-shadow: 0 18px 40px rgba(39, 29, 18, 0.08);
-}
-
-:global(body.dark) .ProductPage {
-  --product-surface: hsl(30, 20%, 11%);
-  --product-surface-muted: hsl(30, 18%, 14%);
-  --product-surface-strong: hsl(30, 18%, 8%);
-  --product-surface-border: hsl(30, 16%, 30%);
-  --product-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  --product-surface-strong: var(--surface-strong);
+  --product-surface-border: var(--line-color);
+  --product-shadow: 0 18px 40px var(--shadow-color);
 }
 
 .ProductPage h1 {
@@ -169,7 +163,6 @@
 }
 
 .FeatureList,
-.CleanList,
 .PriceList {
   list-style: none !important;
   padding: 0 !important;
@@ -177,7 +170,6 @@
 }
 
 .FeatureList li,
-.CleanList li,
 .PriceList li {
   margin: 0 !important;
   padding: 0.7rem 0;
@@ -185,14 +177,12 @@
 }
 
 .FeatureList li:first-child,
-.CleanList li:first-child,
 .PriceList li:first-child {
   padding-top: 0;
   border-top: none;
 }
 
 .FeatureList li:last-child,
-.CleanList li:last-child,
 .PriceList li:last-child {
   padding-bottom: 0;
 }
@@ -976,7 +966,7 @@
 
 @media (max-width: 36rem) {
   .PreparedBinDetails[open] {
-    z-index: 110;
+    z-index: calc(var(--z-navigation, 300) + 50);
   }
 
   .PreparedBinPopover {
@@ -985,7 +975,8 @@
     width: 100%;
     max-height: none;
     height: 100dvh;
-    padding: 1rem;
+    padding: 1rem max(1rem, env(safe-area-inset-right))
+      max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
     border: 0;
     border-radius: 0;
   }
@@ -1036,7 +1027,7 @@
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
   background-color: var(--highlight);
-  color: #fff;
+  color: var(--text-on-accent);
   font-size: 0.78rem;
   font-weight: 600;
 }
@@ -1069,26 +1060,8 @@
   gap: 0.6rem !important;
 }
 
-.VariantOptionContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
 .ReviewsSection {
   margin: 0;
-}
-
-.ReviewDetails {
-  margin: 0;
-}
-
-.ReviewDetails[open] {
-  padding-bottom: 0.15rem;
-}
-
-.ReviewDetails summary::-webkit-details-marker {
-  display: none;
 }
 
 .ReviewSummary {
@@ -1269,11 +1242,6 @@
   line-height: 1.4;
 }
 
-.ReviewLanguageNotice {
-  margin-bottom: 0.75rem;
-  font-weight: 600;
-}
-
 .ReviewLanguageNoticePlain {
   margin-bottom: 0.75rem;
   font-weight: 400;
@@ -1288,13 +1256,6 @@
   font-size: 0.78rem;
   font-weight: 700;
   padding: 0.2rem 0.55rem;
-}
-
-.ReviewBodyMuted {
-  margin: 0.22rem 0 0;
-  opacity: 0.8;
-  font-style: italic;
-  line-height: 1.35;
 }
 
 .ReviewRatingOnlyNote {
