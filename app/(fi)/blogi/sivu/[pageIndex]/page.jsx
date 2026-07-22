@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 
+import BlogTagNavigation from '@/components/BlogTagNavigation/BlogTagNavigation';
 import Pagination from '@/components/Pagination/Pagination';
 import Post from '@/components/PostPreview/PostPreview';
-import SafeLink from '@/components/SafeLink/SafeLink';
 import SiteSearch from '@/components/SiteSearch/SiteSearch';
 import {
   getAllContentSlugs,
@@ -13,8 +13,6 @@ import {
 import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
 import { createCollectionStructuredData } from '@/lib/structuredData/createCollectionStructuredData.mjs';
-
-import classes from './PostPage.module.css';
 
 export { default as generateMetadata } from './generateMetadata';
 
@@ -68,31 +66,19 @@ export default async function BlogPage({ params }) {
         resultLimit={5}
       />
 
-      <div className={classes.Taglist}>
-        <SafeLink href="/blogi" className={`${classes.Tag} ${classes.ActiveTag}`}>
-          Kaikki
-        </SafeLink>
-        {allTags.map((tag) => (
-          <SafeLink
-            href={`/blogi/${tag.toLowerCase().replaceAll(' ', '-')}/sivu/1`}
-            key={tag}
-            className={classes.Tag}
-          >
-            {tag}
-          </SafeLink>
-        ))}
-      </div>
+      <BlogTagNavigation tags={allTags} />
       <h2 style={{ color: 'var(--highlight-alt)', marginTop: '1rem' }}>
         Viimeisimmät julkaisut
       </h2>
-      {posts.map((post, index) => (
-        <Post key={index} post={post} />
+      {posts.map((post) => (
+        <Post key={post.slug} post={post} />
       ))}
 
       <Pagination
         numPages={numPages}
         currentPage={pageData.pageIndexInt}
         basePath="/blogi"
+        firstPagePath="/blogi"
       />
     </>
   );

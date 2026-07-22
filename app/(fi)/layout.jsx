@@ -11,8 +11,8 @@ config.autoAddCss = false;
 
 export default function FinnishRootLayout({ children }) {
   return (
-    <html lang="fi" className={siteFontClassName}>
-      <body>
+    <html lang="fi" className={siteFontClassName} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <SiteShell
           language="fi"
           navigation={getSiteNavigation()}

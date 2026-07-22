@@ -13,8 +13,8 @@ export const metadata = getDefaultMetadata('en');
 
 export default function EnglishRootLayout({ children }) {
   return (
-    <html lang="en" className={siteFontClassName}>
-      <body>
+    <html lang="en" className={siteFontClassName} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <SiteShell language="en" navigation={getEnglishNavigation()}>
           {children}
         </SiteShell>

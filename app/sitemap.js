@@ -3,9 +3,7 @@ import safeLinks from '@/generated/site/safeRoutes.json';
 import {
   getAllContent,
   getAllGuideCategories,
-  getAllPostTags,
-  getPostsByTag,
-  isIndexableBlogTag,
+  getBlogTagArchives,
 } from '@/lib/content/index.mjs';
 import { productCatalog } from '@/lib/products/catalog.mjs';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
@@ -29,7 +27,7 @@ export default async function sitemap() {
   const urls = [];
   const posts = getAllContent({ type: CONTENT_TYPES.POST });
   const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
-  const postTags = getAllPostTags();
+  const blogTagArchives = getBlogTagArchives();
   const guideCategories = getAllGuideCategories();
 
   const latest = (arr, field) =>
@@ -68,13 +66,13 @@ export default async function sitemap() {
   );
 
   // --- Tag pages
-  for (const tag of postTags) {
-    const slug = slugify(tag);
-    const { numPages, total } = getPostsByTag(slug, 1, POSTS_PER_PAGE);
-    if (!isIndexableBlogTag(total)) {
+  for (const tagArchive of blogTagArchives) {
+    if (!tagArchive.indexable) {
       continue;
     }
-    for (let i = 1; i <= numPages; i++) add(`/blogi/${slug}/sivu/${i}`, latestPost);
+    for (let i = 1; i <= tagArchive.numPages; i++) {
+      add(`/blogi/${tagArchive.slug}/sivu/${i}`, latestPost);
+    }
   }
 
   // --- Guide categories

@@ -1,0 +1,449 @@
+.Marker {
+  --marker-worm-color: var(--worm-color, var(--highlight-alt));
+  --worm-soil: var(--navigation-ground, var(--nav-substrate, var(--background-2)));
+  position: absolute;
+  z-index: 7;
+  right: 3%;
+  bottom: var(--worm-ground-offset, -0.55rem);
+  left: 3%;
+  display: block;
+  height: 2.3rem;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--marker-worm-color);
+  pointer-events: none;
+}
+
+.WormGraphic {
+  position: absolute;
+  z-index: 1;
+  bottom: -0.64rem;
+  left: 50%;
+  width: min(4rem, 96%);
+  height: 1.8rem;
+  overflow: visible;
+  transform: translateX(-50%);
+}
+
+.TailGroup,
+.BodyGroup,
+.FrontGroup,
+.HeadGroup {
+  transform-box: fill-box;
+  will-change: transform, opacity;
+}
+
+.TailGroup {
+  transform-origin: 86% 62%;
+}
+
+.BodyGroup {
+  transform-origin: 70% 72%;
+}
+
+.FrontGroup {
+  transform-origin: 22% 75%;
+}
+
+.HeadGroup {
+  transform-origin: 34% 78%;
+}
+
+.WormBody,
+.Segment {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.WormBody {
+  stroke-width: 5.4;
+}
+
+.Segment {
+  opacity: 0.42;
+  stroke: var(--worm-highlight, color-mix(in srgb, currentColor 50%, var(--worm-soil)));
+  stroke-width: 1.1;
+}
+
+.WormHead {
+  fill: currentColor;
+}
+
+.Eye {
+  fill: var(--worm-soil);
+}
+
+.SoilSlit {
+  position: absolute;
+  z-index: 2;
+  bottom: -0.035rem;
+  left: 50%;
+  width: 1.85rem;
+  height: 0.14rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--marker-worm-color) 40%, transparent);
+  opacity: 0.48;
+  transform: translateX(-50%) scaleX(0.68);
+}
+
+.PhaseClock {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.resting {
+  visibility: visible;
+}
+
+.underground :is(.TailGroup, .BodyGroup, .FrontGroup, .HeadGroup) {
+  opacity: 0;
+  transform: translateY(2.25rem) scale(0.72);
+}
+
+.underground .SoilSlit {
+  opacity: 0;
+}
+
+.diving .HeadGroup {
+  animation: head-dive 260ms cubic-bezier(0.55, 0.02, 0.7, 0.35) forwards;
+}
+
+.diving .FrontGroup {
+  animation: front-follow-down 260ms cubic-bezier(0.55, 0.02, 0.7, 0.35) forwards;
+}
+
+.diving .BodyGroup {
+  animation: body-follow-down 260ms cubic-bezier(0.55, 0.02, 0.7, 0.35) forwards;
+}
+
+.diving .TailGroup {
+  animation: tail-curl-down 260ms cubic-bezier(0.55, 0.02, 0.7, 0.35) forwards;
+}
+
+.diving .SoilSlit {
+  animation: slit-open 260ms ease-out forwards;
+}
+
+.diving .PhaseClock {
+  animation: worm-phase-clock 260ms linear forwards;
+}
+
+.emerging .HeadGroup {
+  animation: head-emerge 280ms cubic-bezier(0.18, 0.8, 0.32, 1) forwards;
+}
+
+.emerging .FrontGroup {
+  animation: front-follow-up 280ms cubic-bezier(0.18, 0.8, 0.32, 1) forwards;
+}
+
+.emerging .BodyGroup {
+  animation: body-follow-up 280ms cubic-bezier(0.18, 0.8, 0.32, 1) forwards;
+}
+
+.emerging .TailGroup {
+  animation: tail-follow-up 280ms cubic-bezier(0.18, 0.8, 0.32, 1) forwards;
+}
+
+.emerging .SoilSlit {
+  animation: slit-close 280ms ease-out forwards;
+}
+
+.emerging .PhaseClock {
+  animation: worm-phase-clock 280ms linear forwards;
+}
+
+.settling .HeadGroup {
+  animation: head-settle 150ms ease-out forwards;
+}
+
+.settling .FrontGroup,
+.settling .BodyGroup {
+  animation: body-settle 150ms ease-out forwards;
+}
+
+.settling .TailGroup {
+  animation: tail-settle 150ms ease-out forwards;
+}
+
+.settling .PhaseClock {
+  animation: worm-phase-clock 150ms linear forwards;
+}
+
+.diving :is(.TailGroup, .BodyGroup, .FrontGroup, .HeadGroup, .SoilSlit, .PhaseClock),
+.emerging :is(.TailGroup, .BodyGroup, .FrontGroup, .HeadGroup, .SoilSlit, .PhaseClock),
+.settling :is(.TailGroup, .BodyGroup, .FrontGroup, .HeadGroup, .PhaseClock) {
+  animation-delay: calc(0ms - var(--worm-phase-offset, 0ms));
+}
+
+@keyframes head-dive {
+  0%,
+  8% {
+    opacity: 1;
+    transform: none;
+  }
+  28% {
+    transform: translate(0.04rem, 0.24rem) rotate(14deg) scale(0.98);
+  }
+  52% {
+    transform: translate(0.12rem, 0.76rem) rotate(27deg) scale(0.9);
+  }
+  72% {
+    opacity: 1;
+    transform: translate(0.08rem, 1.5rem) rotate(34deg) scale(0.8);
+  }
+  82%,
+  100% {
+    opacity: 0;
+    transform: translate(0.04rem, 2.3rem) rotate(38deg) scale(0.68);
+  }
+}
+
+@keyframes front-follow-down {
+  0%,
+  20% {
+    opacity: 1;
+    transform: none;
+  }
+  46% {
+    transform: translateY(0.34rem) rotate(8deg) scaleX(0.92);
+  }
+  72% {
+    opacity: 1;
+    transform: translateY(1.2rem) rotate(17deg) scale(0.8, 0.9);
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: translateY(2.25rem) rotate(21deg) scale(0.7);
+  }
+}
+
+@keyframes body-follow-down {
+  0%,
+  34% {
+    opacity: 1;
+    transform: none;
+  }
+  58% {
+    transform: translateY(0.25rem) rotate(4deg) scale(0.9, 0.86);
+  }
+  82% {
+    opacity: 1;
+    transform: translateY(1.12rem) rotate(10deg) scale(0.78, 0.82);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(2.25rem) rotate(14deg) scale(0.7);
+  }
+}
+
+@keyframes tail-curl-down {
+  0%,
+  54% {
+    opacity: 1;
+    transform: none;
+  }
+  72% {
+    transform: translateY(0.16rem) rotate(-18deg) scale(0.78, 0.92);
+  }
+  88% {
+    opacity: 1;
+    transform: translateY(0.92rem) rotate(-29deg) scale(0.68, 0.82);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(2.2rem) rotate(-34deg) scale(0.62);
+  }
+}
+
+@keyframes head-emerge {
+  0%,
+  8% {
+    opacity: 0;
+    transform: translateY(2.2rem) rotate(-24deg) scale(0.7);
+  }
+  22% {
+    opacity: 1;
+    transform: translateY(0.62rem) rotate(-18deg) scale(0.88);
+  }
+  38% {
+    transform: translateY(0.08rem) rotate(-12deg) scale(0.96);
+  }
+  50% {
+    transform: translateY(0.06rem) rotate(5deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes front-follow-up {
+  0%,
+  18% {
+    opacity: 0;
+    transform: translateY(2.25rem) rotate(-16deg) scale(0.7);
+  }
+  38% {
+    opacity: 1;
+    transform: translateY(0.72rem) rotate(-9deg) scale(0.86);
+  }
+  72% {
+    transform: translateY(0.08rem) rotate(3deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes body-follow-up {
+  0%,
+  32% {
+    opacity: 0;
+    transform: translateY(2.25rem) rotate(-9deg) scale(0.68);
+  }
+  54% {
+    opacity: 1;
+    transform: translateY(0.82rem) rotate(-4deg) scale(0.82, 0.88);
+  }
+  84% {
+    transform: translateY(0.08rem) rotate(2deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tail-follow-up {
+  0%,
+  48% {
+    opacity: 0;
+    transform: translateY(2.2rem) rotate(30deg) scale(0.62);
+  }
+  68% {
+    opacity: 1;
+    transform: translateY(0.72rem) rotate(22deg) scale(0.78, 0.9);
+  }
+  88% {
+    transform: translateY(0.08rem) rotate(-7deg) scale(0.96, 1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes head-settle {
+  0% {
+    transform: rotate(5deg) scale(1.03);
+  }
+  58% {
+    transform: rotate(-2deg) scale(0.98);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes body-settle {
+  0% {
+    transform: scale(1.025, 0.97);
+  }
+  58% {
+    transform: scale(0.985, 1.02);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes tail-settle {
+  0% {
+    transform: rotate(-8deg) scaleX(0.96);
+  }
+  58% {
+    transform: rotate(3deg) scaleX(1.015);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes slit-open {
+  from {
+    opacity: 0.28;
+    transform: translateX(-50%) scaleX(0.5);
+  }
+  55% {
+    opacity: 0.7;
+    transform: translateX(-50%) scaleX(1.02);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.78);
+  }
+}
+
+@keyframes slit-close {
+  from {
+    opacity: 0.72;
+    transform: translateX(-50%) scaleX(1.04);
+  }
+  to {
+    opacity: 0.48;
+    transform: translateX(-50%) scaleX(0.68);
+  }
+}
+
+@keyframes worm-phase-clock {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.001;
+  }
+}
+
+:global([data-navigation-surface='desktop']) .Marker {
+  bottom: var(--worm-ground-offset, -0.55rem);
+}
+
+:global([data-navigation-surface='desktop']) .WormGraphic {
+  width: min(3.75rem, 92%);
+}
+
+:global([data-navigation-surface='mobile']) .Marker {
+  top: auto;
+  bottom: 0;
+  height: 2.3rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .PhaseClock,
+  .TailGroup,
+  .BodyGroup,
+  .FrontGroup,
+  .HeadGroup,
+  .SoilSlit {
+    animation: none !important;
+  }
+
+  .TailGroup,
+  .BodyGroup,
+  .FrontGroup,
+  .HeadGroup {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

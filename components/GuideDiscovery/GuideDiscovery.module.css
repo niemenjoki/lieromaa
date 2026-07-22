@@ -1,0 +1,253 @@
+.Discovery {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.Controls {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.9fr) minmax(0, 1.4fr);
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border-top: 2px solid var(--highlight);
+  border-bottom: 1px solid var(--background-5);
+  background: var(--background-2);
+}
+
+.SearchField {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.SearchField label,
+.CategoryFilter legend {
+  color: var(--highlight-alt);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.SearchField input {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--background-6);
+  border-radius: 4px;
+  background: var(--background-1);
+  color: var(--text-color);
+  font: inherit;
+}
+
+.SearchField input::placeholder {
+  color: var(--text-color);
+  opacity: 0.58;
+}
+
+.SearchField input:focus-visible,
+.Chip:focus-visible,
+.ClearButton:focus-visible,
+.Result h3 a:focus-visible {
+  outline: 3px solid var(--highlight);
+  outline-offset: 3px;
+}
+
+.CategoryFilter {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.CategoryFilter legend {
+  margin-bottom: 0.45rem;
+}
+
+.Chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.Chip,
+.ClearButton {
+  min-height: 2.5rem;
+  border: 1px solid var(--background-6);
+  border-radius: 999px;
+  background: var(--background-1);
+  color: var(--text-color);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.Chip {
+  padding: 0.48rem 0.78rem;
+}
+
+.Chip span {
+  display: inline-block;
+  min-width: 1.4rem;
+  margin-left: 0.25rem;
+  padding: 0.08rem 0.3rem;
+  border-radius: 999px;
+  background: var(--background-3);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.Chip:hover,
+.ActiveChip {
+  border-color: var(--highlight);
+  background: var(--highlight);
+  color: var(--text-on-accent);
+}
+
+.ActiveChip span {
+  background: color-mix(in srgb, var(--text-on-accent) 18%, transparent);
+}
+
+.ResultsHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 2px solid var(--highlight-alt);
+}
+
+.Kicker {
+  margin: 0 0 0.25rem;
+  color: var(--highlight);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.ResultsHeader h2 {
+  margin: 0;
+  color: var(--highlight-alt);
+  font-size: 1.45rem;
+}
+
+.ResultsMeta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.ResultCount {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ClearButton {
+  min-height: 2.25rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 4px;
+}
+
+.ClearButton:hover {
+  border-color: var(--highlight);
+  color: var(--highlight);
+}
+
+.Results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Result {
+  margin: 0;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--background-5);
+}
+
+.Result:first-child {
+  padding-top: 0;
+}
+
+.Result article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.55rem;
+}
+
+.ResultMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1rem;
+  color: var(--highlight);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.Result h3 {
+  margin: 0;
+  font-size: clamp(1.05rem, 2vw, 1.24rem);
+  line-height: 1.35;
+}
+
+.Result h3 a {
+  color: var(--highlight-alt);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.16em;
+}
+
+.Result h3 a:hover {
+  opacity: 1;
+  text-decoration-color: currentcolor;
+}
+
+.Result p {
+  max-width: 47rem;
+  margin: 0;
+  line-height: 1.65;
+}
+
+.EmptyResult {
+  padding: 2rem 1.25rem;
+  border: 1px solid var(--background-5);
+  text-align: center;
+}
+
+.EmptyResult h3 {
+  margin-bottom: 0.5rem;
+  color: var(--highlight-alt);
+}
+
+.EmptyResult p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .Controls {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .ResultsHeader,
+  .ResultsMeta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ResultsMeta {
+    gap: 0.5rem;
+  }
+
+  .Chip {
+    min-height: 2.75rem;
+  }
+}
