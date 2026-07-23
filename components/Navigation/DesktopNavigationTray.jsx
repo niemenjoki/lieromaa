@@ -35,7 +35,6 @@ export default function DesktopNavigationTray({
                 <h2>
                   <NavigationAuxiliaryLink item={category} onNavigate={onNavigate} />
                 </h2>
-                {category.description ? <p>{category.description}</p> : null}
                 {category.items?.length ? (
                   <ul>
                     {category.items.map((item) => (

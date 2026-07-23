@@ -1,0 +1,46 @@
+.SymptomIndex {
+  max-width: 42rem;
+  margin: 2rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line-color);
+  border-left: 3px solid var(--nav-accent);
+  border-radius: 8px;
+  background: var(--surface-elevated);
+}
+
+.SymptomIndex .Title {
+  margin: 0;
+  color: var(--highlight-alt);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.SymptomIndex > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.SymptomIndex > ul > li {
+  margin: 0;
+}
+
+.SymptomIndex > ul a {
+  display: inline-flex;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--line-color);
+  border-radius: 999px;
+  background: var(--background-1);
+  text-decoration: none;
+}
+
+.SymptomIndex > ul a:hover {
+  border-color: var(--highlight);
+  opacity: 1;
+}

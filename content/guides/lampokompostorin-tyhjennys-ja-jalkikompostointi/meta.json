@@ -1,0 +1,30 @@
+{
+  "title": "Lämpökompostorin tyhjennys, jälkikompostointi ja käyttö",
+  "description": "Opi tyhjentämään lämpökompostori kapasiteetin mukaan, jälkikompostoimaan poistettu massa sekä arvioimaan kompostin kypsyyttä ja käyttöä.",
+  "publishedAt": "2026-07-21",
+  "updatedAt": "2026-07-21",
+  "keywords": [
+    "lämpökompostorin tyhjennys",
+    "jälkikompostointi",
+    "kypsä komposti",
+    "kompostin käyttö",
+    "kompostin kypsyys"
+  ],
+  "category": {
+    "name": "lämpökompostointi",
+    "pagePosition": 2
+  },
+  "articleSection": "Lämpökompostointi",
+  "about": [
+    "lämpökompostorin tyhjennys",
+    "jälkikompostointi",
+    "kompostin kypsyys",
+    "maanparannus"
+  ],
+  "image": {
+    "url": "/images/content/tyhjennetty_ja_kypsa_kompostimassa.avif",
+    "width": 1200,
+    "height": 800,
+    "alt": "Karkea juuri tyhjennetty kompostimassa ja tasaisempi kypsä komposti kahdessa astiassa rinnakkain."
+  }
+}

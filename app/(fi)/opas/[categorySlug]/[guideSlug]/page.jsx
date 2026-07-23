@@ -10,6 +10,10 @@ import {
   isMatchingGuideCategorySlug,
 } from '@/lib/content/guideRoutes.mjs';
 import {
+  HOT_COMPOSTING_CATEGORY_NAME,
+  HOT_COMPOSTING_GUIDE_SLUGS,
+} from '@/lib/content/hotCompostingGuide.mjs';
+import {
   getAllContent,
   getContentMdxSource,
   getContentMetadata,
@@ -51,13 +55,26 @@ export default async function GuidePage({ params }) {
 
   const canonicalCategorySlug = getGuideCategorySlug(data.category.name);
   const { structuredData } = data;
+  const isHotCompostingGuide = data.category.name === HOT_COMPOSTING_CATEGORY_NAME;
   const recommendations = getContentRecommendations({
     current: {
       ...data,
       type: CONTENT_TYPES.GUIDE,
       slug: guideSlug,
+      ...(isHotCompostingGuide
+        ? {
+            recommendedContent: {
+              pinned: HOT_COMPOSTING_GUIDE_SLUGS.filter((slug) => slug !== guideSlug).map(
+                (slug) => ({ type: CONTENT_TYPES.GUIDE, slug })
+              ),
+            },
+          }
+        : {}),
     },
+    ...(isHotCompostingGuide ? { maxRecommendations: 2 } : {}),
   });
+  const visibleRecommendations =
+    !isHotCompostingGuide || recommendations.length === 2 ? recommendations : [];
 
   return (
     <>
@@ -91,7 +108,7 @@ export default async function GuidePage({ params }) {
       />
 
       <Advert />
-      <ContentRecommendations recommendations={recommendations} />
+      <ContentRecommendations recommendations={visibleRecommendations} />
     </>
   );
 }

@@ -260,7 +260,7 @@ export default function StarterKitSetupPage() {
 
         <p>
           Tarkemmat ohjeet jatkuvaan hoitoon löydät sivulta{' '}
-          <SafeLink href="/opas/kompostorin-hoito">Kompostorin hoito</SafeLink>.
+          <SafeLink href="/opas/kompostorin-hoito">Matokompostorin hoito</SafeLink>.
           Ensimmäisen kuukauden ruokintarytmiä varten katso myös{' '}
           <SafeLink href="/opas/kompostorin-hoito/ensimmaiset-30-paivaa-matokompostorin-kaynnistys">
             Ensimmäiset 30 päivää uudessa matokompostorissa

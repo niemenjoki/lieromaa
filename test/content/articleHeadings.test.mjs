@@ -47,3 +47,21 @@ test('article headings creates readable, stable and unique IDs from inline Markd
     'mista-matokakkaa-saa'
   );
 });
+
+test('article headings reuses an explicit preceding anchor without duplicating it on the heading', () => {
+  const source = `<span id="custom-section"></span>
+
+## Section title
+## Custom section
+`;
+
+  assert.deepEqual(extractArticleHeadings(source), [
+    {
+      id: 'custom-section',
+      level: 2,
+      text: 'Section title',
+      explicitAnchor: true,
+    },
+    { id: 'custom-section-2', level: 2, text: 'Custom section' },
+  ]);
+});

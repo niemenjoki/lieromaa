@@ -84,24 +84,24 @@ export const productCatalogContentSource = {
     },
   },
   compostChow: {
-    name: 'Lieromaan kompostorin kuituseos',
+    name: 'Lieromaan matokompostorin kuituseos',
     page: {
       canonicalUrl: '/tuotteet/kompostorin-kuituseos',
-      pageName: 'Lieromaan kompostorin kuituseos',
-      title: 'Kompostorin kuituseos | Lieromaa',
+      pageName: 'Lieromaan matokompostorin kuituseos',
+      title: 'Matokompostorin kuituseos | Lieromaa',
       description:
         'Lieromaan kompostorin kuituseos on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
-      h1: 'Lieromaan kompostorin kuituseos',
+      h1: 'Lieromaan matokompostorin kuituseos',
       navigationLabel: 'Kuituseos',
       updatedAt: '2026-06-03',
     },
     search: {
       contexts: ['blog', 'notFound'],
-      title: 'Kompostorin kuituseos',
+      title: 'Matokompostorin kuituseos',
       keywords: ['kuituseos', 'matokomposti', 'komposti', 'biojäte'],
     },
     product: {
-      name: 'Lieromaan kompostorin kuituseos',
+      name: 'Lieromaan matokompostorin kuituseos',
       description:
         'Helppokäyttöinen lisäseos kompostiin. Helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee',
       sku: 'chow-150',
@@ -133,7 +133,7 @@ export const productCatalogContentSource = {
     merchant: {
       title(amount, variant) {
         const weight = variant?.weightGrams ?? amount;
-        return `Lieromaan kompostorin kuituseos (${weight} g)`;
+        return `Lieromaan matokompostorin kuituseos (${weight} g)`;
       },
       description(amount, variant) {
         const weight = variant?.weightGrams ?? amount;

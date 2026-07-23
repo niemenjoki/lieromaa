@@ -257,13 +257,6 @@
   opacity: 1;
 }
 
-.GuideCategory p {
-  margin: 0 0 0.8rem;
-  font-size: 0.82rem;
-  line-height: 1.45;
-  opacity: 0.78;
-}
-
 .GuideCategory ul,
 .SecondaryGrid ul {
   display: grid;

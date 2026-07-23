@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import {
+  getGuideCategoryLabel,
+  getGuideCategoryNameFromSlug,
   getGuideCategorySlug,
   getGuidePath,
   isMatchingGuideCategorySlug,
@@ -18,6 +20,22 @@ test('guide category slug helpers build canonical guide paths', () => {
       guideSlug: 'milloin-matokomposti-on-valmista-miten-sita-kaytetaan',
     }),
     '/opas/kompostin-hyödyntäminen/milloin-matokomposti-on-valmista-miten-sita-kaytetaan'
+  );
+  assert.equal(getGuideCategorySlug('lämpökompostointi'), 'lämpökompostointi');
+  assert.equal(
+    getGuideCategoryLabel('kompostorin perustaminen'),
+    'Matokompostorin perustaminen'
+  );
+  assert.equal(getGuideCategoryLabel('kompostorin hoito'), 'Matokompostorin hoito');
+  assert.equal(
+    getGuideCategoryLabel('kompostin hyödyntäminen'),
+    'Matokompostin hyödyntäminen'
+  );
+  assert.equal(getGuideCategoryLabel('lämpökompostointi'), 'Lämpökompostointi');
+  assert.equal(getGuideCategoryNameFromSlug('kompostorin-hoito'), 'kompostorin hoito');
+  assert.equal(
+    getGuideCategoryNameFromSlug('l%C3%A4mp%C3%B6kompostointi'),
+    'lämpökompostointi'
   );
 });
 
@@ -38,9 +56,23 @@ test('guide category slug matching rejects duplicate wrong-category guide URLs',
   );
   assert.equal(
     isMatchingGuideCategorySlug({
+      categoryName: 'kompostin hyödyntäminen',
+      categorySlug: 'matokakan-hyödyntäminen',
+    }),
+    false
+  );
+  assert.equal(
+    isMatchingGuideCategorySlug({
       categoryName: 'kompostorin perustaminen',
       categorySlug: 'foo',
     }),
     false
+  );
+  assert.equal(
+    isMatchingGuideCategorySlug({
+      categoryName: 'lämpökompostointi',
+      categorySlug: 'l%C3%A4mp%C3%B6kompostointi',
+    }),
+    true
   );
 });

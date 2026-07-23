@@ -53,6 +53,13 @@ function resolveRelativeSpecifier(specifier, parentURL) {
 }
 
 export async function resolve(specifier, context, nextResolve) {
+  if (specifier === 'next/navigation') {
+    return {
+      shortCircuit: true,
+      url: pathToFileURL(path.join(testDir, 'stubs', 'nextNavigation.mjs')).href,
+    };
+  }
+
   const aliasPath = resolveAliasSpecifier(specifier);
 
   if (aliasPath) {

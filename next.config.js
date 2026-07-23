@@ -37,6 +37,32 @@ const nextConfig = {
           '/opas/kompostin-hyödyntäminen/matotee-matokakasta-valmistus-ja-kaytto',
         permanent: true,
       },
+      {
+        source: '/opas/l%C3%A4mp%C3%B6kompostointi/miten-lampokompostori-toimii',
+        destination:
+          '/opas/lämpökompostointi/lampokompostori-ei-lampene#kompostori-ei-ole-lammon-lahde',
+        permanent: true,
+      },
+      {
+        source:
+          '/opas/l%C3%A4mp%C3%B6kompostointi/lampokompostorin-kosteus-happi-ja-kuivike',
+        destination:
+          '/opas/lämpökompostointi/lampokompostori-ei-lampene#vihreat-ruskeat-ja-kuivike',
+        permanent: true,
+      },
+      {
+        source:
+          '/opas/l%C3%A4mp%C3%B6kompostointi/lampokompostorin-lampotila-ja-talvikompostointi',
+        destination:
+          '/opas/lämpökompostointi/lampokompostori-ei-lampene#viilea-ei-ole-sama-kuin-toimimaton',
+        permanent: true,
+      },
+      {
+        source: '/opas/l%C3%A4mp%C3%B6kompostointi/lampokompostorin-kaytto-ja-hoito',
+        destination:
+          '/opas/lämpökompostointi/lampokompostori-ei-lampene#arkinen-havaintomalli',
+        permanent: true,
+      },
     ];
   },
   reactStrictMode: true,

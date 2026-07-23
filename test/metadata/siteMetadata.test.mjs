@@ -2,9 +2,13 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import generateBlogTagMetadata from '@/app/(fi)/blogi/[tag]/sivu/[pageIndex]/generateMetadata';
+import generateGuideMetadata from '@/app/(fi)/opas/[categorySlug]/[guideSlug]/generateMetadata';
+import generateGuideCategoryMetadata from '@/app/(fi)/opas/[categorySlug]/generateMetadata';
 import sitemap from '@/app/sitemap';
 import { englishPageDefinitions } from '@/data/pages/english.mjs';
 import safeRoutes from '@/generated/site/safeRoutes.json';
+import { getGuideCategorySlug } from '@/lib/content/guideRoutes.mjs';
+import { HOT_COMPOSTING_GUIDES } from '@/lib/content/hotCompostingGuide.mjs';
 import {
   getAllContent,
   getAllGuideCategories,
@@ -137,17 +141,17 @@ function collectMetadataScenarios() {
   });
 
   guides.forEach((guide) => {
-    const categorySlug = slugifySegment(guide.category.name);
+    const categorySlug = getGuideCategorySlug(guide.category.name);
 
     addScenario(scenarios, `/opas/${categorySlug}/${guide.slug}`, {
       canonicalUrl: `/opas/${categorySlug}/${guide.slug}`,
       description: guide.description,
-      title: guide.title,
+      title: guide.seoTitle ?? guide.title,
     });
   });
 
   getAllGuideCategories().forEach((category) => {
-    const categorySlug = slugifySegment(category);
+    const categorySlug = getGuideCategorySlug(category);
     const pageData = getGuideCategoryPageData(categorySlug);
 
     addScenario(scenarios, pageData.pagePath, {
@@ -272,4 +276,44 @@ test('sitemap excludes low-count blog tag pages', async () => {
     false,
     'archived starter-kit setup guide should be excluded from the sitemap'
   );
+});
+
+test('hot composting category metadata has correct social copy and main image', async () => {
+  const metadata = await generateGuideCategoryMetadata({
+    params: { categorySlug: 'lämpökompostointi' },
+  });
+  const expectedTitle = 'Lämpökompostointi: toiminta, ongelmat ja käyttö | Lieromaa';
+  const expectedDescription =
+    'Itsenäiset oppaat lämpökompostorin toimintaan, matalan lämpötilan arviointiin, ongelmanratkaisuun, tyhjennykseen ja jälkikompostointiin.';
+  const expectedAlt = 'Henkilö lisää biojätettä avoimeen lämpökompostoriin pihalla.';
+
+  assert.equal(metadata.title, expectedTitle);
+  assert.equal(metadata.description, expectedDescription);
+  assert.equal(metadata.alternates.canonical, '/opas/lämpökompostointi');
+  assert.equal(metadata.openGraph.title, expectedTitle);
+  assert.equal(metadata.openGraph.description, expectedDescription);
+  assert.equal(metadata.openGraph.images[0].alt, expectedAlt);
+  assert.equal(metadata.twitter.title, expectedTitle);
+  assert.equal(metadata.twitter.description, expectedDescription);
+  assert.equal(metadata.twitter.images[0].alt, expectedAlt);
+});
+
+test('hot composting article social metadata follows each page main image', async () => {
+  for (const { slug } of HOT_COMPOSTING_GUIDES) {
+    const guide = getAllContent({ type: CONTENT_TYPES.GUIDE }).find(
+      (candidate) => candidate.slug === slug
+    );
+    const metadata = await generateGuideMetadata({
+      params: {
+        categorySlug: 'lämpökompostointi',
+        guideSlug: slug,
+      },
+    });
+
+    assert.equal(metadata.alternates.canonical, `/opas/lämpökompostointi/${slug}`);
+    assert.equal(metadata.openGraph.images[0].url, guide.image.url);
+    assert.equal(metadata.openGraph.images[0].alt, guide.image.alt);
+    assert.equal(metadata.twitter.images[0].url, guide.image.url);
+    assert.equal(metadata.twitter.images[0].alt, guide.image.alt);
+  }
 });

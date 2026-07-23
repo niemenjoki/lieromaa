@@ -12,4 +12,5 @@ export const GUIDE_CATEGORIES = [
   'kompostorin perustaminen',
   'kompostorin hoito',
   'kompostin hyödyntäminen',
+  'lämpökompostointi',
 ];

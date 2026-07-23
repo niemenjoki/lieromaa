@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
+import { HOT_COMPOSTING_GUIDE_SLUGS } from '@/lib/content/hotCompostingGuide.mjs';
 import {
   getContentMetadata,
   getContentRecommendations,
@@ -121,5 +122,32 @@ describe('content recommendations', () => {
     });
 
     assert.ok(adjacentGuide.recommendationScore > distantGuide.recommendationScore);
+  });
+
+  test('hot composting pages recommend the other two standalone guides', () => {
+    const guide = getContentMetadata({
+      type: CONTENT_TYPES.GUIDE,
+      slug: 'lampokompostorin-ongelmat',
+    });
+    const recommendations = getContentRecommendations({
+      current: {
+        ...guide,
+        type: CONTENT_TYPES.GUIDE,
+        recommendedContent: {
+          pinned: HOT_COMPOSTING_GUIDE_SLUGS.filter((slug) => slug !== guide.slug).map(
+            (slug) => ({ type: CONTENT_TYPES.GUIDE, slug })
+          ),
+        },
+      },
+      maxRecommendations: 2,
+    });
+
+    assert.deepEqual(
+      recommendations.map(({ type, slug }) => `${type}:${slug}`).sort(),
+      [
+        `${CONTENT_TYPES.GUIDE}:lampokompostori-ei-lampene`,
+        `${CONTENT_TYPES.GUIDE}:lampokompostorin-tyhjennys-ja-jalkikompostointi`,
+      ].sort()
+    );
   });
 });

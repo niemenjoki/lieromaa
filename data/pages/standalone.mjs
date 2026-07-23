@@ -81,6 +81,6 @@ export const standalonePageDefinitions = {
     pageName: 'Matokompostoinnin opas',
     title: 'Matokompostoinnin opas | Lieromaa',
     description:
-      'Lieromaan opas kokoaa käytännön ohjeet matokompostorin perustamiseen, hoitoon ja matokakan hyödyntämiseen kotona.',
+      'Lieromaan opas kokoaa käytännön ohjeet matokompostorin perustamiseen, hoitoon, matokakan hyödyntämiseen ja lämpökompostointiin.',
   },
 };

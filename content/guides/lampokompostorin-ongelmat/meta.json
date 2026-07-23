@@ -1,0 +1,32 @@
+{
+  "title": "Lämpökompostorin ongelmat: tunnista syy ja korjaa olosuhde",
+  "description": "Selvitä matalan lämpötilan, hajun, märkyyden, kuivuuden, jäätymisen, hyönteisten ja täyttymisen syy ennen lämpökompostorin korjaamista.",
+  "publishedAt": "2026-07-21",
+  "updatedAt": "2026-07-21",
+  "keywords": [
+    "lämpökompostorin ongelmat",
+    "kompostori ei lämpene",
+    "kompostori haisee",
+    "märkä komposti",
+    "kuiva komposti",
+    "kompostori jäätyy",
+    "kärpäset kompostorissa"
+  ],
+  "category": {
+    "name": "lämpökompostointi",
+    "pagePosition": 1
+  },
+  "articleSection": "Lämpökompostointi",
+  "about": [
+    "lämpökompostorin ongelmat",
+    "kompostin lämpötila",
+    "kompostin kosteus",
+    "kompostin hajottajaeliöt"
+  ],
+  "image": {
+    "url": "/images/content/marka_tiivis_kompostimassa.avif",
+    "width": 1200,
+    "height": 800,
+    "alt": "Märkä ja tiivis kompostimassa avoimessa lämpökompostorissa."
+  }
+}
