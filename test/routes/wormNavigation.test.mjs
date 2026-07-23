@@ -44,8 +44,8 @@ describe('worm navigation motion', () => {
       WORM_PHASE_DURATION_MS[WORM_PHASES.EMERGING] +
       WORM_PHASE_DURATION_MS[WORM_PHASES.SETTLING];
 
-    assert.equal(fixedPhaseDuration + WORM_UNDERGROUND_MIN_MS, 890);
-    assert.equal(fixedPhaseDuration + WORM_UNDERGROUND_MAX_MS, 1070);
+    assert.equal(fixedPhaseDuration + WORM_UNDERGROUND_MIN_MS, 1690);
+    assert.equal(fixedPhaseDuration + WORM_UNDERGROUND_MAX_MS, 2690);
   });
 
   test('rebases resized animations without extending their phase clock', () => {
