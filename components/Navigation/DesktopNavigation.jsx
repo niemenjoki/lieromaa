@@ -48,7 +48,7 @@ export default function DesktopNavigation({
       if (restoreFocus) {
         globalThis.requestAnimationFrame?.(() => {
           if (trayToClose === 'guides') {
-            guideTriggerRef.current?.focus();
+            guideTriggerRef.current?.querySelector('a')?.focus();
           } else if (trayToClose === 'secondary') {
             secondaryTriggerRef.current?.focus();
           }
@@ -103,17 +103,19 @@ export default function DesktopNavigation({
   }, [closeTray, guideTrayId, openTray, secondaryTrayId]);
 
   useEffect(() => {
-    if (!openTray) {
+    if (openTray !== 'secondary') {
       return undefined;
     }
 
-    const trayId = openTray === 'guides' ? guideTrayId : secondaryTrayId;
     const frameId = globalThis.requestAnimationFrame?.(() => {
-      document.getElementById(trayId)?.querySelector('a, input, button')?.focus();
+      document
+        .getElementById(secondaryTrayId)
+        ?.querySelector('a, input, button')
+        ?.focus();
     });
 
     return () => globalThis.cancelAnimationFrame?.(frameId);
-  }, [guideTrayId, openTray, secondaryTrayId]);
+  }, [openTray, secondaryTrayId]);
 
   useEffect(() => {
     const mediaQuery = globalThis.matchMedia?.('(max-width: 960px)');
@@ -142,6 +144,11 @@ export default function DesktopNavigation({
       className={classes.DesktopRoot}
       data-navigation-surface="desktop"
       data-open-navigation-tray={openTray ?? 'none'}
+      onMouseLeave={() => {
+        if (openTray === 'guides') {
+          closeTray(false);
+        }
+      }}
     >
       <div className={classes.CommandBand}>
         <div ref={commandBarRef} className={classes.CommandBar}>
@@ -169,7 +176,24 @@ export default function DesktopNavigation({
                 const isGuideItem = item.id === guidePrimaryId;
 
                 return (
-                  <li key={item.id} className={classes.PrimaryItem}>
+                  <li
+                    key={item.id}
+                    ref={isGuideItem ? guideTriggerRef : undefined}
+                    id={isGuideItem ? `${idPrefix}-guide-trigger` : undefined}
+                    className={`${classes.PrimaryItem} ${
+                      isGuideItem ? classes.GuidePrimaryItem : ''
+                    }`}
+                    data-guide-dropdown-open={
+                      isGuideItem ? String(openTray === 'guides') : undefined
+                    }
+                    onMouseEnter={() => {
+                      if (isGuideItem && guideCategories.length) {
+                        setOpenTray('guides');
+                      } else if (openTray === 'guides') {
+                        closeTray(false);
+                      }
+                    }}
+                  >
                     <PrimaryNavigationLink
                       item={item}
                       className={classes.PrimaryLink}
@@ -177,18 +201,7 @@ export default function DesktopNavigation({
                       labelClassName={classes.PrimaryLabel}
                     />
                     {isGuideItem && guideCategories.length ? (
-                      <button
-                        ref={guideTriggerRef}
-                        id={`${idPrefix}-guide-trigger`}
-                        type="button"
-                        className={classes.TrayToggle}
-                        aria-label={labels.openGuideTray}
-                        aria-expanded={openTray === 'guides'}
-                        aria-controls={guideTrayId}
-                        onClick={() => toggleTray('guides')}
-                      >
-                        <span aria-hidden="true">⌄</span>
-                      </button>
+                      <span className={classes.TrayIndicator} aria-hidden="true" />
                     ) : null}
                   </li>
                 );
@@ -196,7 +209,14 @@ export default function DesktopNavigation({
             </ul>
           </nav>
 
-          <div className={classes.Utilities}>
+          <div
+            className={classes.Utilities}
+            onMouseEnter={() => {
+              if (openTray === 'guides') {
+                closeTray(false);
+              }
+            }}
+          >
             {searchItems?.length ? (
               <SiteSearch
                 searchItems={searchItems}
