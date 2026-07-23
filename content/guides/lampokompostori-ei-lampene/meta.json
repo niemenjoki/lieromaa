@@ -1,0 +1,31 @@
+{
+  "title": "Lämpökompostori ei lämpene? Toiminta ja käytännön hoito",
+  "description": "Matala lämpötila ei välttämättä ole ongelma. Opi arvioimaan kompostin toimintaa, käyttämään kuiviketta ja hoitamaan lämpökompostoria myös talvella.",
+  "publishedAt": "2026-06-23",
+  "updatedAt": "2026-07-21",
+  "keywords": [
+    "lämpökompostori ei lämpene",
+    "lämpökompostorin hoito",
+    "kompostorin kuivike",
+    "kompostimassan kosteus",
+    "talvikompostointi",
+    "kompostori jäätyy"
+  ],
+  "category": {
+    "name": "lämpökompostointi",
+    "pagePosition": 0
+  },
+  "articleSection": "Lämpökompostointi",
+  "about": [
+    "lämpökompostorin toiminta",
+    "kompostimassan lämpötila",
+    "kompostorin kuivike",
+    "talvikompostointi"
+  ],
+  "image": {
+    "url": "/images/content/biojatteen_lisaaminen_lampokompostoriin.avif",
+    "width": 1200,
+    "height": 800,
+    "alt": "Henkilö lisää biojätettä avoimeen lämpökompostoriin pihalla."
+  }
+}

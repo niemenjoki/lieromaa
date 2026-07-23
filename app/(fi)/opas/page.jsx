@@ -40,7 +40,7 @@ export default function GuideHubPage() {
           { name: 'Opas', href: canonicalUrl },
         ]}
         data={data}
-        description={`${description} Hae kokoelmasta aiheella tai rajaa näkymä perustamiseen, kompostorin hoitoon tai valmiin kompostin hyödyntämiseen.`}
+        description={`${description} Hae kokoelmasta aiheella tai rajaa näkymä haluamaasi aihealueeseen.`}
         pageName={pageName}
         title="Matokompostoinnin opaskirjasto"
       />

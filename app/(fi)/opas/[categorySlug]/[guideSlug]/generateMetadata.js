@@ -18,17 +18,23 @@ export default async function generateMetadata({ params }) {
     notFound();
   }
 
-  const title = data.title || '';
+  const title = data.seoTitle || data.title || '';
   const description = data.description || '';
   const url = getGuidePath({
     categoryName: data.category.name,
     guideSlug,
   });
-  const image = data.image || {
+  const imageData = data.image || {
     url: '/images/lieromaa_logo_1024.avif',
     width: 1024,
     height: 1024,
     alt: 'Lieromaa logo',
+  };
+  const image = {
+    url: imageData.url,
+    width: imageData.width,
+    height: imageData.height,
+    alt: imageData.alt,
   };
 
   const customMetadata = {
@@ -45,7 +51,7 @@ export default async function generateMetadata({ params }) {
     twitter: {
       title,
       description,
-      images: [image.url],
+      images: [image],
     },
   };
 

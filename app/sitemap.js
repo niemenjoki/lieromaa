@@ -1,5 +1,6 @@
 import { englishIndexablePageDefinitions } from '@/data/pages/english.mjs';
 import safeLinks from '@/generated/site/safeRoutes.json';
+import { getGuideCategorySlug } from '@/lib/content/guideRoutes.mjs';
 import {
   getAllContent,
   getAllGuideCategories,
@@ -19,7 +20,6 @@ import {
 } from '@/lib/site/pageRecords.mjs';
 
 const toISODate = (d) => new Date(d).toISOString().split('T')[0];
-const slugify = (s) => s.replaceAll(' ', '-').trim().toLowerCase();
 
 export const revalidate = 3600;
 
@@ -76,13 +76,17 @@ export default async function sitemap() {
   }
 
   // --- Guide categories
-  guideCategories.forEach((cat) => add(`/opas/${slugify(cat)}`, latestGuide));
+  guideCategories.forEach((cat) =>
+    add(`/opas/${getGuideCategorySlug(cat)}`, latestGuide)
+  );
 
   // --- Blog posts
   posts.forEach((p) => add(`/blogi/julkaisu/${p.slug}`, p.updatedAt ?? p.publishedAt));
 
   // --- Guides
-  guides.forEach((g) => add(`/opas/${slugify(g.category.name)}/${g.slug}`, g.updatedAt));
+  guides.forEach((g) =>
+    add(`/opas/${getGuideCategorySlug(g.category.name)}/${g.slug}`, g.updatedAt)
+  );
 
   // --- Paginated blog index
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);

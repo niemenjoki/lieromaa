@@ -51,7 +51,22 @@ describe('guide library order', () => {
       title: 'Hoito ensimmäinen',
       updatedAt: '2026-01-01',
     }),
+    createGuide({
+      categoryName: GUIDE_CATEGORIES[3],
+      pagePosition: 0,
+      title: 'Lämpökompostointi viimeisenä',
+      updatedAt: '2024-01-01',
+    }),
   ];
+
+  it('keeps the four guide categories in their defined editorial order', () => {
+    assert.deepEqual(GUIDE_CATEGORIES, [
+      'kompostorin perustaminen',
+      'kompostorin hoito',
+      'kompostin hyödyntäminen',
+      'lämpökompostointi',
+    ]);
+  });
 
   it('groups guides by the defined category order and then by pagePosition', () => {
     assert.deepEqual(
@@ -62,6 +77,7 @@ describe('guide library order', () => {
         'Hoito ensimmäinen',
         'Hoito toinen',
         'Hyödyntäminen ensin omassa osiossaan',
+        'Lämpökompostointi viimeisenä',
       ]
     );
   });

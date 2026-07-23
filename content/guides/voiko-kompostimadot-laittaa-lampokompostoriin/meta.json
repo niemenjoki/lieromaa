@@ -1,8 +1,8 @@
 {
-  "title": "Voiko kompostimadot laittaa lämpökompostoriin kotona?",
+  "title": "Kannattaako kompostimatoja lisätä lämpökompostoriin?",
   "description": "Voiko kompostimadot laittaa lämpökompostoriin? Madoista ei yleensä ole haittaa, mutta ne eivät välttämättä viihdy siellä pysyvästi.",
   "publishedAt": "2026-05-14",
-  "updatedAt": "2026-05-14",
+  "updatedAt": "2026-06-23",
   "keywords": [
     "kompostimadot lämpökompostoriin",
     "madot lämpökompostoriin",
@@ -18,6 +18,22 @@
     "pagePosition": 5
   },
   "articleSection": "Matokompostointi",
+  "recommendedContent": {
+    "pinned": [
+      {
+        "type": "GUIDE",
+        "slug": "lampokompostori-ei-lampene"
+      },
+      {
+        "type": "POST",
+        "slug": "lampokompostori-vai-matokomposti-paras-ratkaisu-keittiojatteelle"
+      },
+      {
+        "type": "GUIDE",
+        "slug": "matokompostointi-talvella-toimiiko-se-ulkona-suomessa"
+      }
+    ]
+  },
   "faqItems": [
     {
       "question": "Voiko kompostimadot laittaa lämpökompostoriin?",

@@ -36,14 +36,14 @@ export const productMessages = Object.freeze({
       }),
     }),
     compostChow: Object.freeze({
-      pageName: 'Lieromaan kompostorin kuituseos',
-      title: 'Kompostorin kuituseos | Lieromaa',
+      pageName: 'Lieromaan matokompostorin kuituseos',
+      title: 'Matokompostorin kuituseos | Lieromaa',
       description:
         'Lieromaan kompostorin kuituseos on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
       pageDescription:
         'Helppokäyttöinen kuituseos matokompostin tasapainottamiseen ja ruokinnan tukemiseen.',
-      h1: 'Lieromaan kompostorin kuituseos',
-      productName: 'Lieromaan kompostorin kuituseos',
+      h1: 'Lieromaan matokompostorin kuituseos',
+      productName: 'Lieromaan matokompostorin kuituseos',
       productDescription:
         'Helppokäyttöinen lisäseos kompostiin. Helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
       imageAlts: Object.freeze([
@@ -95,7 +95,7 @@ export const productMessages = Object.freeze({
       'Saat valitsemasi määrän kompostimatoja valmiiksi käynnistetyssä 14 litran kompostorissa. Erillistä kokoamista, petimateriaalin valmistelua tai käyttöönottoa ei tarvita.',
     sections: Object.freeze([
       Object.freeze({
-        heading: 'Mitä kompostori sisältää?',
+        heading: 'Mitä matokompostori sisältää?',
         paragraphs: Object.freeze(['Kompostoriin kuuluu:']),
         bullets: Object.freeze([
           'ilmanvaihtoaukoilla varustettu 14 litran muovilaatikko',
@@ -106,7 +106,7 @@ export const productMessages = Object.freeze({
         ]),
       }),
       Object.freeze({
-        heading: 'Miten kompostori käynnistetään?',
+        heading: 'Miten matokompostori käynnistetään?',
         paragraphs: Object.freeze([
           'Valmistelen petimateriaalin sopivan kosteaksi ja sekoitan siihen pienen määrän aiemmin toiminnassa ollutta petimateriaalia. Se tuo uuteen kompostoriin valmiin mikrobikannan ja auttaa hajotustoimintaa käynnistymään nopeammin.',
           'Tämän jälkeen lisään valitsemasi madot ja ensimmäisen pienen ruoka-annoksen. Kompostori saa toimia noin kaksi viikkoa ennen lähetystä.',
@@ -114,7 +114,7 @@ export const productMessages = Object.freeze({
         bullets: Object.freeze([]),
       }),
       Object.freeze({
-        heading: 'Kun kompostori saapuu',
+        heading: 'Kun matokompostori saapuu',
         paragraphs: Object.freeze([
           'Kompostori on saapuessaan valmis käytettäväksi sellaisenaan. Valitse sille sopiva paikka ja aloita jatkoruokinta varovasti.',
           'Kompostoria ei tarvitse koota, eikä petimateriaalia tarvitse erikseen kostuttaa tai valmistella.',
@@ -130,7 +130,7 @@ export const productMessages = Object.freeze({
         bullets: Object.freeze([]),
       }),
       Object.freeze({
-        heading: 'Millainen kompostori on?',
+        heading: 'Millainen matokompostori on?',
         paragraphs: Object.freeze([
           'Kompostori on kestävä, elintarvikekelpoisesta muovista valmistettu 14 litran laatikko, jonka ulkomitat ovat 40 × 30 × 19 cm. Tarvittavat ilmanvaihtoaukot on tehty valmiiksi.',
         ]),
@@ -139,7 +139,7 @@ export const productMessages = Object.freeze({
     ]),
     legend: 'Valitse matokompostoinnin aloitustapa',
     wormsOnly: 'Pelkät madot',
-    optionTitle: 'Valmis 14L kompostori',
+    optionTitle: 'Valmis 14L matokompostori',
     shippingDelay:
       'Valmisteluaika on noin kaksi viikkoa. Käyttövalmis kompostori lähetetään kolmantena tilauksen jälkeisenä maanantaina, jotta petimateriaalin mikrobitoiminta ehtii käynnistyä ja madot kotiutua ennen kuljetusta.',
     alreadyInCart:

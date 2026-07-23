@@ -83,7 +83,7 @@ export const commerceMessages = Object.freeze({
   cart: Object.freeze({
     productNames: Object.freeze({
       worms: 'Kompostimadot (Eisenia fetida)',
-      compostChow: 'Lieromaan kompostorin kuituseos',
+      compostChow: 'Lieromaan matokompostorin kuituseos',
     }),
     wormLineLabel({ weight, estimatedWormCount }) {
       const estimateText = estimatedWormCount

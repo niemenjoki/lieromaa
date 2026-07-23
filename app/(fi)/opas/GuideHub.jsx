@@ -6,16 +6,16 @@ import {
   getLatestGuide,
   orderGuidesForLibrary,
 } from '@/lib/content/guideLibraryOrder.mjs';
-import { getGuideCategorySlug, getGuidePath } from '@/lib/content/guideRoutes.mjs';
+import {
+  getGuideCategoryLabel,
+  getGuideCategorySlug,
+  getGuidePath,
+} from '@/lib/content/guideRoutes.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 
 import classes from './GuideHubPage.module.css';
-
-function formatCategoryLabel(categoryName) {
-  return categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
-}
 
 function getGuideDate(guide) {
   return guide.updatedAt ?? guide.publishedAt ?? '';
@@ -28,7 +28,7 @@ export function getGuideHubData() {
   ).sort(compareGuideCategoryNames);
   const categories = categoryNames.map((categoryName) => ({
     count: allGuides.filter((guide) => guide.category.name === categoryName).length,
-    label: formatCategoryLabel(categoryName),
+    label: getGuideCategoryLabel(categoryName),
     name: categoryName,
     slug: getGuideCategorySlug(categoryName),
   }));
@@ -37,7 +37,7 @@ export function getGuideHubData() {
 
     return {
       category: guide.category.name,
-      categoryLabel: formatCategoryLabel(guide.category.name),
+      categoryLabel: getGuideCategoryLabel(guide.category.name),
       date,
       dateLabel: `${guide.updatedAt ? 'Päivitetty' : 'Julkaistu'} ${formatFinnishDate(date)}`,
       description: guide.description,

@@ -1,6 +1,10 @@
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SiteSearch from '@/components/SiteSearch/SiteSearch';
+import {
+  getGuideCategoryLabel,
+  getGuideCategorySlug,
+} from '@/lib/content/guideRoutes.mjs';
 import { getAllContent } from '@/lib/content/index.mjs';
 import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/lib/site/constants.mjs';
@@ -12,19 +16,24 @@ export { default as generateMetadata } from './generateMetadata';
 
 const CATEGORY_SUMMARIES = {
   'kompostin hyödyntäminen': {
-    actionLabel: 'Selaa hyödyntämisoppaita',
+    actionLabel: 'Selaa matokompostin hyödyntämisoppaita',
     description:
       'Opi keräämään matokakka talteen ja käyttämään sitä kasveille ilman arvailua.',
   },
   'kompostorin perustaminen': {
-    actionLabel: 'Selaa perustamisoppaita',
+    actionLabel: 'Selaa matokompostorin perustamisoppaita',
     description:
       'Aloita kompostorin valinnasta, matojen hankinnasta ja ensimmäisistä viikoista selkeässä järjestyksessä.',
   },
   'kompostorin hoito': {
-    actionLabel: 'Selaa hoito-oppaita',
+    actionLabel: 'Selaa matokompostorin hoito-oppaita',
     description:
       'Saat apua ruokintaan, kosteuteen, hajuihin, talvikäyttöön ja kompostorin tasapainottamiseen.',
+  },
+  lämpökompostointi: {
+    actionLabel: 'Selaa lämpökompostointia',
+    description:
+      'Lämpökompostorin biologia, vihreät ja ruskeat materiaalit, kosteus, ilmavuus ja talvikäyttö.',
   },
 };
 
@@ -51,16 +60,8 @@ const EDITORIAL_HIGHLIGHT_SPECS = [
   },
 ];
 
-function slugifySegment(value) {
-  return value.replaceAll(' ', '-');
-}
-
-function formatCategoryLabel(categoryName) {
-  return categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
-}
-
 function getGuideHref(guide) {
-  return `/opas/${slugifySegment(guide.category.name)}/${guide.slug}`;
+  return `/opas/${getGuideCategorySlug(guide.category.name)}/${guide.slug}`;
 }
 
 export default function HomePage() {
@@ -96,8 +97,8 @@ export default function HomePage() {
         CATEGORY_SUMMARIES[categoryName]?.description ??
         'Käytännön ohjeita matokompostoinnin seuraavaan vaiheeseen.',
       guideCount: guides.length,
-      name: formatCategoryLabel(categoryName),
-      slug: slugifySegment(categoryName),
+      name: getGuideCategoryLabel(categoryName),
+      slug: getGuideCategorySlug(categoryName),
     };
   }).filter(Boolean);
 
@@ -138,7 +139,7 @@ export default function HomePage() {
           <div className={classes.SignalGrid} aria-label="Lieromaan sisältö">
             <div className={classes.SignalCard}>
               <span className={classes.SignalValue}>{allGuides.length}</span>
-              <p>opasta matokompostoinnin eri vaiheisiin</p>
+              <p>opasta matokompostoinnista ja lähiaiheista</p>
             </div>
             <div className={classes.SignalCard}>
               <span className={classes.SignalValue}>{allPosts.length}</span>
@@ -179,9 +180,8 @@ export default function HomePage() {
           <div className={classes.SectionHeading}>
             <h2>Selaa oppaita aihealueittain</h2>
             <p>
-              Oppaat on jaettu kolmeen aihealueeseen: perustaminen kokoaa yhteen
-              aloitusvaiheen ohjeet, hoito auttaa arjen ongelmissa ja hyödyntäminen
-              keskittyy matokakan käyttöön.
+              Oppaat on jaettu aihealueisiin, jotta löydät nopeasti juuri siihen
+              kysymykseen sopivan tekstin, joka on nyt ajankohtainen.
             </p>
           </div>
 
@@ -267,7 +267,7 @@ export default function HomePage() {
               </SafeLink>
             </article>
             <article className={classes.CategoryCard}>
-              <h3>Kompostorin kuituseos</h3>
+              <h3>Matokompostorin kuituseos</h3>
               <p>
                 Petimateriaaliin ja ruokinnan tasaukseen tarkoitettu seos tilanteisiin,
                 joissa biojätteen määrä vaihtelee.

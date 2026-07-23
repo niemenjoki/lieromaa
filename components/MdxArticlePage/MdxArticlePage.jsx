@@ -7,6 +7,7 @@ import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButto
 import { extractArticleHeadings } from '@/lib/content/articleHeadings.mjs';
 
 import AuthorCard from '../AuthorCard/AuthorCard';
+import { HotCompostingSymptomIndex } from '../HotCompostingGuideNavigation/HotCompostingGuideNavigation';
 import classes from './MdxArticlePage.module.css';
 
 function isInternalMarkdownHref(href) {
@@ -36,11 +37,9 @@ function createMdxComponents(headings) {
     const heading = headings[headingIndex];
     headingIndex += 1;
 
-    return (
-      <Tag {...props} id={heading?.id}>
-        {children}
-      </Tag>
-    );
+    const headingProps = heading?.explicitAnchor ? props : { ...props, id: heading?.id };
+
+    return <Tag {...headingProps}>{children}</Tag>;
   }
 
   function HeadingTwo({ children, ...props }) {
@@ -55,6 +54,7 @@ function createMdxComponents(headings) {
     a: MarkdownLink,
     h2: HeadingTwo,
     h3: HeadingThree,
+    HotCompostingSymptomIndex,
     SafeImage,
   };
 }

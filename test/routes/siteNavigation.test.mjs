@@ -1,12 +1,15 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import { getBlogTagArchives } from '@/lib/content/index.mjs';
+import safeRoutes from '@/generated/site/safeRoutes.json';
+import { getGuidePath } from '@/lib/content/guideRoutes.mjs';
+import { getAllContent, getBlogTagArchives } from '@/lib/content/index.mjs';
 import { getEnglishNavigation } from '@/lib/i18n/englishNavigation.mjs';
 import {
   findActiveNavigationItem,
   normalizeNavigationPath,
 } from '@/lib/navigation/activeRoute.mjs';
+import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 import { getSiteNavigation } from '@/lib/siteStructure.mjs';
 
 function flattenSectionLinks(sections) {
@@ -53,15 +56,40 @@ describe('responsive site navigation data', () => {
     assert.deepEqual(
       navigation.guideCategories.map(({ label, count }) => ({ label, count })),
       [
-        { label: 'Kompostorin perustaminen', count: 6 },
-        { label: 'Kompostorin hoito', count: 6 },
-        { label: 'Kompostin hyödyntäminen', count: 4 },
+        { label: 'Matokompostorin perustaminen', count: 6 },
+        { label: 'Matokompostorin hoito', count: 6 },
+        { label: 'Matokompostin hyödyntäminen', count: 4 },
+        { label: 'Lämpökompostointi', count: 3 },
       ]
     );
+    const actualGuideItems = navigation.guideCategories
+      .flatMap((category) => category.items)
+      .map(({ href, label }) => ({ href, label }))
+      .sort((left, right) => left.href.localeCompare(right.href, 'fi'));
+    const expectedGuideItems = getAllContent({ type: CONTENT_TYPES.GUIDE })
+      .map((guide) => ({
+        href: getGuidePath({
+          categoryName: guide.category.name,
+          guideSlug: guide.slug,
+        }),
+        label: guide.title,
+      }))
+      .sort((left, right) => left.href.localeCompare(right.href, 'fi'));
+
+    assert.deepEqual(actualGuideItems, expectedGuideItems);
     assert.equal(
       navigation.guideCategories.every(
-        (category) => category.items.length > 0 && category.items.length <= 2
+        (category) => category.items.length === category.count
       ),
+      true
+    );
+    assert.equal(
+      navigation.guideCategories
+        .flatMap((category) => [
+          category.href,
+          ...category.items.map((item) => item.href),
+        ])
+        .every((href) => safeRoutes.includes(href)),
       true
     );
   });
