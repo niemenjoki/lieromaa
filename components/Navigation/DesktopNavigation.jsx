@@ -23,6 +23,7 @@ export default function DesktopNavigation({
   labels,
   language,
   primaryItems = [],
+  productItems = [],
   searchItems,
   secondarySections = [],
   settingsSection,
@@ -30,15 +31,18 @@ export default function DesktopNavigation({
   const pathname = usePathname();
   const commandBarRef = useRef(null);
   const guideTriggerRef = useRef(null);
+  const productTriggerRef = useRef(null);
   const secondaryTriggerRef = useRef(null);
   const [openTray, setOpenTray] = useState(null);
   const idPrefix = useId().replaceAll(':', '');
   const guideTrayId = `${idPrefix}-guide-tray`;
+  const productTrayId = `${idPrefix}-product-tray`;
   const secondaryTrayId = `${idPrefix}-secondary-tray`;
   const homeItem =
     primaryItems.find((item) => item.id === 'home') ?? primaryItems[0] ?? null;
   const guidePrimaryId =
     primaryItems.find((item) => /guide|opas/.test(item.id))?.id ?? null;
+  const productPrimaryId = primaryItems.find((item) => item.id === 'shop')?.id ?? null;
 
   const closeTray = useCallback(
     (restoreFocus = false) => {
@@ -49,6 +53,8 @@ export default function DesktopNavigation({
         globalThis.requestAnimationFrame?.(() => {
           if (trayToClose === 'guides') {
             guideTriggerRef.current?.querySelector('a')?.focus();
+          } else if (trayToClose === 'products') {
+            productTriggerRef.current?.querySelector('a')?.focus();
           } else if (trayToClose === 'secondary') {
             secondaryTriggerRef.current?.focus();
           }
@@ -68,10 +74,19 @@ export default function DesktopNavigation({
     }
 
     const isInsideActiveDisclosure = (target) => {
-      const trayId = openTray === 'guides' ? guideTrayId : secondaryTrayId;
+      const trayId =
+        openTray === 'guides'
+          ? guideTrayId
+          : openTray === 'products'
+            ? productTrayId
+            : secondaryTrayId;
       const tray = document.getElementById(trayId);
       const trigger =
-        openTray === 'guides' ? guideTriggerRef.current : secondaryTriggerRef.current;
+        openTray === 'guides'
+          ? guideTriggerRef.current
+          : openTray === 'products'
+            ? productTriggerRef.current
+            : secondaryTriggerRef.current;
 
       return tray?.contains(target) || trigger?.contains(target);
     };
@@ -100,7 +115,7 @@ export default function DesktopNavigation({
       document.removeEventListener('focusin', handleFocusIn);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [closeTray, guideTrayId, openTray, secondaryTrayId]);
+  }, [closeTray, guideTrayId, openTray, productTrayId, secondaryTrayId]);
 
   useEffect(() => {
     if (openTray !== 'secondary') {
@@ -145,7 +160,7 @@ export default function DesktopNavigation({
       data-navigation-surface="desktop"
       data-open-navigation-tray={openTray ?? 'none'}
       onMouseLeave={() => {
-        if (openTray === 'guides') {
+        if (openTray === 'guides' || openTray === 'products') {
           closeTray(false);
         }
       }}
@@ -174,22 +189,35 @@ export default function DesktopNavigation({
             <ul>
               {desktopPrimaryItems.map((item) => {
                 const isGuideItem = item.id === guidePrimaryId;
+                const isProductItem = item.id === productPrimaryId;
+                const dropdownName =
+                  isGuideItem && guideCategories.length
+                    ? 'guides'
+                    : isProductItem && productItems.length
+                      ? 'products'
+                      : null;
 
                 return (
                   <li
                     key={item.id}
-                    ref={isGuideItem ? guideTriggerRef : undefined}
-                    id={isGuideItem ? `${idPrefix}-guide-trigger` : undefined}
+                    ref={
+                      isGuideItem
+                        ? guideTriggerRef
+                        : isProductItem
+                          ? productTriggerRef
+                          : undefined
+                    }
+                    id={dropdownName ? `${idPrefix}-${dropdownName}-trigger` : undefined}
                     className={`${classes.PrimaryItem} ${
-                      isGuideItem ? classes.GuidePrimaryItem : ''
+                      dropdownName ? classes.DropdownPrimaryItem : ''
                     }`}
-                    data-guide-dropdown-open={
-                      isGuideItem ? String(openTray === 'guides') : undefined
+                    data-dropdown-open={
+                      dropdownName ? String(openTray === dropdownName) : undefined
                     }
                     onMouseEnter={() => {
-                      if (isGuideItem && guideCategories.length) {
-                        setOpenTray('guides');
-                      } else if (openTray === 'guides') {
+                      if (dropdownName) {
+                        setOpenTray(dropdownName);
+                      } else if (openTray === 'guides' || openTray === 'products') {
                         closeTray(false);
                       }
                     }}
@@ -200,7 +228,7 @@ export default function DesktopNavigation({
                       iconClassName={classes.PrimaryIcon}
                       labelClassName={classes.PrimaryLabel}
                     />
-                    {isGuideItem && guideCategories.length ? (
+                    {dropdownName ? (
                       <span className={classes.TrayIndicator} aria-hidden="true" />
                     ) : null}
                   </li>
@@ -212,7 +240,7 @@ export default function DesktopNavigation({
           <div
             className={classes.Utilities}
             onMouseEnter={() => {
-              if (openTray === 'guides') {
+              if (openTray === 'guides' || openTray === 'products') {
                 closeTray(false);
               }
             }}
@@ -252,6 +280,16 @@ export default function DesktopNavigation({
           guideCategories={guideCategories}
           searchItems={searchItems}
           labels={labels}
+          onNavigate={() => closeTray(false)}
+        />
+      ) : null}
+
+      {openTray === 'products' ? (
+        <DesktopNavigationTray
+          id={productTrayId}
+          labelledBy={`${idPrefix}-products-trigger`}
+          type="products"
+          productItems={productItems}
           onNavigate={() => closeTray(false)}
         />
       ) : null}

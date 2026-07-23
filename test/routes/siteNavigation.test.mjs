@@ -95,7 +95,16 @@ describe('responsive site navigation data', () => {
   });
 
   test('keeps the shop active across product and checkout routes only', () => {
-    const { primaryItems } = getSiteNavigation();
+    const { primaryItems, productItems } = getSiteNavigation();
+
+    assert.deepEqual(productItems, [
+      { href: '/tuotteet/madot', label: 'Kompostimadot' },
+      { href: '/tuotteet/kompostorin-kuituseos', label: 'Kuituseos' },
+    ]);
+    assert.equal(
+      productItems.every(({ href }) => safeRoutes.includes(href)),
+      true
+    );
 
     for (const pathname of [
       '/tuotteet',

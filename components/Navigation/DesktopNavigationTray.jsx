@@ -15,6 +15,7 @@ export default function DesktopNavigationTray({
   labelledBy,
   labels,
   onNavigate,
+  productItems = [],
   searchItems,
   secondarySections = [],
   settingsSection,
@@ -63,6 +64,25 @@ export default function DesktopNavigationTray({
             </div>
           ) : null}
         </div>
+      </section>
+    );
+  }
+
+  if (type === 'products') {
+    return (
+      <section
+        id={id}
+        className={`${classes.Tray} ${classes.ProductTray}`}
+        aria-labelledby={labelledBy}
+        data-navigation-tray="products"
+      >
+        <ul className={classes.ProductList}>
+          {productItems.map((item) => (
+            <li key={item.href}>
+              <NavigationAuxiliaryLink item={item} onNavigate={onNavigate} />
+            </li>
+          ))}
+        </ul>
       </section>
     );
   }
