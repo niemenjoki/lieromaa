@@ -139,35 +139,35 @@
   overflow-wrap: anywhere;
 }
 
-.GuidePrimaryItem:hover .PrimaryLink,
-.GuidePrimaryItem[data-guide-dropdown-open='true'] .PrimaryLink {
+.DropdownPrimaryItem:hover .PrimaryLink,
+.DropdownPrimaryItem[data-dropdown-open='true'] .PrimaryLink {
   background: color-mix(in srgb, var(--highlight-alt) 9%, transparent);
   opacity: 1;
 }
 
 .TrayIndicator {
+  position: absolute;
+  bottom: 0.44rem;
+  left: 50%;
   width: 0.72rem;
   height: 0.72rem;
-  flex: 0 0 auto;
-  margin-right: 0.55rem;
-  margin-left: -0.48rem;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   color: inherit;
   pointer-events: none;
-  transform: translateY(-0.18rem) rotate(45deg);
+  transform: translate(-50%, -0.18rem) rotate(45deg);
   transition:
     color 160ms ease,
     transform 160ms ease;
 }
 
-.GuidePrimaryItem:hover .TrayIndicator,
-.GuidePrimaryItem[data-guide-dropdown-open='true'] .TrayIndicator {
+.DropdownPrimaryItem:hover .TrayIndicator,
+.DropdownPrimaryItem[data-dropdown-open='true'] .TrayIndicator {
   color: var(--highlight-alt);
 }
 
-.GuidePrimaryItem[data-guide-dropdown-open='true'] .TrayIndicator {
-  transform: translateY(0.18rem) rotate(225deg);
+.DropdownPrimaryItem[data-dropdown-open='true'] .TrayIndicator {
+  transform: translate(-50%, 0.18rem) rotate(225deg);
 }
 
 .Utilities {
@@ -285,6 +285,40 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.ProductTray {
+  right: auto;
+  left: 50%;
+  width: min(34rem, calc(100vw - 2rem));
+  transform: translateX(-50%);
+}
+
+.ProductList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem;
+  list-style: none;
+}
+
+.ProductList a {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--line-color, var(--background-5));
+  background: var(--background-1);
+  color: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.ProductList a:hover {
+  border-color: var(--highlight-alt);
+  color: var(--highlight-alt);
+  opacity: 1;
 }
 
 .SecondaryTray {

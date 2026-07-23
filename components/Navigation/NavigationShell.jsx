@@ -71,6 +71,7 @@ function NavigationSurfaces({ copy, labels, language, navigation, searchItems })
     navigation.desktopPrimaryIds
   );
   const guideCategories = navigation.guideCategories ?? [];
+  const productItems = navigation.productItems ?? [];
   const secondarySections = navigation.secondarySections ?? [];
   const settingsSection = navigation.settingsSection ?? null;
 
@@ -90,6 +91,7 @@ function NavigationSurfaces({ copy, labels, language, navigation, searchItems })
         labels={labels}
         language={language}
         primaryItems={primaryItems}
+        productItems={productItems}
         desktopPrimaryItems={desktopPrimaryItems}
         searchItems={searchItems}
         secondarySections={secondarySections}
