@@ -139,19 +139,35 @@
   overflow-wrap: anywhere;
 }
 
-.TrayToggle {
-  width: 1.7rem;
-  height: 2.5rem;
-  margin-left: -0.38rem;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
+.GuidePrimaryItem:hover .PrimaryLink,
+.GuidePrimaryItem[data-guide-dropdown-open='true'] .PrimaryLink {
+  background: color-mix(in srgb, var(--highlight-alt) 9%, transparent);
+  opacity: 1;
 }
 
-.TrayToggle[aria-expanded='true'] {
+.TrayIndicator {
+  width: 0.72rem;
+  height: 0.72rem;
+  flex: 0 0 auto;
+  margin-right: 0.55rem;
+  margin-left: -0.48rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  color: inherit;
+  pointer-events: none;
+  transform: translateY(-0.18rem) rotate(45deg);
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.GuidePrimaryItem:hover .TrayIndicator,
+.GuidePrimaryItem[data-guide-dropdown-open='true'] .TrayIndicator {
   color: var(--highlight-alt);
+}
+
+.GuidePrimaryItem[data-guide-dropdown-open='true'] .TrayIndicator {
+  transform: translateY(0.18rem) rotate(225deg);
 }
 
 .Utilities {
