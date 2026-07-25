@@ -6,10 +6,10 @@ export const productMessages = Object.freeze({
   collection: Object.freeze({
     title: 'Tuotteet | Lieromaa',
     description:
-      'Lieromaan tuotteet matokompostoinnin aloittamiseen ja ylläpitoon: kompostimadot, käyttövalmis 14 litran matokompostori ja kompostorin kuituseos.',
+      'Lieromaan tuotteet matokompostointiin: kompostimadot, matopakettien lisävalinnat ja erikseen tilattava 500 g kuituseos.',
     pageName: 'Tuotteet',
     h1: 'Lieromaan tuotteet',
-    lead: 'Kompostimadot, käyttövalmis 14 litran matokompostori ja kompostorin ylläpitoa helpottava kuituseos samasta paikasta.',
+    lead: 'Kompostimadot, niiden lisävalintana käyttövalmis 14 litran matokompostori tai pieni kuituseos sekä erikseen tilattava 500 g kuituseos.',
     unavailable: 'Ei saatavilla',
   }),
   catalog: Object.freeze({
@@ -17,7 +17,7 @@ export const productMessages = Object.freeze({
       pageName: 'Osta kompostimatoja – Eisenia fetida matokompostointiin',
       title: 'Osta kompostimatoja | Lieromaa',
       description:
-        'Tilaa kotimaisia kompostimatoja koko Suomeen. Valitse pelkät madot tai madot käyttövalmiissa 14 litran matokompostorissa.',
+        'Tilaa kotimaisia kompostimatoja koko Suomeen ja lisää halutessasi käyttövalmis 14 litran matokompostori tai pieni kuituseos.',
       pageDescription:
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Voit valita pelkät madot tai käyttövalmiin 14 litran matokompostorin, jossa madot ovat jo asettuneet petimateriaaliin.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
@@ -41,7 +41,7 @@ export const productMessages = Object.freeze({
       description:
         'Lieromaan kompostorin kuituseos on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
       pageDescription:
-        'Helppokäyttöinen kuituseos matokompostin tasapainottamiseen ja ruokinnan tukemiseen.',
+        'Helppokäyttöinen 500 g kuituseos matokompostin tasapainottamiseen ja ruokinnan tukemiseen. Pienempi 150 g pakkaus on saatavilla vain matopaketin lisävalintana.',
       h1: 'Lieromaan matokompostorin kuituseos',
       productName: 'Lieromaan matokompostorin kuituseos',
       productDescription:
@@ -142,8 +142,8 @@ export const productMessages = Object.freeze({
     optionTitle: 'Valmis 14L matokompostori',
     shippingDelay:
       'Valmisteluaika on noin kaksi viikkoa. Käyttövalmis kompostori lähetetään kolmantena tilauksen jälkeisenä maanantaina, jotta petimateriaalin mikrobitoiminta ehtii käynnistyä ja madot kotiutua ennen kuljetusta.',
-    alreadyInCart:
-      'Käyttövalmis matokompostori on jo ostoskorissa. Voit poistaa sen ostoskorissa.',
+    alreadyInCart: ({ count }) =>
+      `Tähän matopakkaukseen on liitetty ostoskorissa ${count} ${count === 1 ? 'käyttövalmis matokompostori' : 'käyttövalmista matokompostoria'}.`,
   }),
   availability: Object.freeze({
     limitedAndDelayed:

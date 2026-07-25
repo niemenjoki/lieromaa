@@ -34,6 +34,11 @@ export const commerceMessages = Object.freeze({
       label: 'Ready-to-use 14-litre worm bin',
       imageAlt: 'Open 14-litre worm bin with prepared moist worm bedding',
     }),
+    smallCompostChow: Object.freeze({
+      name: 'Lieromaa compost fibre mix',
+      label: 'Compost fibre mix, 150 g',
+      description: 'The small pack is only available as an add-on to a worm package.',
+    }),
   }),
   order: Object.freeze({
     default: Object.freeze({
@@ -92,7 +97,9 @@ export const commerceMessages = Object.freeze({
       prepared_bin_requires_worms: () =>
         'The ready-to-use worm bin can only be ordered with compost worms.',
       prepared_bin_limit: () =>
-        'An order can contain no more than one ready-to-use worm bin.',
+        'Each worm package can have no more than one ready-to-use worm bin.',
+      small_fibre_mix_requires_worms: () =>
+        'The 150 g compost fibre mix can only be ordered as an add-on to a worm package.',
       worm_package_limit: ({ limit }) =>
         `An order can contain no more than ${limit} worm packages.`,
       fibre_mix_limit: ({ limit }) =>

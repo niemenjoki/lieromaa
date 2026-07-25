@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import { getCartItemsAfterRemoval, getCartOrderQuote } from '@/lib/orders/cartOrder';
+import {
+  getCartItemsAfterQuantityChange,
+  getCartItemsAfterRemoval,
+  getCartOrderQuote,
+} from '@/lib/orders/cartOrder';
 import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
@@ -276,11 +280,11 @@ describe('frontend public order normalization', () => {
     expectEqual(legacyPayload.pricing.itemPrice, 50);
   });
 
-  test('normalizePublicOrderSubmission should normalize standalone cart upsells as order items', () => {
+  test('normalizePublicOrderSubmission should keep a small fibre-mix add-on linked to worms and the large pack standalone', () => {
     const now = new Date('2026-05-02T10:00:00Z');
     const cartItems = [
       { sku: 'worms-25', quantity: 1 },
-      { sku: 'chow-150', quantity: 1 },
+      { sku: 'chow-150', parentSku: 'worms-25', quantity: 1 },
       { sku: 'chow-500', quantity: 1 },
     ];
     const expectedQuote = getCartOrderQuote({
@@ -303,15 +307,17 @@ describe('frontend public order normalization', () => {
     expectDeepEqual(
       payload.items.map((item) => ({
         sku: item.sku,
+        parentSku: item.parentSku,
         packageQuantity: item.packageQuantity,
         itemTotal: item.itemTotal,
       })),
       expectedQuote.items.map((item) => ({
         sku: item.sku,
+        parentSku: item.parentSku || null,
         packageQuantity: item.packageQuantity,
         itemTotal: item.itemTotal,
       })),
-      'normalizePublicOrderSubmission should keep each standalone cart SKU in the forwarded items payload'
+      'normalizePublicOrderSubmission should preserve add-on parent links in the forwarded items payload'
     );
     expectEqual(
       payload.product.sku,
@@ -410,7 +416,7 @@ describe('frontend public order normalization', () => {
     const now = new Date('2026-07-14T10:00:00Z');
     const cartItems = [
       { sku: 'worms-50', quantity: 1 },
-      { sku: 'worms-ready-bin-14l', quantity: 1 },
+      { sku: 'worms-ready-bin-14l', parentSku: 'worms-50', quantity: 1 },
     ];
     const expectedQuote = getCartOrderQuote({
       items: cartItems,
@@ -427,6 +433,7 @@ describe('frontend public order normalization', () => {
     );
 
     expectEqual(payload.items[1].sku, 'worms-ready-bin-14l');
+    expectEqual(payload.items[1].parentSku, 'worms-50');
     expectEqual(payload.items[1].key, 'worms');
     expectEqual(payload.items[1].label, 'Käyttövalmis 14 litran matokompostori');
     expectEqual(payload.items[1].quantity, 1);
@@ -435,22 +442,45 @@ describe('frontend public order normalization', () => {
     expectEqual(payload.pricing.itemPrice, expectedQuote.itemSubtotal);
   });
 
-  test('prepared worm bins require worms and are limited to one', () => {
+  test('prepared worm bins require an attached worm package and are limited to one per package', () => {
     assert.throws(
       () =>
         getCartOrderQuote({
-          items: [{ sku: 'worms-ready-bin-14l', quantity: 1 }],
+          items: [
+            {
+              sku: 'worms-ready-bin-14l',
+              parentSku: 'worms-25',
+              quantity: 1,
+            },
+          ],
           shippingMethod: 'nouto',
         }),
       (error) => error?.code === 'prepared_bin_requires_worms'
     );
 
+    const allowedQuote = getCartOrderQuote({
+      items: [
+        { sku: 'worms-25', quantity: 2 },
+        {
+          sku: 'worms-ready-bin-14l',
+          parentSku: 'worms-25',
+          quantity: 2,
+        },
+      ],
+      shippingMethod: 'nouto',
+    });
+    expectEqual(allowedQuote.items[1].packageQuantity, 2);
+
     assert.throws(
       () =>
         getCartOrderQuote({
           items: [
-            { sku: 'worms-25', quantity: 1 },
-            { sku: 'worms-ready-bin-14l', quantity: 2 },
+            { sku: 'worms-25', quantity: 2 },
+            {
+              sku: 'worms-ready-bin-14l',
+              parentSku: 'worms-25',
+              quantity: 3,
+            },
           ],
           shippingMethod: 'nouto',
         }),
@@ -461,14 +491,52 @@ describe('frontend public order normalization', () => {
   test('removing the last worm package also removes its prepared-bin add-on', () => {
     const cartItems = [
       { sku: 'worms-25', quantity: 1 },
-      { sku: 'worms-ready-bin-14l', quantity: 1 },
-      { sku: 'chow-150', quantity: 1 },
+      { sku: 'worms-ready-bin-14l', parentSku: 'worms-25', quantity: 1 },
+      { sku: 'chow-150', parentSku: 'worms-25', quantity: 1 },
+      { sku: 'chow-500', quantity: 1 },
     ];
 
     expectDeepEqual(
       getCartItemsAfterRemoval(cartItems, 'worms-25'),
-      [{ sku: 'chow-150', quantity: 1 }],
-      'removing the last worm package should not leave an orphaned prepared bin'
+      [{ sku: 'chow-500', quantity: 1 }],
+      'removing a worm package should remove all add-ons attached to it'
+    );
+  });
+
+  test('reducing a worm package quantity also reduces excess prepared bins', () => {
+    expectDeepEqual(
+      getCartItemsAfterQuantityChange(
+        [
+          { sku: 'worms-25', quantity: 3 },
+          {
+            sku: 'worms-ready-bin-14l',
+            parentSku: 'worms-25',
+            quantity: 3,
+          },
+        ],
+        'worms-25',
+        2
+      ),
+      [
+        { sku: 'worms-25', quantity: 2 },
+        {
+          sku: 'worms-ready-bin-14l',
+          parentSku: 'worms-25',
+          quantity: 2,
+        },
+      ],
+      'prepared-bin quantity should follow the parent worm-package quantity'
+    );
+  });
+
+  test('the 150 g fibre mix cannot be ordered without an attached worm package', () => {
+    assert.throws(
+      () =>
+        getCartOrderQuote({
+          items: [{ sku: 'chow-150', quantity: 1 }],
+          shippingMethod: 'nouto',
+        }),
+      (error) => error?.code === 'small_fibre_mix_requires_worms'
     );
   });
 
@@ -514,25 +582,25 @@ describe('frontend public order normalization', () => {
     );
   });
 
-  test('normalizePublicOrderSubmission should accept cart orders with two worm packages', () => {
+  test('normalizePublicOrderSubmission should accept cart orders with five worm packages', () => {
     const now = new Date('2026-05-02T10:00:00Z');
 
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormData({
         sku: '',
         tuote_avain: '',
-        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 2 }]),
+        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 5 }]),
         toimitus: 'nouto',
       }),
       { now }
     );
 
     expectEqual(payload.product.sku, 'worms-25');
-    expectEqual(payload.product.packageQuantity, 2);
-    expectEqual(payload.product.quantity, 100);
+    expectEqual(payload.product.packageQuantity, 5);
+    expectEqual(payload.product.quantity, 250);
   });
 
-  test('normalizePublicOrderSubmission should reject cart orders with more than two worm packages', () => {
+  test('normalizePublicOrderSubmission should reject cart orders with more than five worm packages', () => {
     const now = new Date('2026-05-02T10:00:00Z');
 
     assert.throws(
@@ -541,7 +609,7 @@ describe('frontend public order normalization', () => {
           createValidOrderFormData({
             sku: '',
             tuote_avain: '',
-            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 3 }]),
+            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 6 }]),
             toimitus: 'nouto',
           }),
           { now }
@@ -553,8 +621,8 @@ describe('frontend public order normalization', () => {
         );
         assert.match(
           error.publicMessage,
-          /enintään 2 matopakettia/,
-          'normalizePublicOrderSubmission should explain the two-worm-package cart limit'
+          /enintään 5 matopakettia/,
+          'normalizePublicOrderSubmission should explain the five-worm-package cart limit'
         );
         return true;
       }

@@ -6,19 +6,22 @@ export const englishPageDefinitions = Object.freeze(
       canonicalUrl: '/en',
       title: 'Compost worms and worm-composting supplies in Finland | Lieromaa',
       description:
-        'Shop locally raised compost worms, a ready-to-use worm bin and compost fibre mix from Lieromaa, with delivery within Finland.',
+        'Shop locally raised compost worms with optional add-ons and a separately orderable 500 g compost fibre mix from Lieromaa.',
+      updatedAt: '2026-07-25',
     },
     {
       canonicalUrl: '/en/products/compost-worms',
       title: 'Buy compost worms in Finland | Lieromaa',
       description:
-        'Order locally raised compost worms in Finland. Choose worms for your own bin or a ready-to-use 14-litre worm bin.',
+        'Order locally raised compost worms in Finland and optionally add a ready-to-use 14-litre worm bin or a small fibre-mix pack.',
+      updatedAt: '2026-07-25',
     },
     {
       canonicalUrl: '/en/products/compost-fibre-mix',
       title: 'Compost fibre mix | Lieromaa',
       description:
         'Lieromaa compost fibre mix is an easy-to-use supplement for balancing a worm bin when the amount of food waste varies.',
+      updatedAt: '2026-07-25',
     },
     {
       canonicalUrl: '/en/worm-calculator',
@@ -89,7 +92,7 @@ export const englishPageDefinitions = Object.freeze(
         'Leave a star rating, written review and private feedback for a verified Lieromaa order.',
       robots: { index: false, follow: false },
     },
-  ].map((page) => Object.freeze({ ...page, updatedAt: ENGLISH_PROJECT_PUBLISHED_AT }))
+  ].map((page) => Object.freeze({ updatedAt: ENGLISH_PROJECT_PUBLISHED_AT, ...page }))
 );
 
 export const englishIndexablePageDefinitions = Object.freeze(

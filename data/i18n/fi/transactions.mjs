@@ -31,6 +31,7 @@ export const transactionMessages = Object.freeze({
     unitPrice: ({ price }) => `${price} € / kpl`,
     quantity: 'Määrä',
     fixedQuantity: 'Määrä 1',
+    addOns: 'Lisävalinnat',
     remove: 'Poista',
     productsSubtotal: 'Tuotteet',
     continue: 'Jatka',
@@ -188,7 +189,9 @@ export const transactionMessages = Object.freeze({
     prepared_bin_requires_worms:
       'Käyttövalmiin matokompostorin voi tilata vain kompostimatojen kanssa.',
     prepared_bin_limit:
-      'Yhdessä tilauksessa voi olla enintään yksi käyttövalmis matokompostori.',
+      'Jokaista matopakettia kohden voi tilata enintään yhden käyttövalmiin matokompostorin.',
+    small_fibre_mix_requires_worms:
+      'Kuituseoksen 150 g pakkauksen voi tilata vain matopaketin lisävalintana.',
     worm_package_limit: 'Tilauksessa on liian monta matopakettia.',
     fibre_mix_limit: 'Tilauksessa on liian monta kuituseosta.',
   }),

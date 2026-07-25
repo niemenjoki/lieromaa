@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { DEFAULT_LANGUAGE } from '@/lib/i18n/config.mjs';
 import {
   getCartErrorMessage,
+  getCartItemsAfterQuantityChange,
   getCartItemsAfterRemoval,
   getCartLineItems,
   normalizeCartItems,
@@ -142,18 +143,21 @@ export function CartProvider({ children, language = DEFAULT_LANGUAGE }) {
     addItem(sku, quantity = 1) {
       return addItems([{ sku, quantity }]);
     },
-    setItemQuantity(sku, quantity) {
+    setItemQuantity(sku, quantity, parentSku = '') {
       const normalizedSku = String(sku || '').trim();
       const nextQuantity = Math.max(1, Math.floor(Number(quantity) || 1));
-      const nextItems = items.map((item) =>
-        item.sku === normalizedSku ? { ...item, quantity: nextQuantity } : item
+      const nextItems = getCartItemsAfterQuantityChange(
+        items,
+        normalizedSku,
+        nextQuantity,
+        parentSku
       );
 
       return commitItems(nextItems);
     },
-    removeItem(sku) {
+    removeItem(sku, parentSku = '') {
       const normalizedSku = String(sku || '').trim();
-      return commitItems(getCartItemsAfterRemoval(items, normalizedSku));
+      return commitItems(getCartItemsAfterRemoval(items, normalizedSku, parentSku));
     },
     clearCart() {
       setItems([]);

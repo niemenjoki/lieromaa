@@ -90,10 +90,11 @@ export const cartAddOnsSource = {
     key: 'preparedWormBin',
     copyKey: 'preparedWormBin',
     sku: 'worms-ready-bin-14l',
+    productKey: 'worms',
     parentProductKey: 'worms',
     priceSku: 'worms-ready-bin-14l',
-    maxQuantity: 1,
-    fixedQuantity: true,
+    maxQuantityPerParent: 1,
+    fixedQuantity: false,
     shippingScheduleKey: PREPARED_WORM_BIN_SHIPPING_KEY,
     image: {
       src: '/images/content/kompostori_avattuna.avif',
@@ -101,6 +102,18 @@ export const cartAddOnsSource = {
       width: 1200,
       height: 900,
     },
+  },
+  'chow-150': {
+    key: 'smallCompostChow',
+    copyKey: 'smallCompostChow',
+    sku: 'chow-150',
+    productKey: 'compostChow',
+    parentProductKey: 'worms',
+    priceSku: 'chow-150',
+    amount: 150,
+    salesUnit: 'weight',
+    weightGrams: 150,
+    fixedQuantity: false,
   },
 };
 
@@ -132,13 +145,8 @@ export const productCatalogCommerceSource = {
     },
   },
   compostChow: {
-    variantSkus: ['chow-150', 'chow-500'],
+    variantSkus: ['chow-500'],
     variantMetadata: {
-      'chow-150': {
-        amount: 150,
-        salesUnit: 'weight',
-        weightGrams: 150,
-      },
       'chow-500': {
         amount: 500,
         salesUnit: 'weight',
@@ -151,7 +159,7 @@ export const productCatalogCommerceSource = {
     },
     order: {
       copyKey: 'compostChow',
-      defaultVariantAmount: 150,
+      defaultVariantAmount: 500,
       variantSelectorPosition: 'beforeFulfillment',
       shippingOptions: [...cartShippingOptionsSource],
       shippingHelperTextKey: 'postiPickup',

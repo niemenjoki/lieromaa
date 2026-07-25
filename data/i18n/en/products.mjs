@@ -6,10 +6,10 @@ export const productMessages = Object.freeze({
   collection: Object.freeze({
     title: 'Products | Lieromaa',
     description:
-      'Shop compost worms, a ready-to-use 14-litre worm bin and Lieromaa compost fibre mix for worm composting in Finland.',
+      'Shop compost worms with optional add-ons and a separately orderable 500 g pack of Lieromaa compost fibre mix in Finland.',
     pageName: 'Products',
     h1: 'Lieromaa products',
-    lead: 'Locally raised compost worms, a ready-to-use 14-litre worm bin and compost fibre mix to help keep a worm bin balanced.',
+    lead: 'Locally raised compost worms with a ready-to-use 14-litre bin or small fibre-mix add-on, plus a separately orderable 500 g fibre-mix pack.',
     unavailable: 'Temporarily unavailable',
   }),
   catalog: Object.freeze({
@@ -17,7 +17,7 @@ export const productMessages = Object.freeze({
       pageName: 'Compost worms for worm composting in Finland',
       title: 'Buy compost worms in Finland | Lieromaa',
       description:
-        'Order locally raised compost worms in Finland. Choose worms for your own bin or a ready-to-use 14-litre worm bin.',
+        'Order locally raised compost worms in Finland and optionally add a ready-to-use 14-litre worm bin or a small fibre-mix pack.',
       pageDescription:
         'Order compost worms (Eisenia fetida, commonly called red wigglers) for delivery within Finland or local pickup in Järvenpää.',
       h1: 'Buy Lieromaa compost worms (Eisenia fetida)',
@@ -41,7 +41,7 @@ export const productMessages = Object.freeze({
       description:
         'Lieromaa compost fibre mix is an easy-to-use supplement for balancing a worm bin when the amount of food waste varies.',
       pageDescription:
-        'An easy-to-use compost fibre mix for balancing a worm bin and temporarily supplementing its food.',
+        'An easy-to-use 500 g compost fibre mix for balancing a worm bin and temporarily supplementing its food. The smaller 150 g pack is only available as an add-on to a worm package.',
       h1: 'Lieromaa compost fibre mix',
       productName: 'Lieromaa compost fibre mix',
       productDescription:
@@ -142,8 +142,8 @@ export const productMessages = Object.freeze({
     optionTitle: 'Ready-to-use 14-litre worm bin',
     shippingDelay:
       'Preparation takes about two weeks. The ready-to-use worm bin is dispatched on the third Monday after the order is placed so that microbial activity can begin and the worms can settle before transport.',
-    alreadyInCart:
-      'The ready-to-use worm bin is already in your shopping cart. You can remove it in the cart.',
+    alreadyInCart: ({ count }) =>
+      `${count} ready-to-use ${count === 1 ? 'worm bin is' : 'worm bins are'} attached to this worm package in the shopping cart.`,
   }),
   availability: Object.freeze({
     limitedAndDelayed:
