@@ -89,7 +89,13 @@ export default function EnglishCompostFibreMixPage() {
               <aside className={classes.SummaryCard}>
                 <h2>How to order</h2>
                 <ul className={classes.FeatureList}>
-                  <li>150 g and 500 g packs for supplementing a worm bin’s food.</li>
+                  <li>
+                    A separately orderable 500 g pack for supplementing a worm bin’s food.
+                  </li>
+                  <li>
+                    The smaller 150 g pack is only available as an add-on to a worm
+                    package.
+                  </li>
                   <li>
                     Ingredients: wheat bran, oat bran, soya meal, wheat flour, garden
                     lime, zeolite and basalt.

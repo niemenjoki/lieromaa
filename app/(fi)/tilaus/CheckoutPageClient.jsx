@@ -110,6 +110,23 @@ function getAvailabilityDelaySnapshot(lines) {
   );
 }
 
+function groupCartLines(lines) {
+  const addOnsByParentSku = new Map();
+
+  for (const line of lines.filter((candidate) => candidate.isAddOn)) {
+    const parentAddOns = addOnsByParentSku.get(line.parentSku) ?? [];
+    parentAddOns.push(line);
+    addOnsByParentSku.set(line.parentSku, parentAddOns);
+  }
+
+  return lines
+    .filter((line) => !line.isAddOn)
+    .map((line) => ({
+      line,
+      addOns: addOnsByParentSku.get(line.sku) ?? [],
+    }));
+}
+
 function CartQuantityEditor({ quantity, onCommit }) {
   const [draftQuantity, setDraftQuantity] = useState(String(quantity || 1));
 
@@ -270,6 +287,7 @@ export default function CheckoutPageClient({ language }) {
     fulfillmentType === 'local_pickup'
       ? copy.estimatedPickupDate
       : copy.estimatedDispatchDate;
+  const cartLineGroups = groupCartLines(quote?.items ?? []);
 
   const resetPickupPoint = () => {
     setPickupPoints([]);
@@ -317,14 +335,14 @@ export default function CheckoutPageClient({ language }) {
     }
   };
 
-  const handleCartQuantityChange = (sku, quantity) => {
-    const result = setItemQuantity(sku, quantity);
+  const handleCartQuantityChange = (sku, quantity, parentSku = '') => {
+    const result = setItemQuantity(sku, quantity, parentSku);
     setCartFeedback(result.ok ? '' : result.message || copy.quantityUpdateFailed);
     return result.ok;
   };
 
-  const handleRemoveItem = (sku) => {
-    removeItem(sku);
+  const handleRemoveItem = (sku, parentSku = '') => {
+    removeItem(sku, parentSku);
     setCartFeedback('');
   };
 
@@ -584,7 +602,7 @@ export default function CheckoutPageClient({ language }) {
             </p>
           ) : null}
           <ul className={classes.LineList}>
-            {(quote?.items ?? []).map((line) => (
+            {cartLineGroups.map(({ line, addOns }) => (
               <li key={line.sku} className={classes.LineItem}>
                 <div>
                   <div className={classes.LineTitle}>{line.label}</div>
@@ -598,7 +616,7 @@ export default function CheckoutPageClient({ language }) {
                         <CartQuantityEditor
                           quantity={line.packageQuantity}
                           onCommit={(quantity) =>
-                            handleCartQuantityChange(line.sku, quantity)
+                            handleCartQuantityChange(line.sku, quantity, line.parentSku)
                           }
                         />
                       </label>
@@ -608,13 +626,67 @@ export default function CheckoutPageClient({ language }) {
                     <button
                       type="button"
                       className={classes.DangerButton}
-                      onClick={() => handleRemoveItem(line.sku)}
+                      onClick={() => handleRemoveItem(line.sku, line.parentSku)}
                     >
                       {copy.remove}
                     </button>
                   </div>
                 </div>
                 <strong>{formatCurrency(line.itemTotal, language)}</strong>
+
+                {addOns.length ? (
+                  <div className={classes.AddOnGroup}>
+                    <div className={classes.AddOnHeading}>{copy.addOns}</div>
+                    <ul className={classes.AddOnList}>
+                      {addOns.map((addOn) => (
+                        <li
+                          key={`${addOn.parentSku}:${addOn.sku}`}
+                          className={classes.AddOnItem}
+                        >
+                          <div>
+                            <div className={classes.AddOnTitle}>{addOn.label}</div>
+                            <p className={classes.LineMeta}>
+                              {copy.unitPrice({
+                                price: formatPrice(addOn.unitPrice, language),
+                              })}
+                            </p>
+                            <div className={classes.LineActions}>
+                              {addOn.isQuantityEditable ? (
+                                <label className={classes.Field}>
+                                  <span>{copy.quantity}</span>
+                                  <CartQuantityEditor
+                                    quantity={addOn.packageQuantity}
+                                    onCommit={(quantity) =>
+                                      handleCartQuantityChange(
+                                        addOn.sku,
+                                        quantity,
+                                        addOn.parentSku
+                                      )
+                                    }
+                                  />
+                                </label>
+                              ) : (
+                                <span className={classes.FixedQuantity}>
+                                  {copy.fixedQuantity}
+                                </span>
+                              )}
+                              <button
+                                type="button"
+                                className={classes.DangerButton}
+                                onClick={() =>
+                                  handleRemoveItem(addOn.sku, addOn.parentSku)
+                                }
+                              >
+                                {copy.remove}
+                              </button>
+                            </div>
+                          </div>
+                          <strong>{formatCurrency(addOn.itemTotal, language)}</strong>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
               </li>
             ))}
           </ul>

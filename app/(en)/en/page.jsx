@@ -17,7 +17,7 @@ const pageMetadata = {
   language,
   title: 'Compost worms and worm-composting supplies in Finland | Lieromaa',
   description:
-    'Shop locally raised compost worms, a ready-to-use worm bin and compost fibre mix from Lieromaa, with delivery within Finland.',
+    'Shop locally raised compost worms with optional add-ons and a separately orderable 500 g compost fibre mix from Lieromaa.',
   canonicalUrl: getRoutePath('products', language),
 };
 const productKeys = ['worms', 'compostChow'];

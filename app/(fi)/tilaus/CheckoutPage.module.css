@@ -80,6 +80,51 @@
   opacity: 0.86;
 }
 
+.AddOnGroup {
+  grid-column: 1 / -1;
+  margin-top: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  border-left: 3px solid var(--highlight);
+  border-radius: 0 10px 10px 0;
+  background: var(--background-1);
+}
+
+.AddOnHeading {
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
+
+.AddOnList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.AddOnItem {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--background-6);
+}
+
+.AddOnItem:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.AddOnItem + .AddOnItem {
+  margin-top: 0.75rem;
+}
+
+.AddOnTitle {
+  font-weight: 700;
+}
+
 .LineActions {
   display: flex;
   flex-wrap: wrap;
@@ -279,6 +324,10 @@
   }
 
   .LineItem {
+    grid-template-columns: 1fr;
+  }
+
+  .AddOnItem {
     grid-template-columns: 1fr;
   }
 

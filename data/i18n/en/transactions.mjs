@@ -31,6 +31,7 @@ export const transactionMessages = Object.freeze({
     unitPrice: ({ price }) => `${price} € each`,
     quantity: 'Quantity',
     fixedQuantity: 'Quantity 1',
+    addOns: 'Add-ons',
     remove: 'Remove',
     productsSubtotal: 'Products',
     continue: 'Continue',
@@ -186,7 +187,10 @@ export const transactionMessages = Object.freeze({
     unknown_product: 'The shopping cart contains an unknown product.',
     prepared_bin_requires_worms:
       'The ready-to-use worm bin can only be ordered with compost worms.',
-    prepared_bin_limit: 'An order can contain no more than one ready-to-use worm bin.',
+    prepared_bin_limit:
+      'Each worm package can have no more than one ready-to-use worm bin.',
+    small_fibre_mix_requires_worms:
+      'The 150 g compost fibre mix can only be ordered as an add-on to a worm package.',
     worm_package_limit: 'The order contains too many worm packages.',
     fibre_mix_limit: 'The order contains too many packs of compost fibre mix.',
   }),

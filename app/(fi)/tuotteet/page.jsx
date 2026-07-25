@@ -12,7 +12,7 @@ import classes from './ProductPage.module.css';
 const pageMetadata = {
   title: 'Tuotteet | Lieromaa',
   description:
-    'Lieromaan tuotteet matokompostoinnin aloittamiseen ja ylläpitoon: kompostimadot, käyttövalmis 14 litran matokompostori ja kompostorin kuituseos.',
+    'Lieromaan tuotteet matokompostointiin: kompostimadot, matopakettien lisävalinnat ja erikseen tilattava 500 g kuituseos.',
   canonicalUrl: '/tuotteet',
 };
 
@@ -76,8 +76,8 @@ export default function ProductsPage() {
         <div className={classes.Content}>
           <section className={classes.SectionStack}>
             <p className={classes.Lead}>
-              Kompostimadot, käyttövalmis 14 litran matokompostori ja kompostorin
-              ylläpitoa helpottava kuituseos samasta paikasta.
+              Kompostimadot, niiden lisävalintana käyttövalmis 14 litran matokompostori
+              tai pieni kuituseos sekä erikseen tilattava 500 g kuituseos.
             </p>
 
             <div className={classes.ProductGrid}>

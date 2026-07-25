@@ -16,7 +16,7 @@ export default function PreparedWormBinSelector({
   addOn,
   selected,
   onChange,
-  alreadyInCart,
+  alreadyInCartCount,
   language,
 }) {
   const copy = getProductMessages(language).preparedBin;
@@ -155,8 +155,10 @@ export default function PreparedWormBinSelector({
           <p className={classes.PreparedBinShippingDelay}>{copy.shippingDelay}</p>
         ) : null}
 
-        {alreadyInCart ? (
-          <p className={classes.PreparedBinCartStatus}>{copy.alreadyInCart}</p>
+        {alreadyInCartCount ? (
+          <p className={classes.PreparedBinCartStatus}>
+            {copy.alreadyInCart({ count: alreadyInCartCount })}
+          </p>
         ) : null}
       </div>
     </div>

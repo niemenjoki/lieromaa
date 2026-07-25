@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useCart } from '@/components/Cart/CartProvider';
 import SafeImage from '@/components/SafeImage/SafeImage';
@@ -188,13 +188,13 @@ export default function AddToCartPanel({
   const productCopy = productMessages.catalog[productKey];
   const orderConfig = getProductOrderConfig(productKey, language);
   const productAddOns = getProductCartAddOns(productKey, language);
-  const preparedWormBin = productAddOns[0] ?? null;
-  const preparedWormBinInCart = preparedWormBin
-    ? items.some((item) => item.sku === preparedWormBin.sku)
-    : false;
-  const isPreparedWormBinSelected = preparedWormBin
-    ? selectedAddOnSku === preparedWormBin.sku || preparedWormBinInCart
-    : false;
+  const preparedWormBin =
+    productAddOns.find((addOn) => addOn.key === 'preparedWormBin') ?? null;
+  const smallFibreMix =
+    productAddOns.find((addOn) => addOn.key === 'smallCompostChow') ?? null;
+  const isPreparedWormBinSelected = Boolean(
+    preparedWormBin && selectedAddOnSku === preparedWormBin.sku
+  );
   const selectedVariant =
     variants.find((variant) => variant.sku === selectedSku) ?? defaultVariant;
   const selectedExpansionVariant =
@@ -203,21 +203,26 @@ export default function AddToCartPanel({
       : null;
   const selectedOrderSku = selectedExpansionVariant?.sku ?? selectedSku;
   const selectedCartItem = items.find((item) => item.sku === selectedOrderSku) ?? null;
+  const preparedWormBinInCartCount = preparedWormBin
+    ? (items.find(
+        (item) => item.sku === preparedWormBin.sku && item.parentSku === selectedOrderSku
+      )?.quantity ?? 0)
+    : 0;
 
-  const relatedProductGroups = useMemo(
-    () =>
-      relatedProductKeys
-        .map((relatedProductKey) => {
-          const relatedVariants = getAvailableProductVariants(relatedProductKey);
+  const relatedProductGroups = relatedProductKeys
+    .map((relatedProductKey) => {
+      const relatedVariants = getAvailableProductVariants(relatedProductKey);
+      const wormAddOnVariants =
+        productKey === 'worms' && relatedProductKey === 'compostChow' && smallFibreMix
+          ? [{ ...smallFibreMix, isAvailable: true }, ...relatedVariants]
+          : relatedVariants;
 
-          return {
-            productKey: relatedProductKey,
-            variants: relatedVariants,
-          };
-        })
-        .filter((entry) => entry.variants.length),
-    [relatedProductKeys]
-  );
+      return {
+        productKey: relatedProductKey,
+        variants: wormAddOnVariants,
+      };
+    })
+    .filter((entry) => entry.variants.length);
   const showRelatedProducts = relatedProductGroups.length > 0;
 
   const handleAddToCart = () => {
@@ -226,14 +231,24 @@ export default function AddToCartPanel({
     if (selectedOrderSku) {
       nextItems.push({ sku: selectedOrderSku, quantity: 1 });
 
-      if (isPreparedWormBinSelected && !preparedWormBinInCart) {
-        nextItems.push({ sku: preparedWormBin.sku, quantity: 1 });
+      if (isPreparedWormBinSelected) {
+        nextItems.push({
+          sku: preparedWormBin.sku,
+          parentSku: selectedOrderSku,
+          quantity: 1,
+        });
       }
 
       for (const group of relatedProductGroups) {
         const selectedRelatedSku = selectedRelatedProducts[group.productKey];
         if (selectedRelatedSku) {
-          nextItems.push({ sku: selectedRelatedSku, quantity: 1 });
+          nextItems.push({
+            sku: selectedRelatedSku,
+            ...(selectedRelatedSku === smallFibreMix?.sku
+              ? { parentSku: selectedOrderSku }
+              : {}),
+            quantity: 1,
+          });
         }
       }
     }
@@ -380,7 +395,7 @@ export default function AddToCartPanel({
           addOn={preparedWormBin}
           selected={isPreparedWormBinSelected}
           onChange={setSelectedAddOnSku}
-          alreadyInCart={preparedWormBinInCart}
+          alreadyInCartCount={preparedWormBinInCartCount}
           language={language}
         />
       ) : null}

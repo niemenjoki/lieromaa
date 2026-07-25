@@ -40,7 +40,7 @@ const productIndexPage = {
   canonicalUrl: '/tuotteet',
   title: 'Tuotteet | Lieromaa',
   description:
-    'Lieromaan tuotteet matokompostoinnin aloittamiseen ja ylläpitoon: kompostimadot, käyttövalmis 14 litran matokompostori ja kompostorin kuituseos.',
+    'Lieromaan tuotteet matokompostointiin: kompostimadot, matopakettien lisävalinnat ja erikseen tilattava 500 g kuituseos.',
 };
 
 const checkoutPage = {

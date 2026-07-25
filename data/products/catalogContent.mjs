@@ -6,12 +6,12 @@ export const productCatalogContentSource = {
       pageName: 'Osta kompostimatoja – Eisenia fetida matokompostointiin',
       title: 'Osta kompostimatoja | Lieromaa',
       description:
-        'Tilaa kotimaisia kompostimatoja koko Suomeen. Valitse pelkät madot tai madot käyttövalmiissa 14 litran matokompostorissa.',
+        'Tilaa kotimaisia kompostimatoja koko Suomeen ja lisää halutessasi käyttövalmis 14 litran matokompostori tai pieni kuituseos.',
       pageDescription:
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Voit valita pelkät madot tai käyttövalmiin 14 litran matokompostorin, jossa madot ovat jo asettuneet petimateriaaliin.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
-      updatedAt: '2026-07-14',
+      updatedAt: '2026-07-25',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -93,7 +93,7 @@ export const productCatalogContentSource = {
         'Lieromaan kompostorin kuituseos on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
       h1: 'Lieromaan matokompostorin kuituseos',
       navigationLabel: 'Kuituseos',
-      updatedAt: '2026-06-03',
+      updatedAt: '2026-07-25',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -103,8 +103,8 @@ export const productCatalogContentSource = {
     product: {
       name: 'Lieromaan matokompostorin kuituseos',
       description:
-        'Helppokäyttöinen lisäseos kompostiin. Helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee',
-      sku: 'chow-150',
+        'Helppokäyttöinen 500 g kuituseos kompostiin. Helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee',
+      sku: 'chow-500',
     },
     media: {
       images: [
