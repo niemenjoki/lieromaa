@@ -194,6 +194,11 @@ body::-webkit-scrollbar-thumb {
   background: var(--highlight);
 }
 
+/* Consent preferences remain available through the site's own controls. */
+.google-revocation-link-placeholder {
+  display: none !important;
+}
+
 .container {
   display: flex;
   min-height: 100vh;
