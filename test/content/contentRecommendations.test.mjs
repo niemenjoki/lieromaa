@@ -124,7 +124,7 @@ describe('content recommendations', () => {
     assert.ok(adjacentGuide.recommendationScore > distantGuide.recommendationScore);
   });
 
-  test('hot composting pages recommend the other two standalone guides', () => {
+  test('hot composting pages recommend the other guides in the curated cluster', () => {
     const guide = getContentMetadata({
       type: CONTENT_TYPES.GUIDE,
       slug: 'lampokompostorin-ongelmat',
@@ -139,7 +139,7 @@ describe('content recommendations', () => {
           ),
         },
       },
-      maxRecommendations: 2,
+      maxRecommendations: HOT_COMPOSTING_GUIDE_SLUGS.length - 1,
     });
 
     assert.deepEqual(
@@ -147,6 +147,7 @@ describe('content recommendations', () => {
       [
         `${CONTENT_TYPES.GUIDE}:lampokompostori-ei-lampene`,
         `${CONTENT_TYPES.GUIDE}:lampokompostorin-tyhjennys-ja-jalkikompostointi`,
+        `${CONTENT_TYPES.GUIDE}:voiko-kompostimadot-laittaa-lampokompostoriin`,
       ].sort()
     );
   });

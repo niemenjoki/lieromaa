@@ -284,7 +284,7 @@ test('hot composting category metadata has correct social copy and main image', 
   });
   const expectedTitle = 'Lämpökompostointi: toiminta, ongelmat ja käyttö | Lieromaa';
   const expectedDescription =
-    'Itsenäiset oppaat lämpökompostorin toimintaan, matalan lämpötilan arviointiin, ongelmanratkaisuun, tyhjennykseen ja jälkikompostointiin.';
+    'Oppaat lämpökompostorin toimintaan, hoitoon, ongelmanratkaisuun, kompostimatojen käyttöön, tyhjennykseen ja jälkikompostointiin.';
   const expectedAlt = 'Henkilö lisää biojätettä avoimeen lämpökompostoriin pihalla.';
 
   assert.equal(metadata.title, expectedTitle);

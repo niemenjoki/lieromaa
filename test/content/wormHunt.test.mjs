@@ -14,7 +14,7 @@ const EXPECTED_PATHS = [
   '/',
   '/opas/kompostorin-hoito/mita-matokompostoriin-saa-laittaa-mita-ei-saa',
   '/opas/kompostorin-hoito/matokompostin-tasapaino-liikaa-vai-liian-vahan-jatetta',
-  '/opas/kompostorin-perustaminen/voiko-kompostimadot-laittaa-lampokompostoriin',
+  '/opas/lämpökompostointi/voiko-kompostimadot-laittaa-lampokompostoriin',
   '/opas/kompostin-hyödyntäminen/valoerottelu-matoystavallinen-tapa-kerata-matokakka',
   '/opas/kompostin-hyödyntäminen/matotee-matokakasta-valmistus-ja-kaytto',
 ];
