@@ -32,6 +32,13 @@ const nextConfig = {
       },
       {
         source:
+          '/opas/kompostorin-perustaminen/voiko-kompostimadot-laittaa-lampokompostoriin',
+        destination:
+          '/opas/lämpökompostointi/voiko-kompostimadot-laittaa-lampokompostoriin',
+        permanent: true,
+      },
+      {
+        source:
           '/opas/kompostin-hyödyntäminen/kompostitee-matokakasta-valmistus-ja-kaytto',
         destination:
           '/opas/kompostin-hyödyntäminen/matotee-matokakasta-valmistus-ja-kaytto',

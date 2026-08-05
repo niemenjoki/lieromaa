@@ -2,7 +2,7 @@
   "title": "Kannattaako kompostimatoja lisätä lämpökompostoriin?",
   "description": "Voiko kompostimadot laittaa lämpökompostoriin? Madoista ei yleensä ole haittaa, mutta ne eivät välttämättä viihdy siellä pysyvästi.",
   "publishedAt": "2026-05-14",
-  "updatedAt": "2026-06-23",
+  "updatedAt": "2026-08-05",
   "keywords": [
     "kompostimadot lämpökompostoriin",
     "madot lämpökompostoriin",
@@ -14,10 +14,16 @@
     "kompostointi"
   ],
   "category": {
-    "name": "kompostorin perustaminen",
-    "pagePosition": 5
+    "name": "lämpökompostointi",
+    "pagePosition": 3
   },
-  "articleSection": "Matokompostointi",
+  "articleSection": "Lämpökompostointi",
+  "image": {
+    "url": "/images/content/matokompostin_munakotelot_jaisessa_kompostissa.avif",
+    "width": 1200,
+    "height": 900,
+    "alt": "Kompostimatojen munakoteloita jäätyneessä kompostimassassa."
+  },
   "recommendedContent": {
     "pinned": [
       {

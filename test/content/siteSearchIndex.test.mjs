@@ -15,6 +15,15 @@ test('site search index covers primary searchable surfaces', () => {
       '/opas/kompostorin-perustaminen/mika-on-matokompostointi-miksi-se-kannattaa'
     )
   );
+  assert.ok(
+    hrefs.has('/opas/lämpökompostointi/voiko-kompostimadot-laittaa-lampokompostoriin')
+  );
+  assert.equal(
+    hrefs.has(
+      '/opas/kompostorin-perustaminen/voiko-kompostimadot-laittaa-lampokompostoriin'
+    ),
+    false
+  );
   assert.ok(hrefs.has('/tuotteet/madot'));
   assert.ok(hrefs.has('/matolaskuri'));
 

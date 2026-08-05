@@ -63,6 +63,10 @@ export default async function GuidePage({ params }) {
   const wormHuntEntry = getWormHuntEntry(canonicalGuidePath);
   const { structuredData } = data;
   const isHotCompostingGuide = data.category.name === HOT_COMPOSTING_CATEGORY_NAME;
+  const hotCompostingRecommendationCount = Math.max(
+    0,
+    HOT_COMPOSTING_GUIDE_SLUGS.length - 1
+  );
   const recommendations = getContentRecommendations({
     current: {
       ...data,
@@ -78,10 +82,14 @@ export default async function GuidePage({ params }) {
           }
         : {}),
     },
-    ...(isHotCompostingGuide ? { maxRecommendations: 2 } : {}),
+    ...(isHotCompostingGuide
+      ? { maxRecommendations: hotCompostingRecommendationCount }
+      : {}),
   });
   const visibleRecommendations =
-    !isHotCompostingGuide || recommendations.length === 2 ? recommendations : [];
+    !isHotCompostingGuide || recommendations.length === hotCompostingRecommendationCount
+      ? recommendations
+      : [];
 
   return (
     <>

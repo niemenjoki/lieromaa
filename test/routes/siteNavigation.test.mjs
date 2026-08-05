@@ -56,10 +56,10 @@ describe('responsive site navigation data', () => {
     assert.deepEqual(
       navigation.guideCategories.map(({ label, count }) => ({ label, count })),
       [
-        { label: 'Matokompostorin perustaminen', count: 6 },
+        { label: 'Matokompostorin perustaminen', count: 5 },
         { label: 'Matokompostorin hoito', count: 6 },
         { label: 'Matokompostin hyödyntäminen', count: 4 },
-        { label: 'Lämpökompostointi', count: 3 },
+        { label: 'Lämpökompostointi', count: 4 },
       ]
     );
     const actualGuideItems = navigation.guideCategories
