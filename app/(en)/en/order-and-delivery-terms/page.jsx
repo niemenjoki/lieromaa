@@ -14,7 +14,7 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-07-17';
+const UPDATED_AT = '2026-08-05';
 const EFFECTIVE_FROM = '2026-07-17';
 
 const pageMetadata = {
@@ -52,6 +52,12 @@ export default function EnglishOrderTermsPage() {
           <h1>Order and delivery terms</h1>
           <p>
             <em>Effective from {formatDate(EFFECTIVE_FROM, 'en')}.</em>
+            {UPDATED_AT !== EFFECTIVE_FROM ? (
+              <>
+                <br />
+                <em>Updated: {formatDate(UPDATED_AT, 'en')}</em>
+              </>
+            ) : null}
           </p>
         </header>
 
@@ -109,6 +115,15 @@ export default function EnglishOrderTermsPage() {
             delivery at an agreed time, and local pickup in Järvenpää. A pickup-point
             parcel is normally sent to the point selected by the customer, but Posti may
             redirect it elsewhere because of capacity or another operational reason.
+          </p>
+
+          <h2>Discount codes</h2>
+          <p>
+            Only one discount code may be used per order. The code formed from the six
+            worms hidden across the Finnish-language pages gives 15% off every eligible 25
+            g, 50 g, 75 g or 100 g compost-worm pack in the order. It does not reduce
+            delivery charges or the price of a ready-to-use worm bin, compost fibre mix,
+            any other product or any add-on.
           </p>
 
           <h2>Payment</h2>

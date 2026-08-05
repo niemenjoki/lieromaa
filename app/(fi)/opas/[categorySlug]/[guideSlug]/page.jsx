@@ -7,6 +7,7 @@ import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import {
   getGuideCategorySlug,
+  getGuidePath,
   isMatchingGuideCategorySlug,
 } from '@/lib/content/guideRoutes.mjs';
 import {
@@ -21,6 +22,7 @@ import {
 } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
+import { getWormHuntEntry } from '@/lib/wormHunt/trail.server.mjs';
 
 export function generateStaticParams() {
   const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
@@ -54,6 +56,11 @@ export default async function GuidePage({ params }) {
   }
 
   const canonicalCategorySlug = getGuideCategorySlug(data.category.name);
+  const canonicalGuidePath = getGuidePath({
+    categoryName: data.category.name,
+    guideSlug,
+  });
+  const wormHuntEntry = getWormHuntEntry(canonicalGuidePath);
   const { structuredData } = data;
   const isHotCompostingGuide = data.category.name === HOT_COMPOSTING_CATEGORY_NAME;
   const recommendations = getContentRecommendations({
@@ -83,6 +90,7 @@ export default async function GuidePage({ params }) {
         title={data.title}
         dateContent={`Päivitetty: ${formatFinnishDate(data.updatedAt)}`}
         source={mdxContent}
+        wormHuntEntry={wormHuntEntry}
         share={{
           title: data.title,
           tags: data.keywords,

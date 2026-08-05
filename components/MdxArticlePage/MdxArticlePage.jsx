@@ -4,7 +4,9 @@ import ArticleContents from '@/components/ArticleContents/ArticleContents';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SocialShareButtons from '@/components/SocialShareButtons/SocialShareButtons';
+import WormHuntSpot from '@/components/WormHunt/WormHuntSpot';
 import { extractArticleHeadings } from '@/lib/content/articleHeadings.mjs';
+import { shouldPlaceWormAfterHeading } from '@/lib/wormHunt/trail.server.mjs';
 
 import AuthorCard from '../AuthorCard/AuthorCard';
 import { HotCompostingSymptomIndex } from '../HotCompostingGuideNavigation/HotCompostingGuideNavigation';
@@ -30,7 +32,7 @@ function MarkdownLink({ href, children, ...props }) {
   );
 }
 
-function createMdxComponents(headings) {
+function createMdxComponents(headings, wormHuntEntry) {
   let headingIndex = 0;
 
   function renderHeading(Tag, children, props) {
@@ -39,7 +41,19 @@ function createMdxComponents(headings) {
 
     const headingProps = heading?.explicitAnchor ? props : { ...props, id: heading?.id };
 
-    return <Tag {...headingProps}>{children}</Tag>;
+    const headingElement = <Tag {...headingProps}>{children}</Tag>;
+    const shouldPlaceWorm = shouldPlaceWormAfterHeading(wormHuntEntry, heading?.id);
+
+    if (!shouldPlaceWorm) {
+      return headingElement;
+    }
+
+    return (
+      <>
+        {headingElement}
+        <WormHuntSpot clue={wormHuntEntry.clue} />
+      </>
+    );
   }
 
   function HeadingTwo({ children, ...props }) {
@@ -64,12 +78,13 @@ export default function MdxArticlePage({
   title,
   dateContent,
   source,
+  wormHuntEntry = null,
   preTitle = null,
   share = null,
 }) {
   const headings = extractArticleHeadings(source);
   const hasContents = headings.length >= 3;
-  const mdxComponents = createMdxComponents(headings);
+  const mdxComponents = createMdxComponents(headings, wormHuntEntry);
 
   return (
     <>

@@ -52,6 +52,7 @@ export const englishPageDefinitions = Object.freeze(
       title: 'Order and delivery terms | Lieromaa',
       description:
         'Read Lieromaa’s English terms for ordering, invoicing, delivery, cancellation, defects and dispute resolution in Finland.',
+      updatedAt: '2026-08-05',
     },
     {
       canonicalUrl: '/en/privacy',

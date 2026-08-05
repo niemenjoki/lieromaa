@@ -351,6 +351,91 @@ describe('frontend public order normalization', () => {
     );
   });
 
+  test('normalizePublicOrderSubmission should authoritatively apply the cart reward only to eligible worm lines', () => {
+    const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+    const cartItems = [
+      { sku: 'worms-50', quantity: 1 },
+      {
+        sku: 'worms-ready-bin-14l',
+        parentSku: 'worms-50',
+        quantity: 1,
+      },
+      { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
+    ];
+    const payload = normalizePublicOrderSubmission(
+      createValidOrderFormData({
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify(cartItems),
+        toimitus: 'posti_noutopiste',
+        osoite: 'Kompostikuja 1',
+        postinumero: '00100',
+        toimipaikka: 'Helsinki',
+        alennuskoodi: rewardCode.toLowerCase(),
+      }),
+      { now: new Date('2026-08-04T10:00:00Z') }
+    );
+
+    expectEqual(payload.pricing.itemPrice, 63.9);
+    expectEqual(payload.pricing.shippingPrice, 8.9);
+    expectDeepEqual(payload.pricing.discount, {
+      codePlain: rewardCode,
+      codeMasked: 'QE**ZS',
+      obfuscatedCode: '+UjP9wSP',
+      type: 'percentage',
+      value: 15,
+      productAmount: 4.5,
+      extraChargeAmount: 0,
+      shippingAmount: 0,
+      totalAmount: 4.5,
+      endsOn: '2099-12-31',
+    });
+    expectEqual(
+      payload.pricing.total,
+      68.3,
+      'the final review total should subtract only the eligible worm discount'
+    );
+  });
+
+  test('normalizePublicOrderSubmission should reject invalid and non-applicable cart reward claims', () => {
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({
+            sku: '',
+            tuote_avain: '',
+            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+            toimitus: 'nouto',
+            alennuskoodi: 'NOTVALID',
+          }),
+          { now: new Date('2026-08-04T10:00:00Z') }
+        ),
+      (error) => {
+        expectEqual(error.code, 'invalid_discount_code');
+        return true;
+      }
+    );
+
+    const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({
+            sku: '',
+            tuote_avain: '',
+            cart_items_json: JSON.stringify([{ sku: 'chow-500', quantity: 1 }]),
+            toimitus: 'nouto',
+            alennuskoodi: rewardCode,
+          }),
+          { now: new Date('2026-08-04T10:00:00Z') }
+        ),
+      (error) => {
+        expectEqual(error.code, 'discount_not_applicable');
+        return true;
+      }
+    );
+  });
+
   test('normalizePublicOrderSubmission should localize English cart labels without changing commerce identifiers', () => {
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormData({
