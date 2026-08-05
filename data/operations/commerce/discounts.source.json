@@ -3,5 +3,14 @@
     "algorithm": "XOR-BASE64-REVERSE",
     "pepperVersion": 1
   },
-  "discounts": []
+  "discounts": [
+    {
+      "id": "checkout-worm-reward-15",
+      "appliesToSkus": ["worms-25", "worms-50", "worms-75", "worms-100"],
+      "type": "percentage",
+      "value": 15,
+      "endsOn": "2099-12-31",
+      "obfuscatedCode": "+UjP9wSP"
+    }
+  ]
 }

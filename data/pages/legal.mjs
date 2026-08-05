@@ -25,11 +25,18 @@ export const legalPageDefinitions = {
       'Tutustu Lieromaan tilausta, maksua, toimitusta, palautuksia ja asiakkaan oikeuksia koskeviin ehtoihin ennen tilauksen tekemistä.',
     shortLabel: 'Tilaus- ja toimitusehdot',
     publishedAt: '2025-10-16',
-    updatedAt: '2026-07-14',
+    updatedAt: '2026-08-05',
     effectiveFrom: '2025-10-01',
     search: {
       contexts: ['notFound'],
-      keywords: ['tilausehdot', 'toimitusehdot', 'toimitus', 'palautus', 'maksu'],
+      keywords: [
+        'tilausehdot',
+        'toimitusehdot',
+        'toimitus',
+        'palautus',
+        'maksu',
+        'alennuskoodi',
+      ],
     },
   },
   cancellationRequest: {

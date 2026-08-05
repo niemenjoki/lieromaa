@@ -1,0 +1,208 @@
+.Spot {
+  display: flex;
+  width: 100%;
+  margin: 1.15rem 0 1.4rem;
+}
+
+.AlignStart {
+  justify-content: flex-start;
+}
+
+.AlignEnd {
+  justify-content: flex-end;
+}
+
+.Trigger {
+  display: inline-flex;
+  min-width: 4.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.6rem 0.35rem 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--worm-color) 42%, var(--line-color));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-elevated) 88%, transparent);
+  box-shadow: 0 5px 14px color-mix(in srgb, var(--shadow-color) 55%, transparent);
+  color: var(--worm-color);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.Trigger:hover {
+  border-color: var(--worm-color);
+  box-shadow: 0 7px 18px color-mix(in srgb, var(--shadow-color) 70%, transparent);
+  transform: translateY(-1px);
+}
+
+.WormGraphic {
+  width: 3rem;
+  height: 1.45rem;
+  overflow: visible;
+  flex: 0 0 auto;
+}
+
+.WormBody,
+.WormSegment {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.WormBody {
+  stroke-width: 5.4;
+}
+
+.WormSegment {
+  stroke: var(--worm-highlight);
+  stroke-width: 1.1;
+}
+
+.WormHead {
+  fill: currentColor;
+}
+
+.WormEye {
+  fill: var(--surface-elevated);
+}
+
+.Code {
+  color: var(--text-color);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.Dialog {
+  width: min(29rem, calc(100vw - 2rem));
+  max-height: min(80vh, 34rem);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--line-color);
+  border-radius: 10px;
+  background: var(--surface-elevated);
+  box-shadow: 0 24px 64px var(--shadow-color);
+  color: var(--text-color);
+}
+
+.Dialog::backdrop {
+  background: color-mix(in srgb, var(--scrim-color) 72%, transparent);
+}
+
+.DialogPanel {
+  padding: 1.15rem;
+}
+
+.DialogHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.Dialog .DialogHeader h2 {
+  margin: 0.2rem 0 0;
+  padding: 0;
+  border: 0;
+  color: var(--highlight-alt);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+.Dialog .FoundCode {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.CloseButton {
+  display: inline-flex;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--line-color);
+  border-radius: 7px;
+  background: var(--background-3);
+  color: var(--text-color);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.CloseButton:hover {
+  border-color: var(--highlight);
+}
+
+.CloseButton > span:first-child {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.CloseLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.DialogContent {
+  margin-top: 1rem;
+}
+
+.Dialog .DialogContent > p,
+.Dialog .Hint p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.Hint {
+  margin-top: 1rem;
+  padding: 0.85rem 0 0.85rem 1rem;
+  border-left: 3px solid var(--worm-color);
+  background: color-mix(in srgb, var(--background-3) 72%, transparent);
+}
+
+.Dialog .HintLabel {
+  margin-bottom: 0.3rem !important;
+  color: var(--highlight-alt);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+  .Spot {
+    margin: 1rem 0 1.2rem;
+  }
+
+  .DialogPanel {
+    padding: 1rem;
+  }
+
+  .DialogHeader {
+    gap: 0.65rem;
+  }
+
+  .CloseLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

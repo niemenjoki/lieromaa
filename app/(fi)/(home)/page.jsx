@@ -1,6 +1,7 @@
 import Post from '@/components/PostPreview/PostPreview';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SiteSearch from '@/components/SiteSearch/SiteSearch';
+import WormHuntSpot from '@/components/WormHunt/WormHuntSpot';
 import {
   getGuideCategoryLabel,
   getGuideCategorySlug,
@@ -8,6 +9,7 @@ import {
 import { getAllContent } from '@/lib/content/index.mjs';
 import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { CONTENT_TYPES, GUIDE_CATEGORIES } from '@/lib/site/constants.mjs';
+import { getWormHuntEntry } from '@/lib/wormHunt/trail.server.mjs';
 
 import classes from './HomePage.module.css';
 import structuredData from './structuredData.js';
@@ -101,6 +103,7 @@ export default function HomePage() {
       slug: getGuideCategorySlug(categoryName),
     };
   }).filter(Boolean);
+  const wormHuntEntry = getWormHuntEntry('/');
 
   return (
     <>
@@ -125,6 +128,8 @@ export default function HomePage() {
             matokompostorin käynnistämiseen. Aloita oppaista, hae vastauksia ongelmiin tai
             arvioi sopiva matomäärä laskurilla.
           </p>
+
+          {wormHuntEntry ? <WormHuntSpot clue={wormHuntEntry.clue} /> : null}
 
           <div className={classes.HeroSearch}>
             <SiteSearch

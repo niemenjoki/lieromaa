@@ -34,6 +34,23 @@ export const transactionMessages = Object.freeze({
     addOns: 'Lisävalinnat',
     remove: 'Poista',
     productsSubtotal: 'Tuotteet',
+    discountCode: 'Alennuskoodi',
+    discountCodePlaceholder: '6 kirjainta',
+    applyDiscountCode: 'Käytä koodi',
+    removeDiscountCode: 'Poista koodi',
+    discountCodeRequired: 'Syötä alennuskoodi.',
+    discountInvalid: 'Alennuskoodi ei ole voimassa.',
+    discountNotApplicable: 'Alennuskoodi ei koske ostoskorin tuotteita.',
+    discountNeedsApply:
+      'Ota syöttämäsi alennuskoodi käyttöön tai poista se ennen jatkamista.',
+    discountCheckFailed: 'Alennuskoodin tarkistus epäonnistui.',
+    discountApplied: 'Alennuskoodi on käytössä.',
+    discountSummary: ({ type, value }) =>
+      type === 'percentage'
+        ? `Alennus (${value} %)`
+        : type === 'free_shipping'
+          ? 'Toimitusalennus'
+          : 'Alennus',
     continue: 'Jatka',
     back: 'Takaisin',
     deliveryAddress: 'Toimitusosoite',
@@ -194,6 +211,8 @@ export const transactionMessages = Object.freeze({
       'Kuituseoksen 150 g pakkauksen voi tilata vain matopaketin lisävalintana.',
     worm_package_limit: 'Tilauksessa on liian monta matopakettia.',
     fibre_mix_limit: 'Tilauksessa on liian monta kuituseosta.',
+    invalid_discount_code: 'Alennuskoodi ei ole voimassa.',
+    discount_not_applicable: 'Alennuskoodi ei koske ostoskorin tuotteita.',
   }),
 });
 

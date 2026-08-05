@@ -90,6 +90,15 @@ export default function OrderPolicyPage() {
           Posti voi kapasiteettisyistä ohjata sen muualle.
         </p>
 
+        <h2>Alennuskoodit</h2>
+        <p>
+          Tilauksessa voi käyttää vain yhtä alennuskoodia. Sivustolle piilotetuista
+          kuudesta madosta muodostuva koodi antaa 15 prosentin alennuksen jokaisesta
+          tilaukseen sisältyvästä 25, 50, 75 tai 100 gramman kompostimatopakkauksesta.
+          Alennus ei koske toimituskuluja, käyttövalmista matokompostoria, kuituseosta
+          eikä muita tuotteita tai lisävalintoja.
+        </p>
+
         <h2>Maksutavat</h2>
         <p>
           Maksaminen tapahtuu <strong>OP Kevytyrittäjä</strong> -palvelun kautta

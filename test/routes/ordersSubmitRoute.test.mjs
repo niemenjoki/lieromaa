@@ -205,6 +205,116 @@ describe('frontend public order submit route', () => {
     );
   });
 
+  test('the public order submit route should recompute and forward the eligible cart reward', async () => {
+    const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+
+    await withEnv(
+      {
+        ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
+        ORDER_SERVICE_TOKEN: 'shared-secret',
+      },
+      async () => {
+        const recordedCalls = [];
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = async (url, init = {}) => {
+          recordedCalls.push([url, init]);
+          return Response.json({
+            ok: true,
+            orderId: 'LRM-DISCOUNTED',
+            duplicate: false,
+          });
+        };
+
+        try {
+          const formData = createValidOrderFormData({
+            sku: '',
+            tuote_avain: '',
+            cart_items_json: JSON.stringify([
+              { sku: 'worms-50', quantity: 1 },
+              {
+                sku: 'worms-ready-bin-14l',
+                parentSku: 'worms-50',
+                quantity: 1,
+              },
+              { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
+            ]),
+            toimitus: 'posti_noutopiste',
+            osoite: 'Kompostikuja 1',
+            postinumero: '00100',
+            toimipaikka: 'Helsinki',
+            alennuskoodi: rewardCode,
+          });
+          const response = await POST(
+            createRouteRequest({
+              url: 'https://www.lieromaa.fi/api/orders/submit',
+              formData,
+            })
+          );
+
+          expectEqual(response.status, 200);
+          expectEqual(recordedCalls.length, 1);
+
+          const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
+          expectDeepEqual(forwardedPayload.pricing.discount, {
+            codePlain: rewardCode,
+            codeMasked: 'QE**ZS',
+            obfuscatedCode: '+UjP9wSP',
+            type: 'percentage',
+            value: 15,
+            productAmount: 4.5,
+            extraChargeAmount: 0,
+            shippingAmount: 0,
+            totalAmount: 4.5,
+            endsOn: '2099-12-31',
+          });
+          expectEqual(forwardedPayload.pricing.itemPrice, 63.9);
+          expectEqual(forwardedPayload.pricing.shippingPrice, 8.9);
+          expectEqual(forwardedPayload.pricing.total, 68.3);
+        } finally {
+          globalThis.fetch = originalFetch;
+        }
+      }
+    );
+  });
+
+  test('the public order submit route should reject an invalid applied code before forwarding', async () => {
+    const originalFetch = globalThis.fetch;
+    let fetchCalled = false;
+    globalThis.fetch = async () => {
+      fetchCalled = true;
+      throw new Error('The invalid order must not be forwarded.');
+    };
+
+    try {
+      const response = await POST(
+        createRouteRequest({
+          url: 'https://www.lieromaa.fi/api/orders/submit',
+          extraHeaders: {
+            'X-Lieromaa-Language': 'en',
+          },
+          formData: createValidOrderFormData({
+            language: 'en',
+            sku: '',
+            tuote_avain: '',
+            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+            toimitus: 'nouto',
+            alennuskoodi: 'NOTVALID',
+          }),
+        })
+      );
+
+      expectEqual(response.status, 400);
+      expectDeepEqual(await response.json(), {
+        ok: false,
+        code: 'invalid_discount_code',
+        message: 'The discount code is not valid.',
+      });
+      expectEqual(fetchCalled, false);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
   test('the public order submit route should preserve the upstream failure payload when order creation is rejected', async () => {
     const scenario = listOrderScenarios()[0] ?? null;
 

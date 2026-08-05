@@ -34,6 +34,24 @@ export const transactionMessages = Object.freeze({
     addOns: 'Add-ons',
     remove: 'Remove',
     productsSubtotal: 'Products',
+    discountCode: 'Discount code',
+    discountCodePlaceholder: '6 letters',
+    applyDiscountCode: 'Apply code',
+    removeDiscountCode: 'Remove code',
+    discountCodeRequired: 'Enter a discount code.',
+    discountInvalid: 'The discount code is not valid.',
+    discountNotApplicable:
+      'The discount code does not apply to the products in your cart.',
+    discountNeedsApply:
+      'Apply the discount code you entered or remove it before continuing.',
+    discountCheckFailed: 'The discount code could not be checked.',
+    discountApplied: 'The discount code has been applied.',
+    discountSummary: ({ type, value }) =>
+      type === 'percentage'
+        ? `Discount (${value}%)`
+        : type === 'free_shipping'
+          ? 'Delivery discount'
+          : 'Discount',
     continue: 'Continue',
     back: 'Back',
     deliveryAddress: 'Delivery address',
@@ -193,6 +211,9 @@ export const transactionMessages = Object.freeze({
       'The 150 g compost fibre mix can only be ordered as an add-on to a worm package.',
     worm_package_limit: 'The order contains too many worm packages.',
     fibre_mix_limit: 'The order contains too many packs of compost fibre mix.',
+    invalid_discount_code: 'The discount code is not valid.',
+    discount_not_applicable:
+      'The discount code does not apply to the products in your cart.',
   }),
 });
 

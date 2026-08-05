@@ -4,6 +4,10 @@ import path from 'node:path';
 import { describe, test } from 'node:test';
 
 import { obfuscateDiscountCode } from '@/lib/discounts/discountCode.mjs';
+import {
+  resolveDiscountCode,
+  resolveDiscountForSku,
+} from '@/lib/discounts/resolveDiscountForSku';
 import { createDiscountSourceData } from '@/lib/prebuild/generateDiscountCodes.mjs';
 
 const sourceFile = path.join(
@@ -51,6 +55,44 @@ describe('discount source data', () => {
       assert.ok(
         discount.obfuscatedCode.trim().length > 0,
         `${label} should contain a non-empty generated obfuscatedCode`
+      );
+    }
+  });
+
+  test('the active checkout reward should resolve only for the configured worm SKUs', () => {
+    const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+    const now = new Date('2026-08-04T10:00:00Z');
+    const discount = resolveDiscountCode({ code: rewardCode.toLowerCase(), now });
+
+    assert.ok(discount, 'the configured checkout reward should be active');
+    assert.equal(discount.id, 'checkout-worm-reward-15');
+    assert.equal(discount.type, 'percentage');
+    assert.equal(discount.value, 15);
+    assert.deepEqual(discount.appliesToSkus, [
+      'worms-25',
+      'worms-50',
+      'worms-75',
+      'worms-100',
+    ]);
+
+    for (const sku of discount.appliesToSkus) {
+      assert.ok(
+        resolveDiscountForSku({ code: rewardCode, sku, now }),
+        `${sku} should accept the checkout reward`
+      );
+    }
+
+    for (const sku of [
+      'worms-ready-bin-14l',
+      'chow-150',
+      'chow-500',
+      'postage-pickup',
+      'postage-home',
+    ]) {
+      assert.equal(
+        resolveDiscountForSku({ code: rewardCode, sku, now }),
+        null,
+        `${sku} should not accept the checkout reward`
       );
     }
   });

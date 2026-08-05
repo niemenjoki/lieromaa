@@ -10,6 +10,8 @@ import {
   getTodayInBusinessTimeZone,
   getVisibleEarliestShippingDate,
 } from '@/lib/commerce/shippingEstimate.mjs';
+import { normalizeDiscountCode } from '@/lib/discounts/discountCode.mjs';
+import { resolveDiscountCode } from '@/lib/discounts/resolveDiscountForSku';
 import { formatDate, formatDistance } from '@/lib/i18n/formatters.mjs';
 import { getTransactionMessages } from '@/lib/i18n/messages.mjs';
 import { getRoutePath } from '@/lib/i18n/routes.mjs';
@@ -195,6 +197,12 @@ export default function CheckoutPageClient({ language }) {
   const [submissionId, setSubmissionId] = useState('');
   const [submitError, setSubmitError] = useState('');
   const [cartFeedback, setCartFeedback] = useState('');
+  const [discountCodeInput, setDiscountCodeInput] = useState('');
+  const [appliedDiscountCode, setAppliedDiscountCode] = useState('');
+  const [discountFeedback, setDiscountFeedback] = useState({
+    message: '',
+    isError: false,
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -246,18 +254,51 @@ export default function CheckoutPageClient({ language }) {
     }
 
     try {
+      const discount = appliedDiscountCode
+        ? resolveDiscountCode({ code: appliedDiscountCode })
+        : null;
+
       return {
-        quote: getCartOrderQuote({ items, shippingMethod, language }),
+        quote: getCartOrderQuote({
+          items,
+          shippingMethod,
+          language,
+          discount,
+        }),
+        discount,
         error: '',
       };
     } catch (error) {
       return {
         quote: null,
+        discount: null,
         error: getCartErrorMessage(error, language),
       };
     }
-  }, [items, language, shippingMethod]);
+  }, [appliedDiscountCode, items, language, shippingMethod]);
   const quote = quoteResult.quote;
+  const discountAmount = quote?.discountAmounts.totalAmount ?? 0;
+  const normalizedDiscountCodeInput = normalizeDiscountCode(discountCodeInput);
+  const discountNeedsApply = Boolean(
+    normalizedDiscountCodeInput && normalizedDiscountCodeInput !== appliedDiscountCode
+  );
+  const appliedDiscountIsStale = Boolean(
+    appliedDiscountCode && (!quoteResult.discount || discountAmount <= 0)
+  );
+  const discountSubmissionBlocked = discountNeedsApply || appliedDiscountIsStale;
+  const visibleDiscountFeedback = appliedDiscountIsStale
+    ? {
+        message: copy.discountNotApplicable,
+        isError: true,
+      }
+    : discountFeedback.message
+      ? discountFeedback
+      : discountNeedsApply
+        ? {
+            message: copy.discountNeedsApply,
+            isError: true,
+          }
+        : discountFeedback;
   const selectedShippingOption =
     shippingOptions.find((option) => option.id === shippingMethod) ??
     shippingOptions[0] ??
@@ -346,6 +387,77 @@ export default function CheckoutPageClient({ language }) {
     setCartFeedback('');
   };
 
+  const handleDiscountCodeChange = (value) => {
+    setDiscountCodeInput(value);
+    setDiscountFeedback({ message: '', isError: false });
+
+    if (normalizeDiscountCode(value) !== appliedDiscountCode) {
+      setAppliedDiscountCode('');
+    }
+  };
+
+  const clearDiscountCode = () => {
+    setDiscountCodeInput('');
+    setAppliedDiscountCode('');
+    setDiscountFeedback({ message: '', isError: false });
+    setSubmitError('');
+  };
+
+  const applyDiscountCode = () => {
+    const normalizedCode = normalizeDiscountCode(discountCodeInput);
+
+    if (!normalizedCode) {
+      setAppliedDiscountCode('');
+      setDiscountFeedback({
+        message: copy.discountCodeRequired,
+        isError: true,
+      });
+      return;
+    }
+
+    const discount = resolveDiscountCode({ code: normalizedCode });
+    if (!discount) {
+      setAppliedDiscountCode('');
+      setDiscountFeedback({
+        message: copy.discountInvalid,
+        isError: true,
+      });
+      return;
+    }
+
+    try {
+      const discountedQuote = getCartOrderQuote({
+        items,
+        shippingMethod,
+        language,
+        discount,
+      });
+
+      if (discountedQuote.discountAmounts.totalAmount <= 0) {
+        setAppliedDiscountCode('');
+        setDiscountFeedback({
+          message: copy.discountNotApplicable,
+          isError: true,
+        });
+        return;
+      }
+
+      setDiscountCodeInput(normalizedCode);
+      setAppliedDiscountCode(normalizedCode);
+      setDiscountFeedback({
+        message: copy.discountApplied,
+        isError: false,
+      });
+      setSubmitError('');
+    } catch {
+      setAppliedDiscountCode('');
+      setDiscountFeedback({
+        message: copy.discountCheckFailed,
+        isError: true,
+      });
+    }
+  };
+
   const handlePickupPointSelection = (pickupPointId) => {
     const nextPoint = pickupPoints.find((point) => point.id === pickupPointId) ?? null;
 
@@ -426,7 +538,13 @@ export default function CheckoutPageClient({ language }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!formRef.current || isSubmitting || isSubmitted || quoteResult.error) {
+    if (
+      !formRef.current ||
+      isSubmitting ||
+      isSubmitted ||
+      quoteResult.error ||
+      discountSubmissionBlocked
+    ) {
       return;
     }
 
@@ -496,6 +614,7 @@ export default function CheckoutPageClient({ language }) {
     >
       <input type="text" name="_gotcha" style={{ display: 'none' }} />
       <input type="hidden" name="cart_items_json" value={JSON.stringify(items)} />
+      <input type="hidden" name="alennuskoodi" value={normalizedDiscountCodeInput} />
       <input type="hidden" name="toimitus" value={shippingMethod} />
       <input type="hidden" name="osoite" value={addressFields.line1} />
       <input type="hidden" name="postinumero" value={addressFields.postalCode} />
@@ -690,12 +809,83 @@ export default function CheckoutPageClient({ language }) {
               </li>
             ))}
           </ul>
+          <div className={classes.DiscountBox}>
+            <label className={classes.Field} htmlFor="checkout-discount-code">
+              <span>{copy.discountCode}</span>
+              <input
+                id="checkout-discount-code"
+                type="text"
+                value={discountCodeInput}
+                onChange={(event) => handleDiscountCodeChange(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    event.preventDefault();
+                    applyDiscountCode();
+                  }
+                }}
+                placeholder={copy.discountCodePlaceholder}
+                maxLength={80}
+                autoComplete="off"
+                autoCapitalize="characters"
+                spellCheck="false"
+                aria-describedby={
+                  visibleDiscountFeedback.message
+                    ? 'checkout-discount-feedback'
+                    : undefined
+                }
+                aria-invalid={visibleDiscountFeedback.isError ? 'true' : undefined}
+              />
+            </label>
+            <div className={classes.Actions}>
+              <button
+                type="button"
+                className={classes.SecondaryButton}
+                onClick={applyDiscountCode}
+              >
+                {copy.applyDiscountCode}
+              </button>
+              {discountCodeInput || appliedDiscountCode ? (
+                <button
+                  type="button"
+                  className={classes.DangerButton}
+                  onClick={clearDiscountCode}
+                >
+                  {copy.removeDiscountCode}
+                </button>
+              ) : null}
+            </div>
+            {visibleDiscountFeedback.message ? (
+              <p
+                id="checkout-discount-feedback"
+                className={[
+                  classes.HelperText,
+                  visibleDiscountFeedback.isError ? classes.Alert : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                role={visibleDiscountFeedback.isError ? 'alert' : 'status'}
+              >
+                {visibleDiscountFeedback.message}
+              </p>
+            ) : null}
+          </div>
           {quote ? (
             <div className={classes.SummaryRows}>
               <div>
                 <span>{copy.productsSubtotal}</span>
                 <strong>{formatCurrency(quote.itemSubtotal, language)}</strong>
               </div>
+              {discountAmount > 0 ? (
+                <div>
+                  <span>
+                    {copy.discountSummary({
+                      type: quoteResult.discount?.type ?? '',
+                      value: quoteResult.discount?.value ?? 0,
+                    })}
+                  </span>
+                  <strong>{formatCurrency(-discountAmount, language)}</strong>
+                </div>
+              ) : null}
             </div>
           ) : null}
           <div className={classes.Actions}>
@@ -703,7 +893,7 @@ export default function CheckoutPageClient({ language }) {
               type="button"
               className={classes.Button}
               onClick={() => setStep(1)}
-              disabled={!quote || Boolean(quoteResult.error)}
+              disabled={!quote || Boolean(quoteResult.error) || discountSubmissionBlocked}
             >
               {copy.continue}
             </button>
@@ -1014,6 +1204,17 @@ export default function CheckoutPageClient({ language }) {
                 <strong>{formatCurrency(line.itemTotal, language)}</strong>
               </li>
             ))}
+            {discountAmount > 0 ? (
+              <li className={classes.LineItem}>
+                <span>
+                  {copy.discountSummary({
+                    type: quoteResult.discount?.type ?? '',
+                    value: quoteResult.discount?.value ?? 0,
+                  })}
+                </span>
+                <strong>{formatCurrency(-discountAmount, language)}</strong>
+              </li>
+            ) : null}
             <li className={classes.LineItem}>
               <span>{quote?.shippingOption.label}</span>
               <strong>{formatCurrency(quote?.shippingPrice ?? 0, language)}</strong>
@@ -1050,7 +1251,9 @@ export default function CheckoutPageClient({ language }) {
             <button
               type="submit"
               className={classes.Button}
-              disabled={isSubmitting || Boolean(quoteResult.error)}
+              disabled={
+                isSubmitting || Boolean(quoteResult.error) || discountSubmissionBlocked
+              }
             >
               {isSubmitting ? copy.submitting : copy.submit}
             </button>
