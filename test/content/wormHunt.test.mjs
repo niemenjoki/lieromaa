@@ -41,7 +41,7 @@ test('worm hunt keeps six ordered route-specific clues without a combined code f
   );
   assert.deepEqual(
     entries.map((entry) => entry.clue.letter),
-    ['Q', 'E', 'X', 'L', 'Z', 'S']
+    ['N', 'V', 'R', 'K', 'T', 'P']
   );
 
   for (const entry of entries) {

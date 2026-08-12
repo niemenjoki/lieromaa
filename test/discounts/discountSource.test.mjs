@@ -60,7 +60,7 @@ describe('discount source data', () => {
   });
 
   test('the active checkout reward should resolve only for the configured worm SKUs', () => {
-    const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+    const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
     const now = new Date('2026-08-04T10:00:00Z');
     const discount = resolveDiscountCode({ code: rewardCode.toLowerCase(), now });
 

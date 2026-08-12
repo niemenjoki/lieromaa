@@ -5,7 +5,7 @@ import { resolveDiscountCode } from '@/lib/discounts/resolveDiscountForSku';
 import { calculateCartDiscountAmounts, getCartOrderQuote } from '@/lib/orders/cartOrder';
 
 function getCheckoutReward() {
-  const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+  const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
   const discount = resolveDiscountCode({
     code: rewardCode,
     now: new Date('2026-08-04T10:00:00Z'),
