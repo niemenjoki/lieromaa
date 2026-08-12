@@ -206,7 +206,7 @@ describe('frontend public order submit route', () => {
   });
 
   test('the public order submit route should recompute and forward the eligible cart reward', async () => {
-    const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+    const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
 
     await withEnv(
       {
@@ -257,8 +257,8 @@ describe('frontend public order submit route', () => {
           const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
           expectDeepEqual(forwardedPayload.pricing.discount, {
             codePlain: rewardCode,
-            codeMasked: 'QE**ZS',
-            obfuscatedCode: '+UjP9wSP',
+            codeMasked: 'NV**TP',
+            obfuscatedCode: '9sTO38jI',
             type: 'percentage',
             value: 15,
             productAmount: 4.5,

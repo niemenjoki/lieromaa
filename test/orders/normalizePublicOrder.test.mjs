@@ -352,7 +352,7 @@ describe('frontend public order normalization', () => {
   });
 
   test('normalizePublicOrderSubmission should authoritatively apply the cart reward only to eligible worm lines', () => {
-    const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+    const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
     const cartItems = [
       { sku: 'worms-50', quantity: 1 },
       {
@@ -380,8 +380,8 @@ describe('frontend public order normalization', () => {
     expectEqual(payload.pricing.shippingPrice, 8.9);
     expectDeepEqual(payload.pricing.discount, {
       codePlain: rewardCode,
-      codeMasked: 'QE**ZS',
-      obfuscatedCode: '+UjP9wSP',
+      codeMasked: 'NV**TP',
+      obfuscatedCode: '9sTO38jI',
       type: 'percentage',
       value: 15,
       productAmount: 4.5,
@@ -416,7 +416,7 @@ describe('frontend public order normalization', () => {
       }
     );
 
-    const rewardCode = String.fromCodePoint(81, 69, 88, 76, 90, 83);
+    const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
     assert.throws(
       () =>
         normalizePublicOrderSubmission(
