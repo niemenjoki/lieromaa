@@ -67,7 +67,17 @@ Generated build outputs do not belong here. They live in `/generated`.
   The local file controls ids, discount metadata, and which codes stay active.
   Never commit a `code` field; tests block builds when tracked codes are missing
   generated obfuscations or do not match the local file.
+  The worm-hunt reward is the exception: it is managed entirely by
+  `operations/commerce/wormHunt.json` and is ignored by this generic generator.
   During `prepare:site`, this file is transformed into `generated/commerce/discounts.json`, and the runtime build uses that generated file instead of this source file directly.
+- `operations/commerce/wormHunt.json`
+  Build-time configuration for the six-worm hunt and its checkout reward.
+  `enabled: false` removes all six worms and excludes the reward discount from the
+  build. `code` must contain exactly six letters; its letters are assigned to the
+  existing worm placements in order. `discountPercentage` controls the percentage
+  shown by the last worm and applied to eligible worm packages. Edit this file and
+  redeploy the frontend; the normal build preparation validates the config and
+  generates the obfuscated checkout reward automatically.
 - `operations/commerce/skuDiscounts.json`
   Automatic per-SKU sale configuration that affects visible storefront pricing without a code.
   Set `active: true` to enable the discount.

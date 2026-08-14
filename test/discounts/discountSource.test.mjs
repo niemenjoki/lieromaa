@@ -9,6 +9,12 @@ import {
   resolveDiscountForSku,
 } from '@/lib/discounts/resolveDiscountForSku';
 import { createDiscountSourceData } from '@/lib/prebuild/generateDiscountCodes.mjs';
+import {
+  WORM_HUNT_DISCOUNT_ID,
+  WORM_HUNT_DISCOUNT_SKUS,
+  createWormHuntDiscount,
+  wormHuntConfig,
+} from '@/lib/wormHunt/config.mjs';
 
 const sourceFile = path.join(
   process.cwd(),
@@ -60,20 +66,20 @@ describe('discount source data', () => {
   });
 
   test('the active checkout reward should resolve only for the configured worm SKUs', () => {
-    const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
+    const rewardCode = wormHuntConfig.code;
     const now = new Date('2026-08-04T10:00:00Z');
     const discount = resolveDiscountCode({ code: rewardCode.toLowerCase(), now });
 
+    if (!wormHuntConfig.enabled) {
+      assert.equal(discount, null, 'a disabled worm hunt should not deploy its reward');
+      return;
+    }
+
     assert.ok(discount, 'the configured checkout reward should be active');
-    assert.equal(discount.id, 'checkout-worm-reward-15');
+    assert.equal(discount.id, WORM_HUNT_DISCOUNT_ID);
     assert.equal(discount.type, 'percentage');
-    assert.equal(discount.value, 15);
-    assert.deepEqual(discount.appliesToSkus, [
-      'worms-25',
-      'worms-50',
-      'worms-75',
-      'worms-100',
-    ]);
+    assert.equal(discount.value, wormHuntConfig.discountPercentage);
+    assert.deepEqual(discount.appliesToSkus, WORM_HUNT_DISCOUNT_SKUS);
 
     for (const sku of discount.appliesToSkus) {
       assert.ok(
@@ -167,6 +173,27 @@ describe('discount source data', () => {
       'local discount generation should remove plaintext code fields from retained source entries'
     );
     assert.deepEqual(result.removedIds, ['remove_me']);
+  });
+
+  test('generic discount generation leaves the worm hunt reward to its build-time config', () => {
+    const configuredDiscount = createWormHuntDiscount();
+    const result = createDiscountSourceData(
+      {
+        discounts: [
+          {
+            id: WORM_HUNT_DISCOUNT_ID,
+            code: 'ABCDEF',
+            appliesToSkus: ['worms-25'],
+            type: 'percentage',
+            value: 99,
+            endsOn: '2099-12-31',
+          },
+        ],
+      },
+      { discounts: configuredDiscount ? [configuredDiscount] : [] }
+    );
+
+    assert.deepEqual(result.sourceData.discounts, []);
   });
 
   test('expired local discount definitions should not generate deployable source entries', () => {
