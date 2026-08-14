@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
 import { POST } from '@/app/api/orders/submit/route.js';
+import { obfuscateDiscountCode } from '@/lib/discounts/discountCode.mjs';
 import { normalizePublicOrderSubmission } from '@/lib/orders/normalizePublicOrder';
+import { WORM_HUNT_DISCOUNT_ENDS_ON, wormHuntConfig } from '@/lib/wormHunt/config.mjs';
 
 import { expectDeepEqual, expectEqual } from '../helpers/assertions.mjs';
 import { withMutedConsole } from '../helpers/console.mjs';
@@ -206,7 +208,7 @@ describe('frontend public order submit route', () => {
   });
 
   test('the public order submit route should recompute and forward the eligible cart reward', async () => {
-    const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
+    const rewardCode = wormHuntConfig.code;
 
     await withEnv(
       {
@@ -251,25 +253,39 @@ describe('frontend public order submit route', () => {
             })
           );
 
+          if (!wormHuntConfig.enabled) {
+            expectEqual(response.status, 400);
+            expectEqual(recordedCalls.length, 0);
+            return;
+          }
+
           expectEqual(response.status, 200);
           expectEqual(recordedCalls.length, 1);
 
           const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
+          const discountAmount = Number(
+            ((30 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
+          );
+          const rewardLetters = [...rewardCode];
+          const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
           expectDeepEqual(forwardedPayload.pricing.discount, {
             codePlain: rewardCode,
-            codeMasked: 'NV**TP',
-            obfuscatedCode: '9sTO38jI',
+            codeMasked,
+            obfuscatedCode: obfuscateDiscountCode(rewardCode),
             type: 'percentage',
-            value: 15,
-            productAmount: 4.5,
+            value: wormHuntConfig.discountPercentage,
+            productAmount: discountAmount,
             extraChargeAmount: 0,
             shippingAmount: 0,
-            totalAmount: 4.5,
-            endsOn: '2099-12-31',
+            totalAmount: discountAmount,
+            endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
           });
           expectEqual(forwardedPayload.pricing.itemPrice, 63.9);
           expectEqual(forwardedPayload.pricing.shippingPrice, 8.9);
-          expectEqual(forwardedPayload.pricing.total, 68.3);
+          expectEqual(
+            forwardedPayload.pricing.total,
+            Number((72.8 - discountAmount).toFixed(2))
+          );
         } finally {
           globalThis.fetch = originalFetch;
         }

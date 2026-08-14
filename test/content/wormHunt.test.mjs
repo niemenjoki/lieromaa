@@ -5,10 +5,22 @@ import test from 'node:test';
 
 import { extractArticleHeadings } from '@/lib/content/articleHeadings.mjs';
 import {
+  createWormHuntConfig,
+  createWormHuntDiscount,
+  wormHuntConfig,
+} from '@/lib/wormHunt/config.mjs';
+import {
+  createWormHuntEntries,
   getWormHuntEntries,
   getWormHuntEntry,
   shouldPlaceWormAfterHeading,
 } from '@/lib/wormHunt/trail.server.mjs';
+
+const ENABLED_TEST_CONFIG = createWormHuntConfig({
+  enabled: true,
+  code: 'NVRKTP',
+  discountPercentage: 15,
+});
 
 const EXPECTED_PATHS = [
   '/',
@@ -28,7 +40,7 @@ const EXPECTED_HINTS = [
 ];
 
 test('worm hunt keeps six ordered route-specific clues without a combined code field', () => {
-  const entries = getWormHuntEntries();
+  const entries = createWormHuntEntries(ENABLED_TEST_CONFIG);
 
   assert.equal(entries.length, 6);
   assert.deepEqual(
@@ -49,13 +61,84 @@ test('worm hunt keeps six ordered route-specific clues without a combined code f
     assert.equal(entry.clue.total, 6);
     assert.equal(Object.hasOwn(entry, 'code'), false);
     assert.equal(Object.hasOwn(entry.clue, 'code'), false);
+  }
+});
+
+test('configured worm hunt state controls the deployed trail', () => {
+  const entries = getWormHuntEntries();
+
+  assert.equal(entries.length, wormHuntConfig.enabled ? 6 : 0);
+
+  if (!wormHuntConfig.enabled) {
+    assert.equal(getWormHuntEntry('/'), null);
+    return;
+  }
+
+  assert.equal(entries.map((entry) => entry.clue.letter).join(''), wormHuntConfig.code);
+
+  for (const entry of entries) {
     assert.equal(getWormHuntEntry(`${entry.path}/`), entry);
     assert.equal(getWormHuntEntry(encodeURI(entry.path)), entry);
   }
 });
 
+test('worm hunt config can replace the six letters and percentage or disable everything', () => {
+  const customConfig = createWormHuntConfig({
+    enabled: true,
+    code: 'ABCDEF',
+    discountPercentage: 12.5,
+  });
+  const customEntries = createWormHuntEntries(customConfig);
+  const customDiscount = createWormHuntDiscount(customConfig);
+
+  assert.deepEqual(
+    customEntries.map((entry) => entry.clue.letter),
+    ['A', 'B', 'C', 'D', 'E', 'F']
+  );
+  assert.match(customEntries.at(-1).clue.message, /12,5\s*%/u);
+  assert.equal(customDiscount.value, 12.5);
+
+  const disabledConfig = createWormHuntConfig({
+    enabled: false,
+    code: 'ABCDEF',
+    discountPercentage: 12.5,
+  });
+  assert.deepEqual(createWormHuntEntries(disabledConfig), []);
+  assert.equal(createWormHuntDiscount(disabledConfig), null);
+});
+
+test('worm hunt config rejects values that cannot map safely to the six placements', () => {
+  assert.throws(
+    () =>
+      createWormHuntConfig({
+        enabled: true,
+        code: 'TOOLONG',
+        discountPercentage: 15,
+      }),
+    /exactly 6 letters/u
+  );
+  assert.throws(
+    () =>
+      createWormHuntConfig({
+        enabled: true,
+        code: 'ABC DEF',
+        discountPercentage: 15,
+      }),
+    /without spaces/u
+  );
+  assert.throws(
+    () =>
+      createWormHuntConfig({
+        enabled: true,
+        code: 'ABCDEF',
+        discountPercentage: 0,
+      }),
+    /greater than 0/u
+  );
+});
+
 test('worm hunt uses the approved hints and reveals the discount only at the end', () => {
-  const entries = getWormHuntEntries();
+  const entries = createWormHuntEntries(ENABLED_TEST_CONFIG);
 
   assert.deepEqual(
     entries.slice(0, -1).map((entry) => entry.clue.hint),
@@ -74,7 +157,7 @@ test('worm hunt uses the approved hints and reveals the discount only at the end
 });
 
 test('every guide clue targets an existing heading and at least three are deep', () => {
-  const guideEntries = getWormHuntEntries().filter(
+  const guideEntries = createWormHuntEntries(ENABLED_TEST_CONFIG).filter(
     (entry) => entry.placement.type === 'after-heading'
   );
   let deepPlacementCount = 0;

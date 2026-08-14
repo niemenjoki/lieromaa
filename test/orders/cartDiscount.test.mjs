@@ -1,17 +1,19 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import { resolveDiscountCode } from '@/lib/discounts/resolveDiscountForSku';
 import { calculateCartDiscountAmounts, getCartOrderQuote } from '@/lib/orders/cartOrder';
+import { createWormHuntConfig, createWormHuntDiscount } from '@/lib/wormHunt/config.mjs';
 
 function getCheckoutReward() {
-  const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
-  const discount = resolveDiscountCode({
-    code: rewardCode,
-    now: new Date('2026-08-04T10:00:00Z'),
-  });
+  const discount = createWormHuntDiscount(
+    createWormHuntConfig({
+      enabled: true,
+      code: 'ABCDEF',
+      discountPercentage: 15,
+    })
+  );
 
-  assert.ok(discount, 'the checkout reward should resolve for quote tests');
+  assert.ok(discount, 'the checkout reward should exist for quote tests');
   return discount;
 }
 

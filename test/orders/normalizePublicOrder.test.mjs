@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
+import { obfuscateDiscountCode } from '@/lib/discounts/discountCode.mjs';
 import {
   getCartItemsAfterQuantityChange,
   getCartItemsAfterRemoval,
@@ -10,6 +11,7 @@ import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
 } from '@/lib/orders/normalizePublicOrder';
+import { WORM_HUNT_DISCOUNT_ENDS_ON, wormHuntConfig } from '@/lib/wormHunt/config.mjs';
 
 import { expectDeepEqual, expectEqual, expectOk } from '../helpers/assertions.mjs';
 import {
@@ -352,7 +354,7 @@ describe('frontend public order normalization', () => {
   });
 
   test('normalizePublicOrderSubmission should authoritatively apply the cart reward only to eligible worm lines', () => {
-    const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
+    const rewardCode = wormHuntConfig.code;
     const cartItems = [
       { sku: 'worms-50', quantity: 1 },
       {
@@ -362,37 +364,54 @@ describe('frontend public order normalization', () => {
       },
       { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
     ];
-    const payload = normalizePublicOrderSubmission(
-      createValidOrderFormData({
-        sku: '',
-        tuote_avain: '',
-        cart_items_json: JSON.stringify(cartItems),
-        toimitus: 'posti_noutopiste',
-        osoite: 'Kompostikuja 1',
-        postinumero: '00100',
-        toimipaikka: 'Helsinki',
-        alennuskoodi: rewardCode.toLowerCase(),
-      }),
-      { now: new Date('2026-08-04T10:00:00Z') }
+    const formData = createValidOrderFormData({
+      sku: '',
+      tuote_avain: '',
+      cart_items_json: JSON.stringify(cartItems),
+      toimitus: 'posti_noutopiste',
+      osoite: 'Kompostikuja 1',
+      postinumero: '00100',
+      toimipaikka: 'Helsinki',
+      alennuskoodi: rewardCode.toLowerCase(),
+    });
+
+    if (!wormHuntConfig.enabled) {
+      assert.throws(
+        () =>
+          normalizePublicOrderSubmission(formData, {
+            now: new Date('2026-08-04T10:00:00Z'),
+          }),
+        (error) => error.code === 'invalid_discount_code'
+      );
+      return;
+    }
+
+    const payload = normalizePublicOrderSubmission(formData, {
+      now: new Date('2026-08-04T10:00:00Z'),
+    });
+    const discountAmount = Number(
+      ((30 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
     );
+    const rewardLetters = [...rewardCode];
+    const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
 
     expectEqual(payload.pricing.itemPrice, 63.9);
     expectEqual(payload.pricing.shippingPrice, 8.9);
     expectDeepEqual(payload.pricing.discount, {
       codePlain: rewardCode,
-      codeMasked: 'NV**TP',
-      obfuscatedCode: '9sTO38jI',
+      codeMasked,
+      obfuscatedCode: obfuscateDiscountCode(rewardCode),
       type: 'percentage',
-      value: 15,
-      productAmount: 4.5,
+      value: wormHuntConfig.discountPercentage,
+      productAmount: discountAmount,
       extraChargeAmount: 0,
       shippingAmount: 0,
-      totalAmount: 4.5,
-      endsOn: '2099-12-31',
+      totalAmount: discountAmount,
+      endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
     });
     expectEqual(
       payload.pricing.total,
-      68.3,
+      Number((72.8 - discountAmount).toFixed(2)),
       'the final review total should subtract only the eligible worm discount'
     );
   });
@@ -416,7 +435,7 @@ describe('frontend public order normalization', () => {
       }
     );
 
-    const rewardCode = String.fromCodePoint(78, 86, 82, 75, 84, 80);
+    const rewardCode = wormHuntConfig.code;
     assert.throws(
       () =>
         normalizePublicOrderSubmission(
@@ -430,7 +449,10 @@ describe('frontend public order normalization', () => {
           { now: new Date('2026-08-04T10:00:00Z') }
         ),
       (error) => {
-        expectEqual(error.code, 'discount_not_applicable');
+        expectEqual(
+          error.code,
+          wormHuntConfig.enabled ? 'discount_not_applicable' : 'invalid_discount_code'
+        );
         return true;
       }
     );
