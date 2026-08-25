@@ -3,6 +3,12 @@ export const productMessages = Object.freeze({
     heading: 'Delivery within Finland only',
     body: 'I deliver to addresses and Posti pickup points in Finland. I do not ship abroad. Local pickup is available in Järvenpää.',
   }),
+  salesMilestones: Object.freeze({
+    ariaLabel: 'Lieromaa by the numbers',
+    approximately: 'about',
+    wormsSoldLabel: 'compost worms sold',
+    completedOrdersLabel: 'completed orders',
+  }),
   collection: Object.freeze({
     title: 'Products | Lieromaa',
     description:

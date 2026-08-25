@@ -3,6 +3,10 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_ADSENSE_ENABLED: process.env.ADSENSE_ENABLED ?? '0',
   },
+  outputFileTracingIncludes: {
+    '/en': ['./generated/commerce/sales-milestones.json'],
+    '/tuotteet': ['./generated/commerce/sales-milestones.json'],
+  },
   async headers() {
     return [
       {

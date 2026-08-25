@@ -53,6 +53,23 @@ function resolveRelativeSpecifier(specifier, parentURL) {
 }
 
 export async function resolve(specifier, context, nextResolve) {
+  if (specifier === 'server-only') {
+    return {
+      shortCircuit: true,
+      url: pathToFileURL(
+        path.join(
+          rootDir,
+          'node_modules',
+          'next',
+          'dist',
+          'compiled',
+          'server-only',
+          'empty.js'
+        )
+      ).href,
+    };
+  }
+
   if (specifier === 'next/navigation') {
     return {
       shortCircuit: true,
