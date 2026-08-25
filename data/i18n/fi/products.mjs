@@ -3,6 +3,12 @@ export const productMessages = Object.freeze({
     heading: 'Toimitus vain Suomeen',
     body: 'Toimitamme osoitteisiin ja Postin noutopisteisiin Suomessa. Paikallinen nouto on saatavilla Järvenpäässä.',
   }),
+  salesMilestones: Object.freeze({
+    ariaLabel: 'Lieromaa lukuina',
+    approximately: 'noin',
+    wormsSoldLabel: 'myytyä kompostimatoa',
+    completedOrdersLabel: 'toteutunutta tilausta',
+  }),
   collection: Object.freeze({
     title: 'Tuotteet | Lieromaa',
     description:

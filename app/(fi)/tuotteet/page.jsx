@@ -1,6 +1,7 @@
 import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import SalesMilestones from '@/components/SalesMilestones/SalesMilestones';
 import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
 import { formatPrice, getProductVariants } from '@/lib/pricing/catalog';
 import { productCatalog } from '@/lib/products/catalog.mjs';
@@ -79,6 +80,8 @@ export default function ProductsPage() {
               Kompostimadot, niiden lisävalintana käyttövalmis 14 litran matokompostori
               tai pieni kuituseos sekä erikseen tilattava 500 g kuituseos.
             </p>
+
+            <SalesMilestones language="fi" />
 
             <div className={classes.ProductGrid}>
               {products.map((product) => (

@@ -48,7 +48,8 @@ public/images/**/*.webp
 public/images/**/*.gif
 
 data/generated/
-generated/
+/generated/*
+!/generated/README.md
 
 .env
 data/operations/commerce/discounts.local.json

@@ -2,6 +2,7 @@ import classes from '@/app/(fi)/tuotteet/ProductPage.module.css';
 import FinnishContentLinks from '@/components/FinnishContentLinks/FinnishContentLinks';
 import SafeImage from '@/components/SafeImage/SafeImage';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import SalesMilestones from '@/components/SalesMilestones/SalesMilestones';
 import { formatCurrency, formatPrice } from '@/lib/i18n/formatters.mjs';
 import { getProductMessages } from '@/lib/i18n/messages.mjs';
 import { getRoutePath } from '@/lib/i18n/routes.mjs';
@@ -97,6 +98,8 @@ export default function EnglishHomePage() {
               <h2>Products</h2>
               <p>{copy.collection.lead}</p>
             </div>
+
+            <SalesMilestones language={language} />
 
             <div className={classes.ProductGrid}>
               {productKeys.map((productKey) => {
