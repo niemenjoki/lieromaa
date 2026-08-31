@@ -21,6 +21,10 @@ import {
   getDefaultCartShippingOption,
 } from '@/lib/orders/cartOrder';
 import { createCheckoutDraft, parseCheckoutDraft } from '@/lib/orders/checkoutDraft.mjs';
+import {
+  createPendingStripeCheckout,
+  parsePendingStripeCheckout,
+} from '@/lib/orders/pendingStripeCheckout.mjs';
 import { submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   findProductKeyBySku,
@@ -35,6 +39,7 @@ import classes from './CheckoutPage.module.css';
 
 const PICKUP_POINT_SEARCH_ENDPOINT = '/api/pickup-points/search';
 const PAYMENT_STATUS_ENDPOINT = '/api/orders/payment-status';
+const STRIPE_ABANDON_ENDPOINT = '/api/orders/stripe-abandon';
 const PENDING_STRIPE_STORAGE_KEY = 'lieromaa.pendingStripeCheckout.v1';
 const CHECKOUT_DRAFT_STORAGE_KEY = 'lieromaa.checkoutDraft.v1';
 const POSTCODE_PATTERN = /^\d{5}$/;
@@ -59,8 +64,11 @@ function createCartFingerprint({ items, shippingMethod, discountCode }) {
 
 function readPendingStripeCheckout() {
   try {
-    const value = JSON.parse(localStorage.getItem(PENDING_STRIPE_STORAGE_KEY) || 'null');
-    return value && typeof value === 'object' ? value : null;
+    const pending = parsePendingStripeCheckout(
+      localStorage.getItem(PENDING_STRIPE_STORAGE_KEY) || ''
+    );
+    if (!pending) localStorage.removeItem(PENDING_STRIPE_STORAGE_KEY);
+    return pending;
   } catch {
     return null;
   }
@@ -68,8 +76,32 @@ function readPendingStripeCheckout() {
 
 function storePendingStripeCheckout(value) {
   try {
-    localStorage.setItem(PENDING_STRIPE_STORAGE_KEY, JSON.stringify(value));
-    return true;
+    const pending = createPendingStripeCheckout(value);
+    localStorage.setItem(PENDING_STRIPE_STORAGE_KEY, JSON.stringify(pending));
+    return pending;
+  } catch {
+    return null;
+  }
+}
+
+function createSubmissionId() {
+  return globalThis.crypto?.randomUUID?.() || `cart-${Date.now()}`;
+}
+
+async function abandonPendingStripeCheckout(reference, language) {
+  if (!reference?.sessionId) return false;
+  try {
+    const response = await fetch(STRIPE_ABANDON_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Lieromaa-Language': language,
+      },
+      body: JSON.stringify({ sessionId: reference.sessionId }),
+      cache: 'no-store',
+    });
+    return response.ok;
   } catch {
     return false;
   }
@@ -306,11 +338,7 @@ export default function CheckoutPageClient({ language }) {
           }
         : null);
     setPendingStripe(pending);
-    setSubmissionId(
-      pending?.sourceRequestId ||
-        globalThis.crypto?.randomUUID?.() ||
-        `cart-${Date.now()}`
-    );
+    setSubmissionId(pending?.sourceRequestId || createSubmissionId());
   }, []);
 
   const analyticsItems = useMemo(
@@ -467,14 +495,18 @@ export default function CheckoutPageClient({ language }) {
         clearCheckoutDraft();
         clearPendingStripeCheckout();
         setPendingStripe(null);
-      } else if (state === 'refunded') {
+      } else if (['refunded', 'expired'].includes(state)) {
+        if (state === 'expired') {
+          void abandonPendingStripeCheckout(pendingReference, language);
+        }
         clearCheckoutDraft();
         clearPendingStripeCheckout();
         setPendingStripe(null);
+        setSubmissionId(createSubmissionId());
       }
       return state;
     },
-    [cartFingerprint, clearCart]
+    [cartFingerprint, clearCart, language]
   );
 
   const checkStripePayment = useCallback(
@@ -520,6 +552,7 @@ export default function CheckoutPageClient({ language }) {
       return;
     }
     if (isCancel) {
+      const cancelledReference = pendingStripe;
       const draft = readCheckoutDraft();
       const draftCartFingerprint = draft
         ? createCartFingerprint({
@@ -559,7 +592,17 @@ export default function CheckoutPageClient({ language }) {
         setPaymentProvider('STRIPE');
       }
 
-      setPaymentOutcome({ state: 'cancelled', orderId: pendingStripe.orderId || '' });
+      void abandonPendingStripeCheckout(cancelledReference, language);
+      clearCheckoutDraft();
+      clearPendingStripeCheckout();
+      setPendingStripe(null);
+      setSubmissionId(createSubmissionId());
+      window.history.replaceState(
+        null,
+        '',
+        `${window.location.pathname}${window.location.hash}`
+      );
+      setPaymentOutcome({ state: 'cancelled', orderId: '' });
       setStep(canRestoreDraft ? 4 : 3);
       return;
     }
@@ -575,6 +618,7 @@ export default function CheckoutPageClient({ language }) {
 
   useEffect(() => {
     if (
+      !isHydrated ||
       !pendingStripe ||
       !cartFingerprint ||
       pendingStripe.cartFingerprint === cartFingerprint
@@ -582,8 +626,37 @@ export default function CheckoutPageClient({ language }) {
       return;
     }
     if (new URLSearchParams(window.location.search).has('stripe')) return;
-    setSubmissionId(globalThis.crypto?.randomUUID?.() || `cart-${Date.now()}`);
-  }, [cartFingerprint, pendingStripe]);
+    const abandonedReference = pendingStripe;
+    void abandonPendingStripeCheckout(abandonedReference, language);
+    clearCheckoutDraft();
+    clearPendingStripeCheckout();
+    setPendingStripe(null);
+    setSubmissionId(createSubmissionId());
+  }, [cartFingerprint, isHydrated, language, pendingStripe]);
+
+  useEffect(() => {
+    if (!pendingStripe?.expiresAt) return undefined;
+    const expiresAt = new Date(pendingStripe.expiresAt).getTime();
+    if (!Number.isFinite(expiresAt)) return undefined;
+
+    const expirePendingCheckout = () => {
+      const expiredReference = pendingStripe;
+      void abandonPendingStripeCheckout(expiredReference, language);
+      clearCheckoutDraft();
+      clearPendingStripeCheckout();
+      setPendingStripe(null);
+      setSubmissionId(createSubmissionId());
+      setPaymentOutcome({ state: 'expired', orderId: '' });
+    };
+    const remaining = expiresAt - Date.now();
+    if (remaining <= 0) {
+      expirePendingCheckout();
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(expirePendingCheckout, remaining);
+    return () => window.clearTimeout(timeoutId);
+  }, [language, pendingStripe]);
 
   const resetPickupPoint = () => {
     setPickupPoints([]);
@@ -836,6 +909,7 @@ export default function CheckoutPageClient({ language }) {
           orderId: result.orderId || '',
           sourceRequestId: submissionId,
           cartFingerprint,
+          expiresAt: result.checkoutExpiresAt,
         };
         if (result.paymentStatus === 'PAID' && result.checkoutSessionId) {
           applyPaymentStatus(
@@ -853,16 +927,16 @@ export default function CheckoutPageClient({ language }) {
           result.checkoutStatus === 'COMPLETE' &&
           !result.checkoutUrl
         ) {
-          storePendingStripeCheckout(reference);
-          setPendingStripe(reference);
+          const storedReference = storePendingStripeCheckout(reference);
+          setPendingStripe(storedReference || reference);
           await checkStripePayment(reference, { poll: true });
           return;
         }
         if (!result.checkoutUrl || !result.checkoutSessionId) {
           throw new Error(copy.stripeUnavailable);
         }
-        storePendingStripeCheckout(reference);
-        setPendingStripe(reference);
+        const storedReference = storePendingStripeCheckout(reference);
+        setPendingStripe(storedReference || reference);
         trackAnalyticsEvent('checkout_redirect_started', {
           eventTarget: 'stripe',
           eventValue: 'hosted_checkout',

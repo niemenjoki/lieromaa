@@ -106,10 +106,10 @@ export const transactionMessages = Object.freeze({
         'Maksu on voinut onnistua. Ostoskori säilyi. Odota hetki ja tarkista tila uudelleen ennen uutta maksuyritystä.',
       cancelledHeading: 'Palasit maksusivulta',
       cancelledBody:
-        'Maksua ei merkitty maksetuksi. Tilaustiedot palautettiin tähän selainistuntoon. Tarkista yhteenveto ja jatka samalla Stripe-maksulla tai vaihda maksutavaksi lasku.',
+        'Maksuyritys peruttiin. Tilaustiedot palautettiin tähän selainistuntoon. Voit muokata ostoskoria tai yhteystietoja ja jatkaa sitten uudelle maksusivulle.',
       expiredHeading: 'Maksusivu vanheni',
       expiredBody:
-        'Ostoskori säilyi. Voit valita Stripe-maksun uudelleen, jolloin tilaukselle luodaan uusi maksusivu.',
+        'Maksamaton tilaus poistettiin, mutta ostoskori säilyi. Voit jatkaa uudelle Stripe-maksusivulle.',
       paidHeading: 'Maksu vastaanotettu',
       paidBody:
         'Kiitos tilauksesta! Maksu on vahvistettu. Saat manuaalisen tilausvahvistuksen sähköpostiisi 1–2 arkipäivän sisällä.',

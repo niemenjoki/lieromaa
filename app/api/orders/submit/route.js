@@ -185,6 +185,7 @@ export async function POST(request) {
       checkoutStatus: responseData.checkoutStatus || '',
       checkoutUrl: responseData.checkoutUrl || '',
       checkoutSessionId: responseData.checkoutSessionId || '',
+      checkoutExpiresAt: responseData.checkoutExpiresAt || '',
     });
   } catch (error) {
     console.error('Order service forwarding failed:', error);

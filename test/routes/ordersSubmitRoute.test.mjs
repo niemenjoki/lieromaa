@@ -238,6 +238,7 @@ describe('frontend public order submit route', () => {
             checkoutStatus: 'OPEN',
             checkoutUrl: 'https://checkout.stripe.com/c/pay/cs_test_123',
             checkoutSessionId: 'cs_test_123',
+            checkoutExpiresAt: '2026-08-31T10:00:00.000Z',
           });
 
         try {
@@ -258,6 +259,7 @@ describe('frontend public order submit route', () => {
           expectEqual(body.paymentProvider, 'STRIPE');
           expectEqual(body.checkoutUrl, 'https://checkout.stripe.com/c/pay/cs_test_123');
           expectEqual(body.checkoutSessionId, 'cs_test_123');
+          expectEqual(body.checkoutExpiresAt, '2026-08-31T10:00:00.000Z');
           assert.equal(JSON.stringify(body).includes('sk_test_'), false);
           assert.equal(JSON.stringify(body).includes('whsec_'), false);
         } finally {
