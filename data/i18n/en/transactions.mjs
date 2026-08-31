@@ -106,10 +106,10 @@ export const transactionMessages = Object.freeze({
         'Payment may have succeeded. Your cart has been kept. Wait and check again before attempting another payment.',
       cancelledHeading: 'You returned from the payment page',
       cancelledBody:
-        'The order has not been marked paid. Your order details were restored for this browser session. Check the summary and continue with the same Stripe payment or switch to an invoice.',
+        'The payment attempt was cancelled. Your order details were restored for this browser session. You can edit the cart or contact details and then continue to a new payment page.',
       expiredHeading: 'The payment page has expired',
       expiredBody:
-        'Your cart has been kept. Select Stripe again to create a new payment page for the same order.',
+        'The unpaid order was discarded, but your cart was kept. You can continue to a new Stripe payment page.',
       paidHeading: 'Payment received',
       paidBody:
         'Thank you for your order! Payment is confirmed. You will receive a personal order confirmation by email within 1–2 working days.',

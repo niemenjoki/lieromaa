@@ -6,6 +6,11 @@ import {
   createCheckoutDraft,
   parseCheckoutDraft,
 } from '@/lib/orders/checkoutDraft.mjs';
+import {
+  PENDING_STRIPE_LIFETIME_MS,
+  createPendingStripeCheckout,
+  parsePendingStripeCheckout,
+} from '@/lib/orders/pendingStripeCheckout.mjs';
 
 const NOW = Date.UTC(2026, 7, 31, 8, 0, 0);
 
@@ -86,6 +91,60 @@ test('checkout draft rejects malformed, incomplete and extended-lifetime values'
       JSON.stringify({
         ...draft,
         expiresAt: draft.expiresAt + 1,
+      }),
+      { now: NOW }
+    ),
+    null
+  );
+});
+
+test('pending Stripe checkout state expires after one hour', () => {
+  const pending = createPendingStripeCheckout(
+    {
+      sessionId: 'cs_test_pending123',
+      orderId: 'LRM-PENDING',
+      sourceRequestId: 'submission-pending',
+      cartFingerprint: 'cart-pending',
+    },
+    { now: NOW }
+  );
+  const serialized = JSON.stringify(pending);
+
+  assert.deepEqual(
+    parsePendingStripeCheckout(serialized, {
+      now: NOW + PENDING_STRIPE_LIFETIME_MS - 1,
+    }),
+    pending
+  );
+  assert.equal(
+    parsePendingStripeCheckout(serialized, {
+      now: NOW + PENDING_STRIPE_LIFETIME_MS,
+    }),
+    null
+  );
+});
+
+test('pending Stripe checkout state rejects invalid sessions and extended expiry', () => {
+  const pending = createPendingStripeCheckout(
+    {
+      sessionId: 'cs_test_pending123',
+      sourceRequestId: 'submission-pending',
+    },
+    { now: NOW }
+  );
+
+  assert.equal(
+    parsePendingStripeCheckout(
+      JSON.stringify({ ...pending, sessionId: 'cs_live_wrong-environment!' }),
+      { now: NOW }
+    ),
+    null
+  );
+  assert.equal(
+    parsePendingStripeCheckout(
+      JSON.stringify({
+        ...pending,
+        expiresAt: NOW + PENDING_STRIPE_LIFETIME_MS + 60_001,
       }),
       { now: NOW }
     ),
