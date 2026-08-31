@@ -150,7 +150,7 @@ export default function EnglishHomePage() {
                 <li>Lieromaa checks availability and confirms your order personally.</li>
                 <li>
                   Pay now with MobilePay or a card through Stripe, or choose an email
-                  invoice after dispatch or collection. The invoice payment term is 7
+                  invoice after dispatch or collection. The invoice payment term is 14
                   days.
                 </li>
               </ol>

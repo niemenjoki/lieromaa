@@ -153,9 +153,8 @@ export default async function Page() {
                 </p>
                 <p>
                   Kassalla voit maksaa heti MobilePaylla tai kortilla Stripen suojatulla
-                  maksusivulla tai valita OP Kevytyrittäjä -palvelun sähköpostilaskun
-                  toimituksen tai noudon jälkeen.{' '}
-                  <strong>Laskun maksuaika on 7 vuorokautta.</strong>
+                  maksusivulla tai valita Lieromaan sähköpostilaskun toimituksen tai
+                  noudon jälkeen. Laskun maksuaika on 14 vuorokautta.
                 </p>
               </div>
 

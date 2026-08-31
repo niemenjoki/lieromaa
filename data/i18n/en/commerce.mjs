@@ -65,9 +65,9 @@ export const commerceMessages = Object.freeze({
     }),
     invoiceTiming: Object.freeze({
       postal:
-        'Lieromaa will send the invoice directly by email after the order has been handed to Posti. The payment term is 7 days.',
+        'Lieromaa will send the invoice directly by email after the order has been handed to Posti. The payment term is 14 days.',
       localPickup:
-        'Lieromaa will send the invoice directly by email after you have collected the order. The payment term is 7 days.',
+        'Lieromaa will send the invoice directly by email after you have collected the order. The payment term is 14 days.',
     }),
   }),
   extraCharges: Object.freeze({

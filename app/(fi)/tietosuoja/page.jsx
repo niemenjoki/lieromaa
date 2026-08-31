@@ -272,7 +272,7 @@ export default function PrivacyPage() {
           tietosuojakäytäntönsä mukaisesti.
         </p>
 
-        <h2>Laskutus ja maksut (Stripe ja OP Kevytyrittäjä)</h2>
+        <h2>Laskutus ja maksut</h2>
         <p>
           Kun valitset verkkomaksun, Stripe saa maksun käsittelyä, petosten torjuntaa ja
           lakisääteisiä velvoitteitaan varten nimen, sähköpostiosoitteen, tilausviitteen,
@@ -299,10 +299,12 @@ export default function PrivacyPage() {
           .
         </p>
         <p>
-          Kun valitset laskun, laskutusta ja maksun käsittelyä varten henkilötietoja
-          luovutetaan OP Kevytyrittäjä -palveluun. Tyypillisesti tähän sisältyy nimi,
-          sähköpostiosoite ja tilauksen bruttomyyntisummaa koskevat tiedot. OP
-          Kevytyrittäjä käsittelee tietoja oman tietosuojakäytäntönsä mukaisesti.
+          Kun valitset laskun, Lieromaa käsittelee laskun lähettämiseen, maksun
+          seuraamiseen ja kirjanpitoon tarvittavia henkilötietoja omassa
+          tilausjärjestelmässään ja laskuarkistossaan. Lasku toimitetaan Zoho Mailin
+          kautta. Tarvittavia asiakas-, lasku- ja myyntitietoja voidaan toimittaa
+          kirjanpidon palveluntarjoajalle tämän lakisääteisten ja sopimusperusteisten
+          velvoitteiden mukaisesti.
         </p>
 
         <h2>Google AdSense</h2>
@@ -438,12 +440,12 @@ export default function PrivacyPage() {
         <h2>Tietojen vastaanottajat</h2>
         <p>
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
-          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Posti, Stripe, OP
-          Kevytyrittäjä, Google ja Vercel). Oppaiden kysymys- ja aihe-ehdotuslomakkeiden
-          viestit sekä arvostelut välitetään Lieromaan omaan tilaustenhallintapalveluun
-          Vercelin kautta. Ensimmäisen osapuolen analytiikkadata pysyy Lieromaan omassa
-          hallinnassa. Henkilötietoja ei myydä eikä luovuteta muihin tarkoituksiin ilman
-          lainmukaista perustetta.
+          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Posti, Stripe, mahdollinen
+          kirjanpidon palveluntarjoaja, Google ja Vercel). Oppaiden kysymys- ja
+          aihe-ehdotuslomakkeiden viestit sekä arvostelut välitetään Lieromaan omaan
+          tilaustenhallintapalveluun Vercelin kautta. Ensimmäisen osapuolen
+          analytiikkadata pysyy Lieromaan omassa hallinnassa. Henkilötietoja ei myydä eikä
+          luovuteta muihin tarkoituksiin ilman lainmukaista perustetta.
         </p>
 
         <h2>Tietojen säilytysaika</h2>
@@ -466,11 +468,10 @@ export default function PrivacyPage() {
             tilat ja tapahtumien ajankohdat.
           </li>
           <li>
-            Laskutukseen ja kirjanpitoon liittyviä tietoja säilytetään Suomen
-            kirjanpitolainsäädännön edellyttämän ajan. OP Kevytyrittäjä voi säilyttää
-            laskutus- ja kirjanpitotietoja tätä pidempään oman lakisääteisen
-            velvollisuutensa perusteella. Stripe säilyttää maksutapahtumatietoja oman
-            tietosuojailmoituksensa ja lakisääteisten velvoitteidensa mukaisesti.
+            Laskutukseen ja kirjanpitoon liittyviä tietoja sekä arkistoituja laskuja
+            säilytetään Suomen kirjanpitolainsäädännön edellyttämän ajan. Stripe säilyttää
+            maksutapahtumatietoja oman tietosuojailmoituksensa ja lakisääteisten
+            velvoitteidensa mukaisesti.
           </li>
           <li>
             Oppaiden kysymys- ja aihe-ehdotuslomakkeiden kautta lähetettyjä viestejä

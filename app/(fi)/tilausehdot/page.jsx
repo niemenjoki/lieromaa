@@ -46,10 +46,9 @@ export default function OrderPolicyPage() {
         <h2>Yleistä</h2>
         <p>
           Lieromaan toimintaa harjoittaa <strong>{BUSINESS_NAME}</strong> (Y-tunnus:{' '}
-          {BUSINESS_ID}), mutta laskutus ja verotuksen hallinnointi hoidetaan
-          <strong> OP Kevytyrittäjä </strong>-palvelun kautta. Myynti on
-          arvonlisäverotonta arvonlisäverolain 2 luvun 3 § nojalla (vähäinen toiminta).
-          Pidätän oikeuden hintojen ja toimitusehtojen muutoksiin.
+          {BUSINESS_ID}). Myynti on arvonlisäverotonta arvonlisäverolain 2 luvun 3 §
+          nojalla (vähäinen toiminta). Pidätän oikeuden hintojen ja toimitusehtojen
+          muutoksiin.
         </p>
 
         <h2>Myyjän tiedot ja asiakaspalvelu</h2>
@@ -112,9 +111,9 @@ export default function OrderPolicyPage() {
           kortin koko numeroa tai kortin turvakoodia.
         </p>
         <p>
-          Lasku lähetetään <strong>OP Kevytyrittäjä</strong> -palvelun kautta
-          sähköpostitse, kun tilaus on luovutettu Postille tai noudettu. Maksuaika on 7
-          vuorokautta. Laskun voi maksaa normaalisti verkkopankissa tai mobiilipankissa.
+          Lieromaa lähettää laskun sähköpostitse, kun tilaus on luovutettu Postille tai
+          noudettu. Maksuaika on 14 vuorokautta. Laskun voi maksaa normaalisti
+          verkkopankissa tai mobiilipankissa.
         </p>
         <p>
           Maksamattomasta laskusta voidaan lähettää maksumuistutus, ja edelleen maksamatta

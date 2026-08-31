@@ -142,7 +142,7 @@ export default function EnglishOrderTermsPage() {
           <p>
             For Posti pickup-point and home-delivery orders, I send the invoice after
             handing the order to Posti. For local pickup, I send it after you have
-            collected the order. The payment term is 7 days.
+            collected the order. The payment term is 14 days.
           </p>
           <p>
             A reminder may be sent for an unpaid invoice. A debt that remains unpaid may
