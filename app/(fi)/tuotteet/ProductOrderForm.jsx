@@ -1075,8 +1075,8 @@ export default function ProductOrderForm({ productKey }) {
           Lähettämällä tilauksen vahvistat, että olet tutustunut{' '}
           <SafeLink href="/tilausehdot">tilaus- ja toimitusehtoihin</SafeLink> sekä{' '}
           <SafeLink href="/tietosuoja">tietosuojaselosteeseen</SafeLink>. Maksu tapahtuu
-          OP Kevytyrittäjä-palvelun lähettämällä sähköpostilaskulla, jonka{' '}
-          <strong>maksuaika on 7 vuorokautta</strong>. {invoiceTimingNote}
+          Lieromaan lähettämällä sähköpostilaskulla, jonka maksuaika on 14 vuorokautta.{' '}
+          {invoiceTimingNote}
         </p>
 
         {submitError ? (

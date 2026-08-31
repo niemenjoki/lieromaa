@@ -186,8 +186,8 @@ export default function EnglishCompostWormsPage() {
                 </p>
                 <p>
                   At checkout you can pay now with MobilePay or a card on Stripe’s secure
-                  page, or choose an email invoice after dispatch or collection.{' '}
-                  <strong>The invoice payment term is 7 days.</strong>
+                  page, or choose an email invoice after dispatch or collection. The
+                  invoice payment term is 14 days.
                 </p>
               </div>
 
