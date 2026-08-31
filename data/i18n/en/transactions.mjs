@@ -1,6 +1,6 @@
 export const transactionMessages = Object.freeze({
   checkout: Object.freeze({
-    steps: Object.freeze(['Cart', 'Delivery', 'Payment', 'Details', 'Confirmation']),
+    steps: Object.freeze(['Cart', 'Delivery', 'Details', 'Payment', 'Confirmation']),
     pickupPointTypes: Object.freeze({
       parcelLocker: 'Parcel locker',
       servicePoint: 'Posti service point',
@@ -69,9 +69,11 @@ export const transactionMessages = Object.freeze({
     estimatedDispatchDate: 'Estimated dispatch date',
     estimatedDateSuffix:
       'The actual dispatch or pickup date will be confirmed in the order confirmation.',
-    paymentGeneral: 'You do not pay during checkout.',
-    paymentAcknowledgement:
-      'I understand that the order is paid by an invoice sent by email and that the payment term is 7 days.',
+    paymentChoiceLegend: 'Choose a payment method',
+    stripePaymentLabel: 'Pay now with MobilePay or a card',
+    stripePaymentDetail:
+      'Payment takes place on Stripe’s secure hosted page. Apple Pay or Google Pay may appear on a supported device.',
+    invoicePaymentLabel: 'Pay by email invoice after dispatch or collection',
     invoiceTimingPostal: 'I send the invoice by email after handing your order to Posti.',
     invoiceTimingLocal: 'I send the invoice by email after you collect your order.',
     fields: Object.freeze({
@@ -86,7 +88,35 @@ export const transactionMessages = Object.freeze({
     privacyLink: 'privacy notice',
     termsJoiner: 'and the',
     submitting: 'Placing order...',
-    submit: 'Place order',
+    redirectingToStripe: 'Continuing to payment...',
+    submitInvoice: 'Place order',
+    submitStripe: 'Continue to payment',
+    stripeUnavailable:
+      'The payment page could not be opened. Your cart has been kept. Please try again shortly.',
+    paymentOutcomes: Object.freeze({
+      orderNumber: 'Order number',
+      refresh: 'Check payment status again',
+      checkingHeading: 'Checking your payment',
+      checkingBody: 'Please wait while the payment is confirmed securely.',
+      pendingHeading: 'Your payment is being confirmed',
+      pendingBody:
+        'Payment may have succeeded, but confirmation has not arrived yet. Do not pay for the order again.',
+      unavailableHeading: 'Payment status is temporarily unavailable',
+      unavailableBody:
+        'Payment may have succeeded. Your cart has been kept. Wait and check again before attempting another payment.',
+      cancelledHeading: 'You returned from the payment page',
+      cancelledBody:
+        'The order has not been marked paid. Your order details were restored for this browser session. Check the summary and continue with the same Stripe payment or switch to an invoice.',
+      expiredHeading: 'The payment page has expired',
+      expiredBody:
+        'Your cart has been kept. Select Stripe again to create a new payment page for the same order.',
+      paidHeading: 'Payment received',
+      paidBody:
+        'Thank you for your order! Payment is confirmed. You will receive a personal order confirmation by email within 1–2 working days.',
+      refundedHeading: 'Payment refunded',
+      refundedBody:
+        'The Stripe payment for this order has been returned to the original payment method.',
+    }),
     deliveryNoticeHeading: 'Delivery within Finland only',
     deliveryNoticeBody:
       'I deliver to addresses and Posti pickup points in Finland. I do not ship abroad. Local pickup is available in Järvenpää.',
@@ -98,7 +128,7 @@ export const transactionMessages = Object.freeze({
       'The cancellation notice could not be sent. Please try again in a moment.',
     successHeading: 'Cancellation notice received',
     successBody:
-      'You will receive an automatic acknowledgement by email. I will contact you separately about return and payment arrangements, depending on the order’s status and contents.',
+      'You will receive an automatic acknowledgement by email. I will contact you separately about return and payment arrangements, depending on the order’s status and contents. The notice does not trigger an automatic Stripe refund.',
     fields: Object.freeze({
       name: 'Name',
       email: 'Email address',
@@ -189,6 +219,15 @@ export const transactionMessages = Object.freeze({
     cart_empty: 'The shopping cart is empty.',
     payment_acknowledgement_required:
       'Confirm the payment method before placing the order.',
+    payment_provider_invalid: 'Choose a payment method before placing the order.',
+    stripe_disabled: 'Stripe payment is not currently available.',
+    stripe_unavailable:
+      'Stripe payment could not be processed just now. Your cart has been kept.',
+    duplicate_order_mismatch:
+      'The cart or order details changed after the earlier payment attempt. Check the order and try again.',
+    payment_provider_change_forbidden:
+      'The payment method can no longer be changed for this order.',
+    payment_status_not_found: 'The payment status could not be found.',
     pickup_point_invalid:
       'Search for the selected Posti pickup point again before sending the order.',
     too_fast: 'The form was submitted too quickly. Wait a moment and try again.',

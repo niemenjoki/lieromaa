@@ -83,7 +83,7 @@ describe('English content pages', () => {
     assert.equal(result.options.halfStartWeightGrams, 175);
   });
 
-  test('contains complete legal billing language and no prohibited provider wording', () => {
+  test('contains complete legal Stripe and invoice language with no prohibited provider wording', () => {
     const terms = readEnglishSource('order-and-delivery-terms/page.jsx');
     const privacy = readEnglishSource('privacy/page.jsx');
     const englishSource = [...englishContentRoutes.values()]
@@ -92,11 +92,15 @@ describe('English content pages', () => {
 
     assert.match(
       terms,
-      /Payment is made by invoice, which I send directly to the email address/
+      /At checkout you can either pay on Stripe’s secure hosted payment page or/
     );
+    assert.match(terms, /MobilePay and payment\s+cards are supported/);
+    assert.match(terms, /choose an email invoice after dispatch or collection/);
     assert.match(terms, /The payment term is 7 days/);
     assert.match(terms, /Delivery within Finland only/);
     assert.match(privacy, /Invoicing, payments and accounting/);
+    assert.match(privacy, /Temporary draft for an order proceeding to Stripe/);
+    assert.match(privacy, /sessionStorage for up to one hour/);
     assert.doesNotMatch(englishSource, /OP Kevytyrittäjä/i);
     assert.doesNotMatch(englishSource, /TODO|translation placeholder/i);
   });

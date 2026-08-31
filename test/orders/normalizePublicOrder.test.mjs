@@ -969,4 +969,29 @@ describe('frontend public order normalization', () => {
       }
     );
   });
+
+  test('normalizePublicOrderSubmission should require an explicit invoice or Stripe choice', () => {
+    const cartOverrides = {
+      sku: '',
+      tuote_avain: '',
+      cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+      toimitus: 'nouto',
+    };
+    assert.throws(
+      () =>
+        normalizePublicOrderSubmission(
+          createValidOrderFormData({ ...cartOverrides, payment_provider: '' })
+        ),
+      (error) => {
+        expectOk(error instanceof PublicOrderValidationError);
+        expectEqual(error.code, 'payment_provider_invalid');
+        return true;
+      }
+    );
+
+    const stripeOrder = normalizePublicOrderSubmission(
+      createValidOrderFormData({ ...cartOverrides, payment_provider: 'STRIPE' })
+    );
+    expectEqual(stripeOrder.paymentProvider, 'STRIPE');
+  });
 });
