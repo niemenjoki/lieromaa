@@ -95,6 +95,7 @@ describe('frontend public order submit route', () => {
 
     await withEnv(
       {
+        NODE_ENV: 'development',
         ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
         ORDER_SERVICE_TOKEN: 'shared-secret',
         ORDER_SERVICE_TIMEOUT_MS: '2500',
@@ -221,6 +222,7 @@ describe('frontend public order submit route', () => {
   test('the public order submit route should return the hosted Stripe Checkout handoff without exposing secrets', async () => {
     await withEnv(
       {
+        NODE_ENV: 'development',
         ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
         ORDER_SERVICE_TOKEN: 'shared-secret',
       },
