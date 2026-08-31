@@ -14,14 +14,14 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-08-05';
+const UPDATED_AT = '2026-08-30';
 const EFFECTIVE_FROM = '2026-07-17';
 
 const pageMetadata = {
   language: 'en',
   title: 'Order and delivery terms | Lieromaa',
   description:
-    'Read Lieromaa’s English terms for ordering, invoicing, delivery within Finland, cancellation, returns, defects and dispute resolution.',
+    'Read Lieromaa’s English terms for ordering, Stripe payments, invoicing, delivery within Finland, cancellation, refunds, returns and defects.',
   canonicalUrl: '/en/order-and-delivery-terms',
 };
 
@@ -128,13 +128,21 @@ export default function EnglishOrderTermsPage() {
 
           <h2>Payment</h2>
           <p>
-            Payment is made by invoice, which I send directly to the email address
-            provided with the order. The payment term is 7 days.
+            At checkout you can either pay on Stripe’s secure hosted payment page or
+            choose an email invoice after dispatch or collection. No payment method is
+            selected for you in advance.
+          </p>
+          <p>
+            A Stripe payment is charged when the order is placed. MobilePay and payment
+            cards are supported. Apple Pay or Google Pay may appear on Stripe’s page on a
+            supported device and browser. Stripe processes the payment as an external
+            payment provider; Lieromaa does not receive your card number or other payment
+            credentials.
           </p>
           <p>
             For Posti pickup-point and home-delivery orders, I send the invoice after
             handing the order to Posti. For local pickup, I send it after you have
-            collected the order.
+            collected the order. The payment term is 7 days.
           </p>
           <p>
             A reminder may be sent for an unpaid invoice. A debt that remains unpaid may
@@ -153,6 +161,12 @@ export default function EnglishOrderTermsPage() {
             that, but on the third Monday following the order date.
           </p>
           <p>The exact delivery schedule is always stated in the confirmation.</p>
+          <p>
+            If an exceptional volume of orders makes the stated schedule impossible, I
+            will contact you personally. We will either agree a later delivery date so
+            that the worm population can grow, or cancel the order. A paid Stripe order
+            will then be refunded in full to the original payment method.
+          </p>
           <p>
             Parcels sent to Posti pickup points normally arrive 1–2 working days after
             dispatch. For home delivery, Posti arranges the delivery time with the
@@ -181,6 +195,11 @@ export default function EnglishOrderTermsPage() {
             automatic email acknowledges receipt of a form submission. The acknowledgement
             only confirms receipt; I will respond separately about any return or payment
             arrangements, depending on the order’s status and contents.
+          </p>
+          <p>
+            An approved cancellation of a paid Stripe order is refunded in full through
+            Stripe to the original payment method. Submitting a cancellation notice does
+            not trigger an automatic refund; I review the request personally.
           </p>
           <p>
             A dispatched worm order cannot be cancelled because live compost worms cannot

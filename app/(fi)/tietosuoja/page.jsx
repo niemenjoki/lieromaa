@@ -59,6 +59,12 @@ export default function PrivacyPage() {
             mahdolliset alennuskoodiin liittyvät tiedot.
           </li>
           <li>
+            Maksutiedot: valittu maksutapa, maksun summa ja valuutta, maksun tila, Stripe
+            Checkout -istunnon ja maksutapahtuman tunnisteet sekä maksu- ja
+            hyvitysajankohdat. Lieromaa ei saa kortin numeroa tai muita maksuvälineen
+            tunnistetietoja.
+          </li>
+          <li>
             Peruuttamisilmoitustiedot: nimi, sähköpostiosoite, mahdollinen puhelinnumero,
             toivottu yhteydenottotapa, tilauksen tunnistetieto, ilmoituksen laajuus,
             ilmoituksessa kuvatut tuotteet tai tilauksen tiedot sekä ilmoituksen
@@ -101,6 +107,22 @@ export default function PrivacyPage() {
             Ostoskoritiedot: ostoskoriin lisättyjen tuotteiden tunnisteet, määrät ja korin
             viimeisin muokkausaika. Ostoskori tallennetaan vain selaimeesi, eikä sitä
             lähetetä Lieromaalle ennen tilauslomakkeen lähettämistä.
+          </li>
+          <li>
+            Keskeneräisen Stripe-maksun viite: selaimen localStorageen tallennetaan
+            Checkout-istunnon tunniste, tilausnumero, tekninen lähetyspyyntötunniste ja
+            ostoskorin sormenjälki, jotta maksun tila voidaan tarkistaa paluun tai
+            keskeytyksen jälkeen. Viite ei sisällä yhteystietoja tai maksuvälineen
+            tietoja.
+          </li>
+          <li>
+            Stripe-maksuun siirtyvän tilauksen väliaikainen luonnos: selaimen
+            sessionStorageen tallennetaan enintään tunniksi tilauslomakkeella antamasi
+            yhteys- ja toimitustiedot, viesti, toimitus- ja maksutapavalinta, mahdollinen
+            noutopiste ja alennuskoodi sekä tekniset pyyntötunnisteet. Luonnosta käytetään
+            vain lomakkeen palauttamiseen, jos palaat Stripen maksusivulta maksamatta. Se
+            poistetaan vahvistetun maksun, laskutilauksen onnistuneen lähetyksen tai
+            vanhenemisen jälkeen eikä se sisällä maksuvälineen tietoja.
           </li>
         </ul>
 
@@ -250,11 +272,37 @@ export default function PrivacyPage() {
           tietosuojakäytäntönsä mukaisesti.
         </p>
 
-        <h2>Laskutus ja maksut (OP Kevytyrittäjä)</h2>
+        <h2>Laskutus ja maksut (Stripe ja OP Kevytyrittäjä)</h2>
         <p>
-          Laskutusta ja maksujen käsittelyä varten henkilötietoja luovutetaan OP
-          Kevytyrittäjä -palveluun. Tyypillisesti tähän sisältyy nimi ja sähköpostiosoite.
-          OP Kevytyrittäjä käsittelee tietoja oman tietosuojakäytäntönsä mukaisesti.
+          Kun valitset verkkomaksun, Stripe saa maksun käsittelyä, petosten torjuntaa ja
+          lakisääteisiä velvoitteitaan varten nimen, sähköpostiosoitteen, tilausviitteen,
+          tuotteet, summan, valuutan sekä Stripen maksusivulla keräämät laite- ja
+          maksutiedot. Stripe voi käsitellä tietoja sekä Lieromaan henkilötietojen
+          käsittelijänä että omiin ilmoitettuihin tarkoituksiinsa itsenäisenä
+          rekisterinpitäjänä. Lieromaa saa Stripeltä maksun tilan ja tekniset tunnisteet,
+          mutta ei kortin numeroa tai muita maksuvälineen tunnistetietoja.
+        </p>
+        <p>
+          Stripe käyttää alihankkijoita ja voi käsitellä tietoja ETA-alueen ulkopuolella
+          sovellettavien siirtomekanismien ja tietojenkäsittelyehtojen mukaisesti. Katso{' '}
+          <a
+            href="https://stripe.com/legal/privacy-center"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Stripe Privacy Center
+          </a>{' '}
+          ja{' '}
+          <a href="https://stripe.com/legal/dpa" target="_blank" rel="noreferrer">
+            Stripe Data Processing Agreement
+          </a>
+          .
+        </p>
+        <p>
+          Kun valitset laskun, laskutusta ja maksun käsittelyä varten henkilötietoja
+          luovutetaan OP Kevytyrittäjä -palveluun. Tyypillisesti tähän sisältyy nimi,
+          sähköpostiosoite ja tilauksen bruttomyyntisummaa koskevat tiedot. OP
+          Kevytyrittäjä käsittelee tietoja oman tietosuojakäytäntönsä mukaisesti.
         </p>
 
         <h2>Google AdSense</h2>
@@ -342,7 +390,7 @@ export default function PrivacyPage() {
           .
         </p>
 
-        <h2>LocalStorage</h2>
+        <h2>Selaimen paikallinen ja istuntotallennus</h2>
         <p>
           Kun vaihdat vaaleaan tai tummaan tilaan, sivusto tallentaa valitsemasi teeman
           selaimesi paikalliseen tallennustilaan (localStorage). Ostoskori tallentuu
@@ -354,6 +402,14 @@ export default function PrivacyPage() {
           analytiikkaa varten. Näistä tunnisteista ei voi suoraan päätellä
           henkilöllisyyttäsi, mutta niitä käsitellään henkilötietoina, koska sama selain
           voidaan tunnistaa eri käyntikerroilla suostumuksen voimassa ollessa.
+        </p>
+        <p>
+          Kun siirryt tilauksesta Stripen maksusivulle, sivusto säilyttää lomakkeen
+          luonnoksen nykyisen välilehden sessionStoragessa enintään tunnin. Näin yhteys-,
+          toimitus- ja valintatiedot voidaan palauttaa, jos keskeytät maksamisen. Luonnos
+          poistetaan maksun vahvistamisen, laskutilauksen onnistumisen tai vanhenemisen
+          jälkeen. sessionStorage tyhjentyy tavallisesti myös, kun välilehti tai
+          selainistunto suljetaan.
         </p>
 
         <h2>Evästeet</h2>
@@ -382,10 +438,10 @@ export default function PrivacyPage() {
         <h2>Tietojen vastaanottajat</h2>
         <p>
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
-          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Posti, OP Kevytyrittäjä,
-          Google ja Vercel). Oppaiden kysymys- ja aihe-ehdotuslomakkeiden viestit sekä
-          arvostelut välitetään Lieromaan omaan tilaustenhallintapalveluun Vercelin
-          kautta. Ensimmäisen osapuolen analytiikkadata pysyy Lieromaan omassa
+          palveluissa kuvatulla tavalla (Cloudflare, Zoho Mail, Posti, Stripe, OP
+          Kevytyrittäjä, Google ja Vercel). Oppaiden kysymys- ja aihe-ehdotuslomakkeiden
+          viestit sekä arvostelut välitetään Lieromaan omaan tilaustenhallintapalveluun
+          Vercelin kautta. Ensimmäisen osapuolen analytiikkadata pysyy Lieromaan omassa
           hallinnassa. Henkilötietoja ei myydä eikä luovuteta muihin tarkoituksiin ilman
           lainmukaista perustetta.
         </p>
@@ -413,7 +469,8 @@ export default function PrivacyPage() {
             Laskutukseen ja kirjanpitoon liittyviä tietoja säilytetään Suomen
             kirjanpitolainsäädännön edellyttämän ajan. OP Kevytyrittäjä voi säilyttää
             laskutus- ja kirjanpitotietoja tätä pidempään oman lakisääteisen
-            velvollisuutensa perusteella.
+            velvollisuutensa perusteella. Stripe säilyttää maksutapahtumatietoja oman
+            tietosuojailmoituksensa ja lakisääteisten velvoitteidensa mukaisesti.
           </li>
           <li>
             Oppaiden kysymys- ja aihe-ehdotuslomakkeiden kautta lähetettyjä viestejä

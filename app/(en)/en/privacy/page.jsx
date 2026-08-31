@@ -11,13 +11,13 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-07-17';
+const UPDATED_AT = '2026-08-30';
 
 const pageMetadata = {
   language: 'en',
   title: 'Privacy notice | Lieromaa',
   description:
-    'Read how Lieromaa collects, uses, stores and shares personal data for orders, customer service, reviews, analytics, advertising and data requests.',
+    'Read how Lieromaa handles personal data for orders, Stripe and invoice payments, customer service, reviews, analytics, advertising and data requests.',
   canonicalUrl: '/en/privacy',
 };
 
@@ -80,6 +80,11 @@ export default function EnglishPrivacyPage() {
               message field and any information connected with a discount code.
             </li>
             <li>
+              Payment data: selected payment method, amount and currency, payment status,
+              Stripe Checkout Session and payment identifiers, and payment and refund
+              times. Lieromaa does not receive card numbers or other payment credentials.
+            </li>
+            <li>
               Cancellation-notice data: name, email address, optional telephone number,
               preferred contact method, order identifier, scope of the notice, products or
               order details described in the notice, and submission time.
@@ -100,6 +105,21 @@ export default function EnglishPrivacyPage() {
               order. To limit abuse, technical identifiers created with a secret key may
               be stored for up to 24 hours; the original order number, email address or
               network address cannot be read directly from those identifiers.
+            </li>
+            <li>
+              Pending Stripe payment reference: the browser’s local storage holds the
+              Checkout Session identifier, order number, technical submission identifier
+              and cart fingerprint so that payment status can be checked after a return or
+              interruption. It contains no contact or payment-instrument details.
+            </li>
+            <li>
+              Temporary draft for an order proceeding to Stripe: for up to one hour, the
+              browser’s sessionStorage holds the contact and delivery details, message,
+              delivery and payment selections, possible pickup point and discount code,
+              and technical request identifiers entered in the order form. The draft is
+              used only to restore the form if you return from Stripe without paying. It
+              is removed after confirmed payment, successful invoice submission or expiry
+              and contains no payment-instrument details.
             </li>
             <li>
               Technical usage data and analytics measurements: Lieromaa’s first-party
@@ -260,12 +280,35 @@ export default function EnglishPrivacyPage() {
 
           <h2>Invoicing, payments and accounting</h2>
           <p>
-            Lieromaa processes the personal data needed to send and administer invoices
-            and to record transactions for accounting. Necessary invoice and accounting
-            data may be made available to Lieromaa’s accounting service provider. This
-            typically includes the customer’s name, email address, order and invoice
-            details, payment status and other information required by law. The service
-            provider processes data under its own legal and contractual obligations.
+            When you choose online payment, Stripe receives your name, email address,
+            order reference, products, amount and currency, together with device and
+            payment data collected on Stripe’s hosted page, for payment processing, fraud
+            prevention and legal obligations. Stripe may act both as Lieromaa’s processor
+            and as an independent controller for its stated purposes. Lieromaa receives
+            payment status and technical identifiers, but no card number or other payment
+            credentials.
+          </p>
+          <p>
+            Stripe uses service providers and may process data outside the EEA under its
+            applicable transfer safeguards and data-processing terms. See the{' '}
+            <a
+              href="https://stripe.com/legal/privacy-center"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Stripe Privacy Center
+            </a>{' '}
+            and{' '}
+            <a href="https://stripe.com/legal/dpa" target="_blank" rel="noreferrer">
+              Stripe Data Processing Agreement
+            </a>
+            .
+          </p>
+          <p>
+            When you choose an invoice, Lieromaa processes the personal data needed to
+            send and administer it and may provide necessary customer, invoice and gross
+            sale information to its accounting service provider. The service provider
+            processes data under its own legal and contractual obligations.
           </p>
 
           <h2>Google AdSense</h2>
@@ -347,7 +390,7 @@ export default function EnglishPrivacyPage() {
             .
           </p>
 
-          <h2>Local storage</h2>
+          <h2>Local and session storage</h2>
           <p>
             When you change between light and dark mode, the site stores your selection in
             localStorage. The cart is also stored there so that you can continue later in
@@ -358,6 +401,14 @@ export default function EnglishPrivacyPage() {
             sessionStorage for first-party analytics. These identifiers do not directly
             reveal your identity, but they are treated as personal data because the same
             browser can be recognised across visits while consent remains valid.
+          </p>
+          <p>
+            When an order proceeds to Stripe’s payment page, the site keeps a form draft
+            in the current tab’s sessionStorage for up to one hour. This allows contact,
+            delivery and selection details to be restored if you cancel payment. The draft
+            is removed after confirmed payment, successful invoice submission or expiry.
+            sessionStorage is also normally cleared when the tab or browser session is
+            closed.
           </p>
 
           <h2>Cookies</h2>
@@ -387,7 +438,7 @@ export default function EnglishPrivacyPage() {
           <p>
             Personal data is disclosed to third parties only as described above, which may
             include Cloudflare, Zoho Mail, Posti, Lieromaa’s accounting service provider,
-            Google and Vercel. Messages and reviews from the relevant forms are
+            Stripe, Google and Vercel. Messages and reviews from the relevant forms are
             transmitted to Lieromaa’s own order-management service through Vercel.
             First-party analytics data remains under Lieromaa’s control. Personal data is
             not sold or disclosed for other purposes without a lawful basis.
@@ -413,7 +464,8 @@ export default function EnglishPrivacyPage() {
             <li>
               Invoice and accounting data is kept for the period required by Finnish
               accounting law. An accounting service provider may keep accounting data for
-              longer where required by its own statutory obligations.
+              longer where required by its own statutory obligations. Stripe retains
+              transaction data under its privacy notice and legal obligations.
             </li>
             <li>
               Messages submitted through question and topic-suggestion forms are kept as

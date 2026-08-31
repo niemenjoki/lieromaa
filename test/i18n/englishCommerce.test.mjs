@@ -88,7 +88,7 @@ describe('English commerce and customer-service pages', () => {
     }
   });
 
-  test('contains the exact delivery and direct-invoice promises with no prohibited provider wording', () => {
+  test('contains the delivery and explicit Stripe-or-invoice payment choices with no prohibited provider wording', () => {
     const transactions = fs.readFileSync(
       path.join(PROJECT_ROOT, 'data', 'i18n', 'en', 'transactions.mjs'),
       'utf8'
@@ -108,12 +108,19 @@ describe('English commerce and customer-service pages', () => {
       englishRuntimeSource,
       /I deliver to addresses and Posti pickup points in Finland\. I do not ship abroad\. Local pickup is available in Järvenpää\./
     );
-    assert.match(transactions, /You do not pay during checkout\./);
+    assert.match(transactions, /Pay now with MobilePay or a card/);
+    assert.match(transactions, /Pay by email invoice after dispatch or collection/);
     assert.match(
       transactions,
-      /I understand that the order is paid by an invoice sent by email and that the payment term is 7 days\./
+      /I send the invoice by email after handing your order to Posti/
     );
-    assert.match(transactions, /submit: ['"]Place order['"]/);
+    assert.match(transactions, /submitInvoice: ['"]Place order['"]/);
+    assert.match(transactions, /submitStripe: ['"]Continue to payment['"]/);
+    assert.match(
+      transactions,
+      /steps: Object\.freeze\(\['Cart', 'Delivery', 'Details', 'Payment', 'Confirmation'\]\)/
+    );
+    assert.match(transactions, /order details were restored for this browser session/);
     assert.doesNotMatch(englishRuntimeSource, /OP Kevytyrittäjä/i);
     assert.doesNotMatch(englishRuntimeSource, /TODO|translation placeholder/i);
   });
@@ -139,6 +146,10 @@ describe('English commerce and customer-service pages', () => {
     assert.match(
       finnishTransactions,
       /voit käyttää['"],\s*cancellationLink: ['"]peruuttamisilmoituksen lomaketta['"]/
+    );
+    assert.match(
+      finnishTransactions,
+      /steps: Object\.freeze\(\['Kori', 'Toimitus', 'Tiedot', 'Maksu', 'Vahvistus'\]\)/
     );
   });
 

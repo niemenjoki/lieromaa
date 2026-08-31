@@ -27,6 +27,29 @@ function buildOrderServiceEndpoint(baseUrl) {
   return `${baseUrl.replace(/\/+$/, '')}/api/public/orders`;
 }
 
+function getStripeRuntimeMode() {
+  return process.env.NODE_ENV === 'production' ? 'live' : 'test';
+}
+
+function isSafeStripeCheckoutResponse(responseData) {
+  if (responseData?.paymentProvider !== 'STRIPE') return true;
+
+  const expectedPrefix = `cs_${getStripeRuntimeMode()}_`;
+  if (!String(responseData.checkoutSessionId || '').startsWith(expectedPrefix)) {
+    return false;
+  }
+  if (!responseData.checkoutUrl) return responseData.checkoutStatus === 'COMPLETE';
+
+  try {
+    const checkoutUrl = new URL(responseData.checkoutUrl);
+    return (
+      checkoutUrl.protocol === 'https:' && checkoutUrl.hostname === 'checkout.stripe.com'
+    );
+  } catch {
+    return false;
+  }
+}
+
 function jsonResponse(body, init) {
   return Response.json(body, init);
 }
@@ -106,6 +129,7 @@ export async function POST(request) {
         'Content-Type': 'application/json',
         'X-Order-Token': orderServiceToken,
         'X-Idempotency-Key': normalizedOrder.sourceRequestId,
+        'X-Lieromaa-Stripe-Mode': getStripeRuntimeMode(),
         [LIEROMAA_LANGUAGE_HEADER]: normalizedOrder.language,
       },
       body: JSON.stringify({
@@ -128,10 +152,39 @@ export async function POST(request) {
       );
     }
 
+    const responsePaymentProvider = String(
+      responseData.paymentProvider || ''
+    ).toUpperCase();
+    if (responsePaymentProvider !== normalizedOrder.paymentProvider) {
+      console.error('Order service returned a mismatched payment provider.', {
+        requested: normalizedOrder.paymentProvider,
+        received: responsePaymentProvider || 'MISSING',
+      });
+      return jsonResponse(
+        createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
+        { status: 502 }
+      );
+    }
+
+    if (!isSafeStripeCheckoutResponse(responseData)) {
+      console.error(
+        'Order service returned a Stripe Checkout response for the wrong environment.'
+      );
+      return jsonResponse(
+        createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
+        { status: 502 }
+      );
+    }
+
     return jsonResponse({
       ok: true,
       orderId: responseData.orderId || null,
       duplicate: Boolean(responseData.duplicate),
+      paymentProvider: responsePaymentProvider,
+      paymentStatus: responseData.paymentStatus || 'UNPAID',
+      checkoutStatus: responseData.checkoutStatus || '',
+      checkoutUrl: responseData.checkoutUrl || '',
+      checkoutSessionId: responseData.checkoutSessionId || '',
     });
   } catch (error) {
     console.error('Order service forwarding failed:', error);

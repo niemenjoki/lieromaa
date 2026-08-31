@@ -185,8 +185,9 @@ export default function EnglishCompostWormsPage() {
                   it within two days.
                 </p>
                 <p>
-                  Payment is made by invoice. Lieromaa sends the invoice directly to your
-                  email address. <strong>The payment term is 7 days.</strong>
+                  At checkout you can pay now with MobilePay or a card on Stripe’s secure
+                  page, or choose an email invoice after dispatch or collection.{' '}
+                  <strong>The invoice payment term is 7 days.</strong>
                 </p>
               </div>
 

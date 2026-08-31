@@ -109,6 +109,7 @@ describe('frontend public order submit route', () => {
             ok: true,
             orderId: 'LRM-123',
             duplicate: false,
+            paymentProvider: 'INVOICE',
           });
         };
 
@@ -163,12 +164,22 @@ describe('frontend public order submit route', () => {
             'fi',
             'the public order submit route should default legacy submissions to Finnish upstream'
           );
+          expectEqual(
+            recordedCalls[0][1].headers['X-Lieromaa-Stripe-Mode'],
+            'test',
+            'the development proxy should require the backend Stripe sandbox environment'
+          );
 
           const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
           expectEqual(
             forwardedPayload.sourceRequestId,
             expectedPayload.sourceRequestId,
             'the public order submit route should forward the normalized source request id'
+          );
+          expectEqual(
+            forwardedPayload.paymentProvider,
+            'INVOICE',
+            'the public order submit route should forward the explicit payment provider'
           );
           expectDeepEqual(
             forwardedPayload.customer,
@@ -207,6 +218,145 @@ describe('frontend public order submit route', () => {
     );
   });
 
+  test('the public order submit route should return the hosted Stripe Checkout handoff without exposing secrets', async () => {
+    await withEnv(
+      {
+        ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
+        ORDER_SERVICE_TOKEN: 'shared-secret',
+      },
+      async () => {
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = async () =>
+          Response.json({
+            ok: true,
+            orderId: 'LRM-STRIPE',
+            duplicate: false,
+            paymentProvider: 'STRIPE',
+            paymentStatus: 'UNPAID',
+            checkoutStatus: 'OPEN',
+            checkoutUrl: 'https://checkout.stripe.com/c/pay/cs_test_123',
+            checkoutSessionId: 'cs_test_123',
+          });
+
+        try {
+          const formData = createValidOrderFormData({
+            sku: '',
+            tuote_avain: '',
+            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+            toimitus: 'nouto',
+            payment_provider: 'STRIPE',
+          });
+          const response = await POST(
+            createRouteRequest({
+              url: 'https://www.lieromaa.fi/api/orders/submit',
+              formData,
+            })
+          );
+          const body = await response.json();
+          expectEqual(body.paymentProvider, 'STRIPE');
+          expectEqual(body.checkoutUrl, 'https://checkout.stripe.com/c/pay/cs_test_123');
+          expectEqual(body.checkoutSessionId, 'cs_test_123');
+          assert.equal(JSON.stringify(body).includes('sk_test_'), false);
+          assert.equal(JSON.stringify(body).includes('whsec_'), false);
+        } finally {
+          globalThis.fetch = originalFetch;
+        }
+      }
+    );
+  });
+
+  test('the development submit route should reject live or non-Stripe Checkout handoffs', async () => {
+    await withEnv(
+      {
+        NODE_ENV: 'development',
+        ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
+        ORDER_SERVICE_TOKEN: 'shared-secret',
+      },
+      async () => {
+        const originalFetch = globalThis.fetch;
+        const formData = createValidOrderFormData({
+          sku: '',
+          tuote_avain: '',
+          cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+          toimitus: 'nouto',
+          payment_provider: 'STRIPE',
+        });
+
+        try {
+          for (const checkout of [
+            {
+              checkoutSessionId: 'cs_live_wrong',
+              checkoutUrl: 'https://checkout.stripe.com/c/pay/cs_live_wrong',
+            },
+            {
+              checkoutSessionId: 'cs_test_wronghost',
+              checkoutUrl: 'https://payments.example.test/fake-checkout',
+            },
+          ]) {
+            globalThis.fetch = async () =>
+              Response.json({
+                ok: true,
+                paymentProvider: 'STRIPE',
+                paymentStatus: 'UNPAID',
+                checkoutStatus: 'OPEN',
+                ...checkout,
+              });
+            const response = await withMutedConsole(() =>
+              POST(
+                createRouteRequest({
+                  url: 'https://www.lieromaa.fi/api/orders/submit',
+                  formData,
+                })
+              )
+            );
+            expectEqual(response.status, 502);
+          }
+        } finally {
+          globalThis.fetch = originalFetch;
+        }
+      }
+    );
+  });
+
+  test('a Stripe submission should reject a legacy invoice-shaped response', async () => {
+    await withEnv(
+      {
+        NODE_ENV: 'development',
+        ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
+        ORDER_SERVICE_TOKEN: 'shared-secret',
+      },
+      async () => {
+        const originalFetch = globalThis.fetch;
+        globalThis.fetch = async () =>
+          Response.json({
+            ok: true,
+            orderId: 'LRM-LEGACY',
+            duplicate: false,
+          });
+
+        try {
+          const response = await withMutedConsole(() =>
+            POST(
+              createRouteRequest({
+                url: 'https://www.lieromaa.fi/api/orders/submit',
+                formData: createValidOrderFormData({
+                  sku: '',
+                  tuote_avain: '',
+                  cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+                  toimitus: 'nouto',
+                  payment_provider: 'STRIPE',
+                }),
+              })
+            )
+          );
+          expectEqual(response.status, 502);
+        } finally {
+          globalThis.fetch = originalFetch;
+        }
+      }
+    );
+  });
+
   test('the public order submit route should recompute and forward the eligible cart reward', async () => {
     const rewardCode = wormHuntConfig.code;
 
@@ -224,6 +374,7 @@ describe('frontend public order submit route', () => {
             ok: true,
             orderId: 'LRM-DISCOUNTED',
             duplicate: false,
+            paymentProvider: 'INVOICE',
           });
         };
 

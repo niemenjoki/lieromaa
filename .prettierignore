@@ -1,2 +1,3 @@
 generated/
 content/**/*.mdx
+.env.example

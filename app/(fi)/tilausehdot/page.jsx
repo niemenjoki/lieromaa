@@ -92,18 +92,29 @@ export default function OrderPolicyPage() {
 
         <h2>Alennuskoodit</h2>
         <p>
-          Tilauksessa voi käyttää vain yhtä alennuskoodia. Sivustolle piilotetuista
-          kuudesta madosta muodostuva koodi antaa 15 prosentin alennuksen jokaisesta
-          tilaukseen sisältyvästä 25, 50, 75 tai 100 gramman kompostimatopakkauksesta.
-          Alennus ei koske toimituskuluja, käyttövalmista matokompostoria, kuituseosta
-          eikä muita tuotteita tai lisävalintoja.
+          Tilauksessa voi käyttää vain yhtä alennuskoodia. Sivustolle ajoittain piilotettu
+          koodi antaa 15 prosentin alennuksen jokaisesta tilaukseen sisältyvästä 25, 50,
+          75 tai 100 gramman kompostimatopakkauksesta. Alennus ei koske toimituskuluja,
+          käyttövalmista matokompostoria, kuituseosta eikä muita tuotteita tai
+          lisävalintoja.
         </p>
 
         <h2>Maksutavat</h2>
         <p>
-          Maksaminen tapahtuu <strong>OP Kevytyrittäjä</strong> -palvelun kautta
-          sähköpostitse lähetettävällä laskulla. Maksuaika on 7 vuorokautta. Laskun voi
-          maksaa normaalisti verkkopankissa tai mobiilissa.
+          Kassalla voi valita joko verkkomaksun Stripen suojatulla maksusivulla tai
+          sähköpostilaskun toimituksen tai noudon jälkeen.
+        </p>
+        <p>
+          Stripe-maksu veloitetaan tilausta tehtäessä. Maksutapoina ovat MobilePay ja
+          maksukortit. Apple Pay tai Google Pay voi olla käytettävissä Stripen
+          maksusivulla tuetulla laitteella ja selaimella. Stripe käsittelee maksun
+          ulkoisena maksupalveluntarjoajana. Lieromaa ei käsittele eikä saa tietoonsa
+          kortin koko numeroa tai kortin turvakoodia.
+        </p>
+        <p>
+          Lasku lähetetään <strong>OP Kevytyrittäjä</strong> -palvelun kautta
+          sähköpostitse, kun tilaus on luovutettu Postille tai noudettu. Maksuaika on 7
+          vuorokautta. Laskun voi maksaa normaalisti verkkopankissa tai mobiilipankissa.
         </p>
         <p>
           Maksamattomasta laskusta voidaan lähettää maksumuistutus, ja edelleen maksamatta
@@ -124,6 +135,12 @@ export default function OrderPolicyPage() {
           kolmantena tilaushetkeä seuraavana maanantaina.
         </p>
         <p>Tarkempi toimitusaika ilmoitetaan aina tilausvahvistuksessa.</p>
+        <p>
+          Jos poikkeuksellinen tilausmäärä tekee ilmoitetusta toimitusajasta mahdottoman,
+          otan asiakkaaseen henkilökohtaisesti yhteyttä. Sovimme joko myöhemmästä
+          toimituksesta, jotta matokanta ehtii kasvaa, tai tilauksen peruuttamisesta.
+          Maksettu Stripe-tilaus hyvitetään tällöin kokonaan alkuperäiselle maksutavalle.
+        </p>
         <p>
           Postin noutopistelähetykset saapuvat tavallisesti 1-2 arkipäivässä
           postituksesta. Kotiinkuljetuksissa Posti sopii jakeluajan vastaanottajan kanssa.
@@ -152,6 +169,11 @@ export default function OrderPolicyPage() {
           Verkkolomakkeen lähettämisestä lähetetään automaattinen vahvistus sähköpostitse.
           Vahvistus koskee ilmoituksen vastaanottamista; vastaan erikseen mahdollisista
           palautus- ja maksujärjestelyistä tilauksen tilanteen ja sisällön mukaan.
+        </p>
+        <p>
+          Hyväksytyn, maksetun Stripe-tilauksen peruutuksen hyvitys tehdään kokonaan
+          Stripen kautta alkuperäiselle maksutavalle. Peruuttamisilmoitus ei itsessään
+          käynnistä automaattista hyvitystä, vaan käsittelen pyynnön henkilökohtaisesti.
         </p>
         <p>
           Huomaathan, että postitettuja matotilauksia ei voi peruuttaa, koska

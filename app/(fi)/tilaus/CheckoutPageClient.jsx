@@ -20,6 +20,7 @@ import {
   getCartOrderQuote,
   getDefaultCartShippingOption,
 } from '@/lib/orders/cartOrder';
+import { createCheckoutDraft, parseCheckoutDraft } from '@/lib/orders/checkoutDraft.mjs';
 import { submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   findProductKeyBySku,
@@ -33,7 +34,83 @@ import {
 import classes from './CheckoutPage.module.css';
 
 const PICKUP_POINT_SEARCH_ENDPOINT = '/api/pickup-points/search';
+const PAYMENT_STATUS_ENDPOINT = '/api/orders/payment-status';
+const PENDING_STRIPE_STORAGE_KEY = 'lieromaa.pendingStripeCheckout.v1';
+const CHECKOUT_DRAFT_STORAGE_KEY = 'lieromaa.checkoutDraft.v1';
 const POSTCODE_PATTERN = /^\d{5}$/;
+
+function createCartFingerprint({ items, shippingMethod, discountCode }) {
+  const source = JSON.stringify({
+    items: items.map(({ sku, parentSku = '', quantity = 1 }) => ({
+      sku,
+      parentSku,
+      quantity,
+    })),
+    shippingMethod,
+    discountCode,
+  });
+  let hash = 2166136261;
+  for (let index = 0; index < source.length; index += 1) {
+    hash ^= source.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `cart-${(hash >>> 0).toString(16)}`;
+}
+
+function readPendingStripeCheckout() {
+  try {
+    const value = JSON.parse(localStorage.getItem(PENDING_STRIPE_STORAGE_KEY) || 'null');
+    return value && typeof value === 'object' ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function storePendingStripeCheckout(value) {
+  try {
+    localStorage.setItem(PENDING_STRIPE_STORAGE_KEY, JSON.stringify(value));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function clearPendingStripeCheckout() {
+  try {
+    localStorage.removeItem(PENDING_STRIPE_STORAGE_KEY);
+  } catch {
+    // A Stripe return URL can still recover the local payment status.
+  }
+}
+
+function readCheckoutDraft() {
+  try {
+    const draft = parseCheckoutDraft(
+      sessionStorage.getItem(CHECKOUT_DRAFT_STORAGE_KEY) || ''
+    );
+    if (!draft) sessionStorage.removeItem(CHECKOUT_DRAFT_STORAGE_KEY);
+    return draft;
+  } catch {
+    return null;
+  }
+}
+
+function storeCheckoutDraft(value) {
+  try {
+    sessionStorage.setItem(CHECKOUT_DRAFT_STORAGE_KEY, JSON.stringify(value));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function clearCheckoutDraft() {
+  try {
+    sessionStorage.removeItem(CHECKOUT_DRAFT_STORAGE_KEY);
+  } catch {
+    // Payment status recovery can continue without the checkout draft.
+  }
+}
 
 function getPickupPointTypeLabel(point, copy) {
   return point.parcelLocker
@@ -170,6 +247,7 @@ export default function CheckoutPageClient({ language }) {
   const copy = getTransactionMessages(language).checkout;
   const formRef = useRef(null);
   const trackedCheckoutEventsRef = useRef(new Set());
+  const stripeNavigationHandledRef = useRef(false);
   const { items, itemCount, isHydrated, setItemQuantity, removeItem, clearCart } =
     useCart();
   const shippingOptions = getCartShippingOptions(language);
@@ -192,7 +270,7 @@ export default function CheckoutPageClient({ language }) {
   const [isSearchingPickupPoints, setIsSearchingPickupPoints] = useState(false);
   const [selectedPickupPointId, setSelectedPickupPointId] = useState('');
   const [selectedPickupPoint, setSelectedPickupPoint] = useState(null);
-  const [paymentAcknowledged, setPaymentAcknowledged] = useState(false);
+  const [paymentProvider, setPaymentProvider] = useState('');
   const [formStartedAt, setFormStartedAt] = useState('');
   const [submissionId, setSubmissionId] = useState('');
   const [submitError, setSubmitError] = useState('');
@@ -205,10 +283,34 @@ export default function CheckoutPageClient({ language }) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [paymentOutcome, setPaymentOutcome] = useState({
+    state: 'idle',
+    orderId: '',
+  });
+  const [pendingStripe, setPendingStripe] = useState(null);
 
   useEffect(() => {
     setFormStartedAt(String(Date.now()));
-    setSubmissionId(globalThis.crypto?.randomUUID?.() || `cart-${Date.now()}`);
+    const storedPending = readPendingStripeCheckout();
+    const returnedSessionId = new URLSearchParams(window.location.search).get(
+      'session_id'
+    );
+    const pending =
+      storedPending ||
+      (/^cs_(?:test|live)_[A-Za-z0-9]+$/.test(returnedSessionId || '')
+        ? {
+            sessionId: returnedSessionId,
+            orderId: '',
+            sourceRequestId: '',
+            cartFingerprint: '',
+          }
+        : null);
+    setPendingStripe(pending);
+    setSubmissionId(
+      pending?.sourceRequestId ||
+        globalThis.crypto?.randomUUID?.() ||
+        `cart-${Date.now()}`
+    );
   }, []);
 
   const analyticsItems = useMemo(
@@ -279,6 +381,15 @@ export default function CheckoutPageClient({ language }) {
   const quote = quoteResult.quote;
   const discountAmount = quote?.discountAmounts.totalAmount ?? 0;
   const normalizedDiscountCodeInput = normalizeDiscountCode(discountCodeInput);
+  const cartFingerprint = useMemo(
+    () =>
+      createCartFingerprint({
+        items,
+        shippingMethod,
+        discountCode: normalizedDiscountCodeInput,
+      }),
+    [items, normalizedDiscountCodeInput, shippingMethod]
+  );
   const discountNeedsApply = Boolean(
     normalizedDiscountCodeInput && normalizedDiscountCodeInput !== appliedDiscountCode
   );
@@ -329,6 +440,150 @@ export default function CheckoutPageClient({ language }) {
       ? copy.estimatedPickupDate
       : copy.estimatedDispatchDate;
   const cartLineGroups = groupCartLines(quote?.items ?? []);
+
+  const applyPaymentStatus = useCallback(
+    (status, pendingReference) => {
+      const state =
+        status.paymentStatus === 'PAID'
+          ? 'paid'
+          : status.paymentStatus === 'REFUNDED'
+            ? 'refunded'
+            : status.checkoutStatus === 'EXPIRED'
+              ? 'expired'
+              : 'pending';
+      setPaymentOutcome({
+        state,
+        orderId: status.orderId || pendingReference?.orderId || '',
+      });
+
+      if (state === 'paid') {
+        trackAnalyticsEvent('checkout_paid_return_viewed', {
+          eventTarget: 'checkout',
+          eventValue: 'paid',
+        });
+        if (pendingReference?.cartFingerprint === cartFingerprint) {
+          clearCart();
+        }
+        clearCheckoutDraft();
+        clearPendingStripeCheckout();
+        setPendingStripe(null);
+      } else if (state === 'refunded') {
+        clearCheckoutDraft();
+        clearPendingStripeCheckout();
+        setPendingStripe(null);
+      }
+      return state;
+    },
+    [cartFingerprint, clearCart]
+  );
+
+  const checkStripePayment = useCallback(
+    async (reference, { poll = false } = {}) => {
+      if (!reference?.sessionId) return;
+      setPaymentOutcome({ state: 'checking', orderId: reference.orderId || '' });
+      const attempts = poll ? 5 : 1;
+      for (let attempt = 0; attempt < attempts; attempt += 1) {
+        try {
+          const params = new URLSearchParams({ session_id: reference.sessionId });
+          const response = await fetch(`${PAYMENT_STATUS_ENDPOINT}?${params}`, {
+            headers: { Accept: 'application/json', 'X-Lieromaa-Language': language },
+            cache: 'no-store',
+          });
+          const status = await response.json().catch(() => null);
+          if (!response.ok || !status?.ok) throw new Error('status_unavailable');
+          const state = applyPaymentStatus(status, reference);
+          if (state !== 'pending' || attempt === attempts - 1) return;
+        } catch {
+          setPaymentOutcome({
+            state: 'unavailable',
+            orderId: reference.orderId || '',
+          });
+          return;
+        }
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+    },
+    [applyPaymentStatus, language]
+  );
+
+  useEffect(() => {
+    if (!isHydrated || !pendingStripe?.sessionId || stripeNavigationHandledRef.current) {
+      return;
+    }
+    stripeNavigationHandledRef.current = true;
+    const params = new URLSearchParams(window.location.search);
+    const returnedSessionId = params.get('session_id');
+    const isReturn = params.get('stripe') === 'return';
+    const isCancel = params.get('stripe') === 'cancel';
+    if (returnedSessionId && returnedSessionId !== pendingStripe.sessionId) {
+      setPaymentOutcome({ state: 'unavailable', orderId: pendingStripe.orderId || '' });
+      return;
+    }
+    if (isCancel) {
+      const draft = readCheckoutDraft();
+      const draftCartFingerprint = draft
+        ? createCartFingerprint({
+            items,
+            shippingMethod: draft.shippingMethod,
+            discountCode: normalizeDiscountCode(draft.discountCodeInput),
+          })
+        : '';
+      const canRestoreDraft = Boolean(
+        draft &&
+          draft.language === language &&
+          draft.cartFingerprint === draftCartFingerprint &&
+          (!pendingStripe.cartFingerprint ||
+            draft.cartFingerprint === pendingStripe.cartFingerprint) &&
+          (!pendingStripe.sourceRequestId ||
+            draft.sourceRequestId === pendingStripe.sourceRequestId)
+      );
+
+      if (canRestoreDraft) {
+        setShippingMethod(draft.shippingMethod);
+        setAddressFields(draft.addressFields);
+        setCustomerFields(draft.customerFields);
+        setSelectedPickupPoint(draft.selectedPickupPoint);
+        setSelectedPickupPointId(draft.selectedPickupPoint?.id || '');
+        setPickupPoints(draft.selectedPickupPoint ? [draft.selectedPickupPoint] : []);
+        setPaymentProvider(draft.paymentProvider);
+        setDiscountCodeInput(draft.discountCodeInput);
+        setAppliedDiscountCode(draft.appliedDiscountCode);
+        setDiscountFeedback({
+          message: draft.appliedDiscountCode ? copy.discountApplied : '',
+          isError: false,
+        });
+        setSubmissionId(draft.sourceRequestId);
+        setFormStartedAt(draft.formStartedAt || String(Date.now()));
+      } else {
+        clearCheckoutDraft();
+        setPaymentProvider('STRIPE');
+      }
+
+      setPaymentOutcome({ state: 'cancelled', orderId: pendingStripe.orderId || '' });
+      setStep(canRestoreDraft ? 4 : 3);
+      return;
+    }
+    checkStripePayment(pendingStripe, { poll: isReturn });
+  }, [
+    checkStripePayment,
+    copy.discountApplied,
+    isHydrated,
+    items,
+    language,
+    pendingStripe,
+  ]);
+
+  useEffect(() => {
+    if (
+      !pendingStripe ||
+      !cartFingerprint ||
+      pendingStripe.cartFingerprint === cartFingerprint
+    ) {
+      return;
+    }
+    if (new URLSearchParams(window.location.search).has('stripe')) return;
+    setSubmissionId(globalThis.crypto?.randomUUID?.() || `cart-${Date.now()}`);
+  }, [cartFingerprint, pendingStripe]);
 
   const resetPickupPoint = () => {
     setPickupPoints([]);
@@ -550,14 +805,74 @@ export default function CheckoutPageClient({ language }) {
 
     setIsSubmitting(true);
     setSubmitError('');
+    const checkoutDraft =
+      paymentProvider === 'STRIPE'
+        ? createCheckoutDraft({
+            language,
+            cartFingerprint,
+            sourceRequestId: submissionId,
+            formStartedAt,
+            shippingMethod,
+            addressFields,
+            customerFields,
+            selectedPickupPoint,
+            paymentProvider,
+            discountCodeInput,
+            appliedDiscountCode,
+          })
+        : null;
 
     try {
-      await submitOrderForm(formRef.current, { language });
+      const result = await submitOrderForm(formRef.current, { language });
       trackAnalyticsEvent('order_submit_success', {
         eventTarget: 'checkout',
         eventValue: items.map((item) => item.sku).join(','),
         eventItems: analyticsItems,
       });
+      if (result.paymentProvider === 'STRIPE') {
+        storeCheckoutDraft(checkoutDraft);
+        const reference = {
+          sessionId: result.checkoutSessionId,
+          orderId: result.orderId || '',
+          sourceRequestId: submissionId,
+          cartFingerprint,
+        };
+        if (result.paymentStatus === 'PAID' && result.checkoutSessionId) {
+          applyPaymentStatus(
+            {
+              orderId: result.orderId,
+              paymentStatus: 'PAID',
+              checkoutStatus: result.checkoutStatus || 'COMPLETE',
+            },
+            reference
+          );
+          return;
+        }
+        if (
+          result.checkoutSessionId &&
+          result.checkoutStatus === 'COMPLETE' &&
+          !result.checkoutUrl
+        ) {
+          storePendingStripeCheckout(reference);
+          setPendingStripe(reference);
+          await checkStripePayment(reference, { poll: true });
+          return;
+        }
+        if (!result.checkoutUrl || !result.checkoutSessionId) {
+          throw new Error(copy.stripeUnavailable);
+        }
+        storePendingStripeCheckout(reference);
+        setPendingStripe(reference);
+        trackAnalyticsEvent('checkout_redirect_started', {
+          eventTarget: 'stripe',
+          eventValue: 'hosted_checkout',
+        });
+        window.location.assign(result.checkoutUrl);
+        return;
+      }
+      clearCheckoutDraft();
+      clearPendingStripeCheckout();
+      setPendingStripe(null);
       clearCart();
       setIsSubmitted(true);
     } catch (error) {
@@ -574,6 +889,43 @@ export default function CheckoutPageClient({ language }) {
 
   if (!isHydrated) {
     return <p className={classes.HelperText}>{copy.loadingCart}</p>;
+  }
+
+  if (['paid', 'refunded'].includes(paymentOutcome.state)) {
+    return (
+      <div className={classes.Panel}>
+        <h2>
+          {paymentOutcome.state === 'paid'
+            ? copy.paymentOutcomes.paidHeading
+            : copy.paymentOutcomes.refundedHeading}
+        </h2>
+        <p>
+          {paymentOutcome.state === 'paid'
+            ? copy.paymentOutcomes.paidBody
+            : copy.paymentOutcomes.refundedBody}
+        </p>
+        {paymentOutcome.orderId ? (
+          <p className={classes.HelperText}>
+            {copy.paymentOutcomes.orderNumber}: <strong>{paymentOutcome.orderId}</strong>
+          </p>
+        ) : null}
+        <p className={classes.HelperText}>
+          {copy.successCancellation}{' '}
+          <SafeLink href={getRoutePath('cancelOrder', language)}>
+            {copy.cancellationLink}
+          </SafeLink>
+          .
+        </p>
+        <div className={classes.Actions}>
+          <SafeLink
+            href={getRoutePath('gettingStarted', language)}
+            className={classes.Button}
+          >
+            {copy.successFollowUpLabel}
+          </SafeLink>
+        </div>
+      </div>
+    );
   }
 
   if (!itemCount || isSubmitted) {
@@ -623,11 +975,7 @@ export default function CheckoutPageClient({ language }) {
       <input type="hidden" name="email" value={customerFields.email} />
       <input type="hidden" name="phone" value={customerFields.phone} />
       <input type="hidden" name="lisatiedot" value={customerFields.message} />
-      <input
-        type="hidden"
-        name="maksu_vahvistettu"
-        value={paymentAcknowledged ? 'ymmarretty' : ''}
-      />
+      <input type="hidden" name="payment_provider" value={paymentProvider} />
       <input type="hidden" name="lomake_aloitettu_ms" value={formStartedAt} />
       <input type="hidden" name="submission_id" value={submissionId} />
       <input type="hidden" name="sivu_polku" value={getRoutePath('checkout', language)} />
@@ -706,6 +1054,30 @@ export default function CheckoutPageClient({ language }) {
           </span>
         ))}
       </div>
+
+      {['checking', 'pending', 'unavailable', 'cancelled', 'expired'].includes(
+        paymentOutcome.state
+      ) ? (
+        <div className={classes.InfoBox} role="status">
+          <strong>{copy.paymentOutcomes[`${paymentOutcome.state}Heading`]}</strong>
+          <p>{copy.paymentOutcomes[`${paymentOutcome.state}Body`]}</p>
+          {paymentOutcome.orderId ? (
+            <p>
+              {copy.paymentOutcomes.orderNumber}: {paymentOutcome.orderId}
+            </p>
+          ) : null}
+          {pendingStripe?.sessionId &&
+          ['pending', 'unavailable'].includes(paymentOutcome.state) ? (
+            <button
+              type="button"
+              className={classes.SecondaryButton}
+              onClick={() => checkStripePayment(pendingStripe, { poll: true })}
+            >
+              {copy.paymentOutcomes.refresh}
+            </button>
+          ) : null}
+        </div>
+      ) : null}
 
       {step === 0 ? (
         <section className={classes.Panel}>
@@ -1071,45 +1443,67 @@ export default function CheckoutPageClient({ language }) {
         </section>
       ) : null}
 
-      {step === 2 ? (
+      {step === 3 ? (
         <section className={classes.Panel}>
           <h2>{copy.headings.payment}</h2>
-          <div className={classes.InfoBox}>
-            <p>{copy.paymentGeneral}</p>
-            {language === 'en' ? (
-              <p>
-                {fulfillmentType === 'local_pickup'
-                  ? copy.invoiceTimingLocal
-                  : copy.invoiceTimingPostal}
-              </p>
-            ) : null}
-          </div>
-          <label className={classes.CheckRow}>
-            <input
-              type="checkbox"
-              checked={paymentAcknowledged}
-              onChange={(event) => {
-                setPaymentAcknowledged(event.target.checked);
-                if (event.target.checked) {
-                  trackCheckoutStep('checkout_payment_acknowledged');
-                }
-              }}
-            />
-            <span>{copy.paymentAcknowledgement}</span>
-          </label>
+          <fieldset className={classes.ChoiceList}>
+            <legend>{copy.paymentChoiceLegend}</legend>
+            <label className={classes.Choice}>
+              <input
+                type="radio"
+                name="payment_choice"
+                value="STRIPE"
+                checked={paymentProvider === 'STRIPE'}
+                onChange={() => {
+                  setPaymentProvider('STRIPE');
+                  trackCheckoutStep('checkout_payment_selected', {
+                    eventTarget: 'stripe',
+                    onceKey: 'checkout_payment_selected:stripe',
+                  });
+                }}
+              />
+              <span>
+                <strong>{copy.stripePaymentLabel}</strong>
+                <small className={classes.ChoiceDetail}>{copy.stripePaymentDetail}</small>
+              </span>
+            </label>
+            <label className={classes.Choice}>
+              <input
+                type="radio"
+                name="payment_choice"
+                value="INVOICE"
+                checked={paymentProvider === 'INVOICE'}
+                onChange={() => {
+                  setPaymentProvider('INVOICE');
+                  trackCheckoutStep('checkout_payment_selected', {
+                    eventTarget: 'invoice',
+                    onceKey: 'checkout_payment_selected:invoice',
+                  });
+                }}
+              />
+              <span>
+                <strong>{copy.invoicePaymentLabel}</strong>
+                <small className={classes.ChoiceDetail}>
+                  {fulfillmentType === 'local_pickup'
+                    ? copy.invoiceTimingLocal
+                    : copy.invoiceTimingPostal}
+                </small>
+              </span>
+            </label>
+          </fieldset>
           <div className={classes.Actions}>
             <button
               type="button"
               className={classes.SecondaryButton}
-              onClick={() => setStep(1)}
+              onClick={() => setStep(2)}
             >
               {copy.back}
             </button>
             <button
               type="button"
               className={classes.Button}
-              onClick={() => setStep(3)}
-              disabled={!paymentAcknowledged}
+              onClick={() => setStep(4)}
+              disabled={!paymentProvider || paymentOutcome.state === 'checking'}
             >
               {copy.continue}
             </button>
@@ -1117,7 +1511,7 @@ export default function CheckoutPageClient({ language }) {
         </section>
       ) : null}
 
-      {step === 3 ? (
+      {step === 2 ? (
         <section className={classes.Panel}>
           <h2>{copy.headings.contact}</h2>
           <div className={classes.Fields}>
@@ -1176,14 +1570,14 @@ export default function CheckoutPageClient({ language }) {
             <button
               type="button"
               className={classes.SecondaryButton}
-              onClick={() => setStep(2)}
+              onClick={() => setStep(1)}
             >
               {copy.back}
             </button>
             <button
               type="button"
               className={classes.Button}
-              onClick={() => setStep(4)}
+              onClick={() => setStep(3)}
               disabled={!customerFieldsReady}
             >
               {copy.continue}
@@ -1255,7 +1649,13 @@ export default function CheckoutPageClient({ language }) {
                 isSubmitting || Boolean(quoteResult.error) || discountSubmissionBlocked
               }
             >
-              {isSubmitting ? copy.submitting : copy.submit}
+              {isSubmitting
+                ? paymentProvider === 'STRIPE'
+                  ? copy.redirectingToStripe
+                  : copy.submitting
+                : paymentProvider === 'STRIPE'
+                  ? copy.submitStripe
+                  : copy.submitInvoice}
             </button>
           </div>
         </section>

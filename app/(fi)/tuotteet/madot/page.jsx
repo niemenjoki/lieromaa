@@ -152,8 +152,10 @@ export default async function Page() {
                   päivän kuluessa.
                 </p>
                 <p>
-                  Lasku tulee OP Kevytyrittäjä -palvelun kautta sähköpostiin.{' '}
-                  <strong>Maksuaika on 7 vuorokautta.</strong>
+                  Kassalla voit maksaa heti MobilePaylla tai kortilla Stripen suojatulla
+                  maksusivulla tai valita OP Kevytyrittäjä -palvelun sähköpostilaskun
+                  toimituksen tai noudon jälkeen.{' '}
+                  <strong>Laskun maksuaika on 7 vuorokautta.</strong>
                 </p>
               </div>
 

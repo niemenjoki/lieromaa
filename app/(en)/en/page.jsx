@@ -149,7 +149,8 @@ export default function EnglishHomePage() {
                 </li>
                 <li>Lieromaa checks availability and confirms your order personally.</li>
                 <li>
-                  Lieromaa sends the invoice directly by email. The payment term is 7
+                  Pay now with MobilePay or a card through Stripe, or choose an email
+                  invoice after dispatch or collection. The invoice payment term is 7
                   days.
                 </li>
               </ol>

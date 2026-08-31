@@ -1,6 +1,6 @@
 export const transactionMessages = Object.freeze({
   checkout: Object.freeze({
-    steps: Object.freeze(['Kori', 'Toimitus', 'Maksu', 'Tiedot', 'Vahvistus']),
+    steps: Object.freeze(['Kori', 'Toimitus', 'Tiedot', 'Maksu', 'Vahvistus']),
     pickupPointTypes: Object.freeze({
       parcelLocker: 'Pakettiautomaatti',
       servicePoint: 'Postin palvelupiste',
@@ -68,9 +68,11 @@ export const transactionMessages = Object.freeze({
     estimatedDispatchDate: 'Arvioitu lähetyspäivä',
     estimatedDateSuffix:
       'Todellinen lähetys- tai noutopäivä vahvistetaan tilausvahvistuksessa.',
-    paymentGeneral:
-      'Maksu tapahtuu OP-Kevytyrittäjä-palvelun sähköpostilaskulla. Laskun maksuaika on 7 päivää.',
-    paymentAcknowledgement: 'Ymmärrän, että tilaus maksetaan sähköpostilaskulla.',
+    paymentChoiceLegend: 'Valitse maksutapa',
+    stripePaymentLabel: 'Maksa nyt MobilePaylla tai kortilla',
+    stripePaymentDetail:
+      'Maksu tapahtuu Stripen suojatulla maksusivulla. Apple Pay tai Google Pay voi näkyä tuetulla laitteella.',
+    invoicePaymentLabel: 'Maksa sähköpostilaskulla toimituksen tai noudon jälkeen',
     invoiceTimingPostal:
       'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi.',
     invoiceTimingLocal: 'Lasku lähetetään, kun olet noutanut tilauksen.',
@@ -86,7 +88,34 @@ export const transactionMessages = Object.freeze({
     privacyLink: 'tietosuojaselosteeseen',
     termsJoiner: 'sekä',
     submitting: 'Lähetetään tilausta...',
-    submit: 'Lähetä tilaus',
+    redirectingToStripe: 'Siirrytään maksamaan...',
+    submitInvoice: 'Lähetä tilaus',
+    submitStripe: 'Siirry maksamaan',
+    stripeUnavailable:
+      'Maksusivua ei voitu avata. Ostoskori säilyi. Yritä hetken kuluttua uudelleen.',
+    paymentOutcomes: Object.freeze({
+      orderNumber: 'Tilausnumero',
+      refresh: 'Tarkista maksun tila uudelleen',
+      checkingHeading: 'Maksua tarkistetaan',
+      checkingBody: 'Odota hetki. Maksun vahvistusta tarkistetaan turvallisesti.',
+      pendingHeading: 'Maksua vahvistetaan',
+      pendingBody:
+        'Maksu voi olla onnistunut, mutta vahvistus ei ole vielä saapunut. Älä maksa tilausta uudelleen.',
+      unavailableHeading: 'Maksun tilaa ei voitu tarkistaa',
+      unavailableBody:
+        'Maksu on voinut onnistua. Ostoskori säilyi. Odota hetki ja tarkista tila uudelleen ennen uutta maksuyritystä.',
+      cancelledHeading: 'Palasit maksusivulta',
+      cancelledBody:
+        'Maksua ei merkitty maksetuksi. Tilaustiedot palautettiin tähän selainistuntoon. Tarkista yhteenveto ja jatka samalla Stripe-maksulla tai vaihda maksutavaksi lasku.',
+      expiredHeading: 'Maksusivu vanheni',
+      expiredBody:
+        'Ostoskori säilyi. Voit valita Stripe-maksun uudelleen, jolloin tilaukselle luodaan uusi maksusivu.',
+      paidHeading: 'Maksu vastaanotettu',
+      paidBody:
+        'Kiitos tilauksesta! Maksu on vahvistettu. Saat manuaalisen tilausvahvistuksen sähköpostiisi 1–2 arkipäivän sisällä.',
+      refundedHeading: 'Maksu on hyvitetty',
+      refundedBody: 'Tilauksen Stripe-maksu on palautettu alkuperäiselle maksutavalle.',
+    }),
     deliveryNoticeHeading: 'Toimitus vain Suomeen',
     deliveryNoticeBody:
       'Toimitamme osoitteisiin ja Postin noutopisteisiin Suomessa. Paikallinen nouto on saatavilla Järvenpäässä.',
@@ -98,7 +127,7 @@ export const transactionMessages = Object.freeze({
       'Peruuttamisilmoituksen lähetys epäonnistui. Yritä hetken kuluttua uudelleen.',
     successHeading: 'Peruuttamisilmoitus vastaanotettu',
     successBody:
-      'Saat automaattisen vahvistuksen sähköpostiisi. Olen erikseen yhteydessä palautus- ja maksujärjestelyistä tilauksen tilanteen ja sisällön mukaan.',
+      'Saat automaattisen vahvistuksen sähköpostiisi. Olen erikseen yhteydessä palautus- ja maksujärjestelyistä tilauksen tilanteen ja sisällön mukaan. Ilmoitus ei käynnistä automaattista Stripe-hyvitystä.',
     fields: Object.freeze({
       name: 'Nimi',
       email: 'Sähköposti',
@@ -187,7 +216,15 @@ export const transactionMessages = Object.freeze({
     invalid_email: 'Sähköpostiosoite ei näytä kelvolliselta.',
     cart_invalid: 'Ostoskoria ei voitu lukea. Päivitä sivu ja yritä uudelleen.',
     cart_empty: 'Ostoskori on tyhjä.',
-    payment_acknowledgement_required: 'Vahvista maksutapa ennen tilauksen lähettämistä.',
+    payment_acknowledgement_required: 'Valitse maksutapa ennen tilauksen lähettämistä.',
+    payment_provider_invalid: 'Valitse maksutapa ennen tilauksen lähettämistä.',
+    stripe_disabled: 'Stripe-maksu ei ole tällä hetkellä käytettävissä.',
+    stripe_unavailable: 'Stripe-maksua ei voitu käsitellä juuri nyt. Ostoskori säilyi.',
+    duplicate_order_mismatch:
+      'Ostoskori tai tilaustiedot muuttuivat aiemman maksuyrityksen jälkeen. Tarkista tilaus ja yritä uudelleen.',
+    payment_provider_change_forbidden:
+      'Maksutapaa ei voi enää vaihtaa tälle tilaukselle.',
+    payment_status_not_found: 'Maksun tilaa ei löytynyt.',
     pickup_point_invalid:
       'Valittu Postin noutopaikka täytyy hakea uudelleen ennen tilauksen lähetystä.',
     too_fast:

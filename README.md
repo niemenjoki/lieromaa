@@ -24,6 +24,13 @@ This repository contains the **source code for the Lieromaa website**, built wit
 - **Hosting:** [Vercel](https://vercel.com)
 - **Static Assets:** Optimized using [Sharp](https://sharp.pixelplumbing.com/) for AVIF/WEBP/JPEG variants
 - **Content:** Markdown posts with YAML front matter
+
+## Local checkout development
+
+Copy the tracked `.env.example` to the ignored `.env.local` and run the separate development instance of `lieromaa-orders` on `127.0.0.1:3013`. This avoids the production-style container that normally occupies port `3010`. Local `next dev` identifies itself as Stripe `test` mode, and the order service refuses the request unless it is also running in test mode with an `sk_test_...` key. The browser is redirected to Stripe's real hosted Checkout sandbox; this repository does not implement a fake payment UI.
+
+Production builds identify themselves as Stripe `live` mode. The home-server order service independently requires live credentials when `NODE_ENV=production`. Stripe secret keys and webhook secrets belong only to the home-server runtime and must never be added to this repository or to Vercel. Vercel needs only the existing `ORDER_SERVICE_URL`, `ORDER_SERVICE_TOKEN`, and optional timeout setting.
+
 - **Data:** JSON-based structured datasets (e.g., Finnish worm sellers)
 
 ---
