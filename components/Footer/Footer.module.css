@@ -263,6 +263,10 @@
   display: none;
 }
 
+.WormHuntSlot:empty {
+  display: none;
+}
+
 .Registry {
   min-width: 0;
 }

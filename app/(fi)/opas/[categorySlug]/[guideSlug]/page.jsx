@@ -5,6 +5,8 @@ import Breadcrumbs from '@/components/Breadcumbs/Breadcrumbs';
 import ContentRecommendations from '@/components/ContentRecommendations/ContentRecommendations';
 import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
+import WormHuntFooterPortal from '@/components/WormHunt/WormHuntFooterPortal';
+import WormHuntSpot from '@/components/WormHunt/WormHuntSpot';
 import {
   getGuideCategorySlug,
   getGuidePath,
@@ -22,7 +24,11 @@ import {
 } from '@/lib/content/index.mjs';
 import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
-import { getWormHuntEntry } from '@/lib/wormHunt/trail.server.mjs';
+import {
+  getWormHuntEntry,
+  shouldPlaceWormBeforeFooter,
+  shouldPlaceWormInFooter,
+} from '@/lib/wormHunt/trail.server.mjs';
 
 export function generateStaticParams() {
   const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
@@ -125,6 +131,12 @@ export default async function GuidePage({ params }) {
 
       <Advert />
       <ContentRecommendations recommendations={visibleRecommendations} />
+      {shouldPlaceWormBeforeFooter(wormHuntEntry) ? (
+        <WormHuntSpot clue={wormHuntEntry.clue} />
+      ) : null}
+      {shouldPlaceWormInFooter(wormHuntEntry) ? (
+        <WormHuntFooterPortal clue={wormHuntEntry.clue} />
+      ) : null}
     </>
   );
 }
