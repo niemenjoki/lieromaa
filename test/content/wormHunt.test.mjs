@@ -14,6 +14,8 @@ import {
   getWormHuntEntries,
   getWormHuntEntry,
   shouldPlaceWormAfterHeading,
+  shouldPlaceWormBeforeFooter,
+  shouldPlaceWormInFooter,
 } from '@/lib/wormHunt/trail.server.mjs';
 
 const ENABLED_TEST_CONFIG = createWormHuntConfig({
@@ -156,11 +158,25 @@ test('worm hunt uses the approved hints and reveals the discount only at the end
   assert.match(finalClue.message, /muita tuotteita/iu);
 });
 
-test('every guide clue targets an existing heading and at least three are deep', () => {
+test('the five guide clues use the requested lower-page placements', () => {
+  const entries = createWormHuntEntries(ENABLED_TEST_CONFIG);
+  const guideEntries = entries.slice(1);
+
+  assert.deepEqual(
+    guideEntries.map((entry) => entry.placement.type),
+    ['after-heading', 'after-heading', 'before-footer', 'footer', 'footer']
+  );
+  assert.equal(shouldPlaceWormBeforeFooter(guideEntries[2]), true);
+  assert.equal(shouldPlaceWormBeforeFooter(guideEntries[1]), false);
+  assert.equal(shouldPlaceWormInFooter(guideEntries[3]), true);
+  assert.equal(shouldPlaceWormInFooter(guideEntries[4]), true);
+  assert.equal(shouldPlaceWormInFooter(guideEntries[2]), false);
+});
+
+test('heading-based guide clues target existing headings in the lower half', () => {
   const guideEntries = createWormHuntEntries(ENABLED_TEST_CONFIG).filter(
     (entry) => entry.placement.type === 'after-heading'
   );
-  let deepPlacementCount = 0;
 
   for (const entry of guideEntries) {
     const guideSlug = entry.path.split('/').at(-1);
@@ -181,12 +197,30 @@ test('every guide clue targets an existing heading and at least three are deep',
     assert.equal(shouldPlaceWormAfterHeading(entry, entry.placement.headingId), true);
     assert.equal(shouldPlaceWormAfterHeading(entry, 'a-different-heading'), false);
 
-    if (headingIndex >= Math.ceil(headings.length / 2)) {
-      deepPlacementCount += 1;
-    }
+    assert.ok(headingIndex >= Math.ceil(headings.length / 2));
   }
+});
 
-  assert.ok(deepPlacementCount >= 3);
+test('footer clues are rendered through the shared footer slot', () => {
+  const guidePageSource = fs.readFileSync(
+    path.join(
+      process.cwd(),
+      'app',
+      '(fi)',
+      'opas',
+      '[categorySlug]',
+      '[guideSlug]',
+      'page.jsx'
+    ),
+    'utf8'
+  );
+  const footerSource = fs.readFileSync(
+    path.join(process.cwd(), 'components', 'Footer', 'Footer.jsx'),
+    'utf8'
+  );
+
+  assert.match(guidePageSource, /<WormHuntFooterPortal clue=\{wormHuntEntry\.clue\}/u);
+  assert.match(footerSource, /id=\{WORM_HUNT_FOOTER_SLOT_ID\}/u);
 });
 
 test('worm hunt marker uses a native dialog without analytics or saved progress', () => {

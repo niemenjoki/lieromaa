@@ -10,6 +10,7 @@ import { openConsentPreferences } from '@/lib/site/consentPreferences';
 import { LICENSE_URL, REPO_URL } from '@/lib/site/constants.mjs';
 import { BUSINESS_ID, CONTACT_EMAIL, CONTACT_PHONE } from '@/lib/site/contact';
 import { ORGANIZATION_NAME } from '@/lib/site/schema.mjs';
+import { WORM_HUNT_FOOTER_SLOT_ID } from '@/lib/wormHunt/placementTargets.mjs';
 
 import classes from './Footer.module.css';
 
@@ -193,6 +194,8 @@ export default function Footer({ language = 'fi', navigation, copy, themeCopy })
             );
           })}
         </nav>
+
+        <div id={WORM_HUNT_FOOTER_SLOT_ID} className={classes.WormHuntSlot} />
 
         <section className={classes.Registry} aria-labelledby="footer-registry-title">
           <h2 id="footer-registry-title" className={classes.VisuallyHidden}>
