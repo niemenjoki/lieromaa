@@ -7,21 +7,21 @@ export const englishPageDefinitions = Object.freeze(
       title: 'Compost worms and worm-composting supplies in Finland | Lieromaa',
       description:
         'Shop locally raised compost worms with optional add-ons and a separately orderable 500 g compost fibre mix from Lieromaa.',
-      updatedAt: '2026-07-25',
+      updatedAt: '2026-09-07',
     },
     {
       canonicalUrl: '/en/products/compost-worms',
       title: 'Buy compost worms in Finland | Lieromaa',
       description:
         'Order locally raised compost worms in Finland and optionally add a ready-to-use 14-litre worm bin or a small fibre-mix pack.',
-      updatedAt: '2026-07-25',
+      updatedAt: '2026-09-07',
     },
     {
       canonicalUrl: '/en/products/compost-fibre-mix',
       title: 'Compost fibre mix | Lieromaa',
       description:
         'Lieromaa compost fibre mix is an easy-to-use supplement for balancing a worm bin when the amount of food waste varies.',
-      updatedAt: '2026-07-25',
+      updatedAt: '2026-09-07',
     },
     {
       canonicalUrl: '/en/worm-calculator',
