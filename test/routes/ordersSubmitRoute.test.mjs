@@ -435,11 +435,11 @@ describe('frontend public order submit route', () => {
             totalAmount: discountAmount,
             endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
           });
-          expectEqual(forwardedPayload.pricing.itemPrice, 63.9);
+          expectEqual(forwardedPayload.pricing.itemPrice, 65);
           expectEqual(forwardedPayload.pricing.shippingPrice, 8.9);
           expectEqual(
             forwardedPayload.pricing.total,
-            Number((72.8 - discountAmount).toFixed(2))
+            Number((73.9 - discountAmount).toFixed(2))
           );
         } finally {
           globalThis.fetch = originalFetch;

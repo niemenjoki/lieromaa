@@ -395,7 +395,7 @@ describe('frontend public order normalization', () => {
     const rewardLetters = [...rewardCode];
     const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
 
-    expectEqual(payload.pricing.itemPrice, 63.9);
+    expectEqual(payload.pricing.itemPrice, 65);
     expectEqual(payload.pricing.shippingPrice, 8.9);
     expectDeepEqual(payload.pricing.discount, {
       codePlain: rewardCode,
@@ -411,7 +411,7 @@ describe('frontend public order normalization', () => {
     });
     expectEqual(
       payload.pricing.total,
-      Number((72.8 - discountAmount).toFixed(2)),
+      Number((73.9 - discountAmount).toFixed(2)),
       'the final review total should subtract only the eligible worm discount'
     );
   });

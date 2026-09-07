@@ -30,7 +30,7 @@ const frostProtectionExtraCharge = {
   copyKey: 'frostProtection',
   fieldName: 'pakkastoimituslisa',
   checkedValue: 'maksan',
-  price: 3,
+  price: 4,
   activeMonths: [9, 10, 11, 12, 1, 2, 3, 4],
 };
 

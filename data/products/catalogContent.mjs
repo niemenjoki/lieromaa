@@ -11,7 +11,7 @@ export const productCatalogContentSource = {
         'Tilaa kotimaisia kompostimatoja (Eisenia fetida) postitse tai nouda Järvenpäästä. Voit valita pelkät madot tai käyttövalmiin 14 litran matokompostorin, jossa madot ovat jo asettuneet petimateriaaliin.',
       h1: 'Osta Lieromaan Eisenia fetida -kompostimatoja',
       navigationLabel: 'Kompostimadot',
-      updatedAt: '2026-07-25',
+      updatedAt: '2026-09-07',
     },
     search: {
       contexts: ['blog', 'notFound'],
@@ -93,7 +93,7 @@ export const productCatalogContentSource = {
         'Lieromaan kompostorin kuituseos on helppokäyttöinen lisäseos kompostiin. Se helpottaa kompostin ylläpitoa erityisesti silloin, kun biojätteen määrä vaihtelee.',
       h1: 'Lieromaan matokompostorin kuituseos',
       navigationLabel: 'Kuituseos',
-      updatedAt: '2026-07-25',
+      updatedAt: '2026-09-07',
     },
     search: {
       contexts: ['blog', 'notFound'],
