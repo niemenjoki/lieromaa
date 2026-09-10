@@ -1,0 +1,47 @@
+.Fallback {
+  display: grid;
+  gap: 0.85rem;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--background-6);
+  border-radius: 10px;
+  background: var(--background-1);
+}
+
+.Fallback p {
+  margin: 0;
+}
+
+.Draft {
+  display: grid;
+  gap: 0.5rem;
+}
+.Draft textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 0.75rem;
+  font: inherit;
+  line-height: 1.5;
+  color: inherit;
+  background: var(--background-2);
+  border: 1px solid var(--background-6);
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.Actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.Actions button {
+  padding: 0.65rem 0.9rem;
+  color: inherit;
+  background: var(--background-2);
+  border: 1px solid var(--background-6);
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}

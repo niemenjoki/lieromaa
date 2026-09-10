@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 
 import { usePathname } from 'next/navigation';
 
+import OrderEmailFallback from '@/components/OrderEmailFallback/OrderEmailFallback';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { trackAnalyticsEvent } from '@/lib/analytics/events';
 import { ORDER_SUBMIT_ENDPOINT, ORDER_SUCCESS_MESSAGE } from '@/lib/copy/orderMessages';
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
+import { formatCartLineLabel } from '@/lib/orders/cartOrder';
 import { getDiscountExtraChargeKeys, getOrderQuote } from '@/lib/orders/getOrderQuote';
-import { submitOrderForm } from '@/lib/orders/submitOrderForm';
+import { isOrderServiceUnavailable, submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   formatPrice,
   getAvailableProductVariants,
@@ -187,6 +189,14 @@ export default function ProductOrderForm({ productKey }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [customerFields, setCustomerFields] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const updateCustomerField = (key, value) =>
+    setCustomerFields((current) => ({ ...current, [key]: value }));
   const [formStartedAt, setFormStartedAt] = useState('');
   const [submissionId, setSubmissionId] = useState('');
   const [addressFields, setAddressFields] = useState(emptyAddressFields);
@@ -352,7 +362,7 @@ export default function ProductOrderForm({ productKey }) {
 
   const handleDeliveryChange = (nextDelivery) => {
     setDelivery(nextDelivery);
-    setSubmitError('');
+    setSubmitError((current) => (isOrderServiceUnavailable(current) ? current : ''));
     setPickupPoints([]);
     setPickupPointError('');
     setPickupPointFallbackAllowed(false);
@@ -366,7 +376,7 @@ export default function ProductOrderForm({ productKey }) {
     setSelectedPickupPointId(pickupPointId);
     setSelectedPickupPoint(nextPoint);
     setPickupPointError('');
-    setSubmitError('');
+    setSubmitError((current) => (isOrderServiceUnavailable(current) ? current : ''));
   };
 
   const applyDiscount = async () => {
@@ -514,7 +524,7 @@ export default function ProductOrderForm({ productKey }) {
       setIsSubmitted(true);
     } catch (error) {
       setSubmitError(
-        error instanceof Error ? error.message : 'Tilauksen lähetys epäonnistui.'
+        error instanceof Error ? error : new Error('Tilauksen lähetys epäonnistui.')
       );
     } finally {
       setIsSubmitting(false);
@@ -856,17 +866,35 @@ export default function ProductOrderForm({ productKey }) {
         <div className={classes.FormFields}>
           <label className={classes.StackedField}>
             <span className={classes.FieldLabel}>Nimi</span>
-            <input type="text" name="nimi" required />
+            <input
+              type="text"
+              name="nimi"
+              value={customerFields.name}
+              onChange={(event) => updateCustomerField('name', event.target.value)}
+              required
+            />
           </label>
 
           <label className={classes.StackedField}>
             <span className={classes.FieldLabel}>Sähköposti</span>
-            <input type="email" name="email" required />
+            <input
+              type="email"
+              name="email"
+              value={customerFields.email}
+              onChange={(event) => updateCustomerField('email', event.target.value)}
+              required
+            />
           </label>
 
           <label className={classes.StackedField}>
             <span className={classes.FieldLabel}>{phoneLabel}</span>
-            <input type="tel" name="phone" required />
+            <input
+              type="tel"
+              name="phone"
+              value={customerFields.phone}
+              onChange={(event) => updateCustomerField('phone', event.target.value)}
+              required
+            />
           </label>
         </div>
       </FormSection>
@@ -1056,7 +1084,12 @@ export default function ProductOrderForm({ productKey }) {
 
         <label className={classes.StackedField}>
           <span className={classes.FieldLabel}>Viesti (valinnainen)</span>
-          <textarea name="lisatiedot" rows="4" />
+          <textarea
+            name="lisatiedot"
+            rows="4"
+            value={customerFields.message}
+            onChange={(event) => updateCustomerField('message', event.target.value)}
+          />
         </label>
       </FormSection>
 
@@ -1079,9 +1112,32 @@ export default function ProductOrderForm({ productKey }) {
           {invoiceTimingNote}
         </p>
 
-        {submitError ? (
+        {isOrderServiceUnavailable(submitError) ? (
+          <OrderEmailFallback
+            items={
+              currentVariant
+                ? [
+                    {
+                      label: formatCartLineLabel({ productKey, variant: currentVariant }),
+                      quantity: 1,
+                      extras: activeExtraCharges
+                        .filter((charge) => charge.selected)
+                        .map((charge) => charge.label),
+                    },
+                  ]
+                : []
+            }
+            customer={customerFields}
+            address={pickupSearchVisible || deliveryAddressVisible ? addressFields : {}}
+            shippingLabel={selectedShippingOption?.label}
+            pickupPoint={pickupSearchVisible ? selectedPickupPoint : null}
+            paymentLabel="Sähköpostilasku"
+            discountCode={discountCode}
+            total={quote?.total}
+          />
+        ) : submitError ? (
           <p className={`${classes.HelperText} ${classes.AlertText}`} role="alert">
-            {submitError}
+            {submitError.message}
           </p>
         ) : null}
 

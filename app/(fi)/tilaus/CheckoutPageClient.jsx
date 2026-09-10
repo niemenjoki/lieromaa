@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useCart } from '@/components/Cart/CartProvider';
+import OrderEmailFallback from '@/components/OrderEmailFallback/OrderEmailFallback';
 import SafeLink from '@/components/SafeLink/SafeLink';
 import { trackAnalyticsEvent } from '@/lib/analytics/events';
 import {
@@ -25,7 +26,7 @@ import {
   createPendingStripeCheckout,
   parsePendingStripeCheckout,
 } from '@/lib/orders/pendingStripeCheckout.mjs';
-import { submitOrderForm } from '@/lib/orders/submitOrderForm';
+import { isOrderServiceUnavailable, submitOrderForm } from '@/lib/orders/submitOrderForm';
 import {
   findProductKeyBySku,
   formatCurrency,
@@ -678,7 +679,7 @@ export default function CheckoutPageClient({ language }) {
 
   const handleShippingChange = (nextShippingMethod) => {
     setShippingMethod(nextShippingMethod);
-    setSubmitError('');
+    setSubmitError((current) => (isOrderServiceUnavailable(current) ? current : ''));
     resetPickupPoint();
     trackCheckoutStep('checkout_shipping_selected', {
       eventTarget: nextShippingMethod,
@@ -728,7 +729,7 @@ export default function CheckoutPageClient({ language }) {
     setDiscountCodeInput('');
     setAppliedDiscountCode('');
     setDiscountFeedback({ message: '', isError: false });
-    setSubmitError('');
+    setSubmitError((current) => (isOrderServiceUnavailable(current) ? current : ''));
   };
 
   const applyDiscountCode = () => {
@@ -776,7 +777,7 @@ export default function CheckoutPageClient({ language }) {
         message: copy.discountApplied,
         isError: false,
       });
-      setSubmitError('');
+      setSubmitError((current) => (isOrderServiceUnavailable(current) ? current : ''));
     } catch {
       setAppliedDiscountCode('');
       setDiscountFeedback({
@@ -792,7 +793,7 @@ export default function CheckoutPageClient({ language }) {
     setSelectedPickupPointId(pickupPointId);
     setSelectedPickupPoint(nextPoint);
     setPickupPointError('');
-    setSubmitError('');
+    setSubmitError((current) => (isOrderServiceUnavailable(current) ? current : ''));
 
     if (nextPoint) {
       trackCheckoutStep('checkout_pickup_selected', {
@@ -955,7 +956,7 @@ export default function CheckoutPageClient({ language }) {
         eventValue: error instanceof Error ? 'submit_error' : 'unknown_error',
         eventItems: analyticsItems,
       });
-      setSubmitError(error instanceof Error ? error.message : copy.submitFailed);
+      setSubmitError(error instanceof Error ? error : new Error(copy.submitFailed));
     } finally {
       setIsSubmitting(false);
     }
@@ -1703,9 +1704,30 @@ export default function CheckoutPageClient({ language }) {
             </SafeLink>
             .
           </p>
-          {submitError ? (
+          {isOrderServiceUnavailable(submitError) ? (
+            <OrderEmailFallback
+              language={language}
+              items={(quote?.items ?? []).map((line) => ({
+                label: line.label,
+                quantity: line.packageQuantity,
+              }))}
+              customer={customerFields}
+              address={addressVisible ? addressFields : {}}
+              shippingLabel={selectedShippingOption?.label}
+              pickupPoint={pickupSearchVisible ? selectedPickupPoint : null}
+              paymentLabel={
+                paymentProvider === 'STRIPE'
+                  ? copy.stripePaymentLabel
+                  : paymentProvider === 'INVOICE'
+                    ? copy.invoicePaymentLabel
+                    : ''
+              }
+              discountCode={discountCodeInput}
+              total={quote?.total}
+            />
+          ) : submitError ? (
             <p className={`${classes.HelperText} ${classes.Alert}`} role="alert">
-              {submitError}
+              {submitError.message}
             </p>
           ) : null}
           <div className={classes.Actions}>
