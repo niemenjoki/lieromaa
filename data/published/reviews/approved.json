@@ -246,5 +246,21 @@
     "review": "",
     "displayName": "",
     "submittedAt": "2026-09-16T14:36:58.210Z"
+  },
+  {
+    "language": "fi",
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Madot oli elinvoimaisia saapuessaan, lähetys oli nopea ja yhteydenpito yritykseltä moitteetonta.",
+    "displayName": "Aleksi",
+    "submittedAt": "2026-09-21T14:01:25.622Z"
+  },
+  {
+    "language": "fi",
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Paketin toimitus oli nopea, lierot hyvinvointiset, kaikki toimii mutkattomasti, suosittelen!",
+    "displayName": "Anneli",
+    "submittedAt": "2026-09-22T08:04:53.871Z"
   }
 ]
