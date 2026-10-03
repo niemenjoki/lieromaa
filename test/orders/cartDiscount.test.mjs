@@ -34,14 +34,14 @@ describe('cart discount pricing', () => {
       discount: getCheckoutReward(),
     });
 
-    assert.equal(quote.itemSubtotal, 115);
+    assert.equal(quote.itemSubtotal, 135);
     assert.equal(quote.shippingPrice, 8.9);
-    assert.equal(quote.discountAmounts.eligibleSubtotal, 40);
-    assert.equal(quote.discountAmounts.productAmount, 6);
+    assert.equal(quote.discountAmounts.eligibleSubtotal, 48);
+    assert.equal(quote.discountAmounts.productAmount, 7.2);
     assert.equal(quote.discountAmounts.extraChargeAmount, 0);
     assert.equal(quote.discountAmounts.shippingAmount, 0);
-    assert.equal(quote.discountAmounts.totalAmount, 6);
-    assert.equal(quote.total, 117.9);
+    assert.equal(quote.discountAmounts.totalAmount, 7.2);
+    assert.equal(quote.total, 136.7);
   });
 
   test('rounds the percentage discount from the combined eligible line subtotal to cents', () => {

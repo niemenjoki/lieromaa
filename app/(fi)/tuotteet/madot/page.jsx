@@ -4,6 +4,7 @@ import SafeLink from '@/components/SafeLink/SafeLink';
 import { WORMS_SHIPPING_SCHEDULE_TEXT } from '@/lib/commerce/shippingSchedule.mjs';
 import {
   formatPrice,
+  getCartAddOnBySku,
   getProductShippingOptions,
   getProductVariants,
 } from '@/lib/pricing/catalog';
@@ -30,6 +31,7 @@ const wormLocalPickupOption =
 
 export default async function Page() {
   const wormVariants = getProductVariants('worms');
+  const preparedWormBin = getCartAddOnBySku('worms-ready-bin-14l');
   const structuredData = getStructuredData();
 
   return (
@@ -86,8 +88,9 @@ export default async function Page() {
                   <li>Valitse 25 g, 50 g, 75 g tai 100 g kompostimatoja.</li>
                   <li>Pakkaus sisältää madot ja noin 0,5 L kasvualustaa.</li>
                   <li>
-                    Lisää halutessasi käyttövalmis 14 L matokompostori 30 eurolla – osta,
-                    vastaanota ja aloita ruokinta.
+                    Lisää halutessasi käyttövalmis 14 L matokompostori{' '}
+                    {formatPrice(preparedWormBin.price, 'fi')} eurolla – osta, vastaanota
+                    ja aloita ruokinta.
                   </li>
                 </ul>
 
