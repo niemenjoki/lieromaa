@@ -11,6 +11,7 @@ import { getRoutePath } from '@/lib/i18n/routes.mjs';
 import { createLocalizedPageMetadata } from '@/lib/metadata/createLocalizedPageMetadata.mjs';
 import {
   formatCurrency,
+  getCartAddOnBySku,
   getProductShippingOptions,
   getProductVariants,
 } from '@/lib/pricing/catalog';
@@ -62,6 +63,7 @@ function DeliveryNotice() {
 
 export default function EnglishCompostWormsPage() {
   const variants = getProductVariants('worms');
+  const preparedWormBin = getCartAddOnBySku('worms-ready-bin-14l', language);
   const structuredData = createProductStructuredData('worms', language);
 
   return (
@@ -122,8 +124,9 @@ export default function EnglishCompostWormsPage() {
                     The pack includes the worms and about 0.5 litre of active bedding.
                   </li>
                   <li>
-                    Add a ready-to-use 14-litre worm bin for 30 € if you would like the
-                    bedding, worms and first feeding prepared for you.
+                    Add a ready-to-use 14-litre worm bin for{' '}
+                    {formatCurrency(preparedWormBin.price, language)} if you would like
+                    the bedding, worms and first feeding prepared for you.
                   </li>
                 </ul>
 

@@ -419,7 +419,7 @@ describe('frontend public order submit route', () => {
 
           const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
           const discountAmount = Number(
-            ((30 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
+            ((34 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
           );
           const rewardLetters = [...rewardCode];
           const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
@@ -435,11 +435,11 @@ describe('frontend public order submit route', () => {
             totalAmount: discountAmount,
             endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
           });
-          expectEqual(forwardedPayload.pricing.itemPrice, 65);
+          expectEqual(forwardedPayload.pricing.itemPrice, 74);
           expectEqual(forwardedPayload.pricing.shippingPrice, 8.9);
           expectEqual(
             forwardedPayload.pricing.total,
-            Number((73.9 - discountAmount).toFixed(2))
+            Number((82.9 - discountAmount).toFixed(2))
           );
         } finally {
           globalThis.fetch = originalFetch;

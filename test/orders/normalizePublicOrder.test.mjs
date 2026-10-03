@@ -390,12 +390,12 @@ describe('frontend public order normalization', () => {
       now: new Date('2026-08-04T10:00:00Z'),
     });
     const discountAmount = Number(
-      ((30 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
+      ((34 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
     );
     const rewardLetters = [...rewardCode];
     const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
 
-    expectEqual(payload.pricing.itemPrice, 65);
+    expectEqual(payload.pricing.itemPrice, 74);
     expectEqual(payload.pricing.shippingPrice, 8.9);
     expectDeepEqual(payload.pricing.discount, {
       codePlain: rewardCode,
@@ -411,7 +411,7 @@ describe('frontend public order normalization', () => {
     });
     expectEqual(
       payload.pricing.total,
-      Number((73.9 - discountAmount).toFixed(2)),
+      Number((82.9 - discountAmount).toFixed(2)),
       'the final review total should subtract only the eligible worm discount'
     );
   });
@@ -545,7 +545,7 @@ describe('frontend public order normalization', () => {
     expectEqual(payload.items[1].label, 'Käyttövalmis 14 litran matokompostori');
     expectEqual(payload.items[1].quantity, 1);
     expectEqual(payload.items[1].packageQuantity, 1);
-    expectEqual(payload.items[1].unitPrice, 30);
+    expectEqual(payload.items[1].unitPrice, 35);
     expectEqual(payload.pricing.itemPrice, expectedQuote.itemSubtotal);
   });
 
