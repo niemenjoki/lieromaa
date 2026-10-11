@@ -1,7 +1,10 @@
 {
   "worms": {
     "earliestShippingDate": false,
-    "unavailableSkus": []
+    "unavailableSkus": [
+      "worms-75",
+      "worms-100"
+    ]
   },
   "compostChow": {
     "earliestShippingDate": false,
