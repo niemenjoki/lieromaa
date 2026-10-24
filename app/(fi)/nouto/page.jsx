@@ -9,8 +9,7 @@ export const dynamic = 'force-static';
 
 export const metadata = createPageMetadata({
   title: 'Valitse noutoaika | Lieromaa',
-  description:
-    'Valitse Järvenpäästä noudettavalle Lieromaan tilaukselle sopiva kahden tunnin noutoaika.',
+  description: 'Varaa noutoaika Järvenpäästä noudettavalle Lieromaan tilaukselle.',
   canonicalUrl: '/nouto',
   robots: {
     index: false,
@@ -35,10 +34,11 @@ export default function PickupPage() {
       <div className={classes.Intro}>
         <h1>Valitse noutoaika</h1>
         <p>
-          Laitan tilauksesi kylmälaukkuun kuistilleni valitsemasi kahden tunnin noutoajan
-          alkuun mennessä. Voit noutaa sen itse milloin tahansa noutoajan aikana.
+          Tilauksesi odottaa valitsemasi noutoajan kylmälaukussa kuistillani Järvenpäässä,
+          ja noudat sen itse. Lähetän tarkat nouto-ohjeet ja osoitteen sähköpostiisi heti
+          varauksen jälkeen.
         </p>
-        <p>Noutoaikalinkki on tarkoitettu vain tilauksen tehneelle asiakkaalle.</p>
+        <p>Varauslinkki on tarkoitettu vain tilauksen tehneelle asiakkaalle.</p>
       </div>
 
       <Suspense fallback={<PickupPageFallback />}>

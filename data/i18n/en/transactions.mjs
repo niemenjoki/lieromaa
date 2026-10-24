@@ -75,10 +75,9 @@ export const transactionMessages = Object.freeze({
       'Payment takes place on Stripe’s secure hosted page. Apple Pay or Google Pay may appear on a supported device.',
     invoicePaymentLabel: 'Pay by email invoice',
     invoiceTimingPostal: 'I send the invoice by email after handing your order to Posti.',
-    invoiceTimingLocal:
-      'I send the invoice by email when your order is ready for pickup.',
+    invoiceTimingLocal: 'I send the invoice by email on the pickup day.',
     localPickupNote:
-      'When your order is ready for pickup, I will send you a link where you can choose a pickup time that suits you. Your order will wait on my porch in Järvenpää during that time, and you collect it yourself.',
+      'When I confirm your order, I will tell you the pickup date. Closer to the date, I will send a link where you can book a pickup time that suits you. Your order will wait on my porch in Järvenpää during that time, and you collect it yourself.',
     fields: Object.freeze({
       name: 'Name',
       email: 'Email address',
@@ -214,31 +213,35 @@ export const transactionMessages = Object.freeze({
       'This review link was created for an order handled in Finnish. You can still submit the review on this page.',
   }),
   pickup: Object.freeze({
-    checking: 'Checking the pickup link...',
-    missingLinkAddress: 'The pickup link is missing from the address.',
-    linkCheckFailed: 'The pickup link could not be checked.',
+    checking: 'Checking the booking link...',
+    missingLinkAddress: 'The booking link is missing from the address.',
+    linkCheckFailed: 'The booking link could not be checked.',
     genericError: 'The pickup time could not be booked. Please try again in a moment.',
     contactHelp: ({ email }) =>
       `You can also reply to the email you received or write to ${email}, and we will arrange the pickup.`,
     greeting: ({ firstName }) => (firstName ? `Hello ${firstName}!` : 'Hello!'),
     orderLabel: ({ orderId }) => `Order ${orderId}`,
+    pickupDay: ({ date }) => `Pickup date ${date}`,
     packages: ({ count }) => `${count} pcs`,
-    slotsLegend: 'Available pickup times',
-    slotLabel: ({ start, end }) => `${start}–${end}`,
+    optionsLegend: 'Choose a pickup time',
+    optionLabel: ({ start, end }) => `${start}–${end}`,
     deadlineHelp: ({ hour }) =>
-      `A pickup time for the next day can be booked until ${hour}:00 on the previous day. After booking, you will receive a confirmation and pickup instructions by email.`,
-    noSlots: ({ phone, email }) =>
-      `There are no available pickup times right now. Send a text message to ${phone} or write to ${email}, and we will arrange a pickup time together.`,
+      `Please book by ${hour}:00 on the day before the pickup. I will send detailed pickup instructions and the address to your email right after booking.`,
+    noOptions: ({ phone, email }) =>
+      `There are no pickup times available to book right now. Send a text message to ${phone} or write to ${email}, and we will arrange a pickup time together.`,
     selectRequired: 'Choose a pickup time before booking.',
     submit: 'Book pickup time',
     submitting: 'Booking the pickup time...',
     bookedHeading: 'Your pickup time is booked',
+    readyHeading: 'Your order is ready for pickup',
     bookedTime: ({ weekday, date, start, end }) => `${weekday} ${date}, ${start}–${end}`,
-    bookedEmailNote: 'I have sent a confirmation and a calendar entry to your email.',
-    addressHeading: 'Pickup location',
+    bookedEmailNote:
+      'I have sent detailed pickup instructions, the address and a calendar entry to your email.',
+    readyNote:
+      'Your order is waiting on my porch. The pickup instructions and address are in your email.',
+    cancelHelp: ({ phone, whatsappUrl }) =>
+      `If you cannot make the pickup time, please let me know by replying to the email, by WhatsApp (${whatsappUrl}) or by text message to ${phone}.`,
     photoAlt: 'Photo of the porch where the order waits during the pickup time',
-    changeHelp: ({ phone }) =>
-      `If you would like to change or cancel the time, reply to the confirmation email or send a text message to ${phone}.`,
     collected: 'Your order has already been collected. Thank you!',
     manual:
       'I will arrange the pickup with you separately. If you have any questions, reply to the email you received.',

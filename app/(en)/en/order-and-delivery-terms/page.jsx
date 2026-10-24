@@ -140,8 +140,8 @@ export default function EnglishOrderTermsPage() {
           </p>
           <p>
             For Posti pickup-point and home-delivery orders, I send the invoice after
-            handing the order to Posti. For local pickup, I send it when the order is
-            ready for pickup. The payment term is 14 days.
+            handing the order to Posti. For local pickup, I send it on the pickup day. The
+            payment term is 14 days.
           </p>
           <p>
             A reminder may be sent for an unpaid invoice. A debt that remains unpaid may
@@ -182,18 +182,19 @@ export default function EnglishOrderTermsPage() {
 
           <h2>Local pickup in Järvenpää</h2>
           <p>
-            When a local pickup order is ready, I will email you a link where you can
-            choose an available two-hour pickup time. A pickup time for the next day can
-            be booked until 20:00 on the previous day. After booking, you will receive a
-            confirmation and pickup instructions.
+            The confirmation of a local pickup order states the pickup date. Closer to the
+            date, I will email you a link to the pickup times available for your order,
+            and you book one of them by 20:00 on the day before the pickup. After booking,
+            you will receive detailed pickup instructions and the address by email.
           </p>
           <p>
-            From the start of the pickup time, the order waits in a cool bag on my porch,
-            and you collect it yourself during that time. Changes and cancellations are
-            arranged by replying to the confirmation email or by text message. If the
-            order is not collected during the pickup time, I will take it back indoors and
-            send a link for choosing a new time. I may also arrange the pickup with you
-            separately, for example because of exceptional weather.
+            When the order has been packed and is waiting in a cool bag on my porch, I
+            will let you know, and you collect the order yourself during the time you
+            booked. If you cannot make the pickup time, please let me know by email,
+            WhatsApp or text message. If the order is not collected during the pickup
+            time, I will take it back indoors and we will agree on a new time. I may also
+            arrange the pickup with you separately, for example because of exceptional
+            weather.
           </p>
 
           <h2>Right to cancel and cancellation instructions</h2>

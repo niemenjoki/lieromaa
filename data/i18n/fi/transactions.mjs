@@ -75,9 +75,9 @@ export const transactionMessages = Object.freeze({
     invoicePaymentLabel: 'Maksa sähköpostilaskulla',
     invoiceTimingPostal:
       'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi.',
-    invoiceTimingLocal: 'Lasku lähetetään, kun tilaus on valmis noudettavaksi.',
+    invoiceTimingLocal: 'Lasku lähetetään noutopäivänä.',
     localPickupNote:
-      'Kun tilauksesi on valmis noudettavaksi, lähetän sinulle linkin, josta voit valita sinulle sopivan noutoajan. Tilaus odottaa valitsemasi ajan kuistillani Järvenpäässä, ja noudat sen itse.',
+      'Kun vahvistan tilauksen, kerron noutopäivän. Lähempänä noutopäivää lähetän linkin, josta voit varata sinulle sopivan noutoajan. Tilaus odottaa valitsemasi ajan kuistillani Järvenpäässä, ja noudat sen itse.',
     fields: Object.freeze({
       name: 'Nimi',
       email: 'Sähköposti',
@@ -212,32 +212,36 @@ export const transactionMessages = Object.freeze({
       'Tämä arvostelulinkki kuuluu englanniksi käsiteltyyn tilaukseen. Voit silti lähettää arvostelun tällä sivulla.',
   }),
   pickup: Object.freeze({
-    checking: 'Tarkistetaan noutoaikalinkkiä...',
-    missingLinkAddress: 'Noutoaikalinkki puuttuu osoitteesta.',
-    linkCheckFailed: 'Noutoaikalinkin tarkistus epäonnistui.',
+    checking: 'Tarkistetaan varauslinkkiä...',
+    missingLinkAddress: 'Varauslinkki puuttuu osoitteesta.',
+    linkCheckFailed: 'Varauslinkin tarkistus epäonnistui.',
     genericError: 'Noutoajan varaus epäonnistui. Yritä hetken kuluttua uudelleen.',
     contactHelp: ({ email }) =>
       `Voit myös vastata saamaasi sähköpostiin tai kirjoittaa osoitteeseen ${email}, niin sovitaan nouto.`,
     greeting: ({ firstName }) => (firstName ? `Hei ${firstName}!` : 'Hei!'),
     orderLabel: ({ orderId }) => `Tilaus ${orderId}`,
+    pickupDay: ({ date }) => `Noutopäivä ${date}`,
     packages: ({ count }) => `${count} kpl`,
-    slotsLegend: 'Vapaat noutoajat',
-    slotLabel: ({ start, end }) => `klo ${start}–${end}`,
+    optionsLegend: 'Valitse noutoaika',
+    optionLabel: ({ start, end }) => `klo ${start}–${end}`,
     deadlineHelp: ({ hour }) =>
-      `Seuraavan päivän noutoajan voi varata edellisenä päivänä klo ${hour} asti. Varauksen jälkeen saat vahvistuksen ja nouto-ohjeen sähköpostiisi.`,
-    noSlots: ({ phone, email }) =>
-      `Vapaita noutoaikoja ei ole juuri nyt. Lähetä tekstiviesti numeroon ${phone} tai kirjoita osoitteeseen ${email}, niin sovitaan noutoaika yhdessä.`,
+      `Varaa aika viimeistään noutoa edeltävänä päivänä klo ${hour}. Lähetän tarkat nouto-ohjeet ja osoitteen sähköpostiisi heti varauksen jälkeen.`,
+    noOptions: ({ phone, email }) =>
+      `Varattavia noutoaikoja ei ole juuri nyt. Lähetä tekstiviesti numeroon ${phone} tai kirjoita osoitteeseen ${email}, niin sovitaan noutoaika yhdessä.`,
     selectRequired: 'Valitse noutoaika ennen varausta.',
     submit: 'Varaa noutoaika',
     submitting: 'Varataan noutoaikaa...',
     bookedHeading: 'Noutoaikasi on varattu',
+    readyHeading: 'Tilauksesi on noudettavissa',
     bookedTime: ({ weekday, date, start, end }) =>
       `${weekday} ${date} klo ${start}–${end}`,
-    bookedEmailNote: 'Lähetin vahvistuksen ja kalenterimerkinnän sähköpostiisi.',
-    addressHeading: 'Noutopaikka',
+    bookedEmailNote:
+      'Lähetin tarkat nouto-ohjeet, osoitteen ja kalenterimerkinnän sähköpostiisi.',
+    readyNote:
+      'Tilauksesi odottaa kuistillani. Nouto-ohjeet ja osoite ovat sähköpostissasi.',
+    cancelHelp: ({ phone, whatsappUrl }) =>
+      `Jos nouto peruuntuu, ilmoitathan siitä vastaamalla sähköpostiin, WhatsApp-viestillä (${whatsappUrl}) tai tekstiviestillä numeroon ${phone}.`,
     photoAlt: 'Kuva kuistista, jolla tilaus odottaa noutoajan aikana',
-    changeHelp: ({ phone }) =>
-      `Jos haluat vaihtaa ajan tai perua sen, vastaa vahvistusviestiin tai lähetä tekstiviesti numeroon ${phone}.`,
     collected: 'Tilauksesi on jo noudettu. Kiitos!',
     manual:
       'Sovin noudosta kanssasi erikseen. Jos sinulla on kysyttävää, vastaa saamaasi sähköpostiin.',

@@ -14,6 +14,8 @@ import { getTransactionMessages } from '@/lib/i18n/messages.mjs';
 
 import classes from './PickupPage.module.css';
 
+// Varaussivu näyttää vain lyhyet ohjeet. Osoite ja tarkat nouto-ohjeet lähetetään sähköpostilla varauksen jälkeen.
+
 const LOCALES = { fi: 'fi-FI', en: 'en-GB' };
 
 function formatDay(dateKey, language) {
@@ -32,16 +34,17 @@ function formatDay(dateKey, language) {
 }
 
 function formatTime(time, language) {
-  return language === 'en' ? time : String(time || '').replace(':', '.');
+  const value = String(time || '');
+  return language === 'en' ? value : value.replace(/^0/, '').replace(':', '.');
 }
 
-function groupSlotsByDate(slots) {
+function groupOptionsByDate(options) {
   const groups = new Map();
-  for (const slot of slots) {
-    if (!groups.has(slot.date)) {
-      groups.set(slot.date, []);
+  for (const option of options) {
+    if (!groups.has(option.date)) {
+      groups.set(option.date, []);
     }
-    groups.get(slot.date).push(slot);
+    groups.get(option.date).push(option);
   }
   return [...groups.entries()];
 }
@@ -53,10 +56,9 @@ export default function PickupPageClient({ language = 'fi' }) {
   const [session, setSession] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
-  const [selectedSlotId, setSelectedSlotId] = useState('');
+  const [selectedOptionId, setSelectedOptionId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [justBooked, setJustBooked] = useState(false);
   const [photoFailed, setPhotoFailed] = useState(false);
 
   useEffect(() => {
@@ -65,8 +67,7 @@ export default function PickupPageClient({ language = 'fi' }) {
     setSession(null);
     setLoadError('');
     setSubmitError('');
-    setSelectedSlotId('');
-    setJustBooked(false);
+    setSelectedOptionId('');
 
     if (!nextToken) {
       setIsLoading(false);
@@ -113,15 +114,15 @@ export default function PickupPageClient({ language = 'fi' }) {
     return () => controller.abort();
   }, [searchParams, copy, language]);
 
-  const slotGroups = useMemo(
-    () => groupSlotsByDate(Array.isArray(session?.slots) ? session.slots : []),
+  const optionGroups = useMemo(
+    () => groupOptionsByDate(Array.isArray(session?.options) ? session.options : []),
     [session]
   );
 
   async function handleSubmit(event) {
     event.preventDefault();
     setSubmitError('');
-    if (!selectedSlotId) {
+    if (!selectedOptionId) {
       setSubmitError(copy.selectRequired);
       return;
     }
@@ -136,7 +137,7 @@ export default function PickupPageClient({ language = 'fi' }) {
           'Content-Type': 'application/json',
           'X-Lieromaa-Language': language,
         },
-        body: JSON.stringify({ token, slotId: Number(selectedSlotId) }),
+        body: JSON.stringify({ token, optionId: Number(selectedOptionId) }),
       });
       const data = await response.json().catch(() => null);
       if (!response.ok || !data?.ok) {
@@ -145,18 +146,17 @@ export default function PickupPageClient({ language = 'fi' }) {
             current
               ? {
                   ...current,
-                  slots: (current.slots || []).filter(
-                    (slot) => String(slot.id) !== selectedSlotId
+                  options: (current.options || []).filter(
+                    (option) => String(option.id) !== selectedOptionId
                   ),
                 }
               : current
           );
-          setSelectedSlotId('');
+          setSelectedOptionId('');
         }
         throw new Error(data?.message || copy.genericError);
       }
       setSession(data);
-      setJustBooked(true);
     } catch (error) {
       setSubmitError(
         error instanceof Error && error.message ? error.message : copy.genericError
@@ -188,10 +188,20 @@ export default function PickupPageClient({ language = 'fi' }) {
     );
   }
 
+  const cancelHelp = copy.cancelHelp({
+    phone: session.ownerPhone,
+    whatsappUrl: session.whatsappUrl,
+  });
+
   const header = (
     <div className={classes.Header}>
       <h2>{copy.greeting({ firstName: session.firstName })}</h2>
       <p className={classes.OrderMeta}>{copy.orderLabel({ orderId: session.orderId })}</p>
+      {session.pickupDay ? (
+        <p className={classes.OrderMeta}>
+          {copy.pickupDay({ date: formatDay(session.pickupDay, language).day })}
+        </p>
+      ) : null}
       {Array.isArray(session.items) && session.items.length ? (
         <ul className={classes.Items}>
           {session.items.map((item, index) => (
@@ -214,14 +224,14 @@ export default function PickupPageClient({ language = 'fi' }) {
     );
   }
 
-  if (session.status === 'booked' && session.booking) {
+  if ((session.status === 'booked' || session.status === 'ready') && session.booking) {
     const { weekday, day } = formatDay(session.booking.date, language);
     const photoUrl = `${PICKUP_PHOTO_ENDPOINT}?token=${encodeURIComponent(token)}`;
     return (
       <section className={classes.Card} aria-live="polite">
         {header}
         <div className={classes.Booked}>
-          <h3>{copy.bookedHeading}</h3>
+          <h3>{session.status === 'ready' ? copy.readyHeading : copy.bookedHeading}</h3>
           <p className={classes.BookedTime}>
             {copy.bookedTime({
               weekday,
@@ -230,18 +240,7 @@ export default function PickupPageClient({ language = 'fi' }) {
               end: formatTime(session.booking.end, language),
             })}
           </p>
-          {justBooked ? <p className={classes.HelpText}>{copy.bookedEmailNote}</p> : null}
-          <div>
-            <h3>{copy.addressHeading}</h3>
-            <p className={classes.Address}>
-              {(session.address || []).map((line) => (
-                <span key={line}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-            </p>
-          </div>
+          <p>{session.status === 'ready' ? copy.readyNote : copy.bookedEmailNote}</p>
           {session.photo && !photoFailed ? (
             // Kuva tulee tokenilla suojatusta reitistä, joten next/image-optimointia ei käytetä.
             // eslint-disable-next-line @next/next/no-img-element
@@ -252,10 +251,7 @@ export default function PickupPageClient({ language = 'fi' }) {
               onError={() => setPhotoFailed(true)}
             />
           ) : null}
-          <p className={classes.Instructions}>{session.booking.instructions}</p>
-          <p className={classes.HelpText}>
-            {copy.changeHelp({ phone: session.ownerPhone })}
-          </p>
+          <p className={classes.HelpText}>{cancelHelp}</p>
         </div>
       </section>
     );
@@ -264,30 +260,30 @@ export default function PickupPageClient({ language = 'fi' }) {
   return (
     <section className={classes.Card}>
       {header}
-      {slotGroups.length ? (
+      {optionGroups.length ? (
         <form className={classes.Form} onSubmit={handleSubmit} noValidate>
           <fieldset className={classes.Fieldset}>
-            <legend>{copy.slotsLegend}</legend>
-            {slotGroups.map(([date, slots]) => {
+            <legend>{copy.optionsLegend}</legend>
+            {optionGroups.map(([date, options]) => {
               const { weekday, day } = formatDay(date, language);
               return (
                 <div className={classes.Day} key={date}>
                   <p className={classes.DayLabel}>{`${weekday} ${day}`}</p>
                   <div className={classes.SlotList}>
-                    {slots.map((slot) => (
-                      <label className={classes.SlotOption} key={slot.id}>
+                    {options.map((option) => (
+                      <label className={classes.SlotOption} key={option.id}>
                         <input
                           className={classes.SlotInput}
                           type="radio"
-                          name="slot"
-                          value={String(slot.id)}
-                          checked={selectedSlotId === String(slot.id)}
-                          onChange={() => setSelectedSlotId(String(slot.id))}
+                          name="pickup-time"
+                          value={String(option.id)}
+                          checked={selectedOptionId === String(option.id)}
+                          onChange={() => setSelectedOptionId(String(option.id))}
                         />
                         <span className={classes.SlotLabel}>
-                          {copy.slotLabel({
-                            start: formatTime(slot.start, language),
-                            end: formatTime(slot.end, language),
+                          {copy.optionLabel({
+                            start: formatTime(option.start, language),
+                            end: formatTime(option.end, language),
                           })}
                         </span>
                       </label>
@@ -311,7 +307,7 @@ export default function PickupPageClient({ language = 'fi' }) {
         </form>
       ) : (
         <p className={classes.Error}>
-          {copy.noSlots({ phone: session.ownerPhone, email: PICKUP_SUPPORT_EMAIL })}
+          {copy.noOptions({ phone: session.ownerPhone, email: PICKUP_SUPPORT_EMAIL })}
         </p>
       )}
     </section>

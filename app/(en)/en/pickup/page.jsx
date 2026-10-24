@@ -10,8 +10,7 @@ const language = 'en';
 const pageMetadata = {
   language,
   title: 'Choose a pickup time | Lieromaa',
-  description:
-    'Choose a two-hour pickup time for a Lieromaa order collected in Järvenpää.',
+  description: 'Book a pickup time for a Lieromaa order collected in Järvenpää.',
   canonicalUrl: getRoutePath('pickup', language),
   robots: {
     index: false,
@@ -54,11 +53,11 @@ export default function EnglishPickupPage() {
         <div className={classes.Intro}>
           <h1>Choose a pickup time</h1>
           <p>
-            I will place your order in a cool bag on my porch by the start of the two-hour
-            pickup time you choose. You can collect it yourself at any point during that
-            time.
+            Your order will wait in a cool bag on my porch in Järvenpää during the pickup
+            time you choose, and you collect it yourself. I will send detailed pickup
+            instructions and the address to your email right after booking.
           </p>
-          <p>The pickup link is intended only for the customer who placed the order.</p>
+          <p>The booking link is intended only for the customer who placed the order.</p>
         </div>
 
         <Suspense fallback={<PickupPageFallback />}>

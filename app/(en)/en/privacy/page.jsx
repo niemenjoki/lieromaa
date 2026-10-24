@@ -243,11 +243,12 @@ export default function EnglishPrivacyPage() {
           <h2>Pickup time booking</h2>
           <p>
             For local pickup orders in Järvenpää, I send a personal link for choosing a
-            pickup time. Processing covers the link identifier, the chosen pickup time and
-            events connected with the pickup, such as placing the order out for collection
-            and the collection itself. The booking page shows only the order number, first
-            name, ordered products and available pickup times. The data is kept as part of
-            the order data and deleted or anonymised together with it.
+            pickup time. Processing covers the link identifier, the pickup times offered
+            for the order, the chosen pickup time and events connected with the pickup,
+            such as placing the order out for collection and the collection itself. The
+            booking page shows only the order number, first name, ordered products and
+            available pickup times. The data is kept as part of the order data and deleted
+            or anonymised together with it.
           </p>
 
           <h2>Guide-page question and topic-suggestion form</h2>

@@ -116,7 +116,7 @@ describe('frontend pickup proxy routes', () => {
       createRouteRequest({
         method: 'POST',
         url: 'https://www.lieromaa.fi/api/pickup/book',
-        json: { token: 'p1.1.abc', slotId: 'x' },
+        json: { token: 'p1.1.abc', optionId: 'x' },
       })
     );
     expectEqual(invalid.status, 400, 'an invalid slot id should return HTTP 400');
@@ -130,7 +130,7 @@ describe('frontend pickup proxy routes', () => {
         );
         expectEqual(
           init.body,
-          JSON.stringify({ token: 'p1.1.abc', slotId: 7 }),
+          JSON.stringify({ token: 'p1.1.abc', optionId: 7 }),
           'only the token and slot id should be forwarded'
         );
 
@@ -145,7 +145,7 @@ describe('frontend pickup proxy routes', () => {
           createRouteRequest({
             method: 'POST',
             url: 'https://www.lieromaa.fi/api/pickup/book',
-            json: { token: 'p1.1.abc', slotId: 7, extra: 'ignored' },
+            json: { token: 'p1.1.abc', optionId: 7, extra: 'ignored' },
           })
         );
         const body = await response.json();

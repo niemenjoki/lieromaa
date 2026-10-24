@@ -111,9 +111,9 @@ export default function OrderPolicyPage() {
           kortin koko numeroa tai kortin turvakoodia.
         </p>
         <p>
-          Lähetän laskun sähköpostitse, kun tilaus on luovutettu Postille tai kun
-          noudettava tilaus on valmis noudettavaksi. Maksuaika on 14 vuorokautta. Laskun
-          voi maksaa normaalisti verkkopankissa tai mobiilipankissa.
+          Lähetän laskun sähköpostitse, kun tilaus on luovutettu Postille, tai noudettavan
+          tilauksen noutopäivänä. Maksuaika on 14 vuorokautta. Laskun voi maksaa
+          normaalisti verkkopankissa tai mobiilipankissa.
         </p>
         <p>
           Maksamattomasta laskusta voidaan lähettää maksumuistutus, ja edelleen maksamatta
@@ -156,18 +156,18 @@ export default function OrderPolicyPage() {
 
         <h2>Nouto Järvenpäästä</h2>
         <p>
-          Kun noudettava tilaus on valmis, lähetän asiakkaalle sähköpostitse linkin, josta
-          hän voi valita vapaan kahden tunnin noutoajan. Seuraavan päivän noutoajan voi
-          varata edellisenä päivänä klo 20 asti. Varauksen jälkeen asiakas saa
-          vahvistuksen ja nouto-ohjeen.
+          Noudettavan tilauksen vahvistuksessa kerron noutopäivän. Lähempänä noutopäivää
+          lähetän asiakkaalle sähköpostitse linkin tilaukselle sopiviin noutoaikoihin, ja
+          asiakas varaa niistä yhden viimeistään noutoa edeltävänä päivänä klo 20.
+          Varauksen jälkeen asiakas saa sähköpostiin tarkat nouto-ohjeet ja osoitteen.
         </p>
         <p>
-          Tilaus odottaa noutoajan alusta kuistillani kylmälaukussa, ja asiakas noutaa sen
-          itse noutoajan aikana. Noutoajan muutoksista ja peruutuksista sovitaan
-          vastaamalla vahvistusviestiin tai tekstiviestillä. Jos tilausta ei noudeta
-          noutoajan aikana, otan sen takaisin sisälle ja lähetän linkin uuden ajan
-          valintaan. Voin myös sopia noudosta asiakkaan kanssa erikseen, esimerkiksi
-          poikkeuksellisen sään vuoksi.
+          Kun tilaus on pakattu ja odottaa kuistillani kylmälaukussa, ilmoitan siitä
+          asiakkaalle, ja asiakas noutaa tilauksen itse varaamansa noutoajan aikana. Jos
+          nouto peruuntuu, asiakas ilmoittaa siitä sähköpostilla, WhatsApp-viestillä tai
+          tekstiviestillä. Jos tilausta ei noudeta noutoajan aikana, otan sen takaisin
+          sisälle ja sovimme uuden ajan. Voin myös sopia noudosta asiakkaan kanssa
+          erikseen, esimerkiksi poikkeuksellisen sään vuoksi.
         </p>
 
         <h2>Peruuttamisoikeus ja peruuttamisohje</h2>

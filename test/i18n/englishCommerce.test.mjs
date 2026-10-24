@@ -110,10 +110,7 @@ describe('English commerce and customer-service pages', () => {
     );
     assert.match(transactions, /Pay now with MobilePay or a card/);
     assert.match(transactions, /invoicePaymentLabel: ['"]Pay by email invoice['"]/);
-    assert.match(
-      transactions,
-      /I send the invoice by email when your order is ready for pickup/
-    );
+    assert.match(transactions, /I send the invoice by email on the pickup day/);
     assert.match(
       transactions,
       /I send the invoice by email after handing your order to Posti/

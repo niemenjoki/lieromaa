@@ -96,7 +96,7 @@ describe('English content pages', () => {
     );
     assert.match(terms, /MobilePay and payment\s+cards are supported/);
     assert.match(terms, /choose an email invoice\. No payment method/);
-    assert.match(terms, /The payment term is 14 days/);
+    assert.match(terms, /The\s+payment\s+term\s+is\s+14\s+days/);
     assert.match(terms, /Delivery within Finland only/);
     assert.match(privacy, /Invoicing, payments and accounting/);
     assert.match(privacy, /Temporary draft for an order proceeding to Stripe/);

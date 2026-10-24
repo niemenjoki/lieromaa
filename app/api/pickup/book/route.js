@@ -25,8 +25,8 @@ export async function POST(request) {
 
   const body = await request.json().catch(() => null);
   const token = String(body?.token || '').trim();
-  const slotId = Number(body?.slotId);
-  if (!token || !Number.isInteger(slotId) || slotId <= 0) {
+  const optionId = Number(body?.optionId ?? body?.slotId);
+  if (!token || !Number.isInteger(optionId) || optionId <= 0) {
     return Response.json(
       createPublicErrorBody(PUBLIC_MESSAGE_CODES.INVALID_REQUEST, language),
       { status: 400 }
@@ -53,7 +53,7 @@ export async function POST(request) {
     const upstreamResponse = await fetch(endpoint, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ token, slotId }),
+      body: JSON.stringify({ token, optionId }),
       signal: getPickupServiceTimeout(),
       cache: 'no-store',
     });

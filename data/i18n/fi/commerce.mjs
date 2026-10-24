@@ -24,7 +24,7 @@ export const commerceMessages = Object.freeze({
     localPickup: Object.freeze({
       label: 'Nouto Järvenpäästä',
       helperTexts: Object.freeze([
-        'Kun tilauksesi on valmis noudettavaksi, lähetän sinulle linkin, josta voit valita sinulle sopivan noutoajan. Nouto tapahtuu omatoimisesti kuistiltani Järvenpäässä.',
+        'Kun vahvistan tilauksen, kerron noutopäivän. Lähempänä noutopäivää lähetän linkin, josta voit varata sinulle sopivan noutoajan. Nouto tapahtuu omatoimisesti kuistiltani Järvenpäässä.',
       ]),
     }),
   }),
@@ -70,7 +70,7 @@ export const commerceMessages = Object.freeze({
     }),
     invoiceTiming: Object.freeze({
       postal: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
-      localPickup: 'Lasku lähetetään, kun tilaus on valmis noudettavaksi',
+      localPickup: 'Lasku lähetetään noutopäivänä',
     }),
   }),
   extraCharges: Object.freeze({
