@@ -24,7 +24,7 @@ export const commerceMessages = Object.freeze({
     localPickup: Object.freeze({
       label: 'Local pickup in Järvenpää',
       helperTexts: Object.freeze([
-        'If you select local pickup, I will contact you to arrange the details.',
+        'When your order is ready for pickup, I will send you a link where you can choose a two-hour pickup time. You collect the order yourself from my porch in Järvenpää.',
       ]),
     }),
   }),
@@ -65,9 +65,9 @@ export const commerceMessages = Object.freeze({
     }),
     invoiceTiming: Object.freeze({
       postal:
-        'Lieromaa will send the invoice directly by email after the order has been handed to Posti. The payment term is 14 days.',
+        'I will send the invoice by email after the order has been handed to Posti. The payment term is 14 days.',
       localPickup:
-        'Lieromaa will send the invoice directly by email after you have collected the order. The payment term is 14 days.',
+        'I will send the invoice by email when your order is ready for pickup. The payment term is 14 days.',
     }),
   }),
   extraCharges: Object.freeze({

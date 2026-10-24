@@ -95,7 +95,7 @@ describe('English content pages', () => {
       /At checkout you can either pay on Stripe’s secure hosted payment page or/
     );
     assert.match(terms, /MobilePay and payment\s+cards are supported/);
-    assert.match(terms, /choose an email invoice after dispatch or collection/);
+    assert.match(terms, /choose an email invoice\. No payment method/);
     assert.match(terms, /The payment term is 14 days/);
     assert.match(terms, /Delivery within Finland only/);
     assert.match(privacy, /Invoicing, payments and accounting/);

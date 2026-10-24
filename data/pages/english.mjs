@@ -93,6 +93,13 @@ export const englishPageDefinitions = Object.freeze(
         'Leave a star rating, written review and private feedback for a verified Lieromaa order.',
       robots: { index: false, follow: false },
     },
+    {
+      canonicalUrl: '/en/pickup',
+      title: 'Choose a pickup time | Lieromaa',
+      description:
+        'Choose a two-hour pickup time for a Lieromaa order collected in Järvenpää.',
+      robots: { index: false, follow: false },
+    },
   ].map((page) => Object.freeze({ updatedAt: ENGLISH_PROJECT_PUBLISHED_AT, ...page }))
 );
 

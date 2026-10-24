@@ -101,7 +101,7 @@ export default function OrderPolicyPage() {
         <h2>Maksutavat</h2>
         <p>
           Kassalla voi valita joko verkkomaksun Stripen suojatulla maksusivulla tai
-          sähköpostilaskun toimituksen tai noudon jälkeen.
+          sähköpostilaskun.
         </p>
         <p>
           Stripe-maksu veloitetaan tilausta tehtäessä. Maksutapoina ovat MobilePay ja
@@ -111,9 +111,9 @@ export default function OrderPolicyPage() {
           kortin koko numeroa tai kortin turvakoodia.
         </p>
         <p>
-          Lieromaa lähettää laskun sähköpostitse, kun tilaus on luovutettu Postille tai
-          noudettu. Maksuaika on 14 vuorokautta. Laskun voi maksaa normaalisti
-          verkkopankissa tai mobiilipankissa.
+          Lähetän laskun sähköpostitse, kun tilaus on luovutettu Postille tai kun
+          noudettava tilaus on valmis noudettavaksi. Maksuaika on 14 vuorokautta. Laskun
+          voi maksaa normaalisti verkkopankissa tai mobiilipankissa.
         </p>
         <p>
           Maksamattomasta laskusta voidaan lähettää maksumuistutus, ja edelleen maksamatta
@@ -152,6 +152,22 @@ export default function OrderPolicyPage() {
           noutopaikka asetetaan manuaalisesti tilauksen käsittelyn yhteydessä. Noutopaikan
           voi jättää myös valitsematta, jolloin lähetys ohjataan ilmoitetun postinumeron
           perusteella.
+        </p>
+
+        <h2>Nouto Järvenpäästä</h2>
+        <p>
+          Kun noudettava tilaus on valmis, lähetän asiakkaalle sähköpostitse linkin, josta
+          hän voi valita vapaan kahden tunnin noutoajan. Seuraavan päivän noutoajan voi
+          varata edellisenä päivänä klo 20 asti. Varauksen jälkeen asiakas saa
+          vahvistuksen ja nouto-ohjeen.
+        </p>
+        <p>
+          Tilaus odottaa noutoajan alusta kuistillani kylmälaukussa, ja asiakas noutaa sen
+          itse noutoajan aikana. Noutoajan muutoksista ja peruutuksista sovitaan
+          vastaamalla vahvistusviestiin tai tekstiviestillä. Jos tilausta ei noudeta
+          noutoajan aikana, otan sen takaisin sisälle ja lähetän linkin uuden ajan
+          valintaan. Voin myös sopia noudosta asiakkaan kanssa erikseen, esimerkiksi
+          poikkeuksellisen sään vuoksi.
         </p>
 
         <h2>Peruuttamisoikeus ja peruuttamisohje</h2>

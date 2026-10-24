@@ -209,6 +209,37 @@ export const transactionMessages = Object.freeze({
     mismatchEn:
       'Tämä arvostelulinkki kuuluu englanniksi käsiteltyyn tilaukseen. Voit silti lähettää arvostelun tällä sivulla.',
   }),
+  pickup: Object.freeze({
+    checking: 'Tarkistetaan noutoaikalinkkiä...',
+    missingLinkAddress: 'Noutoaikalinkki puuttuu osoitteesta.',
+    linkCheckFailed: 'Noutoaikalinkin tarkistus epäonnistui.',
+    genericError: 'Noutoajan varaus epäonnistui. Yritä hetken kuluttua uudelleen.',
+    contactHelp: ({ email }) =>
+      `Voit myös vastata saamaasi sähköpostiin tai kirjoittaa osoitteeseen ${email}, niin sovitaan nouto.`,
+    greeting: ({ firstName }) => (firstName ? `Hei ${firstName}!` : 'Hei!'),
+    orderLabel: ({ orderId }) => `Tilaus ${orderId}`,
+    packages: ({ count }) => `${count} kpl`,
+    slotsLegend: 'Vapaat noutoajat',
+    slotLabel: ({ start, end }) => `klo ${start}–${end}`,
+    deadlineHelp: ({ hour }) =>
+      `Seuraavan päivän noutoajan voi varata edellisenä päivänä klo ${hour} asti. Varauksen jälkeen saat vahvistuksen ja nouto-ohjeen sähköpostiisi.`,
+    noSlots:
+      'Vapaita noutoaikoja ei ole juuri nyt. Vastaa saamaasi sähköpostiin, niin sovitaan aika yhdessä.',
+    selectRequired: 'Valitse noutoaika ennen varausta.',
+    submit: 'Varaa noutoaika',
+    submitting: 'Varataan noutoaikaa...',
+    bookedHeading: 'Noutoaikasi on varattu',
+    bookedTime: ({ weekday, date, start, end }) =>
+      `${weekday} ${date} klo ${start}–${end}`,
+    bookedEmailNote: 'Lähetin vahvistuksen ja kalenterimerkinnän sähköpostiisi.',
+    addressHeading: 'Noutopaikka',
+    photoAlt: 'Kuva kuistista, jolla tilaus odottaa noutoajan aikana',
+    changeHelp: ({ phone }) =>
+      `Jos haluat vaihtaa ajan tai perua sen, vastaa vahvistusviestiin tai lähetä tekstiviesti numeroon ${phone}.`,
+    collected: 'Tilauksesi on jo noudettu. Kiitos!',
+    manual:
+      'Sovin noudosta kanssasi erikseen. Jos sinulla on kysyttävää, vastaa saamaasi sähköpostiin.',
+  }),
   orderValidation: Object.freeze({
     validation: 'Tarkista lomakkeen tiedot ja yritä uudelleen.',
     required_field: 'Täytä kaikki pakolliset kentät ennen lähetystä.',

@@ -210,6 +210,36 @@ export const transactionMessages = Object.freeze({
     mismatchEn:
       'This review link was created for an order handled in Finnish. You can still submit the review on this page.',
   }),
+  pickup: Object.freeze({
+    checking: 'Checking the pickup link...',
+    missingLinkAddress: 'The pickup link is missing from the address.',
+    linkCheckFailed: 'The pickup link could not be checked.',
+    genericError: 'The pickup time could not be booked. Please try again in a moment.',
+    contactHelp: ({ email }) =>
+      `You can also reply to the email you received or write to ${email}, and we will arrange the pickup.`,
+    greeting: ({ firstName }) => (firstName ? `Hello ${firstName}!` : 'Hello!'),
+    orderLabel: ({ orderId }) => `Order ${orderId}`,
+    packages: ({ count }) => `${count} pcs`,
+    slotsLegend: 'Available pickup times',
+    slotLabel: ({ start, end }) => `${start}–${end}`,
+    deadlineHelp: ({ hour }) =>
+      `A pickup time for the next day can be booked until ${hour}:00 on the previous day. After booking, you will receive a confirmation and pickup instructions by email.`,
+    noSlots:
+      'There are no available pickup times right now. Please reply to the email you received and we will arrange a time together.',
+    selectRequired: 'Choose a pickup time before booking.',
+    submit: 'Book pickup time',
+    submitting: 'Booking the pickup time...',
+    bookedHeading: 'Your pickup time is booked',
+    bookedTime: ({ weekday, date, start, end }) => `${weekday} ${date}, ${start}–${end}`,
+    bookedEmailNote: 'I have sent a confirmation and a calendar entry to your email.',
+    addressHeading: 'Pickup location',
+    photoAlt: 'Photo of the porch where the order waits during the pickup time',
+    changeHelp: ({ phone }) =>
+      `If you would like to change or cancel the time, reply to the confirmation email or send a text message to ${phone}.`,
+    collected: 'Your order has already been collected. Thank you!',
+    manual:
+      'I will arrange the pickup with you separately. If you have any questions, reply to the email you received.',
+  }),
   orderValidation: Object.freeze({
     validation: 'Check the form details and try again.',
     required_field: 'Complete all required fields before placing the order.',

@@ -233,6 +233,16 @@ export default function PrivacyPage() {
           asiakasarvosteluna.
         </p>
 
+        <h2>Noutoajan varaus</h2>
+        <p>
+          Järvenpäästä noudettavissa tilauksissa lähetän henkilökohtaisen linkin, jolla
+          asiakas valitsee noutoajan. Varauksen yhteydessä käsitellään linkin tunniste,
+          valittu noutoaika sekä noutoon liittyvät tapahtumat, kuten tilauksen laittaminen
+          noudettavaksi ja nouto. Varaussivulla näytetään vain tilausnumero, etunimi,
+          tilatut tuotteet ja vapaat noutoajat. Tiedot säilytetään tilaustietojen osana ja
+          poistetaan tai anonymisoidaan niiden kanssa.
+        </p>
+
         <h2>Oppaiden kysymys- ja aihe-ehdotuslomake</h2>
         <p>
           Oppaiden yhteydessä olevien kysymys- ja aihe-ehdotuslomakkeiden viestit

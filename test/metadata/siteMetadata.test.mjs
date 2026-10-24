@@ -56,6 +56,12 @@ const reviewPage = {
   robots: { index: false, follow: false },
 };
 
+const pickupPage = {
+  canonicalUrl: '/nouto',
+  title: 'Valitse noutoaika | Lieromaa',
+  robots: { index: false, follow: false },
+};
+
 const dataDownloadPage = {
   title: 'Lataa tietosi | Lieromaa',
   robots: { index: false, follow: false, nocache: true },
@@ -115,6 +121,7 @@ function collectMetadataScenarios() {
     wormSourcePage,
     checkoutPage,
     reviewPage,
+    pickupPage,
     dataDownloadPage,
     searchPage,
   ].forEach((page) => {
