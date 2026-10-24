@@ -77,7 +77,7 @@ export const transactionMessages = Object.freeze({
       'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi.',
     invoiceTimingLocal: 'Lasku lähetetään noutopäivänä.',
     localPickupNote:
-      'Kun vahvistan tilauksen, kerron noutopäivän. Lähempänä noutopäivää lähetän linkin, josta voit varata sinulle sopivan noutoajan. Tilaus odottaa valitsemasi ajan kuistillani Järvenpäässä, ja noudat sen itse.',
+      'Kun vahvistan tilauksen, kerron noutopäivän. Lähempänä noutopäivää lähetän linkin, josta voit varata sinulle sopivan noutoajan. Tilaus odottaa valitsemasi ajan etuovellani Järvenpäässä, ja noudat sen itse.',
     fields: Object.freeze({
       name: 'Nimi',
       email: 'Sähköposti',
@@ -238,10 +238,10 @@ export const transactionMessages = Object.freeze({
     bookedEmailNote:
       'Lähetin tarkat nouto-ohjeet, osoitteen ja kalenterimerkinnän sähköpostiisi.',
     readyNote:
-      'Tilauksesi odottaa kuistillani. Nouto-ohjeet ja osoite ovat sähköpostissasi.',
+      'Tilauksesi odottaa etuovellani. Nouto-ohjeet ja osoite ovat sähköpostissasi.',
     cancelHelp: ({ phone, whatsappUrl }) =>
       `Jos nouto peruuntuu, ilmoitathan siitä vastaamalla sähköpostiin, WhatsApp-viestillä (${whatsappUrl}) tai tekstiviestillä numeroon ${phone}.`,
-    photoAlt: 'Kuva kuistista, jolla tilaus odottaa noutoajan aikana',
+    photoAlt: 'Valokuva etuovelta, jossa tilauksesi odottaa noutoajan aikana',
     collected: 'Tilauksesi on jo noudettu. Kiitos!',
     manual:
       'Sovin noudosta kanssasi erikseen. Jos sinulla on kysyttävää, vastaa saamaasi sähköpostiin.',

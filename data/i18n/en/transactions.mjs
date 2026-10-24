@@ -77,7 +77,7 @@ export const transactionMessages = Object.freeze({
     invoiceTimingPostal: 'I send the invoice by email after handing your order to Posti.',
     invoiceTimingLocal: 'I send the invoice by email on the pickup day.',
     localPickupNote:
-      'When I confirm your order, I will tell you the pickup date. Closer to the date, I will send a link where you can book a pickup time that suits you. Your order will wait on my porch in Järvenpää during that time, and you collect it yourself.',
+      'When I confirm your order, I will tell you the pickup date. Closer to the date, I will send a link where you can book a pickup time that suits you. Your order will wait at my front door in Järvenpää during that time, and you collect it yourself.',
     fields: Object.freeze({
       name: 'Name',
       email: 'Email address',
@@ -238,10 +238,10 @@ export const transactionMessages = Object.freeze({
     bookedEmailNote:
       'I have sent detailed pickup instructions, the address and a calendar entry to your email.',
     readyNote:
-      'Your order is waiting on my porch. The pickup instructions and address are in your email.',
+      'Your order is waiting at my front door. The pickup instructions and address are in your email.',
     cancelHelp: ({ phone, whatsappUrl }) =>
       `If you cannot make the pickup time, please let me know by replying to the email, by WhatsApp (${whatsappUrl}) or by text message to ${phone}.`,
-    photoAlt: 'Photo of the porch where the order waits during the pickup time',
+    photoAlt: 'Photo of the front door where your order waits during the pickup time',
     collected: 'Your order has already been collected. Thank you!',
     manual:
       'I will arrange the pickup with you separately. If you have any questions, reply to the email you received.',

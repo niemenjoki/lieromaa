@@ -11,7 +11,7 @@ export const runtime = 'nodejs';
 
 const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
-// Kuistin kuva näytetään vain voimassa olevan varauksen tehneelle (tilausjärjestelmä tarkistaa tokenin).
+// Noutopaikan valokuva näytetään vain voimassa olevan varauksen tehneelle (tilausjärjestelmä tarkistaa tokenin).
 export async function GET(request) {
   const language = getPublicRequestLanguage(request);
   if (!isSameOriginRequest(request)) {

@@ -53,9 +53,9 @@ export default function EnglishPickupPage() {
         <div className={classes.Intro}>
           <h1>Choose a pickup time</h1>
           <p>
-            Your order will wait in a cool bag on my porch in Järvenpää during the pickup
-            time you choose, and you collect it yourself. I will send detailed pickup
-            instructions and the address to your email right after booking.
+            Your order will wait in a cool bag at my front door in Järvenpää during the
+            pickup time you choose, and you collect it yourself. I will send detailed
+            pickup instructions and the address to your email right after booking.
           </p>
           <p>The booking link is intended only for the customer who placed the order.</p>
         </div>

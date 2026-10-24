@@ -162,7 +162,7 @@ export default function OrderPolicyPage() {
           Varauksen jälkeen asiakas saa sähköpostiin tarkat nouto-ohjeet ja osoitteen.
         </p>
         <p>
-          Kun tilaus on pakattu ja odottaa kuistillani kylmälaukussa, ilmoitan siitä
+          Kun tilaus on pakattu ja odottaa etuovellani kylmälaukussa, ilmoitan siitä
           asiakkaalle, ja asiakas noutaa tilauksen itse varaamansa noutoajan aikana. Jos
           nouto peruuntuu, asiakas ilmoittaa siitä sähköpostilla, WhatsApp-viestillä tai
           tekstiviestillä. Jos tilausta ei noudeta noutoajan aikana, otan sen takaisin
