@@ -310,7 +310,9 @@ export default function PickupPageClient({ language = 'fi' }) {
           </button>
         </form>
       ) : (
-        <p>{copy.noSlots}</p>
+        <p className={classes.Error}>
+          {copy.noSlots({ phone: session.ownerPhone, email: PICKUP_SUPPORT_EMAIL })}
+        </p>
       )}
     </section>
   );

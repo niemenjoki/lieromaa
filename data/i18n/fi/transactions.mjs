@@ -72,10 +72,12 @@ export const transactionMessages = Object.freeze({
     stripePaymentLabel: 'Maksa nyt MobilePaylla tai kortilla',
     stripePaymentDetail:
       'Maksu tapahtuu Stripen suojatulla maksusivulla. Apple Pay tai Google Pay voi näkyä tuetulla laitteella.',
-    invoicePaymentLabel: 'Maksa sähköpostilaskulla toimituksen tai noudon jälkeen',
+    invoicePaymentLabel: 'Maksa sähköpostilaskulla',
     invoiceTimingPostal:
       'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi.',
-    invoiceTimingLocal: 'Lasku lähetetään, kun olet noutanut tilauksen.',
+    invoiceTimingLocal: 'Lasku lähetetään, kun tilaus on valmis noudettavaksi.',
+    localPickupNote:
+      'Kun tilauksesi on valmis noudettavaksi, lähetän sinulle linkin, josta voit valita sinulle sopivan noutoajan. Tilaus odottaa valitsemasi ajan kuistillani Järvenpäässä, ja noudat sen itse.',
     fields: Object.freeze({
       name: 'Nimi',
       email: 'Sähköposti',
@@ -223,8 +225,8 @@ export const transactionMessages = Object.freeze({
     slotLabel: ({ start, end }) => `klo ${start}–${end}`,
     deadlineHelp: ({ hour }) =>
       `Seuraavan päivän noutoajan voi varata edellisenä päivänä klo ${hour} asti. Varauksen jälkeen saat vahvistuksen ja nouto-ohjeen sähköpostiisi.`,
-    noSlots:
-      'Vapaita noutoaikoja ei ole juuri nyt. Vastaa saamaasi sähköpostiin, niin sovitaan aika yhdessä.',
+    noSlots: ({ phone, email }) =>
+      `Vapaita noutoaikoja ei ole juuri nyt. Lähetä tekstiviesti numeroon ${phone} tai kirjoita osoitteeseen ${email}, niin sovitaan noutoaika yhdessä.`,
     selectRequired: 'Valitse noutoaika ennen varausta.',
     submit: 'Varaa noutoaika',
     submitting: 'Varataan noutoaikaa...',

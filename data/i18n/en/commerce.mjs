@@ -24,7 +24,7 @@ export const commerceMessages = Object.freeze({
     localPickup: Object.freeze({
       label: 'Local pickup in Järvenpää',
       helperTexts: Object.freeze([
-        'When your order is ready for pickup, I will send you a link where you can choose a two-hour pickup time. You collect the order yourself from my porch in Järvenpää.',
+        'When your order is ready for pickup, I will send you a link where you can choose a pickup time that suits you. You collect the order yourself from my porch in Järvenpää.',
       ]),
     }),
   }),

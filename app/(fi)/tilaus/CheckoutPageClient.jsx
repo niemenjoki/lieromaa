@@ -1377,6 +1377,11 @@ export default function CheckoutPageClient({ language }) {
               </label>
             ))}
           </div>
+          {fulfillmentType === 'local_pickup' ? (
+            <div className={classes.InfoBox}>
+              <p>{copy.localPickupNote}</p>
+            </div>
+          ) : null}
 
           {addressVisible ? (
             <div className={classes.AddressGrid}>

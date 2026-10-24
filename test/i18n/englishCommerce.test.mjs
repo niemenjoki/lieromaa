@@ -109,7 +109,11 @@ describe('English commerce and customer-service pages', () => {
       /I deliver to addresses and Posti pickup points in Finland\. I do not ship abroad\. Local pickup is available in Järvenpää\./
     );
     assert.match(transactions, /Pay now with MobilePay or a card/);
-    assert.match(transactions, /Pay by email invoice after dispatch or collection/);
+    assert.match(transactions, /invoicePaymentLabel: ['"]Pay by email invoice['"]/);
+    assert.match(
+      transactions,
+      /I send the invoice by email when your order is ready for pickup/
+    );
     assert.match(
       transactions,
       /I send the invoice by email after handing your order to Posti/

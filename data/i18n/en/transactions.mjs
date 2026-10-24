@@ -73,9 +73,12 @@ export const transactionMessages = Object.freeze({
     stripePaymentLabel: 'Pay now with MobilePay or a card',
     stripePaymentDetail:
       'Payment takes place on Stripe’s secure hosted page. Apple Pay or Google Pay may appear on a supported device.',
-    invoicePaymentLabel: 'Pay by email invoice after dispatch or collection',
+    invoicePaymentLabel: 'Pay by email invoice',
     invoiceTimingPostal: 'I send the invoice by email after handing your order to Posti.',
-    invoiceTimingLocal: 'I send the invoice by email after you collect your order.',
+    invoiceTimingLocal:
+      'I send the invoice by email when your order is ready for pickup.',
+    localPickupNote:
+      'When your order is ready for pickup, I will send you a link where you can choose a pickup time that suits you. Your order will wait on my porch in Järvenpää during that time, and you collect it yourself.',
     fields: Object.freeze({
       name: 'Name',
       email: 'Email address',
@@ -224,8 +227,8 @@ export const transactionMessages = Object.freeze({
     slotLabel: ({ start, end }) => `${start}–${end}`,
     deadlineHelp: ({ hour }) =>
       `A pickup time for the next day can be booked until ${hour}:00 on the previous day. After booking, you will receive a confirmation and pickup instructions by email.`,
-    noSlots:
-      'There are no available pickup times right now. Please reply to the email you received and we will arrange a time together.',
+    noSlots: ({ phone, email }) =>
+      `There are no available pickup times right now. Send a text message to ${phone} or write to ${email}, and we will arrange a pickup time together.`,
     selectRequired: 'Choose a pickup time before booking.',
     submit: 'Book pickup time',
     submitting: 'Booking the pickup time...',
