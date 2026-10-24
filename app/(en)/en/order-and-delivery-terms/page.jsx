@@ -188,9 +188,9 @@ export default function EnglishOrderTermsPage() {
             you will receive detailed pickup instructions and the address by email.
           </p>
           <p>
-            When the order has been packed and is waiting in a cool bag at my front door,
-            I will let you know, and you collect the order yourself during the time you
-            booked. If you cannot make the pickup time, please let me know by email,
+            When the order has been packed and is waiting in a foam cooler at my front
+            door, I will let you know, and you collect the order yourself during the time
+            you booked. If you cannot make the pickup time, please let me know by email,
             WhatsApp or text message. If the order is not collected during the pickup
             time, I will take it back indoors and we will agree on a new time. I may also
             arrange the pickup with you separately, for example because of exceptional
