@@ -261,9 +261,17 @@ export default function PickupPageClient({ language = 'fi' }) {
     );
   }
 
+  const contents = session.contents || {};
+  const waitingText = contents.composter
+    ? contents.cooler
+      ? copy.waitingComposterAndCooler
+      : copy.waitingComposter
+    : copy.waitingCooler;
+
   return (
     <section className={classes.Card}>
       {header}
+      <p className={classes.HelpText}>{waitingText}</p>
       {optionGroups.length ? (
         <form className={classes.Form} onSubmit={handleSubmit} noValidate>
           <fieldset className={classes.Fieldset}>

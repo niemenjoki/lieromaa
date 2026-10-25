@@ -224,6 +224,12 @@ export const transactionMessages = Object.freeze({
     pickupDay: ({ date }) => `Pickup date ${date}`,
     packages: ({ count }) => `${count} pcs`,
     optionsLegend: 'Choose a pickup time',
+    waitingCooler:
+      'Your order will wait in a foam cooler at my front door during the time you choose.',
+    waitingComposter:
+      'Your composter will wait where the foam cooler usually is, at my front door, during the time you choose.',
+    waitingComposterAndCooler:
+      'Your composter will wait next to the foam cooler at my front door during the time you choose, and the other products you ordered will be in the foam cooler.',
     optionLabel: ({ start, end }) => `${start}–${end}`,
     deadlineHelp: ({ hour }) =>
       `Please book by ${hour}:00 on the day before the pickup. I will send detailed pickup instructions and the address to your email right after booking.`,

@@ -223,6 +223,11 @@ export const transactionMessages = Object.freeze({
     pickupDay: ({ date }) => `Noutopäivä ${date}`,
     packages: ({ count }) => `${count} kpl`,
     optionsLegend: 'Valitse noutoaika',
+    waitingCooler: 'Tilauksesi odottaa valitsemasi ajan kylmälaukussa etuovellani.',
+    waitingComposter:
+      'Kompostorisi odottaa valitsemasi ajan kylmälaukun paikalla etuovellani.',
+    waitingComposterAndCooler:
+      'Kompostorisi odottaa valitsemasi ajan kylmälaukun vieressä etuovellani, ja muut tilaamasi tuotteet ovat kylmälaukussa.',
     optionLabel: ({ start, end }) => `klo ${start}–${end}`,
     deadlineHelp: ({ hour }) =>
       `Varaa aika viimeistään noutoa edeltävänä päivänä klo ${hour}. Lähetän tarkat nouto-ohjeet ja osoitteen sähköpostiisi heti varauksen jälkeen.`,

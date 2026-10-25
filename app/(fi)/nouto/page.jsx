@@ -34,9 +34,9 @@ export default function PickupPage() {
       <div className={classes.Intro}>
         <h1>Valitse noutoaika</h1>
         <p>
-          Tilauksesi odottaa valitsemasi noutoajan kylmälaukussa etuovellani Järvenpäässä,
-          ja noudat sen itse. Lähetän tarkat nouto-ohjeet ja osoitteen sähköpostiisi heti
-          varauksen jälkeen.
+          Tilauksesi odottaa valitsemasi noutoajan etuovellani Järvenpäässä, ja noudat sen
+          itse. Lähetän tarkat nouto-ohjeet ja osoitteen sähköpostiisi heti varauksen
+          jälkeen.
         </p>
         <p>Varauslinkki on tarkoitettu vain tilauksen tehneelle asiakkaalle.</p>
       </div>
