@@ -246,7 +246,6 @@ export const transactionMessages = Object.freeze({
       'Tilauksesi odottaa etuovellani. Nouto-ohjeet ja osoite ovat sähköpostissasi.',
     cancelHelp: ({ phone, whatsappUrl }) =>
       `Jos nouto peruuntuu, ilmoitathan siitä vastaamalla sähköpostiin, WhatsApp-viestillä (${whatsappUrl}) tai tekstiviestillä numeroon ${phone}.`,
-    photoAlt: 'Valokuva etuovelta, jossa tilauksesi odottaa noutoajan aikana',
     collected: 'Tilauksesi on jo noudettu. Kiitos!',
     manual:
       'Sovin noudosta kanssasi erikseen. Jos sinulla on kysyttävää, vastaa saamaasi sähköpostiin.',

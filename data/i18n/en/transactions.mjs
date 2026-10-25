@@ -247,7 +247,6 @@ export const transactionMessages = Object.freeze({
       'Your order is waiting at my front door. The pickup instructions and address are in your email.',
     cancelHelp: ({ phone, whatsappUrl }) =>
       `If you cannot make the pickup time, please let me know by replying to the email, by WhatsApp (${whatsappUrl}) or by text message to ${phone}.`,
-    photoAlt: 'Photo of the front door where your order waits during the pickup time',
     collected: 'Your order has already been collected. Thank you!',
     manual:
       'I will arrange the pickup with you separately. If you have any questions, reply to the email you received.',

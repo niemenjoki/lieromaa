@@ -6,7 +6,6 @@ import { useSearchParams } from 'next/navigation';
 
 import {
   PICKUP_BOOK_ENDPOINT,
-  PICKUP_PHOTO_ENDPOINT,
   PICKUP_SESSION_ENDPOINT,
   PICKUP_SUPPORT_EMAIL,
 } from '@/lib/copy/pickupMessages';
@@ -84,7 +83,6 @@ function PickupBooking({ token, language }) {
   const [selectedOptionId, setSelectedOptionId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [photoFailed, setPhotoFailed] = useState(false);
 
   useEffect(() => {
     if (!token) {
@@ -218,7 +216,6 @@ function PickupBooking({ token, language }) {
 
   if ((session.status === 'booked' || session.status === 'ready') && session.booking) {
     const { weekday, day } = formatDay(session.booking.date, language);
-    const photoUrl = `${PICKUP_PHOTO_ENDPOINT}?token=${encodeURIComponent(token)}`;
     return (
       <section className={classes.Card} aria-live="polite">
         {header}
@@ -233,16 +230,6 @@ function PickupBooking({ token, language }) {
             })}
           </p>
           <p>{session.status === 'ready' ? copy.readyNote : copy.bookedEmailNote}</p>
-          {session.photo && !photoFailed ? (
-            // Kuva tulee tokenilla suojatusta reitistä, joten next/image-optimointia ei käytetä.
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              className={classes.Photo}
-              src={photoUrl}
-              alt={copy.photoAlt}
-              onError={() => setPhotoFailed(true)}
-            />
-          ) : null}
           <p className={classes.HelpText}>{cancelHelp}</p>
         </div>
       </section>

@@ -182,15 +182,6 @@
   margin: 0;
 }
 
-.Photo {
-  display: block;
-  width: 100%;
-  max-width: 560px;
-  height: auto;
-  border-radius: 6px;
-  border: 1px solid var(--background-6);
-}
-
 .SubmitButton {
   width: fit-content;
   margin-top: 0.5rem;

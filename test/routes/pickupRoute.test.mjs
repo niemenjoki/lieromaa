@@ -1,7 +1,6 @@
 import { describe, test } from 'node:test';
 
 import { POST as bookPickup } from '@/app/api/pickup/book/route.js';
-import { GET as getPickupPhoto } from '@/app/api/pickup/photo/route.js';
 import { GET as getPickupSession } from '@/app/api/pickup/session/route.js';
 
 import { expectEqual } from '../helpers/assertions.mjs';
@@ -152,51 +151,6 @@ describe('frontend pickup proxy routes', () => {
 
         expectEqual(response.status, 200, 'a successful booking should return HTTP 200');
         expectEqual(body.status, 'booked', 'the booked session should be passed through');
-      }
-    );
-  });
-
-  test('the pickup photo route only passes image responses through', async () => {
-    await withEnvAndFetch(
-      async () =>
-        new Response('<html></html>', {
-          status: 200,
-          headers: { 'content-type': 'text/html' },
-        }),
-      async () => {
-        const response = await getPickupPhoto(
-          createRouteRequest({
-            url: 'https://www.lieromaa.fi/api/pickup/photo?token=p1.1.abc',
-          })
-        );
-
-        expectEqual(
-          response.status,
-          502,
-          'a non-image upstream response should not be passed on'
-        );
-      }
-    );
-
-    await withEnvAndFetch(
-      async () =>
-        new Response(new Uint8Array([0xff, 0xd8, 0xff]), {
-          status: 200,
-          headers: { 'content-type': 'image/jpeg' },
-        }),
-      async () => {
-        const response = await getPickupPhoto(
-          createRouteRequest({
-            url: 'https://www.lieromaa.fi/api/pickup/photo?token=p1.1.abc',
-          })
-        );
-
-        expectEqual(response.status, 200, 'a JPEG photo should be passed through');
-        expectEqual(
-          response.headers.get('cache-control'),
-          'private, no-store',
-          'the photo should not be cached by shared caches'
-        );
       }
     );
   });
