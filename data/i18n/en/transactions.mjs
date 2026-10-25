@@ -77,7 +77,7 @@ export const transactionMessages = Object.freeze({
     invoiceTimingPostal: 'I send the invoice by email after handing your order to Posti.',
     invoiceTimingLocal: 'I send the invoice by email on the pickup day.',
     localPickupNote:
-      'When I confirm your order, I will tell you the pickup date. Closer to the date, I will send a link where you can book a pickup time that suits you. Your order will wait at my front door in Järvenpää during that time, and you collect it yourself.',
+      'Your order confirmation will tell you the earliest possible pickup date. Closer to the pickup date, I will send a link where you can book a pickup time that suits you. You collect the order at the time you choose from my home in Järvenpää.',
     fields: Object.freeze({
       name: 'Name',
       email: 'Email address',

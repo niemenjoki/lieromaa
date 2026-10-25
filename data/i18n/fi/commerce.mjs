@@ -24,7 +24,7 @@ export const commerceMessages = Object.freeze({
     localPickup: Object.freeze({
       label: 'Nouto Järvenpäästä',
       helperTexts: Object.freeze([
-        'Kun vahvistan tilauksen, kerron noutopäivän. Lähempänä noutopäivää lähetän linkin, josta voit varata sinulle sopivan noutoajan. Nouto tapahtuu omatoimisesti etuoveltani Järvenpäässä.',
+        'Saat tiedon aikaisimmasta mahdollisesta noutopäivästä tilausvahvistuksessa. Lähempänä noutopäivää lähetän linkin, josta voit varata sinulle sopivan noutoajan. Tilaus noudetaan valitsemanasi ajankohtana asunnoltani Järvenpäästä.',
       ]),
     }),
   }),
