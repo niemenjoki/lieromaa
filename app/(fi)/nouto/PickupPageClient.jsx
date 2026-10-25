@@ -49,6 +49,26 @@ function groupOptionsByDate(options) {
   return [...groups.entries()];
 }
 
+async function fetchSession(token, language, { signal, fallbackMessage } = {}) {
+  const response = await fetch(
+    `${PICKUP_SESSION_ENDPOINT}?token=${encodeURIComponent(token)}`,
+    {
+      method: 'GET',
+      cache: 'no-store',
+      signal,
+      headers: {
+        Accept: 'application/json',
+        'X-Lieromaa-Language': language,
+      },
+    }
+  );
+  const data = await response.json().catch(() => null);
+  if (!response.ok || !data?.ok) {
+    throw new Error(data?.message || fallbackMessage);
+  }
+  return data;
+}
+
 export default function PickupPageClient({ language = 'fi' }) {
   const copy = getTransactionMessages(language).pickup;
   const searchParams = useSearchParams();
@@ -79,23 +99,12 @@ export default function PickupPageClient({ language = 'fi' }) {
     const loadSession = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(
-          `${PICKUP_SESSION_ENDPOINT}?token=${encodeURIComponent(nextToken)}`,
-          {
-            method: 'GET',
-            cache: 'no-store',
+        setSession(
+          await fetchSession(nextToken, language, {
             signal: controller.signal,
-            headers: {
-              Accept: 'application/json',
-              'X-Lieromaa-Language': language,
-            },
-          }
+            fallbackMessage: copy.linkCheckFailed,
+          })
         );
-        const data = await response.json().catch(() => null);
-        if (!response.ok || !data?.ok) {
-          throw new Error(data?.message || copy.linkCheckFailed);
-        }
-        setSession(data);
       } catch (error) {
         if (controller.signal.aborted) {
           return;
@@ -142,17 +151,12 @@ export default function PickupPageClient({ language = 'fi' }) {
       const data = await response.json().catch(() => null);
       if (!response.ok || !data?.ok) {
         if (data?.code === 'pickup_slot_unavailable') {
-          setSession((current) =>
-            current
-              ? {
-                  ...current,
-                  options: (current.options || []).filter(
-                    (option) => String(option.id) !== selectedOptionId
-                  ),
-                }
-              : current
-          );
+          // Joku ehti varata ajan: haetaan jäljellä olevat ajat uudelleen, koska muitakin aikoja on voinut poistua.
           setSelectedOptionId('');
+          const refreshed = await fetchSession(token, language).catch(() => null);
+          if (refreshed) {
+            setSession(refreshed);
+          }
         }
         throw new Error(data?.message || copy.genericError);
       }
@@ -306,9 +310,16 @@ export default function PickupPageClient({ language = 'fi' }) {
           </button>
         </form>
       ) : (
-        <p className={classes.Error}>
-          {copy.noOptions({ phone: session.ownerPhone, email: PICKUP_SUPPORT_EMAIL })}
-        </p>
+        <>
+          {submitError ? (
+            <p className={classes.Error} role="alert">
+              {submitError}
+            </p>
+          ) : null}
+          <p className={classes.Error}>
+            {copy.noOptions({ phone: session.ownerPhone, email: PICKUP_SUPPORT_EMAIL })}
+          </p>
+        </>
       )}
     </section>
   );
