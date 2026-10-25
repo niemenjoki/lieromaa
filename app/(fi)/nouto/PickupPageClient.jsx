@@ -70,58 +70,46 @@ async function fetchSession(token, language, { signal, fallbackMessage } = {}) {
 }
 
 export default function PickupPageClient({ language = 'fi' }) {
-  const copy = getTransactionMessages(language).pickup;
   const searchParams = useSearchParams();
-  const [token, setToken] = useState('');
+  const token = searchParams.get('token')?.trim() || '';
+  // Uusi linkki alustaa varausnäkymän kokonaan, joten tilaa ei tarvitse nollata efektissä.
+  return <PickupBooking key={token} token={token} language={language} />;
+}
+
+function PickupBooking({ token, language }) {
+  const copy = getTransactionMessages(language).pickup;
   const [session, setSession] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState('');
+  const [isLoading, setIsLoading] = useState(Boolean(token));
+  const [loadError, setLoadError] = useState(token ? '' : copy.missingLinkAddress);
   const [selectedOptionId, setSelectedOptionId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [photoFailed, setPhotoFailed] = useState(false);
 
   useEffect(() => {
-    const nextToken = searchParams.get('token')?.trim() || '';
-    setToken(nextToken);
-    setSession(null);
-    setLoadError('');
-    setSubmitError('');
-    setSelectedOptionId('');
-
-    if (!nextToken) {
-      setIsLoading(false);
-      setLoadError(copy.missingLinkAddress);
+    if (!token) {
       return undefined;
     }
-
     const controller = new AbortController();
-    const loadSession = async () => {
-      setIsLoading(true);
-      try {
-        setSession(
-          await fetchSession(nextToken, language, {
-            signal: controller.signal,
-            fallbackMessage: copy.linkCheckFailed,
-          })
-        );
-      } catch (error) {
-        if (controller.signal.aborted) {
-          return;
+    fetchSession(token, language, {
+      signal: controller.signal,
+      fallbackMessage: copy.linkCheckFailed,
+    })
+      .then((data) => setSession(data))
+      .catch((error) => {
+        if (!controller.signal.aborted) {
+          setLoadError(
+            error instanceof Error && error.message ? error.message : copy.linkCheckFailed
+          );
         }
-        setLoadError(
-          error instanceof Error && error.message ? error.message : copy.linkCheckFailed
-        );
-      } finally {
+      })
+      .finally(() => {
         if (!controller.signal.aborted) {
           setIsLoading(false);
         }
-      }
-    };
-
-    loadSession();
+      });
     return () => controller.abort();
-  }, [searchParams, copy, language]);
+  }, [token, language, copy]);
 
   const optionGroups = useMemo(
     () => groupOptionsByDate(Array.isArray(session?.options) ? session.options : []),
