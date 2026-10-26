@@ -10,7 +10,7 @@ export const legalPageDefinitions = {
       'Lieromaan tietosuojaseloste henkilötietojen käsittelystä, Stripe- ja laskumaksuista, evästeistä sekä kolmansien osapuolten palveluista.',
     shortLabel: 'Tietosuojaseloste',
     publishedAt: '2025-10-16',
-    updatedAt: '2026-10-25',
+    updatedAt: '2026-10-26',
     search: {
       contexts: ['notFound'],
       keywords: ['tietosuoja', 'tietosuojaseloste', 'evästeet', 'henkilötiedot'],
@@ -25,7 +25,7 @@ export const legalPageDefinitions = {
       'Tutustu Lieromaan tilausta, maksua, toimitusta, palautuksia ja asiakkaan oikeuksia koskeviin ehtoihin ennen tilauksen tekemistä.',
     shortLabel: 'Tilaus- ja toimitusehdot',
     publishedAt: '2025-10-16',
-    updatedAt: '2026-10-25',
+    updatedAt: '2026-10-26',
     effectiveFrom: '2025-10-01',
     search: {
       contexts: ['notFound'],
