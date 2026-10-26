@@ -75,7 +75,7 @@ export const transactionMessages = Object.freeze({
     invoicePaymentLabel: 'Maksa sähköpostilaskulla',
     invoiceTimingPostal:
       'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi.',
-    invoiceTimingLocal: 'Lasku lähetetään noutopäivänä.',
+    invoiceTimingLocal: 'Lasku lähetetään noudon jälkeen.',
     localPickupNote:
       'Saat tiedon aikaisimmasta mahdollisesta noutopäivästä tilausvahvistuksessa. Lähempänä noutopäivää lähetän linkin, josta voit varata sinulle sopivan noutoajan. Tilaus noudetaan valitsemanasi ajankohtana asunnoltani Järvenpäästä.',
     fields: Object.freeze({

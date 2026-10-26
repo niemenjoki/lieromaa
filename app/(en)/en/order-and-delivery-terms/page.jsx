@@ -14,7 +14,7 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-10-26';
+const UPDATED_AT = '2026-10-27';
 const EFFECTIVE_FROM = '2026-07-17';
 
 const pageMetadata = {
@@ -140,8 +140,8 @@ export default function EnglishOrderTermsPage() {
           </p>
           <p>
             For Posti pickup-point and home-delivery orders, I send the invoice after
-            handing the order to Posti. For local pickup, I send it on the pickup day. The
-            payment term is 14 days.
+            handing the order to Posti. For local pickup, I send it after you have
+            collected your order. The payment term is 14 days.
           </p>
           <p>
             A reminder may be sent for an unpaid invoice. A debt that remains unpaid may

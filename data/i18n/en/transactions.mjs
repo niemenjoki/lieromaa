@@ -75,7 +75,8 @@ export const transactionMessages = Object.freeze({
       'Payment takes place on Stripe’s secure hosted page. Apple Pay or Google Pay may appear on a supported device.',
     invoicePaymentLabel: 'Pay by email invoice',
     invoiceTimingPostal: 'I send the invoice by email after handing your order to Posti.',
-    invoiceTimingLocal: 'I send the invoice by email on the pickup day.',
+    invoiceTimingLocal:
+      'I send the invoice by email after you have collected your order.',
     localPickupNote:
       'Your order confirmation will tell you the earliest possible pickup date. Closer to the pickup date, I will send a link where you can book a pickup time that suits you. You collect the order at the time you choose from my home in Järvenpää.',
     fields: Object.freeze({

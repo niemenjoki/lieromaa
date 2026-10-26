@@ -67,7 +67,7 @@ export const commerceMessages = Object.freeze({
       postal:
         'I will send the invoice by email after the order has been handed to Posti. The payment term is 14 days.',
       localPickup:
-        'I will send the invoice by email on the pickup day. The payment term is 14 days.',
+        'I will send the invoice by email after you have collected your order. The payment term is 14 days.',
     }),
   }),
   extraCharges: Object.freeze({

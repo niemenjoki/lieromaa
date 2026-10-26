@@ -111,9 +111,9 @@ export default function OrderPolicyPage() {
           kortin koko numeroa tai kortin turvakoodia.
         </p>
         <p>
-          Lähetän laskun sähköpostitse, kun tilaus on luovutettu Postille, tai noudettavan
-          tilauksen noutopäivänä. Maksuaika on 14 vuorokautta. Laskun voi maksaa
-          normaalisti verkkopankissa tai mobiilipankissa.
+          Lähetän laskun sähköpostitse, kun tilaus on luovutettu Postille tai kun olet
+          noutanut tilauksen. Maksuaika on 14 vuorokautta. Laskun voi maksaa normaalisti
+          verkkopankissa tai mobiilipankissa.
         </p>
         <p>
           Maksamattomasta laskusta voidaan lähettää maksumuistutus, ja edelleen maksamatta

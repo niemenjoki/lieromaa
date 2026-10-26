@@ -70,7 +70,7 @@ export const commerceMessages = Object.freeze({
     }),
     invoiceTiming: Object.freeze({
       postal: 'Lasku lähetetään, kun tilaus on toimitettu Postin kuljetettavaksi',
-      localPickup: 'Lasku lähetetään noutopäivänä',
+      localPickup: 'Lasku lähetetään noudon jälkeen',
     }),
   }),
   extraCharges: Object.freeze({
