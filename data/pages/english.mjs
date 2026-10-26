@@ -52,13 +52,14 @@ export const englishPageDefinitions = Object.freeze(
       title: 'Order and delivery terms | Lieromaa',
       description:
         'Read Lieromaa’s English terms for ordering, invoicing, delivery, cancellation, defects and dispute resolution in Finland.',
-      updatedAt: '2026-08-05',
+      updatedAt: '2026-10-27',
     },
     {
       canonicalUrl: '/en/privacy',
       title: 'Privacy notice | Lieromaa',
       description:
         'Read how Lieromaa collects, uses, stores and shares personal data for orders, customer service, reviews, analytics, advertising and data requests.',
+      updatedAt: '2026-10-26',
     },
     {
       canonicalUrl: '/en/data-request',
