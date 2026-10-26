@@ -3,26 +3,34 @@
 import { useEffect, useState } from 'react';
 
 import SafeLink from '@/components/SafeLink/SafeLink';
+import useHydrated from '@/hooks/useHydrated';
 
 import classes from './FinnishContentLanguageNotice.module.css';
 
 const STORAGE_KEY = 'lieromaa-finnish-content-notice';
 
 export default function FinnishContentLanguageNotice({ copy }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const isHydrated = useHydrated();
+  const [isDismissed, setIsDismissed] = useState(false);
+  const searchParams = new URLSearchParams(
+    isHydrated ? (globalThis.location?.search ?? '') : ''
+  );
+  const isOpenedFromEnglish = searchParams.get('from') === 'en';
+  const isVisible =
+    isHydrated &&
+    !isDismissed &&
+    (isOpenedFromEnglish ||
+      globalThis.sessionStorage?.getItem(STORAGE_KEY) === 'visible');
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(globalThis.location?.search ?? '');
-    if (searchParams.get('from') === 'en') {
+    if (isOpenedFromEnglish) {
       globalThis.sessionStorage?.setItem(STORAGE_KEY, 'visible');
     }
-
-    setIsVisible(globalThis.sessionStorage?.getItem(STORAGE_KEY) === 'visible');
-  }, []);
+  }, [isOpenedFromEnglish]);
 
   const dismiss = () => {
     globalThis.sessionStorage?.removeItem(STORAGE_KEY);
-    setIsVisible(false);
+    setIsDismissed(true);
   };
 
   if (!isVisible) {

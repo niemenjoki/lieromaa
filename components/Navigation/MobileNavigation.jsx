@@ -49,9 +49,12 @@ export default function MobileNavigation({
     guideCategories.length > 0 &&
     (normalizedPathname === '/opas' || normalizedPathname.startsWith('/opas/'));
 
-  useEffect(() => {
+  // Navigating to another page closes the open dialog.
+  const [dialogPathname, setDialogPathname] = useState(pathname);
+  if (dialogPathname !== pathname) {
+    setDialogPathname(pathname);
     setOpenDialog(null);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     const mediaQuery = globalThis.matchMedia?.('(min-width: 961px)');

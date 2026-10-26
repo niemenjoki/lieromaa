@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useCart } from '@/components/Cart/CartProvider';
 import SafeImage from '@/components/SafeImage/SafeImage';
@@ -130,10 +130,11 @@ function RelatedProductSelector({
 
 function QuantityEditor({ quantity, onCommit, label }) {
   const [draftQuantity, setDraftQuantity] = useState(String(quantity || 1));
-
-  useEffect(() => {
+  const [syncedQuantity, setSyncedQuantity] = useState(quantity);
+  if (!Object.is(syncedQuantity, quantity)) {
+    setSyncedQuantity(quantity);
     setDraftQuantity(String(quantity || 1));
-  }, [quantity]);
+  }
 
   const commitQuantity = () => {
     const nextQuantity = Math.max(1, Math.floor(Number(draftQuantity) || 1));

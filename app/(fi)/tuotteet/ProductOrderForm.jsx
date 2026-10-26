@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import OrderEmailFallback from '@/components/OrderEmailFallback/OrderEmailFallback';
 import SafeLink from '@/components/SafeLink/SafeLink';
+import useHydrated from '@/hooks/useHydrated';
 import { trackAnalyticsEvent } from '@/lib/analytics/events';
 import { ORDER_SUBMIT_ENDPOINT, ORDER_SUCCESS_MESSAGE } from '@/lib/copy/orderMessages';
 import { findDiscountForSku } from '@/lib/discounts/findDiscountForSku';
@@ -206,9 +207,7 @@ export default function ProductOrderForm({ productKey }) {
   const [pickupPointFallbackAllowed, setPickupPointFallbackAllowed] = useState(false);
   const [selectedPickupPointId, setSelectedPickupPointId] = useState('');
   const [selectedPickupPoint, setSelectedPickupPoint] = useState(null);
-  const [visibleEarliestShippingDate, setVisibleEarliestShippingDate] = useState(
-    availability.earliestShippingDate
-  );
+  const isHydrated = useHydrated();
 
   const currentVariant =
     availableVariants.find((variant) => String(variant.amount) === amount) ??
@@ -251,53 +250,29 @@ export default function ProductOrderForm({ productKey }) {
     .join('|');
   const normalHandlingWindowDays = Number(product?.schema?.handlingTime?.maxValue);
 
-  useEffect(() => {
-    setVisibleEarliestShippingDate(
-      getVisibleEarliestShippingDate({
+  const visibleEarliestShippingDate = isHydrated
+    ? getVisibleEarliestShippingDate({
         earliestShippingDate: availability.earliestShippingDate,
         normalHandlingWindowDays,
         now: getTodayInBusinessTimeZone(),
       })
-    );
-  }, [availability.earliestShippingDate, normalHandlingWindowDays]);
+    : availability.earliestShippingDate;
 
-  useEffect(() => {
-    if (!appliedDiscount) {
-      return;
-    }
+  // A different product or default choice starts the form from scratch. Otherwise a discount that no longer matches the
+  // chosen product or extra charge is dropped, and a delivery or amount that is no longer offered falls back to the default.
+  const formResetKey = `${productKey}|${defaultAmount}|${defaultDelivery}`;
+  const [appliedFormResetKey, setAppliedFormResetKey] = useState(formResetKey);
+  const discountTargetKeys = appliedDiscount
+    ? getDiscountExtraChargeKeys(appliedDiscount)
+    : [];
+  const selectedExtraChargeKeys = new Set(
+    selectedActiveExtraChargeKeySignature
+      ? selectedActiveExtraChargeKeySignature.split('|')
+      : []
+  );
 
-    if (appliedDiscount.appliesToSku !== currentSku) {
-      setAppliedDiscount(null);
-      setDiscountFeedback('Alennus poistettiin, koska valittu tuote muuttui.');
-    }
-  }, [appliedDiscount, currentSku]);
-
-  useEffect(() => {
-    if (!appliedDiscount) {
-      return;
-    }
-
-    const targetKeys = getDiscountExtraChargeKeys(appliedDiscount);
-    if (!targetKeys.length) {
-      return;
-    }
-
-    const selectedKeys = new Set(
-      selectedActiveExtraChargeKeySignature
-        ? selectedActiveExtraChargeKeySignature.split('|')
-        : []
-    );
-    const targetIsSelected = targetKeys.some((key) => selectedKeys.has(key));
-
-    if (!targetIsSelected) {
-      setAppliedDiscount(null);
-      setDiscountFeedback(
-        'Alennus poistettiin, koska siihen liittyvä lisävalinta poistettiin.'
-      );
-    }
-  }, [appliedDiscount, selectedActiveExtraChargeKeySignature]);
-
-  useEffect(() => {
+  if (appliedFormResetKey !== formResetKey) {
+    setAppliedFormResetKey(formResetKey);
     setDelivery(defaultDelivery);
     setAmount(defaultAmount);
     setSelectedExtraCharges({});
@@ -314,31 +289,41 @@ export default function ProductOrderForm({ productKey }) {
     setPickupPointFallbackAllowed(false);
     setSelectedPickupPointId('');
     setSelectedPickupPoint(null);
-  }, [defaultAmount, defaultDelivery, productKey]);
+  } else if (appliedDiscount && appliedDiscount.appliesToSku !== currentSku) {
+    setAppliedDiscount(null);
+    setDiscountFeedback('Alennus poistettiin, koska valittu tuote muuttui.');
+  } else if (
+    appliedDiscount &&
+    discountTargetKeys.length > 0 &&
+    !discountTargetKeys.some((key) => selectedExtraChargeKeys.has(key))
+  ) {
+    setAppliedDiscount(null);
+    setDiscountFeedback(
+      'Alennus poistettiin, koska siihen liittyvä lisävalinta poistettiin.'
+    );
+  }
+
+  if (
+    delivery !== defaultDelivery &&
+    !shippingOptions.some((option) => option.id === delivery)
+  ) {
+    setDelivery(defaultDelivery);
+  }
+
+  if (
+    amount &&
+    amount !== defaultAmount &&
+    !availableVariants.some((variant) => String(variant.amount) === amount)
+  ) {
+    setAmount(defaultAmount);
+  }
 
   useEffect(() => {
+    // The form start time and submission id are browser-only values that stay fixed for the product.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormStartedAt(String(Date.now()));
     setSubmissionId(globalThis.crypto?.randomUUID?.() || `${productKey}-${Date.now()}`);
   }, [productKey]);
-
-  useEffect(() => {
-    if (shippingOptions.some((option) => option.id === delivery)) {
-      return;
-    }
-
-    setDelivery(defaultDelivery);
-  }, [defaultDelivery, delivery, shippingOptions]);
-
-  useEffect(() => {
-    if (
-      !amount ||
-      availableVariants.some((variant) => String(variant.amount) === amount)
-    ) {
-      return;
-    }
-
-    setAmount(defaultAmount);
-  }, [amount, availableVariants, defaultAmount]);
 
   const handleDiscountChange = (event) => {
     setDiscountCode(event.target.value);

@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
+import useHydrated from '@/hooks/useHydrated';
 import { getTransactionMessages } from '@/lib/i18n/messages.mjs';
 
 import classes from '../DataRequestPage.module.css';
@@ -14,16 +15,14 @@ function getFilename(response, fallbackFilename) {
 
 export default function DownloadDataClient({ language = 'fi' }) {
   const copy = getTransactionMessages(language).download;
-  const [token, setToken] = useState('');
-  const [isReady, setIsReady] = useState(false);
+  const isReady = useHydrated();
+  const [isTokenUsed, setIsTokenUsed] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fragment = new URLSearchParams(globalThis.location.hash.slice(1));
-    setToken(fragment.get('token') || '');
-    setIsReady(true);
-  }, []);
+  const token =
+    isReady && !isTokenUsed
+      ? new URLSearchParams(globalThis.location.hash.slice(1)).get('token') || ''
+      : '';
 
   async function download() {
     if (!token || isDownloading) return;
@@ -52,7 +51,7 @@ export default function DownloadDataClient({ language = 'fi' }) {
       link.download = getFilename(response, copy.defaultFilename);
       link.click();
       URL.revokeObjectURL(objectUrl);
-      setToken('');
+      setIsTokenUsed(true);
       globalThis.history.replaceState(null, '', globalThis.location.pathname);
     } catch (downloadError) {
       setError(

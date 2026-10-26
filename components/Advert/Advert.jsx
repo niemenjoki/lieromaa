@@ -28,6 +28,19 @@ function getAdSlotState(adElement, { allowFrameFallback = false } = {}) {
 
 const Advert = ({ adClient = ADSENSE_CLIENT, adSlot = ADSENSE_DEFAULT_SLOT }) => {
   const pathname = usePathname();
+
+  // A new page or slot starts the ad from scratch.
+  return (
+    <AdvertSlot
+      key={`${pathname}|${adClient}|${adSlot}`}
+      pathname={pathname}
+      adClient={adClient}
+      adSlot={adSlot}
+    />
+  );
+};
+
+const AdvertSlot = ({ pathname, adClient, adSlot }) => {
   const adRef = useRef(null);
   const pushRequestedRef = useRef(false);
   const [isEligible, setIsEligible] = useState(false);
@@ -35,12 +48,6 @@ const Advert = ({ adClient = ADSENSE_CLIENT, adSlot = ADSENSE_DEFAULT_SLOT }) =>
   const hasValidAdConfig = adClient && adClient.startsWith('ca-pub-') && adSlot;
   const canRenderAd =
     process.env.NODE_ENV === 'production' && ADSENSE_ENABLED && hasValidAdConfig;
-
-  useEffect(() => {
-    pushRequestedRef.current = false;
-    setIsEligible(false);
-    setSlotState('idle');
-  }, [pathname, adClient, adSlot]);
 
   useEffect(() => {
     if (!canRenderAd) {
@@ -114,6 +121,8 @@ const Advert = ({ adClient = ADSENSE_CLIENT, adSlot = ADSENSE_DEFAULT_SLOT }) =>
       updateSlotState();
     } catch (e) {
       console.warn('AdSense push skipped:', e.message);
+      // AdSense rejected the slot synchronously; hide it like an unfilled one.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSlotState('hidden');
     }
 

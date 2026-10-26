@@ -93,7 +93,9 @@ export function CartProvider({ children, language = DEFAULT_LANGUAGE }) {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
+    // The cart lives in localStorage, which can be read only after hydration.
     const storedCart = readStoredCart(language);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setItems(storedCart.items);
     setLastEditedAt(storedCart.lastEditedAt);
     setIsHydrated(true);

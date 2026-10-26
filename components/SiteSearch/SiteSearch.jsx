@@ -94,10 +94,14 @@ export default function SiteSearch({
     }
   }, []);
 
-  useEffect(() => {
-    if (!initialQuery) return;
-    setQuery(initialQuery);
-  }, [initialQuery]);
+  // A new non-empty initial query (for example from the /haku URL) replaces the typed one.
+  const [syncedInitialQuery, setSyncedInitialQuery] = useState(initialQuery);
+  if (syncedInitialQuery !== initialQuery) {
+    setSyncedInitialQuery(initialQuery);
+    if (initialQuery) {
+      setQuery(initialQuery);
+    }
+  }
 
   useEffect(() => {
     if (!isOpen || !autoFocus) return;

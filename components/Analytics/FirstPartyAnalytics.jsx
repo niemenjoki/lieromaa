@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 
 import { usePathname } from 'next/navigation';
 
@@ -53,6 +53,15 @@ function isAnalyticsOptedOut() {
 
 function hasAnalyticsConsent() {
   return Boolean(globalThis.window?.__lieromaaAnalyticsConsentGranted);
+}
+
+function subscribeToAnalyticsConsent(onChange) {
+  globalThis.addEventListener(ANALYTICS_CONSENT_EVENT_NAME, onChange);
+  return () => globalThis.removeEventListener(ANALYTICS_CONSENT_EVENT_NAME, onChange);
+}
+
+function getServerAnalyticsConsent() {
+  return false;
 }
 
 function normalizePath(value) {
@@ -458,22 +467,22 @@ export default function FirstPartyAnalytics() {
   const pathname = usePathname();
   const currentViewRef = useRef(null);
   const lastTouchedAtRef = useRef(0);
-  const [analyticsConsentGranted, setAnalyticsConsentGranted] =
-    useState(hasAnalyticsConsent);
+  // The consent gate sets the window flag before it emits the change event.
+  const analyticsConsentGranted = useSyncExternalStore(
+    subscribeToAnalyticsConsent,
+    hasAnalyticsConsent,
+    getServerAnalyticsConsent
+  );
 
   useEffect(() => {
     function handleAnalyticsConsentChange(event) {
-      const granted = Boolean(event.detail?.granted);
-      if (!granted) {
+      if (!event.detail?.granted) {
         clearStoredAnalyticsState();
         currentViewRef.current = null;
         lastTouchedAtRef.current = 0;
       }
-
-      setAnalyticsConsentGranted(granted);
     }
 
-    setAnalyticsConsentGranted(hasAnalyticsConsent());
     globalThis.addEventListener(
       ANALYTICS_CONSENT_EVENT_NAME,
       handleAnalyticsConsentChange

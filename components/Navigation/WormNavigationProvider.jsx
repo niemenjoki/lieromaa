@@ -54,19 +54,22 @@ export default function WormNavigationProvider({ children, primaryItems = [] }) 
       ? state.undergroundDurationMs
       : (WORM_PHASE_DURATION_MS[state.phase] ?? 0);
 
-  if (
-    phaseClockRef.current.phase !== state.phase ||
-    phaseClockRef.current.token !== state.token
-  ) {
-    phaseClockRef.current = {
-      durationMs: phaseDurationMs,
-      phase: state.phase,
-      startedAt: globalThis.performance?.now?.() ?? Date.now(),
-      token: state.token,
-    };
-  } else {
-    phaseClockRef.current.durationMs = phaseDurationMs;
-  }
+  // The phase clock starts when the phase is committed, which is when its CSS animation starts.
+  useEffect(() => {
+    if (
+      phaseClockRef.current.phase !== state.phase ||
+      phaseClockRef.current.token !== state.token
+    ) {
+      phaseClockRef.current = {
+        durationMs: phaseDurationMs,
+        phase: state.phase,
+        startedAt: globalThis.performance?.now?.() ?? Date.now(),
+        token: state.token,
+      };
+    } else {
+      phaseClockRef.current.durationMs = phaseDurationMs;
+    }
+  }, [phaseDurationMs, state.phase, state.token]);
 
   useEffect(() => {
     dispatch({ type: 'ROUTE_RECONCILED', activeId: routeActiveId });

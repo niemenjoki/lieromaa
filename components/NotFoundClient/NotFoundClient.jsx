@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 import { usePathname } from 'next/navigation';
 
@@ -8,6 +8,7 @@ import Fuse from 'fuse.js';
 
 import SafeLink from '@/components/SafeLink/SafeLink';
 import SiteSearchResults from '@/components/SiteSearch/SiteSearchResults';
+import useHydrated from '@/hooks/useHydrated';
 import {
   createPathSearchQuery,
   isProductLikeSearchQuery,
@@ -39,18 +40,14 @@ function prioritizeResults(results, query) {
 
 export default function ClientNotFoundPage({ searchItems }) {
   const pathname = usePathname();
-  const [results, setResults] = useState([]);
-  const [query, setQuery] = useState('');
+  // The 404 page is prerendered, so the missing path is known only in the browser.
+  const isHydrated = useHydrated();
+  const query =
+    isHydrated && pathname && searchItems?.length ? createPathSearchQuery(pathname) : '';
 
-  useEffect(() => {
-    if (!pathname || !searchItems?.length) return;
-
-    const nextQuery = createPathSearchQuery(pathname);
-    setQuery(nextQuery);
-
-    if (nextQuery.length < 3) {
-      setResults([]);
-      return;
+  const results = useMemo(() => {
+    if (query.length < 3) {
+      return [];
     }
 
     const fuse = new Fuse(searchItems, {
@@ -68,17 +65,15 @@ export default function ClientNotFoundPage({ searchItems }) {
       ],
     });
 
-    const matches = prioritizeResults(
+    return prioritizeResults(
       fuse
-        .search(nextQuery)
+        .search(query)
         .filter((r) => r.score == null || r.score < 0.66)
         .slice(0, 6)
         .map((r) => r.item),
-      nextQuery
+      query
     ).slice(0, 2);
-
-    setResults(matches);
-  }, [pathname, searchItems]);
+  }, [query, searchItems]);
 
   return (
     <>

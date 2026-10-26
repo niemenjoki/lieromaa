@@ -5,7 +5,7 @@ import useTimeout from './useTimeout';
 const useDebounce = (callback, delay, dependencies) => {
   const { reset, clear } = useTimeout(callback, delay);
   useEffect(reset, [...dependencies, reset]);
-  useEffect(clear, []);
+  useEffect(clear, [clear]);
 };
 
 export default useDebounce;

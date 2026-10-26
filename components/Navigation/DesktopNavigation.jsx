@@ -64,9 +64,12 @@ export default function DesktopNavigation({
     [openTray]
   );
 
-  useEffect(() => {
+  // Navigating to another page closes the open tray.
+  const [trayPathname, setTrayPathname] = useState(pathname);
+  if (trayPathname !== pathname) {
+    setTrayPathname(pathname);
     setOpenTray(null);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     if (!openTray) {

@@ -36,12 +36,18 @@ function normalizeProductTargets(value, fallback) {
 }
 
 export default function ReviewPageClient({ language = 'fi' }) {
-  const copy = getTransactionMessages(language).review;
   const searchParams = useSearchParams();
-  const [token, setToken] = useState('');
+  const token = searchParams.get('token')?.trim() || '';
+
+  // A new token starts the form from scratch.
+  return <ReviewPageForm key={token} language={language} token={token} />;
+}
+
+function ReviewPageForm({ language, token }) {
+  const copy = getTransactionMessages(language).review;
   const [session, setSession] = useState(null);
-  const [isLoadingSession, setIsLoadingSession] = useState(true);
-  const [sessionError, setSessionError] = useState('');
+  const [isLoadingSession, setIsLoadingSession] = useState(Boolean(token));
+  const [sessionError, setSessionError] = useState(token ? '' : copy.missingLinkAddress);
   const [rating, setRating] = useState(5);
   const [review, setReview] = useState('');
   const [privateFeedback, setPrivateFeedback] = useState('');
@@ -52,27 +58,15 @@ export default function ReviewPageClient({ language = 'fi' }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
-    const nextToken = searchParams.get('token')?.trim() || '';
-    setToken(nextToken);
-    setSession(null);
-    setSubmitError('');
-    setSessionError('');
-    setIsSubmitted(false);
-    setSelectedProductKeys([]);
-
-    if (!nextToken) {
-      setIsLoadingSession(false);
-      setSessionError(copy.missingLinkAddress);
+    if (!token) {
       return;
     }
 
     const controller = new AbortController();
     const validateToken = async () => {
-      setIsLoadingSession(true);
-
       try {
         const response = await fetch(
-          `${REVIEW_SESSION_ENDPOINT}?token=${encodeURIComponent(nextToken)}`,
+          `${REVIEW_SESSION_ENDPOINT}?token=${encodeURIComponent(token)}`,
           {
             method: 'GET',
             cache: 'no-store',
@@ -128,7 +122,7 @@ export default function ReviewPageClient({ language = 'fi' }) {
     return () => {
       controller.abort();
     };
-  }, [copy, language, searchParams]);
+  }, [copy, language, token]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

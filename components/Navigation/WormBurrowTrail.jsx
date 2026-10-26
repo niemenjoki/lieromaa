@@ -48,7 +48,11 @@ export default function WormBurrowTrail({ containerRef, surface }) {
   });
   const positionsRef = useRef(positions);
   const wakeRef = useRef(null);
-  positionsRef.current = positions;
+
+  // Runs before the measuring effect below, so it reads the committed positions.
+  useEffect(() => {
+    positionsRef.current = positions;
+  }, [positions]);
 
   useEffect(() => {
     const container = containerRef.current;

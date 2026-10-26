@@ -241,10 +241,11 @@ function groupCartLines(lines) {
 
 function CartQuantityEditor({ quantity, onCommit }) {
   const [draftQuantity, setDraftQuantity] = useState(String(quantity || 1));
-
-  useEffect(() => {
+  const [syncedQuantity, setSyncedQuantity] = useState(quantity);
+  if (!Object.is(syncedQuantity, quantity)) {
+    setSyncedQuantity(quantity);
     setDraftQuantity(String(quantity || 1));
-  }, [quantity]);
+  }
 
   const commitQuantity = () => {
     const nextQuantity = Math.max(1, Math.floor(Number(draftQuantity) || 1));
@@ -323,6 +324,8 @@ export default function CheckoutPageClient({ language }) {
   const [pendingStripe, setPendingStripe] = useState(null);
 
   useEffect(() => {
+    // Reads the browser-only start time, a pending Stripe checkout from storage and the Stripe return URL once.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFormStartedAt(String(Date.now()));
     const storedPending = readPendingStripeCheckout();
     const returnedSessionId = new URLSearchParams(window.location.search).get(
@@ -548,7 +551,9 @@ export default function CheckoutPageClient({ language }) {
     const returnedSessionId = params.get('session_id');
     const isReturn = params.get('stripe') === 'return';
     const isCancel = params.get('stripe') === 'cancel';
+    // Handles the return from Stripe once: the URL, the saved draft and the payment status are outside React.
     if (returnedSessionId && returnedSessionId !== pendingStripe.sessionId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPaymentOutcome({ state: 'unavailable', orderId: pendingStripe.orderId || '' });
       return;
     }
@@ -627,10 +632,12 @@ export default function CheckoutPageClient({ language }) {
       return;
     }
     if (new URLSearchParams(window.location.search).has('stripe')) return;
+    // The cart changed after the Stripe checkout was opened: cancel it on the server and in storage.
     const abandonedReference = pendingStripe;
     void abandonPendingStripeCheckout(abandonedReference, language);
     clearCheckoutDraft();
     clearPendingStripeCheckout();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPendingStripe(null);
     setSubmissionId(createSubmissionId());
   }, [cartFingerprint, isHydrated, language, pendingStripe]);

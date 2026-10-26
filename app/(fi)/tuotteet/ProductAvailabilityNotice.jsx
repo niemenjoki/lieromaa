@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
+import useHydrated from '@/hooks/useHydrated';
 import {
   getTodayInBusinessTimeZone,
   getVisibleEarliestShippingDate,
@@ -23,19 +22,14 @@ export default function ProductAvailabilityNotice({
   const product = getProductPricing(productKey);
   const hasUnavailableSkus = availability.unavailableSkus.length > 0;
   const normalHandlingWindowDays = Number(product?.schema?.handlingTime?.maxValue);
-  const [visibleEarliestShippingDate, setVisibleEarliestShippingDate] = useState(
-    availability.earliestShippingDate
-  );
-
-  useEffect(() => {
-    setVisibleEarliestShippingDate(
-      getVisibleEarliestShippingDate({
+  const isHydrated = useHydrated();
+  const visibleEarliestShippingDate = isHydrated
+    ? getVisibleEarliestShippingDate({
         earliestShippingDate: availability.earliestShippingDate,
         normalHandlingWindowDays,
         now: getTodayInBusinessTimeZone(),
       })
-    );
-  }, [availability.earliestShippingDate, normalHandlingWindowDays]);
+    : availability.earliestShippingDate;
 
   const hasEarliestShippingDate = Boolean(visibleEarliestShippingDate);
 
