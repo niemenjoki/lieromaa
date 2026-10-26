@@ -225,11 +225,11 @@ export const transactionMessages = Object.freeze({
     packages: ({ count }) => `${count} pcs`,
     optionsLegend: 'Choose a pickup time',
     waitingCooler:
-      'Your order will wait in a foam cooler at my front door during the time you choose.',
+      'Your order will wait in a foam cooler by my front door in Loutti, Järvenpää, during the time you choose, and you collect it yourself.',
     waitingComposter:
-      'Your composter will wait where the foam cooler usually is, at my front door, during the time you choose.',
+      'Your composter will wait where the foam cooler usually is, by my front door in Loutti, Järvenpää, during the time you choose, and you collect it yourself.',
     waitingComposterAndCooler:
-      'Your composter will wait next to the foam cooler at my front door during the time you choose, and the other products you ordered will be in the foam cooler.',
+      'Your composter will wait next to the foam cooler by my front door in Loutti, Järvenpää, during the time you choose, and the other products you ordered will be in the foam cooler. You collect the order yourself.',
     optionLabel: ({ start, end }) => `${start}–${end}`,
     deadlineHelp: ({ hour }) =>
       `Please book by ${hour}:00 on the day before the pickup. I will send detailed pickup instructions and the address to your email right after booking.`,

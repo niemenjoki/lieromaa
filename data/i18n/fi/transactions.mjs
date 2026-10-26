@@ -223,11 +223,12 @@ export const transactionMessages = Object.freeze({
     pickupDay: ({ date }) => `Noutopäivä ${date}`,
     packages: ({ count }) => `${count} kpl`,
     optionsLegend: 'Valitse noutoaika',
-    waitingCooler: 'Tilauksesi odottaa valitsemasi ajan kylmälaukussa etuovellani.',
+    waitingCooler:
+      'Tilauksesi odottaa valitsemasi ajan kylmälaukussa etuovellani Järvenpään Loutissa, ja noudat sen itsenäisesti.',
     waitingComposter:
-      'Kompostorisi odottaa valitsemasi ajan kylmälaukun paikalla etuovellani.',
+      'Kompostorisi odottaa valitsemasi ajan kylmälaukun paikalla etuovellani Järvenpään Loutissa, ja noudat sen itsenäisesti.',
     waitingComposterAndCooler:
-      'Kompostorisi odottaa valitsemasi ajan kylmälaukun vieressä etuovellani, ja muut tilaamasi tuotteet ovat kylmälaukussa.',
+      'Kompostorisi odottaa valitsemasi ajan kylmälaukun vieressä etuovellani Järvenpään Loutissa, ja muut tilaamasi tuotteet ovat kylmälaukussa. Noudat tilauksen itsenäisesti.',
     optionLabel: ({ start, end }) => `klo ${start}–${end}`,
     deadlineHelp: ({ hour }) =>
       `Varaa aika viimeistään noutoa edeltävänä päivänä klo ${hour}. Lähetän tarkat nouto-ohjeet ja osoitteen sähköpostiisi heti varauksen jälkeen.`,
