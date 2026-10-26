@@ -67,7 +67,7 @@ export const transactionMessages = Object.freeze({
     estimatedPickupDate: 'Arvioitu noutovalmiuspäivä',
     estimatedDispatchDate: 'Arvioitu lähetyspäivä',
     estimatedDateSuffix:
-      'Todellinen lähetys- tai noutopäivä vahvistetaan tilausvahvistuksessa.',
+      'Todellinen lähetyspäivä tai aikaisin noutopäivä vahvistetaan tilausvahvistuksessa.',
     paymentChoiceLegend: 'Valitse maksutapa',
     stripePaymentLabel: 'Maksa nyt MobilePaylla tai kortilla',
     stripePaymentDetail:
@@ -220,7 +220,7 @@ export const transactionMessages = Object.freeze({
       `Voit myös vastata saamaasi sähköpostiin tai kirjoittaa osoitteeseen ${email}, niin sovitaan nouto.`,
     greeting: ({ firstName }) => (firstName ? `Hei ${firstName}!` : 'Hei!'),
     orderLabel: ({ orderId }) => `Tilaus ${orderId}`,
-    pickupDay: ({ date }) => `Noutopäivä ${date}`,
+    pickupDay: ({ date }) => `Aikaisin noutopäivä ${date}`,
     packages: ({ count }) => `${count} kpl`,
     optionsLegend: 'Valitse noutoaika',
     waitingCooler:

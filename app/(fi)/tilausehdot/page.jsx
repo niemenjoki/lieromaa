@@ -156,10 +156,11 @@ export default function OrderPolicyPage() {
 
         <h2>Nouto Järvenpäästä</h2>
         <p>
-          Noudettavan tilauksen vahvistuksessa kerron noutopäivän. Lähempänä noutopäivää
-          lähetän asiakkaalle sähköpostitse linkin tilaukselle sopiviin noutoaikoihin, ja
-          asiakas varaa niistä yhden viimeistään noutoa edeltävänä päivänä klo 20.
-          Varauksen jälkeen asiakas saa sähköpostiin tarkat nouto-ohjeet ja osoitteen.
+          Noudettavan tilauksen vahvistuksessa kerron aikaisimman mahdollisen noutopäivän.
+          Lähempänä noutopäivää lähetän asiakkaalle sähköpostitse linkin tilaukselle
+          sopiviin noutoaikoihin, ja asiakas varaa niistä yhden viimeistään noutoa
+          edeltävänä päivänä klo 20. Varauksen jälkeen asiakas saa sähköpostiin tarkat
+          nouto-ohjeet ja osoitteen.
         </p>
         <p>
           Kun tilaus on pakattu ja odottaa etuovellani kylmälaukussa, ilmoitan siitä

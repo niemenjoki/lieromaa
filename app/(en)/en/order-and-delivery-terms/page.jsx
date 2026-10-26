@@ -182,10 +182,11 @@ export default function EnglishOrderTermsPage() {
 
           <h2>Local pickup in Järvenpää</h2>
           <p>
-            The confirmation of a local pickup order states the pickup date. Closer to the
-            date, I will email you a link to the pickup times available for your order,
-            and you book one of them by 20:00 on the day before the pickup. After booking,
-            you will receive detailed pickup instructions and the address by email.
+            The confirmation of a local pickup order states the earliest possible pickup
+            date. Closer to the date, I will email you a link to the pickup times
+            available for your order, and you book one of them by 20:00 on the day before
+            the pickup. After booking, you will receive detailed pickup instructions and
+            the address by email.
           </p>
           <p>
             When the order has been packed and is waiting in a foam cooler at my front

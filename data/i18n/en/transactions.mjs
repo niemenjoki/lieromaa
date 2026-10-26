@@ -68,7 +68,7 @@ export const transactionMessages = Object.freeze({
     estimatedPickupDate: 'Estimated pickup-ready date',
     estimatedDispatchDate: 'Estimated dispatch date',
     estimatedDateSuffix:
-      'The actual dispatch or pickup date will be confirmed in the order confirmation.',
+      'The actual dispatch date or the earliest pickup date will be confirmed in the order confirmation.',
     paymentChoiceLegend: 'Choose a payment method',
     stripePaymentLabel: 'Pay now with MobilePay or a card',
     stripePaymentDetail:
@@ -221,7 +221,7 @@ export const transactionMessages = Object.freeze({
       `You can also reply to the email you received or write to ${email}, and we will arrange the pickup.`,
     greeting: ({ firstName }) => (firstName ? `Hello ${firstName}!` : 'Hello!'),
     orderLabel: ({ orderId }) => `Order ${orderId}`,
-    pickupDay: ({ date }) => `Pickup date ${date}`,
+    pickupDay: ({ date }) => `Earliest pickup date ${date}`,
     packages: ({ count }) => `${count} pcs`,
     optionsLegend: 'Choose a pickup time',
     waitingCooler:
