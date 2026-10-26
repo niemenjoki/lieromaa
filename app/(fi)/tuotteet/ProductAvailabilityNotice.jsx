@@ -9,8 +9,6 @@ import { formatDate } from '@/lib/i18n/formatters.mjs';
 import { getProductMessages } from '@/lib/i18n/messages.mjs';
 import { getProductAvailability, getProductPricing } from '@/lib/pricing/catalog';
 
-export { getTodayInBusinessTimeZone, getVisibleEarliestShippingDate };
-
 export default function ProductAvailabilityNotice({
   productKey,
   className = '',

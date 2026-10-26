@@ -9,6 +9,34 @@ import classes from './FinnishContentLanguageNotice.module.css';
 
 const STORAGE_KEY = 'lieromaa-finnish-content-notice';
 
+function getSessionStorage() {
+  try {
+    return globalThis.sessionStorage || null;
+  } catch {
+    return null;
+  }
+}
+
+function isNoticeStored() {
+  try {
+    return getSessionStorage()?.getItem(STORAGE_KEY) === 'visible';
+  } catch {
+    return false;
+  }
+}
+
+function storeNotice(isVisible) {
+  try {
+    if (isVisible) {
+      getSessionStorage()?.setItem(STORAGE_KEY, 'visible');
+    } else {
+      getSessionStorage()?.removeItem(STORAGE_KEY);
+    }
+  } catch {
+    // Without session storage the notice lasts only for this page.
+  }
+}
+
 export default function FinnishContentLanguageNotice({ copy }) {
   const isHydrated = useHydrated();
   const [isDismissed, setIsDismissed] = useState(false);
@@ -17,19 +45,16 @@ export default function FinnishContentLanguageNotice({ copy }) {
   );
   const isOpenedFromEnglish = searchParams.get('from') === 'en';
   const isVisible =
-    isHydrated &&
-    !isDismissed &&
-    (isOpenedFromEnglish ||
-      globalThis.sessionStorage?.getItem(STORAGE_KEY) === 'visible');
+    isHydrated && !isDismissed && (isOpenedFromEnglish || isNoticeStored());
 
   useEffect(() => {
     if (isOpenedFromEnglish) {
-      globalThis.sessionStorage?.setItem(STORAGE_KEY, 'visible');
+      storeNotice(true);
     }
   }, [isOpenedFromEnglish]);
 
   const dismiss = () => {
-    globalThis.sessionStorage?.removeItem(STORAGE_KEY);
+    storeNotice(false);
     setIsDismissed(true);
   };
 

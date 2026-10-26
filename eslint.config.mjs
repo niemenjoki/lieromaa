@@ -6,7 +6,7 @@ const eslintConfig = [
   prettierRecommended,
   {
     rules: {
-      'no-unused-vars': 'warn',
+      'no-unused-vars': ['warn', { ignoreRestSiblings: true }],
       'react/no-unescaped-entities': 'off',
       'react/display-name': 'off',
       'import/order': 'off',
