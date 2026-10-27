@@ -205,7 +205,7 @@ export const transactionMessages = Object.freeze({
     displayNameLabel: 'Näyttönimi (valinnainen)',
     displayNamePlaceholder: 'Esim. Matti tai Nimimerkki',
     moderationHelp:
-      'Arvostelu tallennetaan ensin tarkistettavaksi. Se ei näy sivustolla ennen manuaalista hyväksyntää.',
+      'Arvostelu tallennetaan ensin tarkistettavaksi. Se ei näy sivustolla ennen manuaalista hyväksyntää. Julkaistun arvostelun yhteydessä näkyy, mitä tuotteita tilasit, esimerkiksi kompostimadot tai kuituseos.',
     submitting: 'Lähetetään arvostelua...',
     submit: 'Lähetä arvostelu',
     mismatchEn:

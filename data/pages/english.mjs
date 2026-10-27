@@ -59,7 +59,7 @@ export const englishPageDefinitions = Object.freeze(
       title: 'Privacy notice | Lieromaa',
       description:
         'Read how Lieromaa collects, uses, stores and shares personal data for orders, customer service, reviews, analytics, advertising and data requests.',
-      updatedAt: '2026-10-26',
+      updatedAt: '2026-10-27',
     },
     {
       canonicalUrl: '/en/data-request',

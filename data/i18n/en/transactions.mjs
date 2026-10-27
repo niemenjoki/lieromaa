@@ -207,7 +207,7 @@ export const transactionMessages = Object.freeze({
     displayNameLabel: 'Display name (optional)',
     displayNamePlaceholder: 'For example, Alex or a nickname',
     moderationHelp:
-      'The review is saved for moderation first. It will not appear on the site until it has been approved manually.',
+      'The review is saved for moderation first. It will not appear on the site until it has been approved manually. The published review also shows which products you ordered, such as compost worms or compost fibre mix.',
     submitting: 'Sending review...',
     submit: 'Send review',
     mismatchEn:

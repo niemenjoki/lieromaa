@@ -153,6 +153,23 @@ export default function ProductReviewsSectionClient({
                   >
                     {getStarString(review.rating)}
                   </p>
+                  {review.purchasedProducts?.length ? (
+                    <div className={classes.ReviewPurchases}>
+                      <span className={classes.ReviewPurchasesLabel} aria-hidden="true">
+                        {copy.purchasedLabel}
+                      </span>
+                      <ul
+                        className={classes.ReviewPurchaseTags}
+                        aria-label={copy.purchasedLabel}
+                      >
+                        {review.purchasedProducts.map((productTag) => (
+                          <li key={productTag} className={classes.ReviewPurchaseTag}>
+                            {copy.purchasedProducts[productTag]}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : null}
                   <p
                     className={classes.ReviewBody}
                     lang={language === 'en' && isFinnishReview ? 'fi' : undefined}

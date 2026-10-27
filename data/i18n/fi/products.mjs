@@ -176,6 +176,12 @@ export const productMessages = Object.freeze({
     reviewStarLabel: ({ rating }) => `${rating} / 5 tähteä`,
     finnishNotice: 'Nämä asiakaskommentit ovat alkuperäiskielellään suomeksi.',
     finnishBadge: 'FI · Arvostelu suomeksi',
+    purchasedLabel: 'Tilasi',
+    purchasedProducts: Object.freeze({
+      worms: 'Kompostimadot',
+      preparedWormBin: 'Käyttövalmis kompostori',
+      compostChow: 'Kuituseos',
+    }),
     showMore: ({ count }) => `Näytä ${count} lisää arvostelua`,
     showRest: 'Näytä loput arvostelut',
     ratingOnly: ({ count }) =>

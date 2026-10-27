@@ -177,6 +177,12 @@ export const productMessages = Object.freeze({
     reviewStarLabel: ({ rating }) => `${rating} out of 5 stars`,
     finnishNotice: 'Reviews are shown in their original language.',
     finnishBadge: 'In Finnish',
+    purchasedLabel: 'Ordered',
+    purchasedProducts: Object.freeze({
+      worms: 'Compost worms',
+      preparedWormBin: 'Ready-to-use worm bin',
+      compostChow: 'Compost fibre mix',
+    }),
     showMore: ({ count }) => `Show ${count} more reviews`,
     showRest: 'Show the remaining reviews',
     ratingOnly: ({ count }) =>

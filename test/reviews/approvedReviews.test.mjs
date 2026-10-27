@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
+import { getProductMessages } from '@/lib/i18n/messages.mjs';
 import { productDefinitions } from '@/lib/products/catalog.mjs';
 import {
+  REVIEW_PURCHASED_PRODUCTS,
   getApprovedProductReviewSummary,
   getApprovedProductReviews,
+  normalizePurchasedProducts,
 } from '@/lib/reviews/approvedReviews';
 import approvedReviewsSource from '@/lib/reviews/approvedReviewsSource';
 
@@ -87,6 +90,37 @@ describe('frontend approved review data', () => {
         calculatedAverage,
         `approved review summaries should match the calculated average rating for ${productKey}`
       );
+    }
+  });
+});
+
+describe('purchased product tags on reviews', () => {
+  test('purchased products keep only known tags once, in display order', () => {
+    assert.deepEqual(
+      normalizePurchasedProducts(['compostChow', 'unknown', 'worms', 'worms', 7]),
+      ['worms', 'compostChow']
+    );
+    assert.deepEqual(normalizePurchasedProducts(undefined), []);
+    assert.deepEqual(normalizePurchasedProducts('worms'), []);
+  });
+
+  test('every purchased product tag has a label in both languages', () => {
+    for (const language of ['fi', 'en']) {
+      const copy = getProductMessages(language).reviews;
+      assert.ok(copy.purchasedLabel, `${language} purchased label`);
+      for (const tag of REVIEW_PURCHASED_PRODUCTS) {
+        assert.ok(copy.purchasedProducts[tag], `${language} label for ${tag}`);
+      }
+    }
+  });
+
+  test('approved reviews expose purchased products as known tags', () => {
+    const knownTags = new Set(REVIEW_PURCHASED_PRODUCTS);
+    for (const productKey of Object.keys(productDefinitions)) {
+      for (const review of getApprovedProductReviews(productKey)) {
+        assert.ok(Array.isArray(review.purchasedProducts));
+        assert.ok(review.purchasedProducts.every((tag) => knownTags.has(tag)));
+      }
     }
   });
 });

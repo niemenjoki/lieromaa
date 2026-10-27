@@ -11,7 +11,7 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-10-26';
+const UPDATED_AT = '2026-10-27';
 
 const pageMetadata = {
   language: 'en',
@@ -96,8 +96,8 @@ export default function EnglishPrivacyPage() {
             </li>
             <li>
               Review data: review-link identifier, product, star rating, written review,
-              optional private feedback, optional display name and the products in the
-              order to which the review relates.
+              optional private feedback, optional display name, the products in the order
+              to which the review relates and the list of products ordered.
             </li>
             <li>
               Data-request information: the order number and email address entered on the
@@ -236,8 +236,11 @@ export default function EnglishPrivacyPage() {
             Processing covers the review-link identifier, product, star rating, written
             review, optional private feedback, optional display name and the products in
             the order to which the review relates. A review is stored for moderation first
-            and is not published until it has been approved manually. Private feedback is
-            not published as a customer review.
+            and is not published until it has been approved manually. An approved review
+            is published with its star rating, written review, optional display name,
+            submission date and the products ordered without quantities, such as compost
+            worms, a ready-to-use worm bin or compost fibre mix. Private feedback is not
+            published as a customer review.
           </p>
 
           <h2>Pickup time booking</h2>
@@ -488,9 +491,10 @@ export default function EnglishPrivacyPage() {
               maintain their reliability, unless a deletion request or another ground
               requires removal. When the associated order is anonymised, private feedback,
               technical request context, order linkage and moderation data are removed.
-              Only published data remains from an approved review: product, star rating,
-              written review, optional display name and submission time. A display name or
-              other identifiable content may be removed on request.
+              Only published data remains from an approved review: product, products
+              ordered, star rating, written review, optional display name and submission
+              time. A display name or other identifiable content may be removed on
+              request.
             </li>
             <li>
               Data connected with complaints, returns and other later customer-service

@@ -77,8 +77,8 @@ export default function PrivacyPage() {
           </li>
           <li>
             Arvostelutiedot: arvostelulinkin tunniste, tuotetieto, tähtiarvio, kirjoitettu
-            arvostelu, mahdollinen yksityinen palaute, mahdollinen näyttönimi sekä tieto
-            siitä, mitä tilauksen tuotteita arvostelu koskee.
+            arvostelu, mahdollinen yksityinen palaute, mahdollinen näyttönimi, tieto
+            siitä, mitä tilauksen tuotteita arvostelu koskee, sekä tilatut tuotteet.
           </li>
           <li>
             Tietopyyntötiedot: tietopyyntölomakkeella annettu tilausnumero ja
@@ -229,7 +229,10 @@ export default function PrivacyPage() {
           tuotetieto, tähtiarvio, kirjoitettu arvostelu, mahdollinen yksityinen palaute,
           mahdollinen näyttönimi sekä tieto siitä, mitä tilauksen tuotteita arvostelu
           koskee. Arvostelu tallennetaan ensin tarkistettavaksi, eikä sitä julkaista
-          sivustolla ennen manuaalista hyväksyntää. Yksityistä palautetta ei julkaista
+          sivustolla ennen manuaalista hyväksyntää. Hyväksytyn arvostelun yhteydessä
+          julkaistaan tähtiarvio, kirjoitettu arvostelu, mahdollinen näyttönimi,
+          lähetyspäivä sekä tilatut tuotteet ilman määriä, esimerkiksi kompostimadot,
+          käyttövalmis kompostori tai kuituseos. Yksityistä palautetta ei julkaista
           asiakasarvosteluna.
         </p>
 
@@ -497,9 +500,9 @@ export default function PrivacyPage() {
             tilaus anonymisoidaan, arvostelun yksityinen palaute, tekninen
             pyyntökonteksti, tilauskytkentä ja tarkistamiseen liittyvät tiedot poistetaan.
             Hyväksytystä arvostelusta säilytetään tämän jälkeen vain sivustolla
-            julkaistavat tiedot: tuote, tähtiarvio, kirjoitettu arvostelu, mahdollinen
-            näyttönimi ja lähetysaika. Julkaistusta arvostelusta voidaan poistaa
-            näyttönimi tai muu tunnistettava tieto pyynnöstä.
+            julkaistavat tiedot: tuote, tilatut tuotteet, tähtiarvio, kirjoitettu
+            arvostelu, mahdollinen näyttönimi ja lähetysaika. Julkaistusta arvostelusta
+            voidaan poistaa näyttönimi tai muu tunnistettava tieto pyynnöstä.
           </li>
           <li>
             Reklamaatioihin, palautuksiin ja muihin jälkikäteisiin
