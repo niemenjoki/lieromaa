@@ -5,7 +5,8 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-03-31T15:30:28.353Z"
+    "submittedAt": "2026-03-31T15:30:28.353Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -13,7 +14,8 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-03-27T19:49:27.895Z"
+    "submittedAt": "2026-03-27T19:49:27.895Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -21,7 +23,8 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-03-27T07:12:23.367Z"
+    "submittedAt": "2026-03-27T07:12:23.367Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -29,7 +32,8 @@
     "rating": 5,
     "review": "Erinomaisia, elinvoimaisia kompostimatoja. Loistavaa palvelua ja sujuva toimitus. Suosittelen!",
     "displayName": "Mari",
-    "submittedAt": "2026-03-26T16:20:50.836Z"
+    "submittedAt": "2026-03-26T16:20:50.836Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -37,7 +41,8 @@
     "rating": 5,
     "review": "Hienosti toimi ja pakkaskaudella madot saapuivat hyväkuntoisina.",
     "displayName": "SakuP",
-    "submittedAt": "2026-03-26T13:25:57.457Z"
+    "submittedAt": "2026-03-26T13:25:57.457Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -45,7 +50,8 @@
     "rating": 5,
     "review": "Hyvin pakattu ja nopea toimitus. Kiitos.",
     "displayName": "Susa",
-    "submittedAt": "2026-03-26T13:12:27.071Z"
+    "submittedAt": "2026-03-26T13:12:27.071Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -53,7 +59,8 @@
     "rating": 5,
     "review": "Kaikki toimi erittäin hyvin ja madot saapuivat hyvässä kunnossa. Voin suositella!",
     "displayName": "Päivi",
-    "submittedAt": "2026-04-11T09:20:19.567Z"
+    "submittedAt": "2026-04-11T09:20:19.567Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -61,7 +68,8 @@
     "rating": 5,
     "review": "Lierot tulivat perille hyvin pakattuna ja nopeasti.",
     "displayName": "Pääskyvuoren iltapäivätoiminta",
-    "submittedAt": "2026-04-11T12:54:42.863Z"
+    "submittedAt": "2026-04-11T12:54:42.863Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -69,7 +77,8 @@
     "rating": 5,
     "review": "Lierot tuli tosi hyvin pakattuna ja nopeasti! Meillä lapset ovat innoissaan. Olisi vain pitänyt ostaa ehkä kerralla enemmän, mutta kyllähän ne lisääntyy.",
     "displayName": "Outi",
-    "submittedAt": "2026-04-19T10:24:38.001Z"
+    "submittedAt": "2026-04-19T10:24:38.001Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -77,7 +86,8 @@
     "rating": 5,
     "review": "Toimitus oli nopea ja lierot pirteitä ja reippaita!",
     "displayName": "Viviana",
-    "submittedAt": "2026-04-19T10:31:19.134Z"
+    "submittedAt": "2026-04-19T10:31:19.134Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -85,7 +95,8 @@
     "rating": 5,
     "review": "5",
     "displayName": "",
-    "submittedAt": "2026-05-04T16:37:51.394Z"
+    "submittedAt": "2026-05-04T16:37:51.394Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -93,7 +104,8 @@
     "rating": 5,
     "review": "Hyvä lähetys, vaikka Posti vähän hidasteli. Kaikki madot eläviä. Voi suositella.",
     "displayName": "Hannu K.",
-    "submittedAt": "2026-05-04T17:05:10.512Z"
+    "submittedAt": "2026-05-04T17:05:10.512Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -101,7 +113,8 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-05-05T15:06:35.252Z"
+    "submittedAt": "2026-05-05T15:06:35.252Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -109,7 +122,8 @@
     "rating": 5,
     "review": "",
     "displayName": "Kuki",
-    "submittedAt": "2026-05-11T13:05:31.603Z"
+    "submittedAt": "2026-05-11T13:05:31.603Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -117,7 +131,8 @@
     "rating": 4,
     "review": "Madot tulivat sovitusti ja olivat virkeitä. Olen tyytyväinen.",
     "displayName": "Anne Ilkantytär",
-    "submittedAt": "2026-05-18T11:47:50.376Z"
+    "submittedAt": "2026-05-18T11:47:50.376Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -125,7 +140,8 @@
     "rating": 5,
     "review": "Toimitus ja ohjeet olivat erinomaiset.\nMadot olivat virkeitä.\nNyt sitten odotetaan miten kasvavat ja lisääntyvätköhän.",
     "displayName": "Hannu P",
-    "submittedAt": "2026-05-18T12:55:29.497Z"
+    "submittedAt": "2026-05-18T12:55:29.497Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -133,7 +149,8 @@
     "rating": 5,
     "review": "Madot saapuivat perille hyvässä kunnossa ja nopeasti. Ja olivat hyvässä kunnossa",
     "displayName": "Toni",
-    "submittedAt": "2026-05-26T05:06:16.918Z"
+    "submittedAt": "2026-05-26T05:06:16.918Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -141,7 +158,8 @@
     "rating": 5,
     "review": "Ystävällinen palvelu. Sujuva toimitus.",
     "displayName": "Markku",
-    "submittedAt": "2026-05-26T05:44:09.819Z"
+    "submittedAt": "2026-05-26T05:44:09.819Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -149,7 +167,8 @@
     "rating": 5,
     "review": "Paketti ja toimitus ok, kaverit voivat hyvin, karkulaisia pari kappaletta. Kunhan vaan maltan olla kurkkimatta joka päivä, niin homma etenee hyvin.",
     "displayName": "Riku",
-    "submittedAt": "2026-06-01T13:19:29.225Z"
+    "submittedAt": "2026-06-01T13:19:29.225Z",
+    "purchasedProducts": ["worms", "compostChow"]
   },
   {
     "language": "fi",
@@ -157,7 +176,8 @@
     "rating": 5,
     "review": "Nopea toimitus ja ekologisesti kestävä pakkaus, kiitos! Madot ovat elinvoimaisia ja harrastus lähti hyvin käyntiin.",
     "displayName": "Matomehuharrastaja",
-    "submittedAt": "2026-06-01T12:47:45.947Z"
+    "submittedAt": "2026-06-01T12:47:45.947Z",
+    "purchasedProducts": ["worms", "compostChow"]
   },
   {
     "language": "fi",
@@ -165,7 +185,8 @@
     "rating": 5,
     "review": "Toimitus nopea ja lierot vikkeliä.",
     "displayName": "",
-    "submittedAt": "2026-06-03T05:17:47.448Z"
+    "submittedAt": "2026-06-03T05:17:47.448Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -173,7 +194,8 @@
     "rating": 5,
     "review": "Tilaus ja toimitus hoitui nopeasti ja vaivattomasti. Sain myös ripeästi vastauksen sähköpostilla lähettämiini kysymyksiin. Toimitetut kompostimadot vastasivat odotuksiani. Kaikin puolin hyvää palvelua!",
     "displayName": "Sirkku P",
-    "submittedAt": "2026-06-24T18:33:59.586Z"
+    "submittedAt": "2026-06-24T18:33:59.586Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -181,7 +203,8 @@
     "rating": 5,
     "review": "Vaikka lierot joutuivat postin hitauden vuoksi olemaan pitkään paketissa, ne olivat elossa, ja voivat nyt hyvin omassa kompostilaatikossaan.",
     "displayName": "Sannavaan75",
-    "submittedAt": "2026-07-13T07:49:30.895Z"
+    "submittedAt": "2026-07-13T07:49:30.895Z",
+    "purchasedProducts": ["worms", "compostChow"]
   },
   {
     "language": "fi",
@@ -189,7 +212,8 @@
     "rating": 5,
     "review": "Todella hyvä! Virkeät madot ja toimiva kontakti myyjään!",
     "displayName": "Filippa",
-    "submittedAt": "2026-07-27T16:57:06.115Z"
+    "submittedAt": "2026-07-27T16:57:06.115Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -197,7 +221,8 @@
     "rating": 4,
     "review": "Ihan hyvä",
     "displayName": "",
-    "submittedAt": "2026-07-27T11:46:55.841Z"
+    "submittedAt": "2026-07-27T11:46:55.841Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -205,7 +230,8 @@
     "rating": 5,
     "review": "Madot olivat hyvässä kunnossa paketin saavuuttua",
     "displayName": "",
-    "submittedAt": "2026-07-28T12:41:44.092Z"
+    "submittedAt": "2026-07-28T12:41:44.092Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -213,7 +239,8 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-08-24T13:35:10.418Z"
+    "submittedAt": "2026-08-24T13:35:10.418Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -221,7 +248,8 @@
     "rating": 5,
     "review": "Kaikki sujui sovitusti ja hienosti",
     "displayName": "",
-    "submittedAt": "2026-09-02T15:14:30.081Z"
+    "submittedAt": "2026-09-02T15:14:30.081Z",
+    "purchasedProducts": ["worms", "preparedWormBin", "compostChow"]
   },
   {
     "language": "fi",
@@ -229,7 +257,8 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-09-15T11:19:31.963Z"
+    "submittedAt": "2026-09-15T11:19:31.963Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -237,7 +266,8 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-09-16T14:36:58.210Z"
+    "submittedAt": "2026-09-16T14:36:58.210Z",
+    "purchasedProducts": ["worms", "compostChow"]
   },
   {
     "language": "fi",
@@ -245,7 +275,8 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-09-16T14:36:58.210Z"
+    "submittedAt": "2026-09-16T14:36:58.210Z",
+    "purchasedProducts": ["worms", "compostChow"]
   },
   {
     "language": "fi",
@@ -253,7 +284,8 @@
     "rating": 5,
     "review": "Madot oli elinvoimaisia saapuessaan, lähetys oli nopea ja yhteydenpito yritykseltä moitteetonta.",
     "displayName": "Aleksi",
-    "submittedAt": "2026-09-21T14:01:25.622Z"
+    "submittedAt": "2026-09-21T14:01:25.622Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -261,7 +293,8 @@
     "rating": 5,
     "review": "Paketin toimitus oli nopea, lierot hyvinvointiset, kaikki toimii mutkattomasti, suosittelen!",
     "displayName": "Anneli",
-    "submittedAt": "2026-09-22T08:04:53.871Z"
+    "submittedAt": "2026-09-22T08:04:53.871Z",
+    "purchasedProducts": ["worms"]
   },
   {
     "language": "fi",
@@ -269,6 +302,7 @@
     "rating": 5,
     "review": "",
     "displayName": "",
-    "submittedAt": "2026-09-28T17:42:25.364Z"
+    "submittedAt": "2026-09-28T17:42:25.364Z",
+    "purchasedProducts": ["worms"]
   }
 ]
