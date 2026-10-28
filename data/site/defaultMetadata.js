@@ -47,5 +47,5 @@ export const defaultMetadata = {
   other: {
     'google-adsense-account': ADSENSE_CLIENT,
   },
-  manifest: '/site.webmanifest',
+  manifest: '/manifest.webmanifest',
 };
