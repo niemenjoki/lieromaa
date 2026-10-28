@@ -62,14 +62,28 @@ export async function POST(request) {
     );
   }
 
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'X-Order-Token': orderServiceToken,
+  };
+  // Consented events join the same day's visitor hash; time on page and scroll
+  // stay anonymous, so their requests carry no IP address.
+  if (payload?.eventName) {
+    const ip = String(request.headers.get('x-forwarded-for') || '')
+      .split(',')[0]
+      .trim();
+    const userAgent = String(request.headers.get('user-agent') || '').trim();
+    if (ip && userAgent) {
+      headers['X-Analytics-Client-Ip'] = ip;
+      headers['X-Analytics-User-Agent'] = userAgent;
+    }
+  }
+
   try {
     const upstreamResponse = await fetch(analyticsServiceUrl, {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-Order-Token': orderServiceToken,
-      },
+      headers,
       body: JSON.stringify(payload || {}),
       signal: AbortSignal.timeout(Number(process.env.ORDER_SERVICE_TIMEOUT_MS) || 5000),
       cache: 'no-store',

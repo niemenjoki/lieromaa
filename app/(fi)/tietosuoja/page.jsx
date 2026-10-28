@@ -28,7 +28,6 @@ export default function PrivacyPage() {
         <p>
           <em>Päivitetty: {formatFinnishDate(updatedAt)}</em>
         </p>
-
         <p>
           Lieromaa-verkkosivustoa ylläpitää Joonas Niemenjoki (rekisterinpitäjä). Tässä
           tietosuojaselosteessa kerrotaan käytännöistä, jotka liittyvät henkilötietojen
@@ -38,7 +37,6 @@ export default function PrivacyPage() {
           antamista. Sivustolla ei käytetä automaattista päätöksentekoa tai profilointia,
           joka tuottaisi oikeusvaikutuksia.
         </p>
-
         <h2>Rekisterinpitäjän yhteystiedot</h2>
         <p>
           Rekisterinpitäjä: <strong>{BUSINESS_NAME}</strong>
@@ -49,7 +47,6 @@ export default function PrivacyPage() {
           <br />
           Puhelin / WhatsApp: <strong>{CONTACT_PHONE}</strong>
         </p>
-
         <h2>Mitä tietoja kerätään</h2>
         <p>Tällä sivustolla voidaan käsitellä seuraavia tietoryhmiä:</p>
         <ul>
@@ -89,15 +86,16 @@ export default function PrivacyPage() {
             suoraan lukea.
           </li>
           <li>
-            Tekninen käyttödata ja analytiikkamittarit: Lieromaan oma analytiikka kerää
-            vain pseudonyymejä käyttömittareita, kuten selainkohtaisen tunnisteen,
-            istuntotunnisteen, sivupolut, aikaleimat, edellisen sisäisen sivun, ulkoisen
-            viittaavan sivun host-nimen, mahdolliset UTM-kampanjaparametrit, arvioidun
-            viipymän, scrollaussyvyyden, tilaus-CTA-klikkaukset, ostoskori- ja
-            tilauslomaketapahtumat sekä suorituskykymittarit. Lieromaan oma analytiikka ei
-            sisällä nimeä, sähköpostiosoitetta, puhelinnumeroa, toimitusosoitetta,
-            tilausnumeroa, IP-osoitetta, tarkkoja laitetietoja tai muita URL-parametreja
-            kuin UTM-kampanjaparametrit.
+            Tekninen käyttödata ja analytiikkamittarit: Lieromaan oma analytiikka kirjaa
+            sivuston palvelimella jokaisesta sivun avauksesta sivupolun, aikaleiman,
+            ulkoisen viittaavan sivun host-nimen, mahdolliset UTM-kampanjaparametrit ja
+            päivittäin vaihtuvan kävijätiivisteen. Jos olet antanut
+            analytiikkasuostumuksen, analytiikka kerää lisäksi arvioidun viipymän,
+            vierityssyvyyden, tilausnapin klikkaukset sekä ostoskori- ja
+            tilauslomaketapahtumat. Lieromaan oma analytiikka ei tallenna nimeä,
+            sähköpostiosoitetta, puhelinnumeroa, toimitusosoitetta, tilausnumeroa,
+            IP-osoitetta, selaintunnistetta eikä muita URL-parametreja kuin
+            UTM-kampanjaparametrit.
           </li>
           <li>
             Käyttäjäasetukset: teema-asetus (vaalea/tumma tila), joka tallennetaan
@@ -125,22 +123,20 @@ export default function PrivacyPage() {
             vanhenemisen jälkeen eikä se sisällä maksuvälineen tietoja.
           </li>
         </ul>
-
         <h2>Tietojen kerääminen ja lähteet</h2>
         <p>
           Tietoja kerätään ensisijaisesti suoraan sinulta, kun lähetät tilauksen
           tilauslomakkeella, lähetät peruuttamisilmoituksen, jätät arvostelun, teet
           tietopyynnön tai lähetät viestin oppaiden yhteydessä olevalla kysymys- ja
           aihe-ehdotuslomakkeella. Lisäksi kolmannen osapuolen palvelut (esimerkiksi
-          Google AdSense ja Speed Insights) voivat kerätä teknisiä tietoja sivuston
-          käytöstä. Lieromaa käyttää lisäksi omaa ensimmäisen osapuolen analytiikkaa, joka
-          tallentaa vain sivuston käytön kannalta olennaiset mittarit omalle palvelimelle
-          suostumuksen perusteella. Tilaus-, peruuttamisilmoitus- ja arvostelulomakkeiden
-          välityksessä käytetään lisäksi Verceliä ja Cloudflare Tunnel -yhteyttä. Sivustoa
-          voi käyttää myös mainostenesto-ohjelmien tai muiden seurantaa estävien
-          työkalujen kanssa.
+          Google AdSense) voivat kerätä teknisiä tietoja sivuston käytöstä. Lieromaa
+          käyttää lisäksi omaa ensimmäisen osapuolen analytiikkaa, joka tallentaa sivuston
+          käytön kannalta olennaiset mittarit omalle palvelimelle. Tarkemmat mittarit
+          kerätään vain suostumuksella. Tilaus-, peruuttamisilmoitus- ja
+          arvostelulomakkeiden välityksessä käytetään lisäksi Verceliä ja Cloudflare
+          Tunnel -yhteyttä. Sivustoa voi käyttää myös mainostenesto-ohjelmien tai muiden
+          seurantaa estävien työkalujen kanssa.
         </p>
-
         <h2>Käsittelyn tarkoitukset ja oikeusperusteet</h2>
         <p>Henkilötietoja käsitellään seuraaviin tarkoituksiin:</p>
         <ul>
@@ -182,10 +178,11 @@ export default function PrivacyPage() {
             suostumus (GDPR Art. 6(1)(a)).
           </li>
           <li>
-            Sivuston käytön ja suorituskyvyn analysointi (Lieromaan oma ensimmäisen
-            osapuolen analytiikka ja Speed Insights): ensimmäisen osapuolen analytiikan
-            oikeusperusteena suostumus (GDPR Art. 6(1)(a)) ja Speed Insightsin osalta
-            oikeutettu etu (GDPR Art. 6(1)(f)) sivuston kehittämiseksi.
+            Sivuston käytön analysointi (Lieromaan oma ensimmäisen osapuolen analytiikka):
+            palvelimella kirjattavien sivunäyttöjen ja kävijätiivisteen oikeusperusteena
+            oikeutettu etu (GDPR Art. 6(1)(f)) sivuston kehittämiseksi. Selaimessa
+            suostumuksella kerättävien lisämittareiden oikeusperusteena suostumus (GDPR
+            Art. 6(1)(a)).
           </li>
           <li>
             Käyttäjäasetusten tallentaminen (localStorage): Oikeusperusteena oikeutettu
@@ -196,7 +193,6 @@ export default function PrivacyPage() {
             6(1)(f)) ostoskorin ja tilaamisen käytettävyyden parantamiseksi.
           </li>
         </ul>
-
         <h2>Tilauslomakkeet</h2>
         <p>
           Tilauslomakkeiden lähetykset vastaanotetaan ensin Lieromaan julkisella
@@ -210,7 +206,6 @@ export default function PrivacyPage() {
           alkuperä- ja viittaustieto sekä välittävän palvelun antama IP-osoitetieto, jotta
           lomakkeen väärinkäyttöä voidaan selvittää ja palvelua suojata.
         </p>
-
         <h2>Peruuttamisilmoituslomake</h2>
         <p>
           Peruuttamisilmoituslomakkeen tiedot vastaanotetaan ensin Lieromaan julkisella
@@ -221,7 +216,6 @@ export default function PrivacyPage() {
           vastaanottamisesta, ja Lieromaan ylläpitäjälle lähetetään sähköposti-ilmoitus
           asian manuaalista käsittelyä varten.
         </p>
-
         <h2>Arvostelulomake</h2>
         <p>
           Arvostelulomake toimii henkilökohtaisella arvostelulinkillä, joka liittyy
@@ -235,7 +229,6 @@ export default function PrivacyPage() {
           käyttövalmis kompostori tai kuituseos. Yksityistä palautetta ei julkaista
           asiakasarvosteluna.
         </p>
-
         <h2>Noutoajan varaus</h2>
         <p>
           Järvenpäästä noudettavissa tilauksissa lähetän henkilökohtaisen linkin, jolla
@@ -246,7 +239,6 @@ export default function PrivacyPage() {
           Tiedot säilytetään tilaustietojen osana ja poistetaan tai anonymisoidaan niiden
           kanssa.
         </p>
-
         <h2>Oppaiden kysymys- ja aihe-ehdotuslomake</h2>
         <p>
           Oppaiden yhteydessä olevien kysymys- ja aihe-ehdotuslomakkeiden viestit
@@ -257,7 +249,6 @@ export default function PrivacyPage() {
           (referrer), jos sellainen on saatavilla. Uudesta viestistä lähetetään
           sähköposti-ilmoitus Lieromaan ylläpitäjälle Zoho Mailin SMTP-palvelun kautta.
         </p>
-
         <h2>Tietopyyntölomake ja tietojen lataaminen</h2>
         <p>
           Tietopyyntölomakkeella annettua tilausnumeroa ja sähköpostiosoitetta verrataan
@@ -271,13 +262,11 @@ export default function PrivacyPage() {
         <p>
           Latauslinkki sisältää satunnaisen kertakäyttöisen tunnisteen, joka on voimassa
           24 tuntia. Palvelimelle tallennetaan tunnisteesta vain tiiviste, eikä tunniste
-          sisälly sivuston analytiikkaan. Lataussivulla ei käytetä Lieromaan analytiikkaa
-          tai Speed Insightsia. Ladattava JSON-tiedosto sisältää tilaukseen liittyvät
-          tiedot, jotka ovat edelleen Lieromaan tilaustenhallinnassa. Lataus ei sisällä
-          sisäisiä ylläpitäjätunnisteita, sähköpostipalvelun viestitunnisteita tai
-          salaisuuksia.
+          sisälly sivuston analytiikkaan. Lataussivulla ei käytetä Lieromaan analytiikkaa.
+          Ladattava JSON-tiedosto sisältää tilaukseen liittyvät tiedot, jotka ovat
+          edelleen Lieromaan tilaustenhallinnassa. Lataus ei sisällä sisäisiä
+          ylläpitäjätunnisteita, sähköpostipalvelun viestitunnisteita tai salaisuuksia.
         </p>
-
         <h2>Toimitukset (Posti)</h2>
         <p>
           Kun valitset toimituksen Postin kautta, toimitusta varten tarvittavat tiedot
@@ -285,7 +274,6 @@ export default function PrivacyPage() {
           sähköposti) syötetään Postin järjestelmään. Posti käsittelee tietoja oman
           tietosuojakäytäntönsä mukaisesti.
         </p>
-
         <h2>Laskutus ja maksut</h2>
         <p>
           Kun valitset verkkomaksun, Stripe saa maksun käsittelyä, petosten torjuntaa ja
@@ -320,7 +308,6 @@ export default function PrivacyPage() {
           kirjanpidon palveluntarjoajalle tämän lakisääteisten ja sopimusperusteisten
           velvoitteiden mukaisesti.
         </p>
-
         <h2>Google AdSense</h2>
         <p>
           Sivustolla käytetään Google AdSensea mainosten näyttämiseen. Google voi kerätä
@@ -356,56 +343,46 @@ export default function PrivacyPage() {
           </a>
           .
         </p>
-
-        <h2>Ensimmäisen osapuolen analytiikka ja Speed Insights</h2>
+        <h2>Ensimmäisen osapuolen analytiikka</h2>
         <p>
           Sivustolla käytetään Lieromaan omaa kevyttä ensimmäisen osapuolen analytiikkaa
-          sekä Vercel Speed Insights -palvelua sivuston käytön ja suorituskyvyn
-          seuraamiseen. Ensimmäisen osapuolen analytiikka käynnistyy vasta, kun olet
-          hyväksynyt analytiikan ja mainontaan liittyvän päätelaitetallennuksen
-          suostumuksenhallintatyökalussa. Tällöin analytiikka tallentaa omalle
-          palvelimelle pseudonyymin selainkohtaisen tunnisteen, istuntotunnisteen,
-          sivupolun, aikaleiman, edellisen sisäisen sivun, ulkoisen viittaavan sivun
-          host-nimen (esimerkiksi google.com tai com.linkedin.android), mahdolliset
-          UTM-parametrit (utm_source, utm_medium, utm_campaign, utm_content ja utm_term),
-          arvioidun viipymän, scrollaussyvyyden ja tilaus-CTA-klikkaukset. Lisäksi
-          analytiikka voi tallentaa pseudonyymejä tapahtumia, kuten ostoskoriin
-          lisäämisen, ostoskorin toimitustapavaiheesta jatkamisen, tilauslomakkeen
-          lähetysyrityksen ja onnistuneen tilauslomakkeen lähetyksen. Tietoja käytetään
-          vain sen ymmärtämiseen, miten sivuilla liikutaan ja miten kiinnostus
-          tuotteisiin, ostoskoriin ja tilaamiseen muuttuu ajan kuluessa.
-        </p>
+          sivuston käytön seuraamiseen. Kun avaat sivun, sivuston palvelin kirjaa
+          sivupolun, aikaleiman, ulkoisen viittaavan sivun host-nimen (esimerkiksi
+          google.com tai com.linkedin.android) ja mahdolliset UTM-parametrit (utm_source,
+          utm_medium, utm_campaign, utm_content ja utm_term). Samalla palvelin laskee
+          IP-osoitteesta ja selaintunnisteesta kävijätiivisteen, jolla saman päivän
+          käynnit voidaan laskea yhteen. Laskennassa käytetään satunnaista avainta, joka
+          vaihtuu joka päivä ja poistetaan vuorokauden päätyttyä, joten samaa kävijää ei
+          voi tunnistaa eri päivinä. IP-osoitetta ja selaintunnistetta ei tallenneta, eikä
+          selaimeesi tallenneta tätä varten mitään. Kävijätiiviste on pseudonyymi tieto,
+          ja sitä käsitellään henkilötietona.{' '}
+        </p>{' '}
         <p>
-          Ensimmäisen osapuolen analytiikka ei tallenna IP-osoitteita, selaimen tai
-          laitteen tarkkoja tunnistetietoja, maantieteellistä sijaintia eikä käytä
-          sormenjälkitunnistusta tai muita vastaavia tunnistuskeinoja. Analytiikan
-          tapahtumia ei yhdistetä yksittäisiin tilaustietoihin, kuten nimeen,
+          {' '}
+          Jos hyväksyt analytiikan suostumuksenhallintatyökalussa, sivun skripti kerää
+          lisäksi arvioidun viipymän, vierityssyvyyden ja tilausnapin klikkaukset sekä
+          tapahtumia, kuten ostoskoriin lisäämisen, ostoskorin toimitustapavaiheesta
+          jatkamisen, tilauslomakkeen lähetysyrityksen ja onnistuneen tilauslomakkeen
+          lähetyksen. Viipymä ja vierityssyvyys tallennetaan sivukohtaisesti ilman
+          kävijätiivistettä. Tapahtumat liitetään saman päivän kävijätiivisteeseen, jotta
+          nähdään, mitkä sivut johtavat ostoskoriin ja tilaukseen. Mainosten suostumus ei
+          vaikuta analytiikkaan. Tietoja käytetään vain sen ymmärtämiseen, miten sivuilla
+          liikutaan ja miten kiinnostus tuotteisiin, ostoskoriin ja tilaamiseen muuttuu
+          ajan kuluessa.{' '}
+        </p>{' '}
+        <p>
+          {' '}
+          Analytiikan tietoja ei yhdistetä yksittäisiin tilaustietoihin, kuten nimeen,
           sähköpostiosoitteeseen, puhelinnumeroon, toimitusosoitteeseen tai
-          tilausnumeroon. Raakatason analytiikkatiedot ovat pseudonyymejä. Raportointi
-          tehdään istunto- ja sivuryhmätasolla, jotta voidaan nähdä yleisesti miten
-          tilaavat istunnot etenevät sivustolla ilman yksittäisen asiakkaan
-          selaushistorian yhdistämistä tilaukseen. Analytiikka tallentaa URL-parametreista
-          vain UTM-kampanjaparametrit, jos niitä on linkissä mukana. Muita URL-parametreja
-          ei tallenneta analytiikkaan. Pseudonyymi kävijätunniste säilytetään suostumuksen
-          jälkeen selaimen localStoragessa ja istuntotieto sessionStoragessa. Jos peruutat
-          analytiikkasuostumuksen, nämä analytiikan tunnisteet poistetaan selaimen
-          tallennustilasta. Speed Insights kerää suorituskykymittareita
-          palveluntarjoajansa käytäntöjen mukaisesti.
+          tilausnumeroon. Analytiikka ei tallenna maantieteellistä sijaintia. Raportointi
+          tehdään sivu-, sivuryhmä- ja päivätasolla. Analytiikka tallentaa
+          URL-parametreista vain UTM-kampanjaparametrit, jos niitä on linkissä mukana.
+          Muita URL-parametreja ei tallenneta analytiikkaan.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikkadata tallennetaan Lieromaan hallinnoimaan
-          SQLite-tietokantaan kotipalvelimella. Lisätietoja Speed Insightsista löydät
-          palveluntarjoajan sivulta:{' '}
-          <a
-            href="https://vercel.com/docs/speed-insights/privacy-policy"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Speed Insightsin tietosuoja
-          </a>
-          .
+          SQLite-tietokantaan kotipalvelimella.
         </p>
-
         <h2>Selaimen paikallinen ja istuntotallennus</h2>
         <p>
           Kun vaihdat vaaleaan tai tummaan tilaan, sivusto tallentaa valitsemasi teeman
@@ -413,11 +390,8 @@ export default function PrivacyPage() {
           localStorageen, jotta voit jatkaa tilaamista myöhemmin samalla selaimella.
           Ostoskori poistetaan automaattisesti, jos sitä ei muokata 7 päivään. Ostoskorin
           sisältö pysyy selaimessasi, eikä sitä lähetetä Lieromaalle ennen kuin lähetät
-          tilauslomakkeen. Lisäksi pseudonyymi kävijätunniste tallennetaan suostumuksen
-          jälkeen localStorageen ja istuntotieto sessionStorageen ensimmäisen osapuolen
-          analytiikkaa varten. Näistä tunnisteista ei voi suoraan päätellä
-          henkilöllisyyttäsi, mutta niitä käsitellään henkilötietoina, koska sama selain
-          voidaan tunnistaa eri käyntikerroilla suostumuksen voimassa ollessa.
+          tilauslomakkeen. Ensimmäisen osapuolen analytiikka ei tallenna selaimeesi
+          mitään.
         </p>
         <p>
           Kun siirryt tilauksesta Stripen maksusivulle, sivusto säilyttää lomakkeen
@@ -427,18 +401,16 @@ export default function PrivacyPage() {
           jälkeen. sessionStorage tyhjentyy tavallisesti myös, kun välilehti tai
           selainistunto suljetaan.
         </p>
-
         <h2>Evästeet</h2>
         <p>
-          Sivusto ei itse käytä analytiikkaevästeitä. Ensimmäisen osapuolen analytiikka
-          käyttää suostumuksen jälkeen selaimen localStoragea ja sessionStoragea, ei
-          evästeitä. Google AdSense sekä muut kolmannen osapuolen palvelut voivat
-          kuitenkin käyttää evästeitä mainosten näyttämiseen, kohdentamiseen ja
-          tilastointiin. Voit estää evästeiden käytön selaimesi asetuksista tai asettaa
-          ilmoituksen evästeiden lähettämisestä. Voit peruuttaa suostumuksesi milloin
-          tahansa suostumuksenhallintatyökalun kautta tai selaimen asetuksista.
+          Sivusto ei itse käytä analytiikkaevästeitä, eikä ensimmäisen osapuolen
+          analytiikka tallenna selaimeen mitään. Google AdSense sekä muut kolmannen
+          osapuolen palvelut voivat kuitenkin käyttää evästeitä mainosten näyttämiseen,
+          kohdentamiseen ja tilastointiin. Voit estää evästeiden käytön selaimesi
+          asetuksista tai asettaa ilmoituksen evästeiden lähettämisestä. Voit peruuttaa
+          suostumuksesi milloin tahansa suostumuksenhallintatyökalun kautta tai selaimen
+          asetuksista.
         </p>
-
         <h2>Tietojen siirto EU-/ETA-alueen ulkopuolelle</h2>
         <p>
           Osa käytetyistä palveluista (kuten Google, Cloudflare, Vercel ja mahdollisesti
@@ -450,7 +422,6 @@ export default function PrivacyPage() {
           Voit pyytää lisätietoa käytetyistä siirtoperusteista ja suojatoimista ottamalla
           yhteyttä rekisterinpitäjään.
         </p>
-
         <h2>Tietojen vastaanottajat</h2>
         <p>
           Henkilötietoja luovutetaan kolmansille osapuolille vain edellä mainituissa
@@ -461,7 +432,6 @@ export default function PrivacyPage() {
           analytiikkadata pysyy Lieromaan omassa hallinnassa. Henkilötietoja ei myydä eikä
           luovuteta muihin tarkoituksiin ilman lainmukaista perustetta.
         </p>
-
         <h2>Tietojen säilytysaika</h2>
         <ul>
           <li>
@@ -524,27 +494,23 @@ export default function PrivacyPage() {
             siihen liittyvät avoimet latauspyynnöt.
           </li>
           <li>
-            Ensimmäisen osapuolen analytiikkatiedot säilyvät Lieromaan omassa
-            SQLite-tietokannassa niin kauan kuin niitä tarvitaan sivuston käytön
-            seuraamiseen ja kuukausiraportointiin. Speed Insightsin tiedot säilyvät
-            palveluntarjoajan käytäntöjen mukaisesti.
+            Ensimmäisen osapuolen analytiikan yksittäiset sivunäytöt, mittarit ja
+            tapahtumat säilyvät Lieromaan omassa SQLite-tietokannassa 25 kuukautta, minkä
+            jälkeen ne poistetaan. Kävijätiivisteen päivittäinen avain poistetaan
+            vuorokauden päätyttyä.
           </li>
           <li>
-            LocalStorageen tallennettu teema-asetus, ostoskoritieto ja pseudonyymi
-            kävijätunniste sekä sessionStorageen tallennettu istuntotieto säilyvät
-            käytössä olevassa selaimessa, kunnes poistat ne, peruutat
-            analytiikkasuostumuksen tai selain poistaa ne omien säilytyskäytäntöjensä
-            mukaisesti. Ostoskori poistetaan sivuston toimesta viimeistään 7 päivän
-            käyttämättömyyden jälkeen.
+            LocalStorageen tallennettu teema-asetus ja ostoskoritieto säilyvät käytössä
+            olevassa selaimessa, kunnes poistat ne tai selain poistaa ne omien
+            säilytyskäytäntöjensä mukaisesti. Ostoskori poistetaan sivuston toimesta
+            viimeistään 7 päivän käyttämättömyyden jälkeen.
           </li>
         </ul>
-
         <h2>Pakolliset tiedot tilausta varten</h2>
         <p>
           Tilauslomakkeen pakolliset tiedot ovat tarpeen tilauksen käsittelemiseksi ja
           toimittamiseksi. Jos pakollisia tietoja ei anneta, tilausta ei voida käsitellä.
         </p>
-
         <h2>Rekisteröidyn oikeudet</h2>
         <p>Sinulla on seuraavat oikeudet GDPR:n mukaisesti:</p>
         <ul>
@@ -568,7 +534,6 @@ export default function PrivacyPage() {
           koskevan pyynnön tai ongelmatilanteen voit lähettää sähköpostitse osoitteeseen{' '}
           {CONTACT_EMAIL}. Pyyntöihin vastataan kuukauden kuluessa.
         </p>
-
         <h2>Valitusoikeus</h2>
         <p>
           Jos katsot, että henkilötietojesi käsittely rikkoo GDPR:ää, sinulla on oikeus
@@ -578,7 +543,6 @@ export default function PrivacyPage() {
           </a>
           ).
         </p>
-
         <h2>Yhteystiedot</h2>
         <p>
           Jos sinulla on kysyttävää tästä tietosuojaselosteesta, voit ottaa yhteyttä

@@ -9,16 +9,12 @@ import {
   ANALYTICS_OPT_OUT_PATH,
   ANALYTICS_OPT_OUT_STORAGE_KEY,
   ANALYTICS_OPT_OUT_STORAGE_VALUE,
-  ANALYTICS_SESSION_STORAGE_KEY,
-  ANALYTICS_VISITOR_STORAGE_KEY,
   clearStoredAnalyticsState,
 } from '@/lib/analytics/optOut';
 
 const ANALYTICS_ENDPOINT = '/api/analytics';
 const ANALYTICS_SCHEMA_VERSION = 2;
 const ANALYTICS_CONSENT_EVENT_NAME = 'lieromaa:analytics-consent-changed';
-const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
-const SESSION_TOUCH_INTERVAL_MS = 60 * 1000;
 const IGNORED_ANALYTICS_PATHS = new Set([ANALYTICS_OPT_OUT_PATH]);
 const UTM_FIELDS = ['utmSource', 'utmMedium', 'utmCampaign', 'utmContent', 'utmTerm'];
 const UTM_QUERY_KEYS = {
@@ -77,29 +73,6 @@ function isIgnoredAnalyticsPath(value) {
   return IGNORED_ANALYTICS_PATHS.has(normalizePath(value));
 }
 
-function normalizeHost(value) {
-  const plainValue = String(value || '').trim();
-  if (!plainValue) {
-    return '';
-  }
-
-  try {
-    const parsed = new URL(plainValue);
-    return parsed.host
-      .toLowerCase()
-      .replace(/^www\./, '')
-      .slice(0, 120);
-  } catch {
-    const sanitized = plainValue
-      .replace(/^[a-z]+:\/\//i, '')
-      .split('/')[0]
-      .toLowerCase()
-      .replace(/^www\./, '');
-
-    return sanitized.slice(0, 120);
-  }
-}
-
 function normalizeCampaignValue(value) {
   return String(value || '')
     .replace(/\s+/g, ' ')
@@ -134,117 +107,17 @@ function hasCampaignParams(campaign) {
   return UTM_FIELDS.some((fieldName) => Boolean(campaign?.[fieldName]));
 }
 
-function getExternalReferrerHost() {
-  const referrerHost = normalizeHost(document.referrer || '');
-  const currentHost = normalizeHost(globalThis.location?.host || '');
+// Visits are counted on the server. This script runs only with analytics
+// consent and keeps everything in memory: nothing is stored in the browser.
+let tabCampaign = null;
 
-  if (!referrerHost || !currentHost || referrerHost === currentHost) {
-    return '';
-  }
-
-  return referrerHost;
-}
-
-function getOrCreateVisitorId() {
-  const storage = getStorage('localStorage');
-  const existingId = storage?.getItem(ANALYTICS_VISITOR_STORAGE_KEY);
-  if (existingId) {
-    return existingId;
-  }
-
-  const nextId = createId('visitor');
-  storage?.setItem(ANALYTICS_VISITOR_STORAGE_KEY, nextId);
-  return nextId;
-}
-
-function loadSessionState(currentPath) {
-  const storage = getStorage('sessionStorage');
-  const now = Date.now();
+function getTabCampaign() {
   const currentCampaign = getCurrentCampaignParams();
-  let session = null;
-
-  if (storage) {
-    try {
-      session = JSON.parse(storage.getItem(ANALYTICS_SESSION_STORAGE_KEY) || 'null');
-    } catch {
-      session = null;
-    }
+  if (!tabCampaign || hasCampaignParams(currentCampaign)) {
+    tabCampaign = currentCampaign;
   }
 
-  const isExpired =
-    !session ||
-    !session.id ||
-    Number(session.lastActivityAt || 0) + SESSION_TIMEOUT_MS < now;
-
-  if (isExpired) {
-    session = {
-      id: createId('session'),
-      pageCount: 0,
-      lastPath: '',
-      lastActivityAt: now,
-      referrerHost: getExternalReferrerHost(),
-      campaign: currentCampaign,
-    };
-  }
-
-  if (hasCampaignParams(currentCampaign)) {
-    session.campaign = currentCampaign;
-  } else {
-    session.campaign = {
-      ...emptyCampaignParams(),
-      ...(session.campaign || {}),
-    };
-  }
-
-  const previousPath =
-    session.lastPath && session.lastPath !== currentPath ? session.lastPath : '';
-
-  session.pageCount = Number(session.pageCount || 0) + 1;
-  session.lastPath = currentPath;
-  session.lastActivityAt = now;
-
-  storage?.setItem(ANALYTICS_SESSION_STORAGE_KEY, JSON.stringify(session));
-
-  return {
-    sessionId: session.id,
-    sessionPageIndex: session.pageCount,
-    previousPath,
-    referrerHost: String(session.referrerHost || ''),
-    campaign: session.campaign,
-  };
-}
-
-function touchSession(path, lastTouchedAtRef) {
-  const now = Date.now();
-  if (
-    lastTouchedAtRef.current &&
-    now - lastTouchedAtRef.current < SESSION_TOUCH_INTERVAL_MS
-  ) {
-    return;
-  }
-
-  lastTouchedAtRef.current = now;
-
-  const storage = getStorage('sessionStorage');
-  if (!storage) {
-    return;
-  }
-
-  try {
-    const session = JSON.parse(storage.getItem(ANALYTICS_SESSION_STORAGE_KEY) || 'null');
-    if (!session?.id) {
-      return;
-    }
-
-    storage.setItem(
-      ANALYTICS_SESSION_STORAGE_KEY,
-      JSON.stringify({
-        ...session,
-        lastActivityAt: now,
-        lastPath: path || session.lastPath || '',
-      })
-    );
-  } catch {}
+  return tabCampaign;
 }
 
 function getCurrentScrollDepth() {
@@ -325,13 +198,7 @@ function buildPayload(view, now = Date.now()) {
   return {
     schemaVersion: ANALYTICS_SCHEMA_VERSION,
     pageViewId: view.pageViewId,
-    visitorId: view.visitorId,
-    sessionId: view.sessionId,
-    sessionPageIndex: view.sessionPageIndex,
     path: view.path,
-    previousPath: view.previousPath,
-    referrerHost: view.referrerHost,
-    ...view.campaign,
     startedAt: new Date(view.startedAtMs).toISOString(),
     endedAt: new Date(now).toISOString(),
     dwellMs: Math.max(0, Math.round(getDwellMs(view, now))),
@@ -410,8 +277,6 @@ function buildEventPayload(view, eventDetail = {}) {
     schemaVersion: ANALYTICS_SCHEMA_VERSION,
     eventId: createId('event'),
     pageViewId: view.pageViewId,
-    visitorId: view.visitorId,
-    sessionId: view.sessionId,
     path: view.path,
     eventName: String(eventName || '')
       .trim()
@@ -435,24 +300,11 @@ function sendEvent(view, eventDetail) {
   }
 }
 
-function createPageView(path, lastTouchedAtRef) {
-  const normalizedPath = normalizePath(path);
-  const session = loadSessionState(normalizedPath);
-
-  touchSession(normalizedPath, lastTouchedAtRef);
-
+function createPageView(path) {
   return {
     pageViewId: createId('pageview'),
-    visitorId: getOrCreateVisitorId(),
-    sessionId: session.sessionId,
-    sessionPageIndex: session.sessionPageIndex,
-    path: normalizedPath,
-    previousPath: session.previousPath || '',
-    referrerHost: session.referrerHost,
-    campaign: {
-      ...emptyCampaignParams(),
-      ...(session.campaign || {}),
-    },
+    path: normalizePath(path),
+    campaign: { ...getTabCampaign() },
     startedAtMs: Date.now(),
     visibleStartedAtMs: document.visibilityState === 'hidden' ? 0 : Date.now(),
     accumulatedVisibleMs: 0,
@@ -466,7 +318,6 @@ function createPageView(path, lastTouchedAtRef) {
 export default function FirstPartyAnalytics() {
   const pathname = usePathname();
   const currentViewRef = useRef(null);
-  const lastTouchedAtRef = useRef(0);
   // The consent gate sets the window flag before it emits the change event.
   const analyticsConsentGranted = useSyncExternalStore(
     subscribeToAnalyticsConsent,
@@ -475,11 +326,12 @@ export default function FirstPartyAnalytics() {
   );
 
   useEffect(() => {
+    // Remove identifiers that older versions stored in the browser.
+    clearStoredAnalyticsState();
+
     function handleAnalyticsConsentChange(event) {
       if (!event.detail?.granted) {
-        clearStoredAnalyticsState();
         currentViewRef.current = null;
-        lastTouchedAtRef.current = 0;
       }
     }
 
@@ -499,7 +351,6 @@ export default function FirstPartyAnalytics() {
   useEffect(() => {
     if (!analyticsConsentGranted) {
       currentViewRef.current = null;
-      lastTouchedAtRef.current = 0;
       return;
     }
 
@@ -508,9 +359,7 @@ export default function FirstPartyAnalytics() {
     const shouldSkipTracking = isIgnoredAnalyticsPath(nextPath) || isAnalyticsOptedOut();
 
     if (shouldSkipTracking) {
-      clearStoredAnalyticsState();
       currentViewRef.current = null;
-      lastTouchedAtRef.current = 0;
       return;
     }
 
@@ -527,7 +376,7 @@ export default function FirstPartyAnalytics() {
       sendAnalyticsPayload(buildPayload(currentView));
     }
 
-    const nextView = createPageView(nextPath, lastTouchedAtRef);
+    const nextView = createPageView(nextPath);
     currentViewRef.current = nextView;
     sendAnalyticsPayload(buildPayload(nextView, nextView.startedAtMs));
     if (nextView.path === '/tilaus') {
@@ -550,7 +399,6 @@ export default function FirstPartyAnalytics() {
         currentView.maxScrollPercent,
         getCurrentScrollDepth()
       );
-      touchSession(currentView.path, lastTouchedAtRef);
       sendAnalyticsPayload(buildPayload(currentView));
     }
 
@@ -583,7 +431,6 @@ export default function FirstPartyAnalytics() {
       }
 
       resumeView(currentView);
-      touchSession(currentView.path, lastTouchedAtRef);
     }
 
     function handlePageHide() {
@@ -613,7 +460,6 @@ export default function FirstPartyAnalytics() {
 
       if (!currentView.startedForms.has(formId)) {
         currentView.startedForms.add(formId);
-        touchSession(currentView.path, lastTouchedAtRef);
         sendEvent(currentView, {
           eventName: 'form_start',
           eventTarget: formId,
@@ -631,7 +477,6 @@ export default function FirstPartyAnalytics() {
 
       currentView.startedForms.add(formId);
       currentView.submittedForms.add(formId);
-      touchSession(currentView.path, lastTouchedAtRef);
       sendEvent(currentView, {
         eventName: formId === 'order' ? 'order_submit_attempt' : 'form_submit',
         eventTarget: formId,
@@ -652,7 +497,6 @@ export default function FirstPartyAnalytics() {
       }
 
       currentView.orderClickCount += 1;
-      touchSession(currentView.path, lastTouchedAtRef);
       sendEvent(currentView, {
         eventName: 'cta_click',
         eventTarget: String(button.dataset.analyticsCta || '').trim(),
@@ -668,18 +512,8 @@ export default function FirstPartyAnalytics() {
         return;
       }
 
-      touchSession(currentView.path, lastTouchedAtRef);
       sendEvent(currentView, event.detail || {});
     }
-
-    const interval = globalThis.setInterval(() => {
-      const currentView = currentViewRef.current;
-      if (!currentView || document.visibilityState === 'hidden') {
-        return;
-      }
-
-      touchSession(currentView.path, lastTouchedAtRef);
-    }, SESSION_TOUCH_INTERVAL_MS);
 
     globalThis.addEventListener('scroll', handleScroll, { passive: true });
     globalThis.addEventListener('pagehide', handlePageHide);
@@ -692,7 +526,6 @@ export default function FirstPartyAnalytics() {
     globalThis.addEventListener(ANALYTICS_CUSTOM_EVENT_NAME, handleCustomAnalyticsEvent);
 
     return () => {
-      globalThis.clearInterval(interval);
       globalThis.removeEventListener('scroll', handleScroll);
       globalThis.removeEventListener('pagehide', handlePageHide);
       globalThis.removeEventListener('beforeunload', handlePageHide);

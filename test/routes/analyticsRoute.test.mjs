@@ -86,6 +86,10 @@ describe('frontend analytics proxy route', () => {
           const response = await POST(
             createRouteRequest({
               url: 'https://www.lieromaa.fi/api/analytics',
+              extraHeaders: {
+                'x-forwarded-for': '203.0.113.7',
+                'user-agent': 'Mozilla/5.0 Test',
+              },
               json: {
                 pageViewId: 'pageview-1',
                 visitorId: 'visitor-1',
@@ -124,6 +128,38 @@ describe('frontend analytics proxy route', () => {
             recordedCalls[0][1].headers['X-Order-Token'],
             'shared-secret',
             'the analytics route should include the shared order token when proxying analytics events'
+          );
+          expectEqual(
+            recordedCalls[0][1].headers['X-Analytics-Client-Ip'],
+            undefined,
+            'time on page and scroll should stay anonymous and carry no IP address'
+          );
+
+          await POST(
+            createRouteRequest({
+              url: 'https://www.lieromaa.fi/api/analytics',
+              extraHeaders: {
+                'x-forwarded-for': '203.0.113.7, 10.0.0.1',
+                'user-agent': 'Mozilla/5.0 Test',
+              },
+              json: {
+                eventId: 'event-1',
+                pageViewId: 'pageview-1',
+                path: '/tuotteet/madot',
+                eventName: 'add_to_cart',
+                occurredAt: '2026-04-05T10:00:05.000Z',
+              },
+            })
+          );
+          expectEqual(
+            recordedCalls[1][1].headers['X-Analytics-Client-Ip'],
+            '203.0.113.7',
+            'consented events should carry the client IP for the daily visitor hash'
+          );
+          expectEqual(
+            recordedCalls[1][1].headers['X-Analytics-User-Agent'],
+            'Mozilla/5.0 Test',
+            'consented events should carry the user agent for the daily visitor hash'
           );
         } finally {
           globalThis.fetch = originalFetch;

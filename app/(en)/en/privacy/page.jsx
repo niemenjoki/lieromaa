@@ -11,7 +11,7 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-10-27';
+const UPDATED_AT = '2026-10-28';
 
 const pageMetadata = {
   language: 'en',
@@ -70,7 +70,6 @@ export default function EnglishPrivacyPage() {
             <br />
             Telephone / WhatsApp: <strong>{CONTACT_PHONE}</strong>
           </p>
-
           <h2>Data collected</h2>
           <p>The following categories of data may be processed on this site:</p>
           <ul>
@@ -123,14 +122,14 @@ export default function EnglishPrivacyPage() {
             </li>
             <li>
               Technical usage data and analytics measurements: Lieromaa’s first-party
-              analytics collects only pseudonymous usage measurements, such as a
-              browser-specific identifier, session identifier, page paths, timestamps, the
-              previous internal page, the hostname of an external referrer, possible UTM
-              campaign parameters, estimated engagement time, scroll depth, order-CTA
-              clicks, cart and order-form events, and performance measurements. It does
-              not include names, email addresses, telephone numbers, delivery addresses,
-              order numbers, IP addresses, detailed device data or URL parameters other
-              than UTM campaign parameters.
+              analytics records on the site’s server, for each page opened, the page path,
+              timestamp, the host name of an external referring site, any UTM campaign
+              parameters and a visitor hash that changes daily. If you have given
+              analytics consent, analytics also collects estimated time on page, scroll
+              depth, order button clicks, and cart and order form events. Lieromaa’s
+              first-party analytics does not store your name, email address, phone number,
+              delivery address, order number, IP address, browser identifier or URL
+              parameters other than UTM campaign parameters.
             </li>
             <li>
               User settings: the light or dark theme selection stored in the browser’s
@@ -142,20 +141,18 @@ export default function EnglishPrivacyPage() {
               until you submit the order form.
             </li>
           </ul>
-
           <h2>Collection and sources of data</h2>
           <p>
             Data is collected primarily from you when you submit an order, cancellation
             notice, review, data request, or a message through a question and
-            topic-suggestion form on a guide page. Third-party services, including Google
-            AdSense and Speed Insights, may also collect technical information about use
-            of the site. With consent, Lieromaa uses first-party analytics that stores
-            only measurements relevant to use of the site on Lieromaa’s own server. Vercel
-            and a Cloudflare Tunnel connection are used to transmit order, cancellation
-            and review forms. The site can also be used with ad blockers or other
-            tracking-prevention tools.
+            topic-suggestion form on a guide page. Third-party services, such as Google
+            AdSense, may also collect technical information about use of the site.
+            Lieromaa also uses its own first-party analytics, which stores measurements
+            relevant to the use of the site on its own server. More detailed measurements
+            are collected only with consent. Vercel and a Cloudflare Tunnel connection are
+            used to transmit order, cancellation and review forms. The site can also be
+            used with ad blockers or other tracking-prevention tools.
           </p>
-
           <h2>Purposes and legal bases for processing</h2>
           <p>Personal data is processed for the following purposes:</p>
           <ul>
@@ -195,10 +192,10 @@ export default function EnglishPrivacyPage() {
               (Article 6(1)(a)).
             </li>
             <li>
-              Analysing use and performance through Lieromaa’s first-party analytics and
-              Speed Insights: consent for first-party analytics (Article 6(1)(a)) and
-              legitimate interests in improving the site for Speed Insights (Article
-              6(1)(f)).
+              Analysing use through Lieromaa’s first-party analytics: for page views and
+              the visitor hash recorded on the server, legitimate interest (Article
+              6(1)(f)) in developing the site. For the additional measurements collected
+              in the browser with consent, consent (Article 6(1)(a)).
             </li>
             <li>
               Saving user settings and the cart in browser storage: legitimate interests
@@ -206,7 +203,6 @@ export default function EnglishPrivacyPage() {
               6(1)(f)).
             </li>
           </ul>
-
           <h2>Order forms</h2>
           <p>
             Order-form submissions are received first by Lieromaa’s public website on
@@ -219,7 +215,6 @@ export default function EnglishPrivacyPage() {
             by an intermediary service, may also be forwarded with an order so that misuse
             can be investigated and the service protected.
           </p>
-
           <h2>Cancellation form</h2>
           <p>
             Cancellation-form data is received first by Lieromaa’s public website on
@@ -229,7 +224,6 @@ export default function EnglishPrivacyPage() {
             acknowledging the notice, and Lieromaa’s operator receives an email so the
             matter can be handled manually.
           </p>
-
           <h2>Review form</h2>
           <p>
             The review form uses a personal review link associated with an earlier order.
@@ -242,7 +236,6 @@ export default function EnglishPrivacyPage() {
             worms, a ready-to-use worm bin or compost fibre mix. Private feedback is not
             published as a customer review.
           </p>
-
           <h2>Pickup time booking</h2>
           <p>
             For local pickup orders in Järvenpää, I send a personal link for choosing a
@@ -253,7 +246,6 @@ export default function EnglishPrivacyPage() {
             available pickup times. The data is kept as part of the order data and deleted
             or anonymised together with it.
           </p>
-
           <h2>Guide-page question and topic-suggestion form</h2>
           <p>
             Messages from question and topic-suggestion forms on the Finnish guide pages
@@ -263,7 +255,6 @@ export default function EnglishPrivacyPage() {
             page URL, page title and referrer where available. Zoho Mail’s SMTP service
             sends Lieromaa’s operator an email notification of a new message.
           </p>
-
           <h2>Data-request form and downloading data</h2>
           <p>
             The order number and email address supplied through the data-request form are
@@ -277,13 +268,11 @@ export default function EnglishPrivacyPage() {
           <p>
             The download link contains a random, single-use token valid for 24 hours. Only
             a hash of the token is stored on the server, and the token is excluded from
-            site analytics. Lieromaa analytics and Speed Insights are not used on the
-            download page. The downloadable JSON file contains data connected with the
-            order that remains stored in Lieromaa’s order-management system. It does not
-            contain internal administrator identifiers, email-service message identifiers
-            or secrets.
+            site analytics. Lieromaa analytics is not used on the download page. The
+            downloadable JSON file contains data connected with the order that remains
+            stored in Lieromaa’s order-management system. It does not contain internal
+            administrator identifiers, email-service message identifiers or secrets.
           </p>
-
           <h2>Delivery through Posti</h2>
           <p>
             When you choose delivery through Posti, the information needed for delivery,
@@ -291,7 +280,6 @@ export default function EnglishPrivacyPage() {
             email address, is entered into Posti’s system. Posti processes the data under
             its own privacy practices.
           </p>
-
           <h2>Invoicing, payments and accounting</h2>
           <p>
             When you choose online payment, Stripe receives your name, email address,
@@ -324,7 +312,6 @@ export default function EnglishPrivacyPage() {
             sale information to its accounting service provider. The service provider
             processes data under its own legal and contractual obligations.
           </p>
-
           <h2>Google AdSense</h2>
           <p>
             The site uses Google AdSense to display advertising. Google may collect data
@@ -360,61 +347,53 @@ export default function EnglishPrivacyPage() {
             </a>
             .
           </p>
-
-          <h2>First-party analytics and Speed Insights</h2>
+          <h2>First-party analytics</h2>
           <p>
-            Lieromaa uses lightweight first-party analytics and Vercel Speed Insights to
-            understand use and performance. First-party analytics begins only after you
-            accept analytics and advertising-related device storage in the consent
-            management tool. It then stores on Lieromaa’s server a pseudonymous
-            browser-specific identifier, session identifier, page path, timestamp,
-            previous internal page, hostname of an external referrer, possible UTM
-            parameters (utm_source, utm_medium, utm_campaign, utm_content and utm_term),
-            estimated engagement time, scroll depth and order-CTA clicks. It may also
-            record pseudonymous events such as adding an item to the cart, continuing from
-            the delivery-method stage, attempting to submit an order form and successfully
-            submitting one. This data is used only to understand navigation and changes in
-            interest in products, the cart and ordering over time.
-          </p>
+            Lieromaa uses lightweight first-party analytics to understand use of the site.
+            When you open a page, the site’s server records the page path, timestamp, the
+            host name of an external referring site (for example google.com or
+            com.linkedin.android) and any UTM parameters (utm_source, utm_medium,
+            utm_campaign, utm_content and utm_term). The server also calculates a visitor
+            hash from the IP address and browser identifier, so that visits on the same
+            day can be counted together. The calculation uses a random key that changes
+            every day and is deleted when the day ends, so the same visitor cannot be
+            recognised on different days. The IP address and browser identifier are not
+            stored, and nothing is stored in your browser for this purpose. The visitor
+            hash is pseudonymous data and is treated as personal data.{' '}
+          </p>{' '}
           <p>
-            First-party analytics does not store IP addresses, precise browser or device
-            identifiers or geographic location, and it does not use fingerprinting or
-            similar identification. Analytics events are not connected with individual
-            order data such as a name, email address, telephone number, delivery address
-            or order number. Raw analytics data is pseudonymous. Reporting is performed at
-            session and page-group level so that general order-session paths can be
-            understood without connecting an individual customer’s browsing history to an
-            order. Of URL parameters, analytics stores only UTM campaign parameters. The
-            pseudonymous visitor identifier is stored in localStorage after consent, and
-            session information in sessionStorage. Withdrawing analytics consent removes
-            these identifiers from browser storage. Speed Insights collects performance
-            measurements under the provider’s practices.
+            {' '}
+            If you accept analytics in the consent management tool, the page script also
+            collects estimated time on page, scroll depth and order button clicks, and
+            events such as adding to the cart, continuing from the delivery step of the
+            cart, an attempt to submit the order form and a successful order form
+            submission. Time on page and scroll depth are stored per page without the
+            visitor hash. Events are linked to the same day’s visitor hash so that it can
+            be seen which pages lead to the cart and to an order. Consent to advertising
+            does not affect analytics. The data is used only to understand how people move
+            through the site and how interest in products, the cart and ordering changes
+            over time.{' '}
+          </p>{' '}
+          <p>
+            {' '}
+            Analytics data is not connected with individual order details such as name,
+            email address, phone number, delivery address or order number. Analytics does
+            not store geographic location. Reporting is done at page, page group and day
+            level. Of URL parameters, analytics stores only UTM campaign parameters when
+            they are included in the link. Other URL parameters are not stored.
           </p>
           <p>
             First-party analytics data is stored in a SQLite database managed by Lieromaa
-            on the home server. More information on Speed Insights is available from the
-            provider:{' '}
-            <a
-              href="https://vercel.com/docs/speed-insights/privacy-policy"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Speed Insights privacy
-            </a>
-            .
+            on the home server.
           </p>
-
           <h2>Local and session storage</h2>
           <p>
             When you change between light and dark mode, the site stores your selection in
             localStorage. The cart is also stored there so that you can continue later in
             the same browser. The cart is removed automatically if it has not been
             modified for 7 days. Its contents remain in your browser and are not sent to
-            Lieromaa until you submit an order. After consent, a pseudonymous visitor
-            identifier is also stored in localStorage and session information in
-            sessionStorage for first-party analytics. These identifiers do not directly
-            reveal your identity, but they are treated as personal data because the same
-            browser can be recognised across visits while consent remains valid.
+            Lieromaa until you submit an order. First-party analytics stores nothing in
+            your browser.
           </p>
           <p>
             When an order proceeds to Stripe’s payment page, the site keeps a form draft
@@ -424,18 +403,16 @@ export default function EnglishPrivacyPage() {
             sessionStorage is also normally cleared when the tab or browser session is
             closed.
           </p>
-
           <h2>Cookies</h2>
           <p>
-            The site does not itself use analytics cookies. After consent, first-party
-            analytics uses localStorage and sessionStorage rather than cookies. Google
-            AdSense and other third-party services may nevertheless use cookies for
-            advertising, targeting and statistics. You can block cookies or request a
-            notice when cookies are sent through your browser settings. You can withdraw
-            consent at any time through the consent-management controls available in the
-            site footer or through your browser settings.
+            The site does not itself use analytics cookies, and first-party analytics
+            stores nothing in the browser. Google AdSense and other third-party services
+            may nevertheless use cookies for advertising, targeting and statistics. You
+            can block cookies or request a notice when cookies are sent through your
+            browser settings. You can withdraw consent at any time through the
+            consent-management controls available in the site footer or through your
+            browser settings.
           </p>
-
           <h2>Transfers outside the EU or EEA</h2>
           <p>
             Some services used by the site, including Google, Cloudflare, Vercel and
@@ -447,7 +424,6 @@ export default function EnglishPrivacyPage() {
             You can ask the data controller for more information about the transfer
             grounds and safeguards used.
           </p>
-
           <h2>Recipients of data</h2>
           <p>
             Personal data is disclosed to third parties only as described above, which may
@@ -457,7 +433,6 @@ export default function EnglishPrivacyPage() {
             First-party analytics data remains under Lieromaa’s control. Personal data is
             not sold or disclosed for other purposes without a lawful basis.
           </p>
-
           <h2>Retention periods</h2>
           <ul>
             <li>
@@ -513,25 +488,22 @@ export default function EnglishPrivacyPage() {
               any open download requests connected with it.
             </li>
             <li>
-              First-party analytics data remains in Lieromaa’s SQLite database for as long
-              as needed for usage monitoring and monthly reporting. Speed Insights data is
-              retained under the provider’s practices.
+              Individual page views, measurements and events of first-party analytics are
+              kept in Lieromaa’s own SQLite database for 25 months and then deleted. The
+              daily key for the visitor hash is deleted when the day ends.
             </li>
             <li>
-              The theme selection, cart and pseudonymous visitor identifier in
-              localStorage and session information in sessionStorage remain in the browser
-              until you remove them, withdraw analytics consent or the browser removes
-              them under its own retention practices. The site removes the cart after 7
-              days of inactivity.
+              The theme setting and cart data stored in localStorage remain in the browser
+              you use until you delete them or the browser deletes them under its own
+              retention practices. The site deletes the cart after no more than 7 days
+              without changes.
             </li>
           </ul>
-
           <h2>Information required for an order</h2>
           <p>
             Required fields on an order form are necessary to process and deliver the
             order. An order cannot be processed if that information is not supplied.
           </p>
-
           <h2>Your rights</h2>
           <p>You have the following rights under the GDPR:</p>
           <ul>
@@ -555,7 +527,6 @@ export default function EnglishPrivacyPage() {
             other rights requests or reports of a problem to {CONTACT_EMAIL}. Requests are
             answered within one month.
           </p>
-
           <h2>Right to lodge a complaint</h2>
           <p>
             If you believe that the processing of your personal data infringes the GDPR,
@@ -566,7 +537,6 @@ export default function EnglishPrivacyPage() {
             </a>
             .
           </p>
-
           <h2>Contact</h2>
           <p>If you have questions about this privacy notice, contact {CONTACT_EMAIL}.</p>
         </section>

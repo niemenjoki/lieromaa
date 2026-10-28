@@ -19,6 +19,9 @@ export default function OptOutRedirect() {
       );
     } catch {}
 
+    // The server counts page views, so the owner's opt-out must reach it too.
+    document.cookie = `${ANALYTICS_OPT_OUT_STORAGE_KEY}=${ANALYTICS_OPT_OUT_STORAGE_VALUE}; Max-Age=63072000; Path=/; SameSite=Lax; Secure`;
+
     globalThis.location.replace('/');
   }, []);
 

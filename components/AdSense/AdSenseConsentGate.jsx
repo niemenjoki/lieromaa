@@ -38,6 +38,19 @@ const consentBootstrap = `
       ];
     }
 
+    // Analytics needs its own consent. NOT_CONFIGURED means the message has no
+    // analytics purposes, so it must not count as consent.
+    function hasGrantedAnalyticsStorage(consentValues) {
+      var statusEnum = window.googlefc && window.googlefc.ConsentModePurposeStatusEnum;
+
+      if (!consentValues || !statusEnum) return false;
+
+      return [
+        statusEnum.CONSENT_MODE_PURPOSE_STATUS_GRANTED,
+        statusEnum.CONSENT_MODE_PURPOSE_STATUS_NOT_APPLICABLE,
+      ].indexOf(consentValues.analyticsStoragePurposeConsentStatus) !== -1;
+    }
+
     function hasGrantedAdStorage(consentValues) {
       if (!consentValues) return false;
 
@@ -86,9 +99,11 @@ const consentBootstrap = `
       var wasGranted = window.__lieromaaAdsConsentGranted;
       var isGranted = hasGrantedAdStorage(consentValues);
 
+      var isAnalyticsGranted = hasGrantedAnalyticsStorage(consentValues);
+
       window.__lieromaaAdsConsentGranted = isGranted;
-      window.__lieromaaAnalyticsConsentGranted = isGranted;
-      emit('lieromaa:analytics-consent-changed', { granted: isGranted });
+      window.__lieromaaAnalyticsConsentGranted = isAnalyticsGranted;
+      emit('lieromaa:analytics-consent-changed', { granted: isAnalyticsGranted });
 
       if (!wasGranted && isGranted) {
         emit('lieromaa:ads-consent-granted');

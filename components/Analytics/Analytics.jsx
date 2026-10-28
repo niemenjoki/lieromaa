@@ -2,8 +2,6 @@
 
 import { usePathname } from 'next/navigation';
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
-
 import { isAnalyticsExcludedPath } from '@/lib/analytics/pathPolicy.mjs';
 
 import FirstPartyAnalytics from './FirstPartyAnalytics';
@@ -20,10 +18,5 @@ export default function AnalyticsWrapper() {
 
   if (isDev || isAnalyticsExcludedPath(pathname)) return null;
 
-  return (
-    <>
-      <FirstPartyAnalytics />
-      <SpeedInsights />
-    </>
-  );
+  return <FirstPartyAnalytics />;
 }
