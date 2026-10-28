@@ -313,6 +313,18 @@
   opacity: 1;
 }
 
+.OtherSite {
+  margin: 0;
+  color: var(--footer-muted);
+  font-size: 0.76rem;
+  letter-spacing: 0.025em;
+  opacity: 0.75;
+}
+
+.OtherSite a {
+  color: inherit;
+}
+
 .Bottom {
   display: grid;
   min-width: 0;

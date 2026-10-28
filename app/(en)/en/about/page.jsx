@@ -8,6 +8,8 @@ import {
   AUTHOR_ID,
   AUTHOR_IMAGE_PATH,
   AUTHOR_LINKEDIN_URL,
+  AUTHOR_PROFILE_URL,
+  AUTHOR_SITE_URL,
   ORGANIZATION_ID,
 } from '@/lib/site/schema.mjs';
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
@@ -38,7 +40,12 @@ export default function EnglishAboutPage() {
       image: `https://www.lieromaa.fi${AUTHOR_IMAGE_PATH}`,
       jobTitle: 'Founder',
       worksFor: { '@id': ORGANIZATION_ID },
-      sameAs: [AUTHOR_LINKEDIN_URL, 'https://www.instagram.com/lieromaa'],
+      url: AUTHOR_PROFILE_URL,
+      sameAs: [
+        AUTHOR_LINKEDIN_URL,
+        AUTHOR_SITE_URL,
+        'https://www.instagram.com/lieromaa',
+      ],
     },
   });
 

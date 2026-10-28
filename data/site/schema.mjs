@@ -5,7 +5,10 @@ export const SCHEMA_TIME_ZONE = 'Europe/Helsinki';
 
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
-export const AUTHOR_ID = `${SITE_URL}/#joonas`;
+// Joonas is described once on his own site; Lieromaa refers to the same person.
+export const AUTHOR_SITE_URL = 'https://www.niemenjoki.fi';
+export const AUTHOR_PROFILE_URL = `${AUTHOR_SITE_URL}/tietoa`;
+export const AUTHOR_ID = `${AUTHOR_SITE_URL}/#joonas`;
 export const SITE_LOGO_URL = `${SITE_URL}/images/lieromaa_logo_1024.avif`;
 export const AUTHOR_IMAGE_PATH = '/images/portrait2024.avif';
 export const AUTHOR_LINKEDIN_URL = 'https://www.linkedin.com/in/joonasniemenjoki';

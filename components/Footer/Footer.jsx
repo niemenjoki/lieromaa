@@ -9,7 +9,7 @@ import { ADSENSE_CONSENT_ENABLED } from '@/lib/site/adsense';
 import { openConsentPreferences } from '@/lib/site/consentPreferences';
 import { LICENSE_URL, REPO_URL } from '@/lib/site/constants.mjs';
 import { BUSINESS_ID, CONTACT_EMAIL, CONTACT_PHONE } from '@/lib/site/contact';
-import { ORGANIZATION_NAME } from '@/lib/site/schema.mjs';
+import { AUTHOR_SITE_URL, ORGANIZATION_NAME } from '@/lib/site/schema.mjs';
 import { WORM_HUNT_FOOTER_SLOT_ID } from '@/lib/wormHunt/placementTargets.mjs';
 
 import classes from './Footer.module.css';
@@ -33,6 +33,7 @@ const LOCALE_COPY = Object.freeze({
     languageCode: 'en',
     languageAriaLabel: 'Vaihda englanninkieliselle sivustolle',
     appearanceLabel: 'Ulkoasu',
+    otherSiteLabel: 'Toinen sivustoni:',
     linkCountSingular: 'linkki',
     linkCountPlural: 'linkkiä',
   }),
@@ -52,6 +53,7 @@ const LOCALE_COPY = Object.freeze({
     languageCode: 'fi',
     languageAriaLabel: 'Switch to the Finnish site',
     appearanceLabel: 'Appearance',
+    otherSiteLabel: 'My other site:',
     linkCountSingular: 'link',
     linkCountPlural: 'links',
   }),
@@ -92,7 +94,7 @@ export default function Footer({ language = 'fi', navigation, copy, themeCopy })
   const startYear = 2025;
   const currentYear = new Date().getFullYear();
   const yearRange =
-    currentYear === startYear ? `${startYear}` : `${startYear}–${currentYear}`;
+    currentYear === startYear ? `${startYear}` : `${startYear}-${currentYear}`;
   const localeCopy = LOCALE_COPY[language] ?? LOCALE_COPY.fi;
   const [consentMessage, setConsentMessage] = useState('');
   const canManageConsent = ADSENSE_CONSENT_ENABLED;
@@ -229,6 +231,10 @@ export default function Footer({ language = 'fi', navigation, copy, themeCopy })
             </div>
           </dl>
         </section>
+
+        <p className={classes.OtherSite}>
+          {localeCopy.otherSiteLabel} <a href={AUTHOR_SITE_URL}>Niemenjoki.fi</a>
+        </p>
 
         <div className={classes.Bottom}>
           <p>

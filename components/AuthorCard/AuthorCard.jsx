@@ -1,4 +1,5 @@
 import { SITE_AUTHOR } from '@/lib/site/author';
+import { AUTHOR_SITE_URL } from '@/lib/site/schema.mjs';
 
 import SafeImage from '../SafeImage/SafeImage';
 import SafeLink from '../SafeLink/SafeLink';
@@ -25,7 +26,8 @@ export default function AuthorCard() {
           <a href={SITE_AUTHOR.linkedInUrl} target="_blank" rel="noopener noreferrer">
             LinkedIn-profiili
           </a>{' '}
-          • <SafeLink href={SITE_AUTHOR.profilePath}>Lue lisää minusta</SafeLink>
+          • <SafeLink href={SITE_AUTHOR.profilePath}>Lue lisää minusta</SafeLink> • Toinen
+          sivustoni: <a href={AUTHOR_SITE_URL}>Niemenjoki.fi</a>
         </p>
       </div>
     </div>
