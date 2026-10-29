@@ -141,8 +141,20 @@
 }
 
 .Content table {
+  --table-scroll-hint: color-mix(in srgb, var(--highlight) 55%, transparent);
   display: block;
   border-collapse: collapse;
+  /* A shadow shows at an edge while more of the table is hidden behind it. The covers
+     (local) move with the content and hide the shadow (scroll) once that edge is reached. */
+  background:
+    linear-gradient(to right, var(--background-1) 40%, transparent) left center / 2rem
+      100% no-repeat local,
+    linear-gradient(to left, var(--background-1) 40%, transparent) right center / 2rem
+      100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, var(--table-scroll-hint), transparent) left
+      center / 1.1rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, var(--table-scroll-hint), transparent)
+      right center / 1.1rem 100% no-repeat scroll;
 }
 
 .Content th,
