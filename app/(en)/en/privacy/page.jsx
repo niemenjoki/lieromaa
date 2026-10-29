@@ -11,7 +11,7 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-10-28';
+const UPDATED_AT = '2026-10-29';
 
 const pageMetadata = {
   language: 'en',
