@@ -1,3 +1,4 @@
+import { getClientIp } from '@/lib/analytics/serverPageView.mjs';
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
 
 export const dynamic = 'force-dynamic';
@@ -70,9 +71,7 @@ export async function POST(request) {
   // Consented events join the same day's visitor hash; time on page and scroll
   // stay anonymous, so their requests carry no IP address.
   if (payload?.eventName) {
-    const ip = String(request.headers.get('x-forwarded-for') || '')
-      .split(',')[0]
-      .trim();
+    const ip = getClientIp(request.headers);
     const userAgent = String(request.headers.get('user-agent') || '').trim();
     if (ip && userAgent) {
       headers['X-Analytics-Client-Ip'] = ip;
