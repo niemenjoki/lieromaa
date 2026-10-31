@@ -178,6 +178,10 @@ export default function PrivacyPage() {
             suostumus (GDPR Art. 6(1)(a)).
           </li>
           <li>
+            Rajoitetut mainokset ilman suostumusta (Google AdSense): oikeusperusteena
+            oikeutettu etu (GDPR Art. 6(1)(f)).
+          </li>
+          <li>
             Sivuston käytön analysointi (Lieromaan oma ensimmäisen osapuolen analytiikka):
             palvelimella kirjattavien sivunäyttöjen ja kävijätiivisteen oikeusperusteena
             oikeutettu etu (GDPR Art. 6(1)(f)) sivuston kehittämiseksi. Selaimessa
@@ -317,6 +321,12 @@ export default function PrivacyPage() {
           mukaisesti vakiosopimuslausekkeilla. Google Consent Mode -toimintoa käytetään
           suostumuksen pyytämiseen ennen ei-välttämättömien evästeiden tallentamista tai
           käyttämistä.
+        </p>
+        <p>
+          Jos et anna suostumusta mainosevästeisiin, Google voi näyttää rajoitettuja
+          mainoksia. Niissä ei käytetä evästeitä eikä mainoksia kohdenneta sinuun
+          liittyvien tietojen perusteella. Google käsittelee silloinkin teknisiä tietoja,
+          kuten IP-osoitetta, mainosten näyttämiseen ja väärinkäytösten torjuntaan.
         </p>
         <p>
           Google voi käyttää tietoja profilointiin kohdennettujen mainosten näyttämiseksi

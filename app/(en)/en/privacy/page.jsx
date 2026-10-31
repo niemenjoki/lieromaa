@@ -11,7 +11,7 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-10-29';
+const UPDATED_AT = '2026-10-31';
 
 const pageMetadata = {
   language: 'en',
@@ -192,6 +192,10 @@ export default function EnglishPrivacyPage() {
               (Article 6(1)(a)).
             </li>
             <li>
+              Limited ads without consent through Google AdSense: legitimate interest
+              (Article 6(1)(f)).
+            </li>
+            <li>
               Analysing use through Lieromaa’s first-party analytics: for page views and
               the visitor hash recorded on the server, legitimate interest (Article
               6(1)(f)) in developing the site. For the additional measurements collected
@@ -321,6 +325,12 @@ export default function EnglishPrivacyPage() {
             with the GDPR, including through standard contractual clauses. Google Consent
             Mode is used to request consent before non-essential cookies are stored or
             used.
+          </p>
+          <p>
+            If you do not consent to advertising cookies, Google may show limited ads.
+            Limited ads do not use cookies, and they are not targeted based on data about
+            you. Google still processes technical data, such as the IP address, to display
+            ads and prevent fraud.
           </p>
           <p>
             With consent, Google may use data for profiling to show targeted advertising.
