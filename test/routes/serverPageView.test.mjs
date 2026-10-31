@@ -55,6 +55,40 @@ describe('server-side page view collection', () => {
     assert.equal(JSON.stringify(pageView.payload).includes('203.0.113.7'), false);
   });
 
+  test('cf-connecting-ip wins over the forwarded headers', () => {
+    const pageView = buildServerPageView(
+      request({
+        headers: {
+          'cf-connecting-ip': ' 198.51.100.4 ',
+          'x-vercel-forwarded-for': '192.0.2.10, 10.0.0.2',
+        },
+      })
+    );
+
+    assert.equal(pageView.client.ip, '198.51.100.4');
+  });
+
+  test('x-vercel-forwarded-for comes before x-forwarded-for', () => {
+    const pageView = buildServerPageView(
+      request({
+        headers: {
+          'cf-connecting-ip': '  ',
+          'x-vercel-forwarded-for': ' 192.0.2.10 , 10.0.0.2',
+        },
+      })
+    );
+
+    assert.equal(pageView.client.ip, '192.0.2.10');
+  });
+
+  test('x-forwarded-for is the fallback when the other headers are missing or empty', () => {
+    const pageView = buildServerPageView(
+      request({ headers: { 'cf-connecting-ip': '', 'x-vercel-forwarded-for': ' ' } })
+    );
+
+    assert.equal(pageView.client.ip, '203.0.113.7');
+  });
+
   test('internal navigation keeps no referrer', () => {
     const pageView = buildServerPageView(
       request({ headers: { referer: 'https://www.lieromaa.fi/' } })
