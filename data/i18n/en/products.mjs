@@ -38,7 +38,7 @@ export const productMessages = Object.freeze({
         material: 'Active worm-bin material, shredded cardboard, wood fibre and coir',
         returnPolicyName: 'Cancellation rights',
         returnPolicyText:
-          'Dispatched worm orders cannot be cancelled because returned live compost worms cannot be handled or resold as ordinary products. I will handle any problems with the product or delivery separately through customer service.',
+          'The right of withdrawal does not apply to live compost worms because they deteriorate rapidly. I will handle any problems with the product or delivery separately through customer service.',
       }),
     }),
     compostChow: Object.freeze({
@@ -62,7 +62,7 @@ export const productMessages = Object.freeze({
           'Wheat bran, oat bran, soya meal, wheat flour, garden lime, zeolite and basalt',
         returnPolicyName: 'Cancellation rights',
         returnPolicyText:
-          'Unopened and unused compost fibre mix has a 14-day cancellation right under the order and delivery terms. I will handle any problems with the product or delivery separately through customer service.',
+          'The compost fibre mix has a 14-day right of withdrawal under the order and delivery terms. If the package has been opened and the product used more than is needed to establish its nature, I may deduct the reduction in value from the refund. I will handle any problems with the product or delivery separately through customer service.',
       }),
     }),
   }),
@@ -169,6 +169,8 @@ export const productMessages = Object.freeze({
     heading: 'Customer reviews',
     verifiedCount: ({ count }) =>
       `${count} ${count === 1 ? 'review' : 'reviews'} from verified buyers`,
+    verificationNote:
+      'Reviews can only be left through a personal link sent by email after an order. I collected the oldest reviews from buyers before the review form existed. I publish all appropriate reviews regardless of the star rating.',
     distributionLabel: 'Rating distribution',
     starLabel: ({ value }) => `${value} ${value === 1 ? 'star' : 'stars'}`,
     hideWritten: 'Hide written reviews',

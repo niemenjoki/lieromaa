@@ -38,7 +38,7 @@ export const productMessages = Object.freeze({
         material: 'Kompostimulta, pahvisilppu, puukuitu, kookoskuitu',
         returnPolicyName: 'Peruuttamisoikeus',
         returnPolicyText:
-          'Postitettuja matotilauksia ei voi peruuttaa, koska kompostimatoja ei voida palautuksen jälkeen käsitellä tai myydä edelleen tavanomaisena tuotteena. Jos tuotteessa tai toimituksessa on virhe, asia käsitellään erikseen asiakaspalvelun kautta.',
+          'Peruuttamisoikeus ei koske eläviä kompostimatoja, koska ne ovat nopeasti pilaantuvaa tavaraa (KSL 6:16 §). Jos tuotteessa tai toimituksessa on virhe, asia käsitellään erikseen asiakaspalvelun kautta.',
       }),
     }),
     compostChow: Object.freeze({
@@ -62,7 +62,7 @@ export const productMessages = Object.freeze({
           'Vehnälese, kauralese, soijarouhe, vehnäjauho, puutarhakalkki, zeoliitti, basaltti',
         returnPolicyName: 'Peruuttamisoikeus',
         returnPolicyText:
-          'Avaamattomalla ja käyttämättömällä kuituseoksella on 14 vrk peruuttamisoikeus tilaus- ja toimitusehtojen mukaisesti. Jos tuotteessa tai toimituksessa on virhe, asia käsitellään erikseen asiakaspalvelun kautta.',
+          'Kuituseoksella on 14 päivän peruuttamisoikeus tilaus- ja toimitusehtojen mukaisesti. Jos pakkaus on avattu ja tuotetta on käytetty enemmän kuin sen laadun toteamiseksi on tarpeen, voin vähentää hyvityksestä arvon alenemista vastaavan summan. Jos tuotteessa tai toimituksessa on virhe, asia käsitellään erikseen asiakaspalvelun kautta.',
       }),
     }),
   }),
@@ -168,6 +168,8 @@ export const productMessages = Object.freeze({
   reviews: Object.freeze({
     heading: 'Asiakasarvostelut',
     verifiedCount: ({ count }) => `${count} vahvistetun ostajan arvostelua`,
+    verificationNote:
+      'Arvostelun voi jättää vain tilauksen jälkeen sähköpostiin saadulla henkilökohtaisella linkillä. Vanhimmat arvostelut keräsin ostajilta ennen arvostelulomaketta. Julkaisen kaikki asialliset arvostelut tähtimäärästä riippumatta.',
     distributionLabel: 'Tähtijakauma',
     starLabel: ({ value }) => (value === 1 ? '1 tähti' : `${value} tähteä`),
     hideWritten: 'Piilota kirjoitetut arvostelut',

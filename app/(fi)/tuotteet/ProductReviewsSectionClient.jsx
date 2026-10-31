@@ -77,6 +77,7 @@ export default function ProductReviewsSectionClient({
         <p className={classes.ReviewSummaryMeta}>
           {copy.verifiedCount({ count: summary.reviewCount })}
         </p>
+        <p className={classes.ReviewSummaryMeta}>{copy.verificationNote}</p>
 
         <dl className={classes.StarBreakdown} aria-label={copy.distributionLabel}>
           {STAR_BREAKDOWN_VALUES.map((ratingValue) => {

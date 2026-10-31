@@ -14,7 +14,7 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-10-27';
+const UPDATED_AT = '2026-10-31';
 const EFFECTIVE_FROM = '2026-07-17';
 
 const pageMetadata = {
@@ -219,17 +219,20 @@ export default function EnglishOrderTermsPage() {
             not trigger an automatic refund; I review the request personally.
           </p>
           <p>
-            A dispatched worm order cannot be cancelled because live compost worms cannot
-            be handled or resold as an ordinary product after being returned. The normal
-            cancellation right still applies to other products, even when they are ordered
-            together with worms.
+            The right of withdrawal does not apply to live compost worms because they are
+            goods that deteriorate rapidly (Finnish Consumer Protection Act, chapter 6,
+            section 16). This applies to all worms: dispatched and collected worm orders,
+            and the worms in a prepared worm bin. For the bin itself, the compost fibre
+            mix and other products, you can withdraw from the order normally, even when
+            they were ordered together with worms.
           </p>
           <p>
-            A returned product must be substantially in the same condition as when it was
-            received. The customer pays the return costs unless agreed otherwise. Before
-            sending a return, contact <strong>{ORDER_CONTACT_EMAIL}</strong> so that the
-            return method can be agreed. If you use the cancellation form, you do not need
-            to send a separate email; I will contact you after receiving the notice.
+            If the product has been handled more than necessary to establish its nature
+            and characteristics, I may deduct the reduction in value from the refund. The
+            customer pays the return costs unless agreed otherwise. Before sending a
+            return, contact <strong>{ORDER_CONTACT_EMAIL}</strong> so that the return
+            method can be agreed. If you use the cancellation form, you do not need to
+            send a separate email; I will contact you after receiving the notice.
           </p>
           <p>
             The cancellation form is not the primary channel for a defect in a product or

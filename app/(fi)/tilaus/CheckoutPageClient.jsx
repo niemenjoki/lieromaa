@@ -44,6 +44,7 @@ const STRIPE_ABANDON_ENDPOINT = '/api/orders/stripe-abandon';
 const PENDING_STRIPE_STORAGE_KEY = 'lieromaa.pendingStripeCheckout.v1';
 const CHECKOUT_DRAFT_STORAGE_KEY = 'lieromaa.checkoutDraft.v1';
 const POSTCODE_PATTERN = /^\d{5}$/;
+const LIVE_WORM_PRODUCT_KEYS = new Set(['worms', 'preparedWormBin']);
 
 function createCartFingerprint({ items, shippingMethod, discountCode }) {
   const source = JSON.stringify({
@@ -183,6 +184,12 @@ function getShippingScheduleKeysFromLines(lines) {
       ...lines.map((line) => line.shippingScheduleKey).filter(Boolean),
     ]),
   ];
+}
+
+function hasLiveWorms(lines) {
+  return getShippingScheduleKeysFromLines(lines).some((key) =>
+    LIVE_WORM_PRODUCT_KEYS.has(key)
+  );
 }
 
 function getEstimatedShippingDate(lines) {
@@ -472,6 +479,7 @@ export default function CheckoutPageClient({ language }) {
       ? copy.estimatedPickupDate
       : copy.estimatedDispatchDate;
   const cartLineGroups = groupCartLines(quote?.items ?? []);
+  const orderHasLiveWorms = hasLiveWorms(quote?.items ?? []);
 
   const applyPaymentStatus = useCallback(
     (status, pendingReference) => {
@@ -1716,6 +1724,9 @@ export default function CheckoutPageClient({ language }) {
             </SafeLink>
             .
           </p>
+          {orderHasLiveWorms ? (
+            <p className={classes.HelperText}>{copy.liveWormsWithdrawalNote}</p>
+          ) : null}
           {isOrderServiceUnavailable(submitError) ? (
             <OrderEmailFallback
               language={language}

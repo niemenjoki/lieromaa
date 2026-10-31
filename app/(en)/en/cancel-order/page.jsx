@@ -55,10 +55,12 @@ export default function EnglishCancellationRequestPage() {
         <section className={classes.Panel}>
           <h2>Before sending the notice</h2>
           <p>
-            Dispatched worm orders cannot be cancelled because returned live compost worms
-            cannot be handled or resold as ordinary products. The normal cancellation
-            right still applies to other products, even when they are ordered together
-            with worms.
+            The right of withdrawal does not apply to live compost worms because they are
+            goods that deteriorate rapidly (Finnish Consumer Protection Act, chapter 6,
+            section 16). This applies to all worms: dispatched and collected worm orders,
+            and the worms in a prepared worm bin. For the bin itself, the compost fibre
+            mix and other products, you can withdraw from the order normally, even when
+            they were ordered together with worms.
           </p>
           <p>
             If a product or delivery is defective, contact{' '}

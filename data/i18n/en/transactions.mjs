@@ -90,9 +90,11 @@ export const transactionMessages = Object.freeze({
     termsLink: 'order and delivery terms',
     privacyLink: 'privacy notice',
     termsJoiner: 'and the',
+    liveWormsWithdrawalNote:
+      'Your order contains live worms, which cannot be returned under the right of withdrawal.',
     submitting: 'Placing order...',
     redirectingToStripe: 'Continuing to payment...',
-    submitInvoice: 'Place order',
+    submitInvoice: 'Order and pay by invoice',
     submitStripe: 'Continue to payment',
     stripeUnavailable:
       'The payment page could not be opened. Your cart has been kept. Please try again shortly.',

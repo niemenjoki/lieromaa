@@ -85,13 +85,15 @@ export const transactionMessages = Object.freeze({
       message: 'Viesti (valinnainen)',
     }),
     total: 'Yhteensä',
-    termsPrefix: 'Lähettämällä tilauksen vahvistat, että olet tutustunut',
+    termsPrefix: 'Tilaamalla vahvistat, että olet tutustunut',
     termsLink: 'tilaus- ja toimitusehtoihin',
     privacyLink: 'tietosuojaselosteeseen',
     termsJoiner: 'sekä',
+    liveWormsWithdrawalNote:
+      'Tilauksessa on eläviä matoja, joilla ei ole peruuttamisoikeutta.',
     submitting: 'Lähetetään tilausta...',
     redirectingToStripe: 'Siirrytään maksamaan...',
-    submitInvoice: 'Lähetä tilaus',
+    submitInvoice: 'Tilaa ja maksa laskulla',
     submitStripe: 'Siirry maksamaan',
     stripeUnavailable:
       'Maksusivua ei voitu avata. Ostoskori säilyi. Yritä hetken kuluttua uudelleen.',

@@ -31,10 +31,12 @@ export default function CancellationRequestPage() {
         <section className={classes.Panel}>
           <h2>Ennen kuin lähetät ilmoituksen</h2>
           <p>
-            Huomaathan, että postitettuja matotilauksia ei voi peruuttaa, koska
-            kompostimatoja ei voida palautuksen jälkeen käsitellä tai myydä edelleen
-            tavanomaisena tuotteena. Muilla tuotteilla on kuitenkin normaali
-            peruuttamisoikeus, vaikka ne olisi tilattu samassa tilauksessa matojen kanssa.
+            Peruuttamisoikeus ei koske eläviä kompostimatoja, koska ne ovat nopeasti
+            pilaantuvaa tavaraa (kuluttajansuojalain 6 luvun 16 §). Poikkeus koskee
+            kaikkia matoja: postitettuja ja noudettuja matotilauksia sekä käyttövalmiin
+            matokompostorin matoja. Kompostoriastian, kuituseoksen ja muiden tuotteiden
+            osalta tilauksen voi peruuttaa normaalisti, vaikka ne olisi tilattu samassa
+            tilauksessa matojen kanssa.
           </p>
           <p>
             Jos tuotteessa tai toimituksessa on virhe, ota yhteyttä sähköpostitse

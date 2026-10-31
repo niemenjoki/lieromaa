@@ -46,9 +46,8 @@ export default function OrderPolicyPage() {
         <h2>Yleistä</h2>
         <p>
           Lieromaan toimintaa harjoittaa <strong>{BUSINESS_NAME}</strong> (Y-tunnus:{' '}
-          {BUSINESS_ID}). Myynti on arvonlisäverotonta arvonlisäverolain 2 luvun 3 §
-          nojalla (vähäinen toiminta). Pidätän oikeuden hintojen ja toimitusehtojen
-          muutoksiin.
+          {BUSINESS_ID}). Myynti on arvonlisäverotonta arvonlisäverolain 3 §:n nojalla
+          (vähäinen toiminta). Pidätän oikeuden hintojen ja toimitusehtojen muutoksiin.
         </p>
 
         <h2>Myyjän tiedot ja asiakaspalvelu</h2>
@@ -137,14 +136,15 @@ export default function OrderPolicyPage() {
         <p>
           Jos poikkeuksellinen tilausmäärä tekee ilmoitetusta toimitusajasta mahdottoman,
           otan asiakkaaseen henkilökohtaisesti yhteyttä. Sovimme joko myöhemmästä
-          toimituksesta, jotta matokanta ehtii kasvaa, tai tilauksen peruuttamisesta.
-          Maksettu Stripe-tilaus hyvitetään tällöin kokonaan alkuperäiselle maksutavalle.
+          toimituksesta, jotta matoja ehtii lisääntyä riittävästi, tai tilauksen
+          peruuttamisesta. Maksettu Stripe-tilaus hyvitetään tällöin kokonaan
+          alkuperäiselle maksutavalle.
         </p>
         <p>
-          Postin noutopistelähetykset saapuvat tavallisesti 1-2 arkipäivässä
+          Lähetykset Postin noutopaikkaan saapuvat tavallisesti 1-2 arkipäivässä
           postituksesta. Kotiinkuljetuksissa Posti sopii jakeluajan vastaanottajan kanssa.
-          Noutopistelähetys kannattaa hakea saapumisilmoituksen jälkeen mahdollisimman
-          pian.
+          Lähetys kannattaa hakea noutopaikasta mahdollisimman pian saapumisilmoituksen
+          jälkeen.
         </p>
         <p>
           Jos noutopistehaku ei ole kassalla hetkellisesti käytettävissä, asiakkaan tulee
@@ -192,15 +192,18 @@ export default function OrderPolicyPage() {
           käynnistä automaattista hyvitystä, vaan käsittelen pyynnön henkilökohtaisesti.
         </p>
         <p>
-          Huomaathan, että postitettuja matotilauksia ei voi peruuttaa, koska
-          kompostimatoja ei voida palautuksen jälkeen käsitellä tai myydä edelleen
-          tavanomaisena tuotteena. Muilla tuotteilla on kuitenkin normaali
-          peruuttamisoikeus, vaikka ne olisi tilattu samassa tilauksessa matojen kanssa.
+          Peruuttamisoikeus ei koske eläviä kompostimatoja, koska ne ovat nopeasti
+          pilaantuvaa tavaraa (kuluttajansuojalain 6 luvun 16 §). Poikkeus koskee kaikkia
+          matoja: postitettuja ja noudettuja matotilauksia sekä käyttövalmiin
+          matokompostorin matoja. Kompostoriastian, kuituseoksen ja muiden tuotteiden
+          osalta tilauksen voi peruuttaa normaalisti, vaikka ne olisi tilattu samassa
+          tilauksessa matojen kanssa.
         </p>
         <p>
-          Palautettavan tuotteen tulee olla olennaisesti samassa kunnossa kuin
-          vastaanottohetkellä. Asiakas vastaa palautuskuluista, ellei toisin sovita. Ennen
-          palautuksen lähettämistä pyydän ottamaan yhteyttä sähköpostitse osoitteeseen{' '}
+          Jos tuotetta on käsitelty enemmän kuin sen laadun ja ominaisuuksien toteamiseksi
+          on tarpeen, voin vähentää hyvityksestä arvon alenemista vastaavan summan.
+          Asiakas vastaa palautuskuluista, ellei toisin sovita. Ennen palautuksen
+          lähettämistä pyydän ottamaan yhteyttä sähköpostitse osoitteeseen{' '}
           <strong>{ORDER_CONTACT_EMAIL}</strong>, jotta palautustavasta voidaan sopia. Jos
           peruutat tilauksesi peruutuslomakkeella, sähköpostia ei tarvitse lähettää, vaan
           olen sinuun yhteydessä saatuani peruutusilmoituksen.

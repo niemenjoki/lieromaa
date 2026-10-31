@@ -118,7 +118,7 @@ describe('English commerce and customer-service pages', () => {
       transactions,
       /I send the invoice by email after handing your order to Posti/
     );
-    assert.match(transactions, /submitInvoice: ['"]Place order['"]/);
+    assert.match(transactions, /submitInvoice: ['"]Order and pay by invoice['"]/);
     assert.match(transactions, /submitStripe: ['"]Continue to payment['"]/);
     assert.match(
       transactions,
