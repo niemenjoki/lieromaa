@@ -249,6 +249,35 @@ export default function EnglishOrderTermsPage() {
             receipt date, and whether you wish to cancel all or part of the order.
           </p>
 
+          <p>
+            You can also use the model form below and send it by email to{' '}
+            <strong>{ORDER_CONTACT_EMAIL}</strong>. Using the form is not mandatory.
+          </p>
+          <p>
+            <strong>Model withdrawal form</strong>
+            <br />
+            (complete and return this form only if you wish to withdraw from the contract)
+            <br />
+            To {BUSINESS_NAME}, {BUSINESS_ADDRESS_LINES.join(', ')}, {ORDER_CONTACT_EMAIL}
+            :
+            <br />
+            I/We (*) hereby give notice that I/We (*) withdraw from my/our (*) contract of
+            sale of the following goods (*)/for the provision of the following service
+            (*),
+            <br />
+            Ordered on (*)/received on (*),
+            <br />
+            Name of consumer(s),
+            <br />
+            Address of consumer(s),
+            <br />
+            Signature of consumer(s) (only if this form is notified on paper),
+            <br />
+            Date
+            <br />
+            (*) Delete as appropriate.
+          </p>
+
           <h2>Liability for defects</h2>
           <p>
             Products are covered by the statutory liability for defects under the Finnish

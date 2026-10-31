@@ -191,9 +191,8 @@ export default async function Page() {
               <div className={classes.InfoCard}>
                 <h3>Hyvä tietää</h3>
                 <p>
-                  Postitettuja matotilauksia ei voi peruuttaa, koska kompostimatoja ei
-                  voida palautuksen jälkeen käsitellä tai myydä edelleen tavanomaisena
-                  tuotteena.
+                  Peruuttamisoikeus ei koske eläviä kompostimatoja, koska ne ovat nopeasti
+                  pilaantuvaa tavaraa (KSL 6:16 §).
                 </p>
                 <p>
                   Jos tuotteessa tai toimituksessa on virhe, ole yhteydessä suoraan

@@ -225,6 +225,38 @@ export default function OrderPolicyPage() {
           kaupan kokonaan vai osittain.
         </p>
 
+        <p>
+          Voit myös käyttää alla olevaa mallilomaketta ja lähettää sen sähköpostitse
+          osoitteeseen <strong>{ORDER_CONTACT_EMAIL}</strong>. Lomakkeen käyttö ei ole
+          pakollista.
+        </p>
+        <p>
+          <strong>Peruuttamislomakkeen malli</strong>
+          <br />
+          (täyttäkää ja palauttakaa tämä lomake vain siinä tapauksessa, että haluatte
+          peruuttaa sopimuksen)
+          <br />
+          Vastaanottaja: {BUSINESS_NAME}, {BUSINESS_ADDRESS_LINES.join(', ')},{' '}
+          {ORDER_CONTACT_EMAIL}
+          <br />
+          Ilmoitan/Ilmoitamme (*), että haluan/haluamme (*) peruuttaa tekemäni/tekemämme
+          (*) sopimuksen, joka koskee seuraavien tavaroiden toimittamista (*) / seuraavan
+          palvelun suorittamista (*):
+          <br />
+          Tilauspäivä (*)/Vastaanottopäivä (*)
+          <br />
+          Kuluttajan nimi (*) / Kuluttajien nimet (*)
+          <br />
+          Kuluttajan osoite (*) / Kuluttajien osoitteet (*)
+          <br />
+          Kuluttajan allekirjoitus (*) / Kuluttajien allekirjoitukset (*) (vain jos lomake
+          täytetään paperimuodossa)
+          <br />
+          Päiväys
+          <br />
+          (*) Tarpeeton yliviivataan.
+        </p>
+
         <h2>Virhevastuu</h2>
         <p>
           Tuotteilla on kuluttajansuojalain mukainen virhevastuu. Jos toimitettu tuote on

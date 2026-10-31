@@ -215,9 +215,9 @@ export default function EnglishCompostWormsPage() {
               <div className={classes.InfoCard}>
                 <h3>Cancellation and defects</h3>
                 <p>
-                  Dispatched worm orders cannot be cancelled because returned live worms
-                  cannot be handled or resold as ordinary products. Other statutory rights
-                  and liability for defects remain unaffected.
+                  The right of withdrawal does not apply to live compost worms because
+                  they deteriorate rapidly. Other statutory rights and liability for
+                  defects remain unaffected.
                 </p>
                 <p>
                   Contact customer service if a product or delivery is defective. Full
