@@ -66,6 +66,8 @@ export const productCatalogContentSource = {
         return `Kotimaiset kompostimadot (${weight} g${estimate}) matokompostointiin. Eisenia fetida -madot toimitetaan noin 0,5 litrassa kasvualustaa, joka suojaa niitä kuljetuksessa ja tuo uuteen kompostoriin mikrobeja. Tilauksen jälkeen madot siirretään kasvualustoineen kompostorin omaan petimateriaaliin. Todellinen matojen määrä vaihtelee yksilöiden koon mukaan.`;
       },
       productType: 'Matokompostointi > Kompostimadot',
+      // Merchant Center does not accept live animals.
+      excludeFromFeed: true,
     },
     schema: {
       productAttributes: {

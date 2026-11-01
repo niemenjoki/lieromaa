@@ -5,8 +5,9 @@ import { test } from 'node:test';
 
 import skuDiscounts from '@/lib/commerce/skuDiscountsSource.mjs';
 import { formatBusinessDateTime } from '@/lib/dates/businessDate.mjs';
-import { getBasePriceForSku } from '@/lib/pricing/catalog';
+import { findProductKeyBySku, getBasePriceForSku } from '@/lib/pricing/catalog';
 import { getScheduledSkuDiscount } from '@/lib/pricing/skuDiscounts.mjs';
+import { productCatalog } from '@/lib/products/catalog.mjs';
 
 const merchantFeedPath = path.join(process.cwd(), 'public', 'google-merchant-feed.xml');
 
@@ -14,6 +15,11 @@ test('Merchant feed includes configured sale prices and effective dates', () => 
   const feed = fs.readFileSync(merchantFeedPath, 'utf8');
 
   for (const sku of Object.keys(skuDiscounts)) {
+    const productKey = findProductKeyBySku(sku);
+    if (productCatalog[productKey]?.merchant?.excludeFromFeed) {
+      continue;
+    }
+
     const discount = getScheduledSkuDiscount({
       sku,
       basePrice: getBasePriceForSku(sku),
@@ -51,8 +57,15 @@ test('Merchant feed remains Finnish-only with Finnish product URLs and FI shippi
 
   assert.match(feed, /Tuotefeed Lieromaan Google Merchant Centeria varten\./);
   assert.match(feed, /<g:country>FI<\/g:country>/);
-  assert.match(feed, /https:\/\/www\.lieromaa\.fi\/tuotteet\/madot/);
   assert.match(feed, /https:\/\/www\.lieromaa\.fi\/tuotteet\/kompostorin-kuituseos/);
   assert.match(feed, /Kompostimadot|kompostorin kuituseos/);
   assert.doesNotMatch(feed, /https:\/\/www\.lieromaa\.fi\/en(?:\/|<)/);
+});
+
+test('Merchant feed leaves out the live compost worms', () => {
+  const feed = fs.readFileSync(merchantFeedPath, 'utf8');
+
+  assert.doesNotMatch(feed, /https:\/\/www\.lieromaa\.fi\/tuotteet\/madot/);
+  assert.doesNotMatch(feed, /<g:id>worms-/);
+  assert.match(feed, /<g:id>chow-500<\/g:id>/);
 });
