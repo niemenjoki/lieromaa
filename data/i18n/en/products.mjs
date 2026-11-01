@@ -170,7 +170,7 @@ export const productMessages = Object.freeze({
     verifiedCount: ({ count }) =>
       `${count} ${count === 1 ? 'review' : 'reviews'} from verified buyers`,
     verificationNote:
-      'Reviews can only be left through a personal link sent by email after an order. I collected the oldest reviews from buyers before the review form existed. I publish all appropriate reviews regardless of the star rating.',
+      'Reviews can only be left through a personal link sent by email after an order. I publish all appropriate reviews regardless of the star rating.',
     distributionLabel: 'Rating distribution',
     starLabel: ({ value }) => `${value} ${value === 1 ? 'star' : 'stars'}`,
     hideWritten: 'Hide written reviews',

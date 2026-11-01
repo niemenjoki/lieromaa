@@ -169,7 +169,7 @@ export const productMessages = Object.freeze({
     heading: 'Asiakasarvostelut',
     verifiedCount: ({ count }) => `${count} vahvistetun ostajan arvostelua`,
     verificationNote:
-      'Arvostelun voi jättää vain tilauksen jälkeen sähköpostiin saadulla henkilökohtaisella linkillä. Vanhimmat arvostelut keräsin ostajilta ennen arvostelulomaketta. Julkaisen kaikki asialliset arvostelut tähtimäärästä riippumatta.',
+      'Arvostelun voi jättää vain tilauksen jälkeen sähköpostiin saadulla henkilökohtaisella linkillä. Julkaisen kaikki asialliset arvostelut tähtimäärästä riippumatta.',
     distributionLabel: 'Tähtijakauma',
     starLabel: ({ value }) => (value === 1 ? '1 tähti' : `${value} tähteä`),
     hideWritten: 'Piilota kirjoitetut arvostelut',
