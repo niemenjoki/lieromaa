@@ -12,7 +12,7 @@
 
 This repository contains the **source code for the Lieromaa website**, built with **Next.js**. The live site is hosted on [Vercel](https://vercel.com).
 
-> **Note:** All public-facing content on the site is written in **Finnish**.
+> **Note:** Most public-facing content is written in **Finnish**. The shop, the order and delivery terms, the privacy notice and a getting-started guide also have English versions under `/en`.
 
 ---
 
