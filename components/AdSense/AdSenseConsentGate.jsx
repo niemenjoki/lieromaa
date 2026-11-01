@@ -1,6 +1,6 @@
 import Script from 'next/script';
 
-import { ADSENSE_CLIENT } from '@/lib/site/adsense';
+import { ADSENSE_CLIENT, ADSENSE_ENABLED } from '@/lib/site/adsense';
 
 const FUNDING_CHOICES_PUBLISHER = ADSENSE_CLIENT.replace(/^ca-/, '');
 
@@ -10,6 +10,12 @@ const consentBootstrap = `
 
     var ADSENSE_SCRIPT_ID = 'lieromaa-adsense-script';
     var ADSENSE_SRC = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}';
+    var ADSENSE_ENABLED = ${ADSENSE_ENABLED ? 'true' : 'false'};
+
+    // The ad script loads only on pages with an ad slot, and only after the
+    // consent message has answered. Without ad consent Google serves limited ads.
+    // Advert may ask before this script runs, so the request is kept on window.
+    var consentDataReady = false;
 
     window.__lieromaaAdsConsentGranted = Boolean(window.__lieromaaAdsConsentGranted);
     window.__lieromaaAdSenseStatus = window.__lieromaaAdSenseStatus || 'idle';
@@ -59,6 +65,8 @@ const consentBootstrap = `
     }
 
     function loadAdSenseScript() {
+      if (!ADSENSE_ENABLED) return;
+
       if (
         window.__lieromaaAdSenseStatus === 'loading' ||
         window.__lieromaaAdSenseStatus === 'ready'
@@ -90,7 +98,18 @@ const consentBootstrap = `
       document.head.appendChild(script);
     }
 
-    function evaluateConsentAndLoadAds() {
+    function loadAdSenseScriptWhenReady() {
+      if (consentDataReady && window.__lieromaaAdSenseRequested) {
+        loadAdSenseScript();
+      }
+    }
+
+    window.__lieromaaRequestAdSense = function () {
+      window.__lieromaaAdSenseRequested = true;
+      loadAdSenseScriptWhenReady();
+    };
+
+    function evaluateConsentAndLoadAds(markConsentDataReady) {
       if (!window.googlefc || typeof window.googlefc.getGoogleConsentModeValues !== 'function') {
         return;
       }
@@ -109,9 +128,11 @@ const consentBootstrap = `
         emit('lieromaa:ads-consent-granted');
       }
 
-      if (isGranted) {
-        loadAdSenseScript();
+      if (markConsentDataReady) {
+        consentDataReady = true;
       }
+
+      loadAdSenseScriptWhenReady();
     }
 
     window.googlefc = window.googlefc || {};
@@ -120,7 +141,7 @@ const consentBootstrap = `
     window.googlefc.callbackQueue.push({
       CONSENT_MODE_DATA_READY: function () {
         try {
-          evaluateConsentAndLoadAds();
+          evaluateConsentAndLoadAds(true);
         } catch (_) {}
       },
     });
@@ -131,9 +152,13 @@ const consentBootstrap = `
 
         if (typeof window.__tcfapi !== 'function') return;
 
-        window.__tcfapi('addEventListener', 2.2, function () {
+        window.__tcfapi('addEventListener', 2.2, function (tcData) {
+          // A shown message (cmpuishown) is not an answer yet.
+          var status = tcData && tcData.eventStatus;
           try {
-            evaluateConsentAndLoadAds();
+            evaluateConsentAndLoadAds(
+              status === 'tcloaded' || status === 'useractioncomplete'
+            );
           } catch (_) {}
         });
       },

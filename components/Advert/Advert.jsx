@@ -54,10 +54,9 @@ const AdvertSlot = ({ pathname, adClient, adSlot }) => {
       return;
     }
 
+    // Without ad consent Google serves a limited ad or leaves the slot unfilled.
     const updateEligibility = () => {
-      const nextIsEligible =
-        window.__lieromaaAdSenseStatus === 'ready' &&
-        Boolean(window.__lieromaaAdsConsentGranted);
+      const nextIsEligible = window.__lieromaaAdSenseStatus === 'ready';
 
       setIsEligible(nextIsEligible);
       setSlotState((currentSlotState) => {
@@ -70,6 +69,8 @@ const AdvertSlot = ({ pathname, adClient, adSlot }) => {
       });
     };
 
+    window.__lieromaaAdSenseRequested = true;
+    window.__lieromaaRequestAdSense?.();
     updateEligibility();
     window.addEventListener('lieromaa:adsense-ready', updateEligibility);
     window.addEventListener('lieromaa:ads-consent-granted', updateEligibility);
