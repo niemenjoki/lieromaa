@@ -95,7 +95,7 @@ export default function WormHuntSpot({ clue }) {
         aria-controls={dialogId}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
-        aria-label={`Mato ${clue.number}/${clue.total}, kirjain ${clue.letter}. Avaa vihje.`}
+        aria-label={`${clue.number}. ${clue.letter}: mato ${clue.number}/${clue.total}, avaa vihje`}
         onClick={openDialog}
       >
         <svg

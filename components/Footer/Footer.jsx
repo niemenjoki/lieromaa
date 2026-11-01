@@ -31,7 +31,6 @@ const LOCALE_COPY = Object.freeze({
     languageAction: 'In English',
     languageHref: '/en',
     languageCode: 'en',
-    languageAriaLabel: 'Vaihda englanninkieliselle sivustolle',
     appearanceLabel: 'Ulkoasu',
     otherSiteLabel: 'Toinen sivustoni:',
     linkCountSingular: 'linkki',
@@ -51,7 +50,6 @@ const LOCALE_COPY = Object.freeze({
     languageAction: 'Suomeksi',
     languageHref: '/',
     languageCode: 'fi',
-    languageAriaLabel: 'Switch to the Finnish site',
     appearanceLabel: 'Appearance',
     otherSiteLabel: 'My other site:',
     linkCountSingular: 'link',
@@ -116,14 +114,9 @@ export default function Footer({ language = 'fi', navigation, copy, themeCopy })
           </div>
 
           <div className={classes.RootActions}>
-            <SafeLink
-              href={localeCopy.languageHref}
-              lang={localeCopy.languageCode}
-              className={classes.LanguageSwitch}
-              aria-label={localeCopy.languageAriaLabel}
-            >
+            <SafeLink href={localeCopy.languageHref} className={classes.LanguageSwitch}>
               <span>{localeCopy.languageLabel}</span>
-              <strong>{localeCopy.languageAction}</strong>
+              <strong lang={localeCopy.languageCode}>{localeCopy.languageAction}</strong>
               <span aria-hidden="true">↗</span>
             </SafeLink>
 

@@ -387,5 +387,5 @@ img {
   --swiper-pagination-bullet-inactive-color: var(--text-color);
   --swiper-pagination-bullet-inactive-opacity: 0.5;
   --swiper-pagination-bullet-size: 10px;
-  --swiper-pagination-bullet-horizontal-gap: 6px;
+  --swiper-pagination-bullet-horizontal-gap: 7px;
 }

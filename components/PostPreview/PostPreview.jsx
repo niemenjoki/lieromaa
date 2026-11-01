@@ -23,7 +23,7 @@ const PostPreview = ({ post }) => {
             </SafeLink>
           ))}
       </p>
-      <SafeLink aria-label={`Avaa julkaisu ${post.title}`} href={href}>
+      <SafeLink aria-label={`Lue lisää: ${post.title}`} href={href}>
         <span>
           Lue lisää{' '}
           <span className={classes.Arrow}>
