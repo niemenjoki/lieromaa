@@ -53,6 +53,7 @@ export const transactionMessages = Object.freeze({
           : 'Alennus',
     continue: 'Jatka',
     back: 'Takaisin',
+    retrySubmit: 'Yritä uudelleen',
     deliveryAddress: 'Toimitusosoite',
     streetAddress: 'Katuosoite',
     postcode: 'Postinumero',

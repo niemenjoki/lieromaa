@@ -1763,7 +1763,11 @@ export default function CheckoutPageClient({ language }) {
             </button>
             <button
               type="submit"
-              className={classes.Button}
+              className={
+                isOrderServiceUnavailable(submitError)
+                  ? classes.SecondaryButton
+                  : classes.Button
+              }
               disabled={
                 isSubmitting || Boolean(quoteResult.error) || discountSubmissionBlocked
               }
@@ -1772,9 +1776,11 @@ export default function CheckoutPageClient({ language }) {
                 ? paymentProvider === 'STRIPE'
                   ? copy.redirectingToStripe
                   : copy.submitting
-                : paymentProvider === 'STRIPE'
-                  ? copy.submitStripe
-                  : copy.submitInvoice}
+                : isOrderServiceUnavailable(submitError)
+                  ? copy.retrySubmit
+                  : paymentProvider === 'STRIPE'
+                    ? copy.submitStripe
+                    : copy.submitInvoice}
             </button>
           </div>
         </section>

@@ -54,6 +54,7 @@ export const transactionMessages = Object.freeze({
           : 'Discount',
     continue: 'Continue',
     back: 'Back',
+    retrySubmit: 'Try again',
     deliveryAddress: 'Delivery address',
     streetAddress: 'Street address',
     postcode: 'Postcode',
