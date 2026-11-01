@@ -238,7 +238,7 @@ export default function SiteSearch({
                 onChange={(event) => setQuery(event.target.value)}
                 className={classes.Input}
                 autoComplete="off"
-                aria-controls={resultsId}
+                aria-controls={showResults ? resultsId : undefined}
                 aria-describedby={showResults ? resultsStatusId : undefined}
               />
               {isNavbar ? (
