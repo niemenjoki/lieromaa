@@ -84,7 +84,7 @@ export default function ProductsPage() {
             <SalesMilestones language="fi" />
 
             <div className={classes.ProductGrid}>
-              {products.map((product) => (
+              {products.map((product, index) => (
                 <SafeLink
                   key={product.key}
                   href={product.canonicalUrl}
@@ -97,6 +97,7 @@ export default function ProductsPage() {
                       width={product.image.width || 800}
                       height={product.image.height || 600}
                       sizes="(max-width: 720px) 100vw, 33vw"
+                      priority={index === 0}
                       className={classes.ProductCardImage}
                     />
                   ) : null}

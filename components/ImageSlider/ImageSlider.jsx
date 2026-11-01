@@ -38,20 +38,25 @@ export default function ImageSlider({
         overflow: 'hidden',
       }}
     >
-      {images.map((img, i) => (
-        <SwiperSlide key={i}>
-          <SafeImage
-            src={img.src}
-            alt={img.alt || ''}
-            width={img.width || 1200}
-            height={img.height || 800}
-            sizes={img.sizes || '(max-width: 800px) 100vw, 800px'}
-            priority={img.priority || false}
-            loading={img.loading || 'lazy'}
-            style={img.style || { width: '100%', maxWidth: '800px', height: 'auto' }}
-          />
-        </SwiperSlide>
-      ))}
+      {images.map((img, i) => {
+        // The first image is the largest element on the page, so it loads first.
+        const priority = img.priority ?? i === 0;
+
+        return (
+          <SwiperSlide key={i}>
+            <SafeImage
+              src={img.src}
+              alt={img.alt || ''}
+              width={img.width || 1200}
+              height={img.height || 800}
+              sizes={img.sizes || '(max-width: 800px) 100vw, 800px'}
+              priority={priority}
+              loading={img.loading || (priority ? undefined : 'lazy')}
+              style={img.style || { width: '100%', maxWidth: '800px', height: 'auto' }}
+            />
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 }

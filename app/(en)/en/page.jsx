@@ -102,7 +102,7 @@ export default function EnglishHomePage() {
             <SalesMilestones language={language} />
 
             <div className={classes.ProductGrid}>
-              {productKeys.map((productKey) => {
+              {productKeys.map((productKey, index) => {
                 const product = getProductCatalogEntry(productKey);
                 const productCopy = copy.catalog[productKey];
                 const href = getRoutePath(
@@ -119,6 +119,7 @@ export default function EnglishHomePage() {
                         width={product.image.width || 800}
                         height={product.image.height || 600}
                         sizes="(max-width: 720px) 100vw, 50vw"
+                        priority={index === 0}
                         className={classes.ProductCardImage}
                       />
                     ) : null}
