@@ -33,11 +33,11 @@ export default function AboutPage() {
         <div className={classes.Bio}>
           <h2>Minusta</h2>
           <p>
-            Hei, olen <strong>Joonas Niemenjoki</strong> — Lieromaa.fi-sivuston perustaja.
+            Hei, olen <strong>Joonas Niemenjoki</strong>, Lieromaa.fi-sivuston perustaja.
             Asun Järvenpäässä, olen pienen lapsen isä ja innokas matokompostoinnin
             harrastaja. Päivätyössäni ohjelmoin lämpöpumppujärjestelmiä ja optimoin niitä
             toimimaan mahdollisimman energiatehokkaasti. Kestävä elintapa ja luonnon
-            kiertokulku ovat minulle tärkeitä — niistä kumpuaa koko Lieromaan idea.
+            kiertokulku ovat minulle tärkeitä, ja niistä kumpuaa koko Lieromaan idea.
           </p>
 
           <h2>Miten kaikki alkoi</h2>
@@ -62,7 +62,7 @@ export default function AboutPage() {
           <h2>Miksi perustin Lieromaan</h2>
           <p>
             Halusin jakaa käytännön kokemuksia, joita ei löydy virallisista ohjeista.
-            Monet kompostointia käsittelevät sivustot tarjoavat yleisluontoista tietoa —
+            Monet kompostointia käsittelevät sivustot tarjoavat yleisluontoista tietoa,
             minä taas kirjoitan siitä, mitä{' '}
             <strong>olen itse kokeillut ja todennut toimivaksi</strong>. Tavoitteeni on
             tehdä Lieromaasta Suomen paras paikka oppia matokompostoinnista ja innostaa

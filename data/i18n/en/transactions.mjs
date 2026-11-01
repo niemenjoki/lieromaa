@@ -14,7 +14,7 @@ export const transactionMessages = Object.freeze({
     submitFailed: 'The order could not be placed.',
     loadingCart: 'Loading the shopping cart...',
     successMessage:
-      'Thank you for your order! Your order has been received. You will receive a personal confirmation by email within 1–2 working days.',
+      'Thank you for your order! Your order has been received. You will receive a personal confirmation by email within 1-2 working days.',
     emptyMessage: 'The shopping cart is empty.',
     successCancellation:
       'If you want to cancel for a reason other than a product defect, you can use the',
@@ -118,7 +118,7 @@ export const transactionMessages = Object.freeze({
         'The unpaid order was discarded, but your cart was kept. You can continue to a new Stripe payment page.',
       paidHeading: 'Payment received',
       paidBody:
-        'Thank you for your order! Payment is confirmed. You will receive a personal order confirmation by email within 1–2 working days.',
+        'Thank you for your order! Payment is confirmed. You will receive a personal order confirmation by email within 1-2 working days.',
       refundedHeading: 'Payment refunded',
       refundedBody:
         'The Stripe payment for this order has been returned to the original payment method.',
@@ -234,7 +234,7 @@ export const transactionMessages = Object.freeze({
       'Your composter will wait where the foam cooler usually is, by my front door in Loutti, Järvenpää, during the time you choose, and you collect it yourself.',
     waitingComposterAndCooler:
       'Your composter will wait next to the foam cooler by my front door in Loutti, Järvenpää, during the time you choose, and the other products you ordered will be in the foam cooler. You collect the order yourself.',
-    optionLabel: ({ start, end }) => `${start}–${end}`,
+    optionLabel: ({ start, end }) => `${start}-${end}`,
     deadlineHelp: ({ hour }) =>
       `Please book by ${hour}:00 on the day before the pickup. I will send detailed pickup instructions and the address to your email right after booking.`,
     noOptions: ({ phone, email }) =>
@@ -244,7 +244,7 @@ export const transactionMessages = Object.freeze({
     submitting: 'Booking the pickup time...',
     bookedHeading: 'Your pickup time is booked',
     readyHeading: 'Your order is ready for pickup',
-    bookedTime: ({ weekday, date, start, end }) => `${weekday} ${date}, ${start}–${end}`,
+    bookedTime: ({ weekday, date, start, end }) => `${weekday} ${date}, ${start}-${end}`,
     bookedEmailNote:
       'I have sent detailed pickup instructions, the address and a calendar entry to your email.',
     readyNote:

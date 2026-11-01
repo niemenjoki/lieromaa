@@ -3,7 +3,7 @@ export const productCatalogContentSource = {
     name: 'Kompostimadot',
     page: {
       canonicalUrl: '/tuotteet/madot',
-      pageName: 'Osta kompostimatoja – Eisenia fetida matokompostointiin',
+      pageName: 'Osta kompostimatoja: Eisenia fetida matokompostointiin',
       title: 'Osta kompostimatoja | Lieromaa',
       description:
         'Tilaa kotimaisia kompostimatoja koko Suomeen ja lisää halutessasi käyttövalmis 14 litran matokompostori tai pieni kuituseos.',

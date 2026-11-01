@@ -17,7 +17,7 @@ export function generateMetadata() {
 export default function EnglishWormCalculatorPage() {
   const structuredData = createLocalizedPageStructuredData({
     ...pageMetadata,
-    name: 'Worm calculator – estimate a starting weight of compost worms',
+    name: 'Worm calculator: estimate a starting weight of compost worms',
     mainEntity: {
       '@type': 'Thing',
       name: 'Compost-worm weight calculator',

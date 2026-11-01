@@ -24,9 +24,9 @@ export const pageMessages = Object.freeze({
       'The result updates automatically when you change the household size or diet.',
     fields: Object.freeze({
       adults: 'Adults',
-      teens: 'Teenagers (13–17 years)',
-      children: 'Children (4–12 years)',
-      toddlers: 'Toddlers (1–3 years)',
+      teens: 'Teenagers (13-17 years)',
+      children: 'Children (4-12 years)',
+      toddlers: 'Toddlers (1-3 years)',
       diet: 'Diet',
     }),
     diets: Object.freeze({
@@ -39,7 +39,7 @@ export const pageMessages = Object.freeze({
     emptyResult:
       'Enter the number of people in your household to see an estimate of weekly food waste and a suitable starting weight of worms.',
     scrapsResult({ min, max }) {
-      return `Your household produces an estimated ${min}–${max} g of suitable food waste per week.`;
+      return `Your household produces an estimated ${min}-${max} g of suitable food waste per week.`;
     },
     wormResultPrefix: 'Processing that amount requires approximately',
     wormResultUnit: 'g of worms',

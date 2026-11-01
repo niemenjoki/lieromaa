@@ -141,7 +141,7 @@ export default function EnglishCompostFibreMixPage() {
                 <h3>Temporarily without food waste</h3>
                 <p>
                   If little food waste is available, use 0.5 dl / 10 L of active worm-bin
-                  material once a week at about 15–25 °C. Use this only temporarily, for
+                  material once a week at about 15-25 °C. Use this only temporarily, for
                   no more than 3 consecutive weeks.
                 </p>
               </div>
@@ -150,7 +150,7 @@ export default function EnglishCompostFibreMixPage() {
                 <p>
                   Sprinkle a thin layer on the surface, moisten it lightly and cover it
                   with moist paper or worm bedding. Increase the amount if it disappears
-                  in 1–2 days. Reduce it if the bin begins to smell or develops mould.
+                  in 1-2 days. Reduce it if the bin begins to smell or develops mould.
                 </p>
               </div>
               <div className={classes.InfoCard}>

@@ -56,7 +56,7 @@ export default async function BlogPage({ params }) {
         }}
       />
 
-      <h1>Lieromaan blogi – Asiaa kompostoinnista ja kestävästä kehityksestä</h1>
+      <h1>Lieromaan blogi: asiaa kompostoinnista ja kestävästä kehityksestä</h1>
 
       <SiteSearch
         searchItems={searchItems}

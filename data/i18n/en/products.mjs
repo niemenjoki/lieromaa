@@ -96,7 +96,7 @@ export const productMessages = Object.freeze({
     infoLabel: 'More information about the ready-to-use worm bin',
     closeLabel: 'Close details',
     promise:
-      'Order it, receive it and begin feeding – starting worm composting could hardly be easier.',
+      'Order it, receive it and begin feeding. Starting worm composting could hardly be easier.',
     intro:
       'You receive your selected amount of compost worms in a prepared 14-litre worm bin. No assembly, bedding preparation or separate setup is required.',
     sections: Object.freeze([

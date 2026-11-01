@@ -20,7 +20,7 @@ export const productMessages = Object.freeze({
   }),
   catalog: Object.freeze({
     worms: Object.freeze({
-      pageName: 'Osta kompostimatoja – Eisenia fetida matokompostointiin',
+      pageName: 'Osta kompostimatoja: Eisenia fetida matokompostointiin',
       title: 'Osta kompostimatoja | Lieromaa',
       description:
         'Tilaa kotimaisia kompostimatoja koko Suomeen ja lisää halutessasi käyttövalmis 14 litran matokompostori tai pieni kuituseos.',
@@ -96,7 +96,7 @@ export const productMessages = Object.freeze({
     infoLabel: 'Lisätietoa käyttövalmiista matokompostorista',
     closeLabel: 'Sulje lisätiedot',
     promise:
-      'Osta, vastaanota ja aloita ruokinta – matokompostoinnin aloittaminen ei juuri helpommaksi muutu.',
+      'Osta, vastaanota ja aloita ruokinta. Matokompostoinnin aloittaminen ei juuri helpommaksi muutu.',
     intro:
       'Saat valitsemasi määrän kompostimatoja valmiiksi käynnistetyssä 14 litran kompostorissa. Erillistä kokoamista, petimateriaalin valmistelua tai käyttöönottoa ei tarvita.',
     sections: Object.freeze([

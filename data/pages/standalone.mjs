@@ -13,7 +13,7 @@ export const standalonePageDefinitions = {
   },
   wormCalculator: {
     canonicalUrl: '/matolaskuri',
-    pageName: 'Matolaskuri – arvioi tarvittava kompostimatojen paino',
+    pageName: 'Matolaskuri: arvioi tarvittava kompostimatojen paino',
     title: 'Matolaskuri | Lieromaa',
     description:
       'Lieromaan matolaskuri auttaa arvioimaan kotitaloutesi biojätteen määrän ja sen, kuinka paljon kompostimatoja tarvitset painona.',

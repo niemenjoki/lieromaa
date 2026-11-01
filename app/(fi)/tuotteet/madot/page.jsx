@@ -89,7 +89,7 @@ export default async function Page() {
                   <li>Pakkaus sisältää madot ja noin 0,5 L kasvualustaa.</li>
                   <li>
                     Lisää halutessasi käyttövalmis 14 L matokompostori{' '}
-                    {formatPrice(preparedWormBin.price, 'fi')} eurolla – osta, vastaanota
+                    {formatPrice(preparedWormBin.price, 'fi')} eurolla: osta, vastaanota
                     ja aloita ruokinta.
                   </li>
                 </ul>

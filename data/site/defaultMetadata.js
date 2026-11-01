@@ -1,7 +1,7 @@
 import { ADSENSE_CLIENT } from './adsense.js';
 import { SITE_URL } from './constants.mjs';
 
-const title = 'Lieromaa – Käytännön opas matokompostointiin kotona';
+const title = 'Lieromaa: käytännön opas matokompostointiin kotona';
 const description =
   'Lieromaa kokoaa käytännön oppaat, kokemukset ja työkalut matokompostoinnin aloittamiseen, hoitoon ja matokakan hyödyntämiseen.';
 const siteName = 'Lieromaa';

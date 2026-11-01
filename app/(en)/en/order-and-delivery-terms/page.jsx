@@ -103,7 +103,7 @@ export default function EnglishOrderTermsPage() {
             also place an order by email or instant message.
           </p>
           <p>
-            Every order is confirmed manually, normally within 1–2 working days after
+            Every order is confirmed manually, normally within 1-2 working days after
             availability has been checked. Holiday or absence notices shown separately on
             the website may postpone processing, confirmation and delivery until after
             that period. The confirmation states the order price, delivery charge and
@@ -167,7 +167,7 @@ export default function EnglishOrderTermsPage() {
             will then be refunded in full to the original payment method.
           </p>
           <p>
-            Parcels sent to Posti pickup points normally arrive 1–2 working days after
+            Parcels sent to Posti pickup points normally arrive 1-2 working days after
             dispatch. For home delivery, Posti arranges the delivery time with the
             recipient. Please collect a pickup-point parcel as soon as reasonably possible
             after receiving the arrival notice.

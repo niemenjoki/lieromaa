@@ -14,7 +14,7 @@ export const transactionMessages = Object.freeze({
     submitFailed: 'Tilauksen lähetys epäonnistui.',
     loadingCart: 'Ladataan ostoskoria...',
     successMessage:
-      'Kiitos tilauksesta! Tilaus on vastaanotettu. Saat manuaalisen vahvistuksen sähköpostiisi 1–2 arkipäivän sisällä.',
+      'Kiitos tilauksesta! Tilaus on vastaanotettu. Saat manuaalisen vahvistuksen sähköpostiisi 1-2 arkipäivän sisällä.',
     emptyMessage: 'Ostoskori on tyhjä.',
     successCancellation:
       'Jos haluat tehdä peruuttamisilmoituksen muusta syystä kuin tuotteen virheen vuoksi, voit käyttää',
@@ -117,7 +117,7 @@ export const transactionMessages = Object.freeze({
         'Maksamaton tilaus poistettiin, mutta ostoskori säilyi. Voit jatkaa uudelle Stripe-maksusivulle.',
       paidHeading: 'Maksu vastaanotettu',
       paidBody:
-        'Kiitos tilauksesta! Maksu on vahvistettu. Saat manuaalisen tilausvahvistuksen sähköpostiisi 1–2 arkipäivän sisällä.',
+        'Kiitos tilauksesta! Maksu on vahvistettu. Saat manuaalisen tilausvahvistuksen sähköpostiisi 1-2 arkipäivän sisällä.',
       refundedHeading: 'Maksu on hyvitetty',
       refundedBody: 'Tilauksen Stripe-maksu on palautettu alkuperäiselle maksutavalle.',
     }),
@@ -232,7 +232,7 @@ export const transactionMessages = Object.freeze({
       'Kompostorisi odottaa valitsemasi ajan kylmälaukun paikalla etuovellani Järvenpään Loutissa, ja noudat sen itsenäisesti.',
     waitingComposterAndCooler:
       'Kompostorisi odottaa valitsemasi ajan kylmälaukun vieressä etuovellani Järvenpään Loutissa, ja muut tilaamasi tuotteet ovat kylmälaukussa. Noudat tilauksen itsenäisesti.',
-    optionLabel: ({ start, end }) => `klo ${start}–${end}`,
+    optionLabel: ({ start, end }) => `klo ${start}-${end}`,
     deadlineHelp: ({ hour }) =>
       `Varaa aika viimeistään noutoa edeltävänä päivänä klo ${hour}. Lähetän tarkat nouto-ohjeet ja osoitteen sähköpostiisi heti varauksen jälkeen.`,
     noOptions: ({ phone, email }) =>
@@ -243,7 +243,7 @@ export const transactionMessages = Object.freeze({
     bookedHeading: 'Noutoaikasi on varattu',
     readyHeading: 'Tilauksesi on noudettavissa',
     bookedTime: ({ weekday, date, start, end }) =>
-      `${weekday} ${date} klo ${start}–${end}`,
+      `${weekday} ${date} klo ${start}-${end}`,
     bookedEmailNote:
       'Lähetin tarkat nouto-ohjeet, osoitteen ja kalenterimerkinnän sähköpostiisi.',
     readyNote:

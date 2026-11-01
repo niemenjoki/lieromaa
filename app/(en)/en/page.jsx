@@ -42,7 +42,7 @@ function formatProductPrice(productKey) {
 
   return lowPrice === highPrice
     ? formatCurrency(lowPrice, language)
-    : `${formatPrice(lowPrice, language)}–${formatPrice(highPrice, language)} €`;
+    : `${formatPrice(lowPrice, language)}-${formatPrice(highPrice, language)} €`;
 }
 
 export default function EnglishHomePage() {

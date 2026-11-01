@@ -51,7 +51,7 @@ export const commerceMessages = Object.freeze({
       variantDescriptionLinkLabel: 'with the worm calculator',
       variantLabel({ weight, estimatedWormCount, priceFormatted }) {
         const estimateText = estimatedWormCount ? ` (~${estimatedWormCount} worms)` : '';
-        return `${weight} g${estimateText} – ${priceFormatted} €`;
+        return `${weight} g${estimateText} - ${priceFormatted} €`;
       },
       submitButtonLabel: 'Place order',
     }),
@@ -59,7 +59,7 @@ export const commerceMessages = Object.freeze({
       variantLegend: 'Pack size',
       variantDescription: 'Choose the pack size that best suits your needs.',
       variantLabel({ weight, priceFormatted }) {
-        return `${weight} g – ${priceFormatted} €`;
+        return `${weight} g - ${priceFormatted} €`;
       },
       submitButtonLabel: 'Place order',
     }),

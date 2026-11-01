@@ -2,7 +2,7 @@ export const legalPageDefinitions = {
   privacyPolicy: {
     canonicalUrl: '/tietosuoja',
     pageIdSuffix: '#privacypolicy',
-    pageName: 'Tietosuojaseloste – Lieromaa',
+    pageName: 'Tietosuojaseloste | Lieromaa',
     title: 'Tietosuojaseloste | Lieromaa',
     description:
       'Lue, miten Lieromaa käsittelee henkilötietoja ja käyttää evästeitä. Sivulla kerrotaan tietosuojaperiaatteet ja käyttäjän oikeudet.',
@@ -19,7 +19,7 @@ export const legalPageDefinitions = {
   orderTerms: {
     canonicalUrl: '/tilausehdot',
     pageIdSuffix: '#termsofservice',
-    pageName: 'Tilaus- ja toimitusehdot – Lieromaa',
+    pageName: 'Tilaus- ja toimitusehdot | Lieromaa',
     title: 'Tilaus- ja toimitusehdot | Lieromaa',
     description:
       'Tutustu Lieromaan tilausta, maksua, toimitusta, palautuksia ja asiakkaan oikeuksia koskeviin ehtoihin ennen tilauksen tekemistä.',
@@ -42,7 +42,7 @@ export const legalPageDefinitions = {
   cancellationRequest: {
     canonicalUrl: '/peruuta-tilaus',
     pageIdSuffix: '#cancellationrequest',
-    pageName: 'Peruuttamisilmoitus – Lieromaa',
+    pageName: 'Peruuttamisilmoitus | Lieromaa',
     title: 'Peruuttamisilmoitus | Lieromaa',
     description:
       'Tee Lieromaan tilauksen peruuttamisilmoitus verkkolomakkeella, kun haluat peruuttaa tilauksen muusta syystä kuin tuotteen virheen vuoksi.',
@@ -65,7 +65,7 @@ export const legalPageDefinitions = {
   dataRequest: {
     canonicalUrl: '/tietopyynto',
     pageIdSuffix: '#datarequest',
-    pageName: 'Omien tietojen lataaminen – Lieromaa',
+    pageName: 'Omien tietojen lataaminen | Lieromaa',
     title: 'Lataa tilaukseen liittyvät tietosi | Lieromaa',
     description:
       'Pyydä sähköpostiisi turvallinen kertakäyttöinen latauslinkki kaikkiin Lieromaan tilausjärjestelmässä tilaukseesi liittyviin henkilötietoihin.',

@@ -181,7 +181,7 @@ export default function GettingStartedPage() {
             <dl className={classes.Fact}>
               <dt>Temperature</dt>
               <dd>
-                The worms can survive roughly 0–35 °C, but about 15–25 °C is preferable.
+                The worms can survive roughly 0-35 °C, but about 15-25 °C is preferable.
                 Keep the bin away from direct sunlight, cold floors and places that are
                 too hot or cold.
               </dd>

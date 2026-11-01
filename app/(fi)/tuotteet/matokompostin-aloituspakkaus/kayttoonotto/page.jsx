@@ -23,7 +23,7 @@ export default function StarterKitSetupPage() {
         <aside className={classes.LegacyNotice}>
           <strong>Tämä on arkistoitu ohje aiemmin myydylle aloituspakkaukselle.</strong>
           <p>
-            Ohje koskee kuivalla kookoskuidulla toimitettua 1–3 laatikon mallia, joka
+            Ohje koskee kuivalla kookoskuidulla toimitettua 1-3 laatikon mallia, joka
             koottiin ja käynnistettiin itse. Sitä ei enää myydä. Nykyinen{' '}
             <SafeLink href="/tuotteet/madot#valmis-matokompostori">
               käyttövalmis 14 litran matokompostori

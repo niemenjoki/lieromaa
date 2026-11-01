@@ -1,7 +1,7 @@
 export const homePageDefinition = {
   canonicalUrl: '/',
-  pageName: 'Lieromaa – Käytännön opas matokompostointiin',
-  title: 'Lieromaa – Käytännön opas matokompostointiin kotona',
+  pageName: 'Lieromaa: käytännön opas matokompostointiin',
+  title: 'Lieromaa: käytännön opas matokompostointiin kotona',
   description:
     'Selkeät aloitusoppaat, matolaskuri, omat kokeilut ja käytännön vinkit matokompostoinnin aloittamiseen ja hoitoon kotona.',
   pageDescription:
