@@ -6,12 +6,12 @@ import {
   getAllGuideCategories,
   getBlogTagArchives,
 } from '@/lib/content/index.mjs';
+import { PAIRED_ROUTES } from '@/lib/i18n/routes.mjs';
 import { productCatalog } from '@/lib/products/catalog.mjs';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
 import {
   aboutPage,
   blogIndexPage,
-  dataRequestPage,
   getLegalPageLastModified,
   orderTermsPage,
   privacyPolicyPage,
@@ -22,6 +22,12 @@ import {
 const toISODate = (d) => new Date(d).toISOString().split('T')[0];
 
 export const revalidate = 3600;
+
+// The data request pages stay indexable, but they are not worth listing in the sitemap.
+export const SITEMAP_EXCLUDED_PATHS = Object.freeze([
+  PAIRED_ROUTES.dataRequest.fi,
+  PAIRED_ROUTES.dataRequest.en,
+]);
 
 export default async function sitemap() {
   const urls = [];
@@ -52,7 +58,6 @@ export default async function sitemap() {
     [aboutPage.canonicalUrl, aboutPage.updatedAt],
     [wormSourcePage.canonicalUrl, wormSourcePage.updatedAt],
     [privacyPolicyPage.canonicalUrl, getLegalPageLastModified(privacyPolicyPage)],
-    [dataRequestPage.canonicalUrl, getLegalPageLastModified(dataRequestPage)],
     [orderTermsPage.canonicalUrl, getLegalPageLastModified(orderTermsPage)],
     ...Object.values(productCatalog).map((product) => [
       product.canonicalUrl,
@@ -61,9 +66,9 @@ export default async function sitemap() {
     [wormCalculatorPage.canonicalUrl, wormCalculatorPage.updatedAt],
   ].forEach(([url, lastmod]) => add(url, lastmod));
 
-  englishIndexablePageDefinitions.forEach(({ canonicalUrl, updatedAt }) =>
-    add(canonicalUrl, updatedAt)
-  );
+  englishIndexablePageDefinitions
+    .filter(({ canonicalUrl }) => !SITEMAP_EXCLUDED_PATHS.includes(canonicalUrl))
+    .forEach(({ canonicalUrl, updatedAt }) => add(canonicalUrl, updatedAt));
 
   // --- Tag pages
   for (const tagArchive of blogTagArchives) {

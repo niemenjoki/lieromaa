@@ -4,7 +4,7 @@ import path from 'node:path';
 import { describe, test } from 'node:test';
 
 import { GET as getRss } from '@/app/rss/route.js';
-import sitemap from '@/app/sitemap';
+import sitemap, { SITEMAP_EXCLUDED_PATHS } from '@/app/sitemap';
 import {
   englishFunctionalPagePaths,
   englishIndexablePageDefinitions,
@@ -38,6 +38,7 @@ describe('English publishing integration', () => {
       const expectedLanguages = {
         'fi-FI': pair.fi,
         'en-FI': pair.en,
+        'x-default': pair.fi,
       };
       const finnishMetadata = createPageMetadata({
         title: 'Finnish test page',
@@ -91,6 +92,11 @@ describe('English publishing integration', () => {
     );
 
     for (const page of englishIndexablePageDefinitions) {
+      if (SITEMAP_EXCLUDED_PATHS.includes(page.canonicalUrl)) {
+        assert.equal(sitemapByPath.has(page.canonicalUrl), false, page.canonicalUrl);
+        continue;
+      }
+
       assert.equal(sitemapByPath.has(page.canonicalUrl), true, page.canonicalUrl);
       assert.equal(
         sitemapByPath.get(page.canonicalUrl).lastModified,
