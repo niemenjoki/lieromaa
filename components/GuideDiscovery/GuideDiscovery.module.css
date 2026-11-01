@@ -107,6 +107,10 @@
 }
 
 .ActiveChip span {
+  background: color-mix(in srgb, var(--text-on-accent) 8%, transparent);
+}
+
+:global(:root.dark) .ActiveChip span {
   background: color-mix(in srgb, var(--text-on-accent) 18%, transparent);
 }
 

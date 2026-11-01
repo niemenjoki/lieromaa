@@ -8,6 +8,7 @@
   --sprout-500: #8dcf55;
   --sprout-300: #c4ec8d;
   --clay-500: #a65b43;
+  --clay-600: #934f3b;
   --cyan-200: #cce8e5;
   --mineral-50: #f7f7f0;
   --mineral-100: #efefe5;
@@ -44,7 +45,7 @@
   --light-5: #c9cbbd;
   --light-6: #aeb3a5;
   --text: var(--peat-950);
-  --blue: var(--clay-500);
+  --blue: var(--clay-600);
   --orange: var(--moss-700);
   --overlay-initial-light: rgb(247 247 240 / 0%);
   --overlay-final-light: rgb(247 247 240 / 94%);
