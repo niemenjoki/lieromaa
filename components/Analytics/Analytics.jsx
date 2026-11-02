@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 
 import { isAnalyticsExcludedPath } from '@/lib/analytics/pathPolicy.mjs';
 
-import FirstPartyAnalytics from './FirstPartyAnalytics';
+import LookuAnalytics from './LookuAnalytics';
 
 const isDev =
   process.env.NODE_ENV === 'development' ||
@@ -18,5 +18,5 @@ export default function AnalyticsWrapper() {
 
   if (isDev || isAnalyticsExcludedPath(pathname)) return null;
 
-  return <FirstPartyAnalytics />;
+  return <LookuAnalytics />;
 }

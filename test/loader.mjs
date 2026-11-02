@@ -77,6 +77,11 @@ export async function resolve(specifier, context, nextResolve) {
     };
   }
 
+  // Next's package has no exports map, so its subpath needs the file extension.
+  if (specifier === 'next/server') {
+    return nextResolve('next/server.js', context);
+  }
+
   const aliasPath = resolveAliasSpecifier(specifier);
 
   if (aliasPath) {

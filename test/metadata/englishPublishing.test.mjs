@@ -184,11 +184,12 @@ describe('English publishing integration', () => {
     }
     assert.equal(isAnalyticsExcludedPath('/en/products/compost-worms'), false);
 
-    const analyticsSource = fs.readFileSync(
-      path.join(process.cwd(), 'components', 'Analytics', 'FirstPartyAnalytics.jsx'),
-      'utf8'
-    );
-    assert.match(analyticsSource, /path: view\.path/);
-    assert.doesNotMatch(analyticsSource, /language:\s*(?:view\.|['"](?:fi|en)['"])/);
+    for (const fileName of ['LookuAnalytics.jsx']) {
+      const analyticsSource = fs.readFileSync(
+        path.join(process.cwd(), 'components', 'Analytics', fileName),
+        'utf8'
+      );
+      assert.doesNotMatch(analyticsSource, /language:/);
+    }
   });
 });

@@ -31,6 +31,8 @@ Copy the tracked `.env.example` to the ignored `.env.local` and run the separate
 
 Production builds identify themselves as Stripe `live` mode. The home-server order service independently requires live credentials when `NODE_ENV=production`. Stripe secret keys and webhook secrets belong only to the home-server runtime and must never be added to this repository or to Vercel. Vercel needs only the existing `ORDER_SERVICE_URL`, `ORDER_SERVICE_TOKEN`, and optional timeout setting.
 
+Analytics is [Looku](https://github.com/niemenjoki/Looku) on the home server. `proxy.js` sends a signed page view for each page request, and with analytics consent `components/Analytics/LookuAnalytics.jsx` sends reading time, scroll depth and the site's named events through `app/api/looku`, which forwards them without the IP address. The connector files are copies in `lib/looku/`. Only Vercel production sends data, and it needs `LOOKU_ENDPOINT`, `LOOKU_SITE_ID` and `LOOKU_SIGNING_KEY` (from `looku site:rotate-key lieromaa`); local development and previews send nothing.
+
 - **Data:** JSON-based structured datasets (e.g., Finnish worm sellers)
 
 ---
