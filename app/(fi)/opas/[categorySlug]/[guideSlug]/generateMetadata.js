@@ -7,7 +7,12 @@ import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 
 export default async function generateMetadata({ params }) {
   const { categorySlug, guideSlug } = await params;
-  const data = getContentMetadata({ type: CONTENT_TYPES.GUIDE, slug: guideSlug });
+  let data;
+  try {
+    data = getContentMetadata({ type: CONTENT_TYPES.GUIDE, slug: guideSlug });
+  } catch {
+    notFound();
+  }
 
   if (
     !isMatchingGuideCategorySlug({
