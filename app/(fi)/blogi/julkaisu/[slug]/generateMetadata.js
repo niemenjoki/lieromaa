@@ -1,10 +1,17 @@
+import { notFound } from 'next/navigation';
+
 import { getContentMetadata } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 
 export default async function generateMetadata({ params }) {
   const { slug } = await params;
-  const data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
+  let data;
+  try {
+    data = getContentMetadata({ type: CONTENT_TYPES.POST, slug });
+  } catch {
+    notFound();
+  }
 
   const title = data.title || '';
   const description = data.description || '';
