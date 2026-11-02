@@ -119,7 +119,12 @@ export async function load(url, context, nextLoad) {
     };
   }
 
-  if (url.startsWith(pathToFileURL(rootDir).href) && url.endsWith('.js')) {
+  // Installed packages keep their own module format (next/server is CommonJS).
+  if (
+    url.startsWith(pathToFileURL(rootDir).href) &&
+    url.endsWith('.js') &&
+    !url.includes('/node_modules/')
+  ) {
     return {
       format: 'module',
       shortCircuit: true,
