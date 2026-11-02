@@ -123,13 +123,14 @@ export default function EnglishPrivacyPage() {
             <li>
               Technical usage data and analytics measurements: Lieromaa’s first-party
               analytics records on the site’s server, for each page opened, the page path,
-              timestamp, the host name of an external referring site, any UTM campaign
-              parameters and a visitor hash that changes daily. If you have given
-              analytics consent, analytics also collects estimated time on page, scroll
-              depth, order button clicks, and cart and order form events. Lieromaa’s
-              first-party analytics does not store your name, email address, phone number,
-              delivery address, order number, IP address, browser identifier or URL
-              parameters other than UTM campaign parameters.
+              timestamp, the host name and path of an external referring site, any UTM
+              campaign parameters, the device type, the browser and operating system name,
+              and a visitor hash that changes daily. If you have given analytics consent,
+              analytics also collects estimated time on page, scroll depth, order button
+              clicks, and cart and order form events. Lieromaa’s first-party analytics
+              does not store your name, email address, phone number, delivery address,
+              order number, IP address, browser identifier, location or URL parameters
+              other than UTM campaign parameters.
             </li>
             <li>
               User settings: the light or dark theme selection stored in the browser’s
@@ -359,17 +360,20 @@ export default function EnglishPrivacyPage() {
           </p>
           <h2>First-party analytics</h2>
           <p>
-            Lieromaa uses lightweight first-party analytics to understand use of the site.
-            When you open a page, the site’s server records the page path, timestamp, the
-            host name of an external referring site (for example google.com or
-            com.linkedin.android) and any UTM parameters (utm_source, utm_medium,
-            utm_campaign, utm_content and utm_term). The server also calculates a visitor
-            hash from the IP address and browser identifier, so that visits on the same
-            day can be counted together. The calculation uses a random key that changes
-            every day and is deleted when the day ends, so the same visitor cannot be
-            recognised on different days. The IP address and browser identifier are not
-            stored, and nothing is stored in your browser for this purpose. The visitor
-            hash is pseudonymous data and is treated as personal data.{' '}
+            Lieromaa uses lightweight first-party analytics (Looku) to understand use of
+            the site. When you open a page, the site’s server records the page path,
+            timestamp, the host name and path of an external referring site without URL
+            parameters (for example google.com or linkedin.com/feed/) and any UTM
+            parameters (utm_source, utm_medium, utm_campaign, utm_content and utm_term).
+            The device type (computer, tablet or phone) and the browser and operating
+            system name, for example Firefox and Android, are derived from the browser
+            identifier. The server also calculates a visitor hash from the IP address and
+            browser identifier, so that visits on the same day can be counted together.
+            The calculation uses a random key that changes every day and is deleted when
+            the day ends, so the same visitor cannot be recognised on different days. The
+            IP address and browser identifier are not stored, and nothing is stored in
+            your browser for this purpose. The visitor hash is pseudonymous data and is
+            treated as personal data.{' '}
           </p>{' '}
           <p>
             {' '}
@@ -377,18 +381,21 @@ export default function EnglishPrivacyPage() {
             collects estimated time on page, scroll depth and order button clicks, and
             events such as adding to the cart, continuing from the delivery step of the
             cart, an attempt to submit the order form and a successful order form
-            submission. Time on page and scroll depth are stored per page without the
-            visitor hash. Events are linked to the same day’s visitor hash so that it can
-            be seen which pages lead to the cart and to an order. Consent to advertising
-            does not affect analytics. The data is used only to understand how people move
-            through the site and how interest in products, the cart and ordering changes
-            over time.{' '}
+            submission. This data is passed to analytics without the IP address and
+            browser identifier, and it is stored per page without the visitor hash and to
+            the day only, so it cannot be connected with a single visit. Consent to
+            advertising does not affect analytics. The data is used only to understand how
+            people move through the site and how interest in products, the cart and
+            ordering changes over time.{' '}
           </p>{' '}
           <p>
             {' '}
             Analytics data is not connected with individual order details such as name,
-            email address, phone number, delivery address or order number. Analytics does
-            not store geographic location. Reporting is done at page, page group and day
+            email address, phone number, delivery address or order number. Of orders, only
+            the order time, total and product rows are passed to analytics, together with
+            an internal identifier of the order system so that the data of a cancelled
+            order can be deleted. Orders are not connected with visits. Analytics does not
+            store geographic location. Reporting is done at page, page group and day
             level. Of URL parameters, analytics stores only UTM campaign parameters when
             they are included in the link. Other URL parameters are not stored.
           </p>
@@ -499,8 +506,11 @@ export default function EnglishPrivacyPage() {
             </li>
             <li>
               Individual page views, measurements and events of first-party analytics are
-              kept in Lieromaa’s own SQLite database for 25 months and then deleted. The
-              daily key for the visitor hash is deleted when the day ends.
+              kept in Lieromaa’s own SQLite database for 25 months and then deleted. Daily
+              totals calculated from them, without the visitor hash, are kept after that.
+              The analytics data of orders (time, total and product rows without customer
+              details) is kept as the shop’s history. The daily key for the visitor hash
+              is deleted when the day ends.
             </li>
             <li>
               The theme setting and cart data stored in localStorage remain in the browser

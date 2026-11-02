@@ -88,13 +88,14 @@ export default function PrivacyPage() {
           <li>
             Tekninen käyttödata ja analytiikkamittarit: Lieromaan oma analytiikka kirjaa
             sivuston palvelimella jokaisesta sivun avauksesta sivupolun, aikaleiman,
-            ulkoisen viittaavan sivun host-nimen, mahdolliset UTM-kampanjaparametrit ja
+            ulkoisen viittaavan sivun host-nimen ja polun, mahdolliset
+            UTM-kampanjaparametrit, laitetyypin, selaimen ja käyttöjärjestelmän nimen sekä
             päivittäin vaihtuvan kävijätiivisteen. Jos olet antanut
             analytiikkasuostumuksen, analytiikka kerää lisäksi arvioidun viipymän,
             vierityssyvyyden, tilausnapin klikkaukset sekä ostoskori- ja
             tilauslomaketapahtumat. Lieromaan oma analytiikka ei tallenna nimeä,
             sähköpostiosoitetta, puhelinnumeroa, toimitusosoitetta, tilausnumeroa,
-            IP-osoitetta, selaintunnistetta eikä muita URL-parametreja kuin
+            IP-osoitetta, selaintunnistetta, sijaintia eikä muita URL-parametreja kuin
             UTM-kampanjaparametrit.
           </li>
           <li>
@@ -356,16 +357,18 @@ export default function PrivacyPage() {
         <h2>Ensimmäisen osapuolen analytiikka</h2>
         <p>
           Sivustolla käytetään Lieromaan omaa kevyttä ensimmäisen osapuolen analytiikkaa
-          sivuston käytön seuraamiseen. Kun avaat sivun, sivuston palvelin kirjaa
-          sivupolun, aikaleiman, ulkoisen viittaavan sivun host-nimen (esimerkiksi
-          google.com tai com.linkedin.android) ja mahdolliset UTM-parametrit (utm_source,
-          utm_medium, utm_campaign, utm_content ja utm_term). Samalla palvelin laskee
-          IP-osoitteesta ja selaintunnisteesta kävijätiivisteen, jolla saman päivän
-          käynnit voidaan laskea yhteen. Laskennassa käytetään satunnaista avainta, joka
-          vaihtuu joka päivä ja poistetaan vuorokauden päätyttyä, joten samaa kävijää ei
-          voi tunnistaa eri päivinä. IP-osoitetta ja selaintunnistetta ei tallenneta, eikä
-          selaimeesi tallenneta tätä varten mitään. Kävijätiiviste on pseudonyymi tieto,
-          ja sitä käsitellään henkilötietona.{' '}
+          (Looku) sivuston käytön seuraamiseen. Kun avaat sivun, sivuston palvelin kirjaa
+          sivupolun, aikaleiman, ulkoisen viittaavan sivun host-nimen ja polun ilman
+          URL-parametreja (esimerkiksi google.com tai linkedin.com/feed/) ja mahdolliset
+          UTM-parametrit (utm_source, utm_medium, utm_campaign, utm_content ja utm_term).
+          Selaintunnisteesta päätellään laitetyyppi (tietokone, tabletti tai puhelin) sekä
+          selaimen ja käyttöjärjestelmän nimi, esimerkiksi Firefox ja Android. Samalla
+          palvelin laskee IP-osoitteesta ja selaintunnisteesta kävijätiivisteen, jolla
+          saman päivän käynnit voidaan laskea yhteen. Laskennassa käytetään satunnaista
+          avainta, joka vaihtuu joka päivä ja poistetaan vuorokauden päätyttyä, joten
+          samaa kävijää ei voi tunnistaa eri päivinä. IP-osoitetta ja selaintunnistetta ei
+          tallenneta, eikä selaimeesi tallenneta tätä varten mitään. Kävijätiiviste on
+          pseudonyymi tieto, ja sitä käsitellään henkilötietona.{' '}
         </p>{' '}
         <p>
           {' '}
@@ -373,21 +376,24 @@ export default function PrivacyPage() {
           lisäksi arvioidun viipymän, vierityssyvyyden ja tilausnapin klikkaukset sekä
           tapahtumia, kuten ostoskoriin lisäämisen, ostoskorin toimitustapavaiheesta
           jatkamisen, tilauslomakkeen lähetysyrityksen ja onnistuneen tilauslomakkeen
-          lähetyksen. Viipymä ja vierityssyvyys tallennetaan sivukohtaisesti ilman
-          kävijätiivistettä. Tapahtumat liitetään saman päivän kävijätiivisteeseen, jotta
-          nähdään, mitkä sivut johtavat ostoskoriin ja tilaukseen. Mainosten suostumus ei
-          vaikuta analytiikkaan. Tietoja käytetään vain sen ymmärtämiseen, miten sivuilla
-          liikutaan ja miten kiinnostus tuotteisiin, ostoskoriin ja tilaamiseen muuttuu
-          ajan kuluessa.{' '}
+          lähetyksen. Nämä tiedot välitetään analytiikkaan ilman IP-osoitetta ja
+          selaintunnistetta, ja ne tallennetaan sivukohtaisesti ilman kävijätiivistettä ja
+          päivän tarkkuudella, joten niitä ei voi yhdistää yksittäiseen käyntiin.
+          Mainosten suostumus ei vaikuta analytiikkaan. Tietoja käytetään vain sen
+          ymmärtämiseen, miten sivuilla liikutaan ja miten kiinnostus tuotteisiin,
+          ostoskoriin ja tilaamiseen muuttuu ajan kuluessa.{' '}
         </p>{' '}
         <p>
           {' '}
           Analytiikan tietoja ei yhdistetä yksittäisiin tilaustietoihin, kuten nimeen,
           sähköpostiosoitteeseen, puhelinnumeroon, toimitusosoitteeseen tai
-          tilausnumeroon. Analytiikka ei tallenna maantieteellistä sijaintia. Raportointi
-          tehdään sivu-, sivuryhmä- ja päivätasolla. Analytiikka tallentaa
-          URL-parametreista vain UTM-kampanjaparametrit, jos niitä on linkissä mukana.
-          Muita URL-parametreja ei tallenneta analytiikkaan.
+          tilausnumeroon. Tilauksista analytiikkaan välitetään vain tilausaika, summa ja
+          tuoterivit sekä tilausjärjestelmän sisäinen tunniste, jotta perutun tilauksen
+          tiedot voidaan poistaa. Tilauksia ei yhdistetä käynteihin. Analytiikka ei
+          tallenna maantieteellistä sijaintia. Raportointi tehdään sivu-, sivuryhmä- ja
+          päivätasolla. Analytiikka tallentaa URL-parametreista vain
+          UTM-kampanjaparametrit, jos niitä on linkissä mukana. Muita URL-parametreja ei
+          tallenneta analytiikkaan.
         </p>
         <p>
           Ensimmäisen osapuolen analytiikkadata tallennetaan Lieromaan hallinnoimaan
@@ -506,8 +512,10 @@ export default function PrivacyPage() {
           <li>
             Ensimmäisen osapuolen analytiikan yksittäiset sivunäytöt, mittarit ja
             tapahtumat säilyvät Lieromaan omassa SQLite-tietokannassa 25 kuukautta, minkä
-            jälkeen ne poistetaan. Kävijätiivisteen päivittäinen avain poistetaan
-            vuorokauden päätyttyä.
+            jälkeen ne poistetaan. Niistä lasketut päiväkohtaiset määrät, joissa ei ole
+            kävijätiivistettä, säilyvät tämän jälkeenkin. Tilausten analytiikkatiedot
+            (aika, summa ja tuoterivit ilman asiakastietoja) säilyvät kaupan historiana.
+            Kävijätiivisteen päivittäinen avain poistetaan vuorokauden päätyttyä.
           </li>
           <li>
             LocalStorageen tallennettu teema-asetus ja ostoskoritieto säilyvät käytössä
