@@ -1,13 +1,19 @@
+import { notFound } from 'next/navigation';
+
 import {
   getBlogTagPageData,
   getPostsByTag,
   isIndexableBlogTag,
+  isValidPageIndex,
 } from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 import { POSTS_PER_PAGE } from '@/lib/site/constants.mjs';
 
 export default async function generateMetadata({ params }) {
   const { tag, pageIndex } = await params;
+  if (!isValidPageIndex(pageIndex)) {
+    notFound();
+  }
   const pageData = getBlogTagPageData({ tag, pageIndex });
   const { numPages, total } = getPostsByTag(
     pageData.tagSlug,

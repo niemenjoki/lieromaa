@@ -1,9 +1,18 @@
-import { getAllContentSlugs, getBlogPageData } from '@/lib/content/index.mjs';
+import { notFound } from 'next/navigation';
+
+import {
+  getAllContentSlugs,
+  getBlogPageData,
+  isValidPageIndex,
+} from '@/lib/content/index.mjs';
 import { withDefaultMetadata } from '@/lib/metadata/withDefaultMetadata';
 import { CONTENT_TYPES, POSTS_PER_PAGE } from '@/lib/site/constants.mjs';
 
 export default async function generateMetadata({ params }) {
   const { pageIndex } = await params;
+  if (!isValidPageIndex(pageIndex)) {
+    notFound();
+  }
   const pageData = getBlogPageData(pageIndex);
 
   const numPages = Math.ceil(

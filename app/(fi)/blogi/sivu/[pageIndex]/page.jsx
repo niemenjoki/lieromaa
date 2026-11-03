@@ -9,6 +9,7 @@ import {
   getAllPostTags,
   getBlogPageData,
   getPaginatedPosts,
+  isValidPageIndex,
 } from '@/lib/content/index.mjs';
 import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
@@ -27,6 +28,9 @@ export async function generateStaticParams() {
 
 export default async function BlogPage({ params }) {
   const { pageIndex } = await params;
+  if (!isValidPageIndex(pageIndex)) {
+    notFound();
+  }
   const pageData = getBlogPageData(pageIndex);
   const { posts, numPages } = getPaginatedPosts(pageData.pageIndexInt, POSTS_PER_PAGE);
   const searchItems = getSiteSearchIndex();
