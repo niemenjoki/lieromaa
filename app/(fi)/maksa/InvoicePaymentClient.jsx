@@ -25,7 +25,7 @@ function normalizePaymentCode(value) {
   const compact = String(value || '')
     .toUpperCase()
     .replace(/[\s-]/g, '');
-  return /^[2-9A-HJ-NP-Z]{8}$/.test(compact) ? compact : '';
+  return /^[1-9A-NP-Z]{8}$/.test(compact) ? compact : '';
 }
 
 function formatCode(code) {
@@ -120,7 +120,7 @@ function CodeForm({ language, invalid }) {
           spellCheck={false}
           inputMode="text"
           maxLength={12}
-          placeholder="K7QF-3M9P"
+          placeholder="K7QF3M9P"
           aria-describedby="invoice-payment-code-help"
         />
         <p id="invoice-payment-code-help" className={pickupClasses.HelpText}>
