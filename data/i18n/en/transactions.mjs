@@ -255,6 +255,35 @@ export const transactionMessages = Object.freeze({
     manual:
       'I will arrange the pickup with you separately. If you have any questions, reply to the email you received.',
   }),
+  invoicePayment: Object.freeze({
+    codeLabel: 'Payment code',
+    codeHelp: 'The payment code is on your invoice, for example K7QF-3M9P.',
+    codeInvalid:
+      'Please check the payment code. It has 8 characters, for example K7QF-3M9P.',
+    continue: 'Continue',
+    checking: 'Looking up the invoice...',
+    invoiceLabel: ({ invoiceNumber }) => `Invoice ${invoiceNumber}`,
+    amountLabel: 'Amount due',
+    dueDateLabel: 'Due date',
+    pay: 'Pay now with MobilePay or a card',
+    payDetail:
+      'Payment takes place on a secure payment page, and your invoice is marked as paid at once. Apple Pay or Google Pay may appear on a supported device.',
+    opening: 'Opening the payment page...',
+    paidHeading: 'The invoice has been paid',
+    paidText:
+      'Thank you! Your payment has been received, and there is nothing else you need to do.',
+    confirming: 'Thank you! Confirming your payment...',
+    confirmSlow:
+      'Confirming the payment is taking longer than usual. If the payment went through, it will be recorded on the invoice automatically, and you do not need to pay again.',
+    unavailable:
+      'The invoice cannot be paid online. You can pay it by bank transfer with the details on the invoice.',
+    genericError:
+      'The invoice could not be loaded. Please try again shortly or pay by bank transfer.',
+    otherCode: 'Pay another invoice',
+    otherLanguage: 'Näytä sivu suomeksi',
+    contactHelp: ({ email }) =>
+      `If you need help, reply to the invoice email or write to ${email}.`,
+  }),
   orderValidation: Object.freeze({
     validation: 'Check the form details and try again.',
     required_field: 'Complete all required fields before placing the order.',

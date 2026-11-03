@@ -1,0 +1,59 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Label {
+  font-weight: 700;
+}
+
+.CodeInput {
+  width: 100%;
+  max-width: 14rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--background-6);
+  border-radius: 4px;
+  background-color: var(--background-1);
+  color: var(--text-color);
+  font: inherit;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.CodeInput:focus-visible {
+  outline: 2px solid var(--highlight-alt);
+  outline-offset: 2px;
+}
+
+.Heading {
+  color: var(--highlight-alt);
+  margin: 0 0 0.75rem;
+}
+
+.Details {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0 0 0.75rem;
+}
+
+.Details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 22rem;
+}
+
+.Details dt {
+  opacity: 0.84;
+}
+
+.Details dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.Amount {
+  font-size: 1.15rem;
+}

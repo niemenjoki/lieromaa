@@ -178,10 +178,15 @@ describe('English publishing integration', () => {
     assert.deepEqual(ANALYTICS_EXCLUDED_PATHS, [
       '/tietopyynto/lataa',
       '/en/data-request/download',
+      '/maksa',
+      '/en/pay',
     ]);
     for (const pathName of ANALYTICS_EXCLUDED_PATHS) {
       assert.equal(isAnalyticsExcludedPath(pathName), true);
     }
+    assert.equal(isAnalyticsExcludedPath('/maksa/K7QF3M9P'), true);
+    assert.equal(isAnalyticsExcludedPath('/en/pay/K7QF3M9P'), true);
+    assert.equal(isAnalyticsExcludedPath('/maksaja'), false);
     assert.equal(isAnalyticsExcludedPath('/en/products/compost-worms'), false);
 
     for (const fileName of ['LookuAnalytics.jsx']) {

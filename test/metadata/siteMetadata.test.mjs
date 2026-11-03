@@ -62,6 +62,12 @@ const pickupPage = {
   robots: { index: false, follow: false },
 };
 
+const invoicePaymentPage = {
+  canonicalUrl: '/maksa',
+  title: 'Maksa lasku | Lieromaa',
+  robots: { index: false, follow: false },
+};
+
 const dataDownloadPage = {
   title: 'Lataa tietosi | Lieromaa',
   robots: { index: false, follow: false, nocache: true },
@@ -122,6 +128,7 @@ function collectMetadataScenarios() {
     checkoutPage,
     reviewPage,
     pickupPage,
+    invoicePaymentPage,
     dataDownloadPage,
     searchPage,
   ].forEach((page) => {

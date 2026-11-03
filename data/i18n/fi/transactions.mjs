@@ -254,6 +254,33 @@ export const transactionMessages = Object.freeze({
     manual:
       'Sovin noudosta kanssasi erikseen. Jos sinulla on kysyttävää, vastaa saamaasi sähköpostiin.',
   }),
+  invoicePayment: Object.freeze({
+    codeLabel: 'Maksukoodi',
+    codeHelp: 'Maksukoodi on laskussa, esimerkiksi K7QF-3M9P.',
+    codeInvalid: 'Tarkista maksukoodi. Siinä on 8 merkkiä, esimerkiksi K7QF-3M9P.',
+    continue: 'Jatka',
+    checking: 'Haetaan laskua...',
+    invoiceLabel: ({ invoiceNumber }) => `Lasku ${invoiceNumber}`,
+    amountLabel: 'Maksettava',
+    dueDateLabel: 'Eräpäivä',
+    pay: 'Maksa nyt MobilePaylla tai kortilla',
+    payDetail:
+      'Maksu tapahtuu suojatulla maksusivulla, ja laskusi merkitään maksetuksi heti. Apple Pay tai Google Pay voi näkyä tuetulla laitteella.',
+    opening: 'Avataan maksusivua...',
+    paidHeading: 'Lasku on maksettu',
+    paidText: 'Kiitos! Maksusi on vastaanotettu, eikä sinun tarvitse tehdä muuta.',
+    confirming: 'Kiitos! Vahvistetaan maksua...',
+    confirmSlow:
+      'Maksun vahvistus kestää tavallista kauemmin. Jos maksu onnistui, se kirjautuu laskulle automaattisesti, eikä sinun tarvitse maksaa uudelleen.',
+    unavailable:
+      'Laskua ei voi maksaa verkossa. Voit maksaa sen tilisiirrolla laskun tiedoilla.',
+    genericError:
+      'Laskun hakeminen epäonnistui. Yritä hetken kuluttua uudelleen tai maksa tilisiirrolla.',
+    otherCode: 'Maksa toinen lasku',
+    otherLanguage: 'Show this page in English',
+    contactHelp: ({ email }) =>
+      `Jos tarvitset apua, vastaa laskun sähköpostiin tai kirjoita osoitteeseen ${email}.`,
+  }),
   orderValidation: Object.freeze({
     validation: 'Tarkista lomakkeen tiedot ja yritä uudelleen.',
     required_field: 'Täytä kaikki pakolliset kentät ennen lähetystä.',

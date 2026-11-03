@@ -107,7 +107,8 @@ describe('locale foundation', () => {
   });
 
   test('declares every final route pair and preserves functional tokens and anchors', () => {
-    assert.equal(Object.keys(PAIRED_ROUTES).length, 14);
+    assert.equal(Object.keys(PAIRED_ROUTES).length, 15);
+    assert.equal(getRoutePath('invoicePayment', 'en'), '/en/pay');
     assert.equal(getRoutePath('products', 'en'), '/en');
     assert.equal(
       getLanguageSwitchHref({

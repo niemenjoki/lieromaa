@@ -100,6 +100,13 @@ export const englishPageDefinitions = Object.freeze(
       description: 'Book a pickup time for a Lieromaa order collected in Järvenpää.',
       robots: { index: false, follow: false },
     },
+    {
+      canonicalUrl: '/en/pay',
+      title: 'Pay an invoice | Lieromaa',
+      description:
+        'Pay a Lieromaa invoice with MobilePay or a card using the payment code on the invoice.',
+      robots: { index: false, follow: false },
+    },
   ].map((page) => Object.freeze({ updatedAt: ENGLISH_PROJECT_PUBLISHED_AT, ...page }))
 );
 
