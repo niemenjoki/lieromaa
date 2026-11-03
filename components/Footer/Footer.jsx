@@ -15,6 +15,8 @@ import { WORM_HUNT_FOOTER_SLOT_ID } from '@/lib/wormHunt/placementTargets.mjs';
 import classes from './Footer.module.css';
 
 const PUBLIC_BUSINESS_LOCATION = 'Järvenpää';
+// UTM-merkintä erottaa alatunnisteen kautta tulleet kävijät Niemenjoki.fi:n analytiikassa.
+const AUTHOR_SITE_FOOTER_URL = `${AUTHOR_SITE_URL}/?utm_source=lieromaa.fi&utm_medium=referral&utm_campaign=toinen-sivustoni`;
 
 const LOCALE_COPY = Object.freeze({
   fi: Object.freeze({
@@ -226,7 +228,7 @@ export default function Footer({ language = 'fi', navigation, copy, themeCopy })
         </section>
 
         <p className={classes.OtherSite}>
-          {localeCopy.otherSiteLabel} <a href={AUTHOR_SITE_URL}>Niemenjoki.fi</a>
+          {localeCopy.otherSiteLabel} <a href={AUTHOR_SITE_FOOTER_URL}>Niemenjoki.fi</a>
         </p>
 
         <div className={classes.Bottom}>

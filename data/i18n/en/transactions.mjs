@@ -257,9 +257,8 @@ export const transactionMessages = Object.freeze({
   }),
   invoicePayment: Object.freeze({
     codeLabel: 'Payment code',
-    codeHelp: 'The payment code is on your invoice, for example K7QF-3M9P.',
-    codeInvalid:
-      'Please check the payment code. It has 8 characters, for example K7QF-3M9P.',
+    codeHelp: 'The payment code is on your invoice and in the invoice email.',
+    codeInvalid: 'The payment code was not recognised. Please check it on your invoice.',
     continue: 'Continue',
     checking: 'Looking up the invoice...',
     invoiceLabel: ({ invoiceNumber }) => `Invoice ${invoiceNumber}`,

@@ -12,7 +12,8 @@ import { getRoutePath } from '@/lib/i18n/routes.mjs';
 
 import classes from './InvoicePayment.module.css';
 
-// Laskun maksusivu: maksukoodi osoitteessa (/maksa/K7QF3M9P) tai syötettynä. Sivu näyttää vain laskun numeron,
+// Laskun maksusivu: maksukoodi osoitteessa (/maksa/<koodi>) tai syötettynä. Sivu ei kerro koodin muotoa, jotta
+// muut kuin asiakkaat eivät saa siitä vihjettä. Sivu näyttää vain laskun numeron,
 // summan ja eräpäivän, ja maksu jatkuu suojatulle maksusivulle (MobilePay tai kortti).
 
 const SESSION_ENDPOINT = '/api/invoice-payment/session';
@@ -120,7 +121,6 @@ function CodeForm({ language, invalid }) {
           spellCheck={false}
           inputMode="text"
           maxLength={12}
-          placeholder="K7QF3M9P"
           aria-describedby="invoice-payment-code-help"
         />
         <p id="invoice-payment-code-help" className={pickupClasses.HelpText}>

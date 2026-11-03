@@ -256,8 +256,8 @@ export const transactionMessages = Object.freeze({
   }),
   invoicePayment: Object.freeze({
     codeLabel: 'Maksukoodi',
-    codeHelp: 'Maksukoodi on laskussa, esimerkiksi K7QF-3M9P.',
-    codeInvalid: 'Tarkista maksukoodi. Siinä on 8 merkkiä, esimerkiksi K7QF-3M9P.',
+    codeHelp: 'Maksukoodi on laskussa ja laskun sähköpostissa.',
+    codeInvalid: 'Maksukoodia ei tunnistettu. Tarkista koodi laskusta.',
     continue: 'Jatka',
     checking: 'Haetaan laskua...',
     invoiceLabel: ({ invoiceNumber }) => `Lasku ${invoiceNumber}`,
