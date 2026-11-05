@@ -2,6 +2,7 @@
   "worms": {
     "earliestShippingDate": false,
     "unavailableSkus": [
+      "worms-50",
       "worms-75",
       "worms-100"
     ]
