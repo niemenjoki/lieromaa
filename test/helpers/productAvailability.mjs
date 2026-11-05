@@ -3,6 +3,13 @@ import assert from 'node:assert/strict';
 import productAvailabilitySource from '@/lib/commerce/productAvailability.mjs';
 import { getProductPricing } from '@/lib/pricing/catalog';
 
+// Tests that use a fixed worm SKU must not depend on what is currently on sale:
+// marking a package unavailable from the admin would otherwise break the build.
+export const ALL_WORM_SKUS_AVAILABLE = Object.freeze({
+  earliestShippingDate: false,
+  unavailableSkus: [],
+});
+
 export function getRequiredProductSku(productKey, behavior) {
   const product = getProductPricing(productKey);
   const sku = product.variantSkus[0];
@@ -12,7 +19,7 @@ export function getRequiredProductSku(productKey, behavior) {
   return sku;
 }
 
-export function withTemporaryProductAvailability(productKey, overrides, callback) {
+function applyTemporaryProductAvailability(productKey, overrides) {
   const hadConfig = Object.prototype.hasOwnProperty.call(
     productAvailabilitySource,
     productKey
@@ -33,13 +40,35 @@ export function withTemporaryProductAvailability(productKey, overrides, callback
         : [],
   };
 
-  try {
-    return callback();
-  } finally {
+  return () => {
     if (hadConfig) {
       productAvailabilitySource[productKey] = previousConfig;
     } else {
       delete productAvailabilitySource[productKey];
     }
+  };
+}
+
+export function withTemporaryProductAvailability(productKey, overrides, callback) {
+  const restore = applyTemporaryProductAvailability(productKey, overrides);
+
+  try {
+    return callback();
+  } finally {
+    restore();
+  }
+}
+
+export async function withTemporaryProductAvailabilityAsync(
+  productKey,
+  overrides,
+  callback
+) {
+  const restore = applyTemporaryProductAvailability(productKey, overrides);
+
+  try {
+    return await callback();
+  } finally {
+    restore();
   }
 }

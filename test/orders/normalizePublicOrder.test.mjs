@@ -24,6 +24,7 @@ import {
   listOrderScenarios,
 } from '../helpers/orderScenarios.mjs';
 import {
+  ALL_WORM_SKUS_AVAILABLE,
   getRequiredProductSku,
   withTemporaryProductAvailability,
 } from '../helpers/productAvailability.mjs';
@@ -353,68 +354,69 @@ describe('frontend public order normalization', () => {
     );
   });
 
-  test('normalizePublicOrderSubmission should authoritatively apply the cart reward only to eligible worm lines', () => {
-    const rewardCode = wormHuntConfig.code;
-    const cartItems = [
-      { sku: 'worms-50', quantity: 1 },
-      {
-        sku: 'worms-ready-bin-14l',
-        parentSku: 'worms-50',
-        quantity: 1,
-      },
-      { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
-    ];
-    const formData = createValidOrderFormData({
-      sku: '',
-      tuote_avain: '',
-      cart_items_json: JSON.stringify(cartItems),
-      toimitus: 'posti_noutopiste',
-      osoite: 'Kompostikuja 1',
-      postinumero: '00100',
-      toimipaikka: 'Helsinki',
-      alennuskoodi: rewardCode.toLowerCase(),
-    });
+  test('normalizePublicOrderSubmission should authoritatively apply the cart reward only to eligible worm lines', () =>
+    withTemporaryProductAvailability('worms', ALL_WORM_SKUS_AVAILABLE, () => {
+      const rewardCode = wormHuntConfig.code;
+      const cartItems = [
+        { sku: 'worms-50', quantity: 1 },
+        {
+          sku: 'worms-ready-bin-14l',
+          parentSku: 'worms-50',
+          quantity: 1,
+        },
+        { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
+      ];
+      const formData = createValidOrderFormData({
+        sku: '',
+        tuote_avain: '',
+        cart_items_json: JSON.stringify(cartItems),
+        toimitus: 'posti_noutopiste',
+        osoite: 'Kompostikuja 1',
+        postinumero: '00100',
+        toimipaikka: 'Helsinki',
+        alennuskoodi: rewardCode.toLowerCase(),
+      });
 
-    if (!wormHuntConfig.enabled) {
-      assert.throws(
-        () =>
-          normalizePublicOrderSubmission(formData, {
-            now: new Date('2026-08-04T10:00:00Z'),
-          }),
-        (error) => error.code === 'invalid_discount_code'
+      if (!wormHuntConfig.enabled) {
+        assert.throws(
+          () =>
+            normalizePublicOrderSubmission(formData, {
+              now: new Date('2026-08-04T10:00:00Z'),
+            }),
+          (error) => error.code === 'invalid_discount_code'
+        );
+        return;
+      }
+
+      const payload = normalizePublicOrderSubmission(formData, {
+        now: new Date('2026-08-04T10:00:00Z'),
+      });
+      const discountAmount = Number(
+        ((34 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
       );
-      return;
-    }
+      const rewardLetters = [...rewardCode];
+      const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
 
-    const payload = normalizePublicOrderSubmission(formData, {
-      now: new Date('2026-08-04T10:00:00Z'),
-    });
-    const discountAmount = Number(
-      ((34 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
-    );
-    const rewardLetters = [...rewardCode];
-    const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
-
-    expectEqual(payload.pricing.itemPrice, 74);
-    expectEqual(payload.pricing.shippingPrice, 8.9);
-    expectDeepEqual(payload.pricing.discount, {
-      codePlain: rewardCode,
-      codeMasked,
-      obfuscatedCode: obfuscateDiscountCode(rewardCode),
-      type: 'percentage',
-      value: wormHuntConfig.discountPercentage,
-      productAmount: discountAmount,
-      extraChargeAmount: 0,
-      shippingAmount: 0,
-      totalAmount: discountAmount,
-      endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
-    });
-    expectEqual(
-      payload.pricing.total,
-      Number((82.9 - discountAmount).toFixed(2)),
-      'the final review total should subtract only the eligible worm discount'
-    );
-  });
+      expectEqual(payload.pricing.itemPrice, 74);
+      expectEqual(payload.pricing.shippingPrice, 8.9);
+      expectDeepEqual(payload.pricing.discount, {
+        codePlain: rewardCode,
+        codeMasked,
+        obfuscatedCode: obfuscateDiscountCode(rewardCode),
+        type: 'percentage',
+        value: wormHuntConfig.discountPercentage,
+        productAmount: discountAmount,
+        extraChargeAmount: 0,
+        shippingAmount: 0,
+        totalAmount: discountAmount,
+        endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
+      });
+      expectEqual(
+        payload.pricing.total,
+        Number((82.9 - discountAmount).toFixed(2)),
+        'the final review total should subtract only the eligible worm discount'
+      );
+    }));
 
   test('normalizePublicOrderSubmission should reject invalid and non-applicable cart reward claims', () => {
     assert.throws(
@@ -519,35 +521,36 @@ describe('frontend public order normalization', () => {
     );
   });
 
-  test('normalizePublicOrderSubmission should include a prepared worm bin as a fixed-price worm add-on', () => {
-    const now = new Date('2026-07-14T10:00:00Z');
-    const cartItems = [
-      { sku: 'worms-50', quantity: 1 },
-      { sku: 'worms-ready-bin-14l', parentSku: 'worms-50', quantity: 1 },
-    ];
-    const expectedQuote = getCartOrderQuote({
-      items: cartItems,
-      shippingMethod: 'nouto',
-    });
-    const payload = normalizePublicOrderSubmission(
-      createValidOrderFormData({
-        sku: '',
-        tuote_avain: '',
-        cart_items_json: JSON.stringify(cartItems),
-        toimitus: 'nouto',
-      }),
-      { now }
-    );
+  test('normalizePublicOrderSubmission should include a prepared worm bin as a fixed-price worm add-on', () =>
+    withTemporaryProductAvailability('worms', ALL_WORM_SKUS_AVAILABLE, () => {
+      const now = new Date('2026-07-14T10:00:00Z');
+      const cartItems = [
+        { sku: 'worms-50', quantity: 1 },
+        { sku: 'worms-ready-bin-14l', parentSku: 'worms-50', quantity: 1 },
+      ];
+      const expectedQuote = getCartOrderQuote({
+        items: cartItems,
+        shippingMethod: 'nouto',
+      });
+      const payload = normalizePublicOrderSubmission(
+        createValidOrderFormData({
+          sku: '',
+          tuote_avain: '',
+          cart_items_json: JSON.stringify(cartItems),
+          toimitus: 'nouto',
+        }),
+        { now }
+      );
 
-    expectEqual(payload.items[1].sku, 'worms-ready-bin-14l');
-    expectEqual(payload.items[1].parentSku, 'worms-50');
-    expectEqual(payload.items[1].key, 'worms');
-    expectEqual(payload.items[1].label, 'Käyttövalmis 14 litran matokompostori');
-    expectEqual(payload.items[1].quantity, 1);
-    expectEqual(payload.items[1].packageQuantity, 1);
-    expectEqual(payload.items[1].unitPrice, 35);
-    expectEqual(payload.pricing.itemPrice, expectedQuote.itemSubtotal);
-  });
+      expectEqual(payload.items[1].sku, 'worms-ready-bin-14l');
+      expectEqual(payload.items[1].parentSku, 'worms-50');
+      expectEqual(payload.items[1].key, 'worms');
+      expectEqual(payload.items[1].label, 'Käyttövalmis 14 litran matokompostori');
+      expectEqual(payload.items[1].quantity, 1);
+      expectEqual(payload.items[1].packageQuantity, 1);
+      expectEqual(payload.items[1].unitPrice, 35);
+      expectEqual(payload.pricing.itemPrice, expectedQuote.itemSubtotal);
+    }));
 
   test('prepared worm bins require an attached worm package and are limited to one per package', () => {
     assert.throws(

@@ -13,6 +13,10 @@ import {
   createValidOrderFormDataForScenario,
 } from '../helpers/orderForm.mjs';
 import { findOrderScenario, listOrderScenarios } from '../helpers/orderScenarios.mjs';
+import {
+  ALL_WORM_SKUS_AVAILABLE,
+  withTemporaryProductAvailabilityAsync,
+} from '../helpers/productAvailability.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
 
 function withEnv(env, fn) {
@@ -361,92 +365,93 @@ describe('frontend public order submit route', () => {
     );
   });
 
-  test('the public order submit route should recompute and forward the eligible cart reward', async () => {
-    const rewardCode = wormHuntConfig.code;
+  test('the public order submit route should recompute and forward the eligible cart reward', () =>
+    withTemporaryProductAvailabilityAsync('worms', ALL_WORM_SKUS_AVAILABLE, async () => {
+      const rewardCode = wormHuntConfig.code;
 
-    await withEnv(
-      {
-        ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
-        ORDER_SERVICE_TOKEN: 'shared-secret',
-      },
-      async () => {
-        const recordedCalls = [];
-        const originalFetch = globalThis.fetch;
-        globalThis.fetch = async (url, init = {}) => {
-          recordedCalls.push([url, init]);
-          return Response.json({
-            ok: true,
-            orderId: 'LRM-DISCOUNTED',
-            duplicate: false,
-            paymentProvider: 'INVOICE',
-          });
-        };
+      await withEnv(
+        {
+          ORDER_SERVICE_URL: 'https://orders-ingest.lieromaa.fi',
+          ORDER_SERVICE_TOKEN: 'shared-secret',
+        },
+        async () => {
+          const recordedCalls = [];
+          const originalFetch = globalThis.fetch;
+          globalThis.fetch = async (url, init = {}) => {
+            recordedCalls.push([url, init]);
+            return Response.json({
+              ok: true,
+              orderId: 'LRM-DISCOUNTED',
+              duplicate: false,
+              paymentProvider: 'INVOICE',
+            });
+          };
 
-        try {
-          const formData = createValidOrderFormData({
-            sku: '',
-            tuote_avain: '',
-            cart_items_json: JSON.stringify([
-              { sku: 'worms-50', quantity: 1 },
-              {
-                sku: 'worms-ready-bin-14l',
-                parentSku: 'worms-50',
-                quantity: 1,
-              },
-              { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
-            ]),
-            toimitus: 'posti_noutopiste',
-            osoite: 'Kompostikuja 1',
-            postinumero: '00100',
-            toimipaikka: 'Helsinki',
-            alennuskoodi: rewardCode,
-          });
-          const response = await POST(
-            createRouteRequest({
-              url: 'https://www.lieromaa.fi/api/orders/submit',
-              formData,
-            })
-          );
+          try {
+            const formData = createValidOrderFormData({
+              sku: '',
+              tuote_avain: '',
+              cart_items_json: JSON.stringify([
+                { sku: 'worms-50', quantity: 1 },
+                {
+                  sku: 'worms-ready-bin-14l',
+                  parentSku: 'worms-50',
+                  quantity: 1,
+                },
+                { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
+              ]),
+              toimitus: 'posti_noutopiste',
+              osoite: 'Kompostikuja 1',
+              postinumero: '00100',
+              toimipaikka: 'Helsinki',
+              alennuskoodi: rewardCode,
+            });
+            const response = await POST(
+              createRouteRequest({
+                url: 'https://www.lieromaa.fi/api/orders/submit',
+                formData,
+              })
+            );
 
-          if (!wormHuntConfig.enabled) {
-            expectEqual(response.status, 400);
-            expectEqual(recordedCalls.length, 0);
-            return;
+            if (!wormHuntConfig.enabled) {
+              expectEqual(response.status, 400);
+              expectEqual(recordedCalls.length, 0);
+              return;
+            }
+
+            expectEqual(response.status, 200);
+            expectEqual(recordedCalls.length, 1);
+
+            const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
+            const discountAmount = Number(
+              ((34 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
+            );
+            const rewardLetters = [...rewardCode];
+            const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
+            expectDeepEqual(forwardedPayload.pricing.discount, {
+              codePlain: rewardCode,
+              codeMasked,
+              obfuscatedCode: obfuscateDiscountCode(rewardCode),
+              type: 'percentage',
+              value: wormHuntConfig.discountPercentage,
+              productAmount: discountAmount,
+              extraChargeAmount: 0,
+              shippingAmount: 0,
+              totalAmount: discountAmount,
+              endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
+            });
+            expectEqual(forwardedPayload.pricing.itemPrice, 74);
+            expectEqual(forwardedPayload.pricing.shippingPrice, 8.9);
+            expectEqual(
+              forwardedPayload.pricing.total,
+              Number((82.9 - discountAmount).toFixed(2))
+            );
+          } finally {
+            globalThis.fetch = originalFetch;
           }
-
-          expectEqual(response.status, 200);
-          expectEqual(recordedCalls.length, 1);
-
-          const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
-          const discountAmount = Number(
-            ((34 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
-          );
-          const rewardLetters = [...rewardCode];
-          const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
-          expectDeepEqual(forwardedPayload.pricing.discount, {
-            codePlain: rewardCode,
-            codeMasked,
-            obfuscatedCode: obfuscateDiscountCode(rewardCode),
-            type: 'percentage',
-            value: wormHuntConfig.discountPercentage,
-            productAmount: discountAmount,
-            extraChargeAmount: 0,
-            shippingAmount: 0,
-            totalAmount: discountAmount,
-            endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
-          });
-          expectEqual(forwardedPayload.pricing.itemPrice, 74);
-          expectEqual(forwardedPayload.pricing.shippingPrice, 8.9);
-          expectEqual(
-            forwardedPayload.pricing.total,
-            Number((82.9 - discountAmount).toFixed(2))
-          );
-        } finally {
-          globalThis.fetch = originalFetch;
         }
-      }
-    );
-  });
+      );
+    }));
 
   test('the public order submit route should reject an invalid applied code before forwarding', async () => {
     const originalFetch = globalThis.fetch;
