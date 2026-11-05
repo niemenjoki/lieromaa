@@ -4,6 +4,7 @@ import { POST as bookPickup } from '@/app/api/pickup/book/route.js';
 import { GET as getPickupSession } from '@/app/api/pickup/session/route.js';
 
 import { expectEqual } from '../helpers/assertions.mjs';
+import { withEnv } from '../helpers/env.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
 
 const ENV = {
@@ -12,23 +13,16 @@ const ENV = {
 };
 
 function withEnvAndFetch(fetchImpl, fn) {
-  const previous = new Map(Object.keys(ENV).map((key) => [key, process.env[key]]));
-  const originalFetch = globalThis.fetch;
-  Object.assign(process.env, ENV);
-  globalThis.fetch = fetchImpl;
+  return withEnv(ENV, async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = fetchImpl;
 
-  return Promise.resolve()
-    .then(fn)
-    .finally(() => {
+    try {
+      return await fn();
+    } finally {
       globalThis.fetch = originalFetch;
-      for (const [key, value] of previous.entries()) {
-        if (value === undefined) {
-          delete process.env[key];
-        } else {
-          process.env[key] = value;
-        }
-      }
-    });
+    }
+  });
 }
 
 describe('frontend pickup proxy routes', () => {

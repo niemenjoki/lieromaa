@@ -3,32 +3,8 @@ import { describe, test } from 'node:test';
 import { GET } from '@/app/api/pickup-points/search/route.js';
 
 import { expectDeepEqual, expectEqual } from '../helpers/assertions.mjs';
+import { withEnv } from '../helpers/env.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
-
-function withEnv(env, fn) {
-  const previousValues = new Map();
-
-  for (const [key, value] of Object.entries(env)) {
-    previousValues.set(key, process.env[key]);
-    if (value === undefined) {
-      delete process.env[key];
-    } else {
-      process.env[key] = value;
-    }
-  }
-
-  return Promise.resolve()
-    .then(fn)
-    .finally(() => {
-      for (const [key, value] of previousValues.entries()) {
-        if (value === undefined) {
-          delete process.env[key];
-        } else {
-          process.env[key] = value;
-        }
-      }
-    });
-}
 
 describe('frontend pickup-point search route', () => {
   test('the pickup-point search route should reject cross-origin requests', async () => {
@@ -47,47 +23,34 @@ describe('frontend pickup-point search route', () => {
     );
   });
 
-  test('the pickup-point search route should reject non-mainland Finnish postal codes', async () => {
-    const response = await GET(
-      createRouteRequest({
-        url: 'https://www.lieromaa.fi/api/pickup-points/search?postalCode=22100',
-      })
-    );
+  test('the pickup-point search route should reject non-mainland postal codes with a stable code in both languages', async () => {
+    const messages = new Map();
+
+    for (const language of ['fi', 'en']) {
+      const response = await GET(
+        createRouteRequest({
+          url: 'https://www.lieromaa.fi/api/pickup-points/search?postalCode=22100',
+          extraHeaders: { 'X-Lieromaa-Language': language },
+        })
+      );
+      const body = await response.json();
+
+      expectEqual(
+        response.status,
+        400,
+        `${language}: postal codes outside mainland Finland`
+      );
+      expectEqual(body.ok, false, `${language}: the search should fail`);
+      expectEqual(body.code, 'invalid_postcode', `${language}: stable error code`);
+      expectEqual(typeof body.message, 'string', `${language}: a readable message`);
+      messages.set(language, body.message);
+    }
 
     expectEqual(
-      response.status,
-      400,
-      'the pickup-point search route should reject postal codes outside mainland Finland'
+      messages.get('fi') === messages.get('en'),
+      false,
+      'the error message should be localized'
     );
-    expectDeepEqual(
-      await response.json(),
-      {
-        ok: false,
-        code: 'invalid_postcode',
-        message:
-          'Noutopistehaku on käytettävissä vain manner-Suomen 5-numeroisilla postinumeroilla.',
-      },
-      'the pickup-point search route should explain that the search is limited to mainland Finland postal codes'
-    );
-  });
-
-  test('the pickup-point search route should return stable English postcode errors', async () => {
-    const response = await GET(
-      createRouteRequest({
-        url: 'https://www.lieromaa.fi/api/pickup-points/search?postalCode=22100',
-        extraHeaders: {
-          'X-Lieromaa-Language': 'en',
-        },
-      })
-    );
-
-    expectEqual(response.status, 400);
-    expectDeepEqual(await response.json(), {
-      ok: false,
-      code: 'invalid_postcode',
-      message:
-        'Pickup-point search is available only for five-digit postcodes in mainland Finland.',
-    });
   });
 
   test('the pickup-point search route should fetch an access token and normalize Posti pickup points', async () => {

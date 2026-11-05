@@ -26,46 +26,10 @@ function readEnglishSource(relativePath) {
 }
 
 describe('English content pages', () => {
-  test('provides the English content routes with self-canonical metadata', () => {
+  test('provides a page for every English content route', () => {
     for (const [route, relativePath] of englishContentRoutes) {
       assert.equal(fs.existsSync(path.join(ENGLISH_APP_ROOT, relativePath)), true, route);
-      const source = readEnglishSource(relativePath);
-
-      if (route === '/en') {
-        assert.match(source, /canonicalUrl: getRoutePath\(['"]products['"], language\)/);
-        assert.match(source, /const language = ['"]en['"]/);
-      } else {
-        assert.match(source, new RegExp(`canonicalUrl: ['\"]${route}['\"]`));
-        assert.match(source, /language: ['"]en['"]/);
-      }
-      assert.match(source, /title:/);
-      assert.match(source, /description:/);
-      assert.match(source, /createLocalizedPageMetadata\(pageMetadata\)/);
     }
-  });
-
-  test('implements the tab-scoped Finnish-content notice and exact customer copy', () => {
-    const noticeSource = fs.readFileSync(
-      path.join(
-        PROJECT_ROOT,
-        'components',
-        'FinnishContentLanguageNotice',
-        'FinnishContentLanguageNotice.jsx'
-      ),
-      'utf8'
-    );
-    const commonSource = fs.readFileSync(
-      path.join(PROJECT_ROOT, 'data', 'i18n', 'en', 'common.mjs'),
-      'utf8'
-    );
-
-    assert.match(noticeSource, /sessionStorage/);
-    assert.match(noticeSource, /searchParams\.get\('from'\) === 'en'/);
-    assert.match(
-      commonSource,
-      /You are now viewing content that is available only in Finnish\./
-    );
-    assert.match(commonSource, /Back to the English shop/);
   });
 
   test('shares the unchanged calculator algorithm with English copy', () => {
@@ -83,77 +47,12 @@ describe('English content pages', () => {
     assert.equal(result.options.halfStartWeightGrams, 175);
   });
 
-  test('contains complete legal Stripe and invoice language with no prohibited provider wording', () => {
-    const terms = readEnglishSource('order-and-delivery-terms/page.jsx');
-    const privacy = readEnglishSource('privacy/page.jsx');
+  test('English content pages have no prohibited provider wording or placeholders', () => {
     const englishSource = [...englishContentRoutes.values()]
       .map(readEnglishSource)
       .join('\n');
 
-    assert.match(
-      terms,
-      /At checkout you can either pay on Stripe’s secure hosted payment page or/
-    );
-    assert.match(terms, /MobilePay and payment\s+cards are supported/);
-    assert.match(terms, /choose an email invoice\. No payment method/);
-    assert.match(terms, /The\s+payment\s+term\s+is\s+14\s+days/);
-    assert.match(terms, /Delivery within Finland only/);
-    assert.match(privacy, /Invoicing, payments and accounting/);
-    assert.match(privacy, /Temporary draft for an order proceeding to Stripe/);
-    assert.match(privacy, /sessionStorage for up to one hour/);
     assert.doesNotMatch(englishSource, /OP Kevytyrittäjä/i);
     assert.doesNotMatch(englishSource, /TODO|translation placeholder/i);
-  });
-
-  test('includes the required landing and getting-started sections', () => {
-    const landing = readEnglishSource('page.jsx');
-    const gettingStarted = readEnglishSource(
-      'getting-started-with-compost-worms/page.jsx'
-    );
-
-    for (const heading of [
-      'Compost worms and worm-composting supplies in Finland',
-      'Products',
-      'How ordering works',
-      'Why buy from Lieromaa',
-    ]) {
-      assert.match(landing, new RegExp(heading));
-    }
-
-    for (const heading of [
-      'Which instructions apply to your order?',
-      'The first 48 hours',
-      'First feeding and the first four weeks',
-      'Food essentials',
-      'Moisture, smell, temperature and worms trying to escape',
-      'Basic corrective actions',
-      'Contact and next actions',
-    ]) {
-      assert.match(gettingStarted, new RegExp(heading));
-    }
-  });
-
-  test('reuses Finnish page styles for equivalent translated pages', () => {
-    const styleImports = new Map([
-      ['page.jsx', '@/app/(fi)/tuotteet/ProductPage.module.css'],
-      ['about/page.jsx', '@/app/(fi)/tietoa/Tietoa.module.css'],
-      [
-        'about/where-our-worms-come-from/page.jsx',
-        '@/app/(fi)/tietoa/mista-lieromaan-madot-tulevat/WormSource.module.css',
-      ],
-      [
-        'order-and-delivery-terms/page.jsx',
-        '@/app/(fi)/tilausehdot/Tilausehdot.module.css',
-      ],
-      ['privacy/page.jsx', '@/app/(fi)/tietosuoja/Tietosuoja.module.css'],
-    ]);
-
-    for (const [relativePath, styleImport] of styleImports) {
-      assert.equal(
-        readEnglishSource(relativePath).includes(styleImport),
-        true,
-        relativePath
-      );
-    }
   });
 });

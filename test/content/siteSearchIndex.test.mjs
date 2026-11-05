@@ -1,8 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
+import { getGuidePath } from '@/lib/content/guideRoutes.mjs';
+import { getAllContent } from '@/lib/content/index.mjs';
+import { productCatalog } from '@/lib/products/catalog.mjs';
 import { createPathSearchQuery } from '@/lib/search/searchQuery.mjs';
 import { getSiteSearchIndex } from '@/lib/search/siteSearchIndex.mjs';
+import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
+import { wormCalculatorPage } from '@/lib/site/pageRecords.mjs';
 
 test('site search index covers primary searchable surfaces', () => {
   const index = getSiteSearchIndex();
@@ -10,22 +15,30 @@ test('site search index covers primary searchable surfaces', () => {
   const hrefs = new Set(index.map((item) => item.href));
 
   assert.equal(ids.size, index.length);
-  assert.ok(
-    hrefs.has(
-      '/opas/kompostorin-perustaminen/mika-on-matokompostointi-miksi-se-kannattaa'
+
+  const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
+  const guidePaths = new Set(
+    guides.map((guide) =>
+      getGuidePath({ categoryName: guide.category.name, guideSlug: guide.slug })
     )
   );
-  assert.ok(
-    hrefs.has('/opas/lämpökompostointi/voiko-kompostimadot-laittaa-lampokompostoriin')
-  );
-  assert.equal(
-    hrefs.has(
-      '/opas/kompostorin-perustaminen/voiko-kompostimadot-laittaa-lampokompostoriin'
-    ),
-    false
-  );
-  assert.ok(hrefs.has('/tuotteet/madot'));
-  assert.ok(hrefs.has('/matolaskuri'));
+  for (const guidePath of guidePaths) {
+    assert.ok(hrefs.has(guidePath), `search should include ${guidePath}`);
+  }
+  // A guide is listed only under its current category.
+  const indexedGuidePaths = [...hrefs].filter((href) => href.startsWith('/opas/'));
+  for (const guide of guides) {
+    assert.deepEqual(
+      indexedGuidePaths.filter((href) => href.endsWith(`/${guide.slug}`)),
+      [getGuidePath({ categoryName: guide.category.name, guideSlug: guide.slug })],
+      guide.slug
+    );
+  }
+
+  for (const product of Object.values(productCatalog)) {
+    assert.ok(hrefs.has(product.canonicalUrl), product.canonicalUrl);
+  }
+  assert.ok(hrefs.has(wormCalculatorPage.canonicalUrl));
 
   for (const item of index) {
     assert.ok(item.title, `[${item.id}] missing title`);

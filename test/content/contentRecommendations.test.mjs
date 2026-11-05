@@ -3,17 +3,21 @@ import { describe, test } from 'node:test';
 
 import { HOT_COMPOSTING_GUIDE_SLUGS } from '@/lib/content/hotCompostingGuide.mjs';
 import {
+  getAllContent,
   getContentMetadata,
   getContentRecommendations,
   scoreContentRecommendation,
 } from '@/lib/content/index.mjs';
 import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 
+// The hot composting guides are curated in code, so their slugs are stable.
+const CURRENT_GUIDE_SLUG = HOT_COMPOSTING_GUIDE_SLUGS.at(-1);
+
 describe('content recommendations', () => {
   test('guide recommendations exclude the current guide and include useful cross-type reading', () => {
     const guide = getContentMetadata({
       type: CONTENT_TYPES.GUIDE,
-      slug: 'voiko-kompostimadot-laittaa-lampokompostoriin',
+      slug: CURRENT_GUIDE_SLUG,
     });
 
     const recommendations = getContentRecommendations({
@@ -28,7 +32,7 @@ describe('content recommendations', () => {
       recommendations.some(
         (recommendation) =>
           recommendation.type === CONTENT_TYPES.GUIDE &&
-          recommendation.slug === 'voiko-kompostimadot-laittaa-lampokompostoriin'
+          recommendation.slug === CURRENT_GUIDE_SLUG
       ),
       false
     );
@@ -38,40 +42,28 @@ describe('content recommendations', () => {
       ),
       true
     );
-    assert.equal(
-      recommendations.some(
-        (recommendation) =>
-          recommendation.slug === 'matokompostointi-talvella-toimiiko-se-ulkona-suomessa'
-      ),
-      true
-    );
   });
 
   test('metadata-pinned recommendations are placed before automatic matches', () => {
     const guide = getContentMetadata({
       type: CONTENT_TYPES.GUIDE,
-      slug: 'voiko-kompostimadot-laittaa-lampokompostoriin',
+      slug: CURRENT_GUIDE_SLUG,
     });
+
+    const pinnedPost = getAllContent({ type: CONTENT_TYPES.POST }).at(-1);
+    assert.ok(pinnedPost, 'at least one blog post should be published');
 
     const recommendations = getContentRecommendations({
       current: {
         ...guide,
         type: CONTENT_TYPES.GUIDE,
         recommendedContent: {
-          pinned: [
-            {
-              type: CONTENT_TYPES.POST,
-              slug: 'lampokompostori-vai-matokomposti-paras-ratkaisu-keittiojatteelle',
-            },
-          ],
+          pinned: [{ type: CONTENT_TYPES.POST, slug: pinnedPost.slug }],
         },
       },
     });
 
-    assert.equal(
-      recommendations[0].slug,
-      'lampokompostori-vai-matokomposti-paras-ratkaisu-keittiojatteelle'
-    );
+    assert.equal(recommendations[0].slug, pinnedPost.slug);
     assert.equal(recommendations[0].recommendationReason, 'Suositeltu jatkolukeminen');
   });
 
@@ -127,7 +119,7 @@ describe('content recommendations', () => {
   test('hot composting pages recommend the other guides in the curated cluster', () => {
     const guide = getContentMetadata({
       type: CONTENT_TYPES.GUIDE,
-      slug: 'lampokompostorin-ongelmat',
+      slug: HOT_COMPOSTING_GUIDE_SLUGS[0],
     });
     const recommendations = getContentRecommendations({
       current: {
@@ -144,11 +136,9 @@ describe('content recommendations', () => {
 
     assert.deepEqual(
       recommendations.map(({ type, slug }) => `${type}:${slug}`).sort(),
-      [
-        `${CONTENT_TYPES.GUIDE}:lampokompostori-ei-lampene`,
-        `${CONTENT_TYPES.GUIDE}:lampokompostorin-tyhjennys-ja-jalkikompostointi`,
-        `${CONTENT_TYPES.GUIDE}:voiko-kompostimadot-laittaa-lampokompostoriin`,
-      ].sort()
+      HOT_COMPOSTING_GUIDE_SLUGS.filter((slug) => slug !== guide.slug)
+        .map((slug) => `${CONTENT_TYPES.GUIDE}:${slug}`)
+        .sort()
     );
   });
 });

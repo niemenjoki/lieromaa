@@ -20,7 +20,7 @@ import {
   isIndexableBlogTag,
 } from '@/lib/content/index.mjs';
 import { createProductPageMetadata } from '@/lib/metadata/createProductPageMetadata';
-import { productCatalog } from '@/lib/products/catalog.mjs';
+import { productCatalog, productDefinitions } from '@/lib/products/catalog.mjs';
 import { CONTENT_TYPES, POSTS_PER_PAGE, SITE_URL } from '@/lib/site/constants.mjs';
 import {
   aboutPage,
@@ -36,50 +36,22 @@ import {
   wormSourcePage,
 } from '@/lib/site/pageRecords.mjs';
 
-const productIndexPage = {
-  canonicalUrl: '/tuotteet',
-  title: 'Tuotteet | Lieromaa',
-  description:
-    'Lieromaan tuotteet matokompostointiin: kompostimadot, matopakettien lisävalinnat ja erikseen tilattava 500 g kuituseos.',
-};
+import { readFinnishPageMetadata } from '../helpers/pageMetadataSource.mjs';
+import {
+  createSkuDiscount,
+  withTemporarySkuDiscounts,
+} from '../helpers/skuDiscounts.mjs';
 
-const checkoutPage = {
-  canonicalUrl: '/tilaus',
-  title: 'Tilaus | Lieromaa',
-  description:
-    'Tarkista ostoskorisi, valitse toimitustapa ja lähetä Lieromaan tuotteiden tilaus helposti yhdeltä sivulta.',
-  robots: { index: false, follow: true },
-};
-
-const reviewPage = {
-  title: 'Jätä arvostelu | Lieromaa',
-  robots: { index: false, follow: false },
-};
-
-const pickupPage = {
-  canonicalUrl: '/nouto',
-  title: 'Valitse noutoaika | Lieromaa',
-  robots: { index: false, follow: false },
-};
-
-const invoicePaymentPage = {
-  canonicalUrl: '/maksa',
-  title: 'Maksa lasku | Lieromaa',
-  robots: { index: false, follow: false },
-};
-
-const dataDownloadPage = {
-  title: 'Lataa tietosi | Lieromaa',
-  robots: { index: false, follow: false, nocache: true },
-};
-
-const searchPage = {
-  canonicalUrl: '/haku',
-  title: 'Haku | Lieromaa',
-  description:
-    'Hae Lieromaan oppaita, tuotteita, blogijulkaisuja ja matokompostointiin liittyviä aiheita.',
-  robots: { index: false, follow: true },
-};
+// These pages declare their metadata inside page.jsx.
+const SOURCE_METADATA_PAGES = new Map([
+  ['/tuotteet', 'tuotteet'],
+  ['/tilaus', 'tilaus'],
+  ['/arvostele', 'arvostele'],
+  ['/nouto', 'nouto'],
+  ['/maksa', 'maksa'],
+  ['/tietopyynto/lataa', 'tietopyynto/lataa'],
+  ['/haku', 'haku'],
+]);
 
 const explicitNonMetadataRoutes = new Map([
   ['/7b0d4de4-7896-4f1f-b8f4-c7d94d9bf7a8', 'analytics opt-out client redirect'],
@@ -115,7 +87,6 @@ function collectMetadataScenarios() {
   [
     homePage,
     blogIndexPage,
-    productIndexPage,
     guideHubPage,
     aboutPage,
     cancellationRequestPage,
@@ -125,16 +96,13 @@ function collectMetadataScenarios() {
     starterKitSetupPage,
     wormCalculatorPage,
     wormSourcePage,
-    checkoutPage,
-    reviewPage,
-    pickupPage,
-    invoicePaymentPage,
-    dataDownloadPage,
-    searchPage,
   ].forEach((page) => {
-    const fallbackPath = page === reviewPage ? '/arvostele' : '/tietopyynto/lataa';
-    addScenario(scenarios, page.canonicalUrl ?? fallbackPath, page);
+    addScenario(scenarios, page.canonicalUrl, page);
   });
+
+  for (const [routePath, routeDirectory] of SOURCE_METADATA_PAGES) {
+    addScenario(scenarios, routePath, readFinnishPageMetadata(routeDirectory));
+  }
 
   englishPageDefinitions.forEach((page) => {
     addScenario(scenarios, page.canonicalUrl, page);
@@ -248,25 +216,87 @@ test('every site route is covered by title and metadata expectations', () => {
   }
 });
 
-test('product page metadata descriptions stay valid after dynamic offer copy', () => {
-  for (const [productKey, product] of Object.entries(productCatalog)) {
-    const metadata = createProductPageMetadata(productKey, product.metadata);
+function assertProductDescription(product, metadata, label) {
+  const { length } = metadata.description;
 
-    assertMetadataShape(product.canonicalUrl, metadata);
+  assert.ok(
+    length >= 110 && length <= 160,
+    `[${product.canonicalUrl}] ${label}: description must be 110-160 characters (${length})`
+  );
+  assert.ok(
+    metadata.description.startsWith(product.metadata.description),
+    `[${product.canonicalUrl}] ${label}: the sale text may only be appended`
+  );
+  assertMetadataShape(product.canonicalUrl, metadata);
+}
+
+test('product page descriptions stay within 110-160 characters with and without a sale', () => {
+  const now = new Date('2026-07-15T10:00:00Z');
+  const saleScenarios = [
+    ['one end date', () => '2026-07-21'],
+    ['a different end date per SKU', (index) => `2026-07-${String(20 + index)}`],
+  ];
+
+  for (const [productKey, product] of Object.entries(productCatalog)) {
+    assertProductDescription(
+      product,
+      createProductPageMetadata(productKey, product.metadata, { now }),
+      'no sale'
+    );
+
+    const skus = productDefinitions[productKey].variantSkus;
+    for (const [label, getValidUntil] of saleScenarios) {
+      const sales = Object.fromEntries(
+        skus.map((sku, index) => [
+          sku,
+          createSkuDiscount({
+            validFrom: '2026-07-13',
+            validUntil: getValidUntil(index),
+          }),
+        ])
+      );
+
+      withTemporarySkuDiscounts(sales, () => {
+        const metadata = createProductPageMetadata(productKey, product.metadata, { now });
+
+        assertProductDescription(product, metadata, `sale with ${label}`);
+      });
+    }
   }
 });
 
-test('low-count blog tag pages are noindexed', async () => {
+function findBlogTag(indexable) {
+  return getAllPostTags()
+    .map(slugifySegment)
+    .find(
+      (tagSlug) =>
+        isIndexableBlogTag(getPostsByTag(tagSlug, 1, POSTS_PER_PAGE).total) === indexable
+    );
+}
+
+test('low-count blog tag pages are noindexed', async (t) => {
+  const tagSlug = findBlogTag(false);
+  if (!tagSlug) {
+    t.skip('every blog tag currently has enough posts to be indexed');
+    return;
+  }
+
   const metadata = await generateBlogTagMetadata({
-    params: { tag: 'lapset', pageIndex: '1' },
+    params: { tag: tagSlug, pageIndex: '1' },
   });
 
   assert.deepEqual(metadata.robots, { index: false, follow: true });
 });
 
-test('indexable blog tag pages do not get explicit noindex metadata', async () => {
+test('indexable blog tag pages do not get explicit noindex metadata', async (t) => {
+  const tagSlug = findBlogTag(true);
+  if (!tagSlug) {
+    t.skip('no blog tag currently has enough posts to be indexed');
+    return;
+  }
+
   const metadata = await generateBlogTagMetadata({
-    params: { tag: 'matokompostointi', pageIndex: '1' },
+    params: { tag: tagSlug, pageIndex: '1' },
   });
 
   assert.equal(metadata.robots, undefined);
@@ -296,10 +326,13 @@ test('hot composting category metadata has correct social copy and main image', 
   const metadata = await generateGuideCategoryMetadata({
     params: { categorySlug: 'lämpökompostointi' },
   });
-  const expectedTitle = 'Lämpökompostointi: toiminta, ongelmat ja käyttö | Lieromaa';
-  const expectedDescription =
-    'Oppaat lämpökompostorin toimintaan, hoitoon, ongelmanratkaisuun, kompostimatojen käyttöön, tyhjennykseen ja jälkikompostointiin.';
-  const expectedAlt = 'Henkilö lisää biojätettä avoimeen lämpökompostoriin pihalla.';
+  const pageData = getGuideCategoryPageData('lämpökompostointi');
+  const mainGuide = getAllContent({ type: CONTENT_TYPES.GUIDE }).find(
+    (guide) => guide.slug === HOT_COMPOSTING_GUIDES[0].slug
+  );
+  const expectedTitle = pageData.title;
+  const expectedDescription = pageData.description;
+  const expectedAlt = mainGuide.image.alt;
 
   assert.equal(metadata.title, expectedTitle);
   assert.equal(metadata.description, expectedDescription);

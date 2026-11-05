@@ -3,32 +3,8 @@ import { describe, test } from 'node:test';
 import { POST } from '@/app/api/orders/cancel/route.js';
 
 import { expectDeepEqual, expectEqual } from '../helpers/assertions.mjs';
+import { withEnv } from '../helpers/env.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
-
-function withEnv(env, fn) {
-  const previousValues = new Map();
-
-  for (const [key, value] of Object.entries(env)) {
-    previousValues.set(key, process.env[key]);
-    if (value === undefined) {
-      delete process.env[key];
-    } else {
-      process.env[key] = value;
-    }
-  }
-
-  return Promise.resolve()
-    .then(fn)
-    .finally(() => {
-      for (const [key, value] of previousValues.entries()) {
-        if (value === undefined) {
-          delete process.env[key];
-        } else {
-          process.env[key] = value;
-        }
-      }
-    });
-}
 
 describe('frontend cancellation request proxy route', () => {
   test('the cancellation request route should reject cross-origin requests', async () => {

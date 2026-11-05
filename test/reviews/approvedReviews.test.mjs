@@ -3,15 +3,35 @@ import { describe, test } from 'node:test';
 
 import { getProductMessages } from '@/lib/i18n/messages.mjs';
 import { productDefinitions } from '@/lib/products/catalog.mjs';
-import {
+import approvedReviewsSource from '@/lib/reviews/approvedReviewsSource';
+
+import { expectEqual } from '../helpers/assertions.mjs';
+
+// Example reviews are added before the review module normalizes the file, so the
+// language fallback is tested even when every real review states its language.
+const EXAMPLE_PRODUCT_KEY = Object.keys(productDefinitions)[0];
+const EXAMPLE_REVIEWS = [
+  { review: 'Esimerkki ilman kieltä', submittedAt: '2000-01-01T10:00:00.000Z' },
+  {
+    review: 'Example in English',
+    submittedAt: '2000-01-02T10:00:00.000Z',
+    language: 'en',
+  },
+  {
+    review: 'Esimerkki tuntemattomalla kielellä',
+    submittedAt: '2000-01-03T10:00:00.000Z',
+    language: 'sv',
+  },
+].map((entry) => ({ productKey: EXAMPLE_PRODUCT_KEY, rating: 5, ...entry }));
+
+approvedReviewsSource.push(...EXAMPLE_REVIEWS);
+
+const {
   REVIEW_PURCHASED_PRODUCTS,
   getApprovedProductReviewSummary,
   getApprovedProductReviews,
   normalizePurchasedProducts,
-} from '@/lib/reviews/approvedReviews';
-import approvedReviewsSource from '@/lib/reviews/approvedReviewsSource';
-
-import { expectEqual } from '../helpers/assertions.mjs';
+} = await import('@/lib/reviews/approvedReviews');
 
 describe('frontend approved review data', () => {
   test('approved review normalization should keep every review from the static data file', () => {
@@ -27,24 +47,17 @@ describe('frontend approved review data', () => {
     );
   });
 
-  test('approved reviews without a language remain Finnish for compatibility', () => {
-    const rawEntries = Array.isArray(approvedReviewsSource) ? approvedReviewsSource : [];
-    const normalizedEntries = Object.keys(productDefinitions).flatMap((productKey) =>
-      getApprovedProductReviews(productKey)
+  test('approved reviews without a known language remain Finnish for compatibility', () => {
+    const languageBySubmittedAt = new Map(
+      getApprovedProductReviews(EXAMPLE_PRODUCT_KEY).map((review) => [
+        review.submittedAt,
+        review.language,
+      ])
     );
 
-    rawEntries.forEach((entry) => {
-      if (entry.language !== undefined) return;
-
-      const normalizedEntry = normalizedEntries.find(
-        (candidate) =>
-          candidate.productKey === entry.productKey &&
-          candidate.submittedAt === entry.submittedAt &&
-          candidate.review === String(entry.review || '').trim()
-      );
-
-      assert.equal(normalizedEntry?.language, 'fi');
-    });
+    assert.equal(languageBySubmittedAt.get('2000-01-01T10:00:00.000Z'), 'fi');
+    assert.equal(languageBySubmittedAt.get('2000-01-02T10:00:00.000Z'), 'en');
+    assert.equal(languageBySubmittedAt.get('2000-01-03T10:00:00.000Z'), 'fi');
   });
 
   test('approved review summaries should stay internally consistent for each product', () => {

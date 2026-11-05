@@ -122,7 +122,7 @@ export function buildExpectedQuoteFromSource({
   selectedExtraCharges = {},
   now = new Date(),
 }) {
-  const variant = getProductVariantBySku(sku);
+  const variant = getProductVariantBySku(sku, { now });
   const shippingOption = getShippingOption(productKey, shippingMethod);
   const orderConfig = getProductOrderConfig(productKey);
   const itemPrice = Number(variant?.price) || 0;

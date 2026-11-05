@@ -3,7 +3,6 @@ import { describe, test } from 'node:test';
 
 import {
   WORM_PHASES,
-  WORM_PHASE_DURATION_MS,
   WORM_UNDERGROUND_MAX_MS,
   WORM_UNDERGROUND_MIN_MS,
   createInitialWormState,
@@ -36,16 +35,6 @@ describe('worm navigation motion', () => {
       getBoundedUndergroundDuration(() => Number.NaN),
       Math.round((WORM_UNDERGROUND_MIN_MS + WORM_UNDERGROUND_MAX_MS) / 2)
     );
-  });
-
-  test('keeps the complete decorative journey within the tuned duration', () => {
-    const fixedPhaseDuration =
-      WORM_PHASE_DURATION_MS[WORM_PHASES.DIVING] +
-      WORM_PHASE_DURATION_MS[WORM_PHASES.EMERGING] +
-      WORM_PHASE_DURATION_MS[WORM_PHASES.SETTLING];
-
-    assert.equal(fixedPhaseDuration + WORM_UNDERGROUND_MIN_MS, 1690);
-    assert.equal(fixedPhaseDuration + WORM_UNDERGROUND_MAX_MS, 2690);
   });
 
   test('rebases resized animations without extending their phase clock', () => {

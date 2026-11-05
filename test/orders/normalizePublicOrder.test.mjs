@@ -11,9 +11,20 @@ import {
   PublicOrderValidationError,
   normalizePublicOrderSubmission,
 } from '@/lib/orders/normalizePublicOrder';
+import {
+  getLegacyProductVariantBySku,
+  getProductVariantBySku,
+} from '@/lib/pricing/catalog';
 import { WORM_HUNT_DISCOUNT_ENDS_ON, wormHuntConfig } from '@/lib/wormHunt/config.mjs';
 
 import { expectDeepEqual, expectEqual, expectOk } from '../helpers/assertions.mjs';
+import {
+  getAddOnPrice,
+  getCartShippingPrice,
+  getRequiredAddOnSku,
+  getVariantPrice,
+  roundMoney,
+} from '../helpers/catalogSkus.mjs';
 import {
   createValidOrderFormData,
   createValidOrderFormDataForScenario,
@@ -28,6 +39,23 @@ import {
   getRequiredProductSku,
   withTemporaryProductAvailability,
 } from '../helpers/productAvailability.mjs';
+
+const WORM_SKU = getRequiredProductSku(
+  'worms',
+  'normalizePublicOrder cart tests need a worm package'
+);
+const CHOW_SKU = getRequiredProductSku(
+  'compostChow',
+  'normalizePublicOrder cart tests need the standalone fibre mix'
+);
+const PREPARED_BIN_SKU = getRequiredAddOnSku(
+  'preparedWormBin',
+  'normalizePublicOrder cart tests need the prepared worm bin add-on'
+);
+const SMALL_CHOW_SKU = getRequiredAddOnSku(
+  'smallCompostChow',
+  'normalizePublicOrder cart tests need the small fibre-mix add-on'
+);
 
 describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should match the current runtime config for configured order scenarios', () => {
@@ -175,9 +203,7 @@ describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should allow pickup-point shipping without a selected pickup point', () => {
     const scenario = findOrderScenario({ fulfillmentType: 'pickup_point' });
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'a pickup-point shipping option should be configured');
 
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormDataForScenario(scenario, {
@@ -280,19 +306,23 @@ describe('frontend public order normalization', () => {
     expectEqual(legacyPayload.product.salesUnit, 'worm_count');
     expectEqual(legacyPayload.product.weightGrams, null);
     expectEqual(legacyPayload.product.quantity, 200);
-    expectEqual(legacyPayload.pricing.itemPrice, 50);
+    expectEqual(
+      legacyPayload.pricing.itemPrice,
+      getLegacyProductVariantBySku('worms-200', { salesUnit: 'worm_count' }).price
+    );
   });
 
   test('normalizePublicOrderSubmission should keep a small fibre-mix add-on linked to worms and the large pack standalone', () => {
     const now = new Date('2026-05-02T10:00:00Z');
     const cartItems = [
-      { sku: 'worms-25', quantity: 1 },
-      { sku: 'chow-150', parentSku: 'worms-25', quantity: 1 },
-      { sku: 'chow-500', quantity: 1 },
+      { sku: WORM_SKU, quantity: 1 },
+      { sku: SMALL_CHOW_SKU, parentSku: WORM_SKU, quantity: 1 },
+      { sku: CHOW_SKU, quantity: 1 },
     ];
     const expectedQuote = getCartOrderQuote({
       items: cartItems,
       shippingMethod: 'posti_noutopiste',
+      now,
     });
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormData({
@@ -324,7 +354,7 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.product.sku,
-      'worms-25',
+      WORM_SKU,
       'normalizePublicOrderSubmission should keep the first cart line as the compatibility product payload'
     );
     expectEqual(
@@ -334,7 +364,7 @@ describe('frontend public order normalization', () => {
     );
     expectEqual(
       payload.pricing.shippingPrice,
-      8.9,
+      getCartShippingPrice('posti_noutopiste'),
       'normalizePublicOrderSubmission should use shared cart shipping prices'
     );
     expectEqual(
@@ -357,14 +387,11 @@ describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should authoritatively apply the cart reward only to eligible worm lines', () =>
     withTemporaryProductAvailability('worms', ALL_WORM_SKUS_AVAILABLE, () => {
       const rewardCode = wormHuntConfig.code;
+      const now = new Date('2026-08-04T10:00:00Z');
       const cartItems = [
-        { sku: 'worms-50', quantity: 1 },
-        {
-          sku: 'worms-ready-bin-14l',
-          parentSku: 'worms-50',
-          quantity: 1,
-        },
-        { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
+        { sku: WORM_SKU, quantity: 1 },
+        { sku: PREPARED_BIN_SKU, parentSku: WORM_SKU, quantity: 1 },
+        { sku: SMALL_CHOW_SKU, parentSku: WORM_SKU, quantity: 1 },
       ];
       const formData = createValidOrderFormData({
         sku: '',
@@ -379,26 +406,26 @@ describe('frontend public order normalization', () => {
 
       if (!wormHuntConfig.enabled) {
         assert.throws(
-          () =>
-            normalizePublicOrderSubmission(formData, {
-              now: new Date('2026-08-04T10:00:00Z'),
-            }),
+          () => normalizePublicOrderSubmission(formData, { now }),
           (error) => error.code === 'invalid_discount_code'
         );
         return;
       }
 
-      const payload = normalizePublicOrderSubmission(formData, {
-        now: new Date('2026-08-04T10:00:00Z'),
-      });
-      const discountAmount = Number(
-        ((34 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
+      const payload = normalizePublicOrderSubmission(formData, { now });
+      const wormPrice = getVariantPrice(WORM_SKU, { now });
+      const itemPrice = roundMoney(
+        wormPrice + getAddOnPrice(PREPARED_BIN_SKU) + getAddOnPrice(SMALL_CHOW_SKU)
+      );
+      const shippingPrice = getCartShippingPrice('posti_noutopiste');
+      const discountAmount = roundMoney(
+        (wormPrice * wormHuntConfig.discountPercentage) / 100
       );
       const rewardLetters = [...rewardCode];
       const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
 
-      expectEqual(payload.pricing.itemPrice, 74);
-      expectEqual(payload.pricing.shippingPrice, 8.9);
+      expectEqual(payload.pricing.itemPrice, itemPrice);
+      expectEqual(payload.pricing.shippingPrice, shippingPrice);
       expectDeepEqual(payload.pricing.discount, {
         codePlain: rewardCode,
         codeMasked,
@@ -413,7 +440,7 @@ describe('frontend public order normalization', () => {
       });
       expectEqual(
         payload.pricing.total,
-        Number((82.9 - discountAmount).toFixed(2)),
+        roundMoney(itemPrice + shippingPrice - discountAmount),
         'the final review total should subtract only the eligible worm discount'
       );
     }));
@@ -425,7 +452,7 @@ describe('frontend public order normalization', () => {
           createValidOrderFormData({
             sku: '',
             tuote_avain: '',
-            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+            cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
             toimitus: 'nouto',
             alennuskoodi: 'NOTVALID',
           }),
@@ -444,7 +471,7 @@ describe('frontend public order normalization', () => {
           createValidOrderFormData({
             sku: '',
             tuote_avain: '',
-            cart_items_json: JSON.stringify([{ sku: 'chow-500', quantity: 1 }]),
+            cart_items_json: JSON.stringify([{ sku: CHOW_SKU, quantity: 1 }]),
             toimitus: 'nouto',
             alennuskoodi: rewardCode,
           }),
@@ -467,7 +494,7 @@ describe('frontend public order normalization', () => {
         country: 'FI',
         sku: '',
         tuote_avain: '',
-        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+        cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
         toimitus: 'posti_noutopiste',
         osoite: 'Compost Lane 1',
         postinumero: '00100',
@@ -480,7 +507,7 @@ describe('frontend public order normalization', () => {
     expectEqual(payload.language, 'en');
     expectEqual(payload.country, 'FI');
     expectEqual(payload.pagePath, '/en/checkout');
-    expectEqual(payload.product.sku, 'worms-25');
+    expectEqual(payload.product.sku, WORM_SKU);
     assert.match(payload.product.label, /compost worms/);
     expectEqual(payload.fulfillment.method, 'posti_noutopiste');
     expectEqual(payload.fulfillment.label, 'Posti pickup point or parcel locker');
@@ -503,7 +530,7 @@ describe('frontend public order normalization', () => {
     );
 
     const pickupScenario = findOrderScenario({ fulfillmentType: 'pickup_point' });
-    if (!pickupScenario) return;
+    assert.ok(pickupScenario, 'a pickup-point shipping option should be configured');
 
     assert.throws(
       () =>
@@ -525,12 +552,13 @@ describe('frontend public order normalization', () => {
     withTemporaryProductAvailability('worms', ALL_WORM_SKUS_AVAILABLE, () => {
       const now = new Date('2026-07-14T10:00:00Z');
       const cartItems = [
-        { sku: 'worms-50', quantity: 1 },
-        { sku: 'worms-ready-bin-14l', parentSku: 'worms-50', quantity: 1 },
+        { sku: WORM_SKU, quantity: 1 },
+        { sku: PREPARED_BIN_SKU, parentSku: WORM_SKU, quantity: 1 },
       ];
       const expectedQuote = getCartOrderQuote({
         items: cartItems,
         shippingMethod: 'nouto',
+        now,
       });
       const payload = normalizePublicOrderSubmission(
         createValidOrderFormData({
@@ -542,13 +570,13 @@ describe('frontend public order normalization', () => {
         { now }
       );
 
-      expectEqual(payload.items[1].sku, 'worms-ready-bin-14l');
-      expectEqual(payload.items[1].parentSku, 'worms-50');
+      expectEqual(payload.items[1].sku, PREPARED_BIN_SKU);
+      expectEqual(payload.items[1].parentSku, WORM_SKU);
       expectEqual(payload.items[1].key, 'worms');
       expectEqual(payload.items[1].label, 'Käyttövalmis 14 litran matokompostori');
       expectEqual(payload.items[1].quantity, 1);
       expectEqual(payload.items[1].packageQuantity, 1);
-      expectEqual(payload.items[1].unitPrice, 35);
+      expectEqual(payload.items[1].unitPrice, getAddOnPrice(PREPARED_BIN_SKU));
       expectEqual(payload.pricing.itemPrice, expectedQuote.itemSubtotal);
     }));
 
@@ -558,8 +586,8 @@ describe('frontend public order normalization', () => {
         getCartOrderQuote({
           items: [
             {
-              sku: 'worms-ready-bin-14l',
-              parentSku: 'worms-25',
+              sku: PREPARED_BIN_SKU,
+              parentSku: WORM_SKU,
               quantity: 1,
             },
           ],
@@ -570,10 +598,10 @@ describe('frontend public order normalization', () => {
 
     const allowedQuote = getCartOrderQuote({
       items: [
-        { sku: 'worms-25', quantity: 2 },
+        { sku: WORM_SKU, quantity: 2 },
         {
-          sku: 'worms-ready-bin-14l',
-          parentSku: 'worms-25',
+          sku: PREPARED_BIN_SKU,
+          parentSku: WORM_SKU,
           quantity: 2,
         },
       ],
@@ -585,10 +613,10 @@ describe('frontend public order normalization', () => {
       () =>
         getCartOrderQuote({
           items: [
-            { sku: 'worms-25', quantity: 2 },
+            { sku: WORM_SKU, quantity: 2 },
             {
-              sku: 'worms-ready-bin-14l',
-              parentSku: 'worms-25',
+              sku: PREPARED_BIN_SKU,
+              parentSku: WORM_SKU,
               quantity: 3,
             },
           ],
@@ -600,15 +628,15 @@ describe('frontend public order normalization', () => {
 
   test('removing the last worm package also removes its prepared-bin add-on', () => {
     const cartItems = [
-      { sku: 'worms-25', quantity: 1 },
-      { sku: 'worms-ready-bin-14l', parentSku: 'worms-25', quantity: 1 },
-      { sku: 'chow-150', parentSku: 'worms-25', quantity: 1 },
-      { sku: 'chow-500', quantity: 1 },
+      { sku: WORM_SKU, quantity: 1 },
+      { sku: PREPARED_BIN_SKU, parentSku: WORM_SKU, quantity: 1 },
+      { sku: SMALL_CHOW_SKU, parentSku: WORM_SKU, quantity: 1 },
+      { sku: CHOW_SKU, quantity: 1 },
     ];
 
     expectDeepEqual(
-      getCartItemsAfterRemoval(cartItems, 'worms-25'),
-      [{ sku: 'chow-500', quantity: 1 }],
+      getCartItemsAfterRemoval(cartItems, WORM_SKU),
+      [{ sku: CHOW_SKU, quantity: 1 }],
       'removing a worm package should remove all add-ons attached to it'
     );
   });
@@ -617,21 +645,21 @@ describe('frontend public order normalization', () => {
     expectDeepEqual(
       getCartItemsAfterQuantityChange(
         [
-          { sku: 'worms-25', quantity: 3 },
+          { sku: WORM_SKU, quantity: 3 },
           {
-            sku: 'worms-ready-bin-14l',
-            parentSku: 'worms-25',
+            sku: PREPARED_BIN_SKU,
+            parentSku: WORM_SKU,
             quantity: 3,
           },
         ],
-        'worms-25',
+        WORM_SKU,
         2
       ),
       [
-        { sku: 'worms-25', quantity: 2 },
+        { sku: WORM_SKU, quantity: 2 },
         {
-          sku: 'worms-ready-bin-14l',
-          parentSku: 'worms-25',
+          sku: PREPARED_BIN_SKU,
+          parentSku: WORM_SKU,
           quantity: 2,
         },
       ],
@@ -643,7 +671,7 @@ describe('frontend public order normalization', () => {
     assert.throws(
       () =>
         getCartOrderQuote({
-          items: [{ sku: 'chow-150', quantity: 1 }],
+          items: [{ sku: SMALL_CHOW_SKU, quantity: 1 }],
           shippingMethod: 'nouto',
         }),
       (error) => error?.code === 'small_fibre_mix_requires_worms'
@@ -657,7 +685,7 @@ describe('frontend public order normalization', () => {
       createValidOrderFormData({
         sku: '',
         tuote_avain: '',
-        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+        cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
         toimitus: 'nouto',
         availability_earliest_shipping_date: '2026-05-18',
       }),
@@ -678,7 +706,7 @@ describe('frontend public order normalization', () => {
       createValidOrderFormData({
         sku: '',
         tuote_avain: '',
-        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+        cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
         toimitus: 'nouto',
         availability_earliest_shipping_date: 'not-a-date',
       }),
@@ -699,15 +727,18 @@ describe('frontend public order normalization', () => {
       createValidOrderFormData({
         sku: '',
         tuote_avain: '',
-        cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 5 }]),
+        cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 5 }]),
         toimitus: 'nouto',
       }),
       { now }
     );
 
-    expectEqual(payload.product.sku, 'worms-25');
+    expectEqual(payload.product.sku, WORM_SKU);
     expectEqual(payload.product.packageQuantity, 5);
-    expectEqual(payload.product.quantity, 250);
+    expectEqual(
+      payload.product.quantity,
+      getProductVariantBySku(WORM_SKU).estimatedWormCount * 5
+    );
   });
 
   test('normalizePublicOrderSubmission should reject cart orders with more than five worm packages', () => {
@@ -719,7 +750,7 @@ describe('frontend public order normalization', () => {
           createValidOrderFormData({
             sku: '',
             tuote_avain: '',
-            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 6 }]),
+            cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 6 }]),
             toimitus: 'nouto',
           }),
           { now }
@@ -748,7 +779,7 @@ describe('frontend public order normalization', () => {
           createValidOrderFormData({
             sku: '',
             tuote_avain: '',
-            cart_items_json: JSON.stringify([{ sku: 'chow-500', quantity: 5 }]),
+            cart_items_json: JSON.stringify([{ sku: CHOW_SKU, quantity: 5 }]),
             toimitus: 'nouto',
           }),
           { now }
@@ -771,9 +802,7 @@ describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should preserve the rendered earliest shipping date snapshot', () => {
     const scenario = findOrderScenario({ fulfillmentType: 'pickup_point' });
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'a pickup-point shipping option should be configured');
 
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormDataForScenario(scenario, {
@@ -794,9 +823,7 @@ describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should ignore invalid availability snapshot dates', () => {
     const scenario = findOrderScenario({ fulfillmentType: 'pickup_point' });
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'a pickup-point shipping option should be configured');
 
     const payload = normalizePublicOrderSubmission(
       createValidOrderFormDataForScenario(scenario, {
@@ -819,9 +846,7 @@ describe('frontend public order normalization', () => {
       findOrderScenario({ fulfillmentType: 'pickup_point' }) ??
       findOrderScenario({ fulfillmentType: 'home_delivery' });
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'a Posti shipping option should be configured');
 
     assert.throws(
       () =>
@@ -902,9 +927,7 @@ describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should reject product tampering when the product key and sku do not match', () => {
     const scenario = findOrderScenario();
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'at least one product and shipping option should be configured');
 
     assert.throws(
       () =>
@@ -933,9 +956,7 @@ describe('frontend public order normalization', () => {
   test('normalizePublicOrderSubmission should reject temporarily unavailable configured SKUs', () => {
     const scenario = findOrderScenario();
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'at least one product and shipping option should be configured');
 
     const unavailableSku = getRequiredProductSku(
       scenario.productKey,
@@ -977,7 +998,7 @@ describe('frontend public order normalization', () => {
     const cartOverrides = {
       sku: '',
       tuote_avain: '',
-      cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+      cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
       toimitus: 'nouto',
     };
     assert.throws(

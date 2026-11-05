@@ -7,7 +7,16 @@ import { normalizePublicOrderSubmission } from '@/lib/orders/normalizePublicOrde
 import { WORM_HUNT_DISCOUNT_ENDS_ON, wormHuntConfig } from '@/lib/wormHunt/config.mjs';
 
 import { expectDeepEqual, expectEqual } from '../helpers/assertions.mjs';
+import {
+  getAddOnPrice,
+  getCartShippingPrice,
+  getRequiredAddOnSku,
+  getRequiredProductSku,
+  getVariantPrice,
+  roundMoney,
+} from '../helpers/catalogSkus.mjs';
 import { withMutedConsole } from '../helpers/console.mjs';
+import { withEnv } from '../helpers/env.mjs';
 import {
   createValidOrderFormData,
   createValidOrderFormDataForScenario,
@@ -19,30 +28,10 @@ import {
 } from '../helpers/productAvailability.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
 
-function withEnv(env, fn) {
-  const previousValues = new Map();
-
-  for (const [key, value] of Object.entries(env)) {
-    previousValues.set(key, process.env[key]);
-    if (value === undefined) {
-      delete process.env[key];
-    } else {
-      process.env[key] = value;
-    }
-  }
-
-  return Promise.resolve()
-    .then(fn)
-    .finally(() => {
-      for (const [key, value] of previousValues.entries()) {
-        if (value === undefined) {
-          delete process.env[key];
-        } else {
-          process.env[key] = value;
-        }
-      }
-    });
-}
+const WORM_SKU = getRequiredProductSku(
+  'worms',
+  'the submit route cart tests need a worm package'
+);
 
 describe('frontend public order submit route', () => {
   test('the public order submit route should reject cross-origin requests before reading the payload', async () => {
@@ -93,9 +82,7 @@ describe('frontend public order submit route', () => {
       listOrderScenarios()[0] ??
       null;
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'at least one product and shipping option should be configured');
 
     await withEnv(
       {
@@ -249,7 +236,7 @@ describe('frontend public order submit route', () => {
           const formData = createValidOrderFormData({
             sku: '',
             tuote_avain: '',
-            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+            cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
             toimitus: 'nouto',
             payment_provider: 'STRIPE',
           });
@@ -285,7 +272,7 @@ describe('frontend public order submit route', () => {
         const formData = createValidOrderFormData({
           sku: '',
           tuote_avain: '',
-          cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+          cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
           toimitus: 'nouto',
           payment_provider: 'STRIPE',
         });
@@ -350,7 +337,7 @@ describe('frontend public order submit route', () => {
                 formData: createValidOrderFormData({
                   sku: '',
                   tuote_avain: '',
-                  cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+                  cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
                   toimitus: 'nouto',
                   payment_provider: 'STRIPE',
                 }),
@@ -387,18 +374,23 @@ describe('frontend public order submit route', () => {
             });
           };
 
+          const binSku = getRequiredAddOnSku(
+            'preparedWormBin',
+            'the cart reward route test needs the prepared worm bin'
+          );
+          const smallChowSku = getRequiredAddOnSku(
+            'smallCompostChow',
+            'the cart reward route test needs the small fibre mix'
+          );
+
           try {
             const formData = createValidOrderFormData({
               sku: '',
               tuote_avain: '',
               cart_items_json: JSON.stringify([
-                { sku: 'worms-50', quantity: 1 },
-                {
-                  sku: 'worms-ready-bin-14l',
-                  parentSku: 'worms-50',
-                  quantity: 1,
-                },
-                { sku: 'chow-150', parentSku: 'worms-50', quantity: 1 },
+                { sku: WORM_SKU, quantity: 1 },
+                { sku: binSku, parentSku: WORM_SKU, quantity: 1 },
+                { sku: smallChowSku, parentSku: WORM_SKU, quantity: 1 },
               ]),
               toimitus: 'posti_noutopiste',
               osoite: 'Kompostikuja 1',
@@ -423,8 +415,14 @@ describe('frontend public order submit route', () => {
             expectEqual(recordedCalls.length, 1);
 
             const forwardedPayload = JSON.parse(recordedCalls[0][1].body);
-            const discountAmount = Number(
-              ((34 * wormHuntConfig.discountPercentage) / 100).toFixed(2)
+            // The route prices the order with the real clock, like production.
+            const wormPrice = getVariantPrice(WORM_SKU);
+            const itemPrice = roundMoney(
+              wormPrice + getAddOnPrice(binSku) + getAddOnPrice(smallChowSku)
+            );
+            const shippingPrice = getCartShippingPrice('posti_noutopiste');
+            const discountAmount = roundMoney(
+              (wormPrice * wormHuntConfig.discountPercentage) / 100
             );
             const rewardLetters = [...rewardCode];
             const codeMasked = `${rewardLetters.slice(0, 2).join('')}**${rewardLetters.slice(-2).join('')}`;
@@ -440,11 +438,11 @@ describe('frontend public order submit route', () => {
               totalAmount: discountAmount,
               endsOn: WORM_HUNT_DISCOUNT_ENDS_ON,
             });
-            expectEqual(forwardedPayload.pricing.itemPrice, 74);
-            expectEqual(forwardedPayload.pricing.shippingPrice, 8.9);
+            expectEqual(forwardedPayload.pricing.itemPrice, itemPrice);
+            expectEqual(forwardedPayload.pricing.shippingPrice, shippingPrice);
             expectEqual(
               forwardedPayload.pricing.total,
-              Number((82.9 - discountAmount).toFixed(2))
+              roundMoney(itemPrice + shippingPrice - discountAmount)
             );
           } finally {
             globalThis.fetch = originalFetch;
@@ -472,7 +470,7 @@ describe('frontend public order submit route', () => {
             language: 'en',
             sku: '',
             tuote_avain: '',
-            cart_items_json: JSON.stringify([{ sku: 'worms-25', quantity: 1 }]),
+            cart_items_json: JSON.stringify([{ sku: WORM_SKU, quantity: 1 }]),
             toimitus: 'nouto',
             alennuskoodi: 'NOTVALID',
           }),
@@ -494,9 +492,7 @@ describe('frontend public order submit route', () => {
   test('the public order submit route should preserve the upstream failure payload when order creation is rejected', async () => {
     const scenario = listOrderScenarios()[0] ?? null;
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'at least one product and shipping option should be configured');
 
     await withEnv(
       {

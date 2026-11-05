@@ -103,8 +103,9 @@ describe('discount source data', () => {
     }
   });
 
-  test('tracked discount source should match local discount definitions when local file exists', () => {
+  test('tracked discount source should match local discount definitions when local file exists', (t) => {
     if (!fs.existsSync(localFile)) {
+      t.skip('the local discount file exists only on the development machine');
       return;
     }
 
@@ -113,6 +114,7 @@ describe('discount source data', () => {
     const expected = createDiscountSourceData(localData, sourceData).sourceData;
 
     if (expected.discounts.length === 0) {
+      t.skip('the local discount file defines no deployable discounts');
       return;
     }
 

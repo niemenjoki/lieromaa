@@ -5,28 +5,8 @@ import { POST as downloadDataExport } from '@/app/api/data-exports/download/rout
 import { POST as requestDataExport } from '@/app/api/data-exports/request/route.js';
 
 import { expectDeepEqual, expectEqual } from '../helpers/assertions.mjs';
+import { withEnv } from '../helpers/env.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
-
-function withEnv(env, fn) {
-  const previousValues = new Map();
-
-  for (const [key, value] of Object.entries(env)) {
-    previousValues.set(key, process.env[key]);
-    process.env[key] = value;
-  }
-
-  return Promise.resolve()
-    .then(fn)
-    .finally(() => {
-      for (const [key, value] of previousValues.entries()) {
-        if (value === undefined) {
-          delete process.env[key];
-        } else {
-          process.env[key] = value;
-        }
-      }
-    });
-}
 
 describe('frontend data export proxy routes', () => {
   test('the request route rejects cross-origin submissions', async () => {

@@ -5,32 +5,8 @@ import { GET as getReviewSession } from '@/app/api/reviews/session/route.js';
 import { POST as submitReview } from '@/app/api/reviews/submit/route.js';
 
 import { expectDeepEqual, expectEqual } from '../helpers/assertions.mjs';
+import { withEnv } from '../helpers/env.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
-
-function withEnv(env, fn) {
-  const previousValues = new Map();
-
-  for (const [key, value] of Object.entries(env)) {
-    previousValues.set(key, process.env[key]);
-    if (value === undefined) {
-      delete process.env[key];
-    } else {
-      process.env[key] = value;
-    }
-  }
-
-  return Promise.resolve()
-    .then(fn)
-    .finally(() => {
-      for (const [key, value] of previousValues.entries()) {
-        if (value === undefined) {
-          delete process.env[key];
-        } else {
-          process.env[key] = value;
-        }
-      }
-    });
-}
 
 describe('frontend review proxy routes', () => {
   test('the review session route should reject requests that do not include a review token', async () => {

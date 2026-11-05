@@ -31,7 +31,8 @@ test('hot composting category schema uses rendered names and canonical URL forms
 
   assert.equal(webPage.name, 'Oppaat: lämpökompostointi');
   assert.equal(webPage.url, `${SITE_URL}/opas/lämpökompostointi`);
-  assert.equal(itemList.itemListElement.length, 4);
+  assert.ok(guides.length > 0, 'the hot composting category should have guides');
+  assert.equal(itemList.itemListElement.length, guides.length);
   assert.deepEqual(
     itemList.itemListElement.map(({ name }) => name),
     guides.map(({ title }) => title)

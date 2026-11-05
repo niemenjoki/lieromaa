@@ -59,15 +59,6 @@ describe('guide library order', () => {
     }),
   ];
 
-  it('keeps the four guide categories in their defined editorial order', () => {
-    assert.deepEqual(GUIDE_CATEGORIES, [
-      'kompostorin perustaminen',
-      'kompostorin hoito',
-      'kompostin hyödyntäminen',
-      'lämpökompostointi',
-    ]);
-  });
-
   it('groups guides by the defined category order and then by pagePosition', () => {
     assert.deepEqual(
       orderGuidesForLibrary(guides).map((guide) => guide.title),

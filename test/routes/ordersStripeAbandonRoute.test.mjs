@@ -3,22 +3,8 @@ import { test } from 'node:test';
 
 import { POST } from '@/app/api/orders/stripe-abandon/route.js';
 
+import { withEnv } from '../helpers/env.mjs';
 import { createRouteRequest } from '../helpers/routeRequest.mjs';
-
-async function withEnv(env, fn) {
-  const previous = Object.fromEntries(
-    Object.keys(env).map((key) => [key, process.env[key]])
-  );
-  Object.assign(process.env, env);
-  try {
-    return await fn();
-  } finally {
-    for (const [key, value] of Object.entries(previous)) {
-      if (value === undefined) delete process.env[key];
-      else process.env[key] = value;
-    }
-  }
-}
 
 test('Stripe abandonment proxy forwards a same-origin sandbox session', async () => {
   await withEnv(

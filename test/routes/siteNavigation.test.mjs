@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
 import safeRoutes from '@/generated/site/safeRoutes.json';
-import { getGuidePath } from '@/lib/content/guideRoutes.mjs';
+import { getGuideCategoryLabel, getGuidePath } from '@/lib/content/guideRoutes.mjs';
 import { getAllContent, getBlogTagArchives } from '@/lib/content/index.mjs';
 import { getEnglishNavigation } from '@/lib/i18n/englishNavigation.mjs';
 import {
@@ -53,14 +53,20 @@ describe('responsive site navigation data', () => {
   test('builds the guide tray from all real guide categories', () => {
     const navigation = getSiteNavigation();
 
+    const guides = getAllContent({ type: CONTENT_TYPES.GUIDE });
+    const countGuides = (label) =>
+      guides.filter((guide) => getGuideCategoryLabel(guide.category.name) === label)
+        .length;
+
+    // The editorial order of the categories is set in code; the counts follow the guides.
     assert.deepEqual(
       navigation.guideCategories.map(({ label, count }) => ({ label, count })),
       [
-        { label: 'Matokompostorin perustaminen', count: 5 },
-        { label: 'Matokompostorin hoito', count: 6 },
-        { label: 'Matokompostin hyödyntäminen', count: 4 },
-        { label: 'Lämpökompostointi', count: 4 },
-      ]
+        'Matokompostorin perustaminen',
+        'Matokompostorin hoito',
+        'Matokompostin hyödyntäminen',
+        'Lämpökompostointi',
+      ].map((label) => ({ label, count: countGuides(label) }))
     );
     const actualGuideItems = navigation.guideCategories
       .flatMap((category) => category.items)

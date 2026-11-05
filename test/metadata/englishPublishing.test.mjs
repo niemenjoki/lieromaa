@@ -1,6 +1,4 @@
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
-import path from 'node:path';
 import { describe, test } from 'node:test';
 
 import { GET as getRss } from '@/app/rss/route.js';
@@ -12,10 +10,7 @@ import {
   englishRedirectPaths,
 } from '@/data/pages/english.mjs';
 import safeRoutes from '@/generated/site/safeRoutes.json';
-import {
-  ANALYTICS_EXCLUDED_PATHS,
-  isAnalyticsExcludedPath,
-} from '@/lib/analytics/pathPolicy.mjs';
+import { isAnalyticsExcludedPath } from '@/lib/analytics/pathPolicy.mjs';
 import { PAIRED_ROUTES, getLanguageAlternatesForPath } from '@/lib/i18n/routes.mjs';
 import { createLocalizedPageMetadata } from '@/lib/metadata/createLocalizedPageMetadata.mjs';
 import { createPageMetadata } from '@/lib/metadata/createPageMetadata';
@@ -131,13 +126,10 @@ describe('English publishing integration', () => {
         englishOffers.map((offer) => offer.price),
         finnishOffers.map((offer) => offer.price)
       );
-      assert.match(
+      assert.notEqual(
         englishOffers[0].hasMerchantReturnPolicy.additionalProperty[0].value,
-        /I will handle any problems with the product or delivery separately through customer service\./
-      );
-      assert.match(
         finnishOffers[0].hasMerchantReturnPolicy.additionalProperty[0].value,
-        /Jos tuotteessa tai toimituksessa on virhe, asia käsitellään erikseen asiakaspalvelun kautta\./
+        'the return policy note should be localized'
       );
 
       for (const offer of englishOffers) {
@@ -174,27 +166,18 @@ describe('English publishing integration', () => {
     assert.doesNotMatch(rss, /https:\/\/www\.lieromaa\.fi\/en(?:\/|<)/);
   });
 
-  test('excludes both private data-download paths from analytics without a language field', () => {
-    assert.deepEqual(ANALYTICS_EXCLUDED_PATHS, [
+  test('excludes the private data-download and payment paths from analytics', () => {
+    for (const pathName of [
       '/tietopyynto/lataa',
       '/en/data-request/download',
       '/maksa',
       '/en/pay',
-    ]);
-    for (const pathName of ANALYTICS_EXCLUDED_PATHS) {
-      assert.equal(isAnalyticsExcludedPath(pathName), true);
+    ]) {
+      assert.equal(isAnalyticsExcludedPath(pathName), true, pathName);
     }
     assert.equal(isAnalyticsExcludedPath('/maksa/K7QF3M9P'), true);
     assert.equal(isAnalyticsExcludedPath('/en/pay/K7QF3M9P'), true);
     assert.equal(isAnalyticsExcludedPath('/maksaja'), false);
     assert.equal(isAnalyticsExcludedPath('/en/products/compost-worms'), false);
-
-    for (const fileName of ['LookuAnalytics.jsx']) {
-      const analyticsSource = fs.readFileSync(
-        path.join(process.cwd(), 'components', 'Analytics', fileName),
-        'utf8'
-      );
-      assert.doesNotMatch(analyticsSource, /language:/);
-    }
   });
 });

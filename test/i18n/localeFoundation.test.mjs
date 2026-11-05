@@ -41,6 +41,8 @@ import {
 } from '@/lib/orders/cartOrder';
 import { getCartShippingOptions } from '@/lib/pricing/catalog';
 
+import { getRequiredProductSku } from '../helpers/catalogSkus.mjs';
+
 function collectKeyPaths(value, prefix = '') {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     return [prefix];
@@ -163,10 +165,11 @@ describe('locale foundation', () => {
     assert.equal(finnishShipping[0].label, 'Nouto Postista tai automaatista');
     assert.equal(englishShipping[0].label, 'Posti pickup point or parcel locker');
 
-    const [finnishLine] = getCartLineItems([{ sku: 'worms-25', quantity: 1 }], {
+    const wormSku = getRequiredProductSku('worms', 'the cart label test needs worms');
+    const [finnishLine] = getCartLineItems([{ sku: wormSku, quantity: 1 }], {
       language: 'fi',
     });
-    const [englishLine] = getCartLineItems([{ sku: 'worms-25', quantity: 1 }], {
+    const [englishLine] = getCartLineItems([{ sku: wormSku, quantity: 1 }], {
       language: 'en',
     });
     assert.equal(finnishLine.sku, englishLine.sku);

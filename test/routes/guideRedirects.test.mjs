@@ -7,25 +7,56 @@ import safeRoutes from '@/generated/site/safeRoutes.json';
 const require = createRequire(import.meta.url);
 const nextConfig = require('../../next.config.js');
 
-const OLD_PATH =
-  '/opas/kompostorin-perustaminen/voiko-kompostimadot-laittaa-lampokompostoriin';
-const NEW_PATH = '/opas/lämpökompostointi/voiko-kompostimadot-laittaa-lampokompostoriin';
+function decodePath(value) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
 
-test('permanently redirects the former guide category URL to its canonical route', async () => {
+function getPathname(destination) {
+  return destination.split('#')[0];
+}
+
+test('every redirect is permanent and lands on an existing route in one hop', async () => {
   const redirects = await nextConfig.redirects();
-  const matchingRedirects = redirects.filter(({ source }) => source === OLD_PATH);
+  const sources = new Set(redirects.map(({ source }) => decodePath(source)));
 
-  assert.deepEqual(matchingRedirects, [
-    {
-      source: OLD_PATH,
-      destination: NEW_PATH,
-      permanent: true,
-    },
-  ]);
-  assert.equal(
-    encodeURI(matchingRedirects[0].destination),
-    '/opas/l%C3%A4mp%C3%B6kompostointi/voiko-kompostimadot-laittaa-lampokompostoriin'
-  );
-  assert.equal(safeRoutes.includes(OLD_PATH), false);
-  assert.equal(safeRoutes.includes(NEW_PATH), true);
+  assert.ok(redirects.length > 0, 'next.config.js should define redirects');
+
+  for (const { source, destination, permanent } of redirects) {
+    const destinationPath = getPathname(destination);
+
+    assert.equal(permanent, true, `${source} should redirect permanently`);
+    assert.notEqual(decodePath(source), destinationPath, `${source} redirects to itself`);
+    assert.ok(
+      safeRoutes.includes(destinationPath),
+      `${source} redirects to ${destinationPath}, which is not a site route`
+    );
+    assert.equal(
+      sources.has(destinationPath),
+      false,
+      `${source} redirects to ${destinationPath}, which redirects again`
+    );
+    assert.equal(
+      encodeURI(destination).includes('%25'),
+      false,
+      `${destination} should be stored decoded so it is encoded only once`
+    );
+  }
+});
+
+test('retired guide URLs are no longer served as pages', async () => {
+  const redirects = await nextConfig.redirects();
+
+  for (const { source } of redirects) {
+    const sourcePath = decodePath(source);
+
+    if (!sourcePath.startsWith('/opas/')) {
+      continue;
+    }
+
+    assert.equal(safeRoutes.includes(sourcePath), false, sourcePath);
+  }
 });

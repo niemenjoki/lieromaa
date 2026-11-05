@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
 import { getOrderQuote } from '@/lib/orders/getOrderQuote';
+import { getProductVariantBySku } from '@/lib/pricing/catalog';
 
 import { expectEqual } from '../helpers/assertions.mjs';
 import {
@@ -62,12 +63,13 @@ describe('frontend order quote pricing', () => {
     }
   });
 
-  test('getOrderQuote should respect the current extra-charge configuration', () => {
+  test('getOrderQuote should respect the current extra-charge configuration', (t) => {
     const scenario =
       listOrderScenarios().find((entry) => entry.orderConfig.extraCharges.length > 0) ??
       null;
 
     if (!scenario) {
+      t.skip('no product currently has an extra charge');
       return;
     }
 
@@ -105,20 +107,23 @@ describe('frontend order quote pricing', () => {
     );
   });
 
-  test('getOrderQuote should only discount selected targeted extra charges', () => {
+  test('getOrderQuote should only discount selected targeted extra charges', (t) => {
     const scenario =
       listOrderScenarios().find((entry) =>
-        entry.orderConfig.extraCharges.some((charge) => charge.key === 'compostFood')
+        entry.orderConfig.extraCharges.some((charge) =>
+          getDateForChargeActivity(charge, { active: true })
+        )
       ) ?? null;
 
     if (!scenario) {
+      t.skip('no product currently has an extra charge');
       return;
     }
 
-    const charge = scenario.orderConfig.extraCharges.find(
-      (entry) => entry.key === 'compostFood'
+    const charge = scenario.orderConfig.extraCharges.find((entry) =>
+      getDateForChargeActivity(entry, { active: true })
     );
-    const now = new Date('2026-06-15T10:00:00Z');
+    const now = getDateForChargeActivity(charge, { active: true });
     const discount = {
       type: 'fixed',
       value: Number(charge.price) || 0,
@@ -142,7 +147,10 @@ describe('frontend order quote pricing', () => {
       now,
     });
     const expectedSelectedTotal = Number(
-      (scenario.variant.price + scenario.shippingOption.price).toFixed(2)
+      (
+        getProductVariantBySku(scenario.variant.sku, { now }).price +
+        scenario.shippingOption.price
+      ).toFixed(2)
     );
 
     expectEqual(
@@ -167,7 +175,7 @@ describe('frontend order quote pricing', () => {
     );
   });
 
-  test('getOrderQuote should respect seasonal extra-charge activity from source data', () => {
+  test('getOrderQuote should respect seasonal extra-charge activity from source data', (t) => {
     const scenario =
       listOrderScenarios().find((entry) =>
         entry.orderConfig.extraCharges.some((charge) => {
@@ -178,6 +186,7 @@ describe('frontend order quote pricing', () => {
       ) ?? null;
 
     if (!scenario) {
+      t.skip('no product currently has a seasonal extra charge');
       return;
     }
 
@@ -186,10 +195,6 @@ describe('frontend order quote pricing', () => {
       const inactiveDate = getDateForChargeActivity(entry, { active: false });
       return Boolean(activeDate && inactiveDate);
     });
-
-    if (!charge) {
-      return;
-    }
 
     const selectedExtraCharges = {
       [charge.fieldName]: true,
@@ -228,9 +233,7 @@ describe('frontend order quote pricing', () => {
   test('getOrderQuote should reject unsupported shipping methods for the selected product', () => {
     const scenario = findOrderScenario();
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'at least one product and shipping option should be configured');
 
     assert.throws(
       () =>
@@ -247,9 +250,7 @@ describe('frontend order quote pricing', () => {
   test('getOrderQuote should reject temporarily unavailable configured SKUs', () => {
     const scenario = findOrderScenario();
 
-    if (!scenario) {
-      return;
-    }
+    assert.ok(scenario, 'at least one product and shipping option should be configured');
 
     const unavailableSku = getRequiredProductSku(
       scenario.productKey,
