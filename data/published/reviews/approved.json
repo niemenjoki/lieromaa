@@ -304,5 +304,41 @@
     "displayName": "",
     "submittedAt": "2026-09-28T17:42:25.364Z",
     "purchasedProducts": ["worms"]
+  },
+  {
+    "language": "fi",
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Hyvä setti, madot oli hyvin ja suojaisasti paketoitu ja niitä oli reippaasti. Kiitos!\nLämpimät suositukset matoja tarvitseville.",
+    "displayName": "Ville",
+    "submittedAt": "2026-10-27T12:33:18.360Z",
+    "purchasedProducts": ["worms"]
+  },
+  {
+    "language": "fi",
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Tuote vastasi odotuksia ja tilauksen nouto sujui mutkattomasti. Tein itse kompostorin nettisivuilta löytyneiden, hyvien ohjeiden mukaan, ja madot ovat kotiutuneet hyvin ja ensimmäinen pieni, nuutunut basilikanlehti kohta syöty. En malta odottaa, että saan kompostorin kunnolla käyntiin!",
+    "displayName": "Michaela",
+    "submittedAt": "2026-11-05T06:49:01.062Z",
+    "purchasedProducts": ["worms", "compostChow"]
+  },
+  {
+    "language": "fi",
+    "productKey": "compostChow",
+    "rating": 5,
+    "review": "Tuote vastasi odotuksia ja tilauksen nouto sujui mutkattomasti. Tein itse kompostorin nettisivuilta löytyneiden, hyvien ohjeiden mukaan, ja madot ovat kotiutuneet hyvin ja ensimmäinen pieni, nuutunut basilikanlehti kohta syöty. En malta odottaa, että saan kompostorin kunnolla käyntiin!",
+    "displayName": "Michaela",
+    "submittedAt": "2026-11-05T06:49:01.062Z",
+    "purchasedProducts": ["worms", "compostChow"]
+  },
+  {
+    "language": "fi",
+    "productKey": "worms",
+    "rating": 5,
+    "review": "Erinomaista asiakaspalvelua! Minut pidettiin ajan tasalla, miten tilaukseni etenee. Nyt lierokaverit ovat kotiutuneet ja yhteiselo alkanut hienosti. Suosittelen!",
+    "displayName": "Riikka N.",
+    "submittedAt": "2026-10-27T05:55:15.306Z",
+    "purchasedProducts": ["worms", "preparedWormBin"]
   }
 ]
