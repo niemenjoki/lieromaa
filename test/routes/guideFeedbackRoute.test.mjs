@@ -141,55 +141,131 @@ describe('guide feedback route', () => {
     );
   });
 
-  test('passes unknown fields through unchanged (current behaviour, the order service validates)', async () => {
-    // The route does no validation of its own: whatever the browser sends is
-    // forwarded with the server's token. See the todo below.
+  test('forwards only the known feedback fields', async () => {
     await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
       withMockFetch(
         () => Response.json({ ok: true, messageId: 'msg-1' }),
         async (calls) => {
-          await POST(feedbackRequest({ ...FEEDBACK, status: 'resolved', extra: 'x' }));
+          await POST(
+            feedbackRequest({
+              ...FEEDBACK,
+              status: 'resolved',
+              extra: 'x',
+              viesti: 'alias',
+              customerEmail: 'toinen@example.com',
+            })
+          );
 
           const forwarded = JSON.parse(calls[0].init.body);
-          assert.equal(forwarded.status, 'resolved');
-          assert.equal(forwarded.extra, 'x');
+          assert.deepEqual(
+            Object.keys(forwarded).sort(),
+            [...Object.keys(FEEDBACK), 'requestContext'].sort()
+          );
         }
       )
     );
   });
 
-  test.todo(
-    'forwards only the known feedback fields (VIKA: runko välitetään validoimatta palvelimen tokenilla)',
-    async () => {
-      await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
-        withMockFetch(
-          () => Response.json({ ok: true, messageId: 'msg-1' }),
-          async (calls) => {
-            await POST(feedbackRequest({ ...FEEDBACK, status: 'resolved', extra: 'x' }));
+  test('rejects a JSON body that is not an object', async () => {
+    await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
+      withMockFetch(failIfCalled, async (calls) => {
+        for (const body of [['a', 'b'], 'viesti', 42, null, true]) {
+          const response = await POST(feedbackRequest(body));
 
-            const forwarded = JSON.parse(calls[0].init.body);
-            assert.equal('status' in forwarded, false);
-            assert.equal('extra' in forwarded, false);
+          assert.equal(response.status, 400, JSON.stringify(body));
+          assert.equal((await response.json()).ok, false);
+        }
+        assert.equal(calls.length, 0);
+      })
+    );
+  });
+
+  test('rejects a field of the wrong type', async () => {
+    await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
+      withMockFetch(failIfCalled, async (calls) => {
+        for (const overrides of [
+          { message: ['a'] },
+          { message: { text: 'a' } },
+          { email: 42 },
+          { feedbackType: true },
+          { pageUrl: { href: 'x' } },
+        ]) {
+          const response = await POST(feedbackRequest({ ...FEEDBACK, ...overrides }));
+
+          assert.equal(response.status, 400, JSON.stringify(overrides));
+        }
+        assert.equal(calls.length, 0);
+      })
+    );
+  });
+
+  test('rejects a too long message or email but shortens a long page address', async () => {
+    await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
+      withMockFetch(
+        () => Response.json({ ok: true, messageId: 'msg-1' }),
+        async (calls) => {
+          for (const overrides of [
+            { message: 'a'.repeat(8001) },
+            { email: `${'a'.repeat(250)}@example.com` },
+            { feedbackType: 'q'.repeat(41) },
+          ]) {
+            const response = await POST(feedbackRequest({ ...FEEDBACK, ...overrides }));
+            assert.equal(response.status, 400, Object.keys(overrides)[0]);
           }
-        )
-      );
-    }
-  );
+          assert.equal(calls.length, 0);
 
-  test.todo(
-    'rejects a JSON body that is not an object (VIKA: taulukko tai merkkijono levitetään runkoon)',
-    async () => {
-      await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
-        withMockFetch(
-          () => Response.json({ ok: true, messageId: 'msg-1' }),
-          async (calls) => {
-            const response = await POST(feedbackRequest(['a', 'b']));
+          const longUrl = `https://www.lieromaa.fi/opas?${'q'.repeat(2000)}`;
+          const response = await POST(
+            feedbackRequest({ ...FEEDBACK, pageUrl: longUrl, referrer: longUrl })
+          );
+          assert.equal(response.status, 200);
+          const forwarded = JSON.parse(calls[0].init.body);
+          assert.equal(forwarded.pageUrl, longUrl.slice(0, 1000));
+          assert.equal(forwarded.referrer, longUrl.slice(0, 1000));
+        }
+      )
+    );
+  });
 
-            assert.equal(response.status, 400);
-            assert.equal(calls.length, 0);
-          }
-        )
-      );
-    }
-  );
+  test('accepts missing optional fields', async () => {
+    await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
+      withMockFetch(
+        () => Response.json({ ok: true, messageId: 'msg-1' }),
+        async (calls) => {
+          const response = await POST(
+            feedbackRequest({ feedbackType: 'question', message: 'Kysymys', email: null })
+          );
+
+          assert.equal(response.status, 200);
+          const forwarded = JSON.parse(calls[0].init.body);
+          assert.deepEqual(Object.keys(forwarded).sort(), [
+            'feedbackType',
+            'message',
+            'requestContext',
+          ]);
+        }
+      )
+    );
+  });
+
+  test('passes a validation message from the order service to the browser', async () => {
+    await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
+      withMockFetch(
+        () =>
+          Response.json(
+            { ok: false, message: 'Sähköpostiosoite ei ole kelvollinen.' },
+            { status: 400 }
+          ),
+        async () => {
+          const response = await POST(feedbackRequest(FEEDBACK));
+
+          assert.equal(response.status, 400);
+          assert.deepEqual(await response.json(), {
+            ok: false,
+            message: 'Sähköpostiosoite ei ole kelvollinen.',
+          });
+        }
+      )
+    );
+  });
 });

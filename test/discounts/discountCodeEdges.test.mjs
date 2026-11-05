@@ -155,18 +155,44 @@ describe('two discounts with the same code', () => {
     assert.equal(resolveDiscountForSku({ code: CODE, sku: '', now }), null);
   });
 
-  test('the cart lookup uses the first valid entry only (current behaviour)', () => {
-    // The cart applies the returned entry's SKUs. With two valid entries the
-    // second one's SKUs get no discount in the cart, while the product page
-    // (SKU lookup) shows one. prepareDiscounts does not reject duplicates.
+  test('the cart picks the valid entry that covers a product in the cart, like the product page', () => {
     useDiscounts([
       discount({ id: 'a', endsOn: '2026-06-30', appliesToSkus: ['test-sku-a'] }),
       discount({ id: 'b', endsOn: '2026-06-30', appliesToSkus: ['test-sku-b'] }),
     ]);
 
-    const resolved = resolveDiscountCode({ code: CODE, now });
-    assert.equal(resolved?.id, 'a');
-    assert.deepEqual(resolved.appliesToSkus, ['test-sku-a']);
+    for (const sku of ['test-sku-a', 'test-sku-b']) {
+      assert.equal(
+        resolveDiscountCode({ code: CODE, now, skus: [sku] })?.id,
+        resolveDiscountForSku({ code: CODE, sku, now })?.id,
+        sku
+      );
+    }
+    assert.equal(
+      resolveDiscountCode({ code: CODE, now, skus: ['test-sku-c', 'test-sku-b'] })?.id,
+      'b'
+    );
+  });
+
+  test('the cart skips an expired entry that covers the product', () => {
+    useDiscounts([
+      discount({ id: 'old-b', endsOn: '2026-05-31', appliesToSkus: ['test-sku-b'] }),
+      discount({ id: 'a', endsOn: '2026-06-30', appliesToSkus: ['test-sku-a'] }),
+    ]);
+
+    // No valid entry covers the cart, so the first valid one is returned and
+    // the cart tells the customer that the code does not apply.
+    assert.equal(resolveDiscountCode({ code: CODE, now, skus: ['test-sku-b'] })?.id, 'a');
+  });
+
+  test('without cart SKUs the first valid entry is returned', () => {
+    useDiscounts([
+      discount({ id: 'a', endsOn: '2026-06-30', appliesToSkus: ['test-sku-a'] }),
+      discount({ id: 'b', endsOn: '2026-06-30', appliesToSkus: ['test-sku-b'] }),
+    ]);
+
+    assert.equal(resolveDiscountCode({ code: CODE, now })?.id, 'a');
+    assert.equal(resolveDiscountCode({ code: CODE, now, skus: [] })?.id, 'a');
   });
 
   test('the returned discount is a copy that cannot change the source data', () => {

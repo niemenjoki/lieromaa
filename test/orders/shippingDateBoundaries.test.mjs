@@ -85,19 +85,37 @@ describe('business date on daylight saving change days', () => {
     assert.equal(getBusinessDateOnly(new Date(autumnEnd)), '2026-10-25');
   });
 
-  test.todo(
-    'the start of a change day uses the offset that is in force at 00:00 (VIKA: offset luetaan klo 12 UTC:n mukaan)',
-    () => {
-      // Midnight on 29 March is still winter time (+02:00) and midnight on
-      // 25 October is still summer time (+03:00). With the noon offset the
-      // Merchant feed sale window starts an hour early in spring and an hour
-      // late in autumn.
-      const springStart = formatBusinessDateTime('2026-03-29');
-      const autumnStart = formatBusinessDateTime('2026-10-25');
+  test('the start of a change day uses the offset that is in force at 00:00', () => {
+    // Midnight on 29 March is still winter time (+02:00) and midnight on
+    // 25 October is still summer time (+03:00).
+    const springStart = formatBusinessDateTime('2026-03-29');
+    const autumnStart = formatBusinessDateTime('2026-10-25');
 
-      assert.equal(getBusinessDateOnly(new Date(springStart)), '2026-03-29');
-      assert.equal(springStart, '2026-03-29T00:00:00+02:00');
-      assert.equal(autumnStart, '2026-10-25T00:00:00+03:00');
-    }
-  );
+    assert.equal(springStart, '2026-03-29T00:00:00+02:00');
+    assert.equal(autumnStart, '2026-10-25T00:00:00+03:00');
+    assert.equal(getBusinessDateOnly(new Date(springStart)), '2026-03-29');
+    assert.equal(getBusinessDateOnly(new Date(autumnStart)), '2026-10-25');
+    assert.equal(new Date(springStart).toISOString(), '2026-03-28T22:00:00.000Z');
+    assert.equal(new Date(autumnStart).toISOString(), '2026-10-24T21:00:00.000Z');
+  });
+
+  test('the offset changes at the hour the clocks change', () => {
+    // Spring: 03:00 EET becomes 04:00 EEST. Autumn: 04:00 EEST becomes 03:00 EET.
+    assert.equal(
+      formatBusinessDateTime('2026-03-29', '02:59:59'),
+      '2026-03-29T02:59:59+02:00'
+    );
+    assert.equal(
+      formatBusinessDateTime('2026-03-29', '04:00:00'),
+      '2026-03-29T04:00:00+03:00'
+    );
+    assert.equal(
+      formatBusinessDateTime('2026-10-25', '02:59:59'),
+      '2026-10-25T02:59:59+03:00'
+    );
+    assert.equal(
+      formatBusinessDateTime('2026-10-25', '04:00:00'),
+      '2026-10-25T04:00:00+02:00'
+    );
+  });
 });

@@ -174,15 +174,31 @@ describe('prepareDiscounts validation', () => {
     );
   });
 
-  test.todo(
-    'two discounts that are valid at the same time cannot share a code (VIKA: ostoskori käyttää vain ensimmäistä)',
-    () => {
-      const result = runPrepare([
-        validDiscount({ id: 'a' }),
-        validDiscount({ id: 'b', value: 20 }),
-      ]);
+  test('two valid discounts that share a code only print a warning', () => {
+    // The owner's data change must not fail the build. The cart picks the
+    // entry that covers the product in the cart.
+    const result = runPrepare([
+      validDiscount({ id: 'a', endsOn: '2099-12-31' }),
+      validDiscount({ id: 'b', value: 20, endsOn: '2099-12-31' }),
+    ]);
 
-      assert.equal(result.status, 1);
-    }
-  );
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stderr, /a, b share the same code/);
+    assert.deepEqual(
+      result.output.discounts
+        .filter(({ id }) => ['a', 'b'].includes(id))
+        .map(({ id }) => id),
+      ['a', 'b']
+    );
+  });
+
+  test('an expired discount with the same code does not cause a warning', () => {
+    const result = runPrepare([
+      validDiscount({ id: 'old', endsOn: '2020-01-31' }),
+      validDiscount({ id: 'current', endsOn: '2099-12-31' }),
+    ]);
+
+    assert.equal(result.status, 0, result.stderr);
+    assert.doesNotMatch(result.stderr, /share the same code/);
+  });
 });

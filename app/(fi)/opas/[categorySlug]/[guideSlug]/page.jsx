@@ -7,6 +7,7 @@ import GuideFeedbackBox from '@/components/GuideFeedbackBox/GuideFeedbackBox';
 import MdxArticlePage from '@/components/MdxArticlePage/MdxArticlePage';
 import WormHuntFooterPortal from '@/components/WormHunt/WormHuntFooterPortal';
 import WormHuntSpot from '@/components/WormHunt/WormHuntSpot';
+import { extractArticleHeadings } from '@/lib/content/articleHeadings.mjs';
 import {
   getGuideCategorySlug,
   getGuidePath,
@@ -26,6 +27,7 @@ import { formatFinnishDate } from '@/lib/dates/formatFinnishDate';
 import { CONTENT_TYPES } from '@/lib/site/constants.mjs';
 import {
   getWormHuntEntry,
+  resolveWormHuntPlacement,
   shouldPlaceWormBeforeFooter,
   shouldPlaceWormInFooter,
 } from '@/lib/wormHunt/trail.server.mjs';
@@ -66,7 +68,10 @@ export default async function GuidePage({ params }) {
     categoryName: data.category.name,
     guideSlug,
   });
-  const wormHuntEntry = getWormHuntEntry(canonicalGuidePath);
+  const wormHuntEntry = resolveWormHuntPlacement(
+    getWormHuntEntry(canonicalGuidePath),
+    extractArticleHeadings(mdxContent).map((heading) => heading.id)
+  );
   const { structuredData } = data;
   const isHotCompostingGuide = data.category.name === HOT_COMPOSTING_CATEGORY_NAME;
   const hotCompostingRecommendationCount = Math.max(

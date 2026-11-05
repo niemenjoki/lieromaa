@@ -51,7 +51,9 @@ export async function GET(request) {
       signal: getPickupServiceTimeout(),
       cache: 'no-store',
     });
-    return await forwardPickupJson(upstreamResponse, language);
+    return await forwardPickupJson(upstreamResponse, language, {
+      label: 'Pickup session request',
+    });
   } catch (error) {
     console.error('Pickup session forwarding failed:', error);
     return Response.json(

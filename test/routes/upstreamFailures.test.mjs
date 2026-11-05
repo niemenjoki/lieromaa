@@ -163,6 +163,12 @@ const UNAUTHORIZED_UPSTREAM = () =>
     { status: 401 }
   );
 
+const FORBIDDEN_UPSTREAM = () =>
+  Response.json(
+    { ok: false, code: 'unauthorized', message: 'Unauthorized order API token.' },
+    { status: 403 }
+  );
+
 const INTERNAL_UPSTREAM_MESSAGE = 'SQLITE_BUSY: database is locked (orders.db)';
 const INTERNAL_ERROR_UPSTREAM = () =>
   Response.json(
@@ -239,43 +245,102 @@ describe('upstream failures: what the browser sees', () => {
     assert.equal(text.includes('Unauthorized order API token'), false);
   });
 
-  test.todo(
-    'an upstream 401 (wrong ORDER_SERVICE_TOKEN) reaches the browser as 502, not 401 (VIKA: 401 ja ylävirran viesti välitetään selaimelle)',
-    async () => {
-      const leaking = [];
-      for (const route of ROUTES.filter(({ usesOrderToken }) => usesOrderToken)) {
-        const { response, text } = await callWithUpstream(route, UNAUTHORIZED_UPSTREAM);
-        if (response.status === 401 || text.includes('Unauthorized order API token')) {
-          leaking.push(route.name);
-        }
-      }
-
-      assert.deepEqual(leaking, []);
-    }
-  );
-
-  test.todo(
-    'an internal upstream 5xx message is not shown to the browser (VIKA: ylävirran viesti välitetään sellaisenaan)',
-    async () => {
-      const leaking = [];
+  test('an upstream 401 or 403 (wrong ORDER_SERVICE_TOKEN) reaches the browser as 502 with a generic error', async () => {
+    for (const upstream of [UNAUTHORIZED_UPSTREAM, FORBIDDEN_UPSTREAM]) {
       for (const route of ROUTES) {
-        const { text } = await callWithUpstream(route, INTERNAL_ERROR_UPSTREAM);
-        if (text.includes(INTERNAL_UPSTREAM_MESSAGE)) {
-          leaking.push(route.name);
+        const { response, text, body } = await callWithUpstream(route, upstream);
+
+        assert.equal(response.status, 502, route.name);
+        assert.equal(body.ok, false, route.name);
+        assert.equal(text.includes('Unauthorized order API token'), false, route.name);
+        assert.equal(text.includes('unauthorized'), false, route.name);
+        if (!route.hasNoErrorCode) {
+          assert.equal(body.code, 'upstream_unavailable', route.name);
         }
       }
-
-      assert.deepEqual(leaking, []);
     }
-  );
+  });
 
-  test.todo(
-    'data-exports/download reports an upstream outage as upstream_unavailable (VIKA: ei-JSON-5xx näytetään koodilla invalid_request)',
-    async () => {
-      const route = ROUTES.find(({ name }) => name === 'data-exports/download');
-      const { body } = await callWithUpstream(route, () => nonJsonResponse(503));
+  test('an upstream 401 is logged on the server without the token', async () => {
+    const route = ROUTES.find(({ name }) => name === 'orders/cancel');
+    const logged = [];
+    const originalError = console.error;
+    console.error = (...args) => logged.push(args.map(String).join(' '));
+    try {
+      await withTemporaryEnv(TEST_MODE_ENV, () =>
+        withMockFetch(UNAUTHORIZED_UPSTREAM, () => route.call())
+      );
+    } finally {
+      console.error = originalError;
+    }
+
+    assert.equal(logged.length, 1);
+    assert.match(logged[0], /401/);
+    assert.equal(logged[0].includes(TEST_ORDER_SERVICE_TOKEN), false);
+  });
+
+  test('an internal upstream 5xx message is not shown to the browser', async () => {
+    for (const route of ROUTES) {
+      const { response, text, body } = await callWithUpstream(
+        route,
+        INTERNAL_ERROR_UPSTREAM
+      );
+
+      assert.equal(text.includes(INTERNAL_UPSTREAM_MESSAGE), false, route.name);
+      assert.equal(response.status, route.hidesUpstreamStatus ? 502 : 500, route.name);
+      assert.equal(body.ok, false, route.name);
+      if (!route.hasNoErrorCode) {
+        assert.equal(body.code, 'upstream_unavailable', route.name);
+      }
+    }
+  });
+
+  test('a 5xx answer uses the localized generic message', async () => {
+    const route = ROUTES.find(({ name }) => name === 'orders/cancel');
+    const finnish = await callWithUpstream(route, INTERNAL_ERROR_UPSTREAM);
+    const english = await withTemporaryEnv(TEST_MODE_ENV, () =>
+      withMockFetch(INTERNAL_ERROR_UPSTREAM, async () => {
+        const response = await withMutedConsole(() =>
+          cancelOrder(
+            createRouteRequest({
+              method: 'POST',
+              url: `${SITE}/api/orders/cancel`,
+              json: { orderId: 'LRM-1', email: 'testi@example.com' },
+              extraHeaders: { 'X-Lieromaa-Language': 'en' },
+            })
+          )
+        );
+        return response.json();
+      })
+    );
+
+    assert.equal(typeof finnish.body.message, 'string');
+    assert.equal(typeof english.message, 'string');
+    assert.notEqual(finnish.body.message, english.message);
+  });
+
+  test('a 4xx validation message from the order service still reaches the browser', async () => {
+    for (const route of ROUTES.filter(
+      ({ hidesUpstreamStatus }) => !hidesUpstreamStatus
+    )) {
+      const { response, body } = await callWithUpstream(route, () =>
+        Response.json(
+          { ok: false, code: 'validation_failed', message: 'Tarkista tiedot.' },
+          { status: 422 }
+        )
+      );
+
+      assert.equal(response.status, 422, route.name);
+      assert.equal(body.message, 'Tarkista tiedot.', route.name);
+    }
+  });
+
+  test('data-exports/download reports an upstream outage as upstream_unavailable', async () => {
+    const route = ROUTES.find(({ name }) => name === 'data-exports/download');
+    for (const upstream of [() => nonJsonResponse(503), INTERNAL_ERROR_UPSTREAM]) {
+      const { body } = await callWithUpstream(route, upstream);
 
       assert.equal(body.code, 'upstream_unavailable');
     }
-  );
+  });
 });

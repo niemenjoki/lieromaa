@@ -5,6 +5,7 @@ import {
   createPublicErrorBody,
   getPublicRequestLanguage,
 } from '@/lib/api/publicLanguage';
+import { createUpstreamErrorResponse } from '@/lib/api/upstreamError';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -49,14 +50,9 @@ export async function GET(request) {
     });
     const data = await upstream.json().catch(() => null);
     if (!upstream.ok || !data?.ok) {
-      return Response.json(
-        createPublicErrorBody(
-          data?.code || PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE,
-          language,
-          data?.message
-        ),
-        { status: upstream.status || 502 }
-      );
+      return createUpstreamErrorResponse(upstream, data, language, {
+        label: 'Payment status request',
+      });
     }
 
     return Response.json(

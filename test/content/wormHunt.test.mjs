@@ -15,6 +15,7 @@ import {
   createWormHuntEntries,
   getWormHuntEntries,
   getWormHuntEntry,
+  resolveWormHuntPlacement,
   shouldPlaceWormAfterHeading,
   shouldPlaceWormBeforeFooter,
   shouldPlaceWormInFooter,
@@ -147,10 +148,41 @@ test('placement helpers follow each clue placement type', () => {
   }
 });
 
-// The deployed trail must point at pages and headings that exist: otherwise a
-// worm silently disappears and nobody can finish the code. Checked only while
-// the hunt is enabled, so content edits are free when it is off.
-test('the enabled worm hunt points at existing pages and headings', (t) => {
+test('a missing heading moves the worm to the end of the article instead of hiding it', () => {
+  const entry = createWormHuntEntries(ENABLED_TEST_CONFIG).find(
+    ({ placement }) => placement.type === 'after-heading'
+  );
+  assert.ok(entry, 'the trail should have an after-heading placement');
+
+  const found = resolveWormHuntPlacement(entry, ['johdanto', entry.placement.headingId]);
+  assert.equal(found, entry);
+  assert.equal(shouldPlaceWormAfterHeading(found, entry.placement.headingId), true);
+  assert.equal(shouldPlaceWormBeforeFooter(found), false);
+
+  const missing = resolveWormHuntPlacement(entry, ['johdanto', 'muu-otsikko']);
+  assert.equal(missing.placement.type, 'before-footer');
+  assert.equal(missing.clue, entry.clue);
+  assert.equal(shouldPlaceWormBeforeFooter(missing), true);
+  // Exactly one placement: never after a heading and at the end at once.
+  assert.equal(shouldPlaceWormAfterHeading(missing, entry.placement.headingId), false);
+  assert.equal(shouldPlaceWormInFooter(missing), false);
+});
+
+test('placements other than after-heading do not depend on the headings', () => {
+  for (const entry of createWormHuntEntries(ENABLED_TEST_CONFIG)) {
+    if (entry.placement.type === 'after-heading') {
+      continue;
+    }
+    assert.equal(resolveWormHuntPlacement(entry, []), entry);
+  }
+  assert.equal(resolveWormHuntPlacement(null, []), null);
+});
+
+// The deployed trail must point at pages that exist: otherwise a worm
+// disappears and nobody can finish the code. A renamed heading does not fail
+// the build: the worm moves to the end of the article. Checked only while the
+// hunt is enabled, so content edits are free when it is off.
+test('the enabled worm hunt shows every worm on an existing page', (t) => {
   const entries = getWormHuntEntries();
   if (entries.length === 0) {
     t.skip('the worm hunt is disabled');
@@ -170,10 +202,12 @@ test('the enabled worm hunt points at existing pages and headings', (t) => {
       'utf8'
     );
     const headingIds = extractArticleHeadings(source).map((heading) => heading.id);
+    const placed = resolveWormHuntPlacement(entry, headingIds);
 
-    assert.ok(
-      headingIds.includes(entry.placement.headingId),
-      `${entry.path} must contain heading ${entry.placement.headingId}`
-    );
+    if (headingIds.includes(entry.placement.headingId)) {
+      assert.equal(placed.placement.type, 'after-heading', entry.path);
+    } else {
+      assert.equal(placed.placement.type, 'before-footer', entry.path);
+    }
   }
 });

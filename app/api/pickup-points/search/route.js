@@ -4,6 +4,7 @@ import {
   createPublicErrorBody,
   getPublicRequestLanguage,
 } from '@/lib/api/publicLanguage';
+import { getPublicUpstreamStatus } from '@/lib/api/upstreamError';
 import { getTransactionMessages } from '@/lib/i18n/messages.mjs';
 
 export const dynamic = 'force-dynamic';
@@ -209,10 +210,13 @@ export async function GET(request) {
 
     const responseData = await response.json().catch(() => null);
     if (!response.ok || !Array.isArray(responseData?.pickupPoints)) {
-      console.error('Pickup point search failed:', responseData);
+      console.error(
+        `Pickup point search failed with status ${response.status}:`,
+        responseData
+      );
       return jsonResponse(
         createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
-        { status: response.status || 502 }
+        { status: getPublicUpstreamStatus(response.status) }
       );
     }
 

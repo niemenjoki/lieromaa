@@ -57,7 +57,9 @@ export async function POST(request) {
       signal: getPickupServiceTimeout(),
       cache: 'no-store',
     });
-    return await forwardPickupJson(upstreamResponse, language);
+    return await forwardPickupJson(upstreamResponse, language, {
+      label: 'Pickup booking',
+    });
   } catch (error) {
     console.error('Pickup booking forwarding failed:', error);
     return Response.json(

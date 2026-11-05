@@ -15,6 +15,19 @@ import {
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
+// Kentät, jotka maksusivu (app/(fi)/maksa/InvoicePaymentClient.jsx) lukee.
+const SESSION_FIELDS = ['status', 'language', 'invoiceNumber', 'amountCents', 'dueDate'];
+
+function selectSessionFields(data) {
+  const selected = { ok: true };
+  for (const field of SESSION_FIELDS) {
+    if (data[field] !== undefined) {
+      selected[field] = data[field];
+    }
+  }
+  return selected;
+}
+
 // Laskun maksusivun haku tilausjärjestelmästä. Koodi kulkee kyselyparametrina, eikä sitä kirjata lokiin.
 export async function GET(request) {
   const language = getPublicRequestLanguage(request);
@@ -58,7 +71,10 @@ export async function GET(request) {
       signal: getPickupServiceTimeout(),
       cache: 'no-store',
     });
-    return await forwardPickupJson(upstreamResponse, language);
+    return await forwardPickupJson(upstreamResponse, language, {
+      label: 'Invoice payment session request',
+      selectResponse: selectSessionFields,
+    });
   } catch (error) {
     console.error('Invoice payment session forwarding failed:', error);
     return Response.json(

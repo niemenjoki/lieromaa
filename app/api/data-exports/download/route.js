@@ -5,6 +5,7 @@ import {
   createPublicErrorBody,
   getPublicRequestLanguage,
 } from '@/lib/api/publicLanguage';
+import { createUpstreamErrorResponse } from '@/lib/api/upstreamError';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -54,14 +55,11 @@ export async function POST(request) {
     });
     const result = await response.json().catch(() => null);
     if (!response.ok || !result?.ok) {
-      return Response.json(
-        createPublicErrorBody(
-          result?.code || PUBLIC_MESSAGE_CODES.INVALID_REQUEST,
-          language,
-          result?.message || undefined
-        ),
-        { status: response.status || 502, headers: { 'Cache-Control': 'no-store' } }
-      );
+      return createUpstreamErrorResponse(response, result, language, {
+        label: 'Data export download',
+        fallbackCode: PUBLIC_MESSAGE_CODES.INVALID_REQUEST,
+        headers: { 'Cache-Control': 'no-store' },
+      });
     }
 
     return new Response(`${JSON.stringify(result.data, null, 2)}\n`, {

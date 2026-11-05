@@ -5,11 +5,13 @@ import {
   createPublicErrorBody,
   getPublicRequestLanguage,
 } from '@/lib/api/publicLanguage';
+import { createUpstreamErrorResponse } from '@/lib/api/upstreamError';
 import {
   PublicOrderValidationError,
   getOrderValidationMessage,
   normalizePublicOrderSubmission,
 } from '@/lib/orders/normalizePublicOrder';
+import { isStripeCheckoutUrl } from '@/lib/orders/stripeCheckoutUrl';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -40,14 +42,7 @@ function isSafeStripeCheckoutResponse(responseData) {
   }
   if (!responseData.checkoutUrl) return responseData.checkoutStatus === 'COMPLETE';
 
-  try {
-    const checkoutUrl = new URL(responseData.checkoutUrl);
-    return (
-      checkoutUrl.protocol === 'https:' && checkoutUrl.hostname === 'checkout.stripe.com'
-    );
-  } catch {
-    return false;
-  }
+  return isStripeCheckoutUrl(responseData.checkoutUrl);
 }
 
 function jsonResponse(body, init) {
@@ -142,14 +137,9 @@ export async function POST(request) {
     const responseData = await upstreamResponse.json().catch(() => null);
     if (!upstreamResponse.ok || !responseData?.ok) {
       console.error('Order service rejected request:', responseData);
-      return jsonResponse(
-        createPublicErrorBody(
-          responseData?.code || PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE,
-          language,
-          responseData?.message || undefined
-        ),
-        { status: upstreamResponse.status || 502 }
-      );
+      return createUpstreamErrorResponse(upstreamResponse, responseData, language, {
+        label: 'Order submission',
+      });
     }
 
     const responsePaymentProvider = String(

@@ -85,7 +85,12 @@ for (const route of ROUTES) {
     test('accepts a code of exactly 20 characters after trimming', async () => {
       await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
         withMockFetch(
-          () => Response.json({ ok: true, status: 'open', url: 'x' }),
+          () =>
+            Response.json({
+              ok: true,
+              status: 'open',
+              url: 'https://checkout.stripe.com/c/pay/cs_test_1',
+            }),
           async (calls) => {
             const response = await route.call(`  ${'B'.repeat(20)}  `);
 
@@ -99,7 +104,12 @@ for (const route of ROUTES) {
     test('sends the code, order service token, language and client IP upstream', async () => {
       await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
         withMockFetch(
-          () => Response.json({ ok: true, status: 'open' }),
+          () =>
+            Response.json({
+              ok: true,
+              status: 'open',
+              url: 'https://checkout.stripe.com/c/pay/cs_test_1',
+            }),
           async (calls) => {
             await route.call(` ${CODE} `, {
               extraHeaders: {
@@ -136,7 +146,11 @@ for (const route of ROUTES) {
     test('falls back to x-real-ip and then the first x-forwarded-for address', async () => {
       await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
         withMockFetch(
-          () => Response.json({ ok: true }),
+          () =>
+            Response.json({
+              ok: true,
+              url: 'https://checkout.stripe.com/c/pay/cs_test_1',
+            }),
           async (calls) => {
             await route.call(CODE, {
               extraHeaders: { 'x-real-ip': '198.51.100.2', 'x-forwarded-for': '1.1.1.1' },
@@ -162,7 +176,11 @@ for (const route of ROUTES) {
       const code = '../x?y=1&z#';
       await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
         withMockFetch(
-          () => Response.json({ ok: true }),
+          () =>
+            Response.json({
+              ok: true,
+              url: 'https://checkout.stripe.com/c/pay/cs_test_1',
+            }),
           async (calls) => {
             await route.call(code);
 
@@ -273,73 +291,102 @@ for (const route of ROUTES) {
 }
 
 describe('invoice payment routes: response fields', () => {
-  test.todo(
-    'the session route passes only the fields the payment page shows (VIKA: koko ylävirran vastaus välitetään sellaisenaan)',
-    async () => {
+  test('the session route passes only the fields the payment page reads', async () => {
+    await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
+      withMockFetch(
+        () =>
+          Response.json({
+            ok: true,
+            status: 'open',
+            language: 'fi',
+            invoiceNumber: '1001',
+            amountCents: 3490,
+            currency: 'EUR',
+            dueDate: '2026-11-20',
+            customerEmail: 'asiakas@example.com',
+            customerName: 'Asiakas',
+          }),
+        async () => {
+          const body = await (await getSession(sessionRequest(CODE))).json();
+
+          // InvoicePaymentClient reads ok, status, language, invoiceNumber,
+          // amountCents and dueDate.
+          assert.deepEqual(body, {
+            ok: true,
+            status: 'open',
+            language: 'fi',
+            invoiceNumber: '1001',
+            amountCents: 3490,
+            dueDate: '2026-11-20',
+          });
+        }
+      )
+    );
+  });
+
+  test('the session route passes a paid or unavailable state without invoice fields', async () => {
+    await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
+      withMockFetch(
+        () => Response.json({ ok: true, status: 'paid', language: 'en' }),
+        async () => {
+          const body = await (await getSession(sessionRequest(CODE))).json();
+
+          assert.deepEqual(body, { ok: true, status: 'paid', language: 'en' });
+        }
+      )
+    );
+  });
+
+  test('the checkout route returns only the Stripe Checkout address', async () => {
+    await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
+      withMockFetch(
+        () =>
+          Response.json({
+            ok: true,
+            url: 'https://checkout.stripe.com/c/pay/cs_test_1',
+            orderId: 'LRM-1',
+            customerEmail: 'asiakas@example.com',
+          }),
+        async () => {
+          const body = await (
+            await createCheckout(checkoutRequest({ code: CODE }))
+          ).json();
+
+          assert.deepEqual(body, {
+            ok: true,
+            url: 'https://checkout.stripe.com/c/pay/cs_test_1',
+          });
+        }
+      )
+    );
+  });
+
+  test('the checkout route accepts only a Stripe Checkout address', async () => {
+    for (const url of [
+      'https://payments.example.test/fake',
+      'http://checkout.stripe.com/c/pay/cs_test_1',
+      'https://checkout.stripe.com.example.test/c/pay/cs_test_1',
+      'javascript:alert(1)',
+      '',
+      undefined,
+    ]) {
       await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
         withMockFetch(
-          () =>
-            Response.json({
-              ok: true,
-              status: 'open',
-              language: 'fi',
-              invoiceNumber: '1001',
-              amountCents: 3490,
-              currency: 'EUR',
-              dueDate: '2026-11-20',
-              customerEmail: 'asiakas@example.com',
-              customerName: 'Asiakas',
-            }),
-          async () => {
-            const body = await (await getSession(sessionRequest(CODE))).json();
-
-            assert.equal('customerEmail' in body, false);
-            assert.equal('customerName' in body, false);
-          }
-        )
-      );
-    }
-  );
-
-  test.todo(
-    'the checkout route returns only the Stripe Checkout address (VIKA: koko ylävirran vastaus välitetään sellaisenaan)',
-    async () => {
-      await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
-        withMockFetch(
-          () =>
-            Response.json({
-              ok: true,
-              url: 'https://checkout.stripe.com/c/pay/cs_test_1',
-              orderId: 'LRM-1',
-              customerEmail: 'asiakas@example.com',
-            }),
-          async () => {
-            const body = await (
-              await createCheckout(checkoutRequest({ code: CODE }))
-            ).json();
-
-            assert.deepEqual(Object.keys(body).sort(), ['ok', 'url']);
-          }
-        )
-      );
-    }
-  );
-
-  test.todo(
-    'the checkout route accepts only a Stripe Checkout address (VIKA: url-kenttää ei tarkisteta, toisin kuin tilausreitissä)',
-    async () => {
-      await withTemporaryEnv(ORDER_SERVICE_ENV, () =>
-        withMockFetch(
-          () => Response.json({ ok: true, url: 'https://payments.example.test/fake' }),
+          () => Response.json({ ok: true, url }),
           async () => {
             const response = await withMutedConsole(() =>
               createCheckout(checkoutRequest({ code: CODE }))
             );
+            const text = await response.text();
 
-            assert.equal(response.status, 502);
+            assert.equal(response.status, 502, String(url));
+            assert.equal(JSON.parse(text).code, 'upstream_unavailable', String(url));
+            if (url) {
+              assert.equal(text.includes(url), false, String(url));
+            }
           }
         )
       );
     }
-  );
+  });
 });

@@ -5,6 +5,7 @@ import {
   getPublicRequestLanguage,
 } from '@/lib/api/publicLanguage';
 import { getClientIp } from '@/lib/invoicePayment/clientIp';
+import { isStripeCheckoutUrl } from '@/lib/orders/stripeCheckoutUrl';
 import {
   buildPickupServiceEndpoint,
   forwardPickupJson,
@@ -14,6 +15,11 @@ import {
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+
+// Selaimelle palautetaan vain Stripen maksusivun osoite.
+function selectCheckoutFields(data) {
+  return isStripeCheckoutUrl(data.url) ? { ok: true, url: data.url } : null;
+}
 
 // Avaa laskulle maksusivun (Stripe Checkout) ja palauttaa sen osoitteen.
 export async function POST(request) {
@@ -59,7 +65,10 @@ export async function POST(request) {
       signal: getPickupServiceTimeout(),
       cache: 'no-store',
     });
-    return await forwardPickupJson(upstreamResponse, language);
+    return await forwardPickupJson(upstreamResponse, language, {
+      label: 'Invoice payment checkout request',
+      selectResponse: selectCheckoutFields,
+    });
   } catch (error) {
     console.error('Invoice payment checkout forwarding failed:', error);
     return Response.json(

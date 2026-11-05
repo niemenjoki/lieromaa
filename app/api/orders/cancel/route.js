@@ -5,6 +5,7 @@ import {
   createPublicErrorBody,
   getPublicRequestLanguage,
 } from '@/lib/api/publicLanguage';
+import { createUpstreamErrorResponse } from '@/lib/api/upstreamError';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -85,17 +86,9 @@ export async function POST(request) {
 
     const responseData = await upstreamResponse.json().catch(() => null);
     if (!upstreamResponse.ok || !responseData?.ok) {
-      return jsonResponse(
-        {
-          ok: false,
-          ...createPublicErrorBody(
-            responseData?.code || PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE,
-            language,
-            responseData?.message || undefined
-          ),
-        },
-        { status: upstreamResponse.status || 502 }
-      );
+      return createUpstreamErrorResponse(upstreamResponse, responseData, language, {
+        label: 'Cancellation request',
+      });
     }
 
     return jsonResponse({

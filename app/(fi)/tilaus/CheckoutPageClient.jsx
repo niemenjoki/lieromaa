@@ -396,7 +396,10 @@ export default function CheckoutPageClient({ language }) {
 
     try {
       const discount = appliedDiscountCode
-        ? resolveDiscountCode({ code: appliedDiscountCode })
+        ? resolveDiscountCode({
+            code: appliedDiscountCode,
+            skus: items.map((item) => item?.sku),
+          })
         : null;
 
       return {
@@ -759,7 +762,10 @@ export default function CheckoutPageClient({ language }) {
       return;
     }
 
-    const discount = resolveDiscountCode({ code: normalizedCode });
+    const discount = resolveDiscountCode({
+      code: normalizedCode,
+      skus: items.map((item) => item?.sku),
+    });
     if (!discount) {
       setAppliedDiscountCode('');
       setDiscountFeedback({
