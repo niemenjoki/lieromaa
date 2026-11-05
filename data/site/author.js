@@ -1,4 +1,4 @@
-import portrait from '@/public/images/portrait2024.avif';
+import portrait from '@/public/images/portrait2026.avif';
 
 export const SITE_AUTHOR = {
   name: 'Joonas Niemenjoki',

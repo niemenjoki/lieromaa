@@ -26,5 +26,6 @@
 }
 
 .Info img {
+  border-radius: 50%;
   filter: grayscale(0.3);
 }
