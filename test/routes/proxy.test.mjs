@@ -19,6 +19,7 @@ function pageRequest(path, headers = {}) {
     headers: {
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Firefox/140.0',
       'accept-language': 'fi-FI',
+      'sec-fetch-mode': 'navigate',
       'x-vercel-forwarded-for': '203.0.113.7',
       ...headers,
     },
