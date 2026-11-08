@@ -451,16 +451,18 @@ export default function PrivacyPage() {
         <h2>Tietojen säilytysaika</h2>
         <ul>
           <li>
-            Tilauspyyntöjä, joita ei vahvisteta, säilytetään enintään 12 kuukautta, ellei
-            pidempi säilytys ole tarpeen esimerkiksi väärinkäytösten selvittämiseksi.
+            Tilauspyyntöjen, joita ei vahvisteta, henkilötiedot anonymisoidaan
+            automaattisesti 13 kuukauden kuluttua tilauspyynnön lähettämisestä samalla
+            tavalla kuin lähetettyjen tilausten tiedot.
           </li>
           <li>
             Vahvistettuihin tilauksiin liittyviä yhteystietoja ja toimitustietoja
             säilytetään niin kauan kuin se on tarpeen tilauksen toimittamiseksi,
             asiakaspalvelun hoitamiseksi ja mahdollisten reklamaatioiden käsittelemiseksi.
             Lähetettyihin ja peruttuihin tilauksiin liittyvät henkilötiedot anonymisoidaan
-            tilausjärjestelmässä pääsääntöisesti 12 kuukauden kuluttua lähetyksestä tai
-            peruutuksesta. Tällöin järjestelmästä poistetaan asiakkaan yhteys- ja
+            tilausjärjestelmässä automaattisesti 13 kuukauden kuluttua lähetyksestä tai
+            peruutuksesta, ellei tilauksen käsittely, esimerkiksi reklamaatio, ole vielä
+            kesken. Tällöin järjestelmästä poistetaan asiakkaan yhteys- ja
             osoitetiedot, viestit, tekninen pyyntökonteksti, lähetystunnus sekä ulkoisiin
             järjestelmiin yhdistämisen mahdollistavat tilaus-, lasku- ja viestitunnisteet.
             Tilauksesta säilytetään vain tilaushistorian seurantaan tarvittavat
@@ -475,9 +477,9 @@ export default function PrivacyPage() {
           </li>
           <li>
             Oppaiden kysymys- ja aihe-ehdotuslomakkeiden kautta lähetettyjä viestejä
-            säilytetään niin kauan kuin se on tarpeen viestiin vastaamiseksi,
-            aihe-ehdotusten käsittelemiseksi tai sivuston sisällön kehittämiseksi,
-            kuitenkin enintään 24 kuukautta ilman erillistä perustetta.
+            säilytetään viestiin vastaamista, aihe-ehdotusten käsittelemistä ja sivuston
+            sisällön kehittämistä varten enintään 25 kuukautta. Viestit poistetaan
+            automaattisesti 25 kuukauden kuluttua niiden lähettämisestä.
           </li>
           <li>
             Arvostelut säilytetään niin kauan kuin arvostelua tarvitaan sivuston
@@ -496,11 +498,13 @@ export default function PrivacyPage() {
             käsittely kohtuudella edellyttää.
           </li>
           <li>
-            Peruuttamisilmoituksiin liittyviä tietoja säilytetään niin kauan kuin
-            ilmoituksen käsittely, mahdolliset palautus- ja maksujärjestelyt sekä
-            lakisääteisten velvoitteiden osoittaminen kohtuudella edellyttävät.
-            Tilaustunnuksella tilaukseen yhdistetyn peruuttamisilmoituksen henkilötiedot
-            poistetaan viimeistään kyseisen tilauksen anonymisoinnin yhteydessä.
+            Peruuttamisilmoituksiin liittyviä tietoja säilytetään ilmoituksen käsittelyä,
+            mahdollisia palautus- ja maksujärjestelyjä sekä lakisääteisten velvoitteiden
+            osoittamista varten. Tilaustunnuksella tilaukseen yhdistetyn
+            peruuttamisilmoituksen henkilötiedot poistetaan automaattisesti kyseisen
+            tilauksen anonymisoinnin yhteydessä. Peruuttamisilmoitus, jota ei voi yhdistää
+            mihinkään tilaukseen, poistetaan automaattisesti 25 kuukauden kuluttua sen
+            lähettämisestä.
           </li>
           <li>
             Tietopyynnön latauslinkki on voimassa enintään 24 tuntia ja vain yhden

@@ -144,6 +144,22 @@ describe('prepareDiscounts validation', () => {
     }
   });
 
+  test('an impossible calendar date as the end date is an error, not a warning', () => {
+    for (const endsOn of ['2026-02-31', '2026-02-29', '2026-04-31', '2026-13-01', '2026-00-10', '2026-01-00']) {
+      assertRejected(
+        runPrepare([validDiscount({ endsOn })]),
+        'endsOn must be a real calendar date'
+      );
+    }
+  });
+
+  test('real month-end and leap-day end dates are accepted', () => {
+    for (const endsOn of ['2026-02-28', '2028-02-29', '2026-04-30', '2099-12-31']) {
+      const result = runPrepare([validDiscount({ endsOn })]);
+      assert.equal(result.status, 0, `${endsOn}: ${result.stderr}`);
+    }
+  });
+
   test('a plain-text code is rejected so it never reaches the repository output', () => {
     assertRejected(
       runPrepare([validDiscount({ code: 'TESTIKOODI' })]),

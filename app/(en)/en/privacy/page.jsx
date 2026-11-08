@@ -11,7 +11,7 @@ import {
 import { createLocalizedPageStructuredData } from '@/lib/structuredData/createLocalizedPageStructuredData.mjs';
 
 const PUBLISHED_AT = '2026-07-17';
-const UPDATED_AT = '2026-11-02';
+const UPDATED_AT = '2026-11-08';
 
 const pageMetadata = {
   language: 'en',
@@ -453,15 +453,17 @@ export default function EnglishPrivacyPage() {
           <h2>Retention periods</h2>
           <ul>
             <li>
-              Order requests that are not confirmed are kept for no more than 12 months,
-              unless a longer period is necessary, for example to investigate misuse.
+              Personal data in order requests that are not confirmed is anonymised
+              automatically 13 months after the request was sent, in the same way as the
+              data of dispatched orders.
             </li>
             <li>
               Contact and delivery data connected with confirmed orders is kept for as
               long as needed to deliver the order, provide customer service and handle
               possible complaints. Personal data connected with dispatched and cancelled
-              orders is generally anonymised in the order system 12 months after dispatch
-              or cancellation. Contact and address data, messages, technical request
+              orders is anonymised automatically in the order system 13 months after
+              dispatch or cancellation, unless handling of the order, such as a complaint,
+              is still in progress. Contact and address data, messages, technical request
               context, tracking number, and order, invoice and message identifiers that
               enable connections with external systems are then removed. Only non-personal
               information needed for order-history monitoring remains, such as products,
@@ -474,9 +476,10 @@ export default function EnglishPrivacyPage() {
               transaction data under its privacy notice and legal obligations.
             </li>
             <li>
-              Messages submitted through question and topic-suggestion forms are kept as
-              long as needed to answer, process topic suggestions or develop site content,
-              but no longer than 24 months without a separate basis.
+              Messages submitted through question and topic-suggestion forms are kept to
+              answer them, process topic suggestions and develop site content for no more
+              than 25 months. They are deleted automatically 25 months after they were
+              sent.
             </li>
             <li>
               Reviews are kept for as long as needed to display customer reviews and
@@ -493,10 +496,11 @@ export default function EnglishPrivacyPage() {
               matters is kept for as long as reasonably required to handle the matter.
             </li>
             <li>
-              Cancellation-notice data is kept for as long as reasonably required for
-              processing, return and payment arrangements, and demonstrating compliance
-              with legal obligations. Personal data in a notice linked to an order by its
-              identifier is removed no later than when that order is anonymised.
+              Cancellation-notice data is kept for processing, return and payment
+              arrangements, and demonstrating compliance with legal obligations. Personal
+              data in a notice linked to an order by its identifier is removed
+              automatically when that order is anonymised. A notice that cannot be linked
+              to any order is deleted automatically 25 months after it was sent.
             </li>
             <li>
               A data-download link is valid for no more than 24 hours and one download.
