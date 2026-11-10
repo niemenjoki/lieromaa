@@ -1,3 +1,8 @@
+import {
+  PostiPickupError,
+  createPostiPickupClient,
+} from '@niemenjoki/posti-pickup-points';
+
 import { isSameOriginRequest } from '@/lib/api/isSameOriginRequest';
 import {
   PUBLIC_MESSAGE_CODES,
@@ -10,22 +15,10 @@ import { getTransactionMessages } from '@/lib/i18n/messages.mjs';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const DEFAULT_POSTI_AUTH_URL = 'https://gateway-auth.posti.fi/api/v1/token';
-const DEFAULT_POSTI_GATEWAY_URL = 'https://gateway.posti.fi';
-const DEFAULT_POSTI_API_VERSION = '2025-04';
-let tokenCache = {
-  accessToken: '',
-  expiresAt: 0,
-};
-
-function getRequiredEnv(name) {
-  const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required environment variable "${name}"`);
-  }
-
-  return value;
-}
+// Postin rajapinta, tunnuksen välimuisti ja tulosten muoto tulevat paketista
+// @niemenjoki/posti-pickup-points. Asiakas luodaan kerran samoilla asetuksilla, jotta
+// tunnuksen välimuisti toimii, ja uudelleen vain, jos asetukset muuttuvat.
+let cachedClient = { key: '', client: null };
 
 function jsonResponse(body, init) {
   return Response.json(body, init);
@@ -56,87 +49,75 @@ function getSearchLimit(value) {
   return Math.min(12, Math.max(1, Math.round(numericValue)));
 }
 
-function buildPickupPointSearchUrl() {
-  const gatewayUrl =
-    trimValue(process.env.POSTI_API_GATEWAY_URL) || DEFAULT_POSTI_GATEWAY_URL;
-  const apiVersion =
-    trimValue(process.env.POSTI_API_VERSION) || DEFAULT_POSTI_API_VERSION;
-
-  return `${gatewayUrl.replace(/\/+$/, '')}/${apiVersion}/pickuppoints`;
-}
-
-function buildPickupPointSearchBody({ street, postalCode, city, limit }) {
-  return {
-    searchCriteria: {
-      location: {
-        postcode: postalCode,
-        countryCode: 'FI',
-        ...(street ? { street } : {}),
-        ...(city ? { city } : {}),
-      },
-      serviceFilters: {},
-    },
-    limit,
+function getPostiClient() {
+  const options = {
+    clientId: trimValue(process.env.POSTI_API_CLIENT_ID),
+    clientSecret: trimValue(process.env.POSTI_API_CLIENT_SECRET),
+    authUrl: trimValue(process.env.POSTI_API_AUTH_URL),
+    gatewayUrl: trimValue(process.env.POSTI_API_GATEWAY_URL),
+    apiVersion: trimValue(process.env.POSTI_API_VERSION),
   };
+  const key = JSON.stringify(options);
+  if (cachedClient.client && cachedClient.key === key) {
+    return cachedClient.client;
+  }
+
+  const client = createPostiPickupClient({
+    ...options,
+    // Haetaan globaali fetch vasta kutsuhetkellä, jotta testien korvaama fetch on käytössä.
+    fetch: (...args) => globalThis.fetch(...args),
+  });
+  cachedClient = { key, client };
+  return client;
 }
 
-function normalizePickupPoint(point) {
-  const location = point?.location ?? {};
-
+// Selaimelle palautetaan samat kentät kuin ennen pakettia, ei Postin alkuperäistä vastausta.
+function toPublicPickupPoint(point) {
   return {
-    id: trimValue(point?.id),
-    name: trimValue(point?.publicName),
-    careOf: trimValue(point?.careOf),
-    street: trimValue(location?.street),
-    postalCode: trimValue(location?.postcode),
-    city: trimValue(location?.city),
-    municipality: trimValue(location?.municipality),
-    specificLocation: trimValue(location?.specificLocation),
-    parcelLocker: Boolean(point?.parcelLocker),
-    routingServiceCode: trimValue(point?.routingServiceCode),
+    id: point.id,
+    name: point.name,
+    careOf: point.careOf,
+    street: point.street,
+    postalCode: point.postalCode,
+    city: point.city,
+    municipality: point.municipality,
+    specificLocation: point.specificLocation,
+    parcelLocker: point.parcelLocker,
+    routingServiceCode: point.routingServiceCode,
+    // Postin null-etäisyys oli ennen pakettia 0 (Number(null)). Paketti antaa null, joten vanha arvo palautetaan.
     distanceInMeters:
-      Number.isFinite(Number(point?.distanceInMeters)) &&
-      Number(point?.distanceInMeters) >= 0
-        ? Number(point.distanceInMeters)
-        : null,
+      point.distanceInMeters === null && point.raw?.distanceInMeters === null
+        ? 0
+        : point.distanceInMeters,
   };
 }
 
-async function getAccessToken() {
-  if (tokenCache.accessToken && tokenCache.expiresAt > Date.now() + 30_000) {
-    return tokenCache.accessToken;
+function getFailureStatus(error) {
+  if (!(error instanceof PostiPickupError)) {
+    return 502;
   }
 
-  const authUrl = trimValue(process.env.POSTI_API_AUTH_URL) || DEFAULT_POSTI_AUTH_URL;
-  const body = new URLSearchParams({
-    grant_type: 'client_credentials',
-    client_id: getRequiredEnv('POSTI_API_CLIENT_ID'),
-    client_secret: getRequiredEnv('POSTI_API_CLIENT_SECRET'),
-  });
-
-  const response = await fetch(authUrl, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: body.toString(),
-    cache: 'no-store',
-    signal: AbortSignal.timeout(10_000),
-  });
-
-  const responseData = await response.json().catch(() => null);
-  if (!response.ok || !responseData?.access_token) {
-    throw new Error('Posti access token request failed.');
+  if (error.code === 'missing_credentials' || error.code === 'auth_failed') {
+    return 503;
   }
 
-  const expiresInSeconds = Math.max(60, Number(responseData.expires_in) || 300);
-  tokenCache = {
-    accessToken: responseData.access_token,
-    expiresAt: Date.now() + expiresInSeconds * 1000,
-  };
+  if (error.code === 'upstream_error') {
+    return getPublicUpstreamStatus(error.status);
+  }
 
-  return tokenCache.accessToken;
+  return 502;
+}
+
+function logFailure(error) {
+  if (error instanceof PostiPickupError) {
+    console.error(
+      `Pickup point search failed (${error.code}${error.status ? `, status ${error.status}` : ''}):`,
+      error.details ?? error.message
+    );
+    return;
+  }
+
+  console.error('Pickup point search request failed:', error);
 }
 
 export async function GET(request) {
@@ -176,61 +157,26 @@ export async function GET(request) {
     );
   }
 
-  let accessToken;
   try {
-    accessToken = await getAccessToken();
-  } catch (error) {
-    console.error('Pickup point search configuration error:', error);
-    return jsonResponse(
-      createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
-      { status: 503 }
-    );
-  }
-
-  try {
-    const response = await fetch(buildPickupPointSearchUrl(), {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Accept-Language': language,
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(
-        buildPickupPointSearchBody({
-          street,
-          postalCode,
-          city,
-          limit,
-        })
-      ),
-      cache: 'no-store',
-      signal: AbortSignal.timeout(10_000),
+    const pickupPoints = await getPostiClient().search({
+      postalCode,
+      street,
+      city,
+      limit,
+      language,
     });
-
-    const responseData = await response.json().catch(() => null);
-    if (!response.ok || !Array.isArray(responseData?.pickupPoints)) {
-      console.error(
-        `Pickup point search failed with status ${response.status}:`,
-        responseData
-      );
-      return jsonResponse(
-        createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
-        { status: getPublicUpstreamStatus(response.status) }
-      );
-    }
 
     return jsonResponse({
       ok: true,
-      pickupPoints: responseData.pickupPoints
-        .map(normalizePickupPoint)
-        .filter((point) => isMainlandFinlandPostalCode(point.postalCode)),
+      pickupPoints: pickupPoints
+        .filter((point) => isMainlandFinlandPostalCode(point.postalCode))
+        .map(toPublicPickupPoint),
     });
   } catch (error) {
-    console.error('Pickup point search request failed:', error);
+    logFailure(error);
     return jsonResponse(
       createPublicErrorBody(PUBLIC_MESSAGE_CODES.UPSTREAM_UNAVAILABLE, language),
-      { status: 502 }
+      { status: getFailureStatus(error) }
     );
   }
 }
