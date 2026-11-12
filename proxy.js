@@ -1,27 +1,16 @@
 import { NextResponse } from 'next/server';
 
-import {
-  ANALYTICS_OPT_OUT_PATH,
-  ANALYTICS_OPT_OUT_STORAGE_KEY,
-  ANALYTICS_OPT_OUT_STORAGE_VALUE,
-} from '@/lib/analytics/optOut.js';
-import { ANALYTICS_EXCLUDED_PATHS } from '@/lib/analytics/pathPolicy.mjs';
-import { trackPageview } from '@/lib/looku/next.js';
+import { lookuRequestHeaders, trackPageview } from '@/lib/looku/next.js';
+import { LOOKU_OPTIONS } from '@/lib/looku/options.js';
 
 // Page views are recorded on the server with Looku, and nothing is stored in the
-// browser. The receiver address and keys come from the environment variables
-// LOOKU_ENDPOINT, LOOKU_SITE_ID and LOOKU_SIGNING_KEY. Only production sends data.
-const LOOKU_OPTIONS = {
-  excludePaths: [ANALYTICS_OPT_OUT_PATH, ...ANALYTICS_EXCLUDED_PATHS],
-  optOutCookie: {
-    name: ANALYTICS_OPT_OUT_STORAGE_KEY,
-    value: ANALYTICS_OPT_OUT_STORAGE_VALUE,
-  },
-};
-
-export function proxy(request, event) {
+// browser. The address goes on to the not-found pages in a signed request header,
+// so they can tell Looku that the page does not exist (lib/looku/options.js).
+export async function proxy(request, event) {
   trackPageview(request, event, LOOKU_OPTIONS);
-  return NextResponse.next();
+  return NextResponse.next({
+    request: { headers: await lookuRequestHeaders(request, LOOKU_OPTIONS) },
+  });
 }
 
 export const config = {
